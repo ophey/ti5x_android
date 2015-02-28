@@ -10,19 +10,19 @@
         android:background="@color/dark"
         android:layout_gravity="fill"
     />
-    <nz.gen.geek_central.ti5x.Display
+    <net.obry.ti5x.Display
         android:id="@+id/display"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
     />
-    <nz.gen.geek_central.ti5x.LabelCard
+    <net.obry.ti5x.LabelCard
         android:id="@+id/help_card"
         android:layout_width="fill_parent"
         android:layout_height="80dp"
         android:layout_below="@id/display"
     />
-    <nz.gen.geek_central.ti5x.ButtonGrid
+    <net.obry.ti5x.ButtonGrid
         android:id="@+id/buttons"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

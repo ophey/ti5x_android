@@ -1,4 +1,4 @@
-package nz.gen.geek_central.ti5x;
+package net.obry.ti5x;
 /*
     Label-card display area
 
@@ -61,7 +61,7 @@ public class LabelCard extends android.view.View
                               {
                                 final android.content.Intent ShowHelp =
                                     new android.content.Intent(android.content.Intent.ACTION_VIEW);
-                                ShowHelp.putExtra(nz.gen.geek_central.ti5x.Help.ContentID, Help);
+                                ShowHelp.putExtra(net.obry.ti5x.Help.ContentID, Help);
                                 ShowHelp.setClass(LabelCard.this.TheContext, Help.class);
                                 LabelCard.this.TheContext.startActivity(ShowHelp);
                               }

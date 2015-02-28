@@ -1,3 +1,4 @@
+
 ti5x is an emulator, running on Android, for the venerable
 TI-58/58C/59 family of programmable scientific calculators
 which were manufactured by Texas Instruments from the late
@@ -29,4 +30,10 @@ Contents:
 Note all text files are in UTF-8 encoding, and literal Unicode
 characters abound. In this day and age, why not?
 
-Lawrence D'Oliveiro <ldo@geek-central.gen.nz>
+Current Maintainer:
+
+   Pascal Obry <pascal@obry.net>
+
+Original Author:
+
+   Lawrence D'Oliveiro <ldo@geek-central.gen.nz>

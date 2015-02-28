@@ -1,4 +1,4 @@
-package nz.gen.geek_central.ti5x;
+package net.obry.ti5x;
 /*
     Help-page display
 
@@ -18,7 +18,7 @@ package nz.gen.geek_central.ti5x;
 
 public class Help extends android.app.Activity
   {
-    public static String ContentID = "nz.gen.geek-central.ti5x.HelpContent";
+    public static String ContentID = "net.obry.ti5x.HelpContent";
     android.webkit.WebView HelpView;
   /* for remembering scroll position of last page displayed: */
     static String LastContent;

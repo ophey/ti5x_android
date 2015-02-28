@@ -1,4 +1,4 @@
-package nz.gen.geek_central.ti5x;
+package net.obry.ti5x;
 /*
     let the user choose a program or library to load
 
@@ -18,7 +18,7 @@ package nz.gen.geek_central.ti5x;
 
 public class Picker extends android.app.Activity
   {
-    public static String AltIndexID = "nz.gen.geek-central.ti5x.PickedIndex";
+    public static String AltIndexID = "net.obry.ti5x.PickedIndex";
 
     static boolean Reentered = false; /* sanity check */
     public static Picker Current = null;

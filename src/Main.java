@@ -1,4 +1,4 @@
-package nz.gen.geek_central.ti5x;
+package net.obry.ti5x;
 /*
     ti5x calculator emulator -- mainline
 
@@ -1289,7 +1289,7 @@ public class Main extends android.app.Activity
           );
         NotifyDone.contentView = new android.widget.RemoteViews
           (
-            "nz.gen.geek_central.ti5x",
+            "net.obry.ti5x",
             R.layout.prog_status
           );
         NotifyDone.contentView.setTextViewText(R.id.notify_prog_status, getString(MsgID));
