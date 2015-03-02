@@ -17,12 +17,16 @@ package net.obry.ti5x;
 */
 
 import android.graphics.RectF;
+import android.graphics.Typeface;
 import android.view.MotionEvent;
 
 public class ButtonGrid extends android.view.View
   {
     static final int NrButtonRows = 9;
     static final int NrButtonCols = 5;
+    final android.graphics.Typeface MFont =
+        Typeface.createFromAsset(getContext().getAssets(),
+                                 "fonts/dejavusans-bold.ttf");
 
     android.media.SoundPool MakeNoise;
     android.os.Vibrator Vibrate;
@@ -106,7 +110,7 @@ public class ButtonGrid extends android.view.View
                         new ButtonDef("STO", "CMs", White, ButtonBrown),
                         new ButtonDef("RCL", "Exc", White, ButtonBrown),
                         new ButtonDef("SUM", "Prd", White, ButtonBrown),
-                        new ButtonDef("y**x", "Ind", White, ButtonBrown),
+                        new ButtonDef("yˣ", "Ind", White, ButtonBrown),
                     },
                 new ButtonDef[]
                     {
@@ -129,7 +133,7 @@ public class ButtonGrid extends android.view.View
                         new ButtonDef("SBR", "Lbl", White, ButtonBrown),
                         new ButtonDef("4", "x≥t", "STO Ind", Dark, White),
                         new ButtonDef("5", "∑+", "RCL Ind", Dark, White),
-                        new ButtonDef("6", "mean(x)", "SUM Ind", Dark, White),
+                        new ButtonDef("6", "x̅", "SUM Ind", Dark, White),
                         new ButtonDef("-", "Rad", Dark, ButtonYellow),
                     },
                 new ButtonDef[]
@@ -487,6 +491,7 @@ public class ButtonGrid extends android.view.View
                 TextPaint.setAntiAlias(true);
                 final float BaseTextSize = CellHeight * 0.33f;
                 TextPaint.setTextSize(BaseTextSize * 0.9f);
+                TextPaint.setTypeface(MFont);
                 GraphicsUseful.DrawCenteredText
                   (
                     Draw,
@@ -643,8 +648,8 @@ public class ButtonGrid extends android.view.View
                   } /*if*/
                 TextPaint.setTextAlign(android.graphics.Paint.Align.CENTER);
                 TextPaint.setColor(ThisButton.TextColor);
-                TextPaint.setTypeface(android.graphics.Typeface.DEFAULT_BOLD);
-                TextPaint.setTextSize(BaseTextSize * 1.2f);
+                TextPaint.setTypeface(MFont);
+                TextPaint.setTextSize(BaseTextSize * 1.1f);
                 GraphicsUseful.DrawCenteredText
                   (
                     Draw,

@@ -1,5 +1,8 @@
 Feature highlights:
 
+v2.1, 2015 March 2:
+    better display for y**x and mean(x) keys
+
 v2.0, 2015 March 1:
     support for HIR code added
     the pause command is longer to match the original TI-59
