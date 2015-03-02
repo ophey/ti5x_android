@@ -1,5 +1,11 @@
 Feature highlights:
 
+v2.0, 2015 March 1:
+    support for HIR code added
+    the pause command is longer to match the original TI-59
+    add the ML-21 Hi-Lo game
+    fix OP 6 output (4 characters only)
+
 16216.1, 2014 May 26:
     allow multitouch in pressing buttons as alternative to moving touch
 
