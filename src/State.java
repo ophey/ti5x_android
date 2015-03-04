@@ -1602,7 +1602,7 @@ public class State
 
                         // emulate the HIR register (OP 01 use HIR 05, 02 -> 06, 03 -> 07 and 04 -> 08) */
 
-                          if  (OpStack[OpNr + 3] == null)
+                        if (OpStack[OpNr + 3] == null)
                             OpStack[OpNr + 3] = new OpStackEntry(0, OpNr, 0);
 
                         OpStack[OpNr + 3].Operand = X / 1e12;
