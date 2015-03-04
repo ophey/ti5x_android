@@ -2732,6 +2732,22 @@ public class State
                       } /*if*/
                   } /*if*/
               }
+            else if (NextByte == 51)
+              {
+              /* 1-digit location. This is an hidden feature that cannot be enterred directly, to have it:
+                    - Key in DSZ 00 A, to put the keycodes [97 00 11] into program memory.
+                    - Then go back and delete the 00.
+                    - Insert two steps between the 97 and 11 and key in STO 36.
+                    - You will then have [97 42 36 11] as keycodes.
+                    - Go back and delete the 42. Then delete the 11.
+                    - You will now have [97 36]. Now key in after the 36 keycode STO 51.
+                    - You will then have [97 36 42 51]. Then delete the 42.
+                    - The final code is: [97 36 51]
+
+                    So "DSZ 36 51" which means decrement register 36 only (no jump).
+              */
+                  Result = 9900 + NextByte;
+              }
             else /* symbolic label */
               {
                 if (Bank[BankNr].Labels.containsKey(NextByte))
@@ -3062,7 +3078,8 @@ public class State
             if (Reg >= 0 && Reg < MaxMemories)
               {
                 Memory[Reg] = Math.max(Math.abs(Memory[Reg]) - 1.0, 0.0) * Math.signum(Memory[Reg]);
-                if (InvState == (Memory[Reg] == 0.0))
+                // do not jump if Target is on-byte value 51 (encoded as 9951)
+                if (InvState == (Memory[Reg] == 0.0) && Target != 9951)
                   {
                     Transfer
                       (
