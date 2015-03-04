@@ -2871,7 +2871,11 @@ public class State
         do /*once*/
           {
             if (ReturnLast < 0)
-                break;
+                {
+                    StopProgram();
+                    OK = true;
+                    break;
+                }
             final ReturnStackEntry ReturnTo = ReturnStack[ReturnLast--];
             if
               (
