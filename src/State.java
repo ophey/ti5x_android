@@ -1607,7 +1607,15 @@ public class State
 
                         OpStack[OpNr + 3].Operand = X / 1e12;
 
-                        SetX(Contents); /* manual says fractional part of display is discarded as a side-effect */
+                        /* manual says fractional part of display is discarded as a side-effect,
+                           tested on a real TI-59 */
+
+                        SetX(Contents);
+
+                        // but the decimal are considered for printing (just spaces)
+
+                        if (CurNrDecimals != -1)
+                            Contents = Contents * (long)Math.pow (10, CurNrDecimals);
 
                         for (int i = 5;;)
                           {
