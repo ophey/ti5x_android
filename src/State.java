@@ -638,7 +638,14 @@ public class State
             ExponentEntered = true;
         break;
         case ResultState:
-            if (InvState)
+            if (!ExponentEntered)
+              {
+                CurDisplay = CurDisplay + " 00";
+                CurState = ExponentEntryState;
+                SetShowing(CurDisplay);
+                ExponentEntered = true;
+              } /*if*/
+            else if (InvState)
               {
                 if (CurFormat != FORMAT_FIXED)
                   {
