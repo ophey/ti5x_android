@@ -377,7 +377,9 @@ while True :
                             if integral :
                                 opval = int(cursym)
                                 if expect == "loc" :
-                                    if opval < 1000 :
+                                    if opval < 100 and len(cursym) == 2:
+                                        out(opval)
+                                    elif opval < 1000 :
                                         out(opval // 100)
                                         out(opval % 100)
                                     else :

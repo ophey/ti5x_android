@@ -638,7 +638,14 @@ public class State
             ExponentEntered = true;
         break;
         case ResultState:
-            if (InvState)
+            if (!ExponentEntered)
+              {
+                CurDisplay = CurDisplay + " 00";
+                CurState = ExponentEntryState;
+                SetShowing(CurDisplay);
+                ExponentEntered = true;
+              } /*if*/
+            else if (InvState)
               {
                 if (CurFormat != FORMAT_FIXED)
                   {
@@ -1602,12 +1609,20 @@ public class State
 
                         // emulate the HIR register (OP 01 use HIR 05, 02 -> 06, 03 -> 07 and 04 -> 08) */
 
-                          if  (OpStack[OpNr + 3] == null)
+                        if (OpStack[OpNr + 3] == null)
                             OpStack[OpNr + 3] = new OpStackEntry(0, OpNr, 0);
 
                         OpStack[OpNr + 3].Operand = X / 1e12;
 
-                        SetX(Contents); /* manual says fractional part of display is discarded as a side-effect */
+                        /* manual says fractional part of display is discarded as a side-effect,
+                           tested on a real TI-59 */
+
+                        SetX(Contents);
+
+                        // but the decimal are considered for printing (just spaces)
+
+                        if (CurNrDecimals != -1)
+                            Contents = Contents * (long)Math.pow (10, CurNrDecimals);
 
                         for (int i = 5;;)
                           {
@@ -2717,6 +2732,22 @@ public class State
                       } /*if*/
                   } /*if*/
               }
+            else if (NextByte == 51)
+              {
+              /* 1-digit location. This is an hidden feature that cannot be enterred directly, to have it:
+                    - Key in DSZ 00 A, to put the keycodes [97 00 11] into program memory.
+                    - Then go back and delete the 00.
+                    - Insert two steps between the 97 and 11 and key in STO 36.
+                    - You will then have [97 42 36 11] as keycodes.
+                    - Go back and delete the 42. Then delete the 11.
+                    - You will now have [97 36]. Now key in after the 36 keycode STO 51.
+                    - You will then have [97 36 42 51]. Then delete the 42.
+                    - The final code is: [97 36 51]
+
+                    So "DSZ 36 51" which means decrement register 36 only (no jump).
+              */
+                  Result = 9900 + NextByte;
+              }
             else /* symbolic label */
               {
                 if (Bank[BankNr].Labels.containsKey(NextByte))
@@ -2871,7 +2902,11 @@ public class State
         do /*once*/
           {
             if (ReturnLast < 0)
-                break;
+                {
+                    StopProgram();
+                    OK = true;
+                    break;
+                }
             final ReturnStackEntry ReturnTo = ReturnStack[ReturnLast--];
             if
               (
@@ -3043,7 +3078,8 @@ public class State
             if (Reg >= 0 && Reg < MaxMemories)
               {
                 Memory[Reg] = Math.max(Math.abs(Memory[Reg]) - 1.0, 0.0) * Math.signum(Memory[Reg]);
-                if (InvState == (Memory[Reg] == 0.0))
+                // do not jump if Target is on-byte value 51 (encoded as 9951)
+                if (InvState == (Memory[Reg] == 0.0) && Target != 9951)
                   {
                     Transfer
                       (
