@@ -1,5 +1,11 @@
 Feature highlights:
 
+v2.2, 2015 March 5:
+    add support for hidden /DSZ nn 51/ decrement Rnn NO jump
+    fix use of EE after RCL or conditional test
+    consider decimals when printing
+    RTN with empty stock stop the program instead of error
+
 v2.1, 2015 March 2:
     better display for y**x and mean(x) keys
 
