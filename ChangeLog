@@ -1,5 +1,8 @@
 Feature highlights:
 
+v2.3, 2015 March 6:
+    better handling of ee and inv ee (fix state issues)
+
 v2.2, 2015 March 5:
     add support for hidden /DSZ nn 51/ decrement Rnn NO jump
     fix use of EE after RCL or conditional test

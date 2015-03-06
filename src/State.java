@@ -637,16 +637,18 @@ public class State
             SetShowing(CurDisplay);
             ExponentEntered = true;
         break;
+        case ExponentEntryState:
+            if (InvState)
+              {
+                Enter();
+                ExponentEntered = false;
+                CurState = EntryState;
+              }
+        break;
         case ResultState:
-            if (!ExponentEntered)
+            if (InvState)
               {
-                CurDisplay = CurDisplay + " 00";
-                CurState = ExponentEntryState;
-                SetShowing(CurDisplay);
-                ExponentEntered = true;
-              } /*if*/
-            else if (InvState)
-              {
+                ExponentEntered = false;
                 if (CurFormat != FORMAT_FIXED)
                   {
                     CurFormat = FORMAT_FIXED;
@@ -656,20 +658,35 @@ public class State
               }
             else
               {
-               /* as per manual */
-                SetX
-                  (
-                    Arith.RoundTo
+                if (!ExponentEntered)
+                  {
+                    if (CurDisplay.length() <= 3
+                        || (CurDisplay.charAt(CurDisplay.length() - 3) != '-'
+                            && CurDisplay.charAt(CurDisplay.length() - 3) != ' '))
+                      {
+                        CurDisplay = CurDisplay + " 00";
+                        CurState = ExponentEntryState;
+                        SetShowing(CurDisplay);
+                        ExponentEntered = true;
+                      }
+                  }
+                else
+                  {
+                    /* as per manual */
+                    SetX
                       (
-                        X,
-                        CurFormat == FORMAT_FIXED ?
-                            CurNrDecimals >= 0 ? CurNrDecimals : 10
-                        :
-                            8
-                      )
-                  );
-                CurFormat = FORMAT_FLOAT; /* but display of X is not changed yet */
-              } /*if*/
+                        Arith.RoundTo
+                          (
+                            X,
+                            CurFormat == FORMAT_FIXED ?
+                                CurNrDecimals >= 0 ? CurNrDecimals : 10
+                            :
+                                8
+                          )
+                      );
+                    CurFormat = FORMAT_FLOAT; /* but display of X is not changed yet */
+                      }
+                  } /*if*/
         break;
           } /*switch*/
       } /*EnterExponent*/
@@ -1376,6 +1393,7 @@ public class State
                 break;
                 case MEMOP_RCL:
                     SetX(Memory[RegNr]);
+                    ExponentEntered = false;
                 break;
                 case MEMOP_ADD:
                     Memory[RegNr] += X;
