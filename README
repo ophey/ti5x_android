@@ -4,11 +4,13 @@ TI-58/58C/59 family of programmable scientific calculators
 which were manufactured by Texas Instruments from the late
 1970s.
 
-ti5x does not aim for 100% authenticity--which is not possible,
-anyway. In particular, I have not bothered to emulate known
-bugs and undocumented features of the originals. But it does
-try to maintain some of the feel of using the original product,
-albeit running a lot faster.
+ti5x does aim for 100% authenticity even if not possible
+in all cases. Yet, it supports many undocumented features
+from the original calculator like the HIR registers and
+the /DSZ nn 51/ (decrement no-jump) instructions.
+
+With the current version it is possible to play the famous
+Treasure-Island and 3D-Tic-Tac-Toe games.
 
 Contents:
     src/ -- Java sources for the Android app
@@ -28,7 +30,7 @@ Contents:
     COPYING -- licence (GPLv3)
 
 Note all text files are in UTF-8 encoding, and literal Unicode
-characters abound. In this day and age, why not?
+characters abound.
 
 Current Maintainer:
 
