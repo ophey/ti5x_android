@@ -623,6 +623,12 @@ public class State
             Exp;
       } /*ScaleExp*/
 
+    private boolean NullExponent ()
+      {
+         return CurDisplay.length() <= 3
+                || CurDisplay.substring(CurDisplay.length() - 3).equals(" 00");
+      }
+
     public void EnterExponent()
       {
         switch (CurState)
@@ -640,8 +646,15 @@ public class State
         case ExponentEntryState:
             if (InvState)
               {
-                Enter();
-                ExponentEntered = false;
+                // reset the display only if we have no exponent that is:
+                //   1 ee inv-ee     must display :  1
+                //   1 ee 1 inv-ee 2 must display : 12 01
+
+                if (ExponentEntered && NullExponent())
+                  {
+                    Enter();
+                    ExponentEntered = false;
+                  }
                 CurState = EntryState;
               }
         break;
