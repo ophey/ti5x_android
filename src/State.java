@@ -629,6 +629,13 @@ public class State
                 || CurDisplay.substring(CurDisplay.length() - 3).equals(" 00");
       }
 
+    private boolean HasExponent ()
+      {
+        return CurDisplay.length() > 3
+            && (CurDisplay.charAt(CurDisplay.length() - 3) == '-'
+                || CurDisplay.charAt(CurDisplay.length() - 3) == ' ');
+      }
+
     public void EnterExponent()
       {
         switch (CurState)
@@ -673,9 +680,10 @@ public class State
               {
                 if (!ExponentEntered)
                   {
-                    if (CurDisplay.length() <= 3
-                        || (CurDisplay.charAt(CurDisplay.length() - 3) != '-'
-                            && CurDisplay.charAt(CurDisplay.length() - 3) != ' '))
+                    // ?? the following test is because just above (InvState) we set ExponentEntered.
+                    //    but the exponent can still be displayed. This is wrong and should be fixed
+                    //    at some point.
+                    if (!HasExponent())
                       {
                         CurDisplay = CurDisplay + " 00";
                         CurState = ExponentEntryState;
