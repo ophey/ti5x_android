@@ -93,7 +93,7 @@ public class State
     public final static int ResultState = 10;
     public final static int ErrorState = 11;
     public int CurState = EntryState;
-    public boolean ExponentEntered = false;
+    public boolean ExponentEntered = false; /* whether the dispay as 00 exp at the end */
 
     public boolean InvState = false; /* INV has been pressed/executed */
 
