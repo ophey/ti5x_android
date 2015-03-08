@@ -96,6 +96,8 @@ public class State
     public boolean ExponentEntered = false; /* whether the dispay as 00 exp at the end */
 
     public boolean InvState = false; /* INV has been pressed/executed */
+    public boolean FromResult = false;
+    // whether the current value is from a result RCL, or a typed number
 
     String CurDisplay; /* current number display */
     android.os.Handler BGTask;
@@ -440,6 +442,7 @@ public class State
                 X = X * Math.pow(10.0, Exp);
               } /*if*/
             SetX(X);
+            FromResult = false;
           } /*if*/
       } /*Enter*/
 
@@ -659,10 +662,16 @@ public class State
 
                 if (ExponentEntered && NullExponent())
                   {
-                    Enter();
+                    CurDisplay = CurDisplay.substring(0, CurDisplay.length() - 3);
+                    SetShowing(CurDisplay);
                     ExponentEntered = false;
                   }
-                CurState = EntryState;
+
+                if (FromResult)
+                    CurState = DecimalEntryState;
+                else
+                    CurState = EntryState;
+
               }
         break;
         case ResultState:
@@ -678,6 +687,7 @@ public class State
               }
             else
               {
+                FromResult = true;
                 if (!ExponentEntered)
                   {
                     // ?? the following test is because just above (InvState) we set ExponentEntered.
