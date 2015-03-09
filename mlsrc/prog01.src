@@ -36,6 +36,10 @@ lbl =
     prt
     inv sbr
 
+lbl write
+; master library check, same as-above
+    gto =
+
 ;+
 ; function indirection with printing of inputs and outputs
 ;-
