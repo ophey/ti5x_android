@@ -2952,6 +2952,7 @@ public class State
           {
             if (ReturnLast < 0)
                 {
+                    CurState = ResultState;
                     StopProgram();
                     OK = true;
                     break;
@@ -2966,6 +2967,13 @@ public class State
                     ReturnTo.Addr >= Bank[ReturnTo.BankNr].Program.length
               )
                 break;
+            if (ReturnTo.FromInteractive)
+              {
+                CurState = ResultState;
+                StopProgram();
+                OK = true;
+                break;
+              } /*if*/
             if (TaskRunning)
               {
                 RunBank = ReturnTo.BankNr;
@@ -2975,10 +2983,6 @@ public class State
               {
                 CurBank = ReturnTo.BankNr;
                 PC = ReturnTo.Addr;
-              } /*if*/
-            if (ReturnTo.FromInteractive)
-              {
-                StopProgram();
               } /*if*/
           /* all successfully done */
             OK = true;
