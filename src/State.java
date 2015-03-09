@@ -2952,6 +2952,7 @@ public class State
           {
             if (ReturnLast < 0)
                 {
+                    CurState = ResultState;
                     StopProgram();
                     OK = true;
                     break;
@@ -2968,6 +2969,7 @@ public class State
                 break;
             if (ReturnTo.FromInteractive)
               {
+                CurState = ResultState;
                 StopProgram();
                 OK = true;
                 break;
