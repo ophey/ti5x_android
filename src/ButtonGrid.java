@@ -146,7 +146,7 @@ public class ButtonGrid extends android.view.View
                     },
                 new ButtonDef[]
                     {
-                        new ButtonDef("R/S", "", White, ButtonBrown),
+                        new ButtonDef("R/S", "Write", White, ButtonBrown),
                         new ButtonDef("0", "Dsz", "INV SBR", Dark, White),
                         new ButtonDef(".", "Adv", Dark, White),
                         new ButtonDef("+/-", "Prt", Dark, White),
