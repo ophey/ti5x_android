@@ -1375,6 +1375,23 @@ public class Main extends android.app.Activity
                   } /*onClick*/
               } /*OnClickListener*/
           );
+        ((android.widget.Button)findViewById(R.id.action_print)).setOnClickListener
+          (
+            new View.OnClickListener()
+              {
+                public void onClick
+                  (
+                    View ButtonView
+                  )
+                  {
+                    startActivity
+                      (
+                        new Intent(Intent.ACTION_VIEW)
+                            .setClass(Main.this, PrinterView.class)
+                      );
+                  } /*onClick*/
+              } /*OnClickListener*/
+          );
       } /*onPostCreate*/
 
     @Override
