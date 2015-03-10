@@ -731,14 +731,14 @@ render_special[symbols["rarrow"]] = \
         "widthadjust" :
                     "currentfont exch /%s findfont %.2f scalefont setfont"
                 %
-                    (symbolfontname, basefontsize)
+                    (symbolfontname, basefontsize * 1.3)
             +
                 " (\\256) stringwidth pop 2 div add exch setfont",
         "renderbefore" :
                 "currentfont /%s findfont matrix %.2f dup 2 div exch"
                 " 3 2 roll scale makefont setfont (\\256) show"
             %
-                (symbolfontname, basefontsize),
+                (symbolfontname, basefontsize * 1.3),
         "renderafter" : "setfont",
     }
 
