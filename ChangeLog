@@ -1,5 +1,12 @@
 Feature highlights:
 
+v2.8, 2015 March 10:
+    more visible arrow in card
+    add Write label under the R/S key
+    add SBR-Write in ML-01 (Master Library check)
+    add ML-02 and ML-03 (matrix oriented libraries)
+    add a printer button in the title-bar for fast access
+
 v2.7, 2015 March 9:
     again better support for large screen
     fix interactive rtn handling
