@@ -4,6 +4,10 @@
 <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
 <TITLE>ti5x help</TITLE>
 <STYLE TYPE="text/css">
+li
+  {
+     padding-bottom: 6pt;
+  }
 .yellowbutton
   {
     background : #cc9858;
@@ -157,9 +161,9 @@ above it, rather than on key itself.
 (meaning depends on key).
 <LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="yellowbutton">&nbsp;÷&nbsp;</SPAN>
 — <B>extension:</B> remainder on division.
-<LI><SPAN CLASS="brownbutton">y**x</SPAN> — raise number entered before to power of number
+<LI><SPAN CLASS="brownbutton">yˣ</SPAN> — raise number entered before to power of number
 entered after.
-<LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="brownbutton">y**x</SPAN> — raise number
+<LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="brownbutton">yˣ</SPAN> — raise number
 entered before to power of reciprocal of number entered after.
 <LI><SPAN CLASS="brownbutton">lnx</SPAN> — replaces last-entered number with its log
 base <I>e</I>.
@@ -337,10 +341,10 @@ independent variable in T register, dependent variable in X register. T register
 incremented for next entry.
 <LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">∑+</SPAN>
 — remove a data point. Can be used to undo an incorrect entry. Note that T still increments!
-<LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">mean(x)</SPAN> — compute sample mean:
+<LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">x̅</SPAN> — compute sample mean:
 T = ∑x / N, X = ∑y / N.
 <LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="yellowbutton">2nd</SPAN>
-<SPAN CLASS="alttext">mean(x)</SPAN> — compute population standard deviation:
+<SPAN CLASS="alttext">x̅</SPAN> — compute population standard deviation:
 T = sqrt(∑x² - (∑x)² / N(N - 1)), X = sqrt(∑y² - (∑y)² / N(N - 1)).
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Op</SPAN> <B>11</B> — compute
 sample variance: T = ∑x² / N - (∑x)² / N², X = ∑y² - (∑y)² / N².
@@ -570,7 +574,7 @@ while <SPAN CLASS="yellowbutton">2nd</SPAN> is not.
 <TD>42 <SPAN CLASS="brownbutton">STO</SPAN></TD>
 <TD>43 <SPAN CLASS="brownbutton">RCL</SPAN></TD>
 <TD>44 <SPAN CLASS="brownbutton">SUM</SPAN></TD>
-<TD>45 <SPAN CLASS="brownbutton">y**x</SPAN></TD>
+<TD>45 <SPAN CLASS="brownbutton">yˣ</SPAN></TD>
 </TR>
 <TR>
 <TD CLASS="unused">&nbsp;</TD>
@@ -621,7 +625,7 @@ while <SPAN CLASS="yellowbutton">2nd</SPAN> is not.
 <TD>76 <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Lbl</SPAN></TD>
 <TD>77 <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">x≥t</SPAN></TD>
 <TD>78 <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">∑+</SPAN</TD>
-<TD>79 <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">mean(x)</SPAN</TD>
+<TD>79 <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">x̅</SPAN</TD>
 <TD>70 <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Rad</SPAN></TD>
 </TR>
 
