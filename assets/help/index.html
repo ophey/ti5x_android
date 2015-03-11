@@ -4,7 +4,7 @@
 <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
 <TITLE>ti5x help</TITLE>
 <STYLE TYPE="text/css">
-li
+ul.spaced li
   {
      padding-bottom: 6pt;
   }
@@ -97,7 +97,7 @@ It mostly tries to follow the original functionality; features marked “extensi
 are additions not present in the original.
 
 <H2><A NAME="BasicOps"></A>Basic Operation</H2>
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="whitebutton">&nbsp;0&nbsp;</SPAN>, <SPAN CLASS="whitebutton">&nbsp;1&nbsp;</SPAN>,
 <SPAN CLASS="whitebutton">&nbsp;2&nbsp;</SPAN>, <SPAN CLASS="whitebutton">&nbsp;3&nbsp;</SPAN>,
 <SPAN CLASS="whitebutton">&nbsp;4&nbsp;</SPAN>, <SPAN CLASS="whitebutton">&nbsp;5&nbsp;</SPAN>,
@@ -122,7 +122,7 @@ automatically supplying any missing closing parentheses.
 <P><A HREF="#Topics">Back to Topics</A>
 
 <H2><A NAME="Display"></A>Display Control</H2>
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="yellowbutton">2nd</SPAN>
 <SPAN CLASS="alttext">Fix</SPAN> or <SPAN CLASS="yellowbutton">2nd</SPAN>
 <SPAN CLASS="alttext">Fix</SPAN> <B>9</B>
@@ -155,7 +155,7 @@ you will get an error message.
 <P><A HREF="#Topics">Back to Topics</A>
 
 <H2><A NAME="AdditionalOps"></A>Additional Operations</H2>
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> — modify next key to perform function written just
 above it, rather than on key itself.
 <LI><SPAN CLASS="brownbutton">INV</SPAN> — modify next key to perform “inverse” function
@@ -192,7 +192,7 @@ they can be pressed in either order. If you press one of these by mistake, just 
 again to cancel it before pressing another key.
 
 <P>The following operations are mainly useful when writing programs:</P>
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Int</SPAN> — replace
 the displayed number with its integer part.
 <LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="yellowbutton">2nd</SPAN>
@@ -210,7 +210,7 @@ the positions of following instructions.
 
 <H2><A NAME="Memories"></A>Memories</H2>
 <P>There are 100 memory registers available, numbered <B>00</B> to <B>99</B>.
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="brownbutton">STO</SPAN> <I>nn</I> — store current number into memory <I>nn</I>.
 <LI><SPAN CLASS="brownbutton">RCL</SPAN> <I>nn</I> — replace current number with copy of memory <I>nn</I>.
 <LI><SPAN CLASS="brownbutton">SUM</SPAN> <I>nn</I> — add current number to memory <I>nn</I>.
@@ -226,7 +226,7 @@ contents of memory <I>nn</I> by current number.
 </UL>
 
 <P>The following operations are mainly useful when writing programs:</P>
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="brownbutton">STO</SPAN> <SPAN CLASS="yellowbutton">2nd</SPAN>
 <SPAN CLASS="alttext">Ind</SPAN> <I>nn</I>, <SPAN CLASS="brownbutton">RCL</SPAN>
 <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Ind</SPAN> <I>nn</I> etc —
@@ -281,7 +281,7 @@ wants to call it.
 <P><A HREF="#Topics">Back to Topics</A>
 
 <H2><A NAME="Trigonometry"></A>Trigonometry</H2>
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">π</SPAN> — enter π.
 <LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">π</SPAN> — <B>extension:</B> enter the equivalent of 1 radian in the current angle units
 (1 if in radians, 180 ÷ π if in degrees, 200 ÷ π if in gradians). Dividing an angle in the
@@ -336,7 +336,7 @@ X register, output will be angle in X register and magnitude in T register.
 Program <B>01</B> for doing this: <SPAN CLASS="yellowbutton">2nd</SPAN>
 <SPAN CLASS="alttext">Pgm</SPAN> <B>01</B> <SPAN CLASS="brownbutton">SBR</SPAN>
 <SPAN CLASS="yellowbutton">CLR</SPAN>.)</P>
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">∑+</SPAN> — accumulate a data point;
 independent variable in T register, dependent variable in X register. T register automatically
 incremented for next entry.
@@ -369,7 +369,7 @@ estimated <I>x</I> from <I>y</I>: X = (X - (∑y² - <I>m</I> * ∑x) / N) / <I>
 <P>Programs are stored as a sequence of 2-digit numbers that (mostly) correspond to the position
 of the keys on the keyboard. There are 960 program locations available for holding a user-entered
 program. These are numbered from <B>000</B> to <B>959</B>.
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">CP</SPAN> — in calculation mode,
 set all program locations to zero.
 <LI><SPAN CLASS="brownbutton">LRN</SPAN> — toggle between calculation and program-entry modes.
@@ -394,7 +394,7 @@ by just about any other key (except the above program-entry functions, the digit
 or <SPAN CLASS="alttext">Ind</SPAN>) to use that key to label the current location.
 The same label key can then be specified as the <I>loc</I> operand to any of the branch/call/loop
 instructions.
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="brownbutton">GTO</SPAN> <I>loc</I> — unconditional transfer of control to <I>loc</I>.
 <LI><SPAN CLASS="brownbutton">SBR</SPAN> <I>loc</I> — unconditional transfer of control to
 <I>loc</I>, until the next <SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="brownbutton">SBR</SPAN>
@@ -416,7 +416,7 @@ rather than the current program.
 <P><A HREF="#Topics">Back to Topics</A>
 
 <H3><A NAME="Comparisons"></A>Comparisons</H3>
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">x=t</SPAN> <I>loc</I> —
 if X is equal to T, branch to location <I>loc</I>.
 <LI><SPAN CLASS="brownbutton">INV</SPAN>  <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">x=t</SPAN> <I>loc</I> — if X is not equal to T, branch to location <I>loc</I>.
@@ -432,7 +432,7 @@ in a program, this just clears the T-register. It does <I>not</I> clear the prog
 
 <H3><A NAME="Flags"></A>Flags</H3>
 <P>There are 10 flags (numbered 0 to 9), each of which may be set, unset, or tested.</P>
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">St flg</SPAN> <I>n</I> —
 set flag <I>n</I>.
 <LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="yellowbutton">2nd</SPAN>
@@ -463,7 +463,7 @@ on the printer.
 <P><A HREF="#Topics">Back to Topics</A>
 
 <H3><A NAME="Looping"></A>Looping</H3>
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Dsz</SPAN> <I>n</I> <I>loc</I> —
 decrement register <B>0</B><I>n</I>, and branch to <I>loc</I> if its new value is nonzero,
 otherwise continue with the following instruction.
@@ -475,7 +475,7 @@ otherwise continue with the following instruction.
 <P><A HREF="#Topics">Back to Topics</A>
 
 <H3><A NAME="OtherControl"></A>Other Control</H3>
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Pause</SPAN> — pauses execution
 of the program just long enough for the user to see the displayed value before continuing.
 <LI><SPAN CLASS="brownbutton">R/S</SPAN> — when this is encountered in a program,
@@ -665,7 +665,7 @@ while <SPAN CLASS="yellowbutton">2nd</SPAN> is not.
 <P><A HREF="#Topics">Back to Topics</A>
 
 <H2><A NAME="ProgramExecution"></A>Program Execution</H2>
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>, <SPAN CLASS="yellowbutton">2nd</SPAN>
 <SPAN CLASS="alttext">A´</SPAN>, <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>,
 <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">B´</SPAN> etc — execute the subroutines with those
@@ -696,7 +696,7 @@ the “Master Library”, comes preloaded with the calculator. A library module 
 up to 99 separate program banks, which can be selected for execution instead of program
 bank <B>00</B>, which is where your user-entered program is kept. Only one library module
 can be loaded at a time.
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Pgm</SPAN> <I>nn</I>
 — select program bank <I>nn</I> from loaded library module (if <I>nn</I> in
 [<B>01</B> .. <B>99</B>]), or select user-entered program bank (if <I>nn</I> = <B>00</B>).
@@ -766,7 +766,7 @@ rkJggg==" ALT="Printer Character Set">
 </TABLE>
 </TD></TR>
 </TABLE>
-<UL>
+<UL class="spaced">
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Prt</SPAN> — print
 the number currently being displayed.
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Op</SPAN> <B>00</B> —
@@ -847,7 +847,7 @@ Only available in programs.
   displayed value (X) and <b>C</b> is a number corresponding to a
   special operation.
 
-<UL>
+<UL class="spaced">
   <LI>HIR 0n (<i>code 82 0n</i>)
     like <SPAN CLASS="brownbutton">STO</SPAN>, x -> Stack(N).
   <LI>HIR 1n (<i>code 82 1n</i>)
@@ -863,7 +863,7 @@ Only available in programs.
 </UL>
 
 <P>To enter HIR 12 for example:
-  <UL>
+  <UL class="spaced">
     <LI>Key in <SPAN CLASS="brownbutton">STO</SPAN> 82 to put <i>42 82</i>
       into program memory.
     <LI>Key in <SPAN CLASS="brownbutton">STO</SPAN> 12 to pu <i>42 82 42 12</i>
