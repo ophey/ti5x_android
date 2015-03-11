@@ -2632,6 +2632,11 @@ public class State
           {
             OnStop.run();
           } /*if*/
+
+        // if the PC is past the last instruction, move it back to last one
+        if (TaskRunning && RunPC >= Bank[CurBank].Program.length)
+            RunPC = Bank[CurBank].Program.length - 1;
+
         PC = RunPC;
         StopTask();
       } /*StopProgram*/
