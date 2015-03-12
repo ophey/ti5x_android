@@ -1,5 +1,8 @@
 Feature highlights:
 
+v2.10, 2015 March 12:
+    fix crash when stopping program in last instruction
+
 v2.9, 2015 March 11:
     improve help layout, add undocumented features
     improve color to match the original TI-59 ones
