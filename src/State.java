@@ -2810,10 +2810,6 @@ public class State
                   } /*if*/
               } /*if*/
           } /*if*/
-        if (Executing && Result < 0)
-          {
-            SetErrorState(true);
-          } /*if*/
         return
             Result;
       } /*GetLoc*/
@@ -2947,6 +2943,11 @@ public class State
                 SetErrorState(true);
               } /*if*/
           } /*if*/
+        else
+          {
+            // trying to transfer from an invalid loc
+            SetErrorState(true);
+          }
       } /*Transfer*/
 
     void Return()
@@ -3040,7 +3041,7 @@ public class State
         int TargetType /* one of the above TRANSFER_LOC_xxx values */
       )
       {
-        if (FlagNr >= 0 && Target >= 0)
+        if (FlagNr >= 0)
           {
             if (FlagNrInd)
               {
@@ -3119,7 +3120,7 @@ public class State
         int TargetType /* one of the above TRANSFER_LOC_xxx values */
       )
       {
-        if (Reg >= 0 && Target >= 0)
+        if (Reg >= 0)
           {
             Reg = (Reg + RegOffset) % 100;
             if (RegInd)
