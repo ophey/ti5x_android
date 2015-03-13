@@ -3078,7 +3078,7 @@ public class State
     public void CompareBranch
       (
         boolean Greater,
-        int Bank,
+        int BankNr,
         int NewPC,
         boolean Ind
       )
@@ -3103,12 +3103,23 @@ public class State
                 Transfer
                   (
                     /*Type =*/ TRANSFER_TYPE_GTO,
-                    /*BankNr =*/ Bank,
+                    /*BankNr =*/ BankNr,
                     /*Loc =*/ NewPC,
                     /*LocType =*/ Ind ? TRANSFER_LOC_INDIRECT : TRANSFER_LOC_DIRECT
                   );
               } /*if*/
           } /*if*/
+
+        // if the location we land is a number it must replace the current X
+
+        byte Result = -1;
+        if (RunPC < Bank[RunBank].Program.length)
+          {
+            Result = Bank[RunBank].Program[RunPC];
+          }
+
+        if (Result >= 0 && Result <= 9)
+            ResetEntry();
       } /*CompareBranch*/
 
     public void DecrementSkip
