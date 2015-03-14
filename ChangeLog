@@ -1,5 +1,9 @@
 Feature highlights:
 
+v2.11, 2015 March 14:
+    fix branch transfer and numbers (match real TI-59)
+    add ML-10 - Simpson's Approximation (Discrete)
+
 v2.10, 2015 March 12:
     fix crash when stopping program in last instruction
 
