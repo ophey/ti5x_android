@@ -2810,10 +2810,6 @@ public class State
                   } /*if*/
               } /*if*/
           } /*if*/
-        if (Executing && Result < 0)
-          {
-            SetErrorState(true);
-          } /*if*/
         return
             Result;
       } /*GetLoc*/
@@ -2947,6 +2943,11 @@ public class State
                 SetErrorState(true);
               } /*if*/
           } /*if*/
+        else
+          {
+            // trying to transfer from an invalid loc
+            SetErrorState(true);
+          }
       } /*Transfer*/
 
     void Return()
@@ -3040,7 +3041,7 @@ public class State
         int TargetType /* one of the above TRANSFER_LOC_xxx values */
       )
       {
-        if (FlagNr >= 0 && Target >= 0)
+        if (FlagNr >= 0)
           {
             if (FlagNrInd)
               {
@@ -3077,7 +3078,7 @@ public class State
     public void CompareBranch
       (
         boolean Greater,
-        int Bank,
+        int BankNr,
         int NewPC,
         boolean Ind
       )
@@ -3102,12 +3103,23 @@ public class State
                 Transfer
                   (
                     /*Type =*/ TRANSFER_TYPE_GTO,
-                    /*BankNr =*/ Bank,
+                    /*BankNr =*/ BankNr,
                     /*Loc =*/ NewPC,
                     /*LocType =*/ Ind ? TRANSFER_LOC_INDIRECT : TRANSFER_LOC_DIRECT
                   );
               } /*if*/
           } /*if*/
+
+        // if the location we land is a number it must replace the current X
+
+        byte Result = -1;
+        if (RunPC < Bank[RunBank].Program.length)
+          {
+            Result = Bank[RunBank].Program[RunPC];
+          }
+
+        if (Result >= 0 && Result <= 9)
+            ResetEntry();
       } /*CompareBranch*/
 
     public void DecrementSkip
@@ -3119,7 +3131,7 @@ public class State
         int TargetType /* one of the above TRANSFER_LOC_xxx values */
       )
       {
-        if (Reg >= 0 && Target >= 0)
+        if (Reg >= 0)
           {
             Reg = (Reg + RegOffset) % 100;
             if (RegInd)
