@@ -820,7 +820,7 @@ public class Main extends android.app.Activity
                     final boolean IsLib = Data.getIntExtra(Picker.AltIndexID, 0) != 0;
                       /* assumes AltLists array passed to Picker has element 0 for
                         saved programs and element 1 for libraries */
-                    final boolean LoadingMasterLibrary = IsLib && ProgName.intern() == "/";
+                    final boolean LoadingBuiltinLibrary = IsLib && ProgName.intern() == "/";
                   /* It appears onActivityResult is liable to be called before
                     onResume. Therefore I do additional restoring/saving state
                     here to ensure the saved state includes the newly-loaded
@@ -828,7 +828,7 @@ public class Main extends android.app.Activity
                     class LoadProgram extends Global.Task
                       {
                         private static final int LOAD_STATE = 0;
-                        private static final int LOAD_MASTER_LIBRARY = 1;
+                        private static final int LOAD_BUILTIN_LIBRARY = 1;
                         private static final int LOAD_PROG = 2;
                         private static final int LOAD_DONE = 3;
                         private int Step;
@@ -848,7 +848,7 @@ public class Main extends android.app.Activity
                             this
                               (
                                 StateLoaded ?
-                                    LoadingMasterLibrary ? LOAD_MASTER_LIBRARY : LOAD_PROG
+                                    LoadingBuiltinLibrary ? LOAD_BUILTIN_LIBRARY : LOAD_PROG
                                 :
                                     LOAD_STATE
                               );
@@ -863,8 +863,8 @@ public class Main extends android.app.Activity
                                 Subtask = new Persistent.RestoreState(Main.this);
                                   /* if not already done */
                             break;
-                            case LOAD_MASTER_LIBRARY:
-                                Subtask = new Persistent.LoadMasterLibrary(Main.this);
+                            case LOAD_BUILTIN_LIBRARY:
+                                Subtask = new Persistent.LoadBuiltinLibrary(Main.this);
                             break;
                             case LOAD_PROG:
                                 Subtask = new Persistent.Load
@@ -924,15 +924,15 @@ public class Main extends android.app.Activity
                                         /*RunWhat =*/
                                             new LoadProgram
                                               (
-                                                LoadingMasterLibrary ?
-                                                    LOAD_MASTER_LIBRARY
+                                                LoadingBuiltinLibrary ?
+                                                    LOAD_BUILTIN_LIBRARY
                                                 :
                                                     LOAD_PROG
                                               ),
                                         /*ProgressMessage =*/ null
                                       );
                                 break;
-                                case LOAD_MASTER_LIBRARY:
+                                case LOAD_BUILTIN_LIBRARY:
                                 case LOAD_PROG:
                                     if (TaskFailure == null)
                                       {
@@ -950,7 +950,7 @@ public class Main extends android.app.Activity
                                                         :
                                                             R.string.program_loaded
                                                       ),
-                                                    LoadingMasterLibrary ?
+                                                    LoadingBuiltinLibrary ?
                                                         getString(R.string.master_library)
                                                     :
                                                         new java.io.File(ProgName).getName()

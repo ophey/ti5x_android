@@ -1600,7 +1600,7 @@ public class Persistent
           } /*PostRun*/
       } /*Load*/
 
-    public static class LoadMasterLibrary extends Global.Task
+    public static class LoadBuiltinLibrary extends Global.Task
       /* loads the included Master Library module into the calculator state. */
       {
         private final Load DoLoad;
@@ -1609,7 +1609,7 @@ public class Persistent
         so I need to make a temporary copy of the master library out of my raw resources. */
         private final String TempLibName = "temp.ti5x"; /* name for temporary copy */
 
-        public LoadMasterLibrary
+        public LoadBuiltinLibrary
           (
             android.content.Context ctx
           )
@@ -1625,7 +1625,7 @@ public class Persistent
                 /*Buttons =*/ Global.Buttons,
                 /*Calc =*/ Global.Calc
               );
-          } /*LoadMasterLibrary*/
+          } /*LoadBuiltinLibrary*/
 
         @Override
         public boolean PreRun()
@@ -1673,7 +1673,7 @@ public class Persistent
             DoLoad.PostRun();
           } /*PostRun*/
 
-      } /*LoadMasterLibrary*/
+      } /*LoadBuiltinLibrary*/
 
     public static void SaveState
       (
