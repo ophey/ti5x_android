@@ -61,6 +61,11 @@
             <arg value="${out.res.absolute.dir}/raw"/>
             <arg value="ml"/>
         </exec>
+        <exec executable="util/mlmake">
+            <arg value="lesrc"/>
+            <arg value="${out.res.absolute.dir}/raw"/>
+            <arg value="le"/>
+        </exec>
     </target>
 <!--
     <target name="-pre-compile">

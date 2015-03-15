@@ -47,6 +47,7 @@
     <string name="prog_prompt">Program to load:</string>
     <string name="module_prompt">Module to load:</string>
     <string name="master_library">Master Library (Built-In)</string>
+    <string name="leisure_library">Leisure Library (Built-In)</string>
     <string name="import_prompt">Data to load:</string>
     <string name="export_prompt">Append exported data to existing:</string>
     <string name="save_as_prompt">Save %s as:</string>
