@@ -1040,7 +1040,13 @@ public class State
     public void Sqrt()
       {
         Enter();
-        SetX(Math.sqrt(X));
+        if (X < 0)
+          {
+            SetX(Math.sqrt(-X));
+            SetErrorState(false);
+          }
+        else
+          SetX(Math.sqrt(X));
       } /*Sqrt*/
 
     public void Reciprocal()
@@ -2958,7 +2964,8 @@ public class State
           {
             if (ReturnLast < 0)
                 {
-                    CurState = ResultState;
+                    if (!InErrorState())
+                      CurState = ResultState;
                     StopProgram();
                     OK = true;
                     break;
@@ -2975,7 +2982,8 @@ public class State
                 break;
             if (ReturnTo.FromInteractive)
               {
-                CurState = ResultState;
+                if (!InErrorState())
+                  CurState = ResultState;
                 StopProgram();
                 OK = true;
                 break;
