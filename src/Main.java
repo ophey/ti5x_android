@@ -57,6 +57,24 @@ public class Main extends android.app.Activity
 
     static final int NotifyProgramDone = 1; /* arbitrary notification ID */
 
+    // All built-in libraries described here
+
+    static final int BUILTIN_MASTER_LIBRARY_INDEX = 0; // index in the BuiltinLibraries array
+
+    public static final BuiltinLibrary[] BuiltinLibraries =
+    {
+      new BuiltinLibrary(R.string.master_library, R.raw.ml)
+    };
+
+    private static final String[] getBuiltinLibraries(android.content.Context ctx)
+    {
+      String[] result = new String[BuiltinLibraries.length];
+
+      for (int i=0;i<BuiltinLibraries.length;i++)
+        result[i] = BuiltinLibraries[i].getName(ctx);
+      return result;
+    };
+
     public void ShowHelp
       (
         String Path,
@@ -488,7 +506,7 @@ public class Main extends android.app.Activity
                                 /*Prompt =*/ getString(R.string.module_prompt),
                                 /*NoneFound =*/ getString(R.string.no_modules),
                                 /*FileExts =*/ new String[] {Persistent.LibExt},
-                                /*SpecialItem =*/ getString(R.string.master_library)
+                                /*SpecialItem =*/ getBuiltinLibraries(Main.this)
                                   /* item representing selection of built-in Master Library */
                               ),
                         };
@@ -817,6 +835,7 @@ public class Main extends android.app.Activity
                   )
                   {
                     final String ProgName = Data.getData().getPath();
+                    final int SelId = Data.getIntExtra(Picker.SpeIndexID, 0);
                     final boolean IsLib = Data.getIntExtra(Picker.AltIndexID, 0) != 0;
                       /* assumes AltLists array passed to Picker has element 0 for
                         saved programs and element 1 for libraries */
@@ -864,7 +883,7 @@ public class Main extends android.app.Activity
                                   /* if not already done */
                             break;
                             case LOAD_BUILTIN_LIBRARY:
-                                Subtask = new Persistent.LoadBuiltinLibrary(Main.this);
+                                Subtask = new Persistent.LoadBuiltinLibrary(Main.this, SelId);
                             break;
                             case LOAD_PROG:
                                 Subtask = new Persistent.Load
@@ -951,7 +970,7 @@ public class Main extends android.app.Activity
                                                             R.string.program_loaded
                                                       ),
                                                     LoadingBuiltinLibrary ?
-                                                        getString(R.string.master_library)
+                                                        BuiltinLibraries[SelId].getName(Main.this)
                                                     :
                                                         new java.io.File(ProgName).getName()
                                                   ),

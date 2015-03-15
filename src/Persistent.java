@@ -1605,16 +1605,19 @@ public class Persistent
       {
         private final Load DoLoad;
         private final android.content.Context ctx;
+        private final int SelId;
       /* Unfortunately java.util.zip.ZipFile can't read from an arbitrary InputStream,
         so I need to make a temporary copy of the master library out of my raw resources. */
         private final String TempLibName = "temp.ti5x"; /* name for temporary copy */
 
         public LoadBuiltinLibrary
           (
-            android.content.Context ctx
+            android.content.Context ctx,
+            int Id // Id number for the library 0 ml, 2 le, etc
           )
           {
             this.ctx = ctx;
+            this.SelId = Id;
             final String TempLibFile = ctx.getFilesDir().getAbsolutePath() + "/" + TempLibName;
             DoLoad = new Load
               (
@@ -1639,7 +1642,7 @@ public class Persistent
           {
             try
               {
-                final java.io.InputStream LibFile = ctx.getResources().openRawResource(R.raw.ml);
+                final java.io.InputStream LibFile = Main.BuiltinLibraries[SelId].getInputStream(ctx);
                 final java.io.OutputStream TempLib =
                     ctx.openFileOutput(TempLibName, ctx.MODE_WORLD_READABLE);
                   {
@@ -1657,11 +1660,13 @@ public class Persistent
               }
             catch (java.io.FileNotFoundException Failed)
               {
-                throw new RuntimeException("ti5x Master Library load failed: " + Failed.toString());
+                throw new RuntimeException("ti5x " + Main.BuiltinLibraries[0].getName(ctx)
+                                           + " load failed: " + Failed.toString());
               }
             catch (java.io.IOException Failed)
               {
-                throw new RuntimeException("ti5x Master Library load failed: " + Failed.toString());
+                throw new RuntimeException("ti5x "+ Main.BuiltinLibraries[0].getName(ctx)
+                                           + " load failed: " + Failed.toString());
               } /*try*/
             DoLoad.BGRun();
             ctx.deleteFile(TempLibName);
@@ -1796,7 +1801,7 @@ public class Persistent
                     if (!RestoredLib)
                       {
                       /* initialize state to include Master Library */
-                        Subtask = new LoadMasterLibrary(ctx);
+                        Subtask = new LoadBuiltinLibrary(ctx, Main.BUILTIN_MASTER_LIBRARY_INDEX);
                       } /*if*/
                 break;
                 case SAVE_STATE:
