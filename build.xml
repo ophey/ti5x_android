@@ -59,6 +59,7 @@
         <exec executable="util/mlmake">
             <arg value="mlsrc"/>
             <arg value="${out.res.absolute.dir}/raw"/>
+            <arg value="ml"/>
         </exec>
     </target>
 <!--
