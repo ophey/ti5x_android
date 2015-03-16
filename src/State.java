@@ -829,6 +829,15 @@ public class State
           } /*if*/
       } /*SetX*/
 
+    public void SetXFromDisplay()
+      {
+        if (CurNrDecimals >= 0)
+          {
+            final double Factor = Math.pow(10, CurNrDecimals);
+            SetX(Math.floor(X * Factor + .5) / Factor);
+          } /*if*/
+      } /*SetXFromDisplay*/
+
     public void ChangeSign()
       {
         switch (CurState)
@@ -1208,9 +1217,24 @@ public class State
     public void D_MS()
       {
         Enter();
+
+        // Must be done on the displayed value and not X. That is if Fix-01 is set, the number must
+        // be with a single digit.
+
+        SetXFromDisplay();
+
         final double Sign = Math.signum(X);
         final double Degrees = Math.floor(Math.abs(X));
-        final double Fraction = Math.abs(X) - Degrees;
+        double Fraction;
+
+        if (CurNrDecimals >= 0)
+          {
+            final double Factor = Math.pow(10, CurNrDecimals);
+            Fraction = Math.floor((Math.abs(X) - Degrees) * Factor + .5) / Factor;
+          }
+        else
+            Fraction = Math.abs(X) - Degrees;
+
         if (InvState)
           {
             final double Minutes = Math.floor(Fraction * 60.0 + 0.001 /*fudge for rounding errors */);
