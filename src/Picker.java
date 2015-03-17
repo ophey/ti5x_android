@@ -19,6 +19,9 @@ package net.obry.ti5x;
 public class Picker extends android.app.Activity
   {
     public static String AltIndexID = "net.obry.ti5x.PickedIndex";
+    // index for the selection either prog or librairies in the menu
+    public static String SpeIndexID = "net.obry.ti5x.SpecialIndex";
+    // index of the SpecialItem, in this case the selected library 0:Master, 1:xyz
 
     static boolean Reentered = false; /* sanity check */
     public static Picker Current = null;
@@ -30,7 +33,7 @@ public class Picker extends android.app.Activity
         String Prompt;
         String NoneFound;
         String[] FileExts; /* list of extensions to match, or null to match all files */
-        String SpecialItem; /* special item to add to list, null for none */
+        String[] SpecialItem; /* special item to add to list, null for none */
 
         public PickerAltList
           (
@@ -38,7 +41,7 @@ public class Picker extends android.app.Activity
             String Prompt,
             String NoneFound,
             String[] FileExts,
-            String SpecialItem
+            String[] SpecialItem
           )
           {
             this.RadioButtonID = RadioButtonID;
@@ -359,7 +362,8 @@ public class Picker extends android.app.Activity
           }
         if (Alt.SpecialItem != null)
           {
-            PickerList.add(new PickerItem(null, Alt.SpecialItem));
+            for (int i=0; i<Alt.SpecialItem.length; i++)
+              PickerList.add(new PickerItem(null, Alt.SpecialItem[i]));
           } /*if*/
         PromptView.setText
           (
@@ -399,6 +403,7 @@ public class Picker extends android.app.Activity
                   )
                   {
                     PickerItem Selected = null;
+                    int AltIdx = 0;
                     for (int i = 0;;)
                       {
                         if (i == PickerList.getCount())
@@ -408,6 +413,7 @@ public class Picker extends android.app.Activity
                         if (ThisItem.Selected)
                           {
                             Selected = ThisItem;
+                            AltIdx = i;
                             break;
                           } /*if*/
                         ++i;
@@ -432,6 +438,7 @@ public class Picker extends android.app.Activity
                                       )
                                   )
                                 .putExtra(AltIndexID, SelectedAlt)
+                                .putExtra(SpeIndexID, AltIdx)
                           );
                         finish();
                       } /*if*/
