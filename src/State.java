@@ -3068,7 +3068,7 @@ public class State
       (
         int FlagNr,
         boolean FlagNrInd,
-        int Bank,
+        int BankNr,
         int Target,
         int TargetType /* one of the above TRANSFER_LOC_xxx values */
       )
@@ -3094,7 +3094,7 @@ public class State
                     Transfer
                       (
                         /*Type =*/ TRANSFER_TYPE_GTO,
-                        /*BankNr =*/ Bank,
+                        /*BankNr =*/ BankNr,
                         /*Loc =*/ Target,
                         /*LocType =*/ TargetType
                       );
@@ -3104,6 +3104,18 @@ public class State
               {
                 SetErrorState(true);
               } /*if*/
+
+            // if the location we land is a number it must replace the current X
+
+            byte Result = -1;
+            if (RunPC < Bank[RunBank].Program.length)
+              {
+                Result = Bank[RunBank].Program[RunPC];
+              }
+
+            if (Result >= 0 && Result <= 9)
+              ResetEntry();
+
           } /*if*/
       } /*BranchIfFlag*/
 
