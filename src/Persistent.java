@@ -1575,6 +1575,8 @@ public class Persistent
               {
                 if (Calc != null)
                   {
+                    if (Calc.Bank[Calc.CurBank] == null)
+                      Calc.CurBank = 1;
                     Calc.SelectProgram(Calc.CurBank, false);
                     switch (Calc.CurState)
                       {
