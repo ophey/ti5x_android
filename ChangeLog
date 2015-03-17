@@ -1,5 +1,10 @@
 Feature highlights:
 
+v2.12, 2015 March 17:
+    add support for multiple built-in libraries
+    add partial implementation of the leisure library
+    some more semantic fixes
+
 v2.11, 2015 March 14:
     fix branch transfer and numbers (match real TI-59)
     add ML-10 - Simpson's Approximation (Discrete)
