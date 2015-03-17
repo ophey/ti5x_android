@@ -829,6 +829,15 @@ public class State
           } /*if*/
       } /*SetX*/
 
+    public void SetXFromDisplay()
+      {
+        if (CurNrDecimals >= 0)
+          {
+            final double Factor = Math.pow(10, CurNrDecimals);
+            SetX(Math.floor(X * Factor + .5) / Factor);
+          } /*if*/
+      } /*SetXFromDisplay*/
+
     public void ChangeSign()
       {
         switch (CurState)
@@ -1040,7 +1049,13 @@ public class State
     public void Sqrt()
       {
         Enter();
-        SetX(Math.sqrt(X));
+        if (X < 0)
+          {
+            SetX(Math.sqrt(-X));
+            SetErrorState(false);
+          }
+        else
+          SetX(Math.sqrt(X));
       } /*Sqrt*/
 
     public void Reciprocal()
@@ -1202,9 +1217,24 @@ public class State
     public void D_MS()
       {
         Enter();
+
+        // Must be done on the displayed value and not X. That is if Fix-01 is set, the number must
+        // be with a single digit.
+
+        SetXFromDisplay();
+
         final double Sign = Math.signum(X);
         final double Degrees = Math.floor(Math.abs(X));
-        final double Fraction = Math.abs(X) - Degrees;
+        double Fraction;
+
+        if (CurNrDecimals >= 0)
+          {
+            final double Factor = Math.pow(10, CurNrDecimals);
+            Fraction = Math.floor((Math.abs(X) - Degrees) * Factor + .5) / Factor;
+          }
+        else
+            Fraction = Math.abs(X) - Degrees;
+
         if (InvState)
           {
             final double Minutes = Math.floor(Fraction * 60.0 + 0.001 /*fudge for rounding errors */);
@@ -2958,7 +2988,8 @@ public class State
           {
             if (ReturnLast < 0)
                 {
-                    CurState = ResultState;
+                    if (!InErrorState())
+                      CurState = ResultState;
                     StopProgram();
                     OK = true;
                     break;
@@ -2975,7 +3006,8 @@ public class State
                 break;
             if (ReturnTo.FromInteractive)
               {
-                CurState = ResultState;
+                if (!InErrorState())
+                  CurState = ResultState;
                 StopProgram();
                 OK = true;
                 break;
@@ -3036,7 +3068,7 @@ public class State
       (
         int FlagNr,
         boolean FlagNrInd,
-        int Bank,
+        int BankNr,
         int Target,
         int TargetType /* one of the above TRANSFER_LOC_xxx values */
       )
@@ -3062,7 +3094,7 @@ public class State
                     Transfer
                       (
                         /*Type =*/ TRANSFER_TYPE_GTO,
-                        /*BankNr =*/ Bank,
+                        /*BankNr =*/ BankNr,
                         /*Loc =*/ Target,
                         /*LocType =*/ TargetType
                       );
@@ -3072,6 +3104,18 @@ public class State
               {
                 SetErrorState(true);
               } /*if*/
+
+            // if the location we land is a number it must replace the current X
+
+            byte Result = -1;
+            if (RunPC < Bank[RunBank].Program.length)
+              {
+                Result = Bank[RunBank].Program[RunPC];
+              }
+
+            if (Result >= 0 && Result <= 9)
+              ResetEntry();
+
           } /*if*/
       } /*BranchIfFlag*/
 

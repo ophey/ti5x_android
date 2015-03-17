@@ -284,6 +284,7 @@ cursym = None
 in_comment = False
 line_nr = 0
 was_newline = True
+is_dsz_op = False
 loc = 0
 labels_defined = set()
 labels_referenced = set()
@@ -343,6 +344,11 @@ while True :
                     symbol = symbols.get(lookup)
                     numeric = re.search(r"^[\+\-]?(?:\d+(?:\.\d*)?|\.\d+?)(?:[eE][\+\-]?\d+)?$", cursym) != None
                     integral = re.search(r"^\d+$", cursym) != None
+                    if symbol != None:
+                        if "op" in symbol.keys() and symbol["op"] == 97:
+                            is_dsz_op = True
+                        else:
+                            is_dsz_op = False
                     if expect != None :
                         if expect != "label" and symbol != None and symbol.get("isind", False) :
                             if expect == "noindreg" :
@@ -378,7 +384,7 @@ while True :
                             if integral :
                                 opval = int(cursym)
                                 if expect == "loc" :
-                                    if opval < 100 and len(cursym) == 2:
+                                    if is_dsz_op and opval == 51 and len(cursym) == 2:
                                         out(opval)
                                     elif opval < 1000 :
                                         out(opval // 100)
