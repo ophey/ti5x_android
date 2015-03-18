@@ -515,6 +515,7 @@ public class State
         switch (CurState)
           {
         case EntryState:
+        case ErrorState:
         case DecimalEntryState:
             if (ExponentEntered)
               {
@@ -526,6 +527,7 @@ public class State
         switch (CurState)
           {
         case EntryState:
+        case ErrorState:
             if (CurDisplay.charAt(0) == '0')
               {
                 CurDisplay = new String(new char[] {TheDigit}) + CurDisplay.substring(1);
@@ -1073,7 +1075,12 @@ public class State
     public void Reciprocal()
       {
         Enter();
-        SetX(1.0 / X);
+        if (X == 0)
+          {
+            SetErrorState(false);
+          }
+        else
+          SetX(1.0 / X);
       } /*Reciprocal*/
 
     double TrigScale()
