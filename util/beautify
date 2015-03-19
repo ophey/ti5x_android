@@ -27,4 +27,14 @@ sed -i \
      s/lbl c'$/lbl C'/g;
      s/lbl d'$/lbl D'/g;
      s/lbl e'$/lbl E'/g;
+     s/lbl a /lbl A /g;
+     s/lbl b /lbl B /g;
+     s/lbl c /lbl C /g;
+     s/lbl d /lbl D /g;
+     s/lbl e /lbl E /g;
+     s/lbl a' /lbl A' /g;
+     s/lbl b' /lbl B' /g;
+     s/lbl c' /lbl C' /g;
+     s/lbl d' /lbl D' /g;
+     s/lbl e' /lbl E' /g;
      " $1
