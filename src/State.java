@@ -3240,7 +3240,7 @@ public class State
         final int Op = GetProg(Execute);
         if (Op >= 0)
           {
-            boolean WasModifier = false;
+            boolean KeepModifier = false;
             if (Execute)
               {
                 boolean BankSet = false;
@@ -3275,7 +3275,7 @@ public class State
                 case 22:
                 case 27:
                     InvState = !InvState;
-                    WasModifier = true;
+                    KeepModifier = true;
                 break;
                 case 23:
                     Ln();
@@ -3427,6 +3427,7 @@ public class State
                 break;
                 case 68: /*Nop*/
                   /* No effect */
+                    KeepModifier = true;
                 break;
                 case 69:
                     SpecialOp(GetProg(true), false);
@@ -3458,6 +3459,7 @@ public class State
                 break;
                 case 76: /*Lbl*/
                     GetProg(true); /* just skip label, assume Labels already filled in */
+                    KeepModifier = true;
                 break;
               /* 77 handled above */
                 case 78:
@@ -3587,7 +3589,7 @@ public class State
                 case 22:
                 case 27:
                     InvState = !InvState; /* needed to correctly parse INV Fix and unmerged INV SBR */
-                    WasModifier = true;
+                    KeepModifier = true;
                 break;
                 case 36: /*Pgm*/
                 case 42: /*STO*/
@@ -3634,6 +3636,11 @@ public class State
                             Bank[RunBank].Labels.put(TheLabel, RunPC);
                           } /*if*/
                       }
+                      KeepModifier = true;
+                break;
+                case 68: /*Nop*/
+                  /* No effect */
+                    KeepModifier = true;
                 break;
                 case 86: /*St flg*/
                     GetUnitOp(false, false);
@@ -3645,7 +3652,7 @@ public class State
                 break;
                   } /*switch*/
               } /*if*/
-            if (!WasModifier)
+            if (!KeepModifier)
               {
                 InvState = false;
               } /*if*/
