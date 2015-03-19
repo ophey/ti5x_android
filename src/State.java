@@ -188,6 +188,9 @@ public class State
     public double X, T;
     public OpStackEntry[] OpStack;
     public int OpStackNext;
+    public boolean LastIsOperator = false;
+    // wether the last entry was an operator requiring 2 operands:
+    // 1 + = (should set calculator in error)
 
     public static class ProgBank
       {
@@ -285,6 +288,7 @@ public class State
         CurNrDecimals = -1;
         CurAng = ANG_DEG;
         OpStackNext = 0;
+        LastIsOperator = false;
         X = 0.0;
         T = 0.0;
         PC = 0;
@@ -478,6 +482,7 @@ public class State
     public void ClearAll()
       {
         OpStackNext = 0;
+        LastIsOperator = false;
         ResetEntry();
       } /*ClearAll*/
 
@@ -555,6 +560,7 @@ public class State
           } /*switch*/
         CurDisplay += SaveExponent;
         SetShowing(CurDisplay);
+        LastIsOperator = false;
       } /*Digit*/
 
     public void DecimalPoint()
@@ -988,6 +994,7 @@ public class State
             SetX(X);
           } /*if*/
         StackPush(OpCode);
+        LastIsOperator = true;
       } /*Operator*/
 
     public void LParen()
@@ -1025,11 +1032,16 @@ public class State
     public void Equals()
       {
         Enter();
-        while (OpStackNext != 0)
+        if (LastIsOperator)
+          SetErrorState(false);
+        else
           {
-            DoStackTop();
-          } /*while*/
-        SetX(X);
+            while (OpStackNext != 0)
+              {
+                DoStackTop();
+              } /*while*/
+            SetX(X);
+          }
       } /*Equals*/
 
     public void SetAngMode
@@ -3631,6 +3643,7 @@ public class State
                 InvState = false;
               } /*if*/
           } /*if*/
+        LastIsOperator = Op == 45 | Op == 55 || Op == 65 || Op == 75 || Op == 85;
       } /*Interpret*/
 
     void FillInLabels
