@@ -239,23 +239,41 @@ def report_error(msg) :
 alt_state = False
 ind_state = False
 was_modifier = False
-outcount = 0
 pending_out = None # hold back last byte for possible merging
 expect = None
 lastsym = None
 
+prog = []
+labels = {}
+
+def outprog():
+    # print(labels)
+    count=0
+    for s in prog:
+        if s.isdigit():
+            sys.stdout.write(s)
+            count+=1
+        elif s in labels:
+            v = labels[s]
+            if v < 100:
+                sys.stdout.write("00 %02d" % v)
+            else:
+                sys.stdout.write("%02d %02d" % ((v // 100), (v % 100)))
+            count+=2
+        else:
+            report_error("unrecognized symbol \"%s\"" % s)
+
+        if count == 24 :
+            sys.stdout.write("\n")
+            count = 0
+        else:
+            sys.stdout.write(" ")
+
 def realout(b) :
     """really outputs a single instruction byte."""
-    global outcount
-    if outcount != 0 :
-        sys.stdout.write(" ")
+    global prog
     #end if
-    sys.stdout.write("%02d" % b);
-    outcount += 1
-    if outcount == 24 :
-        sys.stdout.write("\n")
-        outcount = 0
-    #end if
+    prog = prog + ["%02d" % b]
 #end realout
 
 def flushout() :
@@ -277,6 +295,24 @@ def out(b) :
     pending_out = b
     loc += 1
 #end out
+
+def outlabel(lab) :
+    """outputs a label, will be resolved on the second pass."""
+    global loc, prog
+    if loc == 1000 :
+        report_error("program too large, can't exceed 1000 steps")
+    #end if
+    flushout()
+    prog = prog + [lab]
+    loc += 2
+#end outlabel
+
+def recordlabel(lab) :
+    """outputs a label, will be resolved on the second pass."""
+    global loc, prog
+    flushout()
+    labels.update({lab[:-1]:loc})
+#end recordlabel
 
 curline = ""
 EOF = False
@@ -512,8 +548,13 @@ while True :
                                 alt_state = False
                             #end if
                         #end if
+                    elif cursym.endswith(":"):
+                        # this is a label
+                        recordlabel(cursym)
                     else :
-                        report_error("unrecognized symbol \"%s\"" % cursym)
+                        outlabel(cursym)
+                        expect = None
+                        #report_error("unrecognized symbol \"%s\"" % cursym)
                     #end if
                 #end if
                 cursym = None
@@ -524,9 +565,6 @@ while True :
     #end if
 #end while
 flushout()
-if outcount != 0 :
-    sys.stdout.write("\n")
-#end if
 if check_labels :
     for sym in labels_referenced - labels_defined :
         # fixme: can't make this an error unless I distinguish cross-bank label references
@@ -536,4 +574,5 @@ if check_labels :
         sys.stderr.write("Assembler warning: label \"%s\" defined but not referenced\n" % repr(sym))
     #end for
 #end if
+outprog()
 sys.exit(exitstatus)
