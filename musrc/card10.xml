@@ -1,0 +1,10 @@
+<carddef style="system">
+<label slot="titleleft">HYPERBOLIC FUNCTIONS</label>
+<label slot="titleright">MU-10</label>
+<label slot="a">sinh</label>
+<label slot="b">cosh</label>
+<label slot="c">tanh</label>
+<label slot="aprime">sinh-1</label>
+<label slot="bprime">cosh-1</label>
+<label slot="cprime">tanh-1</label>
+</carddef>
