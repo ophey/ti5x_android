@@ -94,7 +94,7 @@ public class State
     public final static int ErrorState = 11;
     public int CurState = EntryState;
     public boolean ExponentEntered = false; /* whether the dispay as 00 exp at the end */
-
+    public int ParenCount = 0;
     public boolean InvState = false; /* INV has been pressed/executed */
     public boolean FromResult = false;
     // whether the current value is from a result RCL, or a typed number
@@ -185,6 +185,7 @@ public class State
       } /*OpStackEntry*/
 
     public final int MaxOpStack = 8;
+    public final int MaxParen = 9;
     public double X, T;
     public OpStackEntry[] OpStack;
     public int OpStackNext;
@@ -288,6 +289,7 @@ public class State
         CurNrDecimals = -1;
         CurAng = ANG_DEG;
         OpStackNext = 0;
+        ParenCount = 0;
         LastIsOperator = false;
         X = 0.0;
         T = 0.0;
@@ -482,6 +484,7 @@ public class State
     public void ClearAll()
       {
         OpStackNext = 0;
+        ParenCount = 0;
         LastIsOperator = false;
         ResetEntry();
       } /*ClearAll*/
@@ -1002,6 +1005,12 @@ public class State
     public void LParen()
       {
         Enter();
+
+        if (ParenCount == MaxParen)
+          SetErrorState(false);
+        else
+          ParenCount++;
+
         if (OpStackNext != 0)
           {
             ++OpStack[OpStackNext - 1].ParenFollows;
@@ -1012,6 +1021,7 @@ public class State
     public void RParen()
       {
         Enter();
+        ParenCount--;
         boolean PoppedSomething = false;
         for (;;)
           {
