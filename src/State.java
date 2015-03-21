@@ -1472,7 +1472,7 @@ public class State
                     break;
                 if (Indirect)
                   {
-                    RegNr = ((int)Math.round(Memory[RegNr]) + RegOffset) % 100;
+                    RegNr = ((int)Math.floor(Memory[RegNr]) + RegOffset) % 100;
                     if (RegNr < 0 || RegNr >= MaxMemories)
                         break;
                   } /*if*/
