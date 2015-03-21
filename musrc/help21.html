@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #ce8c3b;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+  } /*.yellowbutton*/
+
+.brownbutton
+  {
+    background : #4e3836;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #ac9e80;
+  } /*.brownbutton*/
+
+.whitebutton
+  {
+    background : #ac9e80;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+  } /*.whitebutton*/
+
+.alttext
+  {
+    background : #222424;
+    padding : 1.5pt;
+    font-weight : bold;
+    color : #ac9e80;
+  } /*alttext*/
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  } /*.deflist DT*/
+.deflist DD
+  {
+    margin-left : 4em;
+  } /*.deflist DD*/
+
+TABLE.functions
+  {
+    border-collapse : collapse;
+  }
+TABLE.functions > TBODY > TR > TD, TABLE.functions > TBODY > TR > TH
+  {
+    border : 1px solid;
+    border-color : #C0C0C0;
+    padding : 0.25em;
+  }
+TABLE.functions > TBODY > TR > TD.unused
+  {
+    background : #D5D5D5;
+  }
+</STYLE>
+</HEAD>
+<BODY>
+<H1>MU-21 — Variable Arithmetic</H1>
+
+<P>This program simplifies keyboard operations by making the
+  user-defined keys <SPAN CLASS="brownbutton">A</SPAN>
+  through <SPAN CLASS="brownbutton">E</SPAN> directly for storage and
+  recall of variables. For example the simple key sequence
+  <i>n</i> <SPAN CLASS="alttext">E'</SPAN>
+  <SPAN CLASS="brownbutton">A</SPAN> defines
+  key <SPAN CLASS="brownbutton">A</SPAN> as <i>n</i>. The
+  variable <i>n</i> can then be recalled for use at any point in a
+  calculation by pressing <SPAN CLASS="brownbutton">A</SPAN>.
+
+<P>To illustrate how the program works, assume a rectangle of length L
+  and width W. The values of L and W can be entered using:
+
+<P>L <SPAN CLASS="alttext">E'</SPAN> <SPAN CLASS="brownbutton">A</SPAN>
+<P>W <SPAN CLASS="alttext">E'</SPAN> <SPAN CLASS="brownbutton">B</SPAN>
+<P>Then:
+
+  <TABLE>
+    <TD><SPAN CLASS="brownbutton">A</SPAN><TD>display L
+    <TD><SPAN CLASS="brownbutton">B</SPAN><TD>display W
+    <TD><SPAN CLASS="brownbutton">A</SPAN> x <SPAN CLASS="brownbutton">B</SPAN><TD>area
+    <TD>2 x <SPAN CLASS="brownbutton">A</SPAN> + 2 x <SPAN CLASS="brownbutton">B</SPAN><TD>perimeter
+    <TD><SPAN CLASS="brownbutton">A</SPAN> <SPAN CLASS="brownbutton">x²</SPAN>
+      + <SPAN CLASS="brownbutton">B</SPAN> <SPAN CLASS="brownbutton">x²</SPAN>
+      <SPAN CLASS="yellowbutton">=</SPAN>  <SPAN CLASS="brownbutton">√x</SPAN><TD>diagonal
+
+<P>L <SPAN CLASS="alttext">E'</SPAN> <SPAN CLASS="brownbutton">A</SPAN>
+
+<P>Variables can be calculated using subroutines that you enter in
+  program memory. For example after <SPAN CLASS="brownbutton">A</SPAN>
+  and <SPAN CLASS="brownbutton">B</SPAN> have been entered, the area
+  of the rectangle can be calculated as
+  variable <SPAN CLASS="brownbutton">C</SPAN> using the key sequence
+  <SPAN CLASS="alttext">A'</SPAN> <SPAN CLASS="brownbutton">C</SPAN>
+  if the following subroutine is entered into program memory.
+
+<P><SPAN CLASS="alttext">Lbl</SPAN> <SPAN CLASS="brownbutton">C</SPAN>
+  <SPAN CLASS="brownbutton">RCL</SPAN> <SPAN CLASS="whitebutton">21</SPAN>
+  <SPAN CLASS="yellowbutton">x</SPAN>
+  <SPAN CLASS="brownbutton">RCL</SPAN> <SPAN CLASS="whitebutton">22</SPAN>
+  <SPAN CLASS="yellowbutton">=</SPAN>
+  <SPAN CLASS="brownbutton">STO</SPAN> <SPAN CLASS="whitebutton">23</SPAN>
+  <SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="brownbutton">SBR</SPAN>
+
+<P>Note that variables <SPAN CLASS="brownbutton">A</SPAN> through
+  <SPAN CLASS="brownbutton">E</SPAN> reside in data register R<sub>21</sub>
+  through R<sub>25</sub>  respectively.
+
+<UL>
+  <LI>To store variable <SPAN CLASS="brownbutton">A</SPAN>,
+    press <SPAN CLASS="alttext">E'</SPAN> <SPAN CLASS="brownbutton">A</SPAN>. Likewise
+    for all variables.
+
+  <LI>To recall variable <SPAN CLASS="brownbutton">A</SPAN>,
+    press <SPAN CLASS="brownbutton">A</SPAN>. Likewise for all variables.
+
+  <LI>To compute variable <SPAN CLASS="brownbutton">A</SPAN>,
+    press <SPAN CLASS="alttext">A'</SPAN> <SPAN CLASS="brownbutton">A</SPAN>.
+    Likewise for all variables.
+</UL>
+
+<P>Registers used: 00-01
+
+</BODY>
