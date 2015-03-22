@@ -1688,7 +1688,13 @@ public class State
                     OpNr = (OpNr + RegOffset) % 100;
                     if (OpNr >= MaxMemories)
                         break;
-                    OpNr = (int)Math.round(Memory[OpNr]);
+                    // if Memory[OpNr] is negative, do nothing, no error
+                    if (Memory[OpNr] < 0.0)
+                      {
+                        OK = true;
+                        break;
+                      }
+                    OpNr = (int)Arith.AbsIntPart(Memory[OpNr]);
                   } /*if*/
                 if (OpNr >= 20 && OpNr < 30)
                   {
