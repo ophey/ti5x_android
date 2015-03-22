@@ -23,6 +23,5 @@ lbl A
 
 lbl B
     A
-    pgm 13
-    B
+    pgm 13 B
     rtn
