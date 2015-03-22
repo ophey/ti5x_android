@@ -1,0 +1,14 @@
+;+
+; Partial recreation of the "Electrical Engineering Library" module
+; that came with the original TI-58C/59 calculators.
+;-
+
+lbl clr
+    cp
+    fix 9
+    0 sto 10
+    sto 11
+    sto 12
+    sto 13
+    sto 14
+    rtn
