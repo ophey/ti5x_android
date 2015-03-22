@@ -1240,6 +1240,13 @@ public class State
           {
             NewX = Math.hypot(X, T);
             NewY = Math.atan2(X, T) * Scale;
+            // never report negative angle below fourth of circle
+            if (CurAng == ANG_DEG && NewY < -90.0)
+              NewY = NewY + 360.0;
+            else if (CurAng == ANG_RAD && NewY < -Math.PI / 2.0)
+              NewY = NewY + 2 * Math.PI;
+            else if (CurAng == ANG_GRAD && NewY < -100)
+              NewY = NewY + 400.0;
           }
         else
           {
