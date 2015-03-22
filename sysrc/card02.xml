@@ -1,0 +1,13 @@
+<carddef style="system">
+<label slot="titleleft">TRAVERSE (AZ/BRG)</label>
+<label slot="titleright">SY-02</label>
+<label slot="a">Az;<rarrow/>Brg;Q</label>
+<label slot="b">Brg</label>
+<label slot="c">D;V<angle/><rarrow/>HzD</label>
+<label slot="d"><rarrow/>Dp;Lt;N;E</label>
+<label slot="e">Occupy<rarrow/><Sigma/>D</label>
+<label slot="aprime">Ref N;E</label>
+<label slot="bprime">Q;<rarrow/>Az</label>
+<label slot="cprime">Z<angle/><rarrow/>HzD</label>
+<label slot="eprime">[Init]<rarrow/></label>
+</carddef>
