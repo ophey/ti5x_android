@@ -1,0 +1,9 @@
+<carddef style="system">
+<label slot="titleleft">INTERPOLATION</label>
+<label slot="titleright">MU-14</label>
+<label slot="a">Register#</label>
+<label slot="b">Xi</label>
+<label slot="c">Yi</label>
+<label slot="d">x<rarrow/>f(x)</label>
+<label slot="aprime"># Points</label>
+</carddef>

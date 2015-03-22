@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #ce8c3b;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+  } /*.yellowbutton*/
+
+.brownbutton
+  {
+    background : #4e3836;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #ac9e80;
+  } /*.brownbutton*/
+
+.whitebutton
+  {
+    background : #ac9e80;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+  } /*.whitebutton*/
+
+.alttext
+  {
+    background : #222424;
+    padding : 1.5pt;
+    font-weight : bold;
+    color : #ac9e80;
+  } /*alttext*/
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  } /*.deflist DT*/
+.deflist DD
+  {
+    margin-left : 4em;
+  } /*.deflist DD*/
+
+TABLE.functions
+  {
+    border-collapse : collapse;
+  }
+TABLE.functions > TBODY > TR > TD, TABLE.functions > TBODY > TR > TH
+  {
+    border : 1px solid;
+    border-color : #C0C0C0;
+    padding : 0.25em;
+  }
+TABLE.functions > TBODY > TR > TD.unused
+  {
+    background : #D5D5D5;
+  }
+</STYLE>
+</HEAD>
+<BODY>
+<H1>MU-13 — Normal Distribution</H1>
+
+<P>The program allows you to enter the normal variate (u) and will
+  compute either Z(u) at that point or the area, Q(u), under the curve
+  to the right of that point. Also, you may enter Q(u) and the program
+  will compute u.
+
+<UL>
+  <LI>Enter normal variate, press <SPAN CLASS="brownbutton">A</SPAN>
+  <LI>Enter Q(u), press <SPAN CLASS="brownbutton">B</SPAN>
+  <LI>Enter normal variate, press <SPAN CLASS="brownbutton">C</SPAN>
+</UL>
+
+<H3>Formulas Used</H3>
+
+<P>Z(u) = (1 / sqrt(2&pi;)) e<sup>-u<sup>2</sup>/2</sup>
+
+<P>Q(u) = (1 / sqrt(2&pi;)) &sum;<sub>u..inf</sub> e<sup>-t<sup>2</sup>/2</sup>dt
+
+<P>Registers used: 10-11
+
+</BODY>

@@ -1,0 +1,7 @@
+<carddef style="system">
+<label slot="titleleft">NORMAL DISTRIBUTION</label>
+<label slot="titleright">MU-13</label>
+<label slot="a">u<rarrow/>Q(u)</label>
+<label slot="b">Q(u)<rarrow/>u</label>
+<label slot="c">u<rarrow/>Z(u)</label>
+</carddef>

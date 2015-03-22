@@ -64,7 +64,8 @@ public class Main extends android.app.Activity
     public static final BuiltinLibrary[] BuiltinLibraries =
     {
       new BuiltinLibrary(R.string.master_library, R.raw.ml),
-      new BuiltinLibrary(R.string.leisure_library, R.raw.le)
+      new BuiltinLibrary(R.string.leisure_library, R.raw.le),
+      new BuiltinLibrary(R.string.mathutil_library, R.raw.mu)
     };
 
     private static final String[] getBuiltinLibraries(android.content.Context ctx)
