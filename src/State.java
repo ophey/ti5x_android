@@ -76,8 +76,12 @@ class Arith
       )
       /* returns the absolute integer part of X. */
       {
-        return
-            Math.floor(Math.abs(RoundTo(X, MaxPrec)));
+        final double Xabs = Math.abs(X);
+        final double Epsilon =
+            Xabs > 0.8
+              ? 1.0 / Math.pow (10, 15 - 3 - Math.min(1, Math.abs((int)Math.floor(Math.log(Xabs) / Math.log(10.0)))))
+              : 0.0;
+        return Math.floor(Xabs + Epsilon);
       } /*AbsIntPart*/
 
   } /*Arith*/
