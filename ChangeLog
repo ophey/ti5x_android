@@ -1,5 +1,9 @@
 Feature highlights:
 
+v2.13, 2015 March 22:
+    add MU built-in library
+    fix numerous semantic issues
+
 v2.12, 2015 March 17:
     add support for multiple built-in libraries
     add partial implementation of the leisure library
