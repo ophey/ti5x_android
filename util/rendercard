@@ -270,6 +270,7 @@ symbols = \
         "integral" : defsymbol("integral", "(\\362)"),
         "lambda" : defsymbol("lambda", "(\\154)"),
         "mul": defsymbol("mul", "(\\264)"),
+        "larrow" : defsymbol("larrow", "(\\254)"),
         "rarrow" : defsymbol("rarrow", "(\\256)"),
         "sigma" : defsymbol("sigma", "(\\163)"),
         "theta" : defsymbol("theta", "(\\161)"),
