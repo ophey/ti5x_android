@@ -1266,7 +1266,7 @@ public class State
             Fraction = Math.floor((Math.abs(X) - Degrees) * Factor + .5) / Factor;
           }
         else
-            Fraction = Math.abs(X) - Degrees;
+          Fraction = Math.abs(X) - Degrees;
 
         if (InvState)
           {
