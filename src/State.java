@@ -3506,7 +3506,7 @@ public class State
                             :
                                 TRANSFER_TYPE_GTO,
                         /*BankNr =*/ NextBank,
-                        /*Loc =*/ GetLoc(true, NextBank),
+                        /*Loc =*/ GetProg(true),
                         /*LocType =*/ TRANSFER_LOC_INDIRECT
                       );
                 break;
