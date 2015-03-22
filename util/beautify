@@ -11,6 +11,7 @@ sed -i \
      s/eq/x=t/g;
      s, /, ÷,g;
      s/x%t/x⇌t/g;
+     s,x/t,x⇌t,g;
      s/x2/x²/g;
      s/yx/yˣ/g;
      s/sqr/√x/g;
