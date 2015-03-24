@@ -818,6 +818,7 @@ public class ButtonGrid extends android.view.View
                       } /*if*/
                 break;
                   } /*switch*/
+
                 if (Digit >= 0)
                   {
                     if (AccumDigits < 0)
@@ -1093,6 +1094,7 @@ public class ButtonGrid extends android.view.View
                             throw new RuntimeException("unhandled collected function " + CollectingForFunction);
                       /* break; */
                           } /*switch*/
+                        Calc.PreviousOp = CollectingForFunction;
                       }
                     else
                       {
@@ -1106,6 +1108,7 @@ public class ButtonGrid extends android.view.View
                       } /*if*/
                   } /*if*/
               } /*if CollectingForFunction*/
+
             if (!Calc.InErrorState())
               {
                 if (!Handled)
@@ -1587,6 +1590,7 @@ public class ButtonGrid extends android.view.View
                           } /*if*/
                     break;
                       } /*switch*/
+                    Calc.PreviousOp = ButtonCode;
                   } /*if ProgMode*/
               } /*if not Handled*/
             if (!WasModifier)
