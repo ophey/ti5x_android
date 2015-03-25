@@ -1,5 +1,13 @@
 Feature highlights:
 
+v2.15, 2015 March 25:
+   fix some minor issues
+
+v2.14, 2015 March 22:
+   add MU built-in library
+   fix numerous semantic issues
+   add LE-21
+
 v2.13, 2015 March 22:
     add MU built-in library
     fix numerous semantic issues
