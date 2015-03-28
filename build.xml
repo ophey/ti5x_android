@@ -71,6 +71,11 @@
             <arg value="${out.res.absolute.dir}/raw"/>
             <arg value="mu"/>
         </exec>
+        <exec executable="util/mlmake">
+            <arg value="eesrc"/>
+            <arg value="${out.res.absolute.dir}/raw"/>
+            <arg value="ee"/>
+        </exec>
     </target>
 <!--
     <target name="-pre-compile">

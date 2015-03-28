@@ -4,7 +4,7 @@
 ;
 ; The original code is documented as only using 4 registers.
 ; I can't figure out how to do that (undocumented functions?)
-; so I'm using 6.
+; so I'm using 6. (??? see eesrc/prog04.src for an implementation).
 ;
 ; Written by Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
 ;-

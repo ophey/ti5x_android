@@ -1,0 +1,166 @@
+;+
+; Partial recreation of the "Electrical Engineering Library" module
+; that came with the original TI-58C/59 calculators.
+;-
+
+lbl A
+    P→R
+    sto 6
+    x⇌t
+    sto 5
+    rtn
+
+lbl B
+    P→R
+    sto 8
+    x⇌t
+    sto 7
+    rtn
+
+lbl C
+    P→R
+    sto 10
+    x⇌t
+    sto 9
+    rtn
+
+lbl D
+    P→R
+    sto 12
+    x⇌t
+    sto 11
+    rtn
+
+lbl clr
+    deg
+    cp
+    50 sto 17
+    fix 9
+    0
+    rtn
+
+lbl E
+    inv
+
+lbl E'
+    stf 4
+    cp
+    x=t 061       ; if not 0 set new X0 on R17 (default 50, see lbl clr)
+    sto 17
+;#061
+    inv iff 4 084
+    rcl 17
+    prd 5
+    prd 6
+    prd 7
+    prd 8
+    prd 9
+    prd 10
+    prd 11
+    prd 12
+;#084
+    rcl 12
+    sto 4
+    rcl 11
+    sto 3
+    rcl 6
+    sto 2
+    rcl 5
+    sto 1
+    pgm 4 C       ; s11 x s22 -> (R01, R02)
+    rcl 7
+    exc 1
+    sto 13
+    rcl 8
+    exc 2
+    sto 14        ; (R13,R14) = s22 x s11
+    rcl 9
+    sto 3
+    rcl 10
+    sto 4
+    pgm 4 C       ; s12 x s21 -> (R01, R02)
+    inv sum 13
+    x⇌t
+    inv sum 14    ; (R13,R14) = s11 x s22 - s12 x s21
+    rcl 13
+    sto 15
+    rcl 14
+    sto 16        ; (R15, R16) = DeltaS
+    rcl 11        ;
+    sum 13        ; DeltaS + s22 (real)
+    exc 5         ; s22 (real) -> s11 (real)
+    sum 13        ; DeltaS + s22 + s11 (real)
+    inv sum 5     ; s22 (real) - s11 (real)
+    rcl 12
+    sum 14        ; DeltaS + s22 (img)
+    exc 6         ; s22 (img) -> s11 (img)
+    sum 14        ; DeltaS + s22 s11 (img)    (R15,R16) = DeltaS
+    inv sum 6     ; s22 (img) - s11 (img)     (R05,R06) = s22 - s11
+    0             ;                           (R13,R14) = DeltaS + s22 + s11
+    rtn
+
+;#165
+lbl D'
+    sbr 260
+    inv sum 1
+    rcl 6         ;#174 is on the 6?????
+    inv sum 2
+    op 21         ; from A' - (R01,R02) = -DeltaS + s22 - s11 + 1 (OK)
+;#180
+    rcl 13        ;
+    sto 3
+    op 23
+    rcl 14
+    sto 4         ; (R03,R04) = DeltaS + s11 + s22 + 1 (?? was sto 14)
+    pgm 4 C'      ; (-DeltaS + s22 - s11 + 1) / (DeltaS + s22 + s11 + 1)
+    rcl 17
+    iff 4 204
+    1/x
+    prd 1
+    prd 2
+;#204
+    rcl 1         ; Y11 (real)
+    x⇌t
+    rcl 2         ; Y11 (img)
+    inv P→R
+    x⇌t
+    prt
+    x⇌t
+    prt
+    x⇌t
+    adv
+    rtn
+
+lbl B'
+    rcl 7
+    sto 1
+    rcl 8
+;#226
+    sto 2
+    2
+    +/-
+    prd 1
+    prd 2
+    gto 180
+
+lbl C'
+    rcl 9
+    sto 1
+    rcl 10
+    gto 226
+
+lbl A'
+    sbr 260
+    sum 1
+    rcl 6
+    gto 176       ; ?? was 174 on orignal code
+
+;#260             ; (R01,R02) = - DeltaS
+    rcl 15
+    +/-
+    sto 1
+    rcl 16
+    +/-
+    sto 2
+    rcl 5
+    rtn

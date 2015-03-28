@@ -33,6 +33,14 @@
 #         A divide symbol is drawn.
 #     <Gamma/>
 #         A capital-gamma character is drawn.
+#     <Omega/>
+#         A capital-omega character is drawn.
+#     <omega/>
+#         A omega character is drawn.
+#     <Zeta/>
+#         A capital-zeta character is drawn.
+#     <zeta/>
+#         A zeta character is drawn.
 #     <integral/>
 #         An integral character is drawn.
 #     <lambda/>
@@ -262,9 +270,14 @@ symbols = \
         "integral" : defsymbol("integral", "(\\362)"),
         "lambda" : defsymbol("lambda", "(\\154)"),
         "mul": defsymbol("mul", "(\\264)"),
+        "larrow" : defsymbol("larrow", "(\\254)"),
         "rarrow" : defsymbol("rarrow", "(\\256)"),
         "sigma" : defsymbol("sigma", "(\\163)"),
         "theta" : defsymbol("theta", "(\\161)"),
+        "Omega" : defsymbol("Omega", "(\\127)"),
+        "omaga" : defsymbol("omega", "(\\167)"),
+        "Zeta" : defsymbol("Zeta", "(\\132)"),
+        "zeta" : defsymbol("zeta", "(\\172)"),
     }
 
 fontname = "Helvetica"
