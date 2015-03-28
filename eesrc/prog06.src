@@ -1,0 +1,151 @@
+;+
+; Partial recreation of the "Electrical Engineering Library" module
+; that came with the original TI-58C/59 calculators.
+;-
+
+lbl A'
+    rad
+    (
+    ( rcl 1 + 1 )
+    x²
+    +
+    rcl 2
+    x²
+    )
+    √x
+    rtn
+
+    ( ( rcl 1 - 1 )
+    x²
+    +
+    rcl 2
+    x²
+    )
+    √x
+    rtn
+
+    ( ( a' + sbr 0 18 )
+    ÷ 2
+    +
+    ( ( ee inv ee x² - 1 )
+    √x
+    iff 0 061
+
+    ×
+    rcl 0
+    inv stf 0
+    ) )
+    lnx
+    rtn
+
+lbl A
+    pgm 4 A
+    rtn
+
+lbl B
+    rad
+    ( rcl 1 sin × pgm 5 E' )
+    x⇌t
+    ( rcl 1 cos × pgm 5 C' )
+    sto 2
+    x⇌t
+    sto 1
+    rtn
+
+lbl C
+    rad
+    ( rcl 1 cos × pgm 5 E' )
+    x⇌t ( rcl 1 sin +/- × pgm 5 C' )
+    sto 2
+    x⇌t
+    sto 1
+    rtn
+
+lbl D
+    rcl 1
+    sto 3
+    rcl 2
+    sto 4
+    C
+    pgm 4 E'
+    B
+    pgm 4 C'
+    rtn
+
+lbl B'
+    rcl 2
+    op 10
+    sto 0
+    (
+    ( a' - sbr 0 18 )
+    ÷ 2
+    )
+    inv sin
+    x⇌t
+    sbr 033
+    sto 2
+    x⇌t
+    sto 1
+    rtn
+
+lbl C'
+    rcl 2
+    op 10
+    sto 0
+    (
+    (
+    ( a' - sbr 018 )
+    ÷
+    2
+    )
+    inv cos
+    ×
+    rcl 0 )
+    x⇌t
+    stf 0
+    sbr 033
+    +/-
+    sto 2
+    x⇌t
+    sto 1
+    rtn
+
+lbl D'
+    (
+    ( 1 - rcl 1 x² - rcl 2 x² )
+    x⇌t
+    )
+    2 × rcl 1
+    )
+    rad
+    inv P→R
+    ÷
+    2
+    )
+    x⇌t
+    (
+    (
+    ( rcl 1 x² +
+    ( rcl 2 + 1 )
+    x²
+    )
+    ÷
+    ( rcl 1 x² +
+    ( rcl 2 - 1 )
+    x²
+    )
+    )
+    lnx
+    ÷
+    4
+    )
+    sto 2
+    x⇌t
+    sto 1
+    rtn
+
+lbl P→R
+    inv stf 1
+    pgm 4 Sbr
+    P→R
+    rtn
