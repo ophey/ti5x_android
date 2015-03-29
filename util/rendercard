@@ -265,6 +265,7 @@ symbols = \
         "rarrow" : defsymbol("rarrow", "(\\256)"),
         "sigma" : defsymbol("sigma", "(\\163)"),
         "theta" : defsymbol("theta", "(\\161)"),
+        "Sigma" : defsymbol("Sigma", "(\\123)"),
     }
 
 fontname = "Helvetica"
