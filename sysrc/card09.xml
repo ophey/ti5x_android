@@ -1,0 +1,12 @@
+<carddef style="system">
+<label slot="titleleft">VERTICAL CURVE DESIGN</label>
+<label slot="titleright">SY-09</label>
+<label slot="a">g1, g2</label>
+<label slot="b">L<rarrow/><Delta/>g</label>
+<label slot="c">[Beg<rarrow/>Int]</label>
+<label slot="d"><rarrow/>Sta (<uarrow/>/<narrow/>)</label>
+<label slot="e">Sta<rarrow/>Elev</label>
+<label slot="bprime"><Delta/>g<rarrow/>L</label>
+<label slot="cprime">[Int<rarrow/>Beg]</label>
+<label slot="eprime">[Init]<rarrow/></label>
+</carddef>
