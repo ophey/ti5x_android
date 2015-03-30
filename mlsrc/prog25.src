@@ -21,7 +21,7 @@ lbl A'
 lbl B
 ; fluid ounces to litres
     ( ce ×
-    ifflg 6 cms
+    inv ifflg 6 cms
 ; Imperial
     sbr stflg
     gto exc
@@ -35,7 +35,7 @@ lbl exc
 lbl B'
 ; litres to fluid ounces
     ( ce ÷
-    ifflg 6 log
+    inv ifflg 6 log
 ; Imperial
     sbr stflg
     gto sto
@@ -49,7 +49,7 @@ lbl sto
 lbl C
 ; gallons to litres
     ( ce ×
-    ifflg 6 rcl
+    inv ifflg 6 rcl
 ; Imperial
     sbr ifflg
     gto sum
@@ -63,7 +63,7 @@ lbl sum
 lbl C'
 ; litres to gallons
     ( ce ÷
-    ifflg 6 prd
+    inv ifflg 6 prd
 ; Imperial
     sbr ifflg
     gto lnx
