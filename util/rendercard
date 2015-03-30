@@ -53,6 +53,8 @@
 #         A theta character is drawn.
 #     <empty/>
 #         A circle with an oblique bar is drawn.
+#     <intersect/>
+#         An half-circle down is drawn.
 #
 # The label slots must be from the following:
 #
@@ -269,6 +271,7 @@ symbols = \
         "theta" : defsymbol("theta", "(\\161)"),
         "Sigma" : defsymbol("Sigma", "(\\123)"),
         "empty" : defsymbol("empty", "(\\306)"),     # circle with a bar
+        "intersect" : defsymbol("intersect", "(\\307)"), # half-circle down
     }
 
 fontname = "Helvetica"
