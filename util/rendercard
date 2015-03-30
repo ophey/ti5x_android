@@ -43,6 +43,12 @@
 #         A letter n and letter r are drawn vertically aligned.
 #     <rarrow/>
 #         A right-arrow character is drawn.
+#     <uarrow/>
+#         An up-arrow character is drawn.
+#     <narrow/>
+#         A down-arrow character is drawn.
+#     <larrow/>
+#         A left-arrow character is drawn.
 #     <sigma/>
 #         A sigma character is drawn.
 #     <sub>subscripttext</sub>
@@ -267,6 +273,9 @@ symbols = \
         "lambda" : defsymbol("lambda", "(\\154)"),
         "mul": defsymbol("mul", "(\\264)"),
         "rarrow" : defsymbol("rarrow", "(\\256)"),
+        "larrow" : defsymbol("larrow", "(\\254)"),
+        "uarrow" : defsymbol("uarrow", "(\\255)"),
+        "narrow" : defsymbol("narrow", "(\\257)"),
         "sigma" : defsymbol("sigma", "(\\163)"),
         "theta" : defsymbol("theta", "(\\161)"),
         "Sigma" : defsymbol("Sigma", "(\\123)"),
