@@ -51,6 +51,12 @@
 #         A letter n and letter r are drawn vertically aligned.
 #     <rarrow/>
 #         A right-arrow character is drawn.
+#     <uarrow/>
+#         An up-arrow character is drawn.
+#     <narrow/>
+#         A down-arrow character is drawn.
+#     <larrow/>
+#         A left-arrow character is drawn.
 #     <sigma/>
 #         A sigma character is drawn.
 #     <sub>subscripttext</sub>
@@ -59,6 +65,10 @@
 #         The superscripttext is rendered raised with a smaller font.
 #     <theta/>
 #         A theta character is drawn.
+#     <empty/>
+#         A circle with an oblique bar is drawn.
+#     <intersect/>
+#         An half-circle down is drawn.
 #
 # The label slots must be from the following:
 #
@@ -272,12 +282,18 @@ symbols = \
         "mul": defsymbol("mul", "(\\264)"),
         "larrow" : defsymbol("larrow", "(\\254)"),
         "rarrow" : defsymbol("rarrow", "(\\256)"),
+        "larrow" : defsymbol("larrow", "(\\254)"),
+        "uarrow" : defsymbol("uarrow", "(\\255)"),
+        "narrow" : defsymbol("narrow", "(\\257)"),
         "sigma" : defsymbol("sigma", "(\\163)"),
         "theta" : defsymbol("theta", "(\\161)"),
         "Omega" : defsymbol("Omega", "(\\127)"),
         "omaga" : defsymbol("omega", "(\\167)"),
         "Zeta" : defsymbol("Zeta", "(\\132)"),
         "zeta" : defsymbol("zeta", "(\\172)"),
+        "Sigma" : defsymbol("Sigma", "(\\123)"),
+        "empty" : defsymbol("empty", "(\\306)"),     # circle with a bar
+        "intersect" : defsymbol("intersect", "(\\307)"), # half-circle down
     }
 
 fontname = "Helvetica"

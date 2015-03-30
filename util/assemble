@@ -101,7 +101,7 @@ symbols = \
         "cp" : simpleop(29),
         "clr" : simpleop2(25, 20),
         # no "lrn"
-        "pgm" : regop(36, 62),
+        "pgm" : {"op" : 36, "expect" : "pgmno"},
         "pg*" : {"op" : 62, "expect" : "reg"},
         "x<>t" : simpleop2(32, 37),
         "p->r" : simpleop(37),
@@ -307,6 +307,17 @@ def outlabel(lab) :
     loc += 2
 #end outlabel
 
+def outpgm(pgmno) :
+    """outputs a label, will be resolved on the second pass."""
+    global loc, prog
+    if loc == 1000 :
+        report_error("program too large, can't exceed 1000 steps")
+    #end if
+    flushout()
+    prog = prog + [pgmno]
+    loc += 1
+#end outlabel
+
 def recordlabel(lab) :
     """outputs a label, will be resolved on the second pass."""
     global loc, prog
@@ -416,7 +427,7 @@ while True :
                     #end if
                     if numeric :
                         if expect != None :
-                            assert expect in ("label", "flag", "unitreg", "noindreg", "reg", "loc")
+                            assert expect in ("label", "flag", "unitreg", "noindreg", "reg", "loc", "pgmno")
                             if integral :
                                 opval = int(cursym)
                                 if expect == "loc" :
@@ -446,6 +457,8 @@ while True :
                                     else :
                                         report_error("reg number can't be 40")
                                     #end if
+                                elif expect == "pgmno" :
+                                    outpgm(cursym)
                                 else : # expect = "label"
                                     report_error("expecting %s" % expect)
                                 #end if

@@ -1,0 +1,11 @@
+<carddef style="system">
+<label slot="titleleft">TRAVERSE (INVERSE)</label>
+<label slot="titleright">SY-03</label>
+<label slot="a">N</label>
+<label slot="b">E</label>
+<label slot="c"><rarrow/>HzD</label>
+<label slot="d"><rarrow/>Brg;Q;Az</label>
+<label slot="e">Occupy<rarrow/><Sigma/>D</label>
+<label slot="aprime">Ref N;E</label>
+<label slot="eprime">[Init]<rarrow/></label>
+</carddef>

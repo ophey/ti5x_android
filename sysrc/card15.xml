@@ -1,0 +1,14 @@
+<carddef style="system">
+<label slot="titleleft">STADIA REDUCT'N/TRAVERSE</label>
+<label slot="titleright">SY-15</label>
+<label slot="a">Ref Elev</label>
+<label slot="b">Inst H</label>
+<label slot="c">Intv'l</label>
+<label slot="d">Vert <angle/></label>
+<label slot="e">rod read'g</label>
+<label slot="aprime"><rarrow/> Hz Dist</label>
+<label slot="bprime"><rarrow/> <Delta/>EL; EL</label>
+<label slot="cprime"><rarrow/> Sta #</label>
+<label slot="dprime">EL;HzD<rarrow/>EL<sub>c</sub></label>
+<label slot="eprime">[Init] <rarrow/></label>
+</carddef>

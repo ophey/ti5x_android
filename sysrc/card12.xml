@@ -1,0 +1,13 @@
+<carddef style="system">
+<label slot="titleleft">HORIZ. CURVE LAYOUT</label>
+<label slot="titleright">SY-12</label>
+<label slot="a">Sta</label>
+<label slot="b"><rarrow/>C<angle/><sub>I,J</sub></label>
+<label slot="c"><rarrow/>C<sub>I,J</sub></label>
+<label slot="d">Def<sub>PC-J</sub></label>
+<label slot="e"><rarrow/> PT</label>
+<label slot="aprime">PI<rarrow/>PC</label>
+<label slot="bprime">PC<rarrow/>PT</label>
+<label slot="cprime">[prt] <rarrow/></label>
+<label slot="dprime"><rarrow/>PC</label>
+</carddef>

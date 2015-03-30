@@ -1,0 +1,14 @@
+<carddef style="system">
+<label slot="titleleft">BORROW PIT VOLUME</label>
+<label slot="titleright">SY-21</label>
+<label slot="a">ALT: L</label>
+<label slot="b">Base: W</label>
+<label slot="c">Tri</label>
+<label slot="d">Rect</label>
+<label slot="e">Depth</label>
+<label slot="aprime"><rarrow/> ALT: L</label>
+<label slot="bprime"><rarrow/> Base : W</label>
+<label slot="cprime"><rarrow/> <Sigma/>Vol</label>
+<label slot="dprime"><rarrow/> Sect Vol</label>
+<label slot="eprime">[Init] <rarrow/></label>
+</carddef>
