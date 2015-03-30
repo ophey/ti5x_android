@@ -51,6 +51,8 @@
 #         The superscripttext is rendered raised with a smaller font.
 #     <theta/>
 #         A theta character is drawn.
+#     <empty/>
+#         A circle with an oblique bar is drawn.
 #
 # The label slots must be from the following:
 #
@@ -266,6 +268,7 @@ symbols = \
         "sigma" : defsymbol("sigma", "(\\163)"),
         "theta" : defsymbol("theta", "(\\161)"),
         "Sigma" : defsymbol("Sigma", "(\\123)"),
+        "empty" : defsymbol("empty", "(\\306)"),     # circle with a bar
     }
 
 fontname = "Helvetica"
