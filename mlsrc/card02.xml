@@ -9,5 +9,5 @@
 <label slot="b">j;a<sub>ij</sub></label>
 <label slot="c"><rarrow/> |A|</label>
 <label slot="d">i;b<sub>i</sub></label>
-<label slot="e">x</label>
+<label slot="e"><rarrow/> x</label>
 </carddef>

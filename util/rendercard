@@ -275,6 +275,7 @@ symbols = \
         "darrow" : defsymbol("darrow", "(\\253)"),
         "Delta" : defsymbol("Delta", "(\\104)"),
         "div": defsymbol("div", "(\\270)"),
+        "sqrt": defsymbol("sqrt", "(\\326)"),
         "epsilon": defsymbol("epsilon", "(\\145)"),
         "Gamma" : defsymbol("Gamma", "(\\107)"),
         "integral" : defsymbol("integral", "(\\362)"),
