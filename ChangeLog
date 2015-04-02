@@ -1,5 +1,9 @@
 Feature highlights:
 
+v3.1, 2015 April 2nd:
+   fix for SY module (all examples pass)
+   fix sin/cos when result is close to 0
+
 v3.0, 2015 March 31:
    fix ML module's cards and programs.
 
