@@ -67,8 +67,8 @@ lbl B
     gto 132
 
 lbl B'
-    sto 18
-    prt
+    sto 13      ; ??? was [sto] [18], but 18 is Lt and 13 is Quadrant
+    prt         ; which is what B' is about.
     rtn
 
     ( cp × 9 0
@@ -78,14 +78,15 @@ lbl B'
     rcl 16
     gto 129
 
-
+;#124
     rcl 16
     cos
     inv sin
-
+;#129
     )
     sto 12
 
+;#132
     fix 6
     inv dms
     prt
