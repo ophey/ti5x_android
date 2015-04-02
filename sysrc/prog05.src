@@ -24,7 +24,7 @@ lbl nop
     +
     rcl 11
 ;#026
-    cp               ; If CP is not done (at least first run) all is ok.
+    cp
     -
     x≥t 33
     0 +
@@ -44,10 +44,11 @@ lbl B
     A'
     rtn
 
-;#062
-    5 E
-    rcl 12
-    P→R              ; this will be 0, as /sbr nop/ above do a CP, T=0
+;#062                ; ???
+    x⇌t             ; was 5, but this makes no sense and x⇌t does fix an
+    E                ; issue with original code. The display was 0 on Page
+    rcl 12           ; 18 after: [74] [A] [2nd] [B'] [R/S] [R/S]
+    P→R             ; 0 because /sbr nop/ above do a CP, T=0
     E' E'            ; and so P→R will have 0 and T is R in (R,Theta)
     inv P→R
     pgm 2 sbr st*
