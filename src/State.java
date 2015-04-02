@@ -20,6 +20,8 @@ class Arith
   /* useful arithmetic-related stuff */
   {
 
+    public static double Epsilon = 1e-11;
+
     public static double RoundTo
       (
         double X,
@@ -1122,27 +1124,39 @@ public class State
     public void Sin()
       {
         Enter();
+        double NewX;
         if (InvState)
           {
-            SetX(Math.asin(X) * TrigScale());
+            NewX = Math.asin(X) * TrigScale();
           }
         else
           {
-            SetX(Math.sin(X / TrigScale()));
+            NewX = Math.sin(X / TrigScale());
           } /*if*/
+
+        if (Math.abs(NewX) < Arith.Epsilon)
+          SetX(0);
+        else
+          SetX(NewX);
       } /*Sin*/
 
     public void Cos()
       {
         Enter();
+        double NewX;
         if (InvState)
           {
-            SetX(Math.acos(X) * TrigScale());
+            NewX = Math.acos(X) * TrigScale();
           }
         else
           {
-            SetX(Math.cos(X / TrigScale()));
+            NewX = Math.cos(X / TrigScale());
           } /*if*/
+
+        if (Math.abs(NewX) < Arith.Epsilon)
+          SetX(0);
+        else
+          SetX(NewX);
       } /*Cos*/
 
     public void Tan()
