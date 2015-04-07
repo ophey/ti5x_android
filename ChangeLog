@@ -1,5 +1,8 @@
 Feature highlights:
 
+v3.2, 2015 April 7th:
+   add graphic for bearing/quadrant/azimuth on SY-02
+
 v3.1, 2015 April 2nd:
    fix for SY module (all examples pass)
    fix sin/cos when result is close to 0
