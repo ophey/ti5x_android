@@ -1574,7 +1574,10 @@ public class State
                     Memory[RegNr] *= X;
                 break;
                 case MEMOP_DIV:
-                    Memory[RegNr] /= X;
+                    if (X == 0.0)
+                      SetErrorState(false);
+                    else
+                      Memory[RegNr] /= X;
                 break;
                 case MEMOP_EXC:
                     final double Temp = Memory[RegNr];
@@ -1657,6 +1660,8 @@ public class State
                 case HIROP_DIV:
                     if (RegNr == 0)
                       X = 1;
+                    else if (X == 0.0)
+                      SetErrorState(false);
                     else
                       OpStack[RegNr - 1].Operand /= X;
                 break;
