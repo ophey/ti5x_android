@@ -949,7 +949,13 @@ public class State
             X = ThisOp.Operand * X;
         break;
         case STACKOP_DIV:
-            X = ThisOp.Operand / X;
+            if (X == 0.0)
+              {
+                SetX(9.9999999e99);
+                SetErrorState(false);
+              }
+            else
+                X = ThisOp.Operand / X;
         break;
         case STACKOP_MOD:
             X = Math.IEEEremainder(ThisOp.Operand, X);
@@ -1128,6 +1134,7 @@ public class State
         Enter();
         if (X == 0)
           {
+            SetX(9.9999999e99);
             SetErrorState(false);
           }
         else
