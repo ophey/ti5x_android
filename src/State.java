@@ -86,6 +86,18 @@ class Arith
         return Math.floor(Xabs + Epsilon);
       } /*AbsIntPart*/
 
+    public static boolean IsEqual
+      (
+        double X,
+        double value
+      )
+      {
+        if (Math.abs (X - value) <= Epsilon)
+          return true;
+        else
+          return false;
+      }
+
   } /*Arith*/
 
 public class State
@@ -1134,7 +1146,7 @@ public class State
             NewX = Math.sin(X / TrigScale());
           } /*if*/
 
-        if (Math.abs(NewX) < Arith.Epsilon)
+        if (Arith.IsEqual(NewX, 0.0))
           SetX(0);
         else
           SetX(NewX);
@@ -1153,7 +1165,7 @@ public class State
             NewX = Math.cos(X / TrigScale());
           } /*if*/
 
-        if (Math.abs(NewX) < Arith.Epsilon)
+        if (Arith.IsEqual(NewX, 0.0))
           SetX(0);
         else
           SetX(NewX);
