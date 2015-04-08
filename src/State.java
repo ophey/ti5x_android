@@ -98,6 +98,26 @@ class Arith
           return false;
       }
 
+    public static double NormalizeAngle
+      (
+        double X
+      )
+      {
+        final double TwoPI = 2.0 * Math.PI;
+        double Result = X;
+
+        if (Result < 0.0)
+          {
+            while (Result < 0.0)
+              Result = Result + TwoPI;
+          }
+        else if (Result >= TwoPI)
+          {
+            while (Result >= TwoPI)
+              Result = Result - TwoPI;
+          }
+        return Result;
+      }
   } /*Arith*/
 
 public class State
@@ -1180,7 +1200,19 @@ public class State
           }
         else
           {
-            SetX(Math.tan(X / TrigScale()));
+            double v = Arith.NormalizeAngle(X / TrigScale());
+
+            if (Arith.IsEqual(v, Math.PI/2.0) || Arith.IsEqual(v, 3.0*Math.PI/2.0))
+              {
+                SetX(9.9999999e99);
+                SetErrorState(false);
+              }
+            else if (Arith.IsEqual(v, 0.0) || Arith.IsEqual(v, Math.PI))
+              {
+                SetX(0.0);
+              }
+            else
+              SetX(Math.tan(v));
           } /*if*/
       } /*Tan*/
 
