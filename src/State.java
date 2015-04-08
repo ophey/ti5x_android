@@ -1337,8 +1337,16 @@ public class State
           }
         else
           {
-            NewX = T * Math.cos(X / Scale);
-            NewY = T * Math.sin(X / Scale);
+            double Xcos = Math.cos(X / Scale);
+            double Xsin = Math.sin(X / Scale);
+
+            if (Arith.IsEqual(Xcos, 0.0))
+              Xcos = 0.0;
+            if (Arith.IsEqual(Xsin, 0.0))
+              Xsin = 0.0;
+
+            NewX = T * Xcos;
+            NewY = T * Xsin;
           } /*if*/
         T = NewX;
         SetX(NewY);
