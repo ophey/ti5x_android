@@ -1232,7 +1232,18 @@ public class State
           }
         else
           {
-            SetX(Math.log(X));
+            if (X < 0.0)
+              {
+                SetX(Math.log(Math.abs(X)));
+                SetErrorState(false);
+              }
+            else if (X == 0.0)
+              {
+                SetX(-9.9999999e99);
+                SetErrorState(false);
+              }
+            else
+              SetX(Math.log(X));
           } /*if*/
       } /*Ln*/
 
@@ -1245,7 +1256,18 @@ public class State
           }
         else
           {
-            SetX(Math.log10(X));
+            if (X < 0.0)
+              {
+                SetX(Math.log10(Math.abs(X)));
+                SetErrorState(false);
+              }
+            else if (X == 0.0)
+              {
+                SetX(-9.9999999e99);
+                SetErrorState(false);
+              }
+            else
+              SetX(Math.log10(X));
           } /*if*/
       } /*Log*/
 
