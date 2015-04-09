@@ -86,6 +86,38 @@ class Arith
         return Math.floor(Xabs + Epsilon);
       } /*AbsIntPart*/
 
+    public static boolean IsEqual
+      (
+        double X,
+        double value
+      )
+      {
+        if (Math.abs (X - value) <= Epsilon)
+          return true;
+        else
+          return false;
+      }
+
+    public static double NormalizeAngle
+      (
+        double X
+      )
+      {
+        final double TwoPI = 2.0 * Math.PI;
+        double Result = X;
+
+        if (Result < 0.0)
+          {
+            while (Result < 0.0)
+              Result = Result + TwoPI;
+          }
+        else if (Result >= TwoPI)
+          {
+            while (Result >= TwoPI)
+              Result = Result - TwoPI;
+          }
+        return Result;
+      }
   } /*Arith*/
 
 public class State
@@ -917,7 +949,13 @@ public class State
             X = ThisOp.Operand * X;
         break;
         case STACKOP_DIV:
-            X = ThisOp.Operand / X;
+            if (X == 0.0)
+              {
+                SetX(9.9999999e99);
+                SetErrorState(false);
+              }
+            else
+                X = ThisOp.Operand / X;
         break;
         case STACKOP_MOD:
             X = Math.IEEEremainder(ThisOp.Operand, X);
@@ -1096,6 +1134,7 @@ public class State
         Enter();
         if (X == 0)
           {
+            SetX(9.9999999e99);
             SetErrorState(false);
           }
         else
@@ -1134,7 +1173,7 @@ public class State
             NewX = Math.sin(X / TrigScale());
           } /*if*/
 
-        if (Math.abs(NewX) < Arith.Epsilon)
+        if (Arith.IsEqual(NewX, 0.0))
           SetX(0);
         else
           SetX(NewX);
@@ -1153,7 +1192,7 @@ public class State
             NewX = Math.cos(X / TrigScale());
           } /*if*/
 
-        if (Math.abs(NewX) < Arith.Epsilon)
+        if (Arith.IsEqual(NewX, 0.0))
           SetX(0);
         else
           SetX(NewX);
@@ -1168,7 +1207,19 @@ public class State
           }
         else
           {
-            SetX(Math.tan(X / TrigScale()));
+            double v = Arith.NormalizeAngle(X / TrigScale());
+
+            if (Arith.IsEqual(v, Math.PI/2.0) || Arith.IsEqual(v, 3.0*Math.PI/2.0))
+              {
+                SetX(9.9999999e99);
+                SetErrorState(false);
+              }
+            else if (Arith.IsEqual(v, 0.0) || Arith.IsEqual(v, Math.PI))
+              {
+                SetX(0.0);
+              }
+            else
+              SetX(Math.tan(v));
           } /*if*/
       } /*Tan*/
 
@@ -1181,7 +1232,18 @@ public class State
           }
         else
           {
-            SetX(Math.log(X));
+            if (X < 0.0)
+              {
+                SetX(Math.log(Math.abs(X)));
+                SetErrorState(false);
+              }
+            else if (X == 0.0)
+              {
+                SetX(-9.9999999e99);
+                SetErrorState(false);
+              }
+            else
+              SetX(Math.log(X));
           } /*if*/
       } /*Ln*/
 
@@ -1194,7 +1256,18 @@ public class State
           }
         else
           {
-            SetX(Math.log10(X));
+            if (X < 0.0)
+              {
+                SetX(Math.log10(Math.abs(X)));
+                SetErrorState(false);
+              }
+            else if (X == 0.0)
+              {
+                SetX(-9.9999999e99);
+                SetErrorState(false);
+              }
+            else
+              SetX(Math.log10(X));
           } /*if*/
       } /*Log*/
 
@@ -1264,8 +1337,16 @@ public class State
           }
         else
           {
-            NewX = T * Math.cos(X / Scale);
-            NewY = T * Math.sin(X / Scale);
+            double Xcos = Math.cos(X / Scale);
+            double Xsin = Math.sin(X / Scale);
+
+            if (Arith.IsEqual(Xcos, 0.0))
+              Xcos = 0.0;
+            if (Arith.IsEqual(Xsin, 0.0))
+              Xsin = 0.0;
+
+            NewX = T * Xcos;
+            NewY = T * Xsin;
           } /*if*/
         T = NewX;
         SetX(NewY);
@@ -1523,7 +1604,10 @@ public class State
                     Memory[RegNr] *= X;
                 break;
                 case MEMOP_DIV:
-                    Memory[RegNr] /= X;
+                    if (X == 0.0)
+                      SetErrorState(false);
+                    else
+                      Memory[RegNr] /= X;
                 break;
                 case MEMOP_EXC:
                     final double Temp = Memory[RegNr];
@@ -1606,6 +1690,8 @@ public class State
                 case HIROP_DIV:
                     if (RegNr == 0)
                       X = 1;
+                    else if (X == 0.0)
+                      SetErrorState(false);
                     else
                       OpStack[RegNr - 1].Operand /= X;
                 break;
