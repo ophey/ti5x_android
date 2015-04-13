@@ -57,6 +57,8 @@
 #         The subscripttext is rendered lowered with a smaller font.
 #     <sup>superscripttext</sup>
 #         The superscripttext is rendered raised with a smaller font.
+#     <supb>superscripttext</supb>
+#         The superscripttext is rendered raised with a smaller font, half move for next character
 #     <theta/>
 #         A theta character is drawn.
 #     <empty/>
@@ -222,6 +224,15 @@ class superscript(taggedtext) :
 
 #end superscript
 
+class superscript_before(taggedtext) :
+    """an inline superscript label before."""
+
+    def __init__(self, text) :
+        super().__init__("supb", text)
+    #end __init__
+
+#end superscript_before
+
 class Bar(taggedtext) :
     """an inline label with a horizontal bar over the text."""
 
@@ -352,8 +363,10 @@ symbolfontname = "Symbol"
 basefontsize = 7.0
 arrowsize = basefontsize / 4
 subsupscale = 0.8 # relative scaling for superscript/subscript text
+subsupscaleb = 0.75 # relative scaling for superscript/subscript before text
 suboffset = -0.2 # vertical offset for subscript, relative to basefontsize
 superoffset = 0.5 # vertical offset for superscript, relative to basefontsize
+superoffsetb = 0.6 # vertical offset for superscript before, relative to basefontsize
 xheightscale = 0.65
 orange = tuple(i / 255 for i in (0x95, 0x50, 0x1c))
 black = (0.0, 0.0, 0.0)
@@ -431,6 +444,10 @@ def parse_template(input) :
         handle_common_end(superscript)
     #end handle_superscript_end
 
+    def handle_superscript_before_end(tag) :
+        handle_common_end(superscript_before)
+    #end handle_superscript_before_end
+
     def handle_Bar_end(tag) :
         handle_common_end(Bar)
     #end handle_Bar_end
@@ -461,6 +478,8 @@ def parse_template(input) :
                     "/sub" : handle_subscript_end,
                     "sup" : handle_common_tag_start,
                     "/sup" : handle_superscript_end,
+                    "supb" : handle_common_tag_start,
+                    "/supb" : handle_superscript_before_end,
                     "Bar" : handle_common_tag_start,
                     "/Bar" : handle_Bar_end,
                     "bar" : handle_common_tag_start,
@@ -778,6 +797,16 @@ render_special = \
                     +
                         " 0 %.2f rmoveto" % (superoffset * basefontsize),
                 "renderafter" : "0 %.2f rmoveto setfont" % (- superoffset * basefontsize),
+            },
+        superscript_before :
+            {
+                "widthadjust" : "%.2f mul" % subsupscaleb,
+                "renderbefore" :
+                        "currentfont dup %.2f scalefont setfont" % subsupscaleb
+                    +
+                        " 0 %.2f rmoveto" % (superoffsetb * basefontsize),
+                "renderafter" : "%.2f %.2f rmoveto setfont"
+                % (-basefontsize / 3 * subsupscaleb, - superoffsetb * basefontsize),
             },
         Bar :
             {
