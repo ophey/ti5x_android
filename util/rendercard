@@ -71,6 +71,12 @@
 #         An half-circle down is drawn.
 #     <ArrowR/>
 #         An arrow left to right is drawn.
+#     <ArrowL/>
+#         An arrow right to left is drawn.
+#     <ArrowD/>
+#         A double arrow is drawn.
+#     <ArrowLR/>
+#         A left arrow at the bottom and a right arrow over is drawn.
 #
 # The label slots must be from the following:
 #
@@ -243,6 +249,45 @@ class ArrowR(taggedtext) :
     #end __repr__
 
 #end ArrowR
+
+class ArrowL(taggedtext) :
+    """a left arrow"""
+
+    def __init__(self) :
+        super().__init__("ArrowL", "")
+    #end __init__
+
+    def __repr__(self) :
+        return "<ArrowL/>"
+    #end __repr__
+
+#end ArrowL
+
+class ArrowLR(taggedtext) :
+    """a left(below)/right(over) arrows"""
+
+    def __init__(self) :
+        super().__init__("ArrowLR", "")
+    #end __init__
+
+    def __repr__(self) :
+        return "<ArrowLR/>"
+    #end __repr__
+
+#end ArrowLR
+
+class ArrowD(taggedtext) :
+    """a left/right arrow"""
+
+    def __init__(self) :
+        super().__init__("ArrowD", "")
+    #end __init__
+
+    def __repr__(self) :
+        return "<ArrowD/>"
+    #end __repr__
+
+#end ArrowD
 
 class bar(taggedtext) :
     """an inline label with a horizontal bar over the text."""
@@ -436,7 +481,7 @@ def parse_template(input) :
         element_handlers[2][symbol.__name__] = handle_common_tag_start
         element_handlers[2]["/" + symbol.__name__] = make_symbol_def(symbol)
     #end for
-    for symbol in (noverr, ArrowR) :
+    for symbol in (noverr, ArrowR, ArrowL, ArrowLR, ArrowD) :
         element_handlers[2][symbol.__name__] = handle_common_tag_start
         element_handlers[2]["/" + symbol.__name__] = make_symbol_def(symbol)
     #end for
@@ -772,6 +817,116 @@ render_special = \
                    + " newpath moveto "
                    + " -%.2f 1.2 mul %.2f rlineto 0 -%.2f 2 mul rlineto closepath fill"
                      % (arrowsize, arrowsize, arrowsize)
+                   # move back to saved position
+                   + " moveto"
+                   + " %.2f 0 rmoveto" % ( basefontsize * 0.9 )
+            },
+        ArrowL :
+            {
+                "widthadjust" : "%.2f add" % ( basefontsize * 0.9 ),
+                "renderbefore" : "",
+                "renderafter" :
+                   # save current point
+                   " currentpoint"
+                   # start new path and starting point
+                   + " newpath 2 copy moveto "
+                   # x offset
+                   + " %.2f 0.2 mul 0 rmoveto" % basefontsize
+                   # move middle of text for the start of arrow
+                   + " 0 %.2f 0.3 mul rmoveto" % basefontsize
+                   # save start of line
+                   + " currentpoint"
+                   # draw arrow
+                   + " %.2f 1.2 mul %.2f rlineto 0 -%.2f 2 mul rlineto closepath fill"
+                     % (arrowsize, arrowsize, arrowsize)
+                   # move back to start of arrow
+                   + " moveto"
+                   # draw the line
+                   + " %.2f 0 rlineto" % ( basefontsize * 0.6 )
+                   # stoke with a bigger line width, restoring the old width
+                   + " currentlinewidth 1 copy 2 mul setlinewidth stroke setlinewidth"
+                   # move back to saved position
+                   + " moveto"
+                   + " %.2f 0 rmoveto" % ( basefontsize * 0.9 )
+            },
+        ArrowD :
+            {
+                "widthadjust" : "%.2f add" % ( basefontsize * 1.1 ),
+                "renderbefore" : "",
+                "renderafter" :
+                   # save current point
+                   " currentpoint"
+                   # start new path and starting point
+                   + " newpath 2 copy moveto "
+                   # x offset
+                   + " %.2f 0.1 mul 0 rmoveto" % basefontsize
+                   # move middle of text for the start of arrow
+                   + " 0 %.2f 0.3 mul rmoveto" % basefontsize
+                   # save start of line
+                   + " currentpoint"
+                   # draw arrow
+                   + " %.2f 1.2 mul %.2f rlineto 0 -%.2f 2 mul rlineto closepath fill"
+                     % (arrowsize, arrowsize, arrowsize)
+                   # move back to start of arrow
+                   + " moveto"
+                   # draw the line (save line end which is staring point for arrow below)
+                   + " %.2f 0 rlineto currentpoint" % ( basefontsize * 0.9 )
+                   # stoke with a bigger line width, restoring the old width
+                   + " currentlinewidth 1 copy 2 mul setlinewidth stroke setlinewidth"
+                   # from there a closed and filed path for the arrow
+                   # start new path and starting point
+                   + " newpath moveto "
+                   + " -%.2f 1.2 mul %.2f rlineto 0 -%.2f 2 mul rlineto closepath fill"
+                     % (arrowsize, arrowsize, arrowsize)
+                   # move back to saved position
+                   + " moveto"
+                   + " %.2f 1.1 mul 0 rmoveto" % basefontsize
+            },
+        ArrowLR :
+            {
+                "widthadjust" : "%.2f add" % ( basefontsize * 0.9 ),
+                "renderbefore" : "",
+                "renderafter" :
+                   # save current point
+                   " currentpoint"
+
+                   # TOP arrow
+                   # start new path and starting point
+                   + " newpath 2 copy moveto "
+                   # x offset
+                   + " %.2f 0.2 mul 0 rmoveto" % basefontsize
+                   # move middle of text for the start of arrow
+                   + " 0 %.2f 0.7 mul rmoveto" % basefontsize
+                   # draw the line (save line end which is staring point for arrow below)
+                   + " %.2f 0 rlineto currentpoint" % ( basefontsize * 0.6 )
+                   # stoke with a bigger line width, restoring the old width
+                   + " currentlinewidth 1 copy 2 mul setlinewidth stroke setlinewidth"
+                   # from there a closed and filed path for the arrow
+                   # start new path and starting point
+                   + " newpath moveto "
+                   + " -%.2f 1.2 mul %.2f rlineto 0 -%.2f 2 mul rlineto closepath fill"
+                     % (arrowsize, arrowsize, arrowsize)
+
+                   # BOTTOM arrow
+                   + " moveto currentpoint"
+                   # start new path and starting point
+                   + " newpath 2 copy moveto "
+                   # x offset
+                   + " %.2f 0.2 mul 0 rmoveto" % basefontsize
+                   # move middle of text for the start of arrow
+                   + " 0 %.2f 0.1 mul rmoveto" % basefontsize
+                   # save start of line
+                   + " currentpoint"
+                   # draw arrow
+                   + " %.2f 1.2 mul %.2f rlineto 0 -%.2f 2 mul rlineto closepath fill"
+                     % (arrowsize, arrowsize, arrowsize)
+                   # move back to start of arrow
+                   + " moveto"
+                   # draw the line
+                   + " %.2f 0 rlineto" % ( basefontsize * 0.6 )
+                   # stoke with a bigger line width, restoring the old width
+                   + " currentlinewidth 1 copy 2 mul setlinewidth stroke setlinewidth"
+
                    # move back to saved position
                    + " moveto"
                    + " %.2f 0 rmoveto" % ( basefontsize * 0.9 )
