@@ -10,5 +10,5 @@
 <label slot="b"><ArrowR/>X+Y</label>
 <label slot="c"><ArrowR/>X<mul/>Y</label>
 <label slot="d"><ArrowR/>Y<sup>x</sup></label>
-<label slot="e"><ArrowR/>Y<sup>1/x</sup></label>
+<label slot="e"><ArrowR/><sup>x</sup><sqrt/>Y</label>
 </carddef>
