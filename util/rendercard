@@ -718,7 +718,7 @@ render_special = \
                         %
                             basefontsize
                     +
-                        "currentpoint 0 %.2f 0.3 mul rmoveto (n) show" % basefontsize
+                        "currentpoint 0 %.2f 0.42 mul rmoveto (n) show" % basefontsize
                     +
                         " moveto currentpoint exch pop 0 %.2f -0.2 mul rmoveto" % basefontsize
                     +
