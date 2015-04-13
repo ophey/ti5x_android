@@ -4,7 +4,7 @@
 <label slot="a">g1, g2</label>
 <label slot="b">L<ArrowR/><Delta/>g</label>
 <label slot="c">[Beg<ArrowR/>Int]</label>
-<label slot="d"><ArrowR/>Sta (<uarrow/>/<narrow/>)</label>
+<label slot="d"><ArrowR/>Sta (<uarrow/>/<darrow/>)</label>
 <label slot="e">Sta<ArrowR/>Elev</label>
 <label slot="bprime"><Delta/>g<ArrowR/>L</label>
 <label slot="cprime">[Int<ArrowR/>Beg]</label>

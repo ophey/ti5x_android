@@ -49,7 +49,7 @@
 #         A letter n and letter r are drawn vertically aligned.
 #     <uarrow/>
 #         An up-arrow character is drawn.
-#     <narrow/>
+#     <darrow/>
 #         A down-arrow character is drawn.
 #     <sigma/>
 #         A sigma character is drawn.
@@ -335,7 +335,7 @@ symbols = \
         "lambda" : defsymbol("lambda", "(\\154)"),
         "mul": defsymbol("mul", "(\\264)"),
         "uarrow" : defsymbol("uarrow", "(\\255)"),
-        "narrow" : defsymbol("narrow", "(\\257)"),
+        "darrow" : defsymbol("darrow", "(\\257)"),
         "sigma" : defsymbol("sigma", "(\\163)"),
         "theta" : defsymbol("theta", "(\\161)"),
         "Omega" : defsymbol("Omega", "(\\127)"),
