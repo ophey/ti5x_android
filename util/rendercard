@@ -823,12 +823,10 @@ render_special = \
                    " currentpoint"
                    # start new path and starting point
                    + " newpath 2 copy moveto "
-                   # x offset
-                   + " %.2f 0.2 mul 0 rmoveto" % basefontsize
                    # move middle of text for the start of arrow
                    + " 0 %.2f 0.3 mul rmoveto" % basefontsize
                    # draw the line (save line end which is staring point for arrow below)
-                   + " %.2f 0 rlineto currentpoint" % ( basefontsize * 0.6 )
+                   + " %.2f 0 rlineto currentpoint" % ( basefontsize * 0.5 )
                    # stoke with a bigger line width, restoring the old width
                    + " currentlinewidth 1 copy 2 mul setlinewidth stroke setlinewidth"
                    # from there a closed and filed path for the arrow
@@ -838,7 +836,7 @@ render_special = \
                      % (arrowsize, arrowsize, arrowsize)
                    # move back to saved position
                    + " moveto"
-                   + " %.2f 0 rmoveto" % ( basefontsize * 0.9 )
+                   + " %.2f 0 rmoveto" % ( basefontsize * 0.5 )
             },
         ArrowL :
             {
