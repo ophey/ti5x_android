@@ -9,6 +9,6 @@
 <label slot="aprime">N<sub>s</sub>, E<sub>s</sub></label>
 <label slot="bprime">N, E (next)</label>
 <label slot="cprime">[calc <Sigma/>] <ArrowR/></label>
-<label slot="dprime">[calc/store] <ArrowR/></label>
+<label slot="dprime">[calc/store]<ArrowR/></label>
 <label slot="eprime">[Init] <ArrowR/></label>
 </carddef>

@@ -6,8 +6,8 @@
 <label slot="c">RElev</label>
 <label slot="d">DMH</label>
 <label slot="e">RH</label>
-<label slot="aprime"><ArrowR/> HzDist(IEL)</label>
-<label slot="bprime"><ArrowR/> HzDist(SL)</label>
-<label slot="cprime">EL<sub>sp</sub> <ArrowR/> HzDist</label>
+<label slot="aprime"><ArrowR/>HzDist(IEL)</label>
+<label slot="bprime"><ArrowR/>HzDist(SL)</label>
+<label slot="cprime">EL<sub>sp</sub><ArrowR/>HzDist</label>
 <label slot="eprime">[Init] <ArrowR/></label>
 </carddef>

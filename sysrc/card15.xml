@@ -9,6 +9,6 @@
 <label slot="aprime"><ArrowR/> Hz Dist</label>
 <label slot="bprime"><ArrowR/> <Delta/>EL; EL</label>
 <label slot="cprime"><ArrowR/> Sta #</label>
-<label slot="dprime">EL;HzD <ArrowR/> EL<sub>c</sub></label>
+<label slot="dprime">EL;HzD<ArrowR/>EL<sub>c</sub></label>
 <label slot="eprime">[Init] <ArrowR/></label>
 </carddef>

@@ -4,7 +4,7 @@
 <label slot="a">sinh</label>
 <label slot="b">cosh</label>
 <label slot="c">tanh</label>
-<label slot="aprime">sinh-1</label>
-<label slot="bprime">cosh-1</label>
-<label slot="cprime">tanh-1</label>
+<label slot="aprime">sinh<sup>-1</sup></label>
+<label slot="bprime">cosh<sup>-1</sup></label>
+<label slot="cprime">tanh<sup>-1</sup></label>
 </carddef>

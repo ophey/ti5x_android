@@ -7,6 +7,6 @@
 <label slot="a">X</label>
 <label slot="b"><ArrowR/> r, <theta/></label>
 <label slot="c"><ArrowR/> X<sup>2</sup></label>
-<label slot="d"><ArrowR/> X<sup>1/2</sup></label>
+<label slot="d"><ArrowR/> <sqrt/>x</label>
 <label slot="e"><ArrowR/> 1/X</label>
 </carddef>
