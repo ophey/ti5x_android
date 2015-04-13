@@ -2,13 +2,13 @@
 <label slot="titleleft">COMPLEX ARITHMETIC</label>
 <label slot="titleright">ML-04</label>
 <label slot="aprime">Y</label>
-<label slot="bprime"><rarrow/>X-Y</label>
-<label slot="cprime"><rarrow/>X<div/>Y</label>
-<label slot="dprime"><rarrow/> log<sub>y</sub>X</label>
+<label slot="bprime"><ArrowR/>X-Y</label>
+<label slot="cprime"><ArrowR/>X<div/>Y</label>
+<label slot="dprime"><ArrowR/>log<sub>y</sub>X</label>
 <label slot="eprime">X<darrow/>Y</label>
 <label slot="a">X</label>
-<label slot="b"><rarrow/>X+Y</label>
-<label slot="c"><rarrow/>X<mul/>Y</label>
-<label slot="d"><rarrow/>Y<sup>x</sup></label>
-<label slot="e"><rarrow/> <sup>x</sup><sqrt/>Y</label>
+<label slot="b"><ArrowR/>X+Y</label>
+<label slot="c"><ArrowR/>X<mul/>Y</label>
+<label slot="d"><ArrowR/>Y<sup>x</sup></label>
+<label slot="e"><ArrowR/><sup>x</sup><sqrt/>Y</label>
 </carddef>

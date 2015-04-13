@@ -6,9 +6,9 @@
 <label slot="c">C<sub>N</sub>,Az<sub>CA</sub>,D<sub>CA</sub></label>
 <label slot="d">P1</label>
 <label slot="e">P2</label>
-<label slot="aprime"><rarrow/> Az<sub>AP</sub>,D<sub>AP</sub></label>
-<label slot="bprime"><rarrow/> Az<sub>BP</sub>,D<sub>BP</sub></label>
-<label slot="cprime"><rarrow/> Az<sub>CP</sub>,D<sub>CP</sub></label>
-<label slot="dprime"><rarrow/> P<sub>N</sub>, P<sub>E</sub></label>
+<label slot="aprime"><ArrowR/>Az<sub>AP</sub>,D<sub>AP</sub></label>
+<label slot="bprime"><ArrowR/>Az<sub>BP</sub>,D<sub>BP</sub></label>
+<label slot="cprime"><ArrowR/>Az<sub>CP</sub>,D<sub>CP</sub></label>
+<label slot="dprime"><ArrowR/>P<sub>N</sub>, P<sub>E</sub></label>
 <label slot="eprime">Code No.</label>
 </carddef>

@@ -6,9 +6,9 @@
 <label slot="c">Intv'l</label>
 <label slot="d">Vert <angle/></label>
 <label slot="e">rod read'g</label>
-<label slot="aprime"><rarrow/> Hz Dist</label>
-<label slot="bprime"><rarrow/> <Delta/>EL; EL</label>
-<label slot="cprime"><rarrow/> Sta #</label>
-<label slot="dprime">EL;HzD<rarrow/>EL<sub>c</sub></label>
-<label slot="eprime">[Init] <rarrow/></label>
+<label slot="aprime"><ArrowR/>Hz Dist</label>
+<label slot="bprime"><ArrowR/><Delta/>EL; EL</label>
+<label slot="cprime"><ArrowR/>Sta #</label>
+<label slot="dprime">EL;HzD<ArrowR/>EL<sub>c</sub></label>
+<label slot="eprime">[Init]<ArrowR/></label>
 </carddef>

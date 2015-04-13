@@ -3,8 +3,8 @@
 <label slot="titleright">ML-03</label>
 <label slot="aprime">j;c<sub>ij</sub></label>
 <label slot="bprime">i;x<sub>i</sub></label>
-<label slot="cprime"><rarrow/>Ax</label>
-<label slot="dprime">i;<rarrow/>y<sub>i</sub></label>
+<label slot="cprime"><ArrowR/>Ax</label>
+<label slot="dprime">i;<ArrowR/>y<sub>i</sub></label>
 <label slot="a">m,n</label>
 <label slot="b">j;a<sub>ij</sub></label>
 <label slot="c">j;b<sub>ij</sub></label>

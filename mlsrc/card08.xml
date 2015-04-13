@@ -5,5 +5,5 @@
 <label slot="b">b</label>
 <label slot="c"><Delta/>x</label>
 <label slot="d"><epsilon/></label>
-<label slot="e"><rarrow/>x</label>
+<label slot="e"><ArrowR/>x</label>
 </carddef>

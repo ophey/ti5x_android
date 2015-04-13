@@ -7,6 +7,6 @@
 <label slot="d"><intersect/> Degree</label>
 <label slot="e"><intersect/> Length</label>
 <label slot="aprime"><Delta/></label>
-<label slot="bprime">[Arc def.] <rarrow/></label>
-<label slot="eprime">[Init]<rarrow/></label>
+<label slot="bprime">[Arc def.]<ArrowR/></label>
+<label slot="eprime">[Init]<ArrowR/></label>
 </carddef>
