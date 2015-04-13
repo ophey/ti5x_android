@@ -4,5 +4,5 @@
 <label slot="a">Lower Limit</label>
 <label slot="b">Upper Limit</label>
 <label slot="c"><epsilon/></label>
-<label slot="d"><ArrowR/><integral/>f(x)dx</label>
+<label slot="d"><ArrowR/> <integral/>f(x)dx</label>
 </carddef>

@@ -5,5 +5,5 @@
 <label slot="a">DATE 1</label>
 <label slot="b">DATE 2</label>
 <label slot="c">No. DAYS</label>
-<label slot="d">D<ArrowR/>D of W</label>
+<label slot="d">D <ArrowR/> D of W</label>
 </carddef>

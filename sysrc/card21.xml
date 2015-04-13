@@ -6,9 +6,9 @@
 <label slot="c">Tri</label>
 <label slot="d">Rect</label>
 <label slot="e">Depth</label>
-<label slot="aprime"><ArrowR/>ALT: L</label>
-<label slot="bprime"><ArrowR/>Base : W</label>
-<label slot="cprime"><ArrowR/><Sigma/>Vol</label>
-<label slot="dprime"><ArrowR/>Sect Vol</label>
-<label slot="eprime">[Init]<ArrowR/></label>
+<label slot="aprime"><ArrowR/> ALT: L</label>
+<label slot="bprime"><ArrowR/> Base : W</label>
+<label slot="cprime"><ArrowR/> <Sigma/>Vol</label>
+<label slot="dprime"><ArrowR/> Sect Vol</label>
+<label slot="eprime">[Init] <ArrowR/></label>
 </carddef>
