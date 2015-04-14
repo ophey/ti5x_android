@@ -7,5 +7,5 @@
 <label slot="d">Y<sub>max</sub></label>
 <label slot="e"># Tapes</label>
 <label slot="dprime"># Functions</label>
-<label slot="eprime"># Pts<rarrow/>Plot</label>
+<label slot="eprime"># Pts <ArrowR/> Plot</label>
 </carddef>

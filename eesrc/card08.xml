@@ -5,5 +5,5 @@
 <label slot="b">SNR</label>
 <label slot="c">P(FA)</label>
 <label slot="d">P(D)</label>
-<label slot="e"><rarrow/> Execute</label>
+<label slot="e"><ArrowR/> Execute</label>
 </carddef>

@@ -5,9 +5,9 @@
 <label slot="b">N<sub>2</sub>, E<sub>2</sub></label>
 <label slot="c">Dist<sub>1</sub></label>
 <label slot="d">Dist<sub>2</sub></label>
-<label slot="e"><rarrow/> <empty/></label>
-<label slot="aprime"><rarrow/> Az<sub>12</sub></label>
-<label slot="bprime"><rarrow/> N<sub>1</sub></label>
-<label slot="cprime"><rarrow/> E<sub>1</sub></label>
-<label slot="eprime">[Init] <rarrow/></label>
+<label slot="e"><ArrowR/> <empty/></label>
+<label slot="aprime"><ArrowR/> Az<sub>12</sub></label>
+<label slot="bprime"><ArrowR/> N<sub>1</sub></label>
+<label slot="cprime"><ArrowR/> E<sub>1</sub></label>
+<label slot="eprime">[Init] <ArrowR/></label>
 </carddef>

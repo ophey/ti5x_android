@@ -6,8 +6,8 @@
 <label slot="c">DMH, RH</label>
 <label slot="d">ThH; TH</label>
 <label slot="e">DMElev</label>
-<label slot="aprime"><rarrow/>HzDist(IEL)</label>
-<label slot="bprime"><rarrow/>HzDist(SL)</label>
-<label slot="cprime"><rarrow/><Delta/>Elev</label>
-<label slot="eprime">[Init]<rarrow/></label>
+<label slot="aprime"><ArrowR/>HzDist(IEL)</label>
+<label slot="bprime"><ArrowR/>HzDist(SL)</label>
+<label slot="cprime"><ArrowR/> <Delta/>Elev</label>
+<label slot="eprime">[Init] <ArrowR/></label>
 </carddef>

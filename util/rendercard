@@ -25,8 +25,6 @@
 #         lower-case text, while “Bar” is suitable for upper-case text.
 #     <button>titletext</button>
 #         The titletext is rendered inline with the rest of the text with a box around it.
-#     <darrow/>
-#         A double-headed-arrow character is drawn.
 #     <Delta/>
 #         A capital-delta character is drawn.
 #     <div/>
@@ -49,26 +47,32 @@
 #         A multiply symbol is drawn.
 #     <noverr/>
 #         A letter n and letter r are drawn vertically aligned.
-#     <rarrow/>
-#         A right-arrow character is drawn.
 #     <uarrow/>
 #         An up-arrow character is drawn.
-#     <narrow/>
+#     <darrow/>
 #         A down-arrow character is drawn.
-#     <larrow/>
-#         A left-arrow character is drawn.
 #     <sigma/>
 #         A sigma character is drawn.
 #     <sub>subscripttext</sub>
 #         The subscripttext is rendered lowered with a smaller font.
 #     <sup>superscripttext</sup>
 #         The superscripttext is rendered raised with a smaller font.
+#     <supb>superscripttext</supb>
+#         The superscripttext is rendered raised with a smaller font, half move for next character
 #     <theta/>
 #         A theta character is drawn.
 #     <empty/>
 #         A circle with an oblique bar is drawn.
 #     <intersect/>
 #         An half-circle down is drawn.
+#     <ArrowR/>
+#         An arrow left to right is drawn.
+#     <ArrowL/>
+#         An arrow right to left is drawn.
+#     <ArrowD/>
+#         A double arrow is drawn.
+#     <ArrowLR/>
+#         A left arrow at the bottom and a right arrow over is drawn.
 #
 # The label slots must be from the following:
 #
@@ -220,6 +224,15 @@ class superscript(taggedtext) :
 
 #end superscript
 
+class superscript_before(taggedtext) :
+    """an inline superscript label before."""
+
+    def __init__(self, text) :
+        super().__init__("supb", text)
+    #end __init__
+
+#end superscript_before
+
 class Bar(taggedtext) :
     """an inline label with a horizontal bar over the text."""
 
@@ -228,6 +241,58 @@ class Bar(taggedtext) :
     #end __init__
 
 #end Bar
+
+class ArrowR(taggedtext) :
+    """a right arrow"""
+
+    def __init__(self) :
+        super().__init__("ArrowR", "")
+    #end __init__
+
+    def __repr__(self) :
+        return "<ArrowR/>"
+    #end __repr__
+
+#end ArrowR
+
+class ArrowL(taggedtext) :
+    """a left arrow"""
+
+    def __init__(self) :
+        super().__init__("ArrowL", "")
+    #end __init__
+
+    def __repr__(self) :
+        return "<ArrowL/>"
+    #end __repr__
+
+#end ArrowL
+
+class ArrowLR(taggedtext) :
+    """a left(below)/right(over) arrows"""
+
+    def __init__(self) :
+        super().__init__("ArrowLR", "")
+    #end __init__
+
+    def __repr__(self) :
+        return "<ArrowLR/>"
+    #end __repr__
+
+#end ArrowLR
+
+class ArrowD(taggedtext) :
+    """a left/right arrow"""
+
+    def __init__(self) :
+        super().__init__("ArrowD", "")
+    #end __init__
+
+    def __repr__(self) :
+        return "<ArrowD/>"
+    #end __repr__
+
+#end ArrowD
 
 class bar(taggedtext) :
     """an inline label with a horizontal bar over the text."""
@@ -272,7 +337,6 @@ def defsymbol(name, psstr) :
 symbols = \
     { # based on symbol font
         "angle" : defsymbol("angle", "(\\320)"),
-        "darrow" : defsymbol("darrow", "(\\253)"),
         "Delta" : defsymbol("Delta", "(\\104)"),
         "div": defsymbol("div", "(\\270)"),
         "sqrt": defsymbol("sqrt", "(\\326)"),
@@ -281,11 +345,8 @@ symbols = \
         "integral" : defsymbol("integral", "(\\362)"),
         "lambda" : defsymbol("lambda", "(\\154)"),
         "mul": defsymbol("mul", "(\\264)"),
-        "larrow" : defsymbol("larrow", "(\\254)"),
-        "rarrow" : defsymbol("rarrow", "(\\256)"),
-        "larrow" : defsymbol("larrow", "(\\254)"),
         "uarrow" : defsymbol("uarrow", "(\\255)"),
-        "narrow" : defsymbol("narrow", "(\\257)"),
+        "darrow" : defsymbol("darrow", "(\\257)"),
         "sigma" : defsymbol("sigma", "(\\163)"),
         "theta" : defsymbol("theta", "(\\161)"),
         "Omega" : defsymbol("Omega", "(\\127)"),
@@ -300,9 +361,12 @@ symbols = \
 fontname = "Helvetica"
 symbolfontname = "Symbol"
 basefontsize = 7.0
+arrowsize = basefontsize / 4
 subsupscale = 0.8 # relative scaling for superscript/subscript text
+subsupscaleb = 0.75 # relative scaling for superscript/subscript before text
 suboffset = -0.2 # vertical offset for subscript, relative to basefontsize
-superoffset = 0.6 # vertical offset for superscript, relative to basefontsize
+superoffset = 0.5 # vertical offset for superscript, relative to basefontsize
+superoffsetb = 0.6 # vertical offset for superscript before, relative to basefontsize
 xheightscale = 0.65
 orange = tuple(i / 255 for i in (0x95, 0x50, 0x1c))
 black = (0.0, 0.0, 0.0)
@@ -380,6 +444,10 @@ def parse_template(input) :
         handle_common_end(superscript)
     #end handle_superscript_end
 
+    def handle_superscript_before_end(tag) :
+        handle_common_end(superscript_before)
+    #end handle_superscript_before_end
+
     def handle_Bar_end(tag) :
         handle_common_end(Bar)
     #end handle_Bar_end
@@ -410,6 +478,8 @@ def parse_template(input) :
                     "/sub" : handle_subscript_end,
                     "sup" : handle_common_tag_start,
                     "/sup" : handle_superscript_end,
+                    "supb" : handle_common_tag_start,
+                    "/supb" : handle_superscript_before_end,
                     "Bar" : handle_common_tag_start,
                     "/Bar" : handle_Bar_end,
                     "bar" : handle_common_tag_start,
@@ -420,7 +490,7 @@ def parse_template(input) :
         element_handlers[2][symbol.__name__] = handle_common_tag_start
         element_handlers[2]["/" + symbol.__name__] = make_symbol_def(symbol)
     #end for
-    for symbol in (noverr,) :
+    for symbol in (noverr, ArrowR, ArrowL, ArrowLR, ArrowD) :
         element_handlers[2][symbol.__name__] = handle_common_tag_start
         element_handlers[2]["/" + symbol.__name__] = make_symbol_def(symbol)
     #end for
@@ -673,6 +743,7 @@ draw_bar = \
     "currentpoint 4 2 roll" \
     " newpath 2 copy moveto exch pop 2 index exch lineto stroke" \
     " moveto"
+
 render_special = \
     { # special actions to modify rendering and width calculation for each tag
         button :
@@ -701,7 +772,7 @@ render_special = \
                         %
                             basefontsize
                     +
-                        "currentpoint 0 %.2f 0.3 mul rmoveto (n) show" % basefontsize
+                        "currentpoint 0 %.2f 0.42 mul rmoveto (n) show" % basefontsize
                     +
                         " moveto currentpoint exch pop 0 %.2f -0.2 mul rmoveto" % basefontsize
                     +
@@ -727,11 +798,155 @@ render_special = \
                         " 0 %.2f rmoveto" % (superoffset * basefontsize),
                 "renderafter" : "0 %.2f rmoveto setfont" % (- superoffset * basefontsize),
             },
+        superscript_before :
+            {
+                "widthadjust" : "%.2f mul" % subsupscaleb,
+                "renderbefore" :
+                        "currentfont dup %.2f scalefont setfont" % subsupscaleb
+                    +
+                        " 0 %.2f rmoveto" % (superoffsetb * basefontsize),
+                "renderafter" : "%.2f %.2f rmoveto setfont"
+                % (-basefontsize / 3 * subsupscaleb, - superoffsetb * basefontsize),
+            },
         Bar :
             {
                 "renderbefore" :
                     "currentpoint %.2f add" % basefontsize,
                 "renderafter" : draw_bar,
+            },
+        ArrowR :
+            {
+                "widthadjust" : "%.2f add" % ( basefontsize * 0.5 ),
+                "renderbefore" : "",
+                "renderafter" :
+                   # save current point
+                   " currentpoint"
+                   # start new path and starting point
+                   + " newpath 2 copy moveto "
+                   # move middle of text for the start of arrow
+                   + " 0 %.2f 0.3 mul rmoveto" % basefontsize
+                   # draw the line (save line end which is staring point for arrow below)
+                   + " %.2f 0 rlineto currentpoint" % ( basefontsize * 0.5 )
+                   # stoke with a bigger line width, restoring the old width
+                   + " currentlinewidth 1 copy 2 mul setlinewidth stroke setlinewidth"
+                   # from there a closed and filed path for the arrow
+                   # start new path and starting point
+                   + " newpath moveto "
+                   + " -%.2f 1.2 mul %.2f rlineto 0 -%.2f 2 mul rlineto closepath fill"
+                     % (arrowsize, arrowsize, arrowsize)
+                   # move back to saved position
+                   + " moveto"
+                   + " %.2f 0 rmoveto" % ( basefontsize * 0.5 )
+            },
+        ArrowL :
+            {
+                "widthadjust" : "%.2f add" % ( basefontsize * 0.9 ),
+                "renderbefore" : "",
+                "renderafter" :
+                   # save current point
+                   " currentpoint"
+                   # start new path and starting point
+                   + " newpath 2 copy moveto "
+                   # x offset
+                   + " %.2f 0.2 mul 0 rmoveto" % basefontsize
+                   # move middle of text for the start of arrow
+                   + " 0 %.2f 0.3 mul rmoveto" % basefontsize
+                   # save start of line
+                   + " currentpoint"
+                   # draw arrow
+                   + " %.2f 1.2 mul %.2f rlineto 0 -%.2f 2 mul rlineto closepath fill"
+                     % (arrowsize, arrowsize, arrowsize)
+                   # move back to start of arrow
+                   + " moveto"
+                   # draw the line
+                   + " %.2f 0 rlineto" % ( basefontsize * 0.6 )
+                   # stoke with a bigger line width, restoring the old width
+                   + " currentlinewidth 1 copy 2 mul setlinewidth stroke setlinewidth"
+                   # move back to saved position
+                   + " moveto"
+                   + " %.2f 0 rmoveto" % ( basefontsize * 0.9 )
+            },
+        ArrowD :
+            {
+                "widthadjust" : "%.2f add" % ( basefontsize * 1.1 ),
+                "renderbefore" : "",
+                "renderafter" :
+                   # save current point
+                   " currentpoint"
+                   # start new path and starting point
+                   + " newpath 2 copy moveto "
+                   # x offset
+                   + " %.2f 0.1 mul 0 rmoveto" % basefontsize
+                   # move middle of text for the start of arrow
+                   + " 0 %.2f 0.3 mul rmoveto" % basefontsize
+                   # save start of line
+                   + " currentpoint"
+                   # draw arrow
+                   + " %.2f 1.2 mul %.2f rlineto 0 -%.2f 2 mul rlineto closepath fill"
+                     % (arrowsize, arrowsize, arrowsize)
+                   # move back to start of arrow
+                   + " moveto"
+                   # draw the line (save line end which is staring point for arrow below)
+                   + " %.2f 0 rlineto currentpoint" % ( basefontsize * 0.9 )
+                   # stoke with a bigger line width, restoring the old width
+                   + " currentlinewidth 1 copy 2 mul setlinewidth stroke setlinewidth"
+                   # from there a closed and filed path for the arrow
+                   # start new path and starting point
+                   + " newpath moveto "
+                   + " -%.2f 1.2 mul %.2f rlineto 0 -%.2f 2 mul rlineto closepath fill"
+                     % (arrowsize, arrowsize, arrowsize)
+                   # move back to saved position
+                   + " moveto"
+                   + " %.2f 1.1 mul 0 rmoveto" % basefontsize
+            },
+        ArrowLR :
+            {
+                "widthadjust" : "%.2f add" % ( basefontsize * 0.9 ),
+                "renderbefore" : "",
+                "renderafter" :
+                   # save current point
+                   " currentpoint"
+
+                   # TOP arrow
+                   # start new path and starting point
+                   + " newpath 2 copy moveto "
+                   # x offset
+                   + " %.2f 0.2 mul 0 rmoveto" % basefontsize
+                   # move middle of text for the start of arrow
+                   + " 0 %.2f 0.7 mul rmoveto" % basefontsize
+                   # draw the line (save line end which is staring point for arrow below)
+                   + " %.2f 0 rlineto currentpoint" % ( basefontsize * 0.6 )
+                   # stoke with a bigger line width, restoring the old width
+                   + " currentlinewidth 1 copy 2 mul setlinewidth stroke setlinewidth"
+                   # from there a closed and filed path for the arrow
+                   # start new path and starting point
+                   + " newpath moveto "
+                   + " -%.2f 1.2 mul %.2f rlineto 0 -%.2f 2 mul rlineto closepath fill"
+                     % (arrowsize, arrowsize, arrowsize)
+
+                   # BOTTOM arrow
+                   + " moveto currentpoint"
+                   # start new path and starting point
+                   + " newpath 2 copy moveto "
+                   # x offset
+                   + " %.2f 0.2 mul 0 rmoveto" % basefontsize
+                   # move middle of text for the start of arrow
+                   + " 0 %.2f 0.1 mul rmoveto" % basefontsize
+                   # save start of line
+                   + " currentpoint"
+                   # draw arrow
+                   + " %.2f 1.2 mul %.2f rlineto 0 -%.2f 2 mul rlineto closepath fill"
+                     % (arrowsize, arrowsize, arrowsize)
+                   # move back to start of arrow
+                   + " moveto"
+                   # draw the line
+                   + " %.2f 0 rlineto" % ( basefontsize * 0.6 )
+                   # stoke with a bigger line width, restoring the old width
+                   + " currentlinewidth 1 copy 2 mul setlinewidth stroke setlinewidth"
+
+                   # move back to saved position
+                   + " moveto"
+                   + " %.2f 0 rmoveto" % ( basefontsize * 0.9 )
             },
         bar :
             {
@@ -756,21 +971,6 @@ for symbol in symbols.values() :
             "renderafter" : "setfont",
         }
 #end for
-render_special[symbols["rarrow"]] = \
-    { # symbol right-arrow is too long, make it shorter
-        "widthadjust" :
-                    "currentfont exch /%s findfont %.2f scalefont setfont"
-                %
-                    (symbolfontname, basefontsize * 1.3)
-            +
-                " (\\256) stringwidth pop 2 div add exch setfont",
-        "renderbefore" :
-                "currentfont /%s findfont matrix %.2f dup 2 div exch"
-                " 3 2 roll scale makefont setfont (\\256) show"
-            %
-                (symbolfontname, basefontsize * 1.3),
-        "renderafter" : "setfont",
-    }
 
 gs.write("/%s findfont %.2f scalefont setfont\n" % (fontname, basefontsize))
 gs.write("/boxextra (M) stringwidth pop 2 div def\n")
