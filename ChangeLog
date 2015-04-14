@@ -1,5 +1,8 @@
 Feature highlights:
 
+v3.4, 2015 April 14th:
+   rework the card design (cleaner arrows, exponents...)
+
 v3.3, 2015 April 8th:
    fix tan(), log(), ln() in limit conditions.
    fix 1/0 error display (flashing 9.999999 99).
