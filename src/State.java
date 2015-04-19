@@ -624,6 +624,20 @@ public class State
           } /*switch*/
       } /*EnterExponent*/
 
+    private static String RemoveTrailingZeros(String str)
+      {
+          String Result = str;
+
+          while (Result.length() != 0
+                 &&
+                 Result.charAt(Result.length() - 1) == '0')
+            {
+                Result = Result.substring(0, Result.length() - 1);
+            }
+
+          return Result;
+      }
+
     static String FormatNumber
       (
         Number X,
@@ -659,7 +673,13 @@ public class State
                 Number N = new Number(X);
                 N.div(Factor);
 
-                Result = N.formatString (Global.StdLocale, Math.max(8 - BeforeDecimal, 0));
+                final int UseNrDecimalsF = Math.max(8 - BeforeDecimal, 0);
+                Result = N.formatString (Global.StdLocale, UseNrDecimalsF);
+
+                if (UseNrDecimalsF > 0)
+                  {
+                      Result = RemoveTrailingZeros(Result);
+                  }
 
                 /* assume there will always be a decimal point? */
                 Result += (Exp < 0 ? "-" : " ") + String.format(Global.StdLocale, "%02d", Math.abs(Exp));
@@ -678,15 +698,7 @@ public class State
 
                       if (UseNrDecimals > 0)
                         {
-                            while
-                              (
-                               Result.length() != 0
-                               &&
-                               Result.charAt(Result.length() - 1) == '0'
-                               )
-                            {
-                                Result = Result.substring(0, Result.length() - 1);
-                            } /*while*/
+                            Result = RemoveTrailingZeros(Result);
                         }
                       else
                         {

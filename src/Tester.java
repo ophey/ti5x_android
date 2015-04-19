@@ -370,6 +370,28 @@ public class Tester
         return true;
     }
 
+    private boolean Test_13()
+    {
+        Clear();
+
+        SetX(85.23);
+        Calc.EnterExponent();
+        Calc.Digit('2');
+        Calc.Digit('2');
+        Calc.Equals();
+
+        if (!Calc.CurDisplay.equals("8.523 23"))
+            return false;
+
+        Calc.SetDisplayMode (Calc.FORMAT_ENG, -1);
+
+        if (!Calc.CurDisplay.equals("852.3 21"))
+            return false;
+
+        Calc.SetDisplayMode (Calc.FORMAT_FIXED, -1);
+        return true;
+    }
+
     public int Run()
     {
         Calc = Global.Calc;
@@ -387,6 +409,7 @@ public class Tester
         if (!Test_10()) return -10; Total++;
         if (!Test_11()) return -11; Total++;
         if (!Test_12()) return -12; Total++;
+        if (!Test_13()) return -13; Total++;
 
         return Total;
     }
