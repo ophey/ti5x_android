@@ -2,7 +2,8 @@ package net.obry.ti5x;
 /*
     The calculation state, number entry and programs.
 
-    Copyright 2011, 2012 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+    Copyright 2011 - 2012 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+    Copyright 2014 - 2015 Pascal Obry <pascal@obry.net>.
 
     This program is free software: you can redistribute it and/or modify it under
     the terms of the GNU General Public License as published by the Free Software
@@ -16,109 +17,7 @@ package net.obry.ti5x;
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-class Arith
-  /* useful arithmetic-related stuff */
-  {
-
-    public static double Epsilon = 1e-11;
-
-    public static double RoundTo
-      (
-        double X,
-        int NrFigures
-      )
-      /* returns X rounded to the specified number of significant figures. */
-      {
-        final double RoundFactor =
-            X != 0.0 ?
-                Math.pow
-                  (
-                    10,
-                    NrFigures - 1 - (int)Math.floor(Math.log(Math.abs(X)) / Math.log(10.0))
-                  )
-            :
-                1.0;
-        return
-            Math.rint(X * RoundFactor) / RoundFactor;
-      } /*RoundTo*/
-
-    public static int FiguresBeforeDecimal
-      (
-        double X,
-        int Exp
-      )
-      /* returns the number of figures before the decimal point in the
-        formatted representation of X scaled by Exp. This has to be
-        at least 1, because the decimal point is part of the display
-        of the preceding digit. */
-      {
-        int BeforeDecimal;
-        if (X != 0.0)
-          {
-            BeforeDecimal = Math.max
-              (
-                (int)Math.ceil(Math.log10(Math.abs(X) / Math.pow(10.0, Exp))),
-                1
-              );
-          }
-        else
-          {
-            BeforeDecimal = 1;
-          } /*if*/
-        return
-            BeforeDecimal;
-      } /*FiguresBeforeDecimal*/
-
-    public static final int MaxPrec = 15;
-      /* fudge for roundoff caused by binary versus decimal arithmetic */
-
-    public static double AbsIntPart
-      (
-        double X
-      )
-      /* returns the absolute integer part of X. */
-      {
-        final double Xabs = Math.abs(X);
-        final double Epsilon =
-            Xabs > 0.8
-              ? 1.0 / Math.pow (10, 15 - 3 - Math.min(1, Math.abs((int)Math.floor(Math.log(Xabs) / Math.log(10.0)))))
-              : 0.0;
-        return Math.floor(Xabs + Epsilon);
-      } /*AbsIntPart*/
-
-    public static boolean IsEqual
-      (
-        double X,
-        double value
-      )
-      {
-        if (Math.abs (X - value) <= Epsilon)
-          return true;
-        else
-          return false;
-      }
-
-    public static double NormalizeAngle
-      (
-        double X
-      )
-      {
-        final double TwoPI = 2.0 * Math.PI;
-        double Result = X;
-
-        if (Result < 0.0)
-          {
-            while (Result < 0.0)
-              Result = Result + TwoPI;
-          }
-        else if (Result >= TwoPI)
-          {
-            while (Result >= TwoPI)
-              Result = Result - TwoPI;
-          }
-        return Result;
-      }
-  } /*Arith*/
+import android.util.Log;
 
 public class State
   /* the calculator state, number entry and programs */
@@ -160,7 +59,7 @@ public class State
 
     public static abstract class ImportFeeder
       {
-        abstract double Next()
+        abstract Number Next()
             throws
                 ImportEOFException,
                 Persistent.DataFormatException;
@@ -187,6 +86,10 @@ public class State
     public int CurFormat;
     public int CurNrDecimals;
 
+  /* Max and Min number that can be represented using a fixed format */
+    public final static Number minFixed = new Number(5.0 * Math.pow(10.0, -9.0));
+    public final static Number maxFixed = new Number(Math.pow(10.0, 10.0));
+
   /* angle units */
     public static final int ANG_RAD = 1;
     public static final int ANG_DEG = 2;
@@ -204,13 +107,13 @@ public class State
 
     public static class OpStackEntry
       {
-        double Operand;
+        Number Operand;
         int Operator;
         int ParenFollows;
 
         public OpStackEntry
           (
-            double Operand,
+            Number Operand,
             int Operator,
             int ParenFollows
           )
@@ -224,7 +127,7 @@ public class State
 
     public final int MaxOpStack = 8;
     public final int MaxParen = 9;
-    public double X, T;
+    public Number X, T;
     public OpStackEntry[] OpStack;
     public int OpStackNext;
     public int PreviousOp = -1;
@@ -265,7 +168,7 @@ public class State
     public final int MaxBanks = 100;
       /* 00 is user-entered program, others are loaded from library modules */
     public final int MaxFlags = 10;
-    public final double[] Memory;
+    public final Number[] Memory;
     public final byte[] Program;
     public final ProgBank[] Bank; /* Bank[0].Program always points to Program */
     public byte[] ModuleHelp; /* overall help for loaded library module */
@@ -334,8 +237,8 @@ public class State
         OpStackNext = 0;
         ParenCount = 0;
         PreviousOp = -1;
-        X = 0.0;
-        T = 0.0;
+        X = new Number();
+        T = new Number();
         PC = 0;
         RunPC = 0;
         CurBank = 0;
@@ -352,7 +255,7 @@ public class State
           } /*for*/
         for (int i = 0; i < MaxMemories; ++i)
           {
-            Memory[i] = 0.0;
+            Memory[i] = new Number();
           } /*for*/
         for (int i = 0; i < MaxProgram; ++i)
           {
@@ -396,7 +299,7 @@ public class State
       {
         this.ctx = ctx;
         OpStack = new OpStackEntry[MaxOpStack];
-        Memory = new double[MaxMemories];
+        Memory = new Number[MaxMemories];
         Program = new byte[MaxProgram];
         Bank = new ProgBank[MaxBanks];
         Bank[0] = new ProgBank(Program, null, null);
@@ -478,7 +381,7 @@ public class State
               {
                 Exp = 0;
               } /*if*/
-            X = Double.parseDouble
+            X = new Number
               (
                 CurDisplay.substring
                   (
@@ -488,7 +391,8 @@ public class State
               );
             if (ExponentEntered)
               {
-                X = X * Math.pow(10.0, Exp);
+                Number E = new Number(Math.pow(10, Exp));
+                X.mult(E);
               } /*if*/
             SetX(X);
             FromResult = false;
@@ -626,59 +530,6 @@ public class State
           } /*CurState*/
       } /*DecimalPoint*/
 
-    static int FormatToUse
-      (
-        double X,
-        int OrigFormat
-      )
-      /* returns OrigFormat, or replaces FORMAT_FIXED with FORMAT_FLOAT if X
-        is outside the suitable range for FORMAT_FIXED. */
-      {
-        int UseFormat = OrigFormat;
-        if
-          (
-                OrigFormat == FORMAT_FIXED
-            &&
-                X != 0
-            &&
-                (
-                    Math.abs(X) < 5.0 * Math.pow(10.0, -9.0)
-                ||
-                    Math.abs(X) >= Math.pow(10.0, 10.0)
-                )
-          )
-          {
-            UseFormat = FORMAT_FLOAT;
-          } /*if*/
-        return
-            UseFormat;
-      } /*FormatToUse*/
-
-    static int ScaleExp
-      (
-        double X,
-        int UsingFormat
-      )
-      /* returns the exponent scale to display X using the given format. */
-      {
-        int Exp = 0;
-        X = Math.abs(X);
-        if (X != 0.0)
-          {
-            switch (UsingFormat)
-              {
-            case FORMAT_FLOAT:
-                Exp = (int)Math.floor(Math.log(X) / Math.log(10.0));
-            break;
-            case FORMAT_ENG:
-                Exp = (int)Math.floor(Math.log(X) / Math.log(1000.0)) * 3;
-            break;
-              } /*switch*/
-          } /*if*/
-        return
-            Exp;
-      } /*ScaleExp*/
-
     private boolean NullExponent ()
       {
          return CurDisplay.length() <= 3
@@ -757,17 +608,15 @@ public class State
                 else
                   {
                     /* as per manual */
+                      /*??PO
+                        probably not needed anymore since the value is 13 bits BCD?????
                     SetX
-                      (
-                        Arith.RoundTo
-                          (
-                            X,
-                            CurFormat == FORMAT_FIXED ?
-                                CurNrDecimals >= 0 ? CurNrDecimals : 10
-                            :
-                                8
-                          )
-                      );
+                      (Arith.RoundTo
+                          (X,
+                           CurFormat == FORMAT_FIXED
+                             ? CurNrDecimals >= 0 ? CurNrDecimals : 10
+                             : 8));
+                      */
                     CurFormat = FORMAT_FLOAT; /* but display of X is not changed yet */
                       }
                   } /*if*/
@@ -777,7 +626,7 @@ public class State
 
     static String FormatNumber
       (
-        double X,
+        Number X,
         int UseFormat,
         int NrDecimals,
         boolean ExponentPad /* leave spaces if exponent is omitted */
@@ -785,80 +634,83 @@ public class State
       /* formats X for display according to the specified settings. */
       {
         String Result = null;
-        UseFormat = FormatToUse(X, UseFormat);
-        final int Exp = ScaleExp(X, UseFormat);
-        final int BeforeDecimal = Arith.FiguresBeforeDecimal(X, Exp);
-        switch (UseFormat)
+
+        Number aX = new Number(X);
+        aX.abs();
+
+        // check that FORMAT_FIXED can be used, if outside supported range use FORMAT_FLOAT
+
+        if (UseFormat == FORMAT_FIXED
+            && X.getSignum() != 0
+            && (aX.compareTo(minFixed) < 0
+                || aX.compareTo(maxFixed) >= 0))
           {
-        case FORMAT_FLOAT:
-        case FORMAT_ENG:
-            Result = String.format
-              (
-                Global.StdLocale,
-                String.format(Global.StdLocale, "%%.%df", Math.max(8 - BeforeDecimal, 0)),
-                X / Math.pow(10.0, Exp)
-              );
-          /* assume there will always be a decimal point? */
-            Result += (Exp < 0 ? "-" : " ") + String.format(Global.StdLocale, "%02d", Math.abs(Exp));
-        break;
-        case FORMAT_FIXED:
-            if (NrDecimals >= 0)
-              {
-                Result = String.format
-                  (
-                    Global.StdLocale,
-                    String.format
-                      (
-                        Global.StdLocale,
-                        "%%.%df",
-                        Math.max(Math.min(NrDecimals, 10 - BeforeDecimal), 0)
-                      ),
-                    X
-                  );
-              }
-            else
-              {
-                final int UseNrDecimals = Math.max(10 - BeforeDecimal, 0);
-                Result = String.format
-                  (
-                    Global.StdLocale,
-                    String.format(Global.StdLocale, "%%.%df", UseNrDecimals),
-                    X
-                  );
-                if (UseNrDecimals > 0)
+              UseFormat = FORMAT_FLOAT;
+          }
+
+        final int Exp           = X.scaleExp(UseFormat);
+        final int BeforeDecimal = X.figuresBeforeDecimal(Exp);
+
+        switch (UseFormat)
+            {
+            case FORMAT_FLOAT:
+            case FORMAT_ENG:
+                final Number Factor = new Number(Math.pow(10.0, Exp));
+                Number N = new Number(X);
+                N.div(Factor);
+
+                Result = N.formatString (Global.StdLocale, Math.max(8 - BeforeDecimal, 0));
+
+                /* assume there will always be a decimal point? */
+                Result += (Exp < 0 ? "-" : " ") + String.format(Global.StdLocale, "%02d", Math.abs(Exp));
+                break;
+
+            case FORMAT_FIXED:
+                if (NrDecimals >= 0)
                   {
-                    while
-                      (
-                            Result.length() != 0
-                        &&
-                            Result.charAt(Result.length() - 1) == '0'
-                      )
-                      {
-                        Result = Result.substring(0, Result.length() - 1);
-                      } /*while*/
+                      Result = X.formatString
+                          (Global.StdLocale, Math.max(Math.min(NrDecimals, 10 - BeforeDecimal), 0));
                   }
                 else
                   {
-                    Result += ".";
+                      final int UseNrDecimals = Math.max(10 - BeforeDecimal, 0);
+                      Result = X.formatString (Global.StdLocale, UseNrDecimals);
+
+                      if (UseNrDecimals > 0)
+                        {
+                            while
+                              (
+                               Result.length() != 0
+                               &&
+                               Result.charAt(Result.length() - 1) == '0'
+                               )
+                            {
+                                Result = Result.substring(0, Result.length() - 1);
+                            } /*while*/
+                        }
+                      else
+                        {
+                            Result += ".";
+                        } /*if*/
                   } /*if*/
-              } /*if*/
-            if (Result.length() == 0)
-              {
-                Result = "0.";
-              } /*if*/
-            if (ExponentPad)
-              {
-                Result += "   ";
-              } /*if*/
-        break;
-          } /*switch*/
-        return
-            Result;
+
+                if (Result.length() == 0)
+                  {
+                      Result = "0.";
+                  } /*if*/
+                if (ExponentPad)
+                  {
+                      Result += "   ";
+                  } /*if*/
+                break;
+            } /*switch*/
+
+        return Result;
       } /*FormatNumber*/
 
     public void SetX
       (
-        double NewX
+        Number NewX
       )
       /* sets the display to show the specified value. */
       {
@@ -866,9 +718,9 @@ public class State
           {
             CurState = ResultState;
           } /*if*/
-        if (!Double.isNaN(NewX) && !Double.isInfinite(NewX))
+        if (!NewX.isNaN() && !NewX.isInfinite())
           {
-            X = NewX;
+            X = new Number(NewX);
             CurDisplay = FormatNumber(X, CurFormat, CurNrDecimals, false);
             SetShowing(CurDisplay);
           }
@@ -881,15 +733,6 @@ public class State
             PrintDisplay(false);
           } /*if*/
       } /*SetX*/
-
-    public void SetXFromDisplay()
-      {
-        if (CurNrDecimals >= 0)
-          {
-            final double Factor = Math.pow(10, CurNrDecimals);
-            SetX(Math.floor(X * Factor + .5) / Factor);
-          } /*if*/
-      } /*SetXFromDisplay*/
 
     public void ChangeSign()
       {
@@ -917,7 +760,8 @@ public class State
             SetShowing(CurDisplay);
         break;
         case ResultState:
-            SetX(- X);
+            X.negate();
+            SetX(X);
         break;
           } /*switch*/
       } /*ChangeSign*/
@@ -940,31 +784,36 @@ public class State
         switch (ThisOp.Operator)
           {
         case STACKOP_ADD:
-            X = ThisOp.Operand + X;
+            X.add(ThisOp.Operand);
         break;
         case STACKOP_SUB:
-            X = ThisOp.Operand - X;
+            ThisOp.Operand.sub(X);
+            X = ThisOp.Operand;
         break;
         case STACKOP_MUL:
-            X = ThisOp.Operand * X;
+            X.mult(ThisOp.Operand);
         break;
         case STACKOP_DIV:
-            if (X == 0.0)
-              {
-                SetX(9.9999999e99);
+            ThisOp.Operand.div(X);
+            X = ThisOp.Operand;
+            if (X.isError())
+            {
+                SetX(X);
                 SetErrorState(false);
-              }
-            else
-                X = ThisOp.Operand / X;
+            }
         break;
         case STACKOP_MOD:
-            X = Math.IEEEremainder(ThisOp.Operand, X);
+            ThisOp.Operand.rem(X);
+            X = ThisOp.Operand;
         break;
         case STACKOP_EXP:
-            X = Math.pow(ThisOp.Operand, X);
+            ThisOp.Operand.pow(X);
+            X = ThisOp.Operand;
         break;
         case STACKOP_ROOT:
-            X = Math.pow(ThisOp.Operand, 1.0 / X);
+            X.reciprocal();
+            ThisOp.Operand.pow(X);
+            X = ThisOp.Operand;
         break;
           } /*switch*/
       /* leave it to caller to update display */
@@ -1008,7 +857,7 @@ public class State
           }
         else
           {
-            OpStack[OpStackNext++] = new OpStackEntry(X, OpCode, 0);
+            OpStack[OpStackNext++] = new OpStackEntry(new Number(X), OpCode, 0);
           } /*if*/
       } /*StackPush*/
 
@@ -1114,88 +963,59 @@ public class State
     public void Square()
       {
         Enter();
-        SetX(X * X);
+        X.x2();
+        SetX(X);
       } /*Square*/
 
     public void Sqrt()
       {
         Enter();
-        if (X < 0)
-          {
-            SetX(Math.sqrt(-X));
+        X.sqrt();
+        if (X.isError())
+        {
             SetErrorState(false);
-          }
-        else
-          SetX(Math.sqrt(X));
+        }
+        SetX(X);
       } /*Sqrt*/
 
     public void Reciprocal()
       {
         Enter();
-        if (X == 0)
-          {
-            SetX(9.9999999e99);
+        X.reciprocal();
+        if (X.isError())
+        {
             SetErrorState(false);
-          }
-        else
-          SetX(1.0 / X);
+        }
+        SetX(X);
       } /*Reciprocal*/
-
-    double TrigScale()
-      {
-        double Scale = 0.0;
-        switch (CurAng)
-          {
-        case ANG_RAD:
-            Scale = 1.0;
-        break;
-        case ANG_DEG:
-            Scale = 180.0 / Math.PI;
-        break;
-        case ANG_GRAD:
-            Scale = 200.0 / Math.PI;
-        break;
-          } /*CurAng*/
-        return
-            Scale;
-      } /*TrigScale*/
 
     public void Sin()
       {
         Enter();
-        double NewX;
         if (InvState)
           {
-            NewX = Math.asin(X) * TrigScale();
+              X.asin(CurAng);
           }
         else
           {
-            NewX = Math.sin(X / TrigScale());
+              X.sin(CurAng);
           } /*if*/
-
-        if (Arith.IsEqual(NewX, 0.0))
-          SetX(0);
-        else
-          SetX(NewX);
+        SetX(X);
       } /*Sin*/
 
     public void Cos()
       {
         Enter();
-        double NewX;
         if (InvState)
           {
-            NewX = Math.acos(X) * TrigScale();
+              X.acos(CurAng);
           }
         else
           {
-            NewX = Math.cos(X / TrigScale());
+              X.cos(CurAng);
           } /*if*/
 
-        if (Arith.IsEqual(NewX, 0.0))
-          SetX(0);
-        else
-          SetX(NewX);
+        SetX(X);
       } /*Cos*/
 
     public void Tan()
@@ -1203,24 +1023,19 @@ public class State
         Enter();
         if (InvState)
           {
-            SetX(Math.atan(X) * TrigScale());
+              X.atan(CurAng);
           }
         else
           {
-            double v = Arith.NormalizeAngle(X / TrigScale());
+              X.tan(CurAng);
+          }
 
-            if (Arith.IsEqual(v, Math.PI/2.0) || Arith.IsEqual(v, 3.0*Math.PI/2.0))
-              {
-                SetX(9.9999999e99);
-                SetErrorState(false);
-              }
-            else if (Arith.IsEqual(v, 0.0) || Arith.IsEqual(v, Math.PI))
-              {
-                SetX(0.0);
-              }
-            else
-              SetX(Math.tan(v));
-          } /*if*/
+        if (X.isError())
+          {
+              SetErrorState(false);
+          }
+
+        SetX(X);
       } /*Tan*/
 
     public void Ln()
@@ -1228,23 +1043,19 @@ public class State
         Enter();
         if (InvState)
           {
-            SetX(Math.exp(X));
+              X.exp();
           }
         else
           {
-            if (X < 0.0)
-              {
-                SetX(Math.log(Math.abs(X)));
-                SetErrorState(false);
-              }
-            else if (X == 0.0)
-              {
-                SetX(-9.9999999e99);
-                SetErrorState(false);
-              }
-            else
-              SetX(Math.log(X));
-          } /*if*/
+              X.ln();
+          }
+
+        if (X.isError())
+          {
+              SetErrorState(false);
+          }
+
+        SetX(X);
       } /*Ln*/
 
     public void Log()
@@ -1252,68 +1063,63 @@ public class State
         Enter();
         if (InvState)
           {
-            SetX(Math.pow(10.0, X));
+              Number NewX = new Number(10.0);
+              NewX.pow(X);
+              X = NewX;
           }
         else
           {
-            if (X < 0.0)
-              {
-                SetX(Math.log10(Math.abs(X)));
-                SetErrorState(false);
-              }
-            else if (X == 0.0)
-              {
-                SetX(-9.9999999e99);
-                SetErrorState(false);
-              }
-            else
-              SetX(Math.log10(X));
-          } /*if*/
+              X.log();
+          }
+
+        if (X.isError())
+          {
+              SetErrorState(false);
+          }
+
+        SetX(X);
       } /*Log*/
 
     public void Pi()
       {
         if (InvState) /* extension! */
           {
-            SetX(TrigScale());
+              X.trigScale(CurAng); // ?? check that it is on same order or reciprocal
           }
         else
           {
-            SetX(Math.PI);
+              X.Pi();
           } /*if*/
+        SetX(X);
       } /*Pi*/
 
     public void Int()
       {
         Enter();
-        final double IntPart = Arith.AbsIntPart(X);
         if (InvState)
           {
-            SetX
-              (
-                Arith.RoundTo
-                  (
-                    (Math.abs(X) - IntPart) * Math.signum(X),
-                    Math.max(Arith.MaxPrec - Arith.FiguresBeforeDecimal(X, 0), 0)
-                  )
-              );
+              X.fracPart();
           }
         else
           {
-            SetX(IntPart * Math.signum(X));
+              X.intPart();
           } /*if*/
+
+        SetX(X);
       } /*Int*/
 
     public void Abs()
       {
         Enter();
-        SetX(Math.abs(X));
+
+        X.abs();
+        SetX(X);
       } /*Abs*/
 
     public void SwapT()
       {
         Enter();
-        final double SwapTemp = X;
+        final Number SwapTemp = X;
         SetX(T);
         T = SwapTemp;
       } /*SwapT*/
@@ -1321,33 +1127,41 @@ public class State
     public void Polar()
       {
         Enter();
-        final double Scale = TrigScale();
-        double NewX, NewY;
+
+        Number NewX, NewY;
+
         if (InvState)
           {
-            NewX = Math.hypot(X, T);
-            NewY = Math.atan2(X, T) * Scale;
-            // never report negative angle below fourth of circle
-            if (CurAng == ANG_DEG && NewY < -90.0)
-              NewY = NewY + 360.0;
-            else if (CurAng == ANG_RAD && NewY < -Math.PI / 2.0)
-              NewY = NewY + 2 * Math.PI;
-            else if (CurAng == ANG_GRAD && NewY < -100)
-              NewY = NewY + 400.0;
+              /* Rectangular -> Polar  */
+              Number X2 = new Number(X);
+              X2.x2();
+              Number Y2 = new Number(T);
+              Y2.x2();
+
+              NewX = new Number(X2);
+              NewX.add(Y2);
+              NewX.sqrt();
+
+              NewY = X;
+              NewY.div(T);
+              NewY.atan(CurAng);
           }
         else
           {
-            double Xcos = Math.cos(X / Scale);
-            double Xsin = Math.sin(X / Scale);
+              /* Polar -> Rectangular */
+              Number Xcos = new Number (X);
+              Number Xsin = new Number (X);
 
-            if (Arith.IsEqual(Xcos, 0.0))
-              Xcos = 0.0;
-            if (Arith.IsEqual(Xsin, 0.0))
-              Xsin = 0.0;
+              Xcos.cos(CurAng);
+              Xsin.sin(CurAng);
 
-            NewX = T * Xcos;
-            NewY = T * Xsin;
-          } /*if*/
+              NewX = new Number(T);
+              NewX.mult(Xcos);
+
+              NewY = new Number(T);
+              NewY.mult(Xsin);
+          }
+
         T = NewX;
         SetX(NewY);
       } /*Polar*/
@@ -1359,30 +1173,51 @@ public class State
         // Must be done on the displayed value and not X. That is if Fix-01 is set, the number must
         // be with a single digit.
 
-        SetXFromDisplay();
+        X.nDigits(CurNrDecimals);
 
-        final double Sign = Math.signum(X);
-        final double Degrees = Math.floor(Math.abs(X));
-        double Fraction;
+        Number Sign = new Number(X);
+        Sign.signum();
 
-        if (CurNrDecimals >= 0)
-          {
-            final double Factor = Math.pow(10, CurNrDecimals);
-            Fraction = Math.floor((Math.abs(X) - Degrees) * Factor + .5) / Factor;
-          }
-        else
-          Fraction = Math.abs(X) - Degrees;
+        Number Degrees = new Number(X);
+        Degrees.abs();
+        Degrees.intPart();
+
+        Number Fraction = new Number(X);
+        Fraction.fracPart();
+
+        Number Minutes = new Number(Fraction);
+        Number Seconds;
 
         if (InvState)
           {
-            final double Minutes = Math.floor(Fraction * 60.0 + 0.001 /*fudge for rounding errors */);
-            SetX((Degrees + Minutes / 100.0 + (Fraction * 60.0 - Minutes) * 6 / 1000.0) * Sign);
+              Minutes.mult(60);
+              Seconds = new Number(Minutes);
+
+              Minutes.intPart();
+              Seconds.fracPart();
+
+              Minutes.div(100);
+              Seconds.mult(6);
+              Seconds.div(1000);
           }
         else
           {
-            final double Minutes = Math.floor(Fraction * 100.0 + 0.1 /*fudge for rounding errors */);
-            SetX((Degrees + Minutes / 60.0 + (Fraction * 100.0 - Minutes) / 36.0) * Sign);
-          } /*if*/
+              Minutes.mult(100);
+              Seconds = new Number(Minutes);
+
+              Minutes.intPart();
+              Seconds.fracPart();
+
+              Minutes.div(60);
+              Seconds.div(36);
+          }
+
+        X.set(Degrees);
+        X.add(Minutes);
+        X.add(Seconds);
+        X.mult(Sign);
+
+        SetX(X);
       } /*D_MS*/
 
     void ShowCurProg()
@@ -1464,7 +1299,7 @@ public class State
         Enter(); /*?*/
         for (int i = 0; i < MaxMemories; ++i)
           {
-            Memory[i] = 0.0;
+              Memory[i].set(0);
           } /*for*/
       } /*ClearMemories*/
 
@@ -1478,7 +1313,7 @@ public class State
         PC = 0;
         ReturnLast = -1;
         ResetLabels();
-        T = 0.0;
+        T.set(0);
         for (int i = 0; i < MaxFlags; ++i)
           {
             Flag[i] = false;
@@ -1513,7 +1348,7 @@ public class State
                     ProgNr = (ProgNr + RegOffset) % 100;
                     if (ProgNr >= MaxMemories)
                         break;
-                    ProgNr = (int)Memory[ProgNr];
+                    ProgNr = (int)Memory[ProgNr].getInt();
                     if (ProgNr < 0)
                         break;
                   } /*if*/
@@ -1581,36 +1416,35 @@ public class State
                     break;
                 if (Indirect)
                   {
-                    RegNr = ((int)Math.floor(Memory[RegNr]) + RegOffset) % 100;
+                    RegNr = ((int)Memory[RegNr].getInt() + RegOffset) % 100;
                     if (RegNr < 0 || RegNr >= MaxMemories)
                         break;
                   } /*if*/
                 switch (Op)
                   {
                 case MEMOP_STO:
-                    Memory[RegNr] = X;
+                    Memory[RegNr] = new Number(X);
                 break;
                 case MEMOP_RCL:
                     SetX(Memory[RegNr]);
                     ExponentEntered = false;
                 break;
                 case MEMOP_ADD:
-                    Memory[RegNr] += X;
+                    Memory[RegNr].add(X);
                 break;
                 case MEMOP_SUB:
-                    Memory[RegNr] -= X;
+                    Memory[RegNr].sub(X);
                 break;
                 case MEMOP_MUL:
-                    Memory[RegNr] *= X;
+                    Memory[RegNr].mult(X);
                 break;
                 case MEMOP_DIV:
-                    if (X == 0.0)
+                    Memory[RegNr].div(X);
+                    if (Memory[RegNr].isError())
                       SetErrorState(false);
-                    else
-                      Memory[RegNr] /= X;
                 break;
                 case MEMOP_EXC:
-                    final double Temp = Memory[RegNr];
+                    final Number Temp = Memory[RegNr];
                     Memory[RegNr] = X;
                     SetX(Temp);
                 break;
@@ -1632,6 +1466,18 @@ public class State
     public static final int HIROP_MUL = 4;
     public static final int HIROP_SUB = 5;
     public static final int HIROP_DIV = 6;
+
+    private void SetPrintRegister (int ColStart, long Contents)
+      {
+          for (int i = 5;;)
+            {
+                if (i == 0)
+                    break;
+                --i;
+                PrintRegister[i + ColStart] = (byte)(Contents % 100);
+                Contents /= 100;
+            }
+      }
 
     public void HirOp
       (
@@ -1657,46 +1503,47 @@ public class State
 
                 // ensure that we are not referencing a non initilized stack entry
                 if  (RegNr != 0 && OpStack[RegNr - 1] == null)
-                    OpStack[RegNr - 1] = new OpStackEntry(0, Code, 0);
+                    OpStack[RegNr - 1] = new OpStackEntry(new Number(), Code, 0);
 
                 switch (Op)
-                  {
-                case HIROP_STO:
-                    if (RegNr != 0)
-                      OpStack[RegNr - 1].Operand = X;
-                break;
-                case HIROP_RCL:
-                    if (RegNr != 0)
-                      SetX(OpStack[RegNr - 1].Operand);
-                break;
-                case HIROP_ADD:
-                    if (RegNr == 0)
-                      X = X + X;
-                    else
-                      OpStack[RegNr - 1].Operand += X;
-                break;
-                case HIROP_SUB:
-                    if (RegNr == 0)
-                      X = 0;
-                    else
-                      OpStack[RegNr - 1].Operand -= X;
-                break;
-                case HIROP_MUL:
-                    if (RegNr == 0)
-                      X = X * X;
-                    else
-                      OpStack[RegNr - 1].Operand *= X;
-                break;
-                case HIROP_DIV:
-                    if (RegNr == 0)
-                      X = 1;
-                    else if (X == 0.0)
-                      SetErrorState(false);
-                    else
-                      OpStack[RegNr - 1].Operand /= X;
-                break;
-                  } /*switch*/
-              /* all done */
+                    {
+                    case HIROP_STO:
+                        if (RegNr != 0)
+                            OpStack[RegNr - 1].Operand = new Number(X);
+                        break;
+                    case HIROP_RCL:
+                        if (RegNr != 0)
+                            SetX(OpStack[RegNr - 1].Operand);
+                        break;
+                    case HIROP_ADD:
+                        if (RegNr == 0)
+                            X.add(X);
+                        else
+                            OpStack[RegNr - 1].Operand.add(X);
+                        break;
+                    case HIROP_SUB:
+                        if (RegNr == 0)
+                            X.set(0);
+                        else
+                            OpStack[RegNr - 1].Operand.sub(X);
+                        break;
+                    case HIROP_MUL:
+                        if (RegNr == 0)
+                            X.x2();
+                        else
+                            OpStack[RegNr - 1].Operand.mult(X);
+                        break;
+                    case HIROP_DIV:
+                        if (RegNr == 0)
+                            X.set(1);
+                        else
+                            OpStack[RegNr - 1].Operand.div(X);
+
+                        if (X.isError())
+                            SetErrorState(false);
+                        break;
+                    } /*switch*/
+                /* all done */
                 OK = true;
               }
             while (false);
@@ -1705,26 +1552,24 @@ public class State
 
             if (RegNr >= 5 && RegNr <= 8)
                 {
-                    final int MaxPrec = 15; /* fudge for roundoff caused by binary versus decimal arithmetic */
-                    final double OpVal = OpStack[RegNr - 1].Operand;
-                    final double StackVal = OpVal *
-                        (OpVal < 10 ? 100 : (OpVal < 100 ? 10 : (OpVal < 100 ? 1 : 0.1)));
-                    final double IntPart = Math.floor(Math.abs(Arith.RoundTo(StackVal, MaxPrec)));
-                    final double FraPart = Arith.RoundTo
-                        ((Math.abs(StackVal) - IntPart) * Math.signum(StackVal),
-                         Math.max(MaxPrec - Arith.FiguresBeforeDecimal(StackVal, 0), 0));
-                    double Value = Math.floor(Math.abs(Arith.RoundTo(FraPart * 1e10, MaxPrec)));
+                    final Number Factor = new Number(1e10);
+                    Number OpVal = new Number(OpStack[RegNr - 1].Operand);
+
+                    if (OpVal.compareTo(10) < 0)
+                        OpVal.mult(100);
+                    else if (OpVal.compareTo(100) < 0)
+                        OpVal.mult(10);
+                    else if (OpVal.compareTo(1000) >= 0)  // ??PO was 100 again in previous code (and mult(1))
+                        OpVal.div(10);
+
+                    OpVal.fracPart();
+                    OpVal.mult(Factor);
+                    OpVal.abs();
+                    OpVal.intPart();
 
                     final int ColStart = (RegNr - 5) * 5;
 
-                    for (int i = 5;;)
-                        {
-                            if (i == 0)
-                                break;
-                            --i;
-                            PrintRegister[i + ColStart] = (byte)(Value % 100);
-                            Value /= 100;
-                        } /*for*/
+                    SetPrintRegister(ColStart, OpVal.getInt());
                 }
 
             if (!OK)
@@ -1745,40 +1590,35 @@ public class State
                 (RegOffset + STATSREG_LAST) % 100 < MaxMemories;
       } /*StatsRegsAvailable*/
 
-    double StatsSlope()
+    Number StatsSlope()
       /* estimated slope from linear regression, used in a lot of other results. */
       {
-        double Result;
+        Number Result;
         if (StatsRegsAvailable())
           {
-            Result =
-                    (
-                        Memory[(RegOffset + STATSREG_SIGMAXY) % 100]
-                    -
-                            Memory[(RegOffset + STATSREG_SIGMAX) % 100]
-                        *
-                            Memory[(RegOffset + STATSREG_SIGMAY) % 100]
-                        /
-                            Memory[(RegOffset + STATSREG_N) % 100]
-                    )
-                /
-                    (
-                        Memory[(RegOffset + STATSREG_SIGMAX2) % 100]
-                    -
-                            Memory[(RegOffset + STATSREG_SIGMAX) % 100]
-                        *
-                            Memory[(RegOffset + STATSREG_SIGMAX) % 100]
-                        /
-                            Memory[(RegOffset + STATSREG_N) % 100]
-                    );
+              Number C1 = new Number (Memory[(RegOffset + STATSREG_SIGMAX) % 100]);
+              C1.mult(Memory[(RegOffset + STATSREG_SIGMAY) % 100]);
+              C1.div(Memory[(RegOffset + STATSREG_N) % 100]);
+              C1.negate();
+              C1.add(Memory[(RegOffset + STATSREG_SIGMAXY) % 100]);
+
+              Number C2 = new Number (Memory[(RegOffset + STATSREG_SIGMAX) % 100]);
+              C2.x2();
+              C2.div(Memory[(RegOffset + STATSREG_N) % 100]);
+              C2.negate();
+              C2.add(Memory[(RegOffset + STATSREG_SIGMAX2) % 100]);
+
+              Result = C1;
+              Result.div(C2);
           }
         else
           {
             SetErrorState(true);
-            Result = Double.NaN;
+            Result = new Number();
+            //???PO what to do if stats regs not available
+            //???PO Result = Double.NaN;
           } /*if*/
-        return
-            Result;
+        return Result;
       } /*StatsSlope*/
 
     public void SpecialOp
@@ -1799,22 +1639,22 @@ public class State
                     if (OpNr >= MaxMemories)
                         break;
                     // if Memory[OpNr] is negative, do nothing, no error
-                    if (Memory[OpNr] < 0.0)
+                    if (Memory[OpNr].getSignum() < 0)
                       {
                         OK = true;
                         break;
                       }
-                    OpNr = (int)Arith.AbsIntPart(Memory[OpNr]);
+                    OpNr = (int)Memory[OpNr].getInt();
                   } /*if*/
                 if (OpNr >= 20 && OpNr < 30)
                   {
-                    Memory[OpNr - 20] += 1.0;
+                    Memory[OpNr - 20].add(Number.ONE);
                     OK = true;
                     break;
                   } /*if*/
                 if (OpNr >= 30 && OpNr < 40)
                   {
-                    Memory[OpNr - 30] -= 1.0;
+                    Memory[OpNr - 30].sub(Number.ONE);
                     OK = true;
                     break;
                   } /*if*/
@@ -1833,33 +1673,30 @@ public class State
                 case 4:
                       {
                         final int ColStart = (OpNr - 1) * 5;
-                        long Contents = (long)Arith.AbsIntPart(X);
+                        long Contents = (long)Math.abs(X.getInt());
 
                         // emulate the HIR register (OP 01 use HIR 05, 02 -> 06, 03 -> 07 and 04 -> 08) */
 
                         if (OpStack[OpNr + 3] == null)
-                            OpStack[OpNr + 3] = new OpStackEntry(0, OpNr, 0);
+                            OpStack[OpNr + 3] = new OpStackEntry(null, OpNr, 0);
 
-                        OpStack[OpNr + 3].Operand = X / 1e12;
+                        final Number E12 = new Number(1e12);
+                        OpStack[OpNr + 3].Operand = new Number(X);
+                        OpStack[OpNr + 3].Operand.div(E12);
 
                         /* manual says fractional part of display is discarded as a side-effect,
                            tested on a real TI-59 */
 
-                        SetX(Contents);
+                        X.intPart();
+                        X.abs();
+                        SetX(X);
 
                         // but the decimal are considered for printing (just spaces)
 
                         if (CurNrDecimals != -1)
                             Contents = Contents * (long)Math.pow (10, CurNrDecimals);
 
-                        for (int i = 5;;)
-                          {
-                            if (i == 0)
-                                break;
-                            --i;
-                            PrintRegister[i + ColStart] = (byte)(Contents % 100);
-                            Contents /= 100;
-                          } /*for*/
+                        SetPrintRegister (ColStart, Contents);
                       }
                     OK = true;
                 break;
@@ -1878,7 +1715,7 @@ public class State
                     if (Global.Print != null)
                       {
                         Enter();
-                        final int PlotX = (int)X;
+                        final int PlotX = (int)X.getInt();
                         if (PlotX >= 0 && PlotX < Printer.CharColumns)
                           {
                             final byte[] Plot = new byte[Printer.CharColumns];
@@ -1933,146 +1770,149 @@ public class State
                     OK = true;
                 break;
                 case 10:
-                    SetX(Math.signum(X));
+                    X.signum();
+                    SetX(X);
                     OK = true;
                 break;
                 case 11:
-                  /* sample variance */
+                    /* sample variance */
                     if (StatsRegsAvailable())
                       {
-                        T =
-                                    Memory[(RegOffset + STATSREG_SIGMAX2) % 100]
-                                /
-                                    Memory[(RegOffset + STATSREG_N) % 100]
-                            -
-                                    Memory[(RegOffset + STATSREG_SIGMAX) % 100]
-                                *
-                                    Memory[(RegOffset + STATSREG_SIGMAX) % 100]
-                                /
-                                    (
-                                        Memory[(RegOffset + STATSREG_N) % 100]
-                                    *
-                                        Memory[(RegOffset + STATSREG_N) % 100]
-                                    );
-                        SetX
-                          (
-                                    Memory[(RegOffset + STATSREG_SIGMAY2) % 100]
-                                /
-                                    Memory[(RegOffset + STATSREG_N) % 100]
-                            -
-                                    Memory[(RegOffset + STATSREG_SIGMAY) % 100]
-                                *
-                                    Memory[(RegOffset + STATSREG_SIGMAY) % 100]
-                                /
-                                    (
-                                        Memory[(RegOffset + STATSREG_N) % 100]
-                                    *
-                                        Memory[(RegOffset + STATSREG_N) % 100]
-                                    )
-                          );
-                        OK = true;
+                          final Number N_SIGMAX2 = Memory[(RegOffset + STATSREG_SIGMAX2) % 100];
+                          final Number N_SIGMAY2 = Memory[(RegOffset + STATSREG_SIGMAY2) % 100];
+                          final Number N_SIGMAX  = Memory[(RegOffset + STATSREG_SIGMAX) % 100];
+                          final Number N_SIGMAY  = Memory[(RegOffset + STATSREG_SIGMAY) % 100];
+                          final Number N_N       = Memory[(RegOffset + STATSREG_N) % 100];
+
+                          Number N_N_2 = new Number(N_N);
+                          N_N_2.x2();
+
+                          Number C1 = new Number(N_SIGMAX);
+                          C1.x2();
+                          C1.div(N_N_2);
+
+                          Number C2 = new Number(N_SIGMAY);
+                          C2.x2();
+                          C2.div(N_N_2);
+
+                          T = new Number(N_SIGMAX2);
+                          T.div(N_N);
+                          T.sub(C1);
+
+                          X = new Number(N_SIGMAY2);
+                          X.div(N_N);
+                          X.sub(C2);
+
+                          SetX(X);
+                          OK = true;
                       } /*if*/
                 break;
                 case 12:
-                  /* slope and intercept */
+                    /* slope and intercept */
                     if (StatsRegsAvailable())
                       {
-                        final double m = StatsSlope();
-                        T = m;
-                        SetX
-                          (
-                                (
-                                    Memory[(RegOffset + STATSREG_SIGMAY) % 100]
-                                -
-                                    m * Memory[(RegOffset + STATSREG_SIGMAX) % 100]
-                                )
-                            /
-                                Memory[(RegOffset + STATSREG_N) % 100]
-                          );
-                        OK = true;
+                          final Number N_SIGMAX  = Memory[(RegOffset + STATSREG_SIGMAX) % 100];
+                          final Number N_SIGMAY  = Memory[(RegOffset + STATSREG_SIGMAY) % 100];
+                          final Number N_N       = Memory[(RegOffset + STATSREG_N) % 100];
+                          final Number m = StatsSlope();
+
+                          T = m;
+
+                          Number C1 = new Number(m);
+                          C1.mult(N_SIGMAX);
+
+                          X = new Number(N_SIGMAY);
+                          X.sub(C1);
+                          X.div(N_N);
+                          SetX(X);
+                          OK = true;
                       } /*if*/
                 break;
                 case 13:
-                  /* correlation coefficient */
+                    /* correlation coefficient */
                     if (StatsRegsAvailable())
                       {
-                        SetX
-                          (
-                                StatsSlope()
-                            *
-                                Math.sqrt
-                                  (
-                                        Memory[(RegOffset + STATSREG_SIGMAX2) % 100]
-                                    -
-                                            Memory[(RegOffset + STATSREG_SIGMAX) % 100]
-                                        *
-                                            Memory[(RegOffset + STATSREG_SIGMAX) % 100]
-                                        /
-                                            Memory[(RegOffset + STATSREG_N) % 100]
-                                  )
-                            /
-                                Math.sqrt
-                                  (
-                                        Memory[(RegOffset + STATSREG_SIGMAY2) % 100]
-                                    -
-                                            Memory[(RegOffset + STATSREG_SIGMAY) % 100]
-                                        *
-                                            Memory[(RegOffset + STATSREG_SIGMAY) % 100]
-                                        /
-                                            Memory[(RegOffset + STATSREG_N) % 100]
-                                  )
-                          );
-                        OK = true;
+                          final Number N_SIGMAX2 = Memory[(RegOffset + STATSREG_SIGMAX2) % 100];
+                          final Number N_SIGMAY2 = Memory[(RegOffset + STATSREG_SIGMAY2) % 100];
+                          final Number N_SIGMAX  = Memory[(RegOffset + STATSREG_SIGMAX) % 100];
+                          final Number N_SIGMAY  = Memory[(RegOffset + STATSREG_SIGMAY) % 100];
+                          final Number N_N       = Memory[(RegOffset + STATSREG_N) % 100];
+                          final Number m = StatsSlope();
+
+                          Number C1 = new Number (N_SIGMAX);
+                          C1.x2();
+                          C1.div(N_N);
+                          C1.negate();
+                          C1.add(N_SIGMAX2);
+                          C1.sqrt();
+
+                          Number C2 = new Number (N_SIGMAY);
+                          C2.x2();
+                          C2.div(N_N);
+                          C2.negate();
+                          C2.add(N_SIGMAY2);
+                          C2.sqrt();
+
+                          X = m;
+                          X.mult(C1);
+                          X.div(C2);
+
+                          SetX(X);
+                          OK = true;
                       } /*if*/
                 break;
                 case 14:
-                  /* estimated y from x */
+                    /* estimated y from x */
                     if (StatsRegsAvailable())
                       {
-                        final double m = StatsSlope();
-                        SetX
-                          (
-                                m * X
-                            +
-                                    (
-                                        Memory[(RegOffset + STATSREG_SIGMAY) % 100]
-                                    -
-                                        m * Memory[(RegOffset + STATSREG_SIGMAX) % 100]
-                                    )
-                                /
-                                    Memory[(RegOffset + STATSREG_N) % 100]
-                          );
-                        OK = true;
+                          final Number N_SIGMAX  = Memory[(RegOffset + STATSREG_SIGMAX) % 100];
+                          final Number N_SIGMAY  = Memory[(RegOffset + STATSREG_SIGMAY) % 100];
+                          final Number N_N       = Memory[(RegOffset + STATSREG_N) % 100];
+                          final Number m = StatsSlope();
+
+                          Number C1 = new Number(N_SIGMAX);
+                          C1.mult(m);
+                          C1.negate();
+                          C1.add(N_SIGMAY);
+                          C1.div(N_N);
+
+                          X.mult(m);
+                          X.add(C1);
+                          SetX(X);
+                          OK = true;
                       } /*if*/
                 break;
                 case 15:
-                  /* estimated x from y */
+                    /* estimated x from y */
                     if (StatsRegsAvailable())
                       {
-                        final double m = StatsSlope();
-                        SetX
-                          (
-                                (
-                                    X
-                                -
-                                        (
-                                            Memory[(RegOffset + STATSREG_SIGMAY) % 100]
-                                        -
-                                            m * Memory[(RegOffset + STATSREG_SIGMAX) % 100]
-                                        )
-                                    /
-                                        Memory[(RegOffset + STATSREG_N) % 100]
-                                )
-                            /
-                                m
-                          );
-                        OK = true;
+                          final Number N_SIGMAX  = Memory[(RegOffset + STATSREG_SIGMAX) % 100];
+                          final Number N_SIGMAY  = Memory[(RegOffset + STATSREG_SIGMAY) % 100];
+                          final Number N_N       = Memory[(RegOffset + STATSREG_N) % 100];
+                          final Number m = StatsSlope();
+
+                          Number C1 = new Number(N_SIGMAX);
+                          C1.mult(m);
+                          C1.negate();
+                          C1.add(N_SIGMAY);
+                          C1.div(N_N);
+
+                          X.sub(C1);
+                          X.div(m);
+
+                          SetX(X);
+                          OK = true;
                       } /*if*/
                 break;
                 case 17:
                   /* not implemented, fall through */
                 case 16:
-                    SetX(MaxProgram - 1.0 + (MaxMemories - 1.0) / 100.0);
+                    Number N = new Number(MaxMemories);
+                    N.sub(1);
+                    N.div(100);
+                    N.add(MaxProgram);
+                    N.sub(1);
+                    SetX(N);
                     OK = true;
                 break;
                 case 18:
@@ -2092,44 +1932,43 @@ public class State
                       } /*if*/
                     OK = true;
                 break;
-                case 50: /* extension! */
-                    SetX(System.currentTimeMillis() / 1000.0);
+                case 50: /* extension! TIME IN SECONDS */
+                    X.set(System.currentTimeMillis() / 1000.0);
+                    SetX(X);
                     OK = true;
                 break;
-                case 51: /* extension! */
+                case 51: /* extension! RANDOM */
                       {
                         byte[] V = new byte[7];
                         Random.nextBytes(V);
-                        SetX
-                          (
-                                (double)(
-                                    ((long)V[0] & 255)
-                                |
-                                    ((long)V[1] & 255) << 8
-                                |
-                                    ((long)V[2] & 255) << 16
-                                |
-                                    ((long)V[3] & 255) << 24
-                                |
-                                    ((long)V[4] & 255) << 32
-                                |
-                                    ((long)V[5] & 255) << 40
-                                |
-                                    ((long)V[6] & 255) << 48
-                                )
-                            /
-                                (double)0x0100000000000000L
-                          );
+                        X.set((double)(((long)V[0] & 255)
+                                       |
+                                       ((long)V[1] & 255) << 8
+                                       |
+                                       ((long)V[2] & 255) << 16
+                                       |
+                                       ((long)V[3] & 255) << 24
+                                       |
+                                       ((long)V[4] & 255) << 32
+                                       |
+                                       ((long)V[5] & 255) << 40
+                                       |
+                                       ((long)V[6] & 255) << 48
+                                       )
+                              /
+                              (double)0x0100000000000000L);
+                        SetX(X);
                       }
                     OK = true;
                 break;
-                case 52: /* extension! */
-                    SetX(RegOffset);
+                case 52: /* extension! DISPLAY REG OFFSET */
+                    X.set(RegOffset);
+                    SetX(X);
                     OK = true;
                 break;
-                case 53: /* extension! */
+                case 53: /* extension! SET REG OFFSET */
                       {
-                        final int NewRegOffset = (int)Math.round(X);
+                        final int NewRegOffset = (int)X.getInt();
                         if (NewRegOffset >= 0 && NewRegOffset < 100)
                           {
                             RegOffset = NewRegOffset;
@@ -2137,6 +1976,17 @@ public class State
                           } /*if*/
                       }
                 break;
+                case 99: /* extension! Test */
+                    int Result = Global.Test.Run();
+
+                    X.set(Result);
+                    SetX(X);
+
+                    if (Result < 0)
+                        SetErrorState(false);
+
+                    OK = true;
+                    break;
                   } /*switch*/
               }
             while (false);
@@ -2152,34 +2002,46 @@ public class State
         Enter();
         if (StatsRegsAvailable())
           {
-            if (InvState)
-              {
-              /* remove sample */
-                Memory[(RegOffset + STATSREG_SIGMAY) % 100] -= X;
-                Memory[(RegOffset + STATSREG_SIGMAY2) % 100] -= X * X;
-                Memory[(RegOffset + STATSREG_N) % 100] -= 1.0;
-                Memory[(RegOffset + STATSREG_SIGMAX) % 100] -= T;
-                Memory[(RegOffset + STATSREG_SIGMAX2) % 100] -= T * T;
-                Memory[(RegOffset + STATSREG_SIGMAXY) % 100] -= X * T;
-                T -= 1.0;
-              }
-            else
-              {
-              /* accumulate sample */
-                Memory[(RegOffset + STATSREG_SIGMAY) % 100] += X;
-                Memory[(RegOffset + STATSREG_SIGMAY2) % 100] += X * X;
-                Memory[(RegOffset + STATSREG_N) % 100] += 1.0;
-                Memory[(RegOffset + STATSREG_SIGMAX) % 100] += T;
-                Memory[(RegOffset + STATSREG_SIGMAX2) % 100] += T * T;
-                Memory[(RegOffset + STATSREG_SIGMAXY) % 100] += X * T;
-                T += 1.0;
-              } /*if*/
-            SetX(Memory[(RegOffset + STATSREG_N) % 100]);
+              Number X2 = new Number(X);
+              X2.x2();
+
+              Number T2 = new Number(T);
+              T2.x2();
+
+              Number XT = new Number(X);
+              XT.mult(T);
+
+              if (InvState)
+                  {
+                      /* remove sample */
+                      Memory[(RegOffset + STATSREG_SIGMAY) % 100].sub(X);
+                      Memory[(RegOffset + STATSREG_SIGMAY2) % 100].sub(X2);
+                      Memory[(RegOffset + STATSREG_N) % 100].sub(1);
+                      Memory[(RegOffset + STATSREG_SIGMAX) % 100].sub(T);
+                      Memory[(RegOffset + STATSREG_SIGMAX2) % 100].sub(T2);
+                      Memory[(RegOffset + STATSREG_SIGMAXY) % 100].sub(XT);
+
+                      T.sub(1);
+                  }
+              else
+                  {
+                      /* accumulate sample */
+                      Memory[(RegOffset + STATSREG_SIGMAY) % 100].add(X);
+                      Memory[(RegOffset + STATSREG_SIGMAY2) % 100].add(X2);
+                      Memory[(RegOffset + STATSREG_N) % 100].add(1);
+                      Memory[(RegOffset + STATSREG_SIGMAX) % 100].add(T);
+                      Memory[(RegOffset + STATSREG_SIGMAX2) % 100].add(T2);
+                      Memory[(RegOffset + STATSREG_SIGMAXY) % 100].add(XT);
+
+                      T.add(1);
+                  } /*if*/
+
+              SetX(Memory[(RegOffset + STATSREG_N) % 100]);
           }
         else
-          {
-            SetErrorState(true);
-          } /*if*/
+            {
+                SetErrorState(true);
+            } /*if*/
       } /*StatsSum*/
 
     public void StatsResult()
@@ -2188,54 +2050,49 @@ public class State
           {
             if (InvState)
               {
-              /* estimated population standard deviation */
-                T =
-                    Math.sqrt
-                        (
-                            (
-                                Memory[(RegOffset + STATSREG_SIGMAX2) % 100]
-                            -
-                                    Memory[(RegOffset + STATSREG_SIGMAX) % 100]
-                                *
-                                    Memory[(RegOffset + STATSREG_SIGMAX) % 100]
-                                /
-                                    Memory[(RegOffset + STATSREG_N) % 100]
-                            )
-                        /
-                            (Memory[(RegOffset + STATSREG_N) % 100] - 1.0)
-                        );
-                SetX
-                  (
-                    Math.sqrt
-                        (
-                            (
-                                Memory[(RegOffset + STATSREG_SIGMAY2) % 100]
-                            -
-                                    Memory[(RegOffset + STATSREG_SIGMAY) % 100]
-                                *
-                                    Memory[(RegOffset + STATSREG_SIGMAY) % 100]
-                                /
-                                    Memory[(RegOffset + STATSREG_N) % 100]
-                            )
-                        /
-                            (Memory[(RegOffset + STATSREG_N) % 100] - 1.0)
-                        )
-                  );
+                  final Number N_SIGMAX2 = Memory[(RegOffset + STATSREG_SIGMAX2) % 100];
+                  final Number N_SIGMAY2 = Memory[(RegOffset + STATSREG_SIGMAY2) % 100];
+                  final Number N_SIGMAX  = Memory[(RegOffset + STATSREG_SIGMAX) % 100];
+                  final Number N_SIGMAY  = Memory[(RegOffset + STATSREG_SIGMAY) % 100];
+                  final Number N_N       = Memory[(RegOffset + STATSREG_N) % 100];
+
+                  Number N_SIGMAX_2 = new Number(N_SIGMAX);
+                  N_SIGMAX_2.x2();
+                  N_SIGMAX_2.div(N_N);
+
+                  Number N_SIGMAY_2 = new Number(N_SIGMAY);
+                  N_SIGMAY_2.x2();
+                  N_SIGMAY_2.div(N_N);
+
+                  Number N_N1 = new Number(N_N);
+                  N_N1.sub(1);
+
+                  T = new Number(N_SIGMAX2);
+                  T.sub(N_SIGMAX_2);
+                  T.div(N_N1);
+                  T.sqrt();
+
+                  X = new Number(N_SIGMAY2);
+                  X.sub(N_SIGMAY_2);
+                  X.div(N_N1);
+                  X.sqrt();
+
+                  SetX(X);
               }
             else
               {
-              /* sample mean */
-                T =
-                        Memory[(RegOffset + STATSREG_SIGMAX) % 100]
-                    /
-                        Memory[(RegOffset + STATSREG_N) % 100];
-                SetX
-                  (
-                        Memory[(RegOffset + STATSREG_SIGMAY) % 100]
-                    /
-                        Memory[(RegOffset + STATSREG_N) % 100]
-                  );
-              } /*if*/
+                  final Number N_SIGMAX  = Memory[(RegOffset + STATSREG_SIGMAX) % 100];
+                  final Number N_SIGMAY  = Memory[(RegOffset + STATSREG_SIGMAY) % 100];
+                  final Number N_N       = Memory[(RegOffset + STATSREG_N) % 100];
+
+                  T = new Number(N_SIGMAX);
+                  T.div(N_N);
+
+                  X = new Number(N_SIGMAY);
+                  X.div(N_N);
+
+                  SetX(X);
+              }
           }
         else
           {
@@ -2248,7 +2105,7 @@ public class State
       {
         boolean OK = true;
         boolean EOF = true;
-        double Value;
+        Number Value;
         do /*once*/
           {
             if (Import == null)
@@ -2829,7 +2686,7 @@ public class State
     public void StartRegisterListing()
       {
         Enter();
-        StartTask(new RegisterLister((int)X), false);
+        StartTask(new RegisterLister((int)X.getInt()), false);
       } /*StartRegisterListing*/
 
     public void StartProgramListing()
@@ -2958,7 +2815,7 @@ public class State
                 final int Reg = (GetProg(Executing) + RegOffset) % 100;
                 if (Reg >= 0 && Reg < MaxMemories)
                   {
-                    Result = (int)Memory[Reg];
+                    Result = (int)Memory[Reg].getInt();
                     if (Result < 0 || Result >= Bank[RunBank].Program.length)
                       {
                         Result = -1;
@@ -3013,7 +2870,7 @@ public class State
                 final int Reg = (GetProg(Executing) + RegOffset) % 100;
                 if (Reg >= 0 && Reg < MaxMemories)
                   {
-                    Result = (int)Memory[Reg];
+                    Result = (int)Memory[Reg].getInt();
                     OK = Result >= 0 && Result < MaxMemories;
                     if (!OK)
                       {
@@ -3074,7 +2931,7 @@ public class State
                     Loc = (Loc + RegOffset) % 100;
                     if (Loc >= MaxMemories)
                         break;
-                    Loc = (int)Memory[Loc];
+                    Loc = (int)Memory[Loc].getInt();
                   }
                 else if (LocType == TRANSFER_LOC_SYMBOLIC)
                   {
@@ -3087,7 +2944,8 @@ public class State
                     break;
                 if (Type == TRANSFER_TYPE_LEA) /* extension! */
                   {
-                    SetX(Loc);
+                    X.set(Loc);
+                    SetX(X);
                   }
                 else
                   {
@@ -3195,7 +3053,7 @@ public class State
                 FlagNr = (FlagNr + RegOffset) % 100;
                 if (FlagNr < MaxMemories)
                   {
-                    FlagNr = (int)Memory[FlagNr];
+                    FlagNr = (int)Memory[FlagNr].getInt();
                   }
                 else
                   {
@@ -3229,7 +3087,7 @@ public class State
                 FlagNr = (FlagNr + RegOffset) % 100;
                 if (FlagNr < MaxMemories)
                   {
-                    FlagNr = (int)Memory[FlagNr];
+                    FlagNr = (int)Memory[FlagNr].getInt();
                   }
                 else
                   {
@@ -3283,14 +3141,14 @@ public class State
               (
                 InvState ?
                     Greater ?
-                        X < T
+                        X.compareTo(T) < 0
                     :
-                        X != T
+                        X.compareTo(T) != 0
                 :
                     Greater ?
-                        X >= T
+                        X.compareTo(T) >= 0
                     :
-                        X == T
+                        X.compareTo(T) == 0
               )
               {
                 Transfer
@@ -3331,7 +3189,7 @@ public class State
               {
                 if (Reg < MaxMemories)
                   {
-                    Reg = ((int)Memory[Reg] + RegOffset) % 100;
+                    Reg = ((int)Memory[Reg].getInt() + RegOffset) % 100;
                   }
                 else
                   {
@@ -3340,9 +3198,15 @@ public class State
               } /*if*/
             if (Reg >= 0 && Reg < MaxMemories)
               {
-                Memory[Reg] = Math.max(Math.abs(Memory[Reg]) - 1.0, 0.0) * Math.signum(Memory[Reg]);
+                Number N = new Number(Memory[Reg]);
+                int Sign = N.getSignum();
+                N.abs();
+                N.sub(1);
+                N.max(0);
+                N.mult(Sign);
+                Memory[Reg] = N;
                 // do not jump if Target is on-byte value 51 (encoded as 9951)
-                if (InvState == (Memory[Reg] == 0.0) && Target != 9951)
+                if (InvState == (Memory[Reg].getSignum() == 0) && Target != 9951)
                   {
                     Transfer
                       (
@@ -3423,7 +3287,7 @@ public class State
                     Log();
                 break;
                 case 29: /*CP*/
-                    T = 0.0;
+                    T.set(Number.ZERO);
                 break;
               /* 20 same as 25 */
               /* 31 invalid */

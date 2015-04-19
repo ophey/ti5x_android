@@ -3,6 +3,7 @@ package net.obry.ti5x;
     ti5x calculator emulator -- data exporter context
 
     Copyright 2011 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+    Copyright 2015 Pascal Obry <pascal@obry.net>.
 
     This program is free software: you can redistribute it and/or modify it under
     the terms of the GNU General Public License as published by the Free Software
@@ -166,19 +167,14 @@ public class Exporter
 
     public void WriteNum
       (
-        double Num
+        Number Num
       )
       /* writes a number to the export data file in a standard form that can
         be read in again by myself or other programs. */
       {
         if (PrintOut != null)
           {
-            PrintOut.printf
-              (
-                Global.StdLocale,
-                String.format(Global.StdLocale, "%%.%de\n", Global.NrSigFigures),
-                Num
-              );
+            PrintOut.printf (Num.formatString(Global.StdLocale, Global.NrSigFigures));
           } /*if*/
       } /*WriteNum*/
 

@@ -3,6 +3,7 @@ package net.obry.ti5x;
     ti5x calculator emulator -- mainline
 
     Copyright 2011, 2012 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+    Copyright 2015 Pascal Obry <pascal@obry.net>.
 
     This program is free software: you can redistribute it and/or modify it under
     the terms of the GNU General Public License as published by the Free Software
@@ -738,8 +739,7 @@ public class Main extends android.app.Activity
                         boolean OK = false;
                         do /*once*/
                           {
-                            double X
-                                = 0.0; /* sigh */
+                            Number X = new Number();
                             String NumString;
                               {
                                 final CharSequence NumChars = Clipboard.getText();
@@ -751,7 +751,7 @@ public class Main extends android.app.Activity
                               {
                                 try
                                   {
-                                    X = Double.parseDouble(NumString);
+                                    X = new Number(NumString);
                                     OK = true;
                                     break;
                                   }
@@ -1356,6 +1356,7 @@ public class Main extends android.app.Activity
         Global.Calc = new State(this);
         Global.Import = new Importer();
         Global.Export = new Exporter(this);
+        Global.Test = new Tester();
         BuildActivityResultActions();
         Clipboard = (android.text.ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
         registerForContextMenu(Global.Disp);

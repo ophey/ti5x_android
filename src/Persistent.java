@@ -3,6 +3,7 @@ package net.obry.ti5x;
     Saving/loading of programs, program libraries and calculator state
 
     Copyright 2011 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+    Copyright 2015 Pascal Obry <pascal@obry.net>.
 
     This program is free software: you can redistribute it and/or modify it under
     the terms of the GNU General Public License as published by the Free Software
@@ -159,28 +160,20 @@ public class Persistent
         POut.printf(Global.StdLocale, "<param name=\"%s\" value=\"%d\"/>\n", Name, Value);
       } /*SaveInt*/
 
-    static void SaveDouble
+    static void SaveNumber
       (
         java.io.PrintStream POut,
         String Name,
-        double Value,
+        Number Value,
         int Indent
       )
       {
         POut.printf(Global.StdLocale, String.format(Global.StdLocale, "%%%ds", Indent), " ");
         POut.printf
-          (
-            Global.StdLocale,
-            String.format
-              (
-                Global.StdLocale,
-                "<param name=\"%%s\" value=\"%%.%de\"/>\n",
-                Global.NrSigFigures
-              ),
-            Name,
-            Value
-          );
-      } /*SaveDouble*/
+          ("<param name=\"%s\" value=\""
+           + Value.formatString(Global.StdLocale, Global.NrSigFigures)
+           + "\"/>\n", Name);
+      } /*SaveNumber*/
 
     static boolean GetBool
       (
@@ -570,13 +563,13 @@ public class Persistent
                           );
                       } /*for*/
                     POut.println("        </opstack>");
-                    SaveDouble(POut, "X", Calc.X, 8);
-                    SaveDouble(POut, "T", Calc.T, 8);
+                    SaveNumber(POut, "X", Calc.X, 8);
+                    SaveNumber(POut, "T", Calc.T, 8);
                     SaveBool(POut, "learn_mode", Calc.ProgMode, 8);
                     POut.println("        <mem>");
                     for (int i = 0; i < Calc.Memory.length; ++i)
                       {
-                        POut.printf(Global.StdLocale, "            %.16e\n", Calc.Memory[i]);
+                        POut.printf("            %s\n", Calc.Memory[i].formatString(Global.StdLocale, 16));
                       } /*for*/
                     POut.println("        </mem>");
                     POut.print("        <feedback kind=\"");
@@ -953,11 +946,11 @@ public class Persistent
                       }
                     else if (Name == "X")
                       {
-                        Calc.X = GetDouble(Value);
+                        Calc.X = new Number(Value);
                       }
                     else if (Name == "T")
                       {
-                        Calc.T = GetDouble(Value);
+                        Calc.T = new Number(Value);
                       }
                     else if (Name == "learn_mode")
                       {
@@ -1089,7 +1082,7 @@ public class Persistent
                       } /*if*/
                     Calc.OpStack[Calc.OpStackNext++] = new State.OpStackEntry
                       (
-                        GetDouble(attributes.getValue("opnd")),
+                        new Number(attributes.getValue("opnd")),
                         Op,
                         GetInt(attributes.getValue("parens"))
                       );
@@ -1269,7 +1262,7 @@ public class Persistent
                                     String.format(Global.StdLocale, "too many memories, only %d allowed", Calc.MaxMemories)
                                   );
                               } /*if*/
-                            Calc.Memory[Reg++] = GetDouble(ContentStr.substring(Start, i));
+                            Calc.Memory[Reg++] = new Number(ContentStr.substring(Start, i));
                           } /*if*/
                         if (i == ContentStr.length())
                             break;
