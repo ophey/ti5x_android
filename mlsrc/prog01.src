@@ -21,7 +21,14 @@ lbl clr
 
 lbl =
 ; self-test diagnostics
-; ???
+; use op 99 extension which runs a set of test, see class Tester
+  op 99
+; check for error condition
+  op 18          ; set flags 7 if no error
+  ifflg 7 Nop
+  r/s
+
+lbl Nop
 ; on success, print "MASTER" and print and display result "1"
     clr
     op 00
@@ -38,7 +45,7 @@ lbl =
 
 lbl write
 ; master library check, same as-above
-    gto =
+    gto Nop
 
 ;+
 ; function indirection with printing of inputs and outputs
