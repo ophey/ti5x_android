@@ -429,6 +429,40 @@ public class Tester
         return true;
     }
 
+    private boolean Test_15()
+    {
+        // commit: 9c9aa2d
+        Clear();
+
+        SetX(0);
+        Calc.MemoryOp (Calc.MEMOP_STO, 14, false);
+
+        SetX(14.1);
+        Calc.MemoryOp (Calc.MEMOP_STO, 00, false);
+
+        SetX(1);
+        Calc.MemoryOp (Calc.MEMOP_ADD, 00, true);
+
+        SetX(14.5);
+        Calc.MemoryOp (Calc.MEMOP_STO, 00, false);
+
+        SetX(1);
+        Calc.MemoryOp (Calc.MEMOP_ADD, 00, true);
+
+        SetX(14.9);
+        Calc.MemoryOp (Calc.MEMOP_STO, 00, false);
+
+        SetX(1);
+        Calc.MemoryOp (Calc.MEMOP_ADD, 00, true);
+
+        Calc.MemoryOp (Calc.MEMOP_RCL, 14, false);
+
+        if (!Calc.CurDisplay.equals("3."))
+            return false;
+
+        return true;
+    }
+
     public int Run()
     {
         Calc = Global.Calc;
@@ -448,6 +482,7 @@ public class Tester
         if (!Test_12()) return -12; Total++;
         if (!Test_13()) return -13; Total++;
         if (!Test_14()) return -14; Total++;
+        if (!Test_15()) return -15; Total++;
 
         return Total;
     }
