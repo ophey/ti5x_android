@@ -1602,36 +1602,28 @@ public class State
                 (RegOffset + STATSREG_LAST) % 100 < MaxMemories;
       } /*StatsRegsAvailable*/
 
-    Number StatsSlope()
+    private Number StatsSlope()
       /* estimated slope from linear regression, used in a lot of other results. */
       {
         Number Result;
-        if (StatsRegsAvailable())
-          {
-              Number C1 = new Number (Memory[(RegOffset + STATSREG_SIGMAX) % 100]);
-              C1.mult(Memory[(RegOffset + STATSREG_SIGMAY) % 100]);
-              C1.div(Memory[(RegOffset + STATSREG_N) % 100]);
-              C1.negate();
-              C1.add(Memory[(RegOffset + STATSREG_SIGMAXY) % 100]);
 
-              Number C2 = new Number (Memory[(RegOffset + STATSREG_SIGMAX) % 100]);
-              C2.x2();
-              C2.div(Memory[(RegOffset + STATSREG_N) % 100]);
-              C2.negate();
-              C2.add(Memory[(RegOffset + STATSREG_SIGMAX2) % 100]);
+        Number C1 = new Number (Memory[(RegOffset + STATSREG_SIGMAX) % 100]);
+        C1.mult(Memory[(RegOffset + STATSREG_SIGMAY) % 100]);
+        C1.div(Memory[(RegOffset + STATSREG_N) % 100]);
+        C1.negate();
+        C1.add(Memory[(RegOffset + STATSREG_SIGMAXY) % 100]);
 
-              Result = C1;
-              Result.div(C2);
-          }
-        else
-          {
-            SetErrorState(true);
-            Result = new Number();
-            //???PO what to do if stats regs not available
-            //???PO Result = Double.NaN;
-          } /*if*/
+        Number C2 = new Number (Memory[(RegOffset + STATSREG_SIGMAX) % 100]);
+        C2.x2();
+        C2.div(Memory[(RegOffset + STATSREG_N) % 100]);
+        C2.negate();
+        C2.add(Memory[(RegOffset + STATSREG_SIGMAX2) % 100]);
+
+        Result = C1;
+        Result.div(C2);
+
         return Result;
-      } /*StatsSlope*/
+      }
 
     public void SpecialOp
       (
