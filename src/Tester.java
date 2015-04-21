@@ -24,7 +24,8 @@ public class Tester
 {
     public static State Calc;
 
-    private final static String ERROR = "9.9999999 99";
+    private final static String  ERROR = "9.9999999 99";
+    private final static String mERROR = "-9.9999999 99";
 
     // helpers
 
@@ -286,7 +287,8 @@ public class Tester
         if (!Calc.InErrorState())
             return false;
 
-        Calc.CurState = 0;
+        Calc.CurState = Calc.ResultState;
+
         return true;
     }
 
@@ -392,6 +394,36 @@ public class Tester
         return true;
     }
 
+    private boolean Test_14()
+    {
+        // commit: 6c9cf8f
+        Clear();
+
+        SetX(0);
+        Calc.Log();
+
+        if (!Calc.CurDisplay.equals(mERROR))
+            return false;
+
+        if (!Calc.InErrorState())
+            return false;
+
+        Calc.CurState = Calc.ResultState;
+
+        SetX(-9);
+        Calc.Ln();
+
+        if (!Calc.CurDisplay.equals("2.197224577"))
+            return false;
+
+        if (!Calc.InErrorState())
+            return false;
+
+        Calc.CurState = Calc.ResultState;
+
+        return true;
+    }
+
     public int Run()
     {
         Calc = Global.Calc;
@@ -410,6 +442,7 @@ public class Tester
         if (!Test_11()) return -11; Total++;
         if (!Test_12()) return -12; Total++;
         if (!Test_13()) return -13; Total++;
+        if (!Test_14()) return -14; Total++;
 
         return Total;
     }
