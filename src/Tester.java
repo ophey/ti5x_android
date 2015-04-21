@@ -463,6 +463,24 @@ public class Tester
         return true;
     }
 
+    private boolean Test_16()
+    {
+        // commit: 194c46a
+        Clear();
+
+        Calc.Digit('1');
+        Calc.Operator(Calc.STACKOP_ADD);
+        Calc.PreviousOp = 85; // 85 is add button
+        Calc.Equals();
+
+        if (!Calc.InErrorState())
+            return false;
+
+        Calc.CurState = Calc.ResultState;
+
+        return true;
+    }
+
     public int Run()
     {
         Calc = Global.Calc;
@@ -483,6 +501,7 @@ public class Tester
         if (!Test_13()) return -13; Total++;
         if (!Test_14()) return -14; Total++;
         if (!Test_15()) return -15; Total++;
+        if (!Test_16()) return -16; Total++;
 
         return Total;
     }
