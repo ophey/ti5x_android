@@ -42,11 +42,16 @@ public class Tester
 
     public void Clear()
     {
-        Global.Calc.ClearMemories();
+        Calc.ClearMemories();
         Calc.InvState = false;
-        Calc.SetAngMode(Calc.ANG_DEG);
-        SetX(0);
-        SetT(0);
+        Calc.CurState = Calc.ResultState;
+        Calc.CurFormat = Calc.FORMAT_FIXED;
+        Calc.CurNrDecimals = -1;
+        Calc.CurAng = Calc.ANG_DEG;
+        Calc.OpStackNext = 0;
+        Calc.PreviousOp = -1;
+        Calc.ResetEntry();
+
     }
 
     private boolean Test_1()
