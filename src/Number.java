@@ -1,5 +1,5 @@
 /*
-    ti5x calculator emulator -- Number
+    ti5x calculator emulator -- BCD Number 13bits
 
     Copyright 2015 Pascal Obry <pascal@obry.net>.
 
@@ -17,86 +17,89 @@
 
 package net.obry.ti5x;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.math.MathContext;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 public class Number
 {
-    private double v = 0;
+    private BigDecimal v;
     private boolean error;
+    private final static MathContext mc = new MathContext(13, RoundingMode.HALF_DOWN);
 
     public static final int ANG_RAD  = 1;
     public static final int ANG_DEG  = 2;
     public static final int ANG_GRAD = 3;
-    public static final Number PI = new Number(Math.PI);
-    public static final Number ONE = new Number(1.0);
-    public static final Number TEN = new Number(10.0);
-    public static final Number ZERO  = new Number(0.0);
 
-    private final static double D_ZERO      = 0.0;
-    private final static double HALF_PI   = Math.PI / 2.0;
-    private final static double HALF3_PI  = 3.0 * Math.PI / 2.0;
-    private final static double TWO_PI    = Math.PI * 2.0;
-    private final static double FROM_DEG  = Math.PI / 180.0;
-    private final static double FROM_RAD  = Math.PI / 200.0;
-    private final static double ERROR     = 9.9999999e99;
-    private final static double LOG10     = Math.log(10);
-    private final static double LOG1000   = Math.log(1000);
+    public final static Number ZERO = new Number(0.0);
+    public final static Number ONE  = new Number(1.0);
+    public final static Number TEN  = new Number(10.0);
+    public final static Number PI   = new Number(Math.PI);
 
-    private final static Number N_PI       = new Number(Math.PI);
-    private final static Number N_HALF_PI  = new Number(HALF_PI);
-    private final static Number N_HALF3_PI = new Number(HALF3_PI);
-    private final static Number N_TWO_PI   = new Number(TWO_PI);
+    private final static BigDecimal B_ZERO   = new BigDecimal(0.0, mc);
+    private final static BigDecimal B_ONE    = new BigDecimal(1.0, mc);
+    private final static BigDecimal B_TEN    = new BigDecimal(10.0, mc);
+    private final static BigDecimal B_TWO    = new BigDecimal(2.0, mc);
+    private final static BigDecimal B_THREE  = new BigDecimal(3.0, mc);
+    private final static BigDecimal ERROR    = new BigDecimal(9.9999999e99, mc);
+    private final static BigDecimal HALF_PI  = new BigDecimal(Math.PI/2.0, mc);
+    private final static BigDecimal HALF3_PI = new BigDecimal(3.0*Math.PI/2.0, mc);
+    private final static BigDecimal TWO_PI   = new BigDecimal(Math.PI * 2.0, mc);
+    private final static BigDecimal FROM_DEG = new BigDecimal(Math.PI / 180.0, mc);
+    private final static BigDecimal FROM_RAD = new BigDecimal(Math.PI / 200.0, mc);
+
+    private static final double LOG10 = Math.log(10.0);
+    private static final double LOG2 = Math.log(2.0);
+
+    // constructors
 
     public Number()
     {
-        v = 0.0;
+        v = B_ZERO;
         error = false;
     }
 
     public Number(double d)
     {
-        v = d;
+        v = new BigDecimal(d, mc);
         error = false;
     }
 
     public Number(String s)
     {
-        v =  Double.parseDouble (s);
+        v =  new BigDecimal(s, mc);
         error = false;
     }
 
     public Number(Number n)
     {
-        this.v = n.v;
-        this.error = false;
+        v = n.v;
+        error = false;
     }
 
-    public boolean isEqual(Number d)
+    private Number(BigDecimal d)
     {
-        final double Epsilon = 1e-11;
+        v = d;
+        error = false;
+    }
 
-        if (Math.abs (v - d.v) <= Epsilon)
-            return true;
-        else
-            return false;
+    // state
+
+    public boolean isEqual(Number n)
+    {
+        return v.compareTo(n.v) == 0;
     }
 
     public int compareTo(Number n)
     {
-        if (v < n.v)
-            return -1;
-        else if (v > n.v)
-            return 1;
-        else
-            return 0;
+        return (int)v.compareTo(n.v);
     }
 
-    public int compareTo(int i)
+    public int compareTo(long i)
     {
-        if (v < (double)i)
-            return -1;
-        else if (v > (double)i)
-            return 1;
-        else
-            return 0;
+        return compareTo(new Number((double)i));
     }
 
     public boolean isError()
@@ -108,17 +111,19 @@ public class Number
 
     public boolean isNaN()
     {
-        return Double.isNaN(v);
+        return false;
     }
 
     public boolean isInfinite()
     {
-        return Double.isInfinite(v);
+        return false;
     }
+
+    // setters/getters
 
     public void set(double d)
     {
-        v = d;
+        v = new BigDecimal(d, mc);
         error = false;
     }
 
@@ -130,99 +135,95 @@ public class Number
 
     public void set(String s)
     {
-        v = Double.parseDouble (s);
+        v = new BigDecimal(s, mc);
         error = false;
     }
 
     public double get()
     {
-        return v;
+        return v.doubleValue();
     }
 
     public long getInt()
     {
-        final double Vabs = Math.abs(v);
-        final double Epsilon =
-            Vabs > 0.8
-            ? 1.0 / Math.pow (10, 15 - 3 - Math.min(1, Math.abs((int)Math.floor(Math.log(Vabs) / Math.log(10.0)))))
-            : 0.0;
-
-        return (long)Math.floor(Vabs + Epsilon);
+        return v.longValue();
     }
 
     public int getSignum()
     {
-        return (int)Math.signum(v);
+        return v.signum();
     }
+
+    // signs
 
     public void signum()
     {
-        v = Math.signum(v);
+        v = new BigDecimal(v.signum());
     }
 
     public void abs()
     {
-        v = Math.abs(v);
+        v = v.abs();
     }
 
     public void negate()
     {
-        v = -v;
+        v = v.negate();
     }
 
     public void min(long i)
     {
-        double N = (double)i;
-        if (v > N)
-            v = N;
+        BigDecimal N = new BigDecimal(i);
+        v = v.min(N);
     }
 
     public void max(long i)
     {
-        double N = (double)i;
-        if (v < N)
-            v = N;
+        BigDecimal N = new BigDecimal(i);
+        v = v.max(N);
+    }
+
+    // maths
+
+    public void add(Number n)
+    {
+        v = v.add(n.v, mc);
     }
 
     public void add(long i)
     {
-        v += (double)i;
-    }
-
-    public void add(Number n)
-    {
-        v += n.v;
+        add(new Number((double)i));
     }
 
     public void sub(Number n)
     {
-        v -= n.v;
+        v = v.subtract(n.v, mc);
     }
 
     public void sub(long i)
     {
-        v -= (double)i;
+        sub(new Number((double)i));
     }
 
     public void mult(Number n)
     {
-        v *= n.v;
+        v = v.multiply(n.v, mc);
     }
 
     public void mult(long i)
     {
-        v *= (double)i;
+        mult(new Number((double)i));
     }
 
     public void div(Number n)
     {
-        if (n.v == 0)
+        if (n.v.compareTo(B_ZERO) == 0)
         {
             v = ERROR;
             error = true;
         }
         else
-            v /= n.v;
+            v = v.divide(n.v, mc);
     }
 
     public void div(long i)
@@ -232,12 +233,12 @@ public class Number
 
     public void rem(Number n)
     {
-        v = Math.IEEEremainder(v, n.v);
+        v = v.remainder(n.v, mc);
     }
 
     public void rem(long i)
     {
-        v = Math.IEEEremainder(v, (double)i);
+        rem(new Number((double)i));
     }
 
     public void trigScale(int Angle)
@@ -245,7 +246,7 @@ public class Number
         v = trigScale2(Angle);
     }
 
-    private static double trigScale2(int Angle)
+    private static BigDecimal trigScale2(int Angle)
     {
         switch (Angle)
         {
@@ -254,23 +255,23 @@ public class Number
            case ANG_GRAD:
                return FROM_RAD;
            default:
-               return 1.0;
+               return B_ONE;
         }
     }
 
     private void NormalizeAngle(int Angle)
     {
-        v = v * trigScale2(Angle);
+        v = v.multiply(trigScale2(Angle), mc);
 
-        if (v < 0)
+        if (v.compareTo(B_ZERO) < 0)
         {
-            while (v < 0.0)
-                v += TWO_PI;
+            while (v.compareTo(B_ZERO) < 0.0)
+                v = v.add(TWO_PI, mc);
         }
-        else if (v >= TWO_PI)
+        else if (v.compareTo(TWO_PI) >= 0)
         {
-            while (v >= TWO_PI)
-                v -= TWO_PI;
+            while (v.compareTo(TWO_PI) >= 0)
+                v = v.subtract(TWO_PI, mc);
         }
     }
 
@@ -278,137 +279,178 @@ public class Number
     {
         NormalizeAngle(Angle);
 
-        v = Math.cos(v);
-        if (isEqual(ZERO))
-            v = 0;
+        if (v.compareTo(HALF_PI) == 0 || v.compareTo(HALF3_PI) == 0)
+            v = B_ZERO;
+        else
+            v = new BigDecimal(Math.cos(v.doubleValue()), mc);
     }
     public void acos(int Angle)
     {
-        v = Math.acos(v) / trigScale2(Angle);
+        v = new BigDecimal(Math.acos(v.doubleValue()), mc).divide(trigScale2(Angle), mc);
     }
 
     public void sin(int Angle)
     {
         NormalizeAngle(Angle);
 
-        v = Math.sin(v);
-        if (isEqual(ZERO))
-            v = D_ZERO;
+        if (v.compareTo(B_ZERO) == 0 || v.compareTo(PI.v) == 0)
+            v = B_ZERO;
+        else
+            v = new BigDecimal(Math.sin(v.doubleValue()), mc);
     }
     public void asin(int Angle)
     {
-        v = Math.asin(v) / trigScale2(Angle);
+        v = new BigDecimal(Math.asin(v.doubleValue()), mc).divide(trigScale2(Angle), mc);
     }
 
     public void tan(int Angle)
     {
         NormalizeAngle(Angle);
 
-        if (isEqual(N_HALF_PI) || isEqual(N_HALF3_PI))
+        if (v.compareTo(HALF_PI) == 0 || v.compareTo(HALF3_PI) == 0)
         {
             v = ERROR;
             error = true;
         }
-        else if (isEqual(ZERO) || isEqual(N_PI))
+        else if (v.compareTo(B_ZERO) == 0 || v.compareTo(PI.v) == 0)
         {
-            v = D_ZERO;
+            v = B_ZERO;
         }
         else
-            v = Math.tan(v);
+            v = new BigDecimal(Math.tan(v.doubleValue()), mc);
     }
     public void atan(int Angle)
     {
-        v = Math.atan(v) / trigScale2(Angle);
+        v = new BigDecimal(Math.atan(v.doubleValue()), mc).divide(trigScale2(Angle), mc);
+    }
+
+    public static double logBigInteger(BigInteger n)
+    {
+        final int blex = n.bitLength() - 1022; // any value in 60..1023 is ok
+        if (blex > 0)
+            n = n.shiftRight(blex);
+        double res = Math.log(n.doubleValue());
+        return blex > 0 ? res + blex * LOG2 : res;
     }
 
     public void log()
     {
-        if (v < 0.0)
+        final int check = v.compareTo(B_ZERO);
+
+        if(check < 0)
         {
-            v = Math.log10(-v);
+            v = v.abs();
+            set((logBigInteger(v.unscaledValue()) + (-v.scale()*LOG10)) / LOG10);
             error = true;
         }
-        else if (v == 0.0)
+        else if (check == 0)
         {
-            v = -ERROR;
+            v = ERROR.negate();
             error = true;
         }
         else
-            v = Math.log10(v);
+            set((logBigInteger(v.unscaledValue()) + (-v.scale()*LOG10)) / LOG10);
     }
 
     public void ln()
     {
-        if (v < 0.0)
+        final int check = v.compareTo(B_ZERO);
+
+        if(check < 0)
         {
-            v = Math.log(-v);
+            v = v.abs();
+            set((logBigInteger(v.unscaledValue()) + (-v.scale()*LOG10)));
             error = true;
         }
-        else if (v == 0.0)
+        else if (check == 0)
         {
-            v = -ERROR;
+            v = ERROR.negate();
             error = true;
         }
         else
-            v = Math.log(v);
+            set((logBigInteger(v.unscaledValue()) + (-v.scale()*LOG10)));
+    }
+
+    private static BigDecimal sqrt(BigDecimal A)
+    {
+        BigDecimal x0 = new BigDecimal("0", mc);
+        BigDecimal x1 = new BigDecimal(Math.sqrt(A.doubleValue()), mc);
+
+        while (!x0.equals(x1))
+        {
+            x0 = x1;
+            x1 = A.divide(x0, mc);
+            x1 = x1.add(x0);
+            x1 = x1.divide(B_TWO, mc);
+        }
+        return x1;
     }
 
     public void sqrt()
     {
-        if (v < 0.0)
+        if (v.compareTo(B_ZERO) < 0.0)
         {
-            v = Math.sqrt(-v);
+            v = sqrt(v.negate(mc));
             error = true;
         }
         else
-            v = Math.sqrt(v);
+            v = sqrt(v);
     }
 
     public void x2()
     {
-        v *= v;
+        v = v.multiply(v, mc);
     }
 
     public void reciprocal()
     {
-        if (v == 0)
+        if (v.signum() == 0)
         {
             v = ERROR;
             error = true;
         }
         else
-            v = 1.0 / v;
+            v = B_ONE.divide(v, mc);
     }
 
     public void pow(Number n)
     {
-        v = Math.pow(v, n.v);
+        set(Math.pow(v.doubleValue(), n.v.doubleValue()));
     }
 
     public void exp()
     {
-        v = Math.exp(v);
-    }
-
-    public void intPart()
-    {
-        final double Vabs = Math.abs(v);
-        final double Epsilon =
-            Vabs > 0.8
-            ? 1.0 / Math.pow (10, 15 - 3 - Math.min(1, Math.abs((int)Math.floor(Math.log(Vabs) / Math.log(10.0)))))
-            : 0.0;
-        v = Math.floor(Vabs + Epsilon);
-    }
-
-    public void fracPart()
-    {
-        final double i = (long)v;
-        v = v - i;
+        set(Math.exp(v.doubleValue()));
     }
 
     public void Pi()
     {
-        v = Math.PI;
+        v = PI.v;
+    }
+
+    // cut
+
+    public void intPart()
+    {
+        v = new BigDecimal(v.longValue(), mc);
+    }
+
+    public void fracPart()
+    {
+        final BigDecimal i = new BigDecimal(v.longValue(), mc);
+        v = v.subtract(i, mc);
+    }
+
+    public void nDigits(int n)
+    {
+        if (n >= 0)
+        {
+            final Number Factor = new Number(B_ONE.scaleByPowerOfTen(n));
+
+            mult(Factor);
+            intPart();
+            div(Factor);
+        }
     }
 
     /* returns the number of figures before the decimal point in the
@@ -419,11 +461,23 @@ public class Number
     public int figuresBeforeDecimal(int Exp)
     {
         int BeforeDecimal;
+        Number l = new Number(this);
 
-        if (v != 0.0)
+        if (v.compareTo(B_ZERO) != 0)
         {
-            BeforeDecimal = Math.max
-                ((int)Math.ceil(Math.log10(Math.abs(v) / Math.pow(10.0, Exp))), 1);
+            Number d = new Number(10);
+            Number e = new Number(Exp);
+            d.pow(e);
+            l.abs();
+            l.div(d);
+            l.log();
+            l.add(ONE);
+            BeforeDecimal = l.v.intValue();
+
+            if (BeforeDecimal >= 1)
+                return BeforeDecimal;
+            else
+                return 1;
         }
         else
         {
@@ -438,33 +492,32 @@ public class Number
     public int scaleExp(int UsingFormat)
     {
         int Exp = 0;
-        double l = Math.abs(v);
-        if (l != 0.0)
+        Number l = new Number(v);
+        l.abs();
+        l.log();
+
+        if (v.compareTo(B_ZERO) != 0)
         {
             switch (UsingFormat)
             {
             case State.FORMAT_FLOAT:
-                Exp = (int)Math.floor(Math.log(l) / LOG10);
+                Exp = (int)l.v.intValue();
                 break;
             case State.FORMAT_ENG:
-                Exp = (int)Math.floor(Math.log(l) / LOG1000) * 3;
+                l.v = l.v.divide(B_THREE, mc);
+                Exp = (int)l.v.intValue() * 3;
                 break;
             }
         }
         return Exp;
     }
 
-    public void nDigits(int n)
-    {
-        if (n >= 0)
-        {
-            final double Factor = Math.pow(10, n);
-            v = (int)(v * Factor) / Factor;
-        }
-    }
-
     public String formatString(java.util.Locale locale, int nrDecimals)
     {
-        return String.format(locale, String.format(locale, "%%.%df", nrDecimals), v);
+        final DecimalFormat form = new DecimalFormat();
+        form.setMaximumFractionDigits(nrDecimals);
+        form.setMinimumFractionDigits(nrDecimals);
+        form.setGroupingUsed(false);
+        return form.format(v);
     }
 }
