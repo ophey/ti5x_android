@@ -481,6 +481,78 @@ public class Tester
         return true;
     }
 
+    private boolean Test_17()
+    {
+        Clear();
+
+        SetX(0.9988776655);
+
+        if (!Calc.CurDisplay.equals(".9988776655"))
+            return false;
+
+        SetX(-0.9988776655);
+
+        if (!Calc.CurDisplay.equals("-.9988776655"))
+            return false;
+
+        SetX(0.9988776650);
+
+        if (!Calc.CurDisplay.equals("0.998877665"))
+            return false;
+
+        Calc.Digit('0');
+        Calc.DecimalPoint();
+        Calc.Digit('2');
+        Calc.Digit('2');
+        Calc.Digit('4');
+        Calc.Digit('4');
+        Calc.Digit('7');
+        Calc.Digit('7');
+        Calc.Digit('8');
+        Calc.Digit('8');
+        Calc.EnterExponent();
+        Calc.Digit('1');
+        Calc.Digit('0');
+        Calc.Equals();
+
+        if (!Calc.CurDisplay.equals("2.2447788 09"))
+            return false;
+
+        Calc.InvState = true;
+        Calc.EnterExponent();
+
+        if (!Calc.CurDisplay.equals("2244778800."))
+            return false;
+
+        Calc.InvState = false;
+
+        Calc.Digit('0');
+        Calc.DecimalPoint();
+        Calc.Digit('2');
+        Calc.Digit('2');
+        Calc.Digit('4');
+        Calc.Digit('4');
+        Calc.Digit('7');
+        Calc.Digit('7');
+        Calc.Digit('8');
+        Calc.Digit('8');
+        Calc.EnterExponent();
+        Calc.Digit('1');
+        Calc.Digit('2');
+        Calc.Equals();
+
+        if (!Calc.CurDisplay.equals("2.2447788 11"))
+            return false;
+
+        Calc.InvState = true;
+        Calc.EnterExponent();
+
+        if (!Calc.CurDisplay.equals("2.2447788 11"))
+            return false;
+
+        return true;
+    }
+
     public int Run()
     {
         Calc = Global.Calc;
@@ -502,6 +574,7 @@ public class Tester
         if (!Test_14()) return -14; Total++;
         if (!Test_15()) return -15; Total++;
         if (!Test_16()) return -16; Total++;
+        if (!Test_17()) return -17; Total++;
 
         return Total;
     }

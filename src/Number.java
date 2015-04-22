@@ -467,17 +467,23 @@ public class Number
         {
             Number d = new Number(10);
             Number e = new Number(Exp);
+            int Adjust = 0;
+
             d.pow(e);
             l.abs();
+
+            if (Exp == 0 && l.v.compareTo(B_ONE) < 0)
+                Adjust = 1;
+
             l.div(d);
             l.log();
             l.add(ONE);
             BeforeDecimal = l.v.intValue();
 
             if (BeforeDecimal >= 1)
-                return BeforeDecimal;
+                return BeforeDecimal - Adjust;
             else
-                return 1;
+                return 1 - Adjust;
         }
         else
         {

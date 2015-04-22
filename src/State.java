@@ -552,6 +552,7 @@ public class State
             if (!ExponentEntered)
               {
                 CurDisplay = CurDisplay + " 00";
+                CurFormat = FORMAT_FLOAT;
               } /*if*/
             CurState = ExponentEntryState;
             SetShowing(CurDisplay);
@@ -575,8 +576,9 @@ public class State
                     CurState = DecimalEntryState;
                 else
                     CurState = EntryState;
-
               }
+            else
+              CurFormat = FORMAT_FLOAT;
         break;
         case ResultState:
             if (InvState)
@@ -592,6 +594,8 @@ public class State
             else
               {
                 FromResult = true;
+                CurFormat = FORMAT_FLOAT;
+
                 if (!ExponentEntered)
                   {
                     // ?? the following test is because just above (InvState) we set ExponentEntered.
@@ -605,21 +609,7 @@ public class State
                         ExponentEntered = true;
                       }
                   }
-                else
-                  {
-                    /* as per manual */
-                      /*??PO
-                        probably not needed anymore since the value is 13 bits BCD?????
-                    SetX
-                      (Arith.RoundTo
-                          (X,
-                           CurFormat == FORMAT_FIXED
-                             ? CurNrDecimals >= 0 ? CurNrDecimals : 10
-                             : 8));
-                      */
-                    CurFormat = FORMAT_FLOAT; /* but display of X is not changed yet */
-                      }
-                  } /*if*/
+                } /*if*/
         break;
           } /*switch*/
       } /*EnterExponent*/
@@ -634,6 +624,19 @@ public class State
             {
                 Result = Result.substring(0, Result.length() - 1);
             }
+
+          return Result;
+      }
+
+    private static String RemoveLeadingZero(String str, int maxSize)
+      {
+          String Result = str;
+          final int len = Result.length();
+
+          if (len == maxSize && Result.charAt(0) == '0')
+              Result = Result.substring(1, Result.length());
+          else if (len == (maxSize + 1) && Result.charAt(0) == '-' && Result.charAt(1) == '0')
+              Result = "-" + Result.substring(2, Result.length());
 
           return Result;
       }
@@ -679,6 +682,11 @@ public class State
                 if (UseNrDecimalsF > 0)
                   {
                       Result = RemoveTrailingZeros(Result);
+
+                      // this can happen only when number <1, remove leading zero
+                      // length is +2 because of 0 and decimal point
+                      if (UseNrDecimalsF == 8)
+                        Result = RemoveLeadingZero(Result, 10);
                   }
 
                 /* assume there will always be a decimal point? */
@@ -699,6 +707,11 @@ public class State
                       if (UseNrDecimals > 0)
                         {
                             Result = RemoveTrailingZeros(Result);
+
+                            // this can happen only when number <1, remove leading zero
+                            // length is +2 because of 0 and decimal point
+                            if (UseNrDecimals == 10)
+                                Result = RemoveLeadingZero(Result, 12);
                         }
                       else
                         {
