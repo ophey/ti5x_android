@@ -68,63 +68,74 @@ TABLE.functions > TBODY > TR > TD.unused
 <H1>MU-21 — Variable Arithmetic</H1>
 
 <P>This program simplifies keyboard operations by making the
-  user-defined keys <SPAN CLASS="brownbutton">A</SPAN>
-  through <SPAN CLASS="brownbutton">E</SPAN> directly for storage and
+  user-defined keys <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+  through <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN> directly for storage and
   recall of variables. For example the simple key sequence
-  <i>n</i> <SPAN CLASS="alttext">E'</SPAN>
-  <SPAN CLASS="brownbutton">A</SPAN> defines
-  key <SPAN CLASS="brownbutton">A</SPAN> as <i>n</i>. The
+  <i>n</i> <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>
+  <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN> defines
+  key <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN> as <i>n</i>. The
   variable <i>n</i> can then be recalled for use at any point in a
-  calculation by pressing <SPAN CLASS="brownbutton">A</SPAN>.
+  calculation by pressing <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>.
 
 <P>To illustrate how the program works, assume a rectangle of length L
   and width W. The values of L and W can be entered using:
 
-<P>L <SPAN CLASS="alttext">E'</SPAN> <SPAN CLASS="brownbutton">A</SPAN>
-<P>W <SPAN CLASS="alttext">E'</SPAN> <SPAN CLASS="brownbutton">B</SPAN>
+<P>L <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN> <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+<P>W <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN> <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
 <P>Then:
 
   <TABLE>
-    <TD><SPAN CLASS="brownbutton">A</SPAN><TD>display L
-    <TD><SPAN CLASS="brownbutton">B</SPAN><TD>display W
-    <TD><SPAN CLASS="brownbutton">A</SPAN> x <SPAN CLASS="brownbutton">B</SPAN><TD>area
-    <TD>2 x <SPAN CLASS="brownbutton">A</SPAN> + 2 x <SPAN CLASS="brownbutton">B</SPAN><TD>perimeter
-    <TD><SPAN CLASS="brownbutton">A</SPAN> <SPAN CLASS="brownbutton">x²</SPAN>
-      + <SPAN CLASS="brownbutton">B</SPAN> <SPAN CLASS="brownbutton">x²</SPAN>
-      <SPAN CLASS="yellowbutton">=</SPAN>  <SPAN CLASS="brownbutton">√x</SPAN><TD>diagonal
+    <TR><TD><SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN><TD>&#8594;<TD>display L
+    <TR><TD><SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN><TD>&#8594;<TD>display W
+        <TR><TD><SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;×&nbsp;</SPAN>
+            <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN><TD>&#8594;<TD>area
+        <TR><TD><SPAN CLASS="whitebutton">&nbsp;2&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;×&nbsp;</SPAN>
+            <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+            <SPAN CLASS="yellowbutton">&nbsp;+&nbsp;</SPAN>
+            <SPAN CLASS="whitebutton">&nbsp;2&nbsp;</SPAN>
+            <SPAN CLASS="yellowbutton">&nbsp;×&nbsp;</SPAN>
+            <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN><TD>&#8594;<TD>perimeter
+    <TR><TD><SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN> <SPAN CLASS="brownbutton">&nbsp;x²&nbsp;</SPAN>
+        <SPAN CLASS="yellowbutton">&nbsp;+&nbsp;</SPAN> <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+        <SPAN CLASS="brownbutton">&nbsp;x²&nbsp;</SPAN>
+        <SPAN CLASS="yellowbutton">&nbsp;=&nbsp;</SPAN> <SPAN CLASS="brownbutton">&nbsp;√x&nbsp;</SPAN><TD>&#8594;<TD>diagonal
+  </TABLE>
 
-<P>L <SPAN CLASS="alttext">E'</SPAN> <SPAN CLASS="brownbutton">A</SPAN>
+<P>L <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN> <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
 
 <P>Variables can be calculated using subroutines that you enter in
-  program memory. For example after <SPAN CLASS="brownbutton">A</SPAN>
-  and <SPAN CLASS="brownbutton">B</SPAN> have been entered, the area
+  program memory. For example after <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+  and <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN> have been entered, the area
   of the rectangle can be calculated as
-  variable <SPAN CLASS="brownbutton">C</SPAN> using the key sequence
-  <SPAN CLASS="alttext">A'</SPAN> <SPAN CLASS="brownbutton">C</SPAN>
+  variable <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN> using the key sequence
+  <SPAN CLASS="alttext">&nbsp;A'&nbsp;</SPAN> <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
   if the following subroutine is entered into program memory.
 
-<P><SPAN CLASS="alttext">Lbl</SPAN> <SPAN CLASS="brownbutton">C</SPAN>
-  <SPAN CLASS="brownbutton">RCL</SPAN> <SPAN CLASS="whitebutton">21</SPAN>
-  <SPAN CLASS="yellowbutton">x</SPAN>
-  <SPAN CLASS="brownbutton">RCL</SPAN> <SPAN CLASS="whitebutton">22</SPAN>
-  <SPAN CLASS="yellowbutton">=</SPAN>
-  <SPAN CLASS="brownbutton">STO</SPAN> <SPAN CLASS="whitebutton">23</SPAN>
-  <SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="brownbutton">SBR</SPAN>
+<P><SPAN CLASS="alttext">Lbl</SPAN> <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+  <SPAN CLASS="brownbutton">&nbsp;RCL&nbsp;</SPAN>
+  <SPAN CLASS="whitebutton">&nbsp;2&nbsp;</SPAN> <SPAN CLASS="whitebutton">&nbsp;1&nbsp;</SPAN>
+  <SPAN CLASS="yellowbutton">&nbsp;×&nbsp;</SPAN>
+  <SPAN CLASS="brownbutton">&nbsp;RCL&nbsp;</SPAN>
+  <SPAN CLASS="whitebutton">&nbsp;2&nbsp;</SPAN> <SPAN CLASS="whitebutton">&nbsp;2&nbsp;</SPAN>
+  <SPAN CLASS="yellowbutton">&nbsp;=&nbsp;</SPAN>
+  <SPAN CLASS="brownbutton">&nbsp;STO&nbsp;</SPAN>
+  <SPAN CLASS="whitebutton">&nbsp;2&nbsp;</SPAN> <SPAN CLASS="whitebutton">&nbsp;3&nbsp;</SPAN>
+  <SPAN CLASS="brownbutton">&nbsp;INV&nbsp;</SPAN> <SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN>
 
-<P>Note that variables <SPAN CLASS="brownbutton">A</SPAN> through
-  <SPAN CLASS="brownbutton">E</SPAN> reside in data register R<sub>21</sub>
+<P>Note that variables <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN> through
+  <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN> reside in data register R<sub>21</sub>
   through R<sub>25</sub>  respectively.
 
 <UL>
-  <LI>To store variable <SPAN CLASS="brownbutton">A</SPAN>,
-    press <SPAN CLASS="alttext">E'</SPAN> <SPAN CLASS="brownbutton">A</SPAN>. Likewise
+  <LI>To store variable <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>,
+    press <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN> <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>. Likewise
     for all variables.
 
-  <LI>To recall variable <SPAN CLASS="brownbutton">A</SPAN>,
-    press <SPAN CLASS="brownbutton">A</SPAN>. Likewise for all variables.
+  <LI>To recall variable <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>,
+    press <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>. Likewise for all variables.
 
-  <LI>To compute variable <SPAN CLASS="brownbutton">A</SPAN>,
-    press <SPAN CLASS="alttext">A'</SPAN> <SPAN CLASS="brownbutton">A</SPAN>.
+  <LI>To compute variable <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>,
+    press <SPAN CLASS="alttext">&nbsp;A'&nbsp;</SPAN> <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>.
     Likewise for all variables.
 </UL>
 
