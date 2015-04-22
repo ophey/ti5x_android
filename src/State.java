@@ -834,11 +834,51 @@ public class State
         case STACKOP_EXP:
             ThisOp.Operand.pow(X);
             X = ThisOp.Operand;
+
+            if (X.isError())
+            {
+                SetX(X);
+                SetErrorState(false);
+            }
         break;
         case STACKOP_ROOT:
-            X.reciprocal();
-            ThisOp.Operand.pow(X);
-            X = ThisOp.Operand;
+            if (X.getSignum() == 0)
+              {
+                  if (ThisOp.Operand.getSignum() == 0
+                      || ThisOp.Operand.compareTo(Number.ONE) == 0
+                      || ThisOp.Operand.compareTo(Number.mONE) == 0)
+                    {
+                        X.set(1);
+                    }
+                  else
+                    {
+                        X.set(Number.ERROR);
+                    }
+                  SetX(X);
+                  SetErrorState(false);
+              }
+            else if (X.getSignum() < 0 && ThisOp.Operand.getSignum() <= 0)
+              {
+                  if (ThisOp.Operand.getSignum() == 0)
+                    {
+                        X.set(Number.ERROR);
+                    }
+                  else if (ThisOp.Operand.getSignum() < 0)
+                    {
+                        ThisOp.Operand.abs();
+                        X.reciprocal();
+                        ThisOp.Operand.pow(X);
+                        X = ThisOp.Operand;
+                    }
+                  SetX(X);
+                  SetErrorState(false);
+              }
+            else
+              {
+                  X.reciprocal();
+                  ThisOp.Operand.pow(X);
+                  X = ThisOp.Operand;
+              }
         break;
           } /*switch*/
       /* leave it to caller to update display */

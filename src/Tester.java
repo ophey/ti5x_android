@@ -40,7 +40,7 @@ public class Tester
         Calc.T.set(v);
     }
 
-    public void Clear()
+    private void Clear()
     {
         Calc.ClearMemories();
         Calc.InvState = false;
@@ -52,6 +52,30 @@ public class Tester
         Calc.PreviousOp = -1;
         Calc.ResetEntry();
 
+    }
+
+    private void exp(double y, double x, boolean invstate)
+    {
+        SetX(y);
+        Calc.InvState = invstate;
+        Calc.Operator(Calc.STACKOP_EXP);
+        Calc.InvState = false;
+        SetX(x);
+        Calc.Equals();
+    }
+
+    private boolean check(String display, boolean error)
+    {
+        boolean isErr = Calc.InErrorState();
+        Calc.CurState = Calc.ResultState;
+
+        if (!Calc.CurDisplay.equals(display))
+            return false;
+
+        if (isErr != error)
+            return false;
+
+        return true;
     }
 
     private boolean Test_1()
@@ -553,6 +577,103 @@ public class Tester
         return true;
     }
 
+    private boolean Test_18()
+    {
+        //  from TI-59 book
+        Clear();
+
+        exp(2.36, -.23, false);
+        if (!check (".8207865654", false))
+            return false;
+
+        exp(.8207865654, 3, true);
+        if (!check (".9362893421", false))
+            return false;
+
+        //     0**0 -> 1
+        exp(0, 0, false);
+        if (!check ("1.", false))
+            return false;
+
+        // inv 0**0 -> 1 (flashing)
+        exp(0, 0, true);
+        if (!check ("1.", true))
+            return false;
+
+        //     0^-x -> 9.999999 99 (flashing)
+        exp(0, -2, false);
+        if (!check (ERROR, true))
+            return false;
+
+        // inv 0^-x -> 9.999999 99 (flashing)
+        exp(0, -2, true);
+        if (!check (ERROR, true))
+            return false;
+
+        //     0**x -> 0
+        exp(0, 2, false);
+        if (!check ("0.", false))
+            return false;
+
+        // inv 0**x -> 0
+        exp(0, 6, true);
+        if (!check ("0.", false))
+            return false;
+
+        //     1**0 -> 1
+        exp(1, 0, false);
+        if (!check ("1.", false))
+            return false;
+
+        // inv 1**0 -> 1 (flashing)
+        exp(1, 0, true);
+        if (!check ("1.", true))
+            return false;
+
+        //     y**0 -> 1
+        exp(9, 0, false);
+        if (!check ("1.", false))
+            return false;
+
+        // inv y**0 -> 9.99999 99 (flashing)
+        exp(5, 0, true);
+        if (!check (ERROR, true))
+            return false;
+
+        //     -1**0 -> 1 (flashing)
+        exp(-1, 0, false);
+        if (!check ("1.", true))
+            return false;
+
+        // inv -1**0 -> 1 (flashing)
+        exp(-1, 0, true);
+        if (!check ("1.", true))
+            return false;
+
+        //     -y**0 -> 1 (flashing)
+        exp(-9, 0, false);
+        if (!check ("1.", true))
+            return false;
+
+        // inv -y**0 -> 9.99999 99 (flashing)
+        exp(-2, 0, true);
+        if (!check (ERROR, true))
+            return false;
+
+        //     -y**-x -> y**-x (flashing)
+        exp(-8, -2, false);
+        if (!check ("64.", true))
+            return false;
+
+        // inv -y**-x -> inv y**-x (flashing)
+        exp(-8, -2, true);
+        if (!check (".3535533906", true))
+            return false;
+
+        Calc.CurState = Calc.ResultState;
+        return true;
+    }
+
     public int Run()
     {
         Calc = Global.Calc;
@@ -575,6 +696,9 @@ public class Tester
         if (!Test_15()) return -15; Total++;
         if (!Test_16()) return -16; Total++;
         if (!Test_17()) return -17; Total++;
+        if (!Test_18()) return -18; Total++;
+
+        Clear();
 
         return Total;
     }

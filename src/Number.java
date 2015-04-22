@@ -33,17 +33,19 @@ public class Number
     public static final int ANG_DEG  = 2;
     public static final int ANG_GRAD = 3;
 
-    public final static Number ZERO = new Number(0.0);
-    public final static Number ONE  = new Number(1.0);
-    public final static Number TEN  = new Number(10.0);
-    public final static Number PI   = new Number(Math.PI);
+    public final static Number ZERO  = new Number(0.0);
+    public final static Number ONE   = new Number(1.0);
+    public final static Number mONE  = new Number(-1.0);
+    public final static Number TEN   = new Number(10.0);
+    public final static Number PI    = new Number(Math.PI);
+    public final static Number ERROR = new Number("9.9999999e99");
 
     private final static BigDecimal B_ZERO   = new BigDecimal(0.0, mc);
     private final static BigDecimal B_ONE    = new BigDecimal(1.0, mc);
     private final static BigDecimal B_TEN    = new BigDecimal(10.0, mc);
     private final static BigDecimal B_TWO    = new BigDecimal(2.0, mc);
     private final static BigDecimal B_THREE  = new BigDecimal(3.0, mc);
-    private final static BigDecimal ERROR    = new BigDecimal(9.9999999e99, mc);
+    private final static BigDecimal B_ERROR  = new BigDecimal(9.9999999e99, mc);
     private final static BigDecimal HALF_PI  = new BigDecimal(Math.PI/2.0, mc);
     private final static BigDecimal HALF3_PI = new BigDecimal(3.0*Math.PI/2.0, mc);
     private final static BigDecimal TWO_PI   = new BigDecimal(Math.PI * 2.0, mc);
@@ -219,7 +221,7 @@ public class Number
     {
         if (n.v.compareTo(B_ZERO) == 0)
         {
-            v = ERROR;
+            v = B_ERROR;
             error = true;
         }
         else
@@ -309,7 +311,7 @@ public class Number
 
         if (v.compareTo(HALF_PI) == 0 || v.compareTo(HALF3_PI) == 0)
         {
-            v = ERROR;
+            v = B_ERROR;
             error = true;
         }
         else if (v.compareTo(B_ZERO) == 0 || v.compareTo(PI.v) == 0)
@@ -345,7 +347,7 @@ public class Number
         }
         else if (check == 0)
         {
-            v = ERROR.negate();
+            v = B_ERROR.negate();
             error = true;
         }
         else
@@ -364,7 +366,7 @@ public class Number
         }
         else if (check == 0)
         {
-            v = ERROR.negate();
+            v = B_ERROR.negate();
             error = true;
         }
         else
@@ -406,7 +408,7 @@ public class Number
     {
         if (v.signum() == 0)
         {
-            v = ERROR;
+            v = B_ERROR;
             error = true;
         }
         else
@@ -415,7 +417,23 @@ public class Number
 
     public void pow(Number n)
     {
-        set(Math.pow(v.doubleValue(), n.v.doubleValue()));
+        if (v.signum() == 0 && n.v.signum() < 0)
+        {
+            v = B_ERROR;
+            error = true;
+        }
+        else if (v.signum() < 0 && n.v.signum() == 0)
+        {
+            v = B_ONE;
+            error = true;
+        }
+        else if (v.signum() < 0 && n.v.signum() <= 0)
+        {
+            set(Math.pow(Math.abs(v.doubleValue()), Math.abs(n.v.doubleValue())));
+            error = true;
+        }
+        else
+            set(Math.pow(v.doubleValue(), n.v.doubleValue()));
     }
 
     public void exp()
