@@ -105,10 +105,7 @@ public class Tester
         Calc.EnterExponent();
         Calc.Digit('2');
 
-        if (Calc.CurDisplay.equals("12."))
-            return true;
-        else
-            return false;
+        return check("12.", false);
     }
 
     private boolean Test_3()
@@ -124,10 +121,7 @@ public class Tester
         Calc.EnterExponent();
         Calc.Digit('3');
 
-        if (Calc.CurDisplay.equals("13. 02"))
-            return true;
-        else
-            return false;
+        return check("13. 02", false);
     }
 
     private boolean Test_4()
@@ -157,16 +151,13 @@ public class Tester
         SetX(30.1348);
         Calc.D_MS();
 
-        if (!Calc.CurDisplay.equals("30.23"))
+        if (!check("30.23", false))
             return false;
 
         Calc.InvState = true;
         Calc.D_MS();
 
-        if (Calc.CurDisplay.equals("30.1348"))
-            return true;
-        else
-            return false;
+        return check("30.1348", false);
     }
 
     private boolean Test_6()
@@ -178,12 +169,12 @@ public class Tester
         SetT(5);
         Calc.Polar();
 
-        if (!Calc.CurDisplay.equals("2.5"))
+        if (!check("2.5", false))
             return false;
 
         Calc.SwapT();
 
-        if (!Calc.CurDisplay.equals("4.330127019"))
+        if (!check("4.330127019", false))
             return false;
 
         Calc.SwapT();
@@ -191,12 +182,12 @@ public class Tester
         Calc.InvState = true;
         Calc.Polar();
 
-        if (!Calc.CurDisplay.equals("30."))
+        if (!check("30.", false))
             return false;
 
         Calc.SwapT();
 
-        if (!Calc.CurDisplay.equals("5."))
+        if (!check("5.", false))
             return false;
 
         Calc.SetAngMode(Calc.ANG_RAD);
@@ -205,15 +196,12 @@ public class Tester
         Calc.InvState = true;
         Calc.Polar();
 
-        if (!Calc.CurDisplay.equals("0.927295218"))
+        if (!check("0.927295218", false))
             return false;
 
         Calc.SwapT();
 
-        if (!Calc.CurDisplay.equals("5."))
-            return false;
-
-        return true;
+        return check("5.", false);
     }
 
     private boolean Test_7()
@@ -234,19 +222,19 @@ public class Tester
 
         Calc.StatsResult();
 
-        if (!Calc.CurDisplay.equals("84."))
+        if (!check("84.", false))
             return false;
 
         Calc.InvState = true;
         Calc.StatsResult();
 
-        if (!Calc.CurDisplay.equals("9.879271228"))
+        if (!check("9.879271228", false))
             return false;
 
         Calc.InvState = false;
         Calc.SpecialOp(11, false);
 
-        if (!Calc.CurDisplay.equals("81.33333333"))
+        if (!check("81.33333333", false))
             return false;
 
         if (Calc.Memory[1].get() != 504)
@@ -275,26 +263,23 @@ public class Tester
         SetX(200);
         Calc.SpecialOp(15, false);
 
-        if (!Calc.CurDisplay.equals("17.81578947"))
+        if (!check("17.81578947", false))
             return false;
 
         SetX(15);
         Calc.SpecialOp(14, false);
 
-        if (!Calc.CurDisplay.equals("176.5561798"))
+        if (!check("176.5561798", false))
             return false;
 
         Calc.SpecialOp(12, false);
 
-        if (!Calc.CurDisplay.equals("51.66853933"))
+        if (!check("51.66853933", false))
             return false;
 
         Calc.SwapT();
 
-        if (!Calc.CurDisplay.equals("8.325842697"))
-            return false;
-
-        return true;
+        return check("8.325842697", false);
     }
 
     private boolean Test_9()
@@ -304,21 +289,13 @@ public class Tester
         SetX(2);
         Calc.Reciprocal();
 
-        if (!Calc.CurDisplay.equals("0.5"))
+        if (!check("0.5", false))
             return false;
 
         SetX(0);
         Calc.Reciprocal();
 
-        if (!Calc.CurDisplay.equals(ERROR))
-            return false;
-
-        if (!Calc.InErrorState())
-            return false;
-
-        Calc.CurState = Calc.ResultState;
-
-        return true;
+        return check(ERROR, true);
     }
 
     private boolean Test_10()
@@ -328,20 +305,13 @@ public class Tester
         SetX(4);
         Calc.Sqrt();
 
-        if (!Calc.CurDisplay.equals("2."))
+        if (!check("2.", false))
             return false;
 
         SetX(-4);
         Calc.Sqrt();
 
-        if (!Calc.CurDisplay.equals("2."))
-            return false;
-
-        if (!Calc.InErrorState())
-            return false;
-
-        Calc.CurState = Calc.ResultState;
-        return true;
+        return check("2.", true);
     }
 
     private boolean Test_11()
@@ -351,30 +321,28 @@ public class Tester
         SetX(9.258);
 
         Calc.SetDisplayMode(Calc.FORMAT_FIXED, 4);
-        if (!Calc.CurDisplay.equals("9.2580"))
+        if (!check("9.2580", false))
             return false;
 
         Calc.SetDisplayMode(Calc.FORMAT_FIXED, 3);
-        if (!Calc.CurDisplay.equals("9.258"))
+        if (!check("9.258", false))
             return false;
 
         Calc.SetDisplayMode(Calc.FORMAT_FIXED, 2);
-        if (!Calc.CurDisplay.equals("9.26"))
+        if (!check("9.26", false))
             return false;
 
         Calc.SetDisplayMode(Calc.FORMAT_FIXED, 1);
-        if (!Calc.CurDisplay.equals("9.3"))
+        if (!check("9.3", false))
             return false;
 
         Calc.SetDisplayMode(Calc.FORMAT_FIXED, 0);
-        if (!Calc.CurDisplay.equals("9"))
+        if (!check("9", false))
             return false;
 
         Calc.SetDisplayMode(Calc.FORMAT_FIXED, -1);
-        if (!Calc.CurDisplay.equals("9.258"))
-            return false;
 
-        return true;
+        return check("9.258", false);
     }
 
     private boolean Test_12()
@@ -386,7 +354,7 @@ public class Tester
         Calc.Digit('7');
         Calc.Equals();
 
-        if (!Calc.CurDisplay.equals("2187."))
+        if (!check("2187.", false))
             return false;
 
         Calc.InvState = true;
@@ -395,10 +363,7 @@ public class Tester
         Calc.Digit('6');
         Calc.Equals();
 
-        if (!Calc.CurDisplay.equals("3.602810866"))
-            return false;
-
-        return true;
+        return check("3.602810866", false);
     }
 
     private boolean Test_13()
@@ -411,12 +376,12 @@ public class Tester
         Calc.Digit('2');
         Calc.Equals();
 
-        if (!Calc.CurDisplay.equals("8.523 23"))
+        if (!check("8.523 23", false))
             return false;
 
         Calc.SetDisplayMode (Calc.FORMAT_ENG, -1);
 
-        if (!Calc.CurDisplay.equals("852.3 21"))
+        if (!check("852.3 21", false))
             return false;
 
         Calc.SetDisplayMode (Calc.FORMAT_FIXED, -1);
@@ -431,26 +396,13 @@ public class Tester
         SetX(0);
         Calc.Log();
 
-        if (!Calc.CurDisplay.equals(mERROR))
+        if (!check(mERROR, true))
             return false;
-
-        if (!Calc.InErrorState())
-            return false;
-
-        Calc.CurState = Calc.ResultState;
 
         SetX(-9);
         Calc.Ln();
 
-        if (!Calc.CurDisplay.equals("2.197224577"))
-            return false;
-
-        if (!Calc.InErrorState())
-            return false;
-
-        Calc.CurState = Calc.ResultState;
-
-        return true;
+        return check("2.197224577", true);
     }
 
     private boolean Test_15()
@@ -481,10 +433,7 @@ public class Tester
 
         Calc.MemoryOp (Calc.MEMOP_RCL, 14, false);
 
-        if (!Calc.CurDisplay.equals("3."))
-            return false;
-
-        return true;
+        return check("3.", false);
     }
 
     private boolean Test_16()
@@ -497,12 +446,7 @@ public class Tester
         Calc.PreviousOp = 85; // 85 is add button
         Calc.Equals();
 
-        if (!Calc.InErrorState())
-            return false;
-
-        Calc.CurState = Calc.ResultState;
-
-        return true;
+        return check("1.", true);
     }
 
     private boolean Test_17()
@@ -511,17 +455,17 @@ public class Tester
 
         SetX(0.9988776655);
 
-        if (!Calc.CurDisplay.equals(".9988776655"))
+        if (!check(".9988776655", false))
             return false;
 
         SetX(-0.9988776655);
 
-        if (!Calc.CurDisplay.equals("-.9988776655"))
+        if (!check("-.9988776655", false))
             return false;
 
         SetX(0.9988776650);
 
-        if (!Calc.CurDisplay.equals("0.998877665"))
+        if (!check("0.998877665", false))
             return false;
 
         Calc.Digit('0');
@@ -539,13 +483,13 @@ public class Tester
         Calc.Digit('0');
         Calc.Equals();
 
-        if (!Calc.CurDisplay.equals("2.2447788 09"))
+        if (!check("2.2447788 09", false))
             return false;
 
         Calc.InvState = true;
         Calc.EnterExponent();
 
-        if (!Calc.CurDisplay.equals("2244778800."))
+        if (!check("2244778800.", false))
             return false;
 
         Calc.InvState = false;
@@ -565,16 +509,13 @@ public class Tester
         Calc.Digit('2');
         Calc.Equals();
 
-        if (!Calc.CurDisplay.equals("2.2447788 11"))
+        if (!check("2.2447788 11", false))
             return false;
 
         Calc.InvState = true;
         Calc.EnterExponent();
 
-        if (!Calc.CurDisplay.equals("2.2447788 11"))
-            return false;
-
-        return true;
+        return check("2.2447788 11", false);
     }
 
     private boolean Test_18()
@@ -667,11 +608,7 @@ public class Tester
 
         // inv -y**-x -> inv y**-x (flashing)
         exp(-8, -2, true);
-        if (!check (".3535533906", true))
-            return false;
-
-        Calc.CurState = Calc.ResultState;
-        return true;
+        return check (".3535533906", true);
     }
 
     public int Run()
