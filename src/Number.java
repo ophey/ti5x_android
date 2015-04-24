@@ -22,6 +22,7 @@ import java.math.BigInteger;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 public class Number
 {
@@ -539,9 +540,11 @@ public class Number
     public String formatString(java.util.Locale locale, int nrDecimals)
     {
         final DecimalFormat form = new DecimalFormat();
+        final DecimalFormatSymbols decForm = new DecimalFormatSymbols(locale);
         form.setMaximumFractionDigits(nrDecimals);
         form.setMinimumFractionDigits(nrDecimals);
         form.setGroupingUsed(false);
+        form.setDecimalFormatSymbols(decForm);
         return form.format(v);
     }
 }
