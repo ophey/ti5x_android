@@ -3,6 +3,7 @@ package net.obry.ti5x;
     ti5x calculator emulator -- data importer context
 
     Copyright 2011 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+    Copyright 2015 Pascal Obry <pascal@obry.net>.
 
     This program is free software: you can redistribute it and/or modify it under
     the terms of the GNU General Public License as published by the Free Software
@@ -39,10 +40,10 @@ public class Importer
           } /*ImportDataFeeder*/
 
         @Override
-        public double Next()
+        public Number Next()
             throws State.ImportEOFException
           {
-            double Result = 0.0;
+            Number Result = new Number();
             StringBuilder LastNum = null;
             for (;;)
               {
@@ -94,7 +95,7 @@ public class Importer
                       {
                         try
                           {
-                            Result = Double.parseDouble(LastNum.toString());
+                            Result = new Number(LastNum.toString());
                           }
                         catch (NumberFormatException Bad)
                           {

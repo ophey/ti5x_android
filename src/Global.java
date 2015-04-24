@@ -3,6 +3,7 @@ package net.obry.ti5x;
     ti5x calculator emulator -- global data
 
     Copyright 2011 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+    Copyright 2015 Pascal Obry <pascal@obry.net>.
 
     This program is free software: you can redistribute it and/or modify it under
     the terms of the GNU General Public License as published by the Free Software
@@ -25,6 +26,7 @@ public class Global
     public static Importer Import;
     public static Exporter Export;
     public static Printer Print;
+    public static Tester Test;
 
     public static final int NrSigFigures = 16;
       /* for formatting reals */
