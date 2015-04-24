@@ -1,5 +1,11 @@
 Feature highlights:
 
+v4.0, 2015 April 24th:
+   use BCD numbers for better precision
+   add some internal tests used by Pgm 01 SBR =
+   add LE-19
+   many small improvements
+
 v3.4, 2015 April 14th:
    rework the card design (cleaner arrows, exponents...)
 
