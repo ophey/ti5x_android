@@ -1415,6 +1415,19 @@ public class Main extends android.app.Activity
                       );
                   } /*onClick*/
               } /*OnClickListener*/
+         );
+        ((android.widget.Button)findViewById(R.id.action_menu)).setOnClickListener
+          (
+            new View.OnClickListener()
+              {
+                public void onClick
+                  (
+                    View ButtonView
+                  )
+                  {
+                    openOptionsMenu();
+                  } /*onClick*/
+              } /*OnClickListener*/
           );
       } /*onPostCreate*/
 
