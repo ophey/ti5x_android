@@ -1,5 +1,5 @@
 /*
-    ti5x calculator emulator -- BCD Number 13bits
+    ti5x calculator emulator -- BCD Number 13-digits
 
     Copyright 2015 Pascal Obry <pascal@obry.net>.
 
