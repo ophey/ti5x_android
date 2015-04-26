@@ -743,7 +743,11 @@ public class State
           {
             CurState = ResultState;
           } /*if*/
-        if (!NewX.isNaN() && !NewX.isInfinite())
+        if (NewX.isInfinite())
+          {
+             SetErrorState(false);
+          }
+        if (!NewX.isNaN())
           {
             X = new Number(NewX);
             CurDisplay = FormatNumber(X, CurFormat, CurNrDecimals, false);

@@ -119,7 +119,18 @@ public class Number
 
     public boolean isInfinite()
     {
-        return false;
+        if (v.compareTo(B_ERROR) > 0)
+          {
+              v = B_ERROR;
+              return true;
+          }
+        if (v.compareTo(B_ERROR.negate()) < 0)
+          {
+              v = B_ERROR.negate();
+              return true;
+          }
+        else
+          return false;
     }
 
     // setters/getters

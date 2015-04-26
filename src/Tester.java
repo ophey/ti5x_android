@@ -611,6 +611,58 @@ public class Tester
         return check (".3535533906", true);
     }
 
+    private boolean Test_19()
+    {
+        Clear();
+
+        Calc.Digit('9');
+        Calc.DecimalPoint();
+        Calc.Digit('9');
+        Calc.Digit('9');
+        Calc.Digit('9');
+        Calc.Digit('9');
+        Calc.Digit('9');
+        Calc.Digit('9');
+        Calc.Digit('9');
+        Calc.EnterExponent();
+        Calc.Digit('9');
+        Calc.Digit('9');
+        Calc.Equals();
+
+        if (!check("9.9999999 99", false))
+            return false;
+
+        Calc.Operator(Calc.STACKOP_MUL);
+        SetX(2);
+        Calc.Equals();
+
+        if (!check(ERROR, true))
+            return false;
+
+        Clear();
+
+        Calc.Digit('9');
+        Calc.DecimalPoint();
+        Calc.Digit('9');
+        Calc.Digit('9');
+        Calc.Digit('9');
+        Calc.Digit('9');
+        Calc.Digit('9');
+        Calc.Digit('9');
+        Calc.Digit('9');
+        Calc.EnterExponent();
+        Calc.Digit('9');
+        Calc.Digit('9');
+        Calc.Equals();
+        Calc.ChangeSign();
+
+        Calc.Operator(Calc.STACKOP_MUL);
+        SetX(2);
+        Calc.Equals();
+
+        return check(mERROR, true);
+    }
+
     public int Run()
     {
         Calc = Global.Calc;
@@ -634,6 +686,7 @@ public class Tester
         if (!Test_16()) return -16; Total++;
         if (!Test_17()) return -17; Total++;
         if (!Test_18()) return -18; Total++;
+        if (!Test_19()) return -19; Total++;
 
         Clear();
 
