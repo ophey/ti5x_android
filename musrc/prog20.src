@@ -43,11 +43,16 @@ lbl D                       ;069
 
 lbl B'                      ;077
     cp
-    ( 1 0 - 1 + +/-
+    ( 1 0
+    -                       ;083
+    1
+    +
+    +/-
     inv log
     ee
     inv ee
-    x=t 83 0
+    x=t 83
+    0
     )
     rtn
 
