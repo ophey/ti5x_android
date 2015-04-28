@@ -3,6 +3,7 @@ Feature highlights:
 v4.1, 2015 April 27th:
    Add menu button for devices without a real button
    Fix handling for out-of-limit numbers (>"9.9999999 99")
+   Some fix in EE handling.
 
 v4.0, 2015 April 24th:
    use BCD numbers for better precision
