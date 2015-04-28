@@ -570,6 +570,7 @@ public class State
                     CurDisplay = CurDisplay.substring(0, CurDisplay.length() - 3);
                     SetShowing(CurDisplay);
                     ExponentEntered = false;
+                    CurFormat = FORMAT_FIXED;
                   }
 
                 if (FromResult)
