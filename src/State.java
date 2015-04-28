@@ -570,6 +570,7 @@ public class State
                     CurDisplay = CurDisplay.substring(0, CurDisplay.length() - 3);
                     SetShowing(CurDisplay);
                     ExponentEntered = false;
+                    CurFormat = FORMAT_FIXED;
                   }
 
                 if (FromResult)
@@ -658,6 +659,7 @@ public class State
         // check that FORMAT_FIXED can be used, if outside supported range use FORMAT_FLOAT
 
         if (UseFormat == FORMAT_FIXED
+            && NrDecimals == -1
             && X.getSignum() != 0
             && (aX.compareTo(minFixed) < 0
                 || aX.compareTo(maxFixed) >= 0))

@@ -663,6 +663,34 @@ public class Tester
         return check(mERROR, true);
     }
 
+    private boolean Test_20()
+    {
+        // verified on real TI-59
+        Clear();
+
+        Calc.Digit('1');
+        Calc.EnterExponent();
+        Calc.InvState = true;
+        Calc.EnterExponent();
+        Calc.Equals();
+
+        return check("1.", false);
+    }
+
+    private boolean Test_21()
+    {
+        // verified on real TI-59
+        Clear();
+
+        Calc.SetDisplayMode(Calc.FORMAT_FIXED, 3);
+        Calc.Digit('9');
+        Calc.ChangeSign();
+        Calc.InvState = true;
+        Calc.Log();
+
+        return check("0.000", false);
+    }
+
     public int Run()
     {
         Calc = Global.Calc;
@@ -687,6 +715,8 @@ public class Tester
         if (!Test_17()) return -17; Total++;
         if (!Test_18()) return -18; Total++;
         if (!Test_19()) return -19; Total++;
+        if (!Test_20()) return -20; Total++;
+        if (!Test_21()) return -21; Total++;
 
         Clear();
 
