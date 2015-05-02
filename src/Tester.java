@@ -67,7 +67,8 @@ public class Tester
     private boolean check(String display, boolean error)
     {
         boolean isErr = Calc.InErrorState();
-        Calc.CurState = Calc.ResultState;
+        if (Calc.CurState == Calc.ErrorState)
+            Calc.CurState = Calc.ResultState;
 
         if (!Calc.CurDisplay.equals(display))
             return false;
@@ -105,7 +106,7 @@ public class Tester
         Calc.EnterExponent();
         Calc.Digit('2');
 
-        return check("12.", false);
+        return check("12", false);
     }
 
     private boolean Test_3()
@@ -121,7 +122,11 @@ public class Tester
         Calc.EnterExponent();
         Calc.Digit('3');
 
-        return check("13. 02", false);
+        if (!check("13 02", false))
+            return false;
+
+        Calc.Equals();
+        return check("1300.", false);
     }
 
     private boolean Test_4()
@@ -691,6 +696,75 @@ public class Tester
         return check("0.000", false);
     }
 
+    private boolean Test_22()
+    {
+        // verified on real TI-59
+        Clear();
+
+        Calc.Digit('9');
+        Calc.EnterExponent();
+        Calc.Digit('9');
+        Calc.Equals();
+
+        if (!check("9. 09", false))
+          return false;
+
+        Calc.ClearAll();
+
+        if (!check("0", false))
+          return false;
+
+        Calc.Equals();
+        if (!check("0.", false))
+            return false;
+
+        Calc.Digit('8');
+        Calc.EnterExponent();
+        Calc.Digit('8');
+        Calc.DecimalPoint();
+        Calc.Digit('3');
+
+        if (!check("8.3 08", false))
+            return false;
+
+        Calc.Digit('6');
+        Calc.EnterExponent();
+        Calc.Digit('2');
+
+        if (!check("8.36 82", false))
+            return false;
+
+        Calc.Equals();
+        return check("8.36 82", false);
+    }
+
+    private boolean Test_23()
+    {
+        // verified on real TI-59
+        Clear();
+
+        Calc.SetDisplayMode (Calc.FORMAT_ENG, -1);
+
+        if (!check("0. 00", false))
+            return false;
+
+        Calc.Digit('2');
+
+        if (!check("2", false))
+            return false;
+
+        Calc.Equals();
+        if (!check("2. 00", false))
+            return false;
+
+        Calc.InvState = true;
+        Calc.EnterExponent();
+        Calc.InvState = false;
+        Calc.Equals();
+
+        return check("2. 00", false);
+    }
+
     public int Run()
     {
         Calc = Global.Calc;
@@ -717,6 +791,8 @@ public class Tester
         if (!Test_19()) return -19; Total++;
         if (!Test_20()) return -20; Total++;
         if (!Test_21()) return -21; Total++;
+        if (!Test_22()) return -22; Total++;
+        if (!Test_23()) return -23; Total++;
 
         Clear();
 

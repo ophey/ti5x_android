@@ -350,16 +350,8 @@ public class State
     public void ResetEntry()
       {
         CurState = EntryState;
-        if (CurFormat == FORMAT_FIXED)
-          {
-            CurDisplay = "0.";
-            ExponentEntered = false;
-          }
-        else
-          {
-            CurDisplay = "0. 00";
-            ExponentEntered = true;
-          } /*if*/
+        CurDisplay = "0";
+        ExponentEntered = false;
         SetShowing(CurDisplay);
       } /*ResetEntry*/
 
@@ -433,7 +425,8 @@ public class State
         OpStackNext = 0;
         ParenCount = 0;
         PreviousOp = -1;
-        CurFormat = FORMAT_FIXED;
+        if (CurFormat == FORMAT_FLOAT)
+          CurFormat = FORMAT_FIXED;
         ResetEntry();
       } /*ClearAll*/
 
@@ -490,11 +483,11 @@ public class State
             else
               {
                 CurDisplay =
-                        CurDisplay.substring(0,CurDisplay.length() - 1)
+                        CurDisplay.substring(0,CurDisplay.length())
                     +
                         new String(new char[] {TheDigit})
                     +
-                        CurDisplay.substring(CurDisplay.length() - 1);
+                        CurDisplay.substring(CurDisplay.length());
               } /*if*/
         break;
         case DecimalEntryState:
@@ -526,6 +519,25 @@ public class State
         case EntryState:
         case ExponentEntryState:
             CurState = DecimalEntryState;
+
+            // Add decimal point if needed
+            if (CurDisplay.indexOf(".") == -1)
+              {
+                  final int len = CurDisplay.length();
+                  if (ExponentEntered)
+                    {
+                        CurDisplay =
+                            CurDisplay.substring(0,len - 3)
+                            +
+                            new String(new char[] {'.'})
+                            +
+                            CurDisplay.substring(len - 3);
+                    }
+                  else
+                    {
+                        CurDisplay = CurDisplay + ".";
+                    }
+              }
         break;
       /* otherwise ignore */
           } /*CurState*/
@@ -571,8 +583,10 @@ public class State
                     CurDisplay = CurDisplay.substring(0, CurDisplay.length() - 3);
                     SetShowing(CurDisplay);
                     ExponentEntered = false;
-                    CurFormat = FORMAT_FIXED;
                   }
+
+                if (CurFormat == FORMAT_FLOAT)
+                    CurFormat = FORMAT_FIXED;
 
                 if (FromResult)
                     CurState = DecimalEntryState;
@@ -588,7 +602,8 @@ public class State
                 ExponentEntered = false;
                 if (CurFormat != FORMAT_FIXED)
                   {
-                    CurFormat = FORMAT_FIXED;
+                    if (CurFormat == FORMAT_FLOAT)
+                      CurFormat = FORMAT_FIXED;
                     CurNrDecimals = -1;
                     SetX(X); /* will cause redisplay */
                   } /*if*/
