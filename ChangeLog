@@ -1,5 +1,12 @@
 Feature highlights:
 
+v4.2, 2015 May 2nd:
+   Fix ML-01 indirect program call (pg* instead of pgm ind)
+   Display card/help for printout support of ML-01
+   Makes the card a bit more readable (lighter color)
+   Fix acos() asin() for values not in range of [-1 ; 1]
+   CLR must reset to fixed format.
+
 v4.1, 2015 April 27th:
    Add menu button for devices without a real button
    Fix handling for out-of-limit numbers (>"9.9999999 99")
