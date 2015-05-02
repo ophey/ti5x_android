@@ -53,60 +53,60 @@ lbl write
 
 lbl A
     prt
-    pgm ind 00 a
+    pg* 00 a
     prt
     inv sbr
 
 lbl B
     prt
-    pgm ind 00 b
+    pg* 00 b
     prt
     inv sbr
 
 lbl C
     prt
-    pgm ind 00 c
+    pg* 00 c
     prt
     inv sbr
 
 lbl D
     prt
-    pgm ind 00 d
+    pg* 00 d
     prt
     inv sbr
 
 lbl E
     prt
-    pgm ind 00 e
+    pg* 00 e
     prt
     inv sbr
 
 lbl A'
     prt
-    pgm ind 00 a'
+    pg* 00 a'
     prt
     inv sbr
 
 lbl B'
     prt
-    pgm ind 00 b'
+    pg* 00 b'
     prt
     inv sbr
 
 lbl C'
     prt
-    pgm ind 00 c'
+    pg* 00 c'
     prt
     inv sbr
 
 lbl D'
     prt
-    pgm ind 00 d'
+    pg* 00 d'
     prt
     inv sbr
 
 lbl E'
     prt
-    pgm ind 00 e'
+    pg* 00 e'
     prt
     inv sbr
