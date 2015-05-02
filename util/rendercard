@@ -368,11 +368,12 @@ suboffset = -0.2 # vertical offset for subscript, relative to basefontsize
 superoffset = 0.5 # vertical offset for superscript, relative to basefontsize
 superoffsetb = 0.6 # vertical offset for superscript before, relative to basefontsize
 xheightscale = 0.65
-orange = tuple(i / 255 for i in (0x95, 0x50, 0x1c))
+orange = tuple(i / 170 for i in (0x95, 0x50, 0x1c))
+dorange = tuple(i / 255 for i in (0x95, 0x50, 0x1c))
 black = (0.0, 0.0, 0.0)
 colors = \
     {
-        "user" : {"fg" : black, "bg" : orange},
+        "user" : {"fg" : black, "bg" : dorange},
         "system" : {"fg" : orange, "bg" : black},
     }
 
