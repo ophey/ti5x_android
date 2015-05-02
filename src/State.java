@@ -433,6 +433,7 @@ public class State
         OpStackNext = 0;
         ParenCount = 0;
         PreviousOp = -1;
+        CurFormat = FORMAT_FIXED;
         ResetEntry();
       } /*ClearAll*/
 
