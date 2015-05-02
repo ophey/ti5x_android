@@ -298,9 +298,12 @@ public class Number
         else
             v = new BigDecimal(Math.cos(v.doubleValue()), mc);
     }
-    public void acos(int Angle)
+    public void acos(int Value)
     {
-        v = new BigDecimal(Math.acos(v.doubleValue()), mc).divide(trigScale2(Angle), mc);
+        if (v.compareTo(B_ONE.negate()) < 0 || v.compareTo(B_ONE) > 0)
+            error = true;
+        else
+            v = new BigDecimal(Math.acos(v.doubleValue()), mc).divide(trigScale2(Value), mc);
     }
 
     public void sin(int Angle)
@@ -312,9 +315,12 @@ public class Number
         else
             v = new BigDecimal(Math.sin(v.doubleValue()), mc);
     }
-    public void asin(int Angle)
+    public void asin(int Value)
     {
-        v = new BigDecimal(Math.asin(v.doubleValue()), mc).divide(trigScale2(Angle), mc);
+        if (v.compareTo(B_ONE.negate()) < 0 || v.compareTo(B_ONE) > 0)
+            error = true;
+        else
+            v = new BigDecimal(Math.asin(v.doubleValue()), mc).divide(trigScale2(Value), mc);
     }
 
     public void tan(int Angle)

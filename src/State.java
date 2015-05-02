@@ -1066,6 +1066,10 @@ public class State
         if (InvState)
           {
               X.asin(CurAng);
+              if (X.isError())
+                {
+                    SetErrorState(false);
+                }
           }
         else
           {
@@ -1080,6 +1084,10 @@ public class State
         if (InvState)
           {
               X.acos(CurAng);
+              if (X.isError())
+                {
+                    SetErrorState(false);
+                }
           }
         else
           {
