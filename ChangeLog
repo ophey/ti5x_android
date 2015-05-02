@@ -1,5 +1,8 @@
 Feature highlights:
 
+v4.3, 2015 May 2nd:
+   Again some more work on EE and Eng mode handling.
+
 v4.2, 2015 May 2nd:
    Fix ML-01 indirect program call (pg* instead of pgm ind)
    Display card/help for printout support of ML-01
