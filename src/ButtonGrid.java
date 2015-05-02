@@ -870,6 +870,20 @@ public class ButtonGrid extends android.view.View
                             else
                               {
                                 Calc.MemoryOp(Calc.MEMOP_STO, AccumDigits, GotInd);
+
+                                /* special case, if pgm is 01 then store mm in 00 is selecting an
+                                   alternate program to have printout. In this case we change the
+                                   actual card/help to correspond to the target program. */
+                                if (Calc.CurBank == 1 && AccumDigits == 0 && Global.Label != null)
+                                  {
+                                      int ProgNr = (int)Calc.X.getInt();
+                                      if (ProgNr >= 1 && ProgNr <= Calc.MaxBanks && Calc.Bank[ProgNr] != null)
+                                        {
+                                            Calc.FillInLabels(ProgNr); // if not done already
+                                            Global.Label.SetHelp
+                                                (Calc.Bank[ProgNr].Card, Calc.Bank[ProgNr].Help);
+                                        }
+                                  }
                               } /*if*/
                         break;
                         case 43: /*RCL*/
