@@ -5,5 +5,5 @@
 <label slot="a">n</label>
 <label slot="b">±p <ArrowR/> n ± p</label>
 <label slot="c">a <ArrowR/> n × a</label>
-<label slot="d">a <ArrowR/> n k ÷ a</label>
+<label slot="d">a <ArrowR/> n ÷ a</label>
 </carddef>
