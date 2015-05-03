@@ -149,6 +149,8 @@ label_slots = \
         "aprime" : {"row" : 3, "cells" : 1, "align" : "center"},
         "bprime" : {"row" : 3, "cells" : 2, "align" : "center"},
         "abprime" : {"row" : 3, "cells" : set((1, 2)), "align" : "center"},
+        "bcprime" : {"row" : 3, "cells" : set((2, 3)), "align" : "center"},
+        "deprime" : {"row" : 3, "cells" : set((4, 5)), "align" : "center"},
         "cprime" : {"row" : 3, "cells" : 3, "align" : "center"},
         "dprime" : {"row" : 3, "cells" : 4, "align" : "center"},
         "eprime" : {"row" : 3, "cells" : 5, "align" : "center"},
