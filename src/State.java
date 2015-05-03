@@ -1274,8 +1274,9 @@ public class State
         Number Sign = new Number(X);
         Sign.signum();
 
+        X.abs();
+
         Number Degrees = new Number(X);
-        Degrees.abs();
         Degrees.intPart();
 
         Number Fraction = new Number(X);

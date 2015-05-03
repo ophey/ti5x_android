@@ -161,8 +161,21 @@ public class Tester
 
         Calc.InvState = true;
         Calc.D_MS();
+        Calc.InvState = false;
 
-        return check("30.1348", false);
+        if (!check("30.1348", false))
+            return false;
+
+        SetX(-30.1348);
+        Calc.D_MS();
+
+        if (!check("-30.23", false))
+            return false;
+
+        Calc.InvState = true;
+        Calc.D_MS();
+
+        return check("-30.1348", false);
     }
 
     private boolean Test_6()
