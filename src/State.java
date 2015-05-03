@@ -537,6 +537,7 @@ public class State
                     {
                         CurDisplay = CurDisplay + ".";
                     }
+                  SetShowing(CurDisplay);
               }
         break;
       /* otherwise ignore */

@@ -722,6 +722,10 @@ public class Tester
         Calc.EnterExponent();
         Calc.Digit('8');
         Calc.DecimalPoint();
+
+        if (!check("8. 08", false))
+            return false;
+
         Calc.Digit('3');
 
         if (!check("8.3 08", false))
