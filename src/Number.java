@@ -66,8 +66,16 @@ public class Number
 
     public Number(double d)
     {
-        v = new BigDecimal(d, mc);
-        error = false;
+        if (d > 9.9999999e99 || Double.isInfinite(d) || Double.isNaN(d))
+          {
+              v = B_ERROR;
+              error = true;
+          }
+        else
+          {
+              v = new BigDecimal(d, mc);
+              error = false;
+          }
     }
 
     public Number(String s)
@@ -137,8 +145,16 @@ public class Number
 
     public void set(double d)
     {
-        v = new BigDecimal(d, mc);
-        error = false;
+        if (d > 9.9999999e99 || Double.isInfinite(d) || Double.isNaN(d))
+          {
+              v = B_ERROR;
+              error = true;
+          }
+        else
+          {
+              v = new BigDecimal(d, mc);
+              error = false;
+          }
     }
 
     public void set(Number n)
