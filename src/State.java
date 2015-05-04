@@ -28,13 +28,14 @@ public class State
     public final static int DecimalEntryState = 1;
     public final static int ExponentEntryState = 2;
     public final static int ResultState = 10;
-    public final static int ErrorState = 11;
     public int CurState = EntryState;
     public boolean ExponentEntered = false; /* whether the dispay as 00 exp at the end */
     public int ParenCount = 0;
     public boolean InvState = false; /* INV has been pressed/executed */
     public boolean FromResult = false;
     // whether the current value is from a result RCL, or a typed number
+
+    public static boolean inError = false;
 
     String CurDisplay; /* current number display */
     android.os.Handler BGTask;
@@ -249,6 +250,7 @@ public class State
         ProgRunningSlowly = false;
         AllowRunningSlowly = false;
         ResetLabels();
+        inError = false;
         for (int i = 0; i < MaxFlags; ++i)
           {
             Flag[i] = false;
@@ -358,7 +360,7 @@ public class State
     public void Enter()
       /* finishes the entry of the current number. */
       {
-        if (CurState != ResultState && CurState != ErrorState)
+        if (CurState != ResultState)
           {
             int Exp;
             if (ExponentEntered)
@@ -401,7 +403,7 @@ public class State
           {
             Global.Disp.SetShowingError(LastShowing);
           } /*if*/
-        CurState = ErrorState;
+        inError = true;
         if (AlsoStopProgram || Flag[FLAG_STOP_ON_ERROR])
           {
             StopProgram();
@@ -410,8 +412,7 @@ public class State
 
     public boolean InErrorState()
       {
-        return
-            CurState == ErrorState;
+        return inError;
       } /*InErrorState*/
 
     public boolean ImportInProgress()
@@ -422,6 +423,7 @@ public class State
 
     public void ClearAll()
       {
+        inError = false;
         OpStackNext = 0;
         ParenCount = 0;
         PreviousOp = -1;
@@ -432,18 +434,13 @@ public class State
 
     public void ClearEntry()
       {
-        if (CurState != ResultState)
+        if (inError)
           {
-            if (CurState == ErrorState)
-              {
-                CurState = ResultState;
-                SetX(X);
-              }
-            else
-              {
-                ResetEntry();
-              } /*if*/
-          } /*if*/
+              inError = false;
+              SetX(X);
+          }
+        else if (CurState != ResultState)
+            ResetEntry();
       } /*ClearEntry*/
 
     public void Digit
@@ -459,7 +456,6 @@ public class State
         switch (CurState)
           {
         case EntryState:
-        case ErrorState:
         case DecimalEntryState:
             if (ExponentEntered)
               {
@@ -471,7 +467,6 @@ public class State
         switch (CurState)
           {
         case EntryState:
-        case ErrorState:
             if (CurDisplay.charAt(0) == '0')
               {
                 CurDisplay = new String(new char[] {TheDigit}) + CurDisplay.substring(1);
@@ -758,10 +753,7 @@ public class State
       )
       /* sets the display to show the specified value. */
       {
-        if (CurState != ErrorState)
-          {
-            CurState = ResultState;
-          } /*if*/
+        CurState = ResultState;
         if (NewX.isInfinite())
           {
              SetErrorState(false);
