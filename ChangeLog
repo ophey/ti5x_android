@@ -1,5 +1,9 @@
 Feature highlights:
 
+v4.4, 2015 May 4th:
+   Fix D.MS for negative numbers.
+   Fix ML-23 to give the output as described in manual.
+
 v4.3, 2015 May 2nd:
    Again some more work on EE and Eng mode handling.
 
