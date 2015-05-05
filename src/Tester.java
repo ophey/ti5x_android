@@ -403,7 +403,38 @@ public class Tester
             return false;
 
         Calc.SetDisplayMode (Calc.FORMAT_FIXED, -1);
-        return true;
+
+        Calc.DecimalPoint();
+        Calc.Digit('1');
+        Calc.Digit('2');
+        Calc.Digit('3');
+        Calc.Digit('4');
+        Calc.Digit('5');
+        Calc.Digit('6');
+        Calc.EnterExponent();
+        Calc.Digit('1');
+        Calc.Digit('2');
+        Calc.ChangeSign();
+        Calc.Equals();
+
+        if (!check("1.23456-13", false))
+            return false;
+
+        Calc.DecimalPoint();
+        Calc.Digit('9');
+        Calc.Digit('9');
+        Calc.Digit('4');
+        Calc.Digit('3');
+        Calc.Digit('2');
+        Calc.Digit('1');
+        Calc.ChangeSign();
+        Calc.EnterExponent();
+        Calc.Digit('1');
+        Calc.Digit('2');
+        Calc.ChangeSign();
+        Calc.Equals();
+
+        return check("-9.94321-13", false);
     }
 
     private boolean Test_14()
