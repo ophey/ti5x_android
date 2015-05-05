@@ -37,6 +37,7 @@ public class Number
     public final static Number ZERO  = new Number(0.0);
     public final static Number ONE   = new Number(1.0);
     public final static Number mONE  = new Number(-1.0);
+    public final static Number DOT9  = new Number(.999999999999);
     public final static Number TEN   = new Number(10.0);
     public final static Number PI    = new Number(Math.PI);
     public final static Number ERROR = new Number("9.9999999e99");
@@ -550,6 +551,7 @@ public class Number
     public int scaleExp(int UsingFormat)
     {
         int Exp = 0;
+        boolean infone = false;
         Number l = new Number(v);
         l.abs();
         l.log();
@@ -559,6 +561,8 @@ public class Number
             switch (UsingFormat)
             {
             case State.FORMAT_FLOAT:
+                if (l.v.signum() < 0)
+                    l.sub(DOT9);
                 Exp = (int)l.v.intValue();
                 break;
             case State.FORMAT_ENG:

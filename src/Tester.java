@@ -66,14 +66,17 @@ public class Tester
 
     private boolean check(String display, boolean error)
     {
-        boolean isErr = Calc.InErrorState();
-        if (Calc.CurState == Calc.ErrorState)
-            Calc.CurState = Calc.ResultState;
+        boolean inError = Calc.InErrorState();
+        if (inError)
+          {
+              Calc.CurState = Calc.ResultState;
+              Calc.inError = false;
+          }
 
         if (!Calc.CurDisplay.equals(display))
             return false;
 
-        if (isErr != error)
+        if (inError != error)
             return false;
 
         return true;
@@ -403,7 +406,38 @@ public class Tester
             return false;
 
         Calc.SetDisplayMode (Calc.FORMAT_FIXED, -1);
-        return true;
+
+        Calc.DecimalPoint();
+        Calc.Digit('1');
+        Calc.Digit('2');
+        Calc.Digit('3');
+        Calc.Digit('4');
+        Calc.Digit('5');
+        Calc.Digit('6');
+        Calc.EnterExponent();
+        Calc.Digit('1');
+        Calc.Digit('2');
+        Calc.ChangeSign();
+        Calc.Equals();
+
+        if (!check("1.23456-13", false))
+            return false;
+
+        Calc.DecimalPoint();
+        Calc.Digit('9');
+        Calc.Digit('9');
+        Calc.Digit('4');
+        Calc.Digit('3');
+        Calc.Digit('2');
+        Calc.Digit('1');
+        Calc.ChangeSign();
+        Calc.EnterExponent();
+        Calc.Digit('1');
+        Calc.Digit('2');
+        Calc.ChangeSign();
+        Calc.Equals();
+
+        return check("-9.94321-13", false);
     }
 
     private boolean Test_14()
@@ -782,6 +816,19 @@ public class Tester
         return check("2. 00", false);
     }
 
+    private boolean Test_24()
+    {
+        Clear();
+
+        SetX(-3);
+        Calc.Ln();
+        Calc.Operator(Calc.STACKOP_DIV);
+        SetX(2);
+        Calc.Equals();
+
+        return check(".5493061443", true);
+    }
+
     public int Run()
     {
         Calc = Global.Calc;
@@ -810,6 +857,7 @@ public class Tester
         if (!Test_21()) return -21; Total++;
         if (!Test_22()) return -22; Total++;
         if (!Test_23()) return -23; Total++;
+        if (!Test_24()) return -24; Total++;
 
         Clear();
 

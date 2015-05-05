@@ -435,9 +435,6 @@ public class Persistent
                         case State.ResultState:
                             StateName = "result";
                         break;
-                        case State.ErrorState:
-                            StateName = "error";
-                        break;
                         default:
                             throw new RuntimeException
                               (
@@ -458,7 +455,8 @@ public class Persistent
                           );
                       }
                     SaveBool(POut, "exponent_entered", Calc.ExponentEntered, 8);
-                    if (Calc.CurState != State.ResultState && Calc.CurState != State.ErrorState)
+                    SaveBool(POut, "error_state", Calc.inError, 8);
+                    if (Calc.CurState != State.ResultState)
                       {
                         POut.printf
                           (
@@ -874,7 +872,8 @@ public class Persistent
                           }
                         else if (Value == "error")
                           {
-                            Calc.CurState = State.ErrorState;
+                            // for compatibility with previous version
+                            Calc.inError = true;
                           }
                         else
                           {
@@ -887,6 +886,10 @@ public class Persistent
                     else if (Name == "exponent_entered")
                       {
                         Calc.ExponentEntered = GetBool(Value);
+                      }
+                    else if (Name == "error_state")
+                      {
+                        Calc.inError = GetBool(Value);
                       }
                     else if (Name == "display")
                       {
@@ -1576,11 +1579,12 @@ public class Persistent
                     case State.ResultState:
                         Calc.SetX(Calc.X);
                     break;
-                    case State.ErrorState:
-                        Calc.SetX(Calc.X);
-                        Calc.SetErrorState(false);
-                    break;
                       } /*switch*/
+                    if (Calc.inError)
+                      {
+                          Calc.SetX(Calc.X);
+                          Calc.SetErrorState(false);
+                      }
                     Calc.SetProgMode(Calc.ProgMode);
                   } /*if*/
                 if (Buttons != null)
