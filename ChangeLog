@@ -1,5 +1,9 @@
 Feature highlights:
 
+v4.5, 2015 May 5th:
+   Rework error state handling (orthogonal to other status)
+   Fix display of number < 0 with exponents
+
 v4.4, 2015 May 4th:
    Fix D.MS for negative numbers.
    Fix ML-23 to give the output as described in manual.
