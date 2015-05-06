@@ -829,6 +829,60 @@ public class Tester
         return check(".5493061443", true);
     }
 
+    private boolean Test_25()
+    {
+        Clear();
+
+        Calc.SetDisplayMode (Calc.FORMAT_ENG, -1);
+
+        SetX(.123456e-12);
+        Calc.Equals();
+
+        if (!check("123.456-15", false))
+            return false;
+
+        SetX(-.654321e-12);
+        Calc.Equals();
+
+        if (!check("-654.321-15", false))
+            return false;
+
+        SetX(.123456e12);
+        Calc.Equals();
+
+        if (!check("123.456 09", false))
+            return false;
+
+        SetX(5.2);
+        Calc.Equals();
+
+        if (!check("5.2 00", false))
+            return false;
+
+        SetX(5.2e12);
+        Calc.Equals();
+
+        if (!check("5.2 12", false))
+            return false;
+
+        // enter a number, adding exponent must not change format
+
+        Calc.DecimalPoint();
+        Calc.Digit('1');
+        Calc.Digit('2');
+        Calc.Digit('3');
+        Calc.Digit('4');
+        Calc.Digit('5');
+        Calc.Digit('6');
+        Calc.EnterExponent();
+        Calc.Digit('1');
+        Calc.Digit('0');
+        Calc.ChangeSign();
+        Calc.Equals();
+
+        return check("12.3456-12", false);
+    }
+
     public int Run()
     {
         Calc = Global.Calc;
@@ -858,6 +912,7 @@ public class Tester
         if (!Test_22()) return -22; Total++;
         if (!Test_23()) return -23; Total++;
         if (!Test_24()) return -24; Total++;
+        if (!Test_25()) return -25; Total++;
 
         Clear();
 

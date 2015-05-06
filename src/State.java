@@ -561,7 +561,8 @@ public class State
             if (!ExponentEntered)
               {
                 CurDisplay = CurDisplay + " 00";
-                CurFormat = FORMAT_FLOAT;
+                if (CurFormat == FORMAT_FIXED)
+                    CurFormat = FORMAT_FLOAT;
               } /*if*/
             CurState = ExponentEntryState;
             SetShowing(CurDisplay);
@@ -590,7 +591,8 @@ public class State
                     CurState = EntryState;
               }
             else
-              CurFormat = FORMAT_FLOAT;
+                if (CurFormat == FORMAT_FIXED)
+                    CurFormat = FORMAT_FLOAT;
         break;
         case ResultState:
             if (InvState)
