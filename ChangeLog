@@ -1,5 +1,9 @@
 Feature highlights:
 
+v4.6, 2015 May 6th:
+   Fix engineering mode (must be sticky)
+   Fix display of smalle negative numbers (above -1) with exponents
+
 v4.5, 2015 May 5th:
    Rework error state handling (orthogonal to other status)
    Fix display of number < 0 with exponents
