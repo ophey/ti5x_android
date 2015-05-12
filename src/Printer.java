@@ -36,7 +36,7 @@ public class Printer
     final static int CharHeight = 7;
     final static int CharHorGap = 1;
     final static int CharVertGap = 1;
-    final static int CharLines = 100; /* perhaps make this configurable? */
+    final static int CharLines = 800; /* perhaps make this configurable? */
 
     final int PaperWidth = (CharColumns * CharWidth + (CharColumns + 1) * CharHorGap) * (DotSize + DotGap) + DotGap;
     final int PaperHeight = (CharLines * CharHeight + (CharLines + 1) * CharVertGap) * (DotSize + DotGap) + DotGap;
@@ -245,7 +245,7 @@ public class Printer
           (
             /*width =*/ PaperWidth,
             /*height =*/ PaperHeight,
-            /*config =*/ android.graphics.Bitmap.Config.ARGB_8888
+            /*config =*/ android.graphics.Bitmap.Config.RGB_565
           );
         PaperDraw = new android.graphics.Canvas(Paper);
         PaperDraw.drawPaint(GraphicsUseful.FillWithColor(PaperColor));
@@ -255,31 +255,16 @@ public class Printer
     public void StartNewLine()
       /* advances the paper to the next line. */
       {
-      /* This sequence seems to take about a quarter of a second to execute on
-        my HTC Desire. I could probably speed it up, but I suspect it's already
-        faster than the real printer anyway. :) */
-        final int[] ScrollTemp = new int[PaperWidth * (PaperHeight - LineHeight)];
-        Paper.prepareToDraw();
-        Paper.getPixels
-          (
-            /*pixels =*/ ScrollTemp,
-            /*offset =*/ 0,
-            /*stride =*/ PaperWidth,
-            /*x =*/ 0,
-            /*y =*/ LineHeight, /* lose top line */
-            /*width =*/ PaperWidth,
-            /*height =*/ PaperHeight - LineHeight
-          );
-        Paper.setPixels
-          (
-            /*pixels =*/ ScrollTemp,
-            /*offset =*/ 0,
-            /*stride =*/ PaperWidth,
-            /*x =*/ 0,
-            /*y =*/ 0, /* move to top */
-            /*width =*/ PaperWidth,
-            /*height =*/ PaperHeight - LineHeight
-          );
+        // source rectangle, skip top line
+        android.graphics.Rect srcRect = new android.graphics.Rect
+            (0, LineHeight, PaperWidth, PaperHeight);
+
+        // destination rect, one line up
+        android.graphics.Rect destRect = new android.graphics.Rect(srcRect);
+        destRect.offset(0, -LineHeight);
+
+        PaperDraw.drawBitmap (Paper, srcRect, destRect, null);
+
         PaperDraw.drawRect /* fill in newly-scrolled-in area */
           (
             new android.graphics.Rect(0, PaperHeight - LineHeight, PaperWidth, PaperHeight),
