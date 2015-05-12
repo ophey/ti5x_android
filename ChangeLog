@@ -1,5 +1,11 @@
 Feature highlights:
 
+v4.7, 2015 May 12th:
+   Use 2nd key in all help page for consistency
+   Printer should now be lot faster.
+   Printer output has 800 history lines instead of 100.
+   After 2nd Prt and 2nd List a number is finalized.
+
 v4.6, 2015 May 6th:
    Fix engineering mode (must be sticky)
    Fix display of smalle negative numbers (above -1) with exponents
