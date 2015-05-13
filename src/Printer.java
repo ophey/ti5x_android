@@ -36,7 +36,7 @@ public class Printer
     final static int CharHeight = 7;
     final static int CharHorGap = 1;
     final static int CharVertGap = 1;
-    final static int CharLines = 700; /* perhaps make this configurable? */
+    final static int CharLines = 200; /* perhaps make this configurable? */
 
     final int PaperWidth = (CharColumns * CharWidth + (CharColumns + 1) * CharHorGap) * (DotSize + DotGap) + DotGap;
     final int PaperHeight = (CharLines * CharHeight + (CharLines + 1) * CharVertGap) * (DotSize + DotGap) + DotGap;
