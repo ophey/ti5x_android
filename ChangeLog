@@ -1,5 +1,8 @@
 Feature highlights:
 
+v4.8, 2015 May 13th:
+   Fix printer output (back to 700 lines).
+
 v4.7, 2015 May 12th:
    Use 2nd key in all help page for consistency
    Printer should now be lot faster.
