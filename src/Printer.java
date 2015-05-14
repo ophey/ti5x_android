@@ -245,7 +245,7 @@ public class Printer
           (
             /*width =*/ PaperWidth,
             /*height =*/ PaperHeight,
-            /*config =*/ android.graphics.Bitmap.Config.ARGB_4444
+            /*config =*/ android.graphics.Bitmap.Config.ARGB_8888
           );
         PaperDraw = new android.graphics.Canvas(Paper);
         PaperDraw.drawPaint(GraphicsUseful.FillWithColor(PaperColor));
@@ -255,6 +255,7 @@ public class Printer
     public void StartNewLine()
       /* advances the paper to the next line. */
       {
+        Paper.prepareToDraw();
         // source rectangle, skip top line
         android.graphics.Rect srcRect = new android.graphics.Rect
             (0, LineHeight, PaperWidth, PaperHeight);
