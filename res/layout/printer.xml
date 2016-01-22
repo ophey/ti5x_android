@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
 >
-    <ScrollView
+    <ListView
         android:id="@+id/paper_scroll"
         android:layout_width="280dp"
         android:layout_height="fill_parent"
@@ -15,5 +15,5 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
         />
-    </ScrollView>
+    </ListView>
 </LinearLayout>

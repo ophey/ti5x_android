@@ -18,6 +18,7 @@ package net.obry.ti5x;
 
 public class Printer
   {
+    /* the paper is a huge bitmap, we should record the actual value for the lines only */
     public android.graphics.Bitmap Paper;
       /* the idea is that this is low-resolution but will be displayed scaled up
         to make matrix dots more visible */
@@ -356,6 +357,11 @@ public class Printer
                   } /*for*/
               } /*if*/
           } /*for*/
+
+        /* we write the last line here, we always write to the last line as we have moved the
+            display before in StartNewLine()
+        */
+
         Paper.setPixels
           (
             /*pixels =*/ Line,

@@ -16,11 +16,14 @@ package net.obry.ti5x;
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
+// import android.widget.ArrayAdapter;
+
 public class PrinterView extends android.app.Activity
   {
-    android.widget.ScrollView PaperScroll;
+    android.widget.ListView PaperScroll;
     PaperView ThePaper;
     boolean FirstView = true;
+    ArrayAdapterItem adapter = new ArrayAdapterItem(this, R.id.paper_scroll, null);
 
     class PaperChangedListener implements Printer.Notifier
       {
@@ -41,8 +44,9 @@ public class PrinterView extends android.app.Activity
       {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.printer);
-        PaperScroll = (android.widget.ScrollView)findViewById(R.id.paper_scroll);
+        PaperScroll = (android.widget.ListView)findViewById(R.id.paper_scroll);
         ThePaper = (PaperView)findViewById(R.id.paper);
+        PaperScroll.setAdapter(adapter);
       } /*onCreate*/
 
     @Override
@@ -74,7 +78,7 @@ public class PrinterView extends android.app.Activity
         super.onWindowFocusChanged(HasFocus);
         if (HasFocus && FirstView)
           {
-            PaperScroll.fullScroll(android.view.View.FOCUS_DOWN);
+            // PaperScroll.fullScroll(android.view.View.FOCUS_DOWN);
             FirstView = false;
           } /*if*/
       } /*onWindowFocusChanged*/
