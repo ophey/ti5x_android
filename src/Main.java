@@ -68,7 +68,8 @@ public class Main extends android.app.Activity
       new BuiltinLibrary(R.string.leisure_library, R.raw.le),
       new BuiltinLibrary(R.string.mathutil_library, R.raw.mu),
       new BuiltinLibrary(R.string.electrical_library, R.raw.ee),
-      new BuiltinLibrary(R.string.surveying_library, R.raw.sy)
+      new BuiltinLibrary(R.string.surveying_library, R.raw.sy),
+      new BuiltinLibrary(R.string.contribution_library, R.raw.ct)
     };
 
     private static final String[] getBuiltinLibraries(android.content.Context ctx)

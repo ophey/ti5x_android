@@ -81,6 +81,11 @@
             <arg value="${out.res.absolute.dir}/raw"/>
             <arg value="sy"/>
         </exec>
+        <exec executable="util/mlmake">
+            <arg value="ctsrc"/>
+            <arg value="${out.res.absolute.dir}/raw"/>
+            <arg value="ct"/>
+        </exec>
     </target>
 <!--
     <target name="-pre-compile">
