@@ -1,5 +1,8 @@
 Feature highlights:
 
+v4.9, 2016 March 23th:
+   Add first version of the contrib library.
+
 v4.8, 2015 May 13th:
    Fix printer output (back to 700 lines).
 
