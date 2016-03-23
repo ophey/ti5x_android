@@ -29,8 +29,14 @@
 #         A capital-delta character is drawn.
 #     <div/>
 #         A divide symbol is drawn.
+#     <alpha/>
+#         A alpha character is drawn.
+#     <beta/>
+#         A beta character is drawn.
 #     <Gamma/>
 #         A capital-gamma character is drawn.
+#     <gamma/>
+#         A gamma character is drawn.
 #     <Omega/>
 #         A capital-omega character is drawn.
 #     <omega/>
@@ -343,7 +349,10 @@ symbols = \
         "div": defsymbol("div", "(\\270)"),
         "sqrt": defsymbol("sqrt", "(\\326)"),
         "epsilon": defsymbol("epsilon", "(\\145)"),
+        "alpha" : defsymbol("alpha", "(\\141)"),
+        "beta" : defsymbol("beta", "(\\142)"),
         "Gamma" : defsymbol("Gamma", "(\\107)"),
+        "gamma" : defsymbol("gamma", "(\\147)"),
         "integral" : defsymbol("integral", "(\\362)"),
         "lambda" : defsymbol("lambda", "(\\154)"),
         "mul": defsymbol("mul", "(\\264)"),
