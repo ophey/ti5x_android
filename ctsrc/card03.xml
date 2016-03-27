@@ -1,4 +1,4 @@
-<carddef style="system">
+<carddef style="user">
 <label slot="titleleft">Limits of functions and infinite series</label>
 <label slot="titleright">JS-03</label>
 <label slot="aprime">Lim f(x+h)</label>

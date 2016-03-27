@@ -1,4 +1,4 @@
-<carddef style="system">
+<carddef style="user">
 <label slot="titleleft">Type and standard equation of conic sections</label>
 <label slot="titleright">JS-01</label>
 <label slot="aprime"><ArrowR/> d</label>

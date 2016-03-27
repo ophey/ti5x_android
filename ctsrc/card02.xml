@@ -1,4 +1,4 @@
-<carddef style="system">
+<carddef style="user">
 <label slot="titleleft">Triangle Solution</label>
 <label slot="titleright">SB-02</label>
 <label slot="aprime"><alpha/></label>
