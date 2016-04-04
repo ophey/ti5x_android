@@ -36,6 +36,7 @@ public class State
     // whether the current value is from a result RCL, or a typed number
 
     public static boolean inError = false;
+    boolean TracePrintActivated = false;
 
     String CurDisplay; /* current number display */
     android.os.Handler BGTask;
@@ -105,6 +106,8 @@ public class State
     public final static int STACKOP_MOD = 5;
     public final static int STACKOP_EXP = 6;
     public final static int STACKOP_ROOT = 7;
+
+    static final int [] STACKOP_CODE = { 85, 75, 65, 55, 55, 45, 34 };
 
     public static class OpStackEntry
       {
@@ -180,7 +183,6 @@ public class State
       /* can be set by Op 18/19 to indicate error/no-error, and
         by Op 40 to indicate printer present */
     public final static int FLAG_STOP_ON_ERROR = 8; /* if set, program stops on error */
-    public final static int FLAG_TRACE_PRINT = 9; /* if set, calculation is traced on printer */
 
     public int PC, RunPC, CurBank, RunBank, NextBank;
     public int RegOffset;
@@ -357,7 +359,7 @@ public class State
         SetShowing(CurDisplay);
       } /*ResetEntry*/
 
-    public void Enter()
+    public void Enter(int op)
       /* finishes the entry of the current number. */
       {
         if (CurState != ResultState)
@@ -388,8 +390,14 @@ public class State
                 Number E = new Number(Math.pow(10, Exp));
                 X.mult(E);
               } /*if*/
-            SetX(X);
+            SetX(X, false);
             FromResult = false;
+          } /*if*/
+
+        if (TracePrintActivated && Global.Print != null)
+          {
+              /* no number when opening a parenthesis */
+              TraceDisplay(op != 53, (InvState ? "I" : " ") + Printer.KeyCodeSym(op));
           } /*if*/
       } /*Enter*/
 
@@ -423,6 +431,7 @@ public class State
 
     public void ClearAll()
       {
+        Enter(25);
         inError = false;
         OpStackNext = 0;
         ParenCount = 0;
@@ -437,7 +446,7 @@ public class State
         if (inError)
           {
               inError = false;
-              SetX(X);
+              SetX(X, true);
           }
         else if (CurState != ResultState)
             ResetEntry();
@@ -603,7 +612,7 @@ public class State
                     if (CurFormat == FORMAT_FLOAT)
                       CurFormat = FORMAT_FIXED;
                     CurNrDecimals = -1;
-                    SetX(X); /* will cause redisplay */
+                    SetX(X, false); /* will cause redisplay */
                   } /*if*/
               }
             else
@@ -751,7 +760,8 @@ public class State
 
     public void SetX
       (
-        Number NewX
+        Number NewX,
+        boolean Trace
       )
       /* sets the display to show the specified value. */
       {
@@ -770,10 +780,8 @@ public class State
           {
             SetErrorState(false);
           } /*if*/
-        if (Flag[FLAG_TRACE_PRINT] && Global.Print != null) /* fixme: there are some cases where I don't want to trigger this */
-          {
-            PrintDisplay(false);
-          } /*if*/
+        if (Trace)
+            TraceDisplay(true, "");
       } /*SetX*/
 
     public void ChangeSign()
@@ -803,7 +811,7 @@ public class State
         break;
         case ResultState:
             X.negate();
-            SetX(X);
+            SetX(X, true);
         break;
           } /*switch*/
       } /*ChangeSign*/
@@ -814,10 +822,10 @@ public class State
         int NewNrDecimals
       )
       {
-        Enter();
+        Enter(NewMode == FORMAT_FIXED ? 58 : 57);
         CurFormat = NewMode;
         CurNrDecimals = NewNrDecimals >= 0 && NewNrDecimals < 9 ? NewNrDecimals : -1;
-        SetX(X);
+        SetX(X, true);
       } /*SetDisplayMode*/
 
     void DoStackTop()
@@ -840,7 +848,7 @@ public class State
             X = ThisOp.Operand;
             if (X.isError())
             {
-                SetX(X);
+                SetX(X, false);
                 SetErrorState(false);
             }
         break;
@@ -854,7 +862,7 @@ public class State
 
             if (X.isError())
             {
-                SetX(X);
+                SetX(X, false);
                 SetErrorState(false);
             }
         break;
@@ -871,7 +879,7 @@ public class State
                     {
                         X.set(Number.ERROR);
                     }
-                  SetX(X);
+                  SetX(X, false);
                   SetErrorState(false);
               }
             else if (X.getSignum() < 0 && ThisOp.Operand.getSignum() <= 0)
@@ -887,7 +895,7 @@ public class State
                         ThisOp.Operand.pow(X);
                         X = ThisOp.Operand;
                     }
-                  SetX(X);
+                  SetX(X, false);
                   SetErrorState(false);
               }
             else
@@ -948,7 +956,7 @@ public class State
         int OpCode
       )
       {
-        Enter();
+        Enter(STACKOP_CODE[OpCode-1]);
         if (InvState)
           {
             switch (OpCode)
@@ -975,14 +983,14 @@ public class State
           } /*for*/
         if (PoppedSomething)
           {
-            SetX(X);
+            SetX(X, false);
           } /*if*/
         StackPush(OpCode);
       } /*Operator*/
 
     public void LParen()
       {
-        Enter();
+        Enter(53);
 
         if (ParenCount == MaxParen)
           SetErrorState(false);
@@ -998,7 +1006,7 @@ public class State
 
     public void RParen()
       {
-        Enter();
+        Enter(54);
         ParenCount--;
         boolean PoppedSomething = false;
         for (;;)
@@ -1015,13 +1023,13 @@ public class State
           } /*for*/
         if (PoppedSomething)
           {
-            SetX(X);
+            SetX(X, true);
           } /*if*/
       } /*RParen*/
 
     public void Equals()
       {
-        Enter();
+        Enter(95);
         if (IsOperator(PreviousOp))
           SetErrorState(false);
         else
@@ -1030,7 +1038,7 @@ public class State
               {
                 DoStackTop();
               } /*while*/
-            SetX(X);
+            SetX(X, true);
           }
       } /*Equals*/
 
@@ -1044,36 +1052,36 @@ public class State
 
     public void Square()
       {
-        Enter();
+        Enter(33);
         X.x2();
-        SetX(X);
+        SetX(X, true);
       } /*Square*/
 
     public void Sqrt()
       {
-        Enter();
+        Enter(34);
         X.sqrt();
         if (X.isError())
         {
             SetErrorState(false);
         }
-        SetX(X);
+        SetX(X, true);
       } /*Sqrt*/
 
     public void Reciprocal()
       {
-        Enter();
+        Enter(35);
         X.reciprocal();
         if (X.isError())
         {
             SetErrorState(false);
         }
-        SetX(X);
+        SetX(X, true);
       } /*Reciprocal*/
 
     public void Sin()
       {
-        Enter();
+        Enter(38);
         if (InvState)
           {
               X.asin(CurAng);
@@ -1086,12 +1094,12 @@ public class State
           {
               X.sin(CurAng);
           } /*if*/
-        SetX(X);
+        SetX(X, true);
       } /*Sin*/
 
     public void Cos()
       {
-        Enter();
+        Enter(39);
         if (InvState)
           {
               X.acos(CurAng);
@@ -1105,12 +1113,12 @@ public class State
               X.cos(CurAng);
           } /*if*/
 
-        SetX(X);
+        SetX(X, true);
       } /*Cos*/
 
     public void Tan()
       {
-        Enter();
+        Enter(30);
         if (InvState)
           {
               X.atan(CurAng);
@@ -1125,12 +1133,12 @@ public class State
               SetErrorState(false);
           }
 
-        SetX(X);
+        SetX(X, true);
       } /*Tan*/
 
     public void Ln()
       {
-        Enter();
+        Enter(23);
         if (InvState)
           {
               X.exp();
@@ -1145,12 +1153,12 @@ public class State
               SetErrorState(false);
           }
 
-        SetX(X);
+        SetX(X, true);
       } /*Ln*/
 
     public void Log()
       {
-        Enter();
+        Enter(28);
         if (InvState)
           {
               Number NewX = new Number(10.0);
@@ -1167,7 +1175,7 @@ public class State
               SetErrorState(false);
           }
 
-        SetX(X);
+        SetX(X, true);
       } /*Log*/
 
     public void Pi()
@@ -1180,12 +1188,12 @@ public class State
           {
               X.Pi();
           } /*if*/
-        SetX(X);
+        SetX(X, true);
       } /*Pi*/
 
     public void Int()
       {
-        Enter();
+        Enter(59);
         if (InvState)
           {
               X.fracPart();
@@ -1195,28 +1203,28 @@ public class State
               X.intPart();
           } /*if*/
 
-        SetX(X);
+        SetX(X, true);
       } /*Int*/
 
     public void Abs()
       {
-        Enter();
+        Enter(50);
 
         X.abs();
-        SetX(X);
+        SetX(X, true);
       } /*Abs*/
 
     public void SwapT()
       {
-        Enter();
+        Enter(32);
         final Number SwapTemp = X;
-        SetX(T);
+        SetX(T, true);
         T = SwapTemp;
       } /*SwapT*/
 
     public void Polar()
       {
-        Enter();
+        Enter(37);
 
         Number NewX, NewY;
 
@@ -1253,12 +1261,12 @@ public class State
           }
 
         T = NewX;
-        SetX(NewY);
+        SetX(NewY, true);
       } /*Polar*/
 
     public void D_MS()
       {
-        Enter();
+        Enter(88);
 
         // Must be done on the displayed value and not X. That is if Fix-01 is set, the number must
         // be with a single digit.
@@ -1308,7 +1316,7 @@ public class State
         X.add(Seconds);
         X.mult(Sign);
 
-        SetX(X);
+        SetX(X, true);
       } /*D_MS*/
 
     void ShowCurProg()
@@ -1329,33 +1337,45 @@ public class State
           );
       } /*ShowCurProg*/
 
+    public void TraceDisplay
+      (
+       boolean Data,
+       String Label
+      )
+      {
+          String L4 = (Label.length() == 1 ? "  " + Label + " "
+                      : (Label.length() == 4 ? Label :
+                         String.format(Global.StdLocale,"%4s",Label)));
+          if (TracePrintActivated && Global.Print != null)
+              PrintDisplay(Data, false, L4);
+      }
+
     public void PrintDisplay
       (
-        boolean Labelled
+        boolean Data,
+        boolean Labelled,
+        String Label
       )
       {
         if (Global.Print != null && CurDisplay != null)
           {
             final byte[] Translated = new byte[Printer.CharColumns];
+            String Disp = (Data ? CurDisplay : "");
             Global.Print.Translate
-              (
-                    String.format
-                      (
-                        Global.StdLocale,
-                        String.format
-                          (
-                            Global.StdLocale,
-                            "%%%ds",
-                            Math.max(1, 14 - CurDisplay.length())
-                          ),
-                        " "
-                      ).substring(1) /* because I can't have a 0-length format width */
-                +
-                    CurDisplay
-                +
-                    (InErrorState() ? "?" : " "),
-                Translated
-              );
+                (
+                 String.format
+                 (
+                  Global.StdLocale,
+                  String.format
+                  (Global.StdLocale, "%%%ds", Math.max(1, 14 - Disp.length())),
+                  " "
+                  ).substring(1) /* because I can't have a 0-length format width */
+                 + Disp
+                 + (InErrorState() ? "?" : " ")
+                 + (Label.length() == 4 ? Label : ""),
+                 Translated
+                 );
+
             if (Labelled)
               {
                 /* clear left-most characters of the last column */
@@ -1387,7 +1407,7 @@ public class State
 
     public void ClearMemories()
       {
-        Enter(); /*?*/
+        Enter(24); /*?*/
         for (int i = 0; i < MaxMemories; ++i)
           {
               Memory[i].set(0);
@@ -1396,7 +1416,7 @@ public class State
 
     public void ClearProgram()
       {
-        Enter(); /*?*/
+        Enter(29); /*?*/
         for (int i = 0; i < MaxProgram; ++i)
           {
             Program[i] = (byte)0;
@@ -1477,6 +1497,8 @@ public class State
     public static final int MEMOP_DIV = 6;
     public static final int MEMOP_EXC = 7;
 
+    static final int [] MEMOP_CODE = { 42, 43, 44, 44, 49, 49, 48 };
+
     public void MemoryOp
       (
         int Op,
@@ -1486,7 +1508,7 @@ public class State
       {
         if (RegNr >= 0)
           {
-            Enter();
+            Enter(MEMOP_CODE[Op-1]);
             if (InvState)
               {
                 switch (Op)
@@ -1517,7 +1539,7 @@ public class State
                     Memory[RegNr] = new Number(X);
                 break;
                 case MEMOP_RCL:
-                    SetX(Memory[RegNr]);
+                    SetX(Memory[RegNr], true);
                     ExponentEntered = false;
                 break;
                 case MEMOP_ADD:
@@ -1537,7 +1559,7 @@ public class State
                 case MEMOP_EXC:
                     final Number Temp = Memory[RegNr];
                     Memory[RegNr] = X;
-                    SetX(Temp);
+                    SetX(Temp, true);
                 break;
                   } /*switch*/
               /* all done */
@@ -1577,7 +1599,7 @@ public class State
       {
         if (Code >= 0)
           {
-            Enter();
+            Enter(Code);
             boolean OK = false; /* to begin with */
             int Op = 0;
             int RegNr = Code;
@@ -1604,7 +1626,7 @@ public class State
                         break;
                     case HIROP_RCL:
                         if (RegNr != 0)
-                            SetX(OpStack[RegNr - 1].Operand);
+                            SetX(OpStack[RegNr - 1].Operand, true);
                         break;
                     case HIROP_ADD:
                         if (RegNr == 0)
@@ -1712,7 +1734,7 @@ public class State
       {
         if (OpNr >= 0)
           {
-            Enter();
+            Enter(OpNr);
             boolean OK = false;
             do /*once*/
               {
@@ -1772,7 +1794,7 @@ public class State
 
                         X.intPart();
                         X.abs();
-                        SetX(X);
+                        SetX(X, true);
 
                         // but the decimal are considered for printing (just spaces)
 
@@ -1791,13 +1813,13 @@ public class State
                     OK = true;
                 break;
                 case 6:
-                    PrintDisplay(true);
+                    PrintDisplay(true, true, "");
                     OK = true;
                 break;
                 case 7:
                     if (Global.Print != null)
                       {
-                        Enter();
+                        Enter(OpNr);
                         final int PlotX = (int)X.getInt();
                         if (PlotX >= 0 && PlotX < Printer.CharColumns)
                           {
@@ -1854,7 +1876,7 @@ public class State
                 break;
                 case 10:
                     X.signum();
-                    SetX(X);
+                    SetX(X, true);
                     OK = true;
                 break;
                 case 11:
@@ -1886,7 +1908,7 @@ public class State
                           X.div(N_N);
                           X.sub(C2);
 
-                          SetX(X);
+                          SetX(X, true);
                           OK = true;
                       } /*if*/
                 break;
@@ -1907,7 +1929,7 @@ public class State
                           X = new Number(N_SIGMAY);
                           X.sub(C1);
                           X.div(N_N);
-                          SetX(X);
+                          SetX(X, true);
                           OK = true;
                       } /*if*/
                 break;
@@ -1940,7 +1962,7 @@ public class State
                           X.mult(C1);
                           X.div(C2);
 
-                          SetX(X);
+                          SetX(X, true);
                           OK = true;
                       } /*if*/
                 break;
@@ -1961,7 +1983,7 @@ public class State
 
                           X.mult(m);
                           X.add(C1);
-                          SetX(X);
+                          SetX(X, true);
                           OK = true;
                       } /*if*/
                 break;
@@ -1983,7 +2005,7 @@ public class State
                           X.sub(C1);
                           X.div(m);
 
-                          SetX(X);
+                          SetX(X, true);
                           OK = true;
                       } /*if*/
                 break;
@@ -1995,7 +2017,7 @@ public class State
                     N.div(100);
                     N.add(MaxProgram);
                     N.sub(1);
-                    SetX(N);
+                    SetX(N, true);
                     OK = true;
                 break;
                 case 18:
@@ -2017,7 +2039,7 @@ public class State
                 break;
                 case 50: /* extension! TIME IN SECONDS */
                     X.set(System.currentTimeMillis() / 1000.0);
-                    SetX(X);
+                    SetX(X, true);
                     OK = true;
                 break;
                 case 51: /* extension! RANDOM */
@@ -2040,13 +2062,13 @@ public class State
                                        )
                               /
                               (double)0x0100000000000000L);
-                        SetX(X);
+                        SetX(X, true);
                       }
                     OK = true;
                 break;
                 case 52: /* extension! DISPLAY REG OFFSET */
                     X.set(RegOffset);
-                    SetX(X);
+                    SetX(X, true);
                     OK = true;
                 break;
                 case 53: /* extension! SET REG OFFSET */
@@ -2059,11 +2081,15 @@ public class State
                           } /*if*/
                       }
                 break;
+                case 98:
+                    TracePrintActivated = !TracePrintActivated;
+                    OK = true;
+                    break;
                 case 99: /* extension! Test */
                     int Result = Global.Test.Run();
 
                     X.set(Result);
-                    SetX(X);
+                    SetX(X, true);
 
                     if (Result < 0)
                         SetErrorState(false);
@@ -2082,7 +2108,7 @@ public class State
 
     public void StatsSum()
       {
-        Enter();
+        Enter(78);
         if (StatsRegsAvailable())
           {
               Number X2 = new Number(X);
@@ -2119,7 +2145,7 @@ public class State
                       T.add(1);
                   } /*if*/
 
-              SetX(Memory[(RegOffset + STATSREG_N) % 100]);
+              SetX(Memory[(RegOffset + STATSREG_N) % 100], true);
           }
         else
             {
@@ -2160,7 +2186,7 @@ public class State
                   X.div(N_N1);
                   X.sqrt();
 
-                  SetX(X);
+                  SetX(X, true);
               }
             else
               {
@@ -2174,7 +2200,7 @@ public class State
                   X = new Number(N_SIGMAY);
                   X.div(N_N);
 
-                  SetX(X);
+                  SetX(X, true);
               }
           }
         else
@@ -2221,7 +2247,7 @@ public class State
                 Import.End();
                 break;
               } /*try*/
-            SetX(Value);
+            SetX(Value, false);
             OK = true;
           }
         while (false);
@@ -2768,7 +2794,6 @@ public class State
 
     public void StartRegisterListing()
       {
-        Enter();
         StartTask(new RegisterLister((int)X.getInt()), false);
       } /*StartRegisterListing*/
 
@@ -3028,7 +3053,7 @@ public class State
                 if (Type == TRANSFER_TYPE_LEA) /* extension! */
                   {
                     X.set(Loc);
-                    SetX(X);
+                    SetX(X, false);
                   }
                 else
                   {
@@ -3219,7 +3244,7 @@ public class State
       {
         if (NewPC >= 0)
           {
-            Enter();
+            Enter((Greater ? (Ind  ? 72 : 77) : (Ind ? 62 : 67)));
             if
               (
                 InvState ?
@@ -3643,7 +3668,7 @@ public class State
                           {
                             Global.Export.WriteNum(X);
                           } /*if*/
-                        PrintDisplay(false);
+                        PrintDisplay(true, false, "");
                       } /*if*/
                 break;
                 case 90: /*List*/

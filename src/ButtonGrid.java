@@ -1577,7 +1577,7 @@ public class ButtonGrid extends android.view.View
                           } /*if*/
                     break;
                     case 99: /*Prt*/
-                        Calc.Enter();
+                        Calc.Enter(99);
                         if (Calc.InvState) /* extension! */
                           {
                             Calc.GetNextImport();
@@ -1588,11 +1588,11 @@ public class ButtonGrid extends android.view.View
                               {
                                 Global.Export.WriteNum(Calc.X);
                               } /*if*/
-                            Calc.PrintDisplay(false);
+                            Calc.PrintDisplay(true, false, "");
                           } /*if*/
                     break;
                     case 90: /*List*/
-                        Calc.Enter();
+                        Calc.Enter(90);
                         if (Global.Print != null)
                           {
                             if (Calc.InvState)

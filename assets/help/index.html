@@ -185,6 +185,9 @@ performs various special operations, depending on the value of <I>nn</I>.
 <B>extension:</B> return the current time in seconds since 00:00:00 1st January 1970 UTC.
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Op</SPAN> <B>51</B> —
 <B>extension:</B> return a cryptographically-strong random value in [0.0 .. 1.0).
+<LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Op</SPAN> <B>98</B> —
+<B>extension:</B> Trace execution: the result of each calculation step will
+be printed on the printer. A second <SPAN CLASS="alttext">Op</SPAN> <B>98</B> will revert.
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Op</SPAN> <B>99</B> —
 <B>extension:</B> run the integrated test suite, return the number
 of tests passed or the flashing number of the test in error.
@@ -459,9 +462,6 @@ if there is an error condition, clear flag 7, otherwise leave it unchanged.
 
 <P>Stop on error: if flag 8 is set when an error condition occurs during program execution,
 execution immediately stops.
-
-<P>Trace execution: if flag 9 is set, the result of each calculation step will be printed
-on the printer.
 
 <P><A HREF="#Topics">Back to Topics</A>
 
@@ -809,6 +809,9 @@ is taken from the integer part of the displayed number.
 print a listing of the names and locations of all labels in the user program.
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Op</SPAN> <B>40</B> —
 set flag 7 to indicate that a printer is attached.
+<LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Op</SPAN> <B>98</B> —
+Activate the trace mode.Trace execution: the result of each calculation step will
+be printed on the printer.
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Adv</SPAN> — advance
 the paper by 1 line.
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">List</SPAN> — print out

@@ -798,7 +798,7 @@ public class Main extends android.app.Activity
                               } /*for*/
                             if (!OK)
                                 break;
-                            Global.Calc.SetX(X);
+                            Global.Calc.SetX(X, false);
                           }
                         while (false);
                         if (!OK)

@@ -1577,12 +1577,12 @@ public class Persistent
                     switch (Calc.CurState)
                       {
                     case State.ResultState:
-                        Calc.SetX(Calc.X);
+                        Calc.SetX(Calc.X, false);
                     break;
                       } /*switch*/
                     if (Calc.inError)
                       {
-                          Calc.SetX(Calc.X);
+                          Calc.SetX(Calc.X, false);
                           Calc.SetErrorState(false);
                       }
                     Calc.SetProgMode(Calc.ProgMode);

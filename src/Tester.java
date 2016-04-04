@@ -32,7 +32,7 @@ public class Tester
     private void SetX (double v)
     {
         Calc.X.set(v);
-        Calc.SetX(Calc.X);
+        Calc.SetX(Calc.X, false);
     }
 
     private void SetT (double v)
