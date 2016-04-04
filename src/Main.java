@@ -719,12 +719,7 @@ public class Main extends android.app.Activity
                           {
                             Clipboard.setText
                               (
-                                String.format
-                                  (
-                                    Global.StdLocale,
-                                    String.format(Global.StdLocale, "%%.%de", Global.NrSigFigures),
-                                    Global.Calc.X
-                                  )
+                                Global.Calc.X.formatString (Global.StdLocale, Global.NrSigFigures)
                               );
                           } /*if*/
                       } /*run*/
