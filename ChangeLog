@@ -1,5 +1,9 @@
 Feature highlights:
 
+v5.1, 2016 April 4th:
+   Fix copy full-precision crash
+   Better TRACE (Op-98) printer support
+
 v5.0, 2016 March 23th:
    Add more programs into the contribution library:
      - limits dans infinite series
