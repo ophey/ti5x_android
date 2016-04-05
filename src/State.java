@@ -396,8 +396,13 @@ public class State
 
         if (TracePrintActivated && Global.Print != null)
           {
-              /* no number when opening a parenthesis */
-              TraceDisplay(op != 53, (InvState ? "I" : " ") + Printer.KeyCodeSym(op));
+              /*  */
+              TraceDisplay
+                  // no number when:
+                  (op != 53     // opening a parenthesis
+                   && op != 25  // clr
+                   && op != 24, // ce
+                   (InvState ? "I" : " ") + Printer.KeyCodeSym(op));
           } /*if*/
       } /*Enter*/
 
