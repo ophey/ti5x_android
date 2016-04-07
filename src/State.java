@@ -1183,6 +1183,25 @@ public class State
         SetX(X, true);
       } /*Log*/
 
+    public void Percent()
+      {
+        Enter(20);
+
+        X.div(100);
+
+        if (OpStackNext > 0)
+            {
+                X.mult(OpStack[OpStackNext-1].Operand);
+            }
+
+        if (X.isError())
+          {
+              SetErrorState(false);
+          }
+
+        SetX(X, true);
+      } /*Percent*/
+
     public void Pi()
       {
         if (InvState) /* extension! */
@@ -3390,8 +3409,10 @@ public class State
                 case 24:
                     ClearEntry();
                 break;
-                case 25:
                 case 20:
+                    Percent();
+                break;
+                case 25:
                     ClearAll();
                 break;
               /* 26 invalid */
