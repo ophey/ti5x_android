@@ -94,7 +94,7 @@ public class ButtonGrid extends android.view.View
                         new ButtonDef("INV", "", White, ButtonBrown),
                         new ButtonDef("lnx", "log", White, ButtonBrown),
                         new ButtonDef("CE", "CP", White, ButtonBrown),
-                        new ButtonDef("CLR", "", Dark, ButtonYellow),
+                        new ButtonDef("CLR", "%", Dark, ButtonYellow),
                     },
                 new ButtonDef[]
                     {
@@ -1238,9 +1238,6 @@ public class ButtonGrid extends android.view.View
                         case 27: /* INV */
                             ButtonCode = 22;
                         break;
-                        case 20: /* CLR */
-                            ButtonCode = 25;
-                        break;
                         case 96: /* R/S */
                             ButtonCode = 91;
                         break;
@@ -1353,8 +1350,10 @@ public class ButtonGrid extends android.view.View
                     case 24:
                         Calc.ClearEntry();
                     break;
-                    case 25:
                     case 20:
+                        Calc.Percent();
+                    break;
+                    case 25:
                         Calc.ClearAll();
                     break;
                   /* 26 same as 21 */
