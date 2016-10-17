@@ -55,25 +55,19 @@ public class Help extends android.app.Activity
             LastScroll = null;
           } /*if*/
         LastContent = NewContent;
-        HelpView.setPictureListener
-          (
-            new android.webkit.WebView.PictureListener()
-              {
+
+        HelpView.setWebViewClient(new android.webkit.WebViewClient()
+            {
                 @Override
-                public void onNewPicture
-                  (
-                    android.webkit.WebView HelpView,
-                    android.graphics.Picture ThePicture
-                  )
-                  {
+                public void onPageFinished(android.webkit.WebView view, String url) {
                     if (LastScroll != null)
-                      {
-                        HelpView.scrollTo(LastScroll.x, LastScroll.y);
-                        LastScroll = null; /* only do once */
-                      } /*if*/
-                  } /*onNewPicture*/
-              } /*PictureListener*/
-          );
+                        {
+                            HelpView.scrollTo(LastScroll.x, LastScroll.y);
+                            LastScroll = null; /* only do once */
+                        } /*if*/
+                }
+            });
+
       } /*onCreate*/
 
     @Override
