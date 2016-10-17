@@ -1,0 +1,122 @@
+
+lbl CLR
+    cms
+    fix 9
+    0
+    inv sbr
+
+lbl A
+    12
+    sto 00
+    gto 021
+
+lbl C
+    6
+    sto 00
+    rcl 00
+    inv sbr
+    sto ind 00
+    dsz 0 021
+    0
+    inv sbr
+
+lbl D
+    sto 18
+    11
+    gto 063
+
+lbl B'
+    sto 18
+    6
+    gto 063
+
+lbl D'
+    sto 18
+    5
+    gto 063
+
+lbl B
+    sto 18
+    12
+    (
+    sto 00
+    -
+    4
+    )
+    sto 19
+    (
+    rcl 18
+    exc ind 00
+    ×
+    rcl ind 19
+    )
+    sum ind 00
+    1
+    sum ind 19
+    rcl ind 19
+    inv prd ind 00
+    0
+    inv sbr
+
+    sto 18
+    (
+    rcl 00
+    -
+    2
+    -
+    sto 00
+    2
+    )
+    sto 19
+    rcl 18
+    (
+    exc ind 00
+    ×
+    (
+    rcl ind 19
+    -
+    1
+    )
+    )
+    sum ind 00
+    rcl ind 19
+    inv prd ind 00
+    0
+    inv sbr
+
+lbl E
+    (
+    (
+    rcl 12
+    +
+    rcl 03
+    )
+    ÷
+    2
+    )
+    fix 0
+    d.ms
+    sto 13
+    (
+    (
+    rcl 10
+    +
+    rcl 05
+    )
+    ÷
+    2
+    )
+    d.ms
+    sto 14
+    fix 9
+    (
+    rcl 14
+    ee
+    +/-
+    2
+    +
+    rcl 13
+    )
+    inv ee
+    fix 9
+    inv sbr
