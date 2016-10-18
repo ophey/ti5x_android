@@ -57,32 +57,32 @@
      in between standard targets -->
     <target name="-pre-build">
         <exec executable="util/mlmake">
-            <arg value="mlsrc"/>
+            <arg value="modules/ml"/>
             <arg value="${out.res.absolute.dir}/raw"/>
             <arg value="ml"/>
         </exec>
         <exec executable="util/mlmake">
-            <arg value="lesrc"/>
+            <arg value="modules/le"/>
             <arg value="${out.res.absolute.dir}/raw"/>
             <arg value="le"/>
         </exec>
         <exec executable="util/mlmake">
-            <arg value="musrc"/>
+            <arg value="modules/mu"/>
             <arg value="${out.res.absolute.dir}/raw"/>
             <arg value="mu"/>
         </exec>
         <exec executable="util/mlmake">
-            <arg value="eesrc"/>
+            <arg value="modules/ee"/>
             <arg value="${out.res.absolute.dir}/raw"/>
             <arg value="ee"/>
         </exec>
         <exec executable="util/mlmake">
-            <arg value="sysrc"/>
+            <arg value="modules/sy"/>
             <arg value="${out.res.absolute.dir}/raw"/>
             <arg value="sy"/>
         </exec>
         <exec executable="util/mlmake">
-            <arg value="ctsrc"/>
+            <arg value="modules/ct"/>
             <arg value="${out.res.absolute.dir}/raw"/>
             <arg value="ct"/>
         </exec>
