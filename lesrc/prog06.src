@@ -1,0 +1,273 @@
+
+lbl D'
+    (
+    (
+    sto 15
+    +
+    350
+    +
+    |x|
+    -
+    (
+    rcl 15
+    -
+    350
+    +
+    |x|
+    )
+    )
+    ÷
+    2
+    -
+    350
+    )
+    inv sbr
+
+lbl B
+    (
+    sto 05
+    sum 06
+    -
+    rcl 04
+    )
+    ifflg 3 048
+    d'
+    sto 03
+    sum 01
+    op 22
+    (
+    rcl 05
+    -
+    1200
+    )
+    ifflg 3 068
+    d'
+    sto 14
+    sum 12
+    rcl 05
+    inv sbr
+
+lbl B'
+    rcl 03
+    inv sum 01
+    rcl 14
+    inv sum 12
+    op 32
+    rcl 05
+    inv sum 06
+    0
+    inv sbr
+
+lbl A
+    b
+    stflg 1
+    inv stflg 2
+    inv stflg 3
+    sto 04
+    x⇌t
+    fix 0
+    0
+    sto 01
+    sto 06
+    sto 02
+    sto 12
+    1199
+    inv x≥t 131
+    stflg 2
+    rcl 04
+    inv sbr
+
+lbl A'
+    stflg 3
+    sto 11
+    inv sbr
+
+lbl C
+    stflg 1
+    99
+    inv sbr
+
+lbl D
+    sto 07
+    fix 1
+    inv sbr
+
+lbl E
+    fix 0
+    (
+    (
+    rcl 06
+    +
+    400
+    ×
+    (
+    2
+    ×
+    rcl 07
+    -
+    rcl 02
+    )
+    sto 10
+    )
+    ÷
+    rcl 02
+    )
+    sto 09
+    (
+    (
+    rcl 12
+    ÷
+    25
+    +
+    1200
+    +
+    16
+    ×
+    rcl 10
+    )
+    -
+    (
+    rcl 01
+    ÷
+    25
+    +
+    rcl 04
+    +
+    16
+    ×
+    rcl 10
+    )
+    sto 08
+    )
+    sto 16
+    ifflg 3 317
+    inv ifflg 2 266
+    rcl 09
+    x⇌t
+    rcl 04
+    inv x≥t 248
+    rcl 08
+    inv sbr
+    1200
+    x≥t 263
+    (
+    rcl 08
+    +
+    rcl 16
+    )
+    inv sbr
+    rcl 09
+    inv sbr
+    rcl 08
+    ifflg 1 276
+    sbr 373
+    inv sbr
+    (
+    (
+    ce
+    -
+    rcl 04
+    )
+    -
+    24
+    x⇌t
+    (
+    16
+    +
+    2
+    ×
+    rcl 02
+    )
+    x≥t 300
+    x⇌t
+    )
+    x⇌t
+    0
+    x≥t 307
+    x⇌t
+    (
+    ce
+    +
+    rcl 08
+    )
+    sbr 373
+    inv sbr
+    (
+    rcl 11
+    ×
+    (
+    1200
+    -
+    rcl 04
+    )
+    ÷
+    (
+    rcl 11
+    +
+    rcl 02
+    )
+    )
+    sto 16
+    (
+    (
+    rcl 11
+    ×
+    rcl 04
+    +
+    400
+    ×
+    rcl 10
+    +
+    rcl 06
+    )
+    ÷
+    (
+    rcl 11
+    +
+    rcl 02
+    )
+    )
+    sto 08
+    gto 231
+    sto 13
+    x⇌t
+    2300
+    inv x≥t 386
+    x⇌t
+    inv sbr
+    x⇌t
+    rcl 04
+    x≥t 408
+    (
+    rcl 13
+    -
+    (
+    ce
+    -
+    2300
+    )
+    ÷
+    2
+    )
+    inv sbr
+    (
+    rcl 13
+    -
+    (
+    ce
+    -
+    rcl 04
+    )
+    ÷
+    2
+    )
+    inv sbr
+
+lbl clr
+    cms
+    fix 9
+    inv stflg 1
+    inv stflg 2
+    inv stflg 3
+    0
+    inv sbr
