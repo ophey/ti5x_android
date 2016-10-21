@@ -1595,6 +1595,12 @@ public class Persistent
                       } /*if*/
                     Buttons.invalidate();
                   } /*if*/
+
+                if (! Libs)
+                  {
+                    // we have loaded a new user's program, select it
+                    Global.Calc.SelectProgram(0, false);
+                  }
               } /*if*/
           } /*PostRun*/
       } /*Load*/
