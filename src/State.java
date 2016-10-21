@@ -289,7 +289,11 @@ public class State
                   {
                     Global.Label.SetHelp(null, null);
                   } /*if*/
-                Bank[i].Card.recycle();
+                else
+                  {
+                    Bank[i].Card.recycle();
+                    Bank[i].Card = null;
+                  }
               } /*if*/
             Bank[i] = null;
           } /*for*/
