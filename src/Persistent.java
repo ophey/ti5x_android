@@ -1595,6 +1595,12 @@ public class Persistent
                       } /*if*/
                     Buttons.invalidate();
                   } /*if*/
+
+                if (! Libs)
+                  {
+                    // we have loaded a new user's program, select it
+                    Global.Calc.SelectProgram(0, false);
+                  }
               } /*if*/
           } /*PostRun*/
       } /*Load*/
@@ -1675,6 +1681,8 @@ public class Persistent
         public void PostRun()
           {
             DoLoad.PostRun();
+            // we have loaded a new built-in library, select its first program
+            Global.Calc.SelectProgram(1, false);
           } /*PostRun*/
 
       } /*LoadBuiltinLibrary*/
