@@ -1681,6 +1681,8 @@ public class Persistent
         public void PostRun()
           {
             DoLoad.PostRun();
+            // we have loaded a new built-in library, select its first program
+            Global.Calc.SelectProgram(1, false);
           } /*PostRun*/
 
       } /*LoadBuiltinLibrary*/
