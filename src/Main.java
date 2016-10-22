@@ -1005,6 +1005,11 @@ public class Main extends android.app.Activity
                                             /*duration =*/ Toast.LENGTH_LONG
                                           ).show();
                                       } /*if*/
+                                    if (Step == LOAD_PROG)
+                                      {
+                                        // we have loaded a new user's program, select it
+                                        Global.Calc.SelectProgram(0, false);
+                                      }
                                 break;
                                   } /*switch*/
                               } /*if*/
