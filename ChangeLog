@@ -1,5 +1,8 @@
 Feature highlights:
 
+v5.7, 2016 October 22nd:
+   Fix handling of restoring state.
+
 v5.6, 2016 October 21st:
    Better handling of switch between user's prog & built-in libraries.
 
