@@ -1,0 +1,102 @@
+
+lbl A
+   pgm 16
+   a
+   inv sbr
+
+lbl B
+   pgm 16
+   b
+   inv sbr
+
+lbl C
+   prt
+   sto 02
+   inv sbr
+
+lbl D
+   prt
+   sto 03
+   inv sbr
+
+lbl E
+   prt
+   d.ms
+   sto 04
+   inv sbr
+
+lbl A'
+   prt
+   d.ms
+   sto 05
+   inv sbr
+
+lbl B'
+   (
+   rcl 02
+   -
+   rcl 03
+   )
+   sto 08
+   (
+   (
+   rcl 01
+   -
+   rcl 03
+   )
+   ÷
+   rcl 08
+   )
+   sto 10
+   (
+   x²
+   ×
+   .558
+   +
+   rcl 10
+   ×
+   .379
+   +
+   .024
+   )
+   sto 09
+   (
+   (
+   rcl 04
+   -
+   rcl 05
+   )
+   ×
+   rcl 09
+   )
+   (
+   (
+   ce
+   +
+   rcl 05
+   )
+   +
+   rcl 06
+   ÷
+   15
+   )
+   cp
+   x≥t 122
+   (
+   ce
+   +
+   24
+   )
+   sto 00
+   (
+   int
+   -
+   rcl 00
+   )
+   +/-
+   sto 07
+   rcl 00
+   inv d.ms
+   prt
+   adv
+   inv sbr
