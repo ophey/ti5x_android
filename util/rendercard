@@ -342,6 +342,7 @@ def defsymbol(name, psstr) :
     return newsymbol
 #end defsymbol
 
+# ref: http://www.vigyan.com/desl/TH000000.HTM
 symbols = \
     { # based on symbol font
         "angle" : defsymbol("angle", "(\\320)"),
@@ -365,6 +366,7 @@ symbols = \
         "Zeta" : defsymbol("Zeta", "(\\132)"),
         "zeta" : defsymbol("zeta", "(\\172)"),
         "Sigma" : defsymbol("Sigma", "(\\123)"),
+        "nu" : defsymbol("nu", "(\\156)"),
         "empty" : defsymbol("empty", "(\\306)"),     # circle with a bar
         "intersect" : defsymbol("intersect", "(\\307)"), # half-circle down
     }
