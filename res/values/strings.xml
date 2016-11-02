@@ -50,6 +50,7 @@
     <string name="leisure_library">Leisure Library (Built-In)</string>
     <string name="mathutil_library">Math Utilities Library (Built-In)</string>
     <string name="electrical_library">Electrical Engineering Library (Built-In)</string>
+    <string name="marine_navigation_library">Marine Navigation Library (Built-In)</string>
     <string name="surveying_library">Surveying Library (Built-In)</string>
     <string name="contribution_library">Contribution Library (Built-In)</string>
     <string name="import_prompt">Data to load:</string>
