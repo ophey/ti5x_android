@@ -728,8 +728,9 @@ public class ButtonGrid extends android.view.View
                     Calc.SetSlowExecution(true);
                 break;
                 case 91: /*R/S*/
-                case 96:
                     Calc.StopProgram();
+                break;
+                case 96: /* write: does nothing as not implemented */
                 break;
                   } /*switch*/
                 Handled = true; /* ignore everything else */
@@ -1238,8 +1239,7 @@ public class ButtonGrid extends android.view.View
                         case 27: /* INV */
                             ButtonCode = 22;
                         break;
-                        case 96: /* R/S */
-                            ButtonCode = 91;
+                        case 96: /* write */
                         break;
                           } /*switch*/
                         switch (ButtonCode)
@@ -1542,8 +1542,9 @@ public class ButtonGrid extends android.view.View
                         Calc.SetAngMode(Calc.ANG_GRAD);
                     break;
                     case 91:
-                    case 96:
                         Calc.StartProgram();
+                    break;
+                    case 96: /* write: not implemented */
                     break;
                     case 92:
                         Calc.Digit('0');
@@ -1557,7 +1558,6 @@ public class ButtonGrid extends android.view.View
                     case 95:
                         Calc.Equals();
                     break;
-                  /* 96 same as 91 */
                   /* 97 handled above */
                     case 98: /*Adv*/
                         if (Calc.InvState) /* extension! */
