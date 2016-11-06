@@ -730,7 +730,8 @@ public class ButtonGrid extends android.view.View
                 case 91: /*R/S*/
                     Calc.StopProgram();
                 break;
-                case 96: /* write: does nothing as not implemented */
+                case 96: /* write */
+                    Calc.WriteBank();
                 break;
                   } /*switch*/
                 Handled = true; /* ignore everything else */
@@ -1239,8 +1240,6 @@ public class ButtonGrid extends android.view.View
                         case 27: /* INV */
                             ButtonCode = 22;
                         break;
-                        case 96: /* write */
-                        break;
                           } /*switch*/
                         switch (ButtonCode)
                           /* special handling of program-editing/viewing functions
@@ -1544,8 +1543,6 @@ public class ButtonGrid extends android.view.View
                     case 91:
                         Calc.StartProgram();
                     break;
-                    case 96: /* write: not implemented */
-                    break;
                     case 92:
                         Calc.Digit('0');
                     break;
@@ -1557,6 +1554,9 @@ public class ButtonGrid extends android.view.View
                     break;
                     case 95:
                         Calc.Equals();
+                    break;
+                    case 96: /* write */
+                        Calc.WriteBank();
                     break;
                   /* 97 handled above */
                     case 98: /*Adv*/

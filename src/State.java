@@ -173,7 +173,9 @@ public class State
       /* 00 is user-entered program, others are loaded from library modules */
     public final int MaxFlags = 10;
     public final Number[] Memory;
+    public final Number[] CardMemory;
     public final byte[] Program;
+    public final byte[] CardProgram;
     public final ProgBank[] Bank; /* Bank[0].Program always points to Program */
     public byte[] ModuleHelp; /* overall help for loaded library module */
     public final boolean[] Flag;
@@ -309,6 +311,8 @@ public class State
         OpStack = new OpStackEntry[MaxOpStack];
         Memory = new Number[MaxMemories];
         Program = new byte[MaxProgram];
+        CardMemory = new Number[MaxMemories];
+        CardProgram = new byte[MaxProgram];
         Bank = new ProgBank[MaxBanks];
         Bank[0] = new ProgBank(Program, null, null);
         Flag = new boolean[MaxFlags];
@@ -2813,6 +2817,44 @@ public class State
         PC = RunPC;
         StopTask();
       } /*StopProgram*/
+
+    public void WriteBank()
+      {
+        Enter(96);
+        int N = (int)Math.abs(X.getInt());
+        if (N < 1 || N > 4)
+          {
+              SetErrorState(true);
+          } /*if*/
+        else if (InvState)
+          {
+            for (int k=(4-N)*30; k < (4-N+1)*30; k++)
+              {
+                if (k<MaxMemories)
+                  {
+                      Memory[k] = new Number(CardMemory[k]);
+                  }
+              }
+            for (int k=(N-1)*240; k < N*240; k++)
+              {
+                  Program[k] = CardProgram[k];
+              }
+          }
+        else
+          {
+            for (int k=(4-N)*30; k < (4-N+1)*30; k++)
+              {
+                if (k<MaxMemories)
+                  {
+                      CardMemory[k] = new Number(Memory[k]);
+                  }
+              }
+            for (int k=(N-1)*240; k < N*240; k++)
+              {
+                  CardProgram[k] = Program[k];
+              }
+          } /*if*/
+      } /*WriteBank*/
 
     void StartLabelListing()
       {
