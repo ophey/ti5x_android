@@ -22,16 +22,18 @@ Contents:
     util/ -- Python scripts for assembling/disassembling
         calculator programs, building the Master Library and
         other useful tasks.
-    mlsrc/  -- the source of the Master Library.
-    lesrc/  -- the source of the Leisure Library.
-    musrc/  -- the source of the Math Utilities Library.
-    sysrc/  -- the source of the Surveying Library.
-    eesrc/  -- the source of the Electrical Engineering Library.
-    art/    -- artwork for diagrams, higher-res scan for icon
-    tests/  -- some unit tests
-    README  -- this file
-    INSTALL -- build/installation instructions
-    COPYING -- licence (GPLv3)
+    modules/
+        ml/   -- the source of the Master Library.
+        le/   -- the source of the Leisure Library.
+        mu/   -- the source of the Math Utilities Library.
+        sy/   -- the source of the Surveying Library.
+        ee/   -- the source of the Electrical Engineering Library.
+        ct/   -- the source of the Contribution Library.x
+    art/      -- artwork for diagrams, higher-res scan for icon
+    tests/    -- some unit tests
+    README    -- this file
+    INSTALL   -- build/installation instructions
+    COPYING   -- licence (GPLv3)
 
 Note all text files are in UTF-8 encoding, and literal Unicode
 characters abound.
