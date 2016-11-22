@@ -222,7 +222,30 @@ public class Tester
 
         Calc.SwapT();
 
-        return check("5.", false);
+        if (!check("5.", false))
+            return false;
+
+        //  check result in proper quadran
+
+        Calc.SetAngMode(Calc.ANG_DEG);
+        Calc.InvState = false;
+
+        SetT(1);
+        SetX(-178.3044464);
+        Calc.Polar();
+
+        if (!check("-.0295886738", false))
+            return false;
+
+        Calc.InvState = true;
+        Calc.Polar();
+
+        if (!check("181.6955536", false))
+            return false;
+
+        Calc.SwapT();
+
+        return check("1.", false);
     }
 
     private boolean Test_7()

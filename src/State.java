@@ -1262,6 +1262,10 @@ public class State
 
         if (InvState)
           {
+              Number OldX = new Number(X);
+              Number OldT = new Number(T);
+              Number New180 = new Number(180);
+
               /* Rectangular -> Polar  */
               Number X2 = new Number(X);
               X2.x2();
@@ -1275,6 +1279,63 @@ public class State
               NewY = X;
               NewY.div(T);
               NewY.atan(CurAng);
+
+              /*
+               *  The function must NOW determine the quadrant in which the
+               *  result is delivered...
+               *
+               *                  y
+               *                  ^
+               *        II        |         I
+               *                  |
+               *                  |
+               *     -x <---------+---------> x
+               *                  |
+               *                  |
+               *        III       |        IV
+               *                  V
+               *                  -y
+               *
+               *  General Rules:
+               *
+               *  Quadrant  Value of atan
+               *  I         (Use Calculator Value) = 45
+               *            Coordinates (8[x],8[t])
+               *  II        Add 180 to the calculator value (Use Calculator Value)
+               *            Coordinates (-8[x],8[t])
+               *  III       Add 180 to the calculator value
+               *            Coordinates (-8[x],-8[t])
+               *  IV        Add 360 to the calculator value (Use Calculator Value)
+               *            Coordinates (8[x],-8[t])
+               */
+
+              if (OldX.compareTo(Number.ZERO) < 0)
+                {
+                    if (OldT.compareTo(Number.ZERO) < 0)
+                      {
+                          /* Quadrant III */
+                          NewY.add(New180);
+                      }
+                    else
+                      {
+                          /* Quadrant II */
+                          // We don't bother adding because the calculator does not do this
+                      }
+
+                }
+              else
+                {
+                    if (OldT.compareTo(Number.ZERO) < 0)
+                      {
+                          /* Quadrant IV */
+                          NewY.add(New180);
+                      }
+                    else
+                      {
+                          /* Quadrant I */
+                          // We don't bother adding because the signs are correct
+                      }
+                }
           }
         else
           {
