@@ -1,5 +1,9 @@
 Feature highlights:
 
+v5.8, 2016 November 23rd:
+   Add support for virtual card (2nd write)
+   Fix Inv P->R (result in proper quadrant)
+
 v5.7, 2016 October 22nd:
    Fix handling of restoring state.
 
