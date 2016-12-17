@@ -1680,7 +1680,20 @@ public class State
                 if (i == 0)
                     break;
                 --i;
-                PrintRegister[i + ColStart] = (byte)(Contents % 100);
+
+                byte val  = (byte)(Contents % 100);
+                byte col  = (byte)(val % 10);
+                byte line = (byte)(val / 10);
+
+                if (col > 7)
+                {
+                    col -= 8;
+                    line += 1;
+                }
+
+                val = (byte)(line * 10 + col);
+
+                PrintRegister[i + ColStart] = val;
                 Contents /= 100;
             }
       }
@@ -3285,6 +3298,7 @@ public class State
         boolean Set
       )
       {
+        Enter(86);
         if (FlagNr >= 0)
           {
             if (Ind)
@@ -3521,6 +3535,7 @@ public class State
                 break;
                 case 25:
                     ClearAll();
+                    Enter(25);
                 break;
               /* 26 invalid */
               /* 27 same as 22 */
@@ -3528,6 +3543,7 @@ public class State
                     Log();
                 break;
                 case 29: /*CP*/
+                    Enter(29);
                     T.set(Number.ZERO);
                 break;
               /* 20 same as 25 */
