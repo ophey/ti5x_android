@@ -3522,6 +3522,7 @@ public class State
                 break;
                 case 25:
                     ClearAll();
+                    Enter(25);
                 break;
               /* 26 invalid */
               /* 27 same as 22 */
