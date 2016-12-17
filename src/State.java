@@ -3285,6 +3285,7 @@ public class State
         boolean Set
       )
       {
+        Enter(86);
         if (FlagNr >= 0)
           {
             if (Ind)

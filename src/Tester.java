@@ -906,6 +906,18 @@ public class Tester
         return check("12.3456-12", false);
     }
 
+    private boolean Test_26()
+    {
+        Clear();
+
+        Calc.Digit('2');
+        Calc.SetFlag(1, false, true);
+        Calc.Digit('3');
+        Calc.Equals();
+
+        return check("3.", false);
+    }
+
     public int Run()
     {
         Calc = Global.Calc;
@@ -936,6 +948,7 @@ public class Tester
         if (!Test_23()) return -23; Total++;
         if (!Test_24()) return -24; Total++;
         if (!Test_25()) return -25; Total++;
+        if (!Test_26()) return -26; Total++;
 
         Clear();
 
