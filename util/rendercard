@@ -92,7 +92,8 @@
 # Note that the ones that treat a row as a single cell are incompatible
 # with the ones that divide it into multiple cells.
 #
-# Copyright 2011 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+# Copyright 2011 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>
+# Copyright 2012-2016 Pascal Obry <pascal@obry.net>
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -365,6 +366,7 @@ symbols = \
         "Zeta" : defsymbol("Zeta", "(\\132)"),
         "zeta" : defsymbol("zeta", "(\\172)"),
         "Sigma" : defsymbol("Sigma", "(\\123)"),
+        "rho"   : defsymbol("rho", "(\\162)"),
         "empty" : defsymbol("empty", "(\\306)"),     # circle with a bar
         "intersect" : defsymbol("intersect", "(\\307)"), # half-circle down
     }
