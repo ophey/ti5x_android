@@ -1680,7 +1680,20 @@ public class State
                 if (i == 0)
                     break;
                 --i;
-                PrintRegister[i + ColStart] = (byte)(Contents % 100);
+
+                byte val  = (byte)(Contents % 100);
+                byte col  = (byte)(val % 10);
+                byte line = (byte)(val / 10);
+
+                if (col > 7)
+                {
+                    col -= 8;
+                    line += 1;
+                }
+
+                val = (byte)(line * 10 + col);
+
+                PrintRegister[i + ColStart] = val;
                 Contents /= 100;
             }
       }
