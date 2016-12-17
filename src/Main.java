@@ -69,6 +69,7 @@ public class Main extends android.app.Activity
       new BuiltinLibrary(R.string.mathutil_library, R.raw.mu),
       new BuiltinLibrary(R.string.electrical_library, R.raw.ee),
       new BuiltinLibrary(R.string.surveying_library, R.raw.sy),
+      new BuiltinLibrary(R.string.aviation_library, R.raw.av),
       new BuiltinLibrary(R.string.contribution_library, R.raw.ct)
     };
 

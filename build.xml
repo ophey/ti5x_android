@@ -82,6 +82,11 @@
             <arg value="sy"/>
         </exec>
         <exec executable="util/mlmake">
+            <arg value="modules/av"/>
+            <arg value="${out.res.absolute.dir}/raw"/>
+            <arg value="av"/>
+        </exec>
+        <exec executable="util/mlmake">
             <arg value="modules/ct"/>
             <arg value="${out.res.absolute.dir}/raw"/>
             <arg value="ct"/>

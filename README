@@ -23,12 +23,13 @@ Contents:
         calculator programs, building the Master Library and
         other useful tasks.
     modules/
-        ml/   -- the source of the Master Library.
+        av/   -- the source of the Aviation Library.
+        ct/   -- the source of the Contribution Library.
+        ee/   -- the source of the Electrical Engineering Library.
         le/   -- the source of the Leisure Library.
+        ml/   -- the source of the Master Library.
         mu/   -- the source of the Math Utilities Library.
         sy/   -- the source of the Surveying Library.
-        ee/   -- the source of the Electrical Engineering Library.
-        ct/   -- the source of the Contribution Library.x
     art/      -- artwork for diagrams, higher-res scan for icon
     tests/    -- some unit tests
     README    -- this file
