@@ -3529,6 +3529,7 @@ public class State
                     Log();
                 break;
                 case 29: /*CP*/
+                    Enter(29);
                     T.set(Number.ZERO);
                 break;
               /* 20 same as 25 */
