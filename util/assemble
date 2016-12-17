@@ -297,6 +297,17 @@ def out(b) :
     loc += 1
 #end out
 
+def outloc(b) :
+    """outputs a single instruction byte."""
+    global pending_out, loc, prog
+    if loc == 1000 :
+        report_error("program too large, can't exceed 1000 steps")
+    #end if
+    flushout()
+    realout(b)
+    loc += 1
+#end out
+
 def outlabel(lab) :
     """outputs a label, will be resolved on the second pass."""
     global loc, prog
@@ -521,7 +532,7 @@ while True :
                                     #end if
                                 #end if
                                 if which in symbol :
-                                    out(symbol[which])
+                                    outloc(symbol[which])
                                     expect = None
                                     alt_state = False
                                 elif symbol["act"] == set_alt_state :
