@@ -3248,7 +3248,10 @@ public class State
             if (ReturnLast < 0)
                 {
                     if (!InErrorState())
-                      CurState = ResultState;
+                        {
+                            Enter(92);
+                            CurState = ResultState;
+                        }
                     StopProgram();
                     OK = true;
                     break;
@@ -3266,7 +3269,10 @@ public class State
             if (ReturnTo.FromInteractive)
               {
                 if (!InErrorState())
-                  CurState = ResultState;
+                    {
+                        Enter(92);
+                        CurState = ResultState;
+                    }
                 StopProgram();
                 OK = true;
                 break;
