@@ -398,6 +398,7 @@ public class State
                 Number E = new Number(Math.pow(10, Exp));
                 X.mult(E);
               } /*if*/
+
             SetX(X, false);
             FromResult = false;
           } /*if*/
@@ -474,7 +475,9 @@ public class State
           {
             ResetEntry();
           } /*if*/
+
         String SaveExponent = "";
+
         switch (CurState)
           {
         case EntryState:
@@ -486,6 +489,7 @@ public class State
               } /*if*/
         break;
           } /*switch*/
+
         switch (CurState)
           {
         case EntryState:
