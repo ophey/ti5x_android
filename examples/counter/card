@@ -1,0 +1,5 @@
+<carddef style="user">
+<label slot="titleleft">PASCAL OBRY LIBRARY</label>
+<label slot="titleright">PO-COUNTER</label>
+<label slot="primecenter">START COUNTER: <button>R/S</button></label>
+</carddef>

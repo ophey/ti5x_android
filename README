@@ -31,6 +31,7 @@ Contents:
         ct/   -- the source of the Contribution Library.x
     art/      -- artwork for diagrams, higher-res scan for icon
     tests/    -- some unit tests
+    examples/ -- some simple examples for building user's programs
     README    -- this file
     INSTALL   -- build/installation instructions
     COPYING   -- licence (GPLv3)
