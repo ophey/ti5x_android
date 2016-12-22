@@ -1520,7 +1520,6 @@ public class State
           } /*if*/
         PC = 0;
         ReturnLast = -1;
-        ResetLabels();
         T.set(0);
         for (int i = 0; i < MaxFlags; ++i)
           {
@@ -1530,11 +1529,6 @@ public class State
         if (CurBank == 0)
           {
             Global.Label.SetHelp(null, null);
-          } /*if*/
-        if (Bank[0].Card != null)
-          {
-          /* avoid "bitmap allocation exceeds budget" crashes */
-            Bank[0].Card.recycle();
           } /*if*/
         Bank[0].Card = null;
         Bank[0].Help = null;
