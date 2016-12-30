@@ -1,5 +1,11 @@
 Feature highlights:
 
+v6.0, 2016 December 30th:
+   First version of Marine Navigation Library.
+   First version of Aviation Library.
+   Fix some issues found while implementing the new libraries.
+   Add graphics in some help messages.
+
 v5.9, 2016 December 17th:
    Fix printer output in obscure context
    Fix some state when entering numbers
