@@ -1,0 +1,121 @@
+
+lbl A'
+   (
+   ce
+   inv d.ms
+   ÷
+   100
+   )
+   d.ms
+   inv sbr
+
+lbl A
+   adv
+   prt
+   a'
+   sto 01
+   inv sbr
+
+lbl B
+   prt
+   a'
+   sto 06
+   inv sbr
+   (
+   prt
+   ×
+   2
+   +
+   6
+   )
+   sto 02
+   rcl ind 02
+   +/-
+   x⇌t
+   1
+   sum 02
+   rcl ind 02
+   inv sbr
+
+lbl C
+   sbr 028
+   sto 07
+   p→r
+   sto 03
+   x⇌t
+   sto 04
+   inv sbr
+
+lbl D
+   sbr 028
+   sto 02
+   p→r
+   sto 05
+   (
+   x⇌t
+   -
+   rcl 04
+   -
+   rcl 03
+   ×
+   rcl 07
+   tan
+   +
+   rcl 05
+   ×
+   rcl 02
+   tan
+   )
+   sto 00
+   (
+   rcl 02
+   tan
+   -
+   rcl 07
+   tan
+   )
+   sto 05
+   (
+   (
+   rcl 01
+   cos
+   ×
+   rcl 05
+   )
+   1/x
+   ×
+   rcl 00
+   )
+   (
+   a'
+   +
+   rcl 06
+   )
+   pgm 25
+   sbr grad
+   inv sbr
+
+lbl E
+   (
+   (
+   rcl 00
+   ÷
+   rcl 05
+   -
+   rcl 03
+   )
+   ×
+   rcl 07
+   tan
+   -
+   rcl 04
+   )
+   (
+   a'
+   +
+   rcl 01
+   )
+   pgm 25
+   sbr grad
+   adv
+   inv sbr

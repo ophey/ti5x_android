@@ -1,0 +1,444 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #ce8c3b;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+  } /*.yellowbutton*/
+
+.brownbutton
+  {
+    background : #4e3836;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #ac9e80;
+  } /*.brownbutton*/
+
+.whitebutton
+  {
+    background : #ac9e80;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+  } /*.whitebutton*/
+
+.alttext
+  {
+    background : #222424;
+    padding : 1.5pt;
+    font-weight : bold;
+    color : #ac9e80;
+  } /*alttext*/
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  } /*.deflist DT*/
+.deflist DD
+  {
+    margin-left : 4em;
+  } /*.deflist DD*/
+
+.display
+  {
+     color : red;
+     font-weight : bold;
+     text-align : right;
+     margin-right : 2em;
+  }
+</STYLE>
+</HEAD>
+<BODY>
+<H1>AV-03 — Flight Plan and Verification</H1>
+
+<P>This program is basically a simplified version of AV-02 (Fligh Plan
+  with Wind). Whereas AV-02 assumes an optimum cruising speed (TAS)
+  and calculates ground speed, this program assumes ground speed
+  desired and calculates TAS needed. This allows the wind triangle to
+  be solved by simple vector addition. The result is a program that
+  will solve for true heading and true airspeed given course desired
+  and wind information.
+</P>
+<P>
+  Also incorporated is a routine to solve the time-speed-distance
+  equation for any one unknown. Thus elapsed time enroute and
+  estimated time of arrival can be predicted. Further, since the
+  time-burn-fuel equation is analogous, it too can be solved for any
+  one unknown. In addition, the flight plan can be upadted in-flight
+  (Flight Verification).
+</P>
+
+<H2>Time-Speed-Distance and Fuel Consumption</H2>
+
+<P>Given two values of the following equations, the third can be
+  calculated</p>
+
+<p>Dist = &Delta;t x GS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fuel =
+  &Delta;t x Burn
+
+<H2>Flight Plan (pre-flight)</H2>
+
+<P>This routine calculates elapsed time enroute and estimated time of
+  arrival gievn estimated time of departure, distance, and ground
+  speed for each leg, as well as total time and total distance for all
+  lefsz previous to the checkpoint. The following equations are
+  used:<P>
+
+<p>ETA = ETD + &Delta;t &nbsp;&nbsp;&nbsp;&nbsp;
+  tt = &Sigma;&Delta;t &nbsp;&nbsp;&nbsp;&nbsp;
+  tD = &Sigma;Dist
+</P>
+
+<H2>Flight Verification</H2>
+
+<p>This routine may be used to update the flight plan as it is being
+  flown. Given the actual time of arrival at a checkpoint, the actual
+  groundspeed and leg time are computed. The corrected total time my
+  be displayed. The following equation is used:<P>
+
+<P>&Delta;t = ATA - ATD</p>
+
+<H2>True Heading and Airspeed</H2>
+
+<P>Gievn the wind direction and velocity, desired groundspeed and true
+  course for each leg, this routine calculates the true course and
+  true airspeed to fly needed to achieve that desired ground speed and
+  course. The following equation is used:</p>
+
+<P>TAS(vector) = GS(vector)+ WV(vector)</P>
+
+<!-- Image below generated from SVG, PNG size 250x250 -->
+
+<P><IMG SRC="data:image/png;base64,
+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
+qzpDSfbEAAAAAElFTkSuQmCC
+" ALT="True Heading and Airspeed">
+
+<table>
+  <tr><td><b>TAS</b><td>= true airspeed</tr>
+  <tr><td><b>GS</b><td>= ground speed</tr>
+  <tr><td><b>Dist</b><td>= distance of leg</tr>
+  <tr><td><b>ETA</b><td>= estimated time of arrival</tr>
+  <tr><td><b>ETD</b><td>= estimated time of departure</tr>
+  <tr><td><b>ATA</b><td>= actual time of arrival</tr>
+  <tr><td><b>ATD</b><td>= actual time of departure</tr>
+  <tr><td><B>&Delta;t</B><td>= elapsed time for leg (calculated from &Delta;t = Dist / GS)</tr>
+  <tr><td><b>tt</b><td>= total time of fligh</tr>
+  <tr><td><b>Burn</b><td>= fuel flow (gal/hr or lbs/hr)</tr>
+  <tr><td><b>Fuel</b><td>= fuel consumed for leg</tr>
+  <tr><td><b>tD</b><td>= total distance</tr>
+</table>
+
+<DL class="deflist">
+  <DT>Select degree mode
+    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN> <SPAN CLASS="alttext">&nbsp;Deg&nbsp;</SPAN></DT>
+</DL>
+
+<h3>Time-Speed-Distance or Time-Fuel-Burn</h3>
+
+<DL class="deflist">
+  <DT>Initialize
+    <DD><SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>
+    <DD CLASS="display">0.000</DD></DT>
+
+  <h3>- distance</h3>
+
+  <DT>Enter time
+    <DD>&Delta;t <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD CLASS="display">0.0000
+  </DT>
+  <DT>Enter ground speed (or burn)
+    <DD>GS (or burn) <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD CLASS="display">0.0000
+  </DT>
+  <DT>Calculate distance (or fuel)
+    <DD><SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD CLASS="display">Dist (or fuel)</DD>
+  </DT>
+
+  <h3>- speed (or burn)</h3>
+
+  <DT>Enter time
+    <DD>&Delta;t <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD CLASS="display">0.0000
+  </DT>
+  <DT>Enter distance (or fuel)
+    <DD>Dist (or fuel) <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD CLASS="display">0.0000
+  </DT>
+  <DT>Calculate ground speed (or burn)
+    <DD><SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD CLASS="display">GS (or burn)</DD>
+  </DT>
+
+  <h3>- time</h3>
+
+  <DT>Enter ground speed (or burn)
+    <DD>GS (or burn) <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD CLASS="display">0.0000
+  </DT>
+  <DT>Enter distance (or fuel)
+    <DD>Dist (or fuel) <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD CLASS="display">0.0000
+  </DT>
+  <DT>Calculate time
+    <DD><SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD CLASS="display">&Delta;t (HH.MMSS)</DD>
+  </DT>
+</DL>
+
+<h3>Flight Planning</h3>
+
+<DL class="deflist">
+  <DT>Initialize
+    <DD><SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>
+    <DD CLASS="display">0.000</DD></DT>
+
+  <DT>Enter take-off time
+    <DD>ETD (HH.MMSS) <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    <DD CLASS="display">ETD</DT>
+
+  <DT>Enter ground speed
+    <DD>GS <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD CLASS="display">0.0000</DT>
+
+  <DT>Enter distance
+    <DD>Dist <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD CLASS="display">0.0000</DD>
+  </DT>
+
+  <DT>Calculate leg time
+    <DD><SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD CLASS="display">&Delta;t (HH.MMSS)</DD>
+  </DT>
+
+  <DT>Calculate ETA
+    <DD><SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+    <DD CLASS="display">ETA (HH.MMSS)</DD>
+  </DT>
+
+  <DT>Calculate total distance
+    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+        <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>
+    <DD CLASS="display">ETA</DD>
+    <DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD CLASS="display">tD</DD>
+    <DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD CLASS="display">tt (HH.MMSS)</DD>
+  </DT>
+</DL>
+
+<h3>Flight Verification</h3>
+
+<DL class="deflist">
+  <DT>Initialize
+    <DD><SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>
+    <DD CLASS="display">0.000</DD></DT>
+
+  <DT>Enter take-off time
+    <DD>ETD (HH.MMSS) <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    <DD CLASS="display">ETD</DT>
+
+  <DT>Enter anticipated ground speed
+    <DD>GS <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD CLASS="display">0.0000</DT>
+
+  <DT>Enter distance
+    <DD>Dist <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD CLASS="display">0.0000</DD>
+  </DT>
+
+  <DT>Calculate ETA
+    <DD><SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+    <DD CLASS="display">ETA (HH.MMSS)</DD>
+  </DT>
+
+  <DT>Enter actual time of arrival and calculates total distance and
+  time flown
+    <DD>ATA (HH.MMSS)<SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+        <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>
+    <DD CLASS="display">ATA (HH.MMSS)</DD>
+    <DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD CLASS="display">tD</DD>
+    <DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD CLASS="display">tt (HH.MMSS)</DD>
+  </DT>
+
+  <DT>Display actual leg time
+    <DD><SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+      <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD CLASS="display">&Delta;t</DD>
+  </DT>
+
+  <DT>Display actual ground speed
+    <DD><SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+      <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD CLASS="display">GS</DD>
+  </DT>
+</DL>
+
+<h3>True heading and Airspeed</h3>
+
+<DL class="deflist">
+  <DT>Enter ground speed
+    <DD>GS <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD CLASS="display">0.0000</DT>
+
+  <DT>Enter anticipated ground speed
+    <DD>GS <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD CLASS="display">0.0000</DT>
+
+  <DT>Enter time
+    <DD>&Delta;t <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD CLASS="display">0.0000
+  </DT>
+  <DT>Enter distance (or fuel)
+    <DD>Dist (or fuel) <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD CLASS="display">0.0000
+  </DT>
+  <DT>Calculate ground speed (or burn)
+    <DD><SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD CLASS="display">GS (or burn)</DD>
+  </DT>
+
+  <DT>Enter take-off time
+    <DD>ETD (HH.MMSS) <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    <DD CLASS="display">ETD</DT>
+
+  <DT>Enter distance
+    <DD>Dist <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD CLASS="display">0.0000</DD>
+  </DT>
+
+  <DT>Enter actual time of arrival and calculates total distance and
+  time flown
+    <DD>ATA (HH.MMSS) <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+        <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>
+    <DD CLASS="display">ATA (HH.MMSS)</DD>
+    <DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD CLASS="display">tD</DD>
+    <DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD CLASS="display">tt (HH.MMSS)</DD>
+  </DT>
+
+  <DT>Enter wind direction
+    <DD>WD <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+      <SPAN CLASS="alttext">&nbsp;B'&nbsp;</SPAN>
+    <DD CLASS="display">WD</DD>
+  </DT>
+
+  <DT>Enter wind velocity
+    <DD>WC <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+      <SPAN CLASS="alttext">&nbsp;C'&nbsp;</SPAN>
+    <DD CLASS="display">WV</DD>
+  </DT>
+
+  <DT>Enter true course and compute true heading and true airspeed
+    <DD>TC <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+      <SPAN CLASS="alttext">&nbsp;D'&nbsp;</SPAN>
+    <DD CLASS="display">TH</DD>
+    <DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD CLASS="display">TAS</DD>
+  </DT>
+</DL>
+
+<P>Registers used: 00, 06-17
+
+</BODY>

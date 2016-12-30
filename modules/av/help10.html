@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #ce8c3b;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+  } /*.yellowbutton*/
+
+.brownbutton
+  {
+    background : #4e3836;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #ac9e80;
+  } /*.brownbutton*/
+
+.whitebutton
+  {
+    background : #ac9e80;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+  } /*.whitebutton*/
+
+.alttext
+  {
+    background : #222424;
+    padding : 1.5pt;
+    font-weight : bold;
+    color : #ac9e80;
+  } /*alttext*/
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  } /*.deflist DT*/
+.deflist DD
+  {
+    margin-left : 4em;
+  } /*.deflist DD*/
+
+.display
+  {
+     color : red;
+     font-weight : bold;
+     text-align : right;
+     margin-right : 2em;
+  }
+</STYLE>
+</HEAD>
+<BODY>
+<H1>AV-10 — Rhumbline Navigation</H1>
+
+<P>This program calculates the rhumbline course between two points on
+  the earth's surface. The rhumb line connecting two points is that
+  one which makes the same oblique angle to all medians. While not
+  always the shortest route, flying a rhumbline course has the
+  advantage of allowing the pilot to maintain a single course. (See
+  test note of AV-04).
+</P>
+
+<P>Input for the program are the latitude and longitude of two points
+  (start and destination), and magnetic variation. Outputs are the
+  true course, magnetic course, distance along the rhumb line, and
+  cumulative distance for several legs. The single keystroke
+  <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN> causes the
+  dstrination coordinates for the present leg to become the start
+  coordinates for the succeeding leg, thus facilitating multiple-leg
+  computations.
+</P>
+<P><IMG SRC="data:image/png;base64,
+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
+" ALT="Rhumbline Navigation">
+
+<table>
+  <tr><td><b>L<sub>s</sub></b><td>= latitude of start
+  <tr><td><b>&lambda;<sub>s</sub></b><td>= longitude of start
+  <tr><td><b>L<sub>d</sub></b><td>= latitude of destination
+  <tr><td><b>&lambda;<sub>d</sub></b><td>= longitude of destination
+  <tr><td><b>MC</b><td>= magnetic course</tr>
+  <tr><td><b>TC</b><td>= true course</tr>
+  <tr><td><b>Var</b><td>= magnetic variation
+  <tr><td><b>Dist</b><td>= distance of leg
+</table>
+
+<DL class="deflist">
+  <DT>Select degree mode
+    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN> <SPAN CLASS="alttext">&nbsp;Deg&nbsp;</SPAN>
+  </DT>
+
+  <DT>Initialize
+    <DD><SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>
+    <DD CLASS="display">0.00</DD>
+  </DT>
+
+  <DT>Enter mag. variation (if needed) (+W, -E)
+    <DD>Var (deg)
+      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+      <SPAN CLASS="alttext">&nbsp;A'&nbsp;</SPAN>
+    <DD CLASS="display">Var</dd>
+  </DT>
+
+  <DT>Enter latitude of start
+    <DD>L<sub>s</sub> (DD.MMSS) <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD CLASS="display">L<sub>s</sub></dd>
+  </DT>
+  <DT>Enter longitude of start
+    <DD>&lambda;<sub>s</sub>  (DD.MMSS)
+      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+      <SPAN CLASS="alttext">&nbsp;B'&nbsp;</SPAN>
+    <DD CLASS="display">&lambda;<sub>s</sub></dd>
+  </DT>
+
+  <DT>Enter latitude of destination
+    <DD>L<sub>d</sub> (DD.MMSS) <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD CLASS="display">L<sub>d</sub></dd>
+  </DT>
+  <DT>Enter longitude of destination
+    <DD>&lambda;<sub>d</sub>  (DD.MMSS)
+      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+      <SPAN CLASS="alttext">&nbsp;C'&nbsp;</SPAN>
+    <DD CLASS="display">&lambda;<sub>d</sub></dd>
+  </DT>
+
+  <DT>Calculate results
+    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+      <SPAN CLASS="alttext">&nbsp;D'&nbsp;</SPAN>
+    <DD CLASS="display">0.00</dd>
+  </DT>
+
+  <DT>Display true course
+    <DD><SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD CLASS="display">TC (deg)</dd>
+    <p>optionally magnetic course
+    <DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD CLASS="display">MC (deg)</dd>
+  </DT>
+
+  <DT>Display distance
+    <DD><SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+    <DD CLASS="display">Dist</dd>
+  </DT>
+
+  <DT>Display total distance
+    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+      <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>
+    <DD CLASS="display">tot Dist</dd>
+  </DT>
+
+  <DT>For multiple legs, make (L<sub>d</sub>, &lambda;<sub>d</sub>)
+  the new (L<sub>s</sub>, &lambda;<sub>s</sub>), then restart above
+    but skip entering L<sub>s</sub> and &lambda;<sub>s</sub>.
+    <DD><SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    <DD CLASS="display">0.00</dd>
+  </DT>
+</DL>
+
+<P>Registers used: 00-11
+
+</BODY>

@@ -1,0 +1,315 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #ce8c3b;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+  } /*.yellowbutton*/
+
+.brownbutton
+  {
+    background : #4e3836;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #ac9e80;
+  } /*.brownbutton*/
+
+.whitebutton
+  {
+    background : #ac9e80;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+  } /*.whitebutton*/
+
+.alttext
+  {
+    background : #222424;
+    padding : 1.5pt;
+    font-weight : bold;
+    color : #ac9e80;
+  } /*alttext*/
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  } /*.deflist DT*/
+.deflist DD
+  {
+    margin-left : 4em;
+  } /*.deflist DD*/
+
+.display
+  {
+     color : red;
+     font-weight : bold;
+     text-align : right;
+     margin-right : 2em;
+  }
+</STYLE>
+</HEAD>
+<BODY>
+<H1>AV-22 — RNAV Flight Planning</H1>
+
+<P>The RNAV Flight Planning program facilitates planning flights for
+  RNAV equipped aircraft that require radial/DME distance to
+  establish waypoints. The program provides waypoint rhumbline
+  navigation with the capability to determine the latitude and
+  longitude of a point on the rhumbline track gievn the leg distance
+  down the track. This calculated position is stored and indexed for
+  use in the computation of the magnetic radial and DME distance
+  from a waypoint off the rhumbline track.
+</P>
+
+<P><IMG SRC="data:image/png;base64,
+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
+fgAAAABJRU5ErkJggg==
+" ALT="RNAV Flight">
+
+<P>The initial true course and distance are calculated by calling the
+  Rhumbline Navigation program (see AV-10).
+</P>
+
+<table>
+  <tr><td><b>D<sub>i</sub></b><td>= distance along the rhumbline track
+  <tr><td><b>TC</b><td>= true course</tr>
+  <tr><td><b>L<sub>s</sub></b><td>= latitude of starting position
+  <tr><td><b>&lambda;<sub>s</sub></b><td>= longitude of starting position
+  <tr><td><b>L<sub>d</sub></b><td>= latitude of destination
+  <tr><td><b>&lambda;<sub>d</sub></b><td>= longitude of destination
+  <tr><td><b>L<sub>i</sub></b><td>= latitude of intermediate point
+  <tr><td><b>&lambda;<sub>i</sub></b><td>= longitude of intermediate point
+</table>
+
+<P>The DME distance and true radial are computed using the Great
+  Circle Flying program (let L<sub>s</sub>, &lambda;<sub>s</sub> be
+  the coordinates of the VORTAC and use L<sub>d</sub>,
+  &lambda;<sub>d</sub> for intermediate waypoing in the equations for
+  AV-11). The magnetic radial is then computed by adding an input
+  magnetic variation to the true radial.
+</P>
+
+<DL class="deflist">
+  <DT>Select degree mode
+    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+      <SPAN CLASS="alttext">&nbsp;Deg&nbsp;</SPAN>
+  </DT>
+
+  <DT>Initialize
+    <DD><SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>
+    <DD CLASS="display">0.0000</DD>
+  </DT>
+
+  <h3>For each waypoint do the three steps below:</h3>
+
+  <DT>Enter number of waypoint to be entered
+    <DD>WP # <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    <DD CLASS="display">WP #</dd>
+  </DT>
+
+  <DT>Enter latitude of waypoint (+N, -S)
+    <DD>L (DD.MMSS) <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD CLASS="display">L (decimal)</dd>
+  </DT>
+
+  <DT>Enter longitude of waypoint (+W, -E)
+    <DD>&lambda; (DDD.MMSS) <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD CLASS="display">&lambda; (decimal)</dd>
+  </DT>
+
+  <h3>Then continue:</h3>
+
+  <DT>Enter starting waypoint number
+    <DD>WP<sub>s</sub> <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD CLASS="display">WP<sub>s</sub></dd>
+  </DT>
+
+  <DT>Enter destination waypoint number
+    <DD>WP<sub>d</sub> <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+    <DD CLASS="display">WP<sub>d</sub></dd>
+  </DT>
+
+  <DT>Calculate initial true course
+    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+      <SPAN CLASS="alttext">&nbsp;A'&nbsp;</SPAN>
+    <DD CLASS="display">TC (decimal)</dd>
+  </DT>
+
+  <DT>Calculate initial distance
+    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+      <SPAN CLASS="alttext">&nbsp;B'&nbsp;</SPAN>
+    <DD CLASS="display">Dist (n. mi.)</dd>
+  </DT>
+
+  <h3>Do the followings steps for each intermediate waypoint:</h3>
+
+  <DT>Enter number of waypoint from which intermediate waypoint is to
+    be defined
+    <DD>WP # <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD CLASS="display">WP #</dd>
+  </DT>
+
+  <DT>Enter number of intermediate waypoint to be defined
+    <DD>WP # <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+    <DD CLASS="display">WP #</dd>
+  </DT>
+
+  <DT>Calculate and store coordinates of intermediate waypoint
+    <DD>Leg Dist <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+      <SPAN CLASS="alttext">&nbsp;C'&nbsp;</SPAN>
+    <DD CLASS="display">WP<sub>i</sub></dd>
+  </DT>
+
+  <DT>Enter waypoint number of VORTAC to be moved to intermediate waypoint
+    <DD>WP # <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD CLASS="display">WP #</dd>
+  </DT>
+
+  <DT>Enter magnetic variation of VORTAC to be moved to intermediate waypoint
+    <DD>Var (+W -E) <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+      <SPAN CLASS="alttext">&nbsp;D'&nbsp;</SPAN>
+    <DD CLASS="display">Var</dd>
+  </DT>
+
+  <DT>Compute Radial from VORTAC to intermediate waypoint
+    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+      <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>
+    <DD CLASS="display">Radial</dd>
+  </DT>
+
+  <DT>Compute DME distance from VORTAC to intermediate waypoint
+    <DD><DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD CLASS="display">DME Dist</dd>
+  </DT>
+</DL>
+
+<P>Registers used: 00-12, 14-19, 20-XX
+
+</BODY>
