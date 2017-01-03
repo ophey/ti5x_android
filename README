@@ -31,6 +31,9 @@ Contents:
         mu/   -- the source of the Math Utilities Library.
         ng/   -- the source of the Marine Navigation Library.
         sy/   -- the source of the Surveying Library.
+    programs/
+        ee19_input_code/         -- builtin companion program for EE-19
+        ee19_construct_nam_code/ -- builtin companion program for EE-19
     art/      -- artwork for diagrams, higher-res scan for icon
     tests/    -- some unit tests
     examples/ -- some simple examples for building user's programs

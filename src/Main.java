@@ -901,13 +901,13 @@ public class Main extends android.app.Activity
                                   /* if not already done */
                             break;
                             case LOAD_BUILTIN_LIBRARY:
-                                Subtask = new Persistent.LoadBuiltinLibrary(Main.this, SelId);
+                                Subtask = new Persistent.LoadBuiltin(Main.this, true, SelId);
                             break;
                             case LOAD_PROG:
                                 if (SelId >= FirstBuiltinId)
                                   {
                                     // a built-in programs
-                                    Subtask = new Persistent.LoadBuiltinProgram(Main.this, SelId - FirstBuiltinId);
+                                    Subtask = new Persistent.LoadBuiltin(Main.this, false, SelId - FirstBuiltinId);
                                   }
                                 else
                                   {

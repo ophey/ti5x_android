@@ -58,6 +58,8 @@
     <string name="export_prompt">Append exported data to existing:</string>
     <string name="save_as_prompt">Save %s as:</string>
     <string name="button_feedback">Button feedback:</string>
+    <string name="input_code">EE-19 Input Code (Built-In)</string>
+    <string name="construct_nam_code">EE-19 Construct NAM Code (Built-In)</string>
 
   <!-- messages -->
     <string name="loading">Loading...</string>
