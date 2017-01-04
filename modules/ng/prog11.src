@@ -106,8 +106,7 @@ lbl C
    1/x
    )
    inv p→r
-   pgm 10
-   sbr |x|
+   pgm 10 sbr st*
    sto 18
    (
    (

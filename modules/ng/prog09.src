@@ -61,8 +61,7 @@ lbl E
    sin
    )
    inv p→r
-   pgm 10
-   sbr |x|
+   pgm 10 sbr st*
    -
    rcl 15
    -

@@ -69,7 +69,7 @@ lbl D
    )
    x⇌t
    inv p→r
-   pgm 10 sbr |x|
+   pgm 10 sbr st*
    (
    (
    (

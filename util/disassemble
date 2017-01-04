@@ -7,6 +7,9 @@
 # will check these against the current location and report any discrepancy.
 #
 # Copyright 2011 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+# Modified  2016 Steven Zoppi <about-ti5x@zoppi.org>.
+#	Fixed Disassembly Table to be compatible with the round-trip
+#	Syntax required by the assemble (python) script.
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -118,9 +121,13 @@ codes = \
         69 : regop("Op", True),
         60 : simple("Deg"),
         71 : {"sym" : "SBR", "act" : sbr},
-        72 : regop("STO Ind", False),
-        73 : regop("RCL Ind", False),
-        74 : regop("SUM Ind", False),
+        #    20170103 SZ: Modified the following to drop the syntax "STO IND" in favor
+        #                 of the shorthand version of the indirect referencing.  This
+        #                 syntactic change enables these to be used as labels (required
+        #                 for the Marine Navigation Library
+        72 : regop("ST*", True),
+        73 : regop("RC*", True),
+        74 : regop("SM*", True),
         75 : simple("-"),
         76 : {"sym" : "Lbl", "expect" : "label"},
         77 : locop("x≥t"),
@@ -165,7 +172,11 @@ show_location = False
 
 if len(sys.argv) == 2 and sys.argv[1] == "--locations" :
     show_location = True
+elif len(sys.argv) == 2 and sys.argv[1] == "--nolocations" :
+    show_location = False
 elif len(sys.argv) > 1 :
+    sys.stderr.write("Unexpected Args (%d)" % (len(sys.argv)))
+    sys.stderr.write("Argument 2: %s\n" % (sys.argv[2]))
     raise RuntimeError("unexpected args")
 #end if
 

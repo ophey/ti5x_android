@@ -103,7 +103,7 @@ lbl E
    )
    p→r
    inv p→r
-   sbr |x|
+   sbr st*
    sto 22
    rcl 21
 
@@ -119,7 +119,7 @@ lbl C
    rcl 22
    gto c
 
-lbl |x|
+lbl st*
    x⇌t
    sto 26
    180
