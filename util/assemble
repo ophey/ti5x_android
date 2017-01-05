@@ -17,7 +17,12 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
-#-
+#
+# Usage: cat prog | assemble [options]
+#
+#        options: --dumploc     : output progloc.src with location numbers
+#                 --checklabels : checks that all labels are defined
+#
 
 import sys
 import re
@@ -217,9 +222,12 @@ symbols["wrt"] = symbols["write"]
 symbols["lst"] = symbols["list"]
 
 check_labels = False
+dump_prog = False
 
 if len(sys.argv) == 2 and sys.argv[1] == "--checklabels" :
     check_labels = True
+elif len(sys.argv) == 2 and sys.argv[1] == "--dumploc" :
+    dump_prog = True
 elif len(sys.argv) > 1 :
     raise RuntimeError("unexpected args")
 #end if
@@ -246,6 +254,8 @@ lastsym = None
 
 prog = []
 labels = {}
+
+lprog = []
 
 def outprog():
     # print(labels)
@@ -351,6 +361,13 @@ labels_referenced = set()
 while True :
     if len(curline) == 0 and not EOF :
         curline += sys.stdin.readline()
+        if len(curline) > 0:
+            if curline == "\n":
+                lprog = lprog + [ "\n" ]
+            elif re.search(r"^[ \t]*[;#]", curline) != None:
+                lprog = lprog + [ "      %s" % ( curline ) ]
+            else:
+                lprog = lprog + [ "%03d:  %s" % ( loc, curline ) ]
         if len(curline) == 0 :
             EOF = True
         #end if
@@ -600,4 +617,10 @@ if check_labels :
     #end for
 #end if
 outprog()
+
+if dump_prog:
+    with open('progloc.src', 'w') as f:
+        for l in lprog:
+            f.write(l)
+
 sys.exit(exitstatus)
