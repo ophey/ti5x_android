@@ -1,99 +1,95 @@
-;+
-; Partial recreation of the "Electrical Engineering Library" module
-; that came with the original TI-58C/59 calculators.
-;-
 
 lbl B
-    deg
-    gto 009
+   deg
+   gto 009
 
 lbl pause
-    nop        ; ?? was deg
-    rcl 1
-    x⇌t
-    rcl 2
-    inv P→R
-    x⇌t
-    rad
-    rtn
+   nop        ; ?? was deg
+   rcl 1
+   x⇌t
+   rcl 2
+   inv p→r
+   x⇌t
+   rad
+   rtn
 
 lbl E'
-    (
-    ( rcl 2 inv lnx + 1/x )
-    ÷
-    2
-    )
-    rad
-    rtn
+   (
+   ( rcl 2 inv lnx + 1/x )
+   ÷
+   2
+   )
+   rad
+   rtn
 
 lbl A
-    pgm 4 A
-    rtn
+   pgm 4 a
+   rtn
 
 lbl D'
-    rcl 2
-    x⇌t
-    rcl 1
-    rtn
+   rcl 2
+   x⇌t
+   rcl 1
+   rtn
 
 lbl A'
-    sbr pause
-    lnx
-    sto 1
-    x⇌t
-    sto 2
-    x⇌t
-    rtn
+   sbr pause
+   lnx
+   sto 1
+   x⇌t
+   sto 2
+   x⇌t
+   rtn
 
 lbl B'
-    rad
-    rcl 1
-    inv lnx
-    x⇌t
-    rcl 2
-    P→R
-    sto 2
-    x⇌t
-    sto 1
-    rtn
+   rad
+   rcl 1
+   inv lnx
+   x⇌t
+   rcl 2
+   p→r
+   sto 2
+   x⇌t
+   sto 1
+   rtn
 
 lbl C
-    sbr pause
-    x²
-    ( x⇌t ×
-;#086
-    2
-    )
-    P→R
-    sto 2
-    x⇌t
-    sto 1
-    rtn
+   sbr pause
+   x²
+   ( x⇌t ×
+   ;#086
+   2
+   )
+   p→r
+   sto 2
+   x⇌t
+   sto 1
+   rtn
 
 lbl D
-    sbr pause
-    √x
-    (
-    x⇌t
-    ÷
-    gto 086
+   sbr pause
+   √x
+   (
+   x⇌t
+   ÷
+   gto 086
 
 lbl E
-    1
-    sto 3
-    0 sto 4
-    pgm 4 E'
-    pgm 4 C'
-    rtn
+   1
+   sto 3
+   0 sto 4
+   pgm 4 e'
+   pgm 4 c'
+   rtn
 
 lbl C'
-    (
-    ( rcl 2 inv lnx - 1/x )
-    ÷ 2
-    )
-    rtn
+   (
+   ( rcl 2 inv lnx - 1/x )
+   ÷ 2
+   )
+   rtn
 
-lbl P→R
-    inv stf 1
-    pgm 4 sbr P→R
-    rtn
+lbl p→r
+   inv stf 1
+   pgm 4 sbr p→r
+   rtn
