@@ -237,6 +237,8 @@ public class Tester
         if (!check("-.0295886738", false))
             return false;
 
+        //
+
         Calc.InvState = true;
         Calc.Polar();
 
@@ -245,7 +247,36 @@ public class Tester
 
         Calc.SwapT();
 
-        return check("1.", false);
+        if (!check("1.", false))
+            return false;
+
+        //
+
+        Calc.InvState = false;
+        SetT(1);
+        SetX(180);
+        Calc.Polar();
+
+        if (!check("0.", false))
+            return false;
+
+        Calc.SwapT();
+
+        if (!check("-1.", false))
+            return false;
+
+        //
+
+        SetT(1);
+        SetX(270);
+        Calc.Polar();
+
+        if (!check("-1.", false))
+            return false;
+
+        Calc.SwapT();
+
+        return check("0.", false);
     }
 
     private boolean Test_7()

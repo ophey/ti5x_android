@@ -1263,98 +1263,222 @@ public class State
         Enter(37);
 
         Number NewX, NewY;
+        Number OldX, OldT;
+        Number New180;
+        Number New360;
+        /*
+         *  To ensure that we handle all cases equally, we initialize
+         *  the semicircle and full-circle parameters for the various
+         *  coordinate systems.
+         *
+         *  Full-Circle:
+         *    Gradian system = 400
+         *    Radian system  =  2π
+         *    Degree system  = 360
+         */
+        switch (CurAng)
+          {
+            case ANG_GRAD:
+              New180 = new Number(200);
+              break;
+            case ANG_RAD:
+              New180 = new Number(Number.PI);
+              break;
+            case ANG_DEG:
+            default: // Degrees
+              New180 = new Number(180);
+              break;
+          };
+
+        New360 = new Number(New180);
+        New360.add(New180);   // We simply double whatever the 180 number was
+        OldX = new Number(X);
+        OldT = new Number(T);
 
         if (InvState)
           {
-              Number OldX = new Number(X);
-              Number OldT = new Number(T);
-              Number New180 = new Number(180);
 
-              /* Rectangular -> Polar  */
-              Number X2 = new Number(X);
-              X2.x2();
-              Number Y2 = new Number(T);
-              Y2.x2();
+            /* Rectangular -> Polar  */
+            Number X2 = new Number(X);
+            X2.x2();
+            Number Y2 = new Number(T);
+            Y2.x2();
 
-              NewX = new Number(X2);
-              NewX.add(Y2);
-              NewX.sqrt();
+            NewX = new Number(X2);
+            NewX.add(Y2);
+            NewX.sqrt();
 
-              NewY = X;
-              NewY.div(T);
-              NewY.atan(CurAng);
-
-              /*
-               *  The function must NOW determine the quadrant in which the
-               *  result is delivered...
-               *
-               *                  y
-               *                  ^
-               *        II        |         I
-               *                  |
-               *                  |
-               *     -x <---------+---------> x
-               *                  |
-               *                  |
-               *        III       |        IV
-               *                  V
-               *                  -y
-               *
-               *  General Rules:
-               *
-               *  Quadrant  Value of atan
-               *  I         (Use Calculator Value) = 45
-               *            Coordinates (8[x],8[t])
-               *  II        Add 180 to the calculator value (Use Calculator Value)
-               *            Coordinates (-8[x],8[t])
-               *  III       Add 180 to the calculator value
-               *            Coordinates (-8[x],-8[t])
-               *  IV        Add 360 to the calculator value (Use Calculator Value)
-               *            Coordinates (8[x],-8[t])
-               */
-
-              if (OldX.compareTo(Number.ZERO) < 0)
+            NewY = X;
+            NewY.div(T);
+            NewY.atan(CurAng);
+            /*
+             *  20161012: SZoppi
+             *
+             *  The function must NOW determine the quadrant in which the
+             *  result is delivered...
+             *
+             *                  y
+             *                  ^
+             *        II        |         I
+             *           θ=+    |   θ=+
+             *                  |
+             *     -x <---------+---------> x
+             *                  |
+             *           θ=+    |   θ=-
+             *        III       |        IV
+             *                  V
+             *                  -y
+             *
+             *    For Cartesian (Rectangular) to Polar, we need to be careful
+             *    to note when the hardware inverts the sign of the angle in
+             *    the expected result so we use the following tests:
+             *
+             *      (x= 1, y= 0) = (R=1,     θ=   0°) Ok
+             *      (x= 1, y= 1) = (R=1.41~, θ=  45°) Ok
+             *      (x= 0, y= 1) = (R=1,     θ=  90°) Ok
+             *      (x=-1, y= 1) = (R=1.41~, θ= 135°) Ok
+             *      (x=-1, y= 0) = (R=1,     θ= 180°) Ok
+             *      (x=-1, y=-1) = (R=1.41~, θ= 225°) Ok
+             *      NOTE: At ≥270°, the Hardware returns
+             *            a NEGATIVE Angular result
+             *      (x= 0, y=-1) = (R=1,     θ= -90°) Ok
+             *      (x= 1, y=-1) = (R=1.41~, θ= -45°) Ok
+             *
+             *  General Rules:
+             *
+             *  Quadrant  Value of atan
+             *  I         (Use Calculator Value) = 45
+             *            Coordinates (8[x],8[t])
+             *  II        Add 180 to the calculator value (Use Calculator Value)
+             *            Coordinates (-8[x],8[t])
+             *  III       Add 180 to the calculator value
+             *            Coordinates (-8[x],-8[t])
+             *  IV        Add 360 to the calculator value (Use Calculator Value)
+             *            Coordinates (8[x],-8[t])
+             *
+             *  OldX is "Y"
+             *  OltT is "X"
+             */
+              if(OldX.compareTo(Number.ZERO) < 0)
+              {
+                if(OldT.compareTo(Number.ZERO) < 0)
                 {
-                    if (OldT.compareTo(Number.ZERO) < 0)
-                      {
-                          /* Quadrant III */
-                          NewY.add(New180);
-                      }
-                    else
-                      {
-                          /* Quadrant II */
-                          // We don't bother adding because the calculator does not do this
-                      }
-
+                  /*
+                   * Quadrant III
+                   * -X,-Y
+                   */
+                  NewY.add(New180);
                 }
-              else
+                  else
                 {
-                    if (OldT.compareTo(Number.ZERO) < 0)
-                      {
-                          /* Quadrant IV */
-                          NewY.add(New180);
-                      }
-                    else
-                      {
-                          /* Quadrant I */
-                          // We don't bother adding because the signs are correct
-                      }
+                  /*
+                   * Quadrant IV
+                   * +X,-Y
+                   */
+                  NewY.abs();
+                  NewY.negate();
                 }
+
+              }
+                else
+              {
+                if(OldT.compareTo(Number.ZERO) < 0)
+                {
+                  /*
+                   * Quadrant II
+                   * -X,+Y
+                   */
+                  NewY.add(New180);
+                }
+                  else
+                {
+                  /*
+                   * Quadrant I
+                   * +X,+Y
+                   */
+                  // We don't bother adding because the signs are correct
+                }
+              }
           }
-        else
+            else
           {
-              /* Polar -> Rectangular */
-              Number Xcos = new Number (X);
-              Number Xsin = new Number (X);
+            /*
+             *  20170106 SZoppi: Fixed Function
+             *  to convert from Cartesian Coordinates (x,y) to Polar Coordinates (r,θ):
+             *
+             *    r = √ ( x2 + y2 )
+             *    θ = tan-1 ( y / x )
+             *
+             *  Calculators may give the wrong value of tan-1 () when x or y are negative
+             *
+             *  The function must NOW determine the quadrant in which the
+             *  result is delivered...
+             *    t=R
+             *    θ=X
+             *  Result:
+             *    t=x
+             *    X=y
+             *
+             *    On the Hardware:
+             *
+             *    For Polar to Cartesian (Rectangular):
+             *
+             *      Java Reliable below θ=180°             Result OK  Modified
+             *                                             in Java?   Routine?
+             *      ------------------------------------------------------------
+             *      (R=1, θ=   0°) = (x= 1,     y=  0    ) Ok         Ok
+             *      (R=1, θ=  45°) = (x= 0.70~, y=  0.70~) Ok         Ok
+             *      (R=1, θ=  90°) = (x= 0,     y=  1    ) Ok         Ok
+             *      (R=1, θ= 135°) = (x=-0.70~, y=  0.70~) Ok         Ok
+             *      ------------------------------------------------------------
+             *      (R=1, θ= 180°) = (x=-1,     y=  0    ) NO         Ok
+             *      (R=1, θ= 225°) = (x=-0.70~, y= -0.70~) Ok         Ok
+             *      (R=1, θ= 270°) = (x= 0,     y= -1    ) NO         Ok
+             *      (R=1, θ= 315°) = (x= 0.70~, y= -0.70~) Ok         Ok
+             *      ------------------------------------------------------------
+             *
+             *    To Address the Discrepancies:
+             *
+             *    We need to modify the routine to calculate the return
+             *    quadrants because the Java library doesn't do an appropriate
+             *    job returning these values (at θ above 180°).
+             *
+             *    The means by which we can keep the angular values of θ
+             *    below 180 requires a little trick: we take the modulo(180) of θ
+             *    and use OldX (Modulo 360) value to determine the quadrant,
+             *    and therefore, correct the signs of the result are returned.
+             *
+             *    This algorithm works for all values of positive and negative θ.
+             *
+             */
 
-              Xcos.cos(CurAng);
-              Xsin.sin(CurAng);
+            /* Polar -> Rectangular */
 
-              NewX = new Number(T);
-              NewX.mult(Xcos);
+            Number Xtheta = new Number(X);
+            Number Xmod360 = new Number(X);
 
-              NewY = new Number(T);
-              NewY.mult(Xsin);
+            Xtheta.rem(New180);
+            Xmod360.rem(New360);
+            Xmod360.abs();
+
+
+            Number Xcos = new Number (Xtheta);
+            Number Xsin = new Number (Xtheta);
+
+            Xcos.cos(CurAng);
+            Xsin.sin(CurAng);
+
+            NewX = new Number(T);
+            NewX.mult(Xcos);
+
+            NewY = new Number(T);
+            NewY.mult(Xsin);
+
+            if(Xmod360.compareTo(New180) >= 0)
+            {
+              NewY.negate();
+              NewX.negate();
+            }
           }
 
         T = NewX;
