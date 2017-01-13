@@ -530,7 +530,7 @@ public class Main extends android.app.Activity
                                 /*NoneFound =*/ getString(R.string.no_modules),
                                 /*FileExts =*/ new String[] {Persistent.LibExt},
                                 /*SpecialItem =*/ getBuiltinLibraries(Main.this)
-                                  /* item representing selection of built-in Master Library */
+                                  /* item representing selection of built-in libraries */
                               ),
                         };
                     PickerExtra = (ViewGroup)getLayoutInflater().inflate(R.layout.prog_type, null);
