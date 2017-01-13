@@ -1681,6 +1681,88 @@ public class Persistent
 
       } /*LoadBuiltinLibrary*/
 
+    public static class LoadBuiltinProgram extends Global.Task
+      /* loads the included Master Library module into the calculator state. */
+      {
+        private final Load DoLoad;
+        private final android.content.Context ctx;
+        private final int SelId;
+      /* Unfortunately java.util.zip.ZipFile can't read from an arbitrary InputStream,
+        so I need to make a temporary copy of the master library out of my raw resources. */
+        private final String TempLibName = "temp.ti5x"; /* name for temporary copy */
+
+        public LoadBuiltinProgram
+          (
+            android.content.Context ctx,
+            int Id // Id number for the library 0 ml, 2 le, etc
+          )
+          {
+            this.ctx = ctx;
+            this.SelId = Id;
+            final String TempLibFile = ctx.getFilesDir().getAbsolutePath() + "/" + TempLibName;
+            DoLoad = new Load
+              (
+                /*FromFile =*/ TempLibFile,
+                /*Libs =*/ false,
+                /*CalcState =*/ false,
+                /*Disp =*/ Global.Disp,
+                /*Buttons =*/ Global.Buttons,
+                /*Calc =*/ Global.Calc
+              );
+          } /*LoadBuiltinLibrary*/
+
+        @Override
+        public boolean PreRun()
+          {
+            return
+                DoLoad.PreRun();
+          } /*PreRun*/
+
+        @Override
+        public void BGRun()
+          {
+            try
+              {
+                final java.io.InputStream LibFile = Main.BuiltinPrograms[SelId].getInputStream(ctx);
+                final java.io.OutputStream TempLib =
+                    ctx.openFileOutput(TempLibName, ctx.MODE_WORLD_READABLE);
+                  {
+                    byte[] Buffer = new byte[2048]; /* some convenient size */
+                    for (;;)
+                      {
+                        final int NrBytes = LibFile.read(Buffer);
+                        if (NrBytes <= 0)
+                            break;
+                        TempLib.write(Buffer, 0, NrBytes);
+                      } /*for*/
+                  }
+                TempLib.flush();
+                TempLib.close();
+              }
+            catch (java.io.FileNotFoundException Failed)
+              {
+                throw new RuntimeException("ti5x " + Main.BuiltinPrograms[SelId].getName(ctx)
+                                           + " load failed: " + Failed.toString());
+              }
+            catch (java.io.IOException Failed)
+              {
+                throw new RuntimeException("ti5x "+ Main.BuiltinPrograms[SelId].getName(ctx)
+                                           + " load failed: " + Failed.toString());
+              } /*try*/
+            DoLoad.BGRun();
+            ctx.deleteFile(TempLibName);
+          } /*BGRun*/
+
+        @Override
+        public void PostRun()
+          {
+            DoLoad.PostRun();
+            // we have loaded a new built-in library, select its first program
+            Global.Calc.SelectProgram(1, false);
+          } /*PostRun*/
+
+      } /*LoadBuiltinProgram*/
+
     public static void SaveState
       (
         android.content.Context ctx,

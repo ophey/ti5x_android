@@ -83,6 +83,21 @@ public class Main extends android.app.Activity
       return result;
     };
 
+    public static final BuiltinLibrary[] BuiltinPrograms =
+    {
+      new BuiltinLibrary(R.string.input_code, R.raw.ee19_input_code),
+      new BuiltinLibrary(R.string.construct_nam_code, R.raw.ee19_construct_nam_code)
+    };
+
+    private static final String[] getBuiltinPrograms(android.content.Context ctx)
+    {
+      String[] result = new String[BuiltinPrograms.length];
+
+      for (int i=0;i<BuiltinPrograms.length;i++)
+        result[i] = BuiltinPrograms[i].getName(ctx);
+      return result;
+    };
+
     public void ShowHelp
       (
         String Path,
@@ -506,7 +521,7 @@ public class Main extends android.app.Activity
                                 /*Prompt =*/ getString(R.string.prog_prompt),
                                 /*NoneFound =*/ getString(R.string.no_programs),
                                 /*FileExts =*/ new String[] {Persistent.ProgExt},
-                                /*SpecialItem =*/ null
+                                /*SpecialItem =*/ getBuiltinPrograms(Main.this)
                               ),
                             new Picker.PickerAltList
                               (
@@ -838,6 +853,7 @@ public class Main extends android.app.Activity
                   {
                     final String ProgName = Data.getData().getPath();
                     final int SelId = Data.getIntExtra(Picker.SpeIndexID, 0);
+                    final int FirstBuiltinId = Data.getIntExtra(Picker.BuiltinIndexID, 0);
                     final boolean IsLib = Data.getIntExtra(Picker.AltIndexID, 0) != 0;
                       /* assumes AltLists array passed to Picker has element 0 for
                         saved programs and element 1 for libraries */
@@ -888,15 +904,23 @@ public class Main extends android.app.Activity
                                 Subtask = new Persistent.LoadBuiltinLibrary(Main.this, SelId);
                             break;
                             case LOAD_PROG:
-                                Subtask = new Persistent.Load
-                                  (
-                                    /*FromFile =*/ ProgName,
-                                    /*Libs =*/ IsLib,
-                                    /*CalcState =*/ false,
-                                    /*Disp =*/ Global.Disp,
-                                    /*Buttons =*/ Global.Buttons,
-                                    /*Calc =*/ Global.Calc
-                                  );
+                                if (SelId >= FirstBuiltinId)
+                                  {
+                                    // a built-in programs
+                                    Subtask = new Persistent.LoadBuiltinProgram(Main.this, SelId - FirstBuiltinId);
+                                  }
+                                else
+                                  {
+                                    Subtask = new Persistent.Load
+                                      (
+                                       /*FromFile =*/ ProgName,
+                                       /*Libs =*/ IsLib,
+                                       /*CalcState =*/ false,
+                                       /*Disp =*/ Global.Disp,
+                                       /*Buttons =*/ Global.Buttons,
+                                       /*Calc =*/ Global.Calc
+                                      );
+                                   }
                             break;
                               } /*switch*/
                             return

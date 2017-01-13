@@ -22,6 +22,8 @@ public class Picker extends android.app.Activity
     // index for the selection either prog or librairies in the menu
     public static String SpeIndexID = "net.obry.ti5x.SpecialIndex";
     // index of the SpecialItem, in this case the selected library 0:Master, 1:xyz
+    public static String BuiltinIndexID = "net.obry.ti5x.BuiltinIndex";
+    // index of the first Builtin item in the list
 
     static boolean Reentered = false; /* sanity check */
     public static Picker Current = null;
@@ -62,6 +64,7 @@ public class Picker extends android.app.Activity
     android.widget.ListView PickerListView;
     SelectedItemAdapter PickerList;
     int SelectedAlt; /* index into AltLists */
+    int FirstBuiltinIdx = 0;
 
     public static class PickerItem
       {
@@ -360,6 +363,8 @@ public class Picker extends android.app.Activity
                   } /* if*/
               } /*for*/
           }
+          //FirstBuiltinIdx = PickerList.getCount() + 1;
+        FirstBuiltinIdx = 1;
         if (Alt.SpecialItem != null)
           {
             for (int i=0; i<Alt.SpecialItem.length; i++)
@@ -439,6 +444,7 @@ public class Picker extends android.app.Activity
                                   )
                                 .putExtra(AltIndexID, SelectedAlt)
                                 .putExtra(SpeIndexID, AltIdx)
+                                .putExtra(BuiltinIndexID, FirstBuiltinIdx)
                           );
                         finish();
                       } /*if*/
