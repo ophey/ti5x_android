@@ -1659,12 +1659,12 @@ public class Persistent
               }
             catch (java.io.FileNotFoundException Failed)
               {
-                throw new RuntimeException("ti5x " + Main.BuiltinLibraries[0].getName(ctx)
+                throw new RuntimeException("ti5x " + Main.BuiltinLibraries[SelId].getName(ctx)
                                            + " load failed: " + Failed.toString());
               }
             catch (java.io.IOException Failed)
               {
-                throw new RuntimeException("ti5x "+ Main.BuiltinLibraries[0].getName(ctx)
+                throw new RuntimeException("ti5x "+ Main.BuiltinLibraries[SelId].getName(ctx)
                                            + " load failed: " + Failed.toString());
               } /*try*/
             DoLoad.BGRun();
