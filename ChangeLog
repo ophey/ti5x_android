@@ -1,5 +1,10 @@
 Feature highlights:
 
+v6.2, 2017 January 14th:
+   Fix possible infinite recursion in sqrt.
+   Add support for built-in programs.
+   Full implementation of the EE library.
+
 v6.1, 2017 January 7th:
    Fix P->R routine in some cases.
 
