@@ -411,13 +411,15 @@ public class Number
     {
         BigDecimal x0 = new BigDecimal("0", mc);
         BigDecimal x1 = new BigDecimal(Math.sqrt(A.doubleValue()), mc);
+        BigDecimal diff = x0.subtract(x1);
 
-        while (!x0.equals(x1))
+        while (diff.doubleValue() > 0.0000000000001)
         {
             x0 = x1;
             x1 = A.divide(x0, mc);
             x1 = x1.add(x0);
             x1 = x1.divide(B_TWO, mc);
+            diff = x1.subtract(x0);
         }
         return x1;
     }

@@ -96,6 +96,18 @@
             <arg value="${out.res.absolute.dir}/raw"/>
             <arg value="ct"/>
         </exec>
+        <exec executable="util/makeprog">
+            <arg value="${out.res.absolute.dir}/raw/ee19_input_code.ti5p"/>
+            <arg value="help00=programs/ee19_input_code/help"/>
+            <arg value="cardsrc00=programs/ee19_input_code/card"/>
+            <arg value="progsrc00=programs/ee19_input_code/prog"/>
+        </exec>
+        <exec executable="util/makeprog">
+            <arg value="${out.res.absolute.dir}/raw/ee19_construct_nam_code.ti5p"/>
+            <arg value="help00=programs/ee19_construct_nam_code/help"/>
+            <arg value="cardsrc00=programs/ee19_construct_nam_code/card"/>
+            <arg value="progsrc00=programs/ee19_construct_nam_code/prog"/>
+        </exec>
     </target>
 <!--
     <target name="-pre-compile">
