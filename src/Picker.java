@@ -363,8 +363,7 @@ public class Picker extends android.app.Activity
                   } /* if*/
               } /*for*/
           }
-          //FirstBuiltinIdx = PickerList.getCount() + 1;
-        FirstBuiltinIdx = 1;
+        FirstBuiltinIdx = PickerList.getCount();
         if (Alt.SpecialItem != null)
           {
             for (int i=0; i<Alt.SpecialItem.length; i++)
