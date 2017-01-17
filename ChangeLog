@@ -1,5 +1,8 @@
 Feature highlights:
 
+v6.3, 2017 January 17th:
+   Fix bug in built-in programs selection.
+
 v6.2, 2017 January 14th:
    Fix possible infinite recursion in sqrt.
    Add support for built-in programs.
