@@ -86,7 +86,7 @@ public class State
     public static final int FORMAT_FLOAT = 1;
     public static final int FORMAT_ENG = 2;
     public int CurFormat;
-    public int CurNrDecimals;
+    public int CurNrDecimals = -1;
 
   /* Max and Min number that can be represented using a fixed format */
     public final static Number minFixed = new Number(5.0 * Math.pow(10.0, -9.0));
@@ -718,7 +718,7 @@ public class State
                 Number N = new Number(X);
                 N.div(Factor);
 
-                final int UseNrDecimalsF = Math.max(8 - BeforeDecimal, 0);
+                final int UseNrDecimalsF = NrDecimals == -1 ? Math.max(8 - BeforeDecimal, 0) : NrDecimals;
                 Result = N.formatString (Global.StdLocale, UseNrDecimalsF);
 
                 if (UseNrDecimalsF > 0)
@@ -3752,17 +3752,17 @@ public class State
                     SetDisplayMode
                       (
                         InvState ? FORMAT_FIXED : FORMAT_ENG,
-                        -1
+                        CurNrDecimals
                       );
                 break;
                 case 58: /*Fix*/
                     if (InvState)
                       {
-                        SetDisplayMode(FORMAT_FIXED, -1);
+                        SetDisplayMode(CurFormat, -1);
                       }
                     else
                       {
-                        SetDisplayMode(FORMAT_FIXED, GetProg(true));
+                        SetDisplayMode(CurFormat, GetProg(true));
                       } /*if*/
                 break;
                 case 59:

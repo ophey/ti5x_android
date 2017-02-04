@@ -941,7 +941,7 @@ public class ButtonGrid extends android.view.View
                               }
                             else
                               {
-                                Calc.SetDisplayMode(Calc.FORMAT_FIXED, AccumDigits);
+                                Calc.SetDisplayMode(Calc.CurFormat, AccumDigits);
                               } /*if*/
                         break;
                         case 67: /*x=t*/
@@ -1439,13 +1439,13 @@ public class ButtonGrid extends android.view.View
                     case 57:
                         Calc.SetDisplayMode
                           (
-                            Calc.InvState ? Calc.FORMAT_FIXED : Calc.FORMAT_ENG,
-                            -1
+                           Calc.InvState ? Calc.FORMAT_FIXED : Calc.FORMAT_ENG,
+                           Calc.CurNrDecimals
                           );
                     break;
                     case 58:
                       /* assert Calc.InvState */
-                        Calc.SetDisplayMode(Calc.FORMAT_FIXED, -1);
+                        Calc.SetDisplayMode(Calc.CurFormat, -1);
                     break;
                     case 59:
                         Calc.Int();
