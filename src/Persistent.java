@@ -556,7 +556,7 @@ public class Persistent
                             Global.StdLocale,
                             "            <op name=\"%s\" opnd=\"%.16e\" parens=\"%d\"/>\n",
                             OpName,
-                            Op.Operand,
+                            Op.Operand.get(),
                             Op.ParenFollows
                           );
                       } /*for*/
