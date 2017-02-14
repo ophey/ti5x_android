@@ -1,5 +1,8 @@
 Feature highlights:
 
+v6.5, 2017 February 14th:
+   Fix crash when saving operator stack (persistence)
+
 v6.4, 2017 February 4th:
    Fix issue with Fix/Eng interaction
 
