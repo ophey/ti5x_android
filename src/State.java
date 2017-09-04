@@ -3935,6 +3935,7 @@ public class State
                       } /*if*/
                 break;
                 case 99: /*Prt*/
+                    Enter(99);
                     if (InvState) /* extension! */
                       {
                         GetNextImport();
