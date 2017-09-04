@@ -3357,6 +3357,7 @@ public class State
         else
           {
             // trying to transfer from an invalid loc
+            RunPC--;
             SetErrorState(true);
           }
       } /*Transfer*/
