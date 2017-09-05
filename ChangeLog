@@ -1,5 +1,10 @@
 Feature highlights:
 
+v6.6, 2017 September 5th:
+   Fix some minor behavior to match real TI-59.
+   Fix bug in handling sbr call past to 6th level.
+   Add Hanoï tower game.
+
 v6.5, 2017 February 14th:
    Fix crash when saving operator stack (persistence)
 
