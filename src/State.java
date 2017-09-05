@@ -3325,10 +3325,12 @@ public class State
                   {
                     if (Type == TRANSFER_TYPE_CALL || Type == TRANSFER_TYPE_INTERACTIVE_CALL)
                       {
-                        if (ReturnLast == MaxReturnStack - 1)
-                            break;
-                        ReturnStack[++ReturnLast] =
-                            new ReturnStackEntry(RunBank, RunPC, Type == TRANSFER_TYPE_INTERACTIVE_CALL);
+                          /* documentation in Appendix D (D-2) of the personnal programming manual
+                             says that past the 6th call the return address is not recorded but the
+                             call is done and it is not an error. */
+                        if (ReturnLast < MaxReturnStack - 1)
+                            ReturnStack[++ReturnLast] =
+                              new ReturnStackEntry(RunBank, RunPC, Type == TRANSFER_TYPE_INTERACTIVE_CALL);
                       } /*if*/
                     if (TaskRunning)
                       {
@@ -3357,6 +3359,7 @@ public class State
         else
           {
             // trying to transfer from an invalid loc
+            RunPC--;
             SetErrorState(true);
           }
       } /*Transfer*/
@@ -3935,6 +3938,7 @@ public class State
                       } /*if*/
                 break;
                 case 99: /*Prt*/
+                    Enter(99);
                     if (InvState) /* extension! */
                       {
                         GetNextImport();
