@@ -1,5 +1,9 @@
 Feature highlights:
 
+v6.7, 2017 October 31st:
+   Attempt to fix reported instability.
+   Adjust layout of card on 16:9 screen.
+
 v6.6, 2017 September 5th:
    Fix some minor behavior to match real TI-59.
    Fix bug in handling sbr call past to 6th level.
