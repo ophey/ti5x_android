@@ -13,19 +13,19 @@
         android:layout_centerVertical="true"
     />
     <Button
-        android:id="@+id/action_help"
-        android:background="@android:drawable/ic_menu_help"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_toLeftOf="@+id/action_menu"
-        android:layout_centerVertical="true"
-    />
-    <Button
         android:id="@+id/action_print"
         android:background="@android:drawable/ic_menu_view"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+    />
+    <Button
+        android:id="@+id/action_help"
+        android:background="@android:drawable/ic_menu_help"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_toLeftOf="@+id/action_menu"
         android:layout_centerVertical="true"
     />
     <Button
