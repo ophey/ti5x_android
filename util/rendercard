@@ -385,7 +385,7 @@ superoffsetb = 0.6 # vertical offset for superscript before, relative to basefon
 xheightscale = 0.65
 orange = tuple(i / 170 for i in (0x95, 0x50, 0x1c))
 dorange = tuple(i / 255 for i in (0x95, 0x50, 0x1c))
-black = (0.0, 0.0, 0.0)
+black = (0.02, 0.02, 0.02)
 colors = \
     {
         "user" : {"fg" : black, "bg" : dorange},
