@@ -19,7 +19,7 @@
     <net.obry.ti5x.LabelCard
         android:id="@+id/help_card"
         android:layout_width="fill_parent"
-        android:layout_height="80dp"
+        android:layout_height="75dp"
         android:layout_below="@id/display"
     />
     <net.obry.ti5x.ButtonGrid

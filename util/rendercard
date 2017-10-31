@@ -642,10 +642,10 @@ proc_gs = subprocess.Popen \
   )
 gs = io.TextIOWrapper(proc_gs.stdin)
 
-card_width = mm(72)
-card_height = mm(16)
-thumb_margin = mm(2)
-label_margin = mm(2)
+card_width = mm(112)
+card_height = mm(18)
+thumb_margin = mm(0)
+label_margin = mm(16)
 gs.write \
   (
         "<</PageSize [%(width)u %(height)u] /ImagingBBox null>> setpagedevice\n"
