@@ -375,7 +375,7 @@ symbols = \
 
 fontname = "Helvetica"
 symbolfontname = "Symbol"
-basefontsize = 7.0
+basefontsize = 10.5
 arrowsize = basefontsize / 4
 subsupscale = 0.8 # relative scaling for superscript/subscript text
 subsupscaleb = 0.75 # relative scaling for superscript/subscript before text
@@ -645,7 +645,7 @@ gs = io.TextIOWrapper(proc_gs.stdin)
 card_width = mm(112)
 card_height = mm(18)
 thumb_margin = mm(0)
-label_margin = mm(16)
+label_margin = mm(4)
 gs.write \
   (
         "<</PageSize [%(width)u %(height)u] /ImagingBBox null>> setpagedevice\n"
