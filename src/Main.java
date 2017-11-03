@@ -55,7 +55,6 @@ public class Main extends android.app.Activity
     ViewGroup PickerExtra, SaveAsExtra;
     boolean ShuttingDown = false;
     boolean StateLoaded = false; /* will be reset to false every time activity is killed and restarted */
-    boolean ResumeBlock = false;
 
     static final int NotifyProgramDone = 1; /* arbitrary notification ID */
 
@@ -1492,13 +1491,6 @@ public class Main extends android.app.Activity
       {
         super.onResume();
         Notiman.cancel(NotifyProgramDone);
-
-        /*  prevent mltiple onResume(), this can happen and is not something we handle here */
-        if (ResumeBlock)
-            return;
-        else
-            ResumeBlock = true;
-
         if (!StateLoaded)
           {
             Global.StartBGTask
