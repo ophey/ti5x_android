@@ -783,7 +783,7 @@ public class State
       /* sets the display to show the specified value. */
       {
         CurState = ResultState;
-        if (NewX.isInfinite())
+        if (NewX.isInfinite() || NewX.isSmall())
           {
              SetErrorState(false);
           }

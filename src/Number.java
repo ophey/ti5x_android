@@ -47,6 +47,7 @@ public class Number
     private final static BigDecimal B_TWO    = new BigDecimal(2.0, mc);
     private final static BigDecimal B_THREE  = new BigDecimal(3.0, mc);
     private final static BigDecimal B_ERROR  = new BigDecimal(9.9999999e99, mc);
+    private final static BigDecimal B_SMALL  = new BigDecimal(1e-99, mc);
     private final static BigDecimal HALF_PI  = new BigDecimal(Math.PI/2.0, mc);
     private final static BigDecimal HALF3_PI = new BigDecimal(3.0*Math.PI/2.0, mc);
     private final static BigDecimal TWO_PI   = new BigDecimal(Math.PI * 2.0, mc);
@@ -135,6 +136,19 @@ public class Number
         if (v.compareTo(B_ERROR.negate()) < 0)
           {
               v = B_ERROR.negate();
+              return true;
+          }
+        else
+          return false;
+    }
+
+    public boolean isSmall()
+    {
+        Number l = new Number(v);
+        l.abs();
+        if (l.v.compareTo(B_ZERO) > 0 && l.v.compareTo(B_SMALL) < 0)
+          {
+              v = B_SMALL;
               return true;
           }
         else

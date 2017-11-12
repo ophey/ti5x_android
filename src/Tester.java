@@ -24,6 +24,7 @@ public class Tester
 {
     public static State Calc;
 
+    private final static String  SMALL = "1.-99";
     private final static String  ERROR = "9.9999999 99";
     private final static String mERROR = "-9.9999999 99";
 
@@ -991,6 +992,22 @@ public class Tester
         return check("31.415927-03", false);
     }
 
+    private boolean Test_29()
+    {
+        Clear();
+
+        SetX(8);
+        Calc.Square();
+
+        if (!check("64.", false))
+            return false;
+
+        SetX(1e-98);
+        Calc.Square();
+
+        return check(SMALL, true);
+    }
+
     public int Run()
     {
         Calc = Global.Calc;
@@ -1024,6 +1041,7 @@ public class Tester
         if (!Test_26()) return -26; Total++;
         if (!Test_27()) return -27; Total++;
         if (!Test_28()) return -28; Total++;
+        if (!Test_29()) return -29; Total++;
 
         Clear();
 
