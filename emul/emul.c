@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
+
+#ifdef _WIN32
 #include <windows.h>
+#endif
 
 // ====================================
 // Compile control
@@ -40,7 +43,7 @@ static char card_output[1024] = "card.bin";
 // ====================================
 // disassembler source
 // ====================================
-#include "disasm.inc"
+// #include "disasm.inc"
 
 // ====================================
 // CPU state variables
@@ -315,6 +318,8 @@ int execute (unsigned short opcode) {
     cpu.digit--;
   else
     cpu.digit = 15;
+
+  //  printf("cpu.digit = %d\n", cpu.digit);
   // update instruction cycle counter
   if (cpu.flags & FLG_IDLE)
     cpu.cycle += 4;
@@ -1105,13 +1110,126 @@ static void cpu_reset (void) {
     cpu.key[0] |= (1 << KP_BIT);
 }
 
+#ifndef _WIN32
+///////////////////////////////////////////////////////
+// unblocking get c
+
+#include <unistd.h>
+#include <sys/select.h>
+#include <termios.h>
+
+char prev_key = -1, prev_vkey = -1;
+int count = 0;
+
+struct termios orig_termios;
+
+void reset_terminal_mode()
+{
+    tcsetattr(0, TCSANOW, &orig_termios);
+}
+
+void set_conio_terminal_mode()
+{
+    struct termios new_termios;
+
+    /* take two copies - one for now, one for later */
+    tcgetattr(0, &orig_termios);
+    memcpy(&new_termios, &orig_termios, sizeof(new_termios));
+
+    /* register cleanup handler, and set the new terminal mode */
+    atexit(reset_terminal_mode);
+    cfmakeraw(&new_termios);
+    tcsetattr(0, TCSANOW, &new_termios);
+}
+
+int kbhit()
+{
+    struct timeval tv = { 0L, 1L };
+    fd_set fds;
+    FD_ZERO(&fds);
+    FD_SET(0, &fds);
+
+    if (++count < 100)
+      return 0;
+
+    count=0;
+
+    if (prev_key == -1)
+      {
+        return select(1, &fds, NULL, NULL, &tv);
+      }
+    else
+      {
+        return 1;
+      }
+}
+
+int getch(int *key_down, int *vkey)
+{
+    int r;
+    int res;
+    unsigned char c;
+
+    if (prev_key == -1)
+      {
+        if ((r = read(0, &c, sizeof(c))) < 0) {
+          res = r;
+        } else {
+          res = c;
+        }
+
+        // vkey
+        if (res == 27)
+          {
+            r = read(0, &c, sizeof(c));
+
+            if (c == 91)
+              {
+                unsigned char prev;
+                while  (c != 126)
+                  {
+                    prev = c;
+                    r = read(0, &c, sizeof(c));
+                  }
+                c = prev;
+              }
+            else
+              r = read(0, &c, sizeof(c));
+
+            *vkey = c;
+            prev_vkey = c;
+            res = 0;
+          }
+        else
+          *vkey = 0;
+
+        prev_key = res;
+        *key_down = 1;
+      }
+    else
+      {
+        res = prev_key;
+        *vkey = prev_vkey;
+        *key_down = 0;
+        prev_key = -1;
+        prev_vkey = -1;
+      }
+
+    return res;
+}
+#endif
+
+#ifdef _WIN32
+HANDLE hCon;
+DWORD tick;
+#endif
+unsigned ex_cnt;
+
 // ====================================
 // Application's main
 // ------------------------------------
 int main (int argc, char *argv[]) {
-HANDLE hCon;
-DWORD tick;
-unsigned ex_cnt;
+
   printf ("TI-5x emulator\n(c) 2014 Hynek Sladky\n");
   // parse command line
   ROM[0] = 0;
@@ -1282,51 +1400,29 @@ unsigned ex_cnt;
   if (mode_flags & MODE_PRINTER)
     printf ("----------\n"
 	    "PRINT=#        TRACE=!        ADVANCE=@\n");
+#if _WIN32
   // open console
   hCon = GetStdHandle (STD_INPUT_HANDLE);
   if (hCon == INVALID_HANDLE_VALUE) {
     printf ("Error opening console!\n");
     return 1;
   }
+#endif
+
   // reset CPU
   cpu_reset ();
 
+#ifdef _WIN32
   tick = GetTickCount ();
+#endif
   ex_cnt = 0;
-  while (1) {
-    if (log_flags && !(cpu.PREG & 1)) {
-      if (log_flags & LOG_SHORT)
-	DIS ("%04X:%c\t%04X\t", cpu.addr, (cpu.flags & FLG_COND) ? 'C' : '-', ROM[cpu.addr]);
-      else
-      if (log_flags & LOG_HRAST)
-	DIS ("%04X %04X ", cpu.addr, ROM[cpu.addr]);
-      disasm (cpu.addr, ROM[cpu.addr]);
-      DIS ("\n");
-      if (log_flags & LOG_HRAST) {
-	int i;
-	LOG_H ("A="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.A[i]);
-	LOG_H (" B="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.B[i]);
-	LOG_H (" C="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.C[i]);
-	LOG_H (" D="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.D[i]);
-	LOG_H (" E="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.E[i]);
-	LOG_H ("\nFA=%04X [", cpu.fA); for (i = 15; i >= 0; i--) LOG_H ("%d", (cpu.fA >> i) & 1);
-	LOG_H ("] KR=%04X [", cpu.KR); for (i = 15; i >= 0; i--) LOG_H ("%d", (cpu.KR >> i) & 1);
-	LOG_H ("] EXT=%02X COND=%d IDLE=%d", (cpu.EXT >> 4) & 0xFF, (cpu.flags & FLG_COND) != 0, (cpu.flags & FLG_IDLE) != 0);
-	LOG_H (" IO="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.Sout[i]);
-	LOG_H ("\nFB=%04X [", cpu.fB); for (i = 15; i >= 0; i--) LOG_H ("%d", (cpu.fB >> i) & 1);
-	LOG_H ("] SR=%04X R5=%X", cpu.SR, cpu.R5);
-	LOG_H (" ROM=%04d.0 PREG=%d", cpu.LIB, (cpu.KR & 2) != 0);
-	LOG_H (" RAMOP=%X RAMREG=%03d", cpu.RAM_OP, cpu.RAM_ADDR);
-	LOG_H (" ROMOP=%X ROMREG=%02d", (cpu.flags & (FLG_RECALL | FLG_STORE)) >> FLG_RCL_SHIFT, ((cpu.KR >> 5) & 0x78) | ((cpu.KR >> 4) & 0x07));
-	LOG_H ("\n");
-      } else {
-	LOG ("\t");
-      }
-    }
-    if (!execute (ROM[cpu.addr]))
-      continue;
-    if (log_flags)
-      LOG ("\n");
+  loop_run();
+  printf ("\nFinished.\n");
+  return 0;
+}
+
+void display(void)
+{
     if (!cpu.digit) {
       static char disp_filter = 0;
       if (cpu.flags & FLG_IDLE) {
@@ -1343,6 +1439,7 @@ unsigned ex_cnt;
 	  }
 	  if ((cpu.flags ^ cpu.fA) & FLG_DISP_C)
 	    cpu.flags &= ~FLG_DISP;
+          /// ????? cpu.flags &= ~FLG_DISP; (display each time, but 0)
 	}
 	if (!(cpu.flags & FLG_DISP)) {
 	  int zero = 1;
@@ -1385,6 +1482,7 @@ unsigned ex_cnt;
 	      putchar ('.');
 	  }
 #else
+          /* display of TI is there */
           for (i = 13; i >= 2; i--) {
             putchar ('0'+cpu.A[i]);
             if (cpu.R5 == i)
@@ -1401,6 +1499,7 @@ unsigned ex_cnt;
       if (disp_filter < 3)
 	disp_filter++;
       else {
+        //        printf("cpu digit\n");
 	// display disabled
 	if ((cpu.flags & FLG_DISP) /*|| (!cpu.fA && (cpu.flags & FLG_DISP_C))*/ || (cpu.fA && !(cpu.flags & FLG_DISP_C))) {
 	  cpu.flags &= ~FLG_DISP;
@@ -1414,6 +1513,55 @@ unsigned ex_cnt;
 	}
       }
     }
+}
+
+void loop_run(void)
+{
+  int key_down = 0, count=0;
+  char AsciiChar = 0, keep_char=0, vkey=0;
+
+  while (1) {
+    if (log_flags && !(cpu.PREG & 1)) {
+      if (log_flags & LOG_SHORT)
+	DIS ("%04X:%c\t%04X\t", cpu.addr, (cpu.flags & FLG_COND) ? 'C' : '-', ROM[cpu.addr]);
+      else
+        if (log_flags & LOG_HRAST)
+          DIS ("%04X %04X ", cpu.addr, ROM[cpu.addr]);
+      //      disasm (cpu.addr, ROM[cpu.addr]);
+      DIS ("\n");
+      if (log_flags & LOG_HRAST) {
+	int i;
+	LOG_H ("A="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.A[i]);
+	LOG_H (" B="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.B[i]);
+	LOG_H (" C="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.C[i]);
+	LOG_H (" D="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.D[i]);
+	LOG_H (" E="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.E[i]);
+	LOG_H ("\nFA=%04X [", cpu.fA); for (i = 15; i >= 0; i--) LOG_H ("%d", (cpu.fA >> i) & 1);
+	LOG_H ("] KR=%04X [", cpu.KR); for (i = 15; i >= 0; i--) LOG_H ("%d", (cpu.KR >> i) & 1);
+	LOG_H ("] EXT=%02X COND=%d IDLE=%d", (cpu.EXT >> 4) & 0xFF, (cpu.flags & FLG_COND) != 0, (cpu.flags & FLG_IDLE) != 0);
+	LOG_H (" IO="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.Sout[i]);
+	LOG_H ("\nFB=%04X [", cpu.fB); for (i = 15; i >= 0; i--) LOG_H ("%d", (cpu.fB >> i) & 1);
+	LOG_H ("] SR=%04X R5=%X", cpu.SR, cpu.R5);
+	LOG_H (" ROM=%04d.0 PREG=%d", cpu.LIB, (cpu.KR & 2) != 0);
+	LOG_H (" RAMOP=%X RAMREG=%03d", cpu.RAM_OP, cpu.RAM_ADDR);
+	LOG_H (" ROMOP=%X ROMREG=%02d", (cpu.flags & (FLG_RECALL | FLG_STORE)) >> FLG_RCL_SHIFT, ((cpu.KR >> 5) & 0x78) | ((cpu.KR >> 4) & 0x07));
+	LOG_H ("\n");
+      } else {
+	LOG ("\t");
+      }
+    }
+
+    //    int k;
+    //    for (k=0; k<100; k++)
+      if (!execute (ROM[cpu.addr]))
+        continue;
+
+    if (log_flags)
+      LOG ("\n");
+
+    display();
+
+#ifdef _WIN32
     // real speed simulation
     // 455kHz / 2 / 16 = 14219
     // 20ms ~ 284.375 instructions
@@ -1424,7 +1572,12 @@ unsigned ex_cnt;
 	Sleep (EMUL_TICK);
       tick += EMUL_TICK;
     }
+#else
+    sleep(0.9);
+#endif
+
     {
+#ifdef _WIN32
       INPUT_RECORD ir;
       DWORD size;
       // reading console keys
@@ -1439,54 +1592,99 @@ unsigned ex_cnt;
 	      ex_cnt = 0;
 	    }
 	  }
-#define	KEY_INVERT	0x01
-#define	KEY_ONOFF	0x02
-	  static const struct {
-	    unsigned char key_code;
-	    unsigned char flags;
-	    unsigned char ascii;
-	    unsigned vkey;
-	  } key_table[] = {
-	    {0x11, 0, 0, VK_F1},     {0x21, 0, 0, VK_F2}, {0x31, 0, 0, VK_F3}, {0x51, 0, 0, VK_F4}, {0x61, 0, 0, VK_F5},
-	    {0x12, 0, 0, VK_F8},     {0x22, 0, 0, VK_F9}, {0x32, 0, 'l', 0},   {0x52, 0, '\b', 0},  {0x62, 0, 0x1B, 0},
-	    {0x13, 0, 'p', 0}, 	     {0x23, 0, 'x', 0},   {0x33, 0, 's', 0},   {0x53, 0, 'c', 0},   {0x63, 0, 't', 0},
-	    {0x14, 0, 0, VK_INSERT}, {0x24, 0, '>', 0},   {0x34, 0, '<', 0},   {0x54, 0, '&', 0},   {0x64, 0, 'y', 0},
-	    {0x15, 0, 0, VK_DELETE}, {0x25, 0, 'e', 0},   {0x35, 0, '(', 0},   {0x55, 0, ')', 0},   {0x65, 0, '/', 0},
-	    {0x16, 0, 'g', 0},       {0x26, 0, '7', 0},   {0x36, 0, '8', 0},   {0x56, 0, '9', 0},   {0x66, 0, '*', 0},
-	    {0x17, 0, 'b', 0},       {0x27, 0, '4', 0},   {0x37, 0, '5', 0},   {0x57, 0, '6', 0},   {0x67, 0, '-', 0},
-	    {0x18, 0, 'r', 0},       {0x28, 0, '1', 0},   {0x38, 0, '2', 0},   {0x58, 0, '3', 0},   {0x68, 0, '+', 0},
-	    {0x19, 0, '$', 0},       {0x29, 0, '0', 0},   {0x39, 0, '.', 0},   {0x59, 0, 'n', 0},   {0x69, 0, '\r', 0},
-	    // printer buttons
-	    {0x2C, 0, '#', 0}, // PRINT
-	    {0x2F, KEY_ONOFF, '!', 0}, // TRACE
-	    {0x0C, 0, '@', 0}, // ADVANCE
-	    // card buttons
-	    {0x4A, KEY_INVERT, '~', 0}, // card inserted
-	    {0}
-	  };
-	  for (size = 0; key_table[size].ascii || key_table[size].vkey; size++) {
-	    if ((key_table[size].ascii && key_table[size].ascii == ir.Event.KeyEvent.uChar.AsciiChar) ||
-		(key_table[size].vkey && key_table[size].vkey == ir.Event.KeyEvent.wVirtualKeyCode)) {
-	      if (log_flags & LOG_DEBUG)
-		LOG ("{K=%02X}\n", key_table[size].key_code);
-	      if (key_table[size].flags & KEY_INVERT)
-		ir.Event.KeyEvent.bKeyDown = !ir.Event.KeyEvent.bKeyDown;
-	      if (ir.Event.KeyEvent.bKeyDown) {
-		if (key_table[size].flags & KEY_ONOFF)
-		  cpu.key[key_table[size].key_code & 0x0F] ^= 1 << ((key_table[size].key_code >> 4) & 0x07);
-		else
-		  cpu.key[key_table[size].key_code & 0x0F] |= 1 << ((key_table[size].key_code >> 4) & 0x07);
-	      } else {
-		if (!(key_table[size].flags & KEY_ONOFF))
-		  cpu.key[key_table[size].key_code & 0x0F] &= ~(1 << ((key_table[size].key_code >> 4) & 0x07));
-	      }
-	      break;
-	    }
-	  }
+
+          AsciiChar = ir.Event.KeyEvent.uChar.AsciiChar;
+          key_down = ir.Event.KeyEvent.bKeyDown;
+#else
+      fflush(0);
+      set_conio_terminal_mode();
+
+      if (kbhit()) {
+        AsciiChar = getch(&key_down, &vkey);
+        if (1) {
+          int size;
+
+          reset_terminal_mode();
+          if (AsciiChar == 3) {
+            printf ("ctrl-c exit!!!!");
+            break;
+          }
+#endif
+
+          handle_key (AsciiChar, vkey, &key_down);
 	}
       }
     }
+#ifndef _WIN32
+      reset_terminal_mode();
+#endif
+      }
+    }
+
+void handle_key(char AsciiChar, char vkey, char *key_down)
+{
+  int size;
+#ifndef _WIN32
+#define VK_F1 80
+#define VK_F2 81
+#define VK_F3 82
+#define VK_F4 83
+#define VK_F5 53
+#define VK_F6 55
+#define VK_F7 56
+#define VK_F8 57
+#define VK_F9 48
+#define VK_INSERT 50
+#define VK_DELETE 51
+#endif
+
+          //          printf("\ngetchar: '%c' %d (vk=%d) isdown:%d\n", AsciiChar, AsciiChar, vkey, key_down);
+#define	KEY_INVERT	0x01
+#define	KEY_ONOFF	0x02
+
+  static const struct {
+    unsigned char key_code;
+    unsigned char flags;
+    unsigned char ascii;
+    unsigned vkey;
+  } key_table[] = {
+    {0x11, 0, 0, VK_F1},     {0x21, 0, 0, VK_F2}, {0x31, 0, 0, VK_F3}, {0x51, 0, 0, VK_F4}, {0x61, 0, 0, VK_F5},
+    {0x12, 0, 0, VK_F8},     {0x22, 0, 0, VK_F9}, {0x32, 0, 'l', 0},   {0x52, 0, '\b', 0},  {0x62, 0, 0x1B, 0},
+    {0x13, 0, 'p', 0}, 	     {0x23, 0, 'x', 0},   {0x33, 0, 's', 0},   {0x53, 0, 'c', 0},   {0x63, 0, 't', 0},
+    {0x14, 0, 0, VK_INSERT}, {0x24, 0, '>', 0},   {0x34, 0, '<', 0},   {0x54, 0, '&', 0},   {0x64, 0, 'y', 0},
+    {0x15, 0, 0, VK_DELETE}, {0x25, 0, 'e', 0},   {0x35, 0, '(', 0},   {0x55, 0, ')', 0},   {0x65, 0, '/', 0},
+    {0x16, 0, 'g', 0},       {0x26, 0, '7', 0},   {0x36, 0, '8', 0},   {0x56, 0, '9', 0},   {0x66, 0, '*', 0},
+    {0x17, 0, 'b', 0},       {0x27, 0, '4', 0},   {0x37, 0, '5', 0},   {0x57, 0, '6', 0},   {0x67, 0, '-', 0},
+    {0x18, 0, 'r', 0},       {0x28, 0, '1', 0},   {0x38, 0, '2', 0},   {0x58, 0, '3', 0},   {0x68, 0, '+', 0},
+    {0x19, 0, '$', 0},       {0x29, 0, '0', 0},   {0x39, 0, '.', 0},   {0x59, 0, 'n', 0},   {0x69, 0, '=' /*'\r'*/, 0},
+    // printer buttons
+    {0x2C, 0, '#', 0}, // PRINT
+    {0x2F, KEY_ONOFF, '!', 0}, // TRACE
+    {0x0C, 0, '@', 0}, // ADVANCE
+    // card buttons
+    {0x4A, KEY_INVERT, '~', 0}, // card inserted
+    {0}
+  };
+  for (size = 0; key_table[size].ascii || key_table[size].vkey; size++) {
+    if ((key_table[size].ascii && key_table[size].ascii == /*ir.Event.KeyEvent.uChar.*/AsciiChar) ||
+        (key_table[size].vkey && key_table[size].vkey == vkey/*ir.Event.KeyEvent.wVirtualKeyCode)*/)) {
+      if (log_flags & LOG_DEBUG)
+        LOG ("{K=%02X}\n", key_table[size].key_code);
+      if (key_table[size].flags & KEY_INVERT)
+        *key_down = *key_down==1?0:1;
+#if 0
+      ir.Event.KeyEvent.bKeyDown = !ir.Event.KeyEvent.bKeyDown;
+#endif
+      if (*key_down == 1/*ir.Event.KeyEvent.bKeyDown*/) {
+        if (key_table[size].flags & KEY_ONOFF)
+          cpu.key[key_table[size].key_code & 0x0F] ^= 1 << ((key_table[size].key_code >> 4) & 0x07);
+        else
+          cpu.key[key_table[size].key_code & 0x0F] |= 1 << ((key_table[size].key_code >> 4) & 0x07);
+      } else {
+        if (!(key_table[size].flags & KEY_ONOFF))
+          cpu.key[key_table[size].key_code & 0x0F] &= ~(1 << ((key_table[size].key_code >> 4) & 0x07));
+      }
+      break;
+    }
   }
-  printf ("\nFinished.\n");
-  return 0;
 }
