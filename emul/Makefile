@@ -1,4 +1,4 @@
-all: win32 win64
+all:
 	gcc -o emul emul.c Master.c Const.c
 
 win32:

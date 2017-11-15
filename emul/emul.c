@@ -1,31 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#ifdef _WIN32
-#include <windows.h>
-#endif
-
-// ====================================
-// Compile control
-// ====================================
-//#define	DISP_DBG
-
-// ====================================
-// Log control
-// ====================================
-#define	LOG_SHORT	0x0001
-#define	LOG_HRAST	0x0002
-#define	LOG_DEBUG	0x0004
-static unsigned log_flags = 0;
-
-#define	LOG_FILE	stderr
-// disassembly output macro
-#define	DIS(...)	fprintf (LOG_FILE, __VA_ARGS__)
-// short log output macro
-#define	LOG(...)	fprintf (LOG_FILE, __VA_ARGS__)
-// Hrast-like log output macro
-#define	LOG_H(...)	fprintf (LOG_FILE, __VA_ARGS__)
-
 // ====================================
 // Mode control
 // ====================================
@@ -233,10 +208,6 @@ static void Alu (unsigned char *dst, unsigned char *srcX, unsigned char *srcY, c
 unsigned char carry = 0;
 unsigned char shl = 0;
 int i;
-  if (log_flags & LOG_DEBUG) {
-    if (srcX) {LOG ("["); for (i = 15; i >= 0; i--) LOG ("%X", srcX[i]); LOG ("]");}
-    if (srcY) {LOG ("["); for (i = 15; i >= 0; i--) LOG ("%X", srcY[i]); LOG ("]");}
-  }
   for (i = 0; i <= 15; i++) {
     unsigned char sum = 0, shr = 0;
     if (i == mask->start)
@@ -379,28 +350,18 @@ int execute (unsigned short opcode) {
 	    // TEST FLAG A
 	    if (cpu.fA & mask)
 	      cpu.flags &= ~FLG_COND;
-	    if (log_flags & LOG_DEBUG)
-	      LOG ("FA=%04X ", cpu.fA);
-	    if (log_flags & LOG_SHORT)
-	      LOG ("COND=%u", (cpu.flags & FLG_COND) != 0);
 	    break;
 	  case 0x0001:
 	    // SET FLAG A
 	    cpu.fA |= mask;
-	    if (log_flags & LOG_SHORT)
-	      LOG ("FA=%04X", cpu.fA);
 	    break;
 	  case 0x0002:
 	    // ZERO FLAG A
 	    cpu.fA &= ~mask;
-	    if (log_flags & LOG_SHORT)
-	      LOG ("FA=%04X", cpu.fA);
 	    break;
 	  case 0x0003:
 	    // INVERT FLAG A
 	    cpu.fA ^= mask;
-	    if (log_flags & LOG_SHORT)
-	      LOG ("FA=%04X", cpu.fA);
 	    break;
 	  case 0x0004:
 	    // EXCH. FLAG A B
@@ -408,82 +369,54 @@ int execute (unsigned short opcode) {
 	      cpu.fA ^= mask;
 	      cpu.fB ^= mask;
 	    }
-	    if (log_flags & LOG_SHORT)
-	      LOG ("FA=%04X FB=%04X", cpu.fA, cpu.fB);
 	    break;
 	  case 0x0005:
 	    // SET FLAG KR
 	    cpu.KR |= mask;
-	    if (log_flags & LOG_SHORT)
-	      LOG ("KR=%04X", cpu.KR);
 	    break;
 	  case 0x0006:
 	    // COPY FLAG B->A
 	    if ((cpu.fA ^ cpu.fB) & mask)
 	      cpu.fA ^= mask;
-	    if (log_flags & LOG_SHORT)
-	      LOG ("FA=%04X", cpu.fA);
 	    break;
 	  case 0x0007:
 	    // REG 5->FLAG A S0 S3
 	    cpu.fA = (cpu.fA & ~0x001E) | ((cpu.R5 & 0x000F) << 1);
-	    if (log_flags & LOG_SHORT)
-	      LOG ("FA=%04X", cpu.fA);
 	    break;
 	  case 0x0008:
 	    // TEST FLAG B
 	    if (cpu.fB & mask)
 	      cpu.flags &= ~FLG_COND;
-	    if (log_flags & LOG_DEBUG)
-	      LOG ("FB=%04X ", cpu.fB);
-	    if (log_flags & LOG_SHORT)
-	      LOG ("COND=%u", (cpu.flags & FLG_COND) != 0);
 	    break;
 	  case 0x0009:
 	    // SET FLAG B
 	    cpu.fB |= mask;
-	    if (log_flags & LOG_SHORT)
-	      LOG ("FB=%04X", cpu.fB);
 	    break;
 	  case 0x000A:
 	    // ZERO FLAG B
 	    cpu.fB &= ~mask;
-	    if (log_flags & LOG_SHORT)
-	      LOG ("FB=%04X", cpu.fB);
 	    break;
 	  case 0x000B:
 	    // INVERT FLAG B
 	    cpu.fB ^= mask;
-	    if (log_flags & LOG_SHORT)
-	      LOG ("FB=%04X", cpu.fB);
 	    break;
 	  case 0x000C:
 	    // COMPARE FLAG A B
 	    if (!((cpu.fA ^ cpu.fB) & mask))
 	      cpu.flags &= ~FLG_COND;
-	    if (log_flags & LOG_DEBUG)
-	      LOG ("FA=%04X FB=%04X ", cpu.fA, cpu.fB);
-	    if (log_flags & LOG_SHORT)
-	      LOG ("COND=%u", (cpu.flags & FLG_COND) != 0);
 	    break;
 	  case 0x000D:
 	    // ZERO FLAG KR
 	    cpu.KR &= ~mask;
-	    if (log_flags & LOG_SHORT)
-	      LOG ("KR=%04X", cpu.KR);
 	    break;
 	  case 0x000E:
 	    // COPY FLAG A->B
 	    if ((cpu.fA ^ cpu.fB) & mask)
 	      cpu.fB ^= mask;
-	    if (log_flags & LOG_SHORT)
-	      LOG ("FB=%04X", cpu.fB);
 	    break;
 	  case 0x000F:
 	    // REG 5->FLAG B S0 S3
 	    cpu.fB = (cpu.fB & ~0x001E) | ((cpu.R5 & 0x000F) << 1);
-	    if (log_flags & LOG_SHORT)
-	      LOG ("FB=%04X", cpu.fB);
 	    break;
 	}
       }
@@ -504,8 +437,6 @@ int execute (unsigned short opcode) {
 	  // scan current row
 	  if (cpu.key[cpu.digit] & mask) {
 	    unsigned char bit = 0;
-	    if (log_flags & LOG_DEBUG)
-	      LOG ("(K%d=%02X)", cpu.digit, cpu.key[cpu.digit] & mask);
 	    // get bit position
 	    while (!(mask & 1)) {
 	      bit++;
@@ -515,8 +446,6 @@ int execute (unsigned short opcode) {
 	    cpu.flags &= ~FLG_COND;
 	    // set result to KR
 	    cpu.KR = /*(cpu.KR & ~0x07F0) |*/ (cpu.digit << 4) | ((bit << 8) & 0x0700);
-	    if (log_flags & LOG_SHORT)
-	      LOG ("KR=%04X COND=0", cpu.KR);
 	  } else
 	  if (cpu.digit) {
 	    // wait for digit 0 counter - end of scan
@@ -527,10 +456,6 @@ int execute (unsigned short opcode) {
 	  // scan current row and update COND
 	  if (cpu.key[cpu.digit] & mask)
 	    cpu.flags &= ~FLG_COND;
-	  if (log_flags & LOG_DEBUG)
-	    LOG ("(K%d=%02X) ", cpu.digit, cpu.key[cpu.digit] & mask);
-	  if (log_flags & LOG_SHORT)
-	    LOG ("COND=%u", (cpu.flags & FLG_COND) != 0);
 	}
       }
       break;
@@ -545,20 +470,14 @@ int execute (unsigned short opcode) {
 	    cpu.flags |= FLG_HOLD;
 	    return 12;
 	  }
-	  if (log_flags & LOG_DEBUG)
-	    LOG ("(D=%u)", cpu.digit);
 	  break;
 	case 0x0001:
 	  // Zero Idle
 	  cpu.flags &= ~FLG_IDLE;
-	  if (log_flags & LOG_SHORT)
-	    LOG ("IDLE=0");
 	  break;
 	case 0x0002:
 	  // CLFA
 	  cpu.fA = 0;
-	  if (log_flags & LOG_SHORT)
-	    LOG ("FA=%04X", cpu.fA);
 	  break;
 	case 0x0003:
 	  // Wait Busy
@@ -569,39 +488,23 @@ int execute (unsigned short opcode) {
 	  cpu.KR += 0x0010;
 	  if (!(cpu.KR & 0xFFF0))
 	    cpu.KR ^= 0x0001;
-	  if (log_flags & LOG_SHORT)
-	    LOG ("KR=%04X", cpu.KR);
 	  break;
 	case 0x0005:
 	  // TKR
 	  if (cpu.KR & (1 << ((opcode >> 4) & 0x000F)))
 	    cpu.flags &= ~FLG_COND;
-	  if (log_flags & LOG_DEBUG)
-	    LOG ("KR=%04X ", cpu.KR);
-	  if (log_flags & LOG_SHORT)
-	    LOG ("COND=%u", (cpu.flags & FLG_COND) != 0);
 	  break;
 	case 0x0006:
 	  // FLGR5
 	  if (opcode & 0x0010) {
 	    cpu.R5 = (cpu.fB >> 1) & 0x000F;
-	    if (log_flags & LOG_DEBUG)
-	      LOG ("FB=%04X ", cpu.fB);
-	    if (log_flags & LOG_SHORT)
-	      LOG ("R5=%01X", cpu.R5);
 	  } else {
 	    cpu.R5 = (cpu.fA >> 1) & 0x000F;
-	    if (log_flags & LOG_DEBUG)
-	      LOG ("FA=%04X ", cpu.fA);
-	    if (log_flags & LOG_SHORT)
-	      LOG ("R5=%01X", cpu.R5);
 	  }
 	  break;
 	case 0x0007:
 	  // Number
 	  cpu.R5 = (opcode >> 4) & 0x000F;
-	  if (log_flags & LOG_SHORT)
-	    LOG ("R5=%01X", cpu.R5);
 	  break;
 	case 0x0008:
 	  // KRR5/R5KR + peripherals
@@ -609,22 +512,16 @@ int execute (unsigned short opcode) {
 	    case 0x0000:
 	      // KRR5
 	      cpu.R5 = (cpu.KR >> 4) & 0x000F;
-	      if (log_flags & LOG_SHORT)
-		LOG ("R5=%01X", cpu.R5);
 	      break;
 	    case 0x0010:
 	      // R5KR
 	      cpu.KR = (cpu.KR & ~0x00F0) | (cpu.R5 << 4);
-	      if (log_flags & LOG_SHORT)
-		LOG ("KR=%04X", cpu.KR);
 	      break;
 	    case 0x0020:
 	      // READ
 //	      cpu.EXT = (card_read () << 4);
 	      cpu.EXT = cpu.CRD_BUF[cpu.CRD_PTR++] << 4;
 	      cpu.flags |= FLG_EXT_VALID;
-	      if (log_flags & LOG_SHORT)
-		LOG ("EXT=%04X", cpu.EXT);
 	      break;
 	    case 0x0030:
 	      // WRITE
@@ -760,27 +657,19 @@ int execute (unsigned short opcode) {
 	case 0x0009:
 	  // Set Idle
 	  cpu.flags |= FLG_IDLE;
-	  if (log_flags & LOG_SHORT)
-	    LOG ("IDLE=1");
 	  break;
 	case 0x000A:
 	  // CLFB
 	  cpu.fB = 0;
-	  if (log_flags & LOG_SHORT)
-	    LOG ("FB=%04X", cpu.fB);
 	  break;
 	case 0x000B:
 	  // Test Busy
 	  if ((cpu.key[cpu.digit] & (1 << KR_BIT)) || (cpu.flags & FLG_BUSY))
 	    cpu.flags &= ~(FLG_COND | FLG_BUSY);
-	  if (log_flags & LOG_SHORT)
-	    LOG ("(K%d=%02X) COND=%u", cpu.digit, cpu.key[cpu.digit] & (1 << KR_BIT), (cpu.flags & FLG_COND) != 0);
 	  break;
 	case 0x000C:
 	  // EXTKR
 	  cpu.KR = (cpu.KR & 0x000F) | cpu.EXT;
-	  if (log_flags & LOG_SHORT)
-	    LOG ("KR=%04X", cpu.KR);
 	  break;
 	case 0x000D:
 	  // XKRSR
@@ -790,8 +679,6 @@ int execute (unsigned short opcode) {
 	    cpu.KR = cpu.SR;
 	    cpu.SR = tmp;
 	  }
-	  if (log_flags & LOG_SHORT)
-	    LOG ("KR=%04X SR=%04X", cpu.KR, cpu.SR);
 	  break;
 	case 0x000E:
 	  // NO-OP + peripherals
@@ -801,15 +688,11 @@ int execute (unsigned short opcode) {
 	      cpu.EXT = LIB[cpu.LIB++] << 4;
 	      cpu.flags |= FLG_EXT_VALID;
 	      cpu.LIB %= 5000;
-	      if (log_flags & LOG_SHORT)
-		LOG ("EXT=%04X LIB.addr=%04d", cpu.EXT, cpu.LIB);
 	      break;
 	    case 0x0010:
 	      // LOAD PC
 	      cpu.LIB /= 10;
 	      cpu.LIB += ((cpu.KR >> 4) & 0xF) * 1000;
-	      if (log_flags & LOG_SHORT)
-		LOG ("LIB.addr=%04d", cpu.LIB);
 	      break;
 	    case 0x0020:
 	      // UNLOAD PC
@@ -817,15 +700,11 @@ int execute (unsigned short opcode) {
 	      cpu.flags |= FLG_EXT_VALID;
 	      //cpu.LIB = (cpu.LIB / 10) + ((cpu.LIB % 10) * 1000); // address is not wrapped around
 	      cpu.LIB /= 10;
-	      if (log_flags & LOG_SHORT)
-		LOG ("EXT=%04X", cpu.EXT);
 	      break;
 	    case 0x0030:
 	      // FETCH HIGH
 	      cpu.EXT = LIB[cpu.LIB] & 0xF0;
 	      cpu.flags |= FLG_EXT_VALID;
-	      if (log_flags & LOG_SHORT)
-		LOG ("EXT=%04X", cpu.EXT);
 	      break;
 	  }
 	  break;
@@ -837,16 +716,12 @@ int execute (unsigned short opcode) {
 	      cpu.flags |= FLG_STORE;
 	      // address is taken from last IO result - digit 0
 	      cpu.REG_ADDR = cpu.Sout[0];
-	      if (log_flags & LOG_SHORT)
-		LOG ("STO.addr=%01X", cpu.REG_ADDR);
 	      break;
 	    case 0x0010:
 	      // Recall F
 	      cpu.flags |= FLG_RECALL;
 	      // address is taken from last IO result - digit 0
 	      cpu.REG_ADDR = cpu.Sout[0];
-	      if (log_flags & LOG_SHORT)
-		LOG ("RCL.addr=%01X", cpu.REG_ADDR);
 	      break;
 	  }
 	  break;
@@ -931,18 +806,10 @@ int execute (unsigned short opcode) {
 	      // load from register
 	      cpu.flags &= ~FLG_RECALL;
 	      Alu (alu_out->dst, 0, SCOM[cpu.REG_ADDR], mask, ALU_ADD);
-	      if (alu_out->dst && (log_flags & LOG_DEBUG)) {
-		int i;
-		LOG ("[RCL.%u:", cpu.REG_ADDR); for (i = 15; i >= 0; i--) LOG ("%X", alu_out->dst[i]); LOG ("]");
-	      }
 	    } else
 	    if ((cpu.flags & FLG_RAM_READ) && ((mode_flags & MODE_TI_59) || cpu.RAM_ADDR < 60)) {
 	      cpu.flags &= ~FLG_RAM_READ;
 	      Alu (alu_out->dst, 0, RAM[cpu.RAM_ADDR], mask, ALU_ADD);
-	      if (alu_out->dst && (log_flags & LOG_DEBUG)) {
-		int i;
-		LOG ("[RAM.%u:", cpu.RAM_ADDR); for (i = 15; i >= 0; i--) LOG ("%X", alu_out->dst[i]); LOG ("]");
-	      }
 	    } else {
 	      Alu (alu_out->dst, 0, 0, mask, ALU_ADD);
 	    }
@@ -978,44 +845,18 @@ int execute (unsigned short opcode) {
 	switch (opcode & 0x0007) {
 	  case 0x0002: // A<->B
 	    Xch (cpu.A, cpu.B, mask);
-	    if (log_flags & LOG_SHORT) {
-	      int i;
-	      LOG ("A="); for (i = 15; i >= 0; i--) LOG ("%X", cpu.A[i]);
-	      LOG (" B="); for (i = 15; i >= 0; i--) LOG ("%X", cpu.B[i]);
-	    }
 	    break;
 	  case 0x0005: // C<->D
 	    Xch (cpu.C, cpu.D, mask);
-	    if (log_flags & LOG_SHORT) {
-	      int i;
-	      LOG ("C="); for (i = 15; i >= 0; i--) LOG ("%X", cpu.C[i]);
-	      LOG (" D="); for (i = 15; i >= 0; i--) LOG ("%X", cpu.D[i]);
-	    }
 	    break;
 	  case 0x0007: // A<->E
 	    Xch (cpu.A, cpu.E, mask);
-	    if (log_flags & LOG_SHORT) {
-	      int i;
-	      LOG ("A="); for (i = 15; i >= 0; i--) LOG ("%X", cpu.A[i]);
-	      LOG (" E="); for (i = 15; i >= 0; i--) LOG ("%X", cpu.E[i]);
-	    }
 	    break;
-	}
-	if (*alu_out->log && (log_flags & LOG_SHORT)) {
-	  int i;
-	  unsigned char *ptr = alu_out->dst;
-	  if (!ptr)
-	    ptr = cpu.Sout;
-	  LOG ("%s=", alu_out->log); for (i = 15; i >= 0; i--) LOG ("%X", ptr[i]);
 	}
 	// IO write control
 	if (cpu.flags & FLG_STORE) {
 	  cpu.flags &= ~FLG_STORE;
 	  memcpy (SCOM[cpu.REG_ADDR], cpu.Sout, sizeof (cpu.Sout));
-	  if (log_flags & LOG_SHORT) {
-	    int i;
-	    LOG ("STO.%u=", cpu.REG_ADDR); for (i = 15; i >= 0; i--) LOG ("%X", cpu.Sout[i]);
-	  }
 	}
 	if (cpu.flags & FLG_RAM_OP) {
 	  cpu.flags &= ~FLG_RAM_OP;
@@ -1024,34 +865,22 @@ int execute (unsigned short opcode) {
 	  if (cpu.RAM_OP == 2) {
 	    // clear 1 memory cell
 	    memset (RAM[cpu.RAM_ADDR], 0, 16*1);
-	    if (log_flags & LOG_DEBUG)
-	      LOG ("[RAM.clr1.addr=%02d]", cpu.RAM_ADDR);
 	  } else
 	  if (cpu.RAM_OP == 4) {
 	    // clear 10 memory cells
 	    memset (RAM[cpu.RAM_ADDR], 0, 16*10);
-	    if (log_flags & LOG_DEBUG)
-	      LOG ("[RAM.clr10.addr=%02d]", cpu.RAM_ADDR);
 	  } else
 	  if (cpu.RAM_OP == 1) {
 	    cpu.flags |= FLG_RAM_WRITE;
-	    if (log_flags & LOG_DEBUG)
-	      LOG ("[RAM.wr.addr=%02d]", cpu.RAM_ADDR);
 	  } else
 	  if (cpu.RAM_OP == 0) {
 	    cpu.flags |= FLG_RAM_READ;
-	    if (log_flags & LOG_DEBUG)
-	      LOG ("[RAM.rd.addr=%02d]", cpu.RAM_ADDR);
 	  }
 	} else
 	if (cpu.flags & FLG_RAM_WRITE) {
 	  // store to RAM (ALL_MASK)
 	  cpu.flags &= ~FLG_RAM_WRITE;
 	  memcpy (RAM[cpu.RAM_ADDR], cpu.Sout, sizeof (cpu.Sout));
-	  if (log_flags & LOG_SHORT) {
-	    int i;
-	    LOG ("RAM.%02u=", cpu.RAM_ADDR); for (i = 15; i >= 0; i--) LOG ("%X", cpu.Sout[i]);
-	  }
 	}
       }
 
@@ -1110,7 +939,6 @@ static void cpu_reset (void) {
     cpu.key[0] |= (1 << KP_BIT);
 }
 
-#ifndef _WIN32
 ///////////////////////////////////////////////////////
 // unblocking get c
 
@@ -1217,12 +1045,7 @@ int getch(int *key_down, int *vkey)
 
     return res;
 }
-#endif
 
-#ifdef _WIN32
-HANDLE hCon;
-DWORD tick;
-#endif
 unsigned ex_cnt;
 
 // ====================================
@@ -1234,16 +1057,6 @@ int main (int argc, char *argv[]) {
   // parse command line
   ROM[0] = 0;
   for (ex_cnt = 1; ex_cnt < argc; ex_cnt++) {
-    if (!strcmp (argv[ex_cnt], "-dbg")) {
-      // set debug flags
-      ex_cnt++;
-      if (ex_cnt >= argc) {
-	printf ("Parameter for -dbg missing!\n");
-	return 1;
-      }
-      sscanf (argv[ex_cnt], "%u", &log_flags);
-      continue;
-    } else
     if (!strcmp (argv[ex_cnt], "-mode")) {
       // set debug flags
       ex_cnt++;
@@ -1400,29 +1213,19 @@ int main (int argc, char *argv[]) {
   if (mode_flags & MODE_PRINTER)
     printf ("----------\n"
 	    "PRINT=#        TRACE=!        ADVANCE=@\n");
-#if _WIN32
-  // open console
-  hCon = GetStdHandle (STD_INPUT_HANDLE);
-  if (hCon == INVALID_HANDLE_VALUE) {
-    printf ("Error opening console!\n");
-    return 1;
-  }
-#endif
-
   // reset CPU
   cpu_reset ();
 
-#ifdef _WIN32
-  tick = GetTickCount ();
-#endif
   ex_cnt = 0;
   loop_run();
   printf ("\nFinished.\n");
   return 0;
 }
 
-void display(void)
+int display(void)
 {
+  int res = 0;
+
     if (!cpu.digit) {
       static char disp_filter = 0;
       if (cpu.flags & FLG_IDLE) {
@@ -1451,55 +1254,46 @@ void display(void)
 	  } else {
 	    cpu.flags &= ~FLG_DISP_C;
 	  }
-#ifndef DISP_DBG
-	  for (i = 13; i >= 2; i--) {
-	    dA[i] = cpu.A[i];
-	    dB[i] = cpu.B[i];
-	    if (i == 3 || cpu.R5 == i || cpu.B[i] >= 8)
-	      zero = 0;
-	    if (i == 2)
-	      zero = 1;
-	    if (cpu.B[i] == 7 || cpu.B[i] == 3 || (cpu.B[i] <= 4 && zero && !cpu.A[i]))
-	      putchar (' ');
-	    else
-	    if (cpu.B[i] == 6 || (cpu.B[i] == 5 && !cpu.A[i]))
-	      putchar ('-');
-	    else
-	    if (cpu.B[i] == 5)
-	      putchar ('o');
-	    else
-	    if (cpu.B[i] == 4)
-	      putchar ('\'');
-	    else
-	    if (cpu.B[3] == 2)
-	      putchar ('"');
-	    else {
-	      putchar ('0' + cpu.A[i]);
-	      if (cpu.A[i])
-		zero = 0;
-	    }
-	    if (cpu.R5 == i)
-	      putchar ('.');
-	  }
-#else
+
           /* display of TI is there */
-          for (i = 13; i >= 2; i--) {
-            putchar ('0'+cpu.A[i]);
-            if (cpu.R5 == i)
-              putchar ('.');
-          }
-          putchar (' ');
-          for (i = 13; i >= 2; i--)
-            putchar ('0'+cpu.B[i]);
-#endif
+         for (i = 13; i >= 2; i--) {
+           dA[i] = cpu.A[i];
+           dB[i] = cpu.B[i];
+           if (i == 3 || cpu.R5 == i || cpu.B[i] >= 8)
+             zero = 0;
+           if (i == 2)
+             zero = 1;
+           if (cpu.B[i] == 7 || cpu.B[i] == 3 || (cpu.B[i] <= 4 && zero && !cpu.A[i]))
+             putchar (' ');
+           else
+           if (cpu.B[i] == 6 || (cpu.B[i] == 5 && !cpu.A[i]))
+             putchar ('-');
+           else
+           if (cpu.B[i] == 5)
+             putchar ('o');
+           else
+           if (cpu.B[i] == 4)
+             putchar ('\'');
+           else
+           if (cpu.B[3] == 2)
+             putchar ('"');
+           else {
+             putchar ('0' + cpu.A[i]);
+             if (cpu.A[i])
+               zero = 0;
+           }
+           if (cpu.R5 == i)
+             putchar ('.');
+         }
+
 	  putchar ('|'); putchar (' ');
+          res = 1;
 	}
 	disp_filter = 0;
       } else
       if (disp_filter < 3)
 	disp_filter++;
       else {
-        //        printf("cpu digit\n");
 	// display disabled
 	if ((cpu.flags & FLG_DISP) /*|| (!cpu.fA && (cpu.flags & FLG_DISP_C))*/ || (cpu.fA && !(cpu.flags & FLG_DISP_C))) {
 	  cpu.flags &= ~FLG_DISP;
@@ -1513,6 +1307,8 @@ void display(void)
 	}
       }
     }
+
+    return res;
 }
 
 void loop_run(void)
@@ -1520,111 +1316,38 @@ void loop_run(void)
   int key_down = 0, count=0;
   char AsciiChar = 0, keep_char=0, vkey=0;
 
-  while (1) {
-    if (log_flags && !(cpu.PREG & 1)) {
-      if (log_flags & LOG_SHORT)
-	DIS ("%04X:%c\t%04X\t", cpu.addr, (cpu.flags & FLG_COND) ? 'C' : '-', ROM[cpu.addr]);
-      else
-        if (log_flags & LOG_HRAST)
-          DIS ("%04X %04X ", cpu.addr, ROM[cpu.addr]);
-      //      disasm (cpu.addr, ROM[cpu.addr]);
-      DIS ("\n");
-      if (log_flags & LOG_HRAST) {
-	int i;
-	LOG_H ("A="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.A[i]);
-	LOG_H (" B="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.B[i]);
-	LOG_H (" C="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.C[i]);
-	LOG_H (" D="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.D[i]);
-	LOG_H (" E="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.E[i]);
-	LOG_H ("\nFA=%04X [", cpu.fA); for (i = 15; i >= 0; i--) LOG_H ("%d", (cpu.fA >> i) & 1);
-	LOG_H ("] KR=%04X [", cpu.KR); for (i = 15; i >= 0; i--) LOG_H ("%d", (cpu.KR >> i) & 1);
-	LOG_H ("] EXT=%02X COND=%d IDLE=%d", (cpu.EXT >> 4) & 0xFF, (cpu.flags & FLG_COND) != 0, (cpu.flags & FLG_IDLE) != 0);
-	LOG_H (" IO="); for (i = 15; i >= 0; i--) LOG_H ("%X", cpu.Sout[i]);
-	LOG_H ("\nFB=%04X [", cpu.fB); for (i = 15; i >= 0; i--) LOG_H ("%d", (cpu.fB >> i) & 1);
-	LOG_H ("] SR=%04X R5=%X", cpu.SR, cpu.R5);
-	LOG_H (" ROM=%04d.0 PREG=%d", cpu.LIB, (cpu.KR & 2) != 0);
-	LOG_H (" RAMOP=%X RAMREG=%03d", cpu.RAM_OP, cpu.RAM_ADDR);
-	LOG_H (" ROMOP=%X ROMREG=%02d", (cpu.flags & (FLG_RECALL | FLG_STORE)) >> FLG_RCL_SHIFT, ((cpu.KR >> 5) & 0x78) | ((cpu.KR >> 4) & 0x07));
-	LOG_H ("\n");
-      } else {
-	LOG ("\t");
-      }
-    }
-
-    //    int k;
-    //    for (k=0; k<100; k++)
+  while (1)
+    {
       if (!execute (ROM[cpu.addr]))
         continue;
 
-    if (log_flags)
-      LOG ("\n");
+      display();
 
-    display();
+      {
+        fflush(0);
+        set_conio_terminal_mode();
 
-#ifdef _WIN32
-    // real speed simulation
-    // 455kHz / 2 / 16 = 14219
-    // 20ms ~ 284.375 instructions
-    // 50ms ~ 710.9375 instructions
-    if ((cpu.cycle - ex_cnt) > EMUL_CYCLE) {
-      ex_cnt += EMUL_CYCLE;
-      while ((GetTickCount () - tick) < EMUL_TICK)
-	Sleep (EMUL_TICK);
-      tick += EMUL_TICK;
-    }
-#else
-    sleep(0.9);
-#endif
+        if (kbhit())
+          {
+            AsciiChar = getch(&key_down, &vkey);
+            reset_terminal_mode();
+            if (AsciiChar == 3)
+              {
+                printf ("ctrl-c exit!!!!");
+                break;
+              }
 
-    {
-#ifdef _WIN32
-      INPUT_RECORD ir;
-      DWORD size;
-      // reading console keys
-      if (PeekConsoleInput (hCon, &ir, 1, &size), size) {
-        ReadConsoleInput (hCon, &ir, 1, &size);
-        if (ir.EventType==KEY_EVENT) {
-	  if (ir.Event.KeyEvent.bKeyDown) {
-	    if (ir.Event.KeyEvent.uChar.AsciiChar == 0x18) // ^X
-	      break;
-	    if (ir.Event.KeyEvent.uChar.AsciiChar == 0x12) { // ^R
-	      cpu_reset ();
-	      ex_cnt = 0;
-	    }
-	  }
-
-          AsciiChar = ir.Event.KeyEvent.uChar.AsciiChar;
-          key_down = ir.Event.KeyEvent.bKeyDown;
-#else
-      fflush(0);
-      set_conio_terminal_mode();
-
-      if (kbhit()) {
-        AsciiChar = getch(&key_down, &vkey);
-        if (1) {
-          int size;
-
-          reset_terminal_mode();
-          if (AsciiChar == 3) {
-            printf ("ctrl-c exit!!!!");
-            break;
+            handle_key (AsciiChar, vkey, &key_down);
           }
-#endif
-
-          handle_key (AsciiChar, vkey, &key_down);
-	}
       }
-    }
-#ifndef _WIN32
       reset_terminal_mode();
-#endif
-      }
     }
+}
 
 void handle_key(char AsciiChar, char vkey, char *key_down)
 {
   int size;
-#ifndef _WIN32
+
 #define VK_F1 80
 #define VK_F2 81
 #define VK_F3 82
@@ -1636,7 +1359,6 @@ void handle_key(char AsciiChar, char vkey, char *key_down)
 #define VK_F9 48
 #define VK_INSERT 50
 #define VK_DELETE 51
-#endif
 
           //          printf("\ngetchar: '%c' %d (vk=%d) isdown:%d\n", AsciiChar, AsciiChar, vkey, key_down);
 #define	KEY_INVERT	0x01
@@ -1649,7 +1371,7 @@ void handle_key(char AsciiChar, char vkey, char *key_down)
     unsigned vkey;
   } key_table[] = {
     {0x11, 0, 0, VK_F1},     {0x21, 0, 0, VK_F2}, {0x31, 0, 0, VK_F3}, {0x51, 0, 0, VK_F4}, {0x61, 0, 0, VK_F5},
-    {0x12, 0, 0, VK_F8},     {0x22, 0, 0, VK_F9}, {0x32, 0, 'l', 0},   {0x52, 0, '\b', 0},  {0x62, 0, 0x1B, 0},
+    {0x12, 0, 0, VK_F8},     {0x22, 0, 0, VK_F9}, {0x32, 0, 'l', 0},   {0x52, 0, '\b', 0},  {0x62, 0, ' ', 0},
     {0x13, 0, 'p', 0}, 	     {0x23, 0, 'x', 0},   {0x33, 0, 's', 0},   {0x53, 0, 'c', 0},   {0x63, 0, 't', 0},
     {0x14, 0, 0, VK_INSERT}, {0x24, 0, '>', 0},   {0x34, 0, '<', 0},   {0x54, 0, '&', 0},   {0x64, 0, 'y', 0},
     {0x15, 0, 0, VK_DELETE}, {0x25, 0, 'e', 0},   {0x35, 0, '(', 0},   {0x55, 0, ')', 0},   {0x65, 0, '/', 0},
@@ -1665,17 +1387,13 @@ void handle_key(char AsciiChar, char vkey, char *key_down)
     {0x4A, KEY_INVERT, '~', 0}, // card inserted
     {0}
   };
+
   for (size = 0; key_table[size].ascii || key_table[size].vkey; size++) {
-    if ((key_table[size].ascii && key_table[size].ascii == /*ir.Event.KeyEvent.uChar.*/AsciiChar) ||
-        (key_table[size].vkey && key_table[size].vkey == vkey/*ir.Event.KeyEvent.wVirtualKeyCode)*/)) {
-      if (log_flags & LOG_DEBUG)
-        LOG ("{K=%02X}\n", key_table[size].key_code);
+    if ((key_table[size].ascii && key_table[size].ascii == AsciiChar) ||
+        (key_table[size].vkey && key_table[size].vkey == vkey)) {
       if (key_table[size].flags & KEY_INVERT)
         *key_down = *key_down==1?0:1;
-#if 0
-      ir.Event.KeyEvent.bKeyDown = !ir.Event.KeyEvent.bKeyDown;
-#endif
-      if (*key_down == 1/*ir.Event.KeyEvent.bKeyDown*/) {
+      if (*key_down == 1) {
         if (key_table[size].flags & KEY_ONOFF)
           cpu.key[key_table[size].key_code & 0x0F] ^= 1 << ((key_table[size].key_code >> 4) & 0x07);
         else
