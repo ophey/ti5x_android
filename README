@@ -24,6 +24,7 @@ Contents:
         other useful tasks.
     modules/
         av/   -- the source of the Aviation Library.
+        bd/   -- the business decisions Library.
         ct/   -- the source of the Contribution Library.
         ee/   -- the source of the Electrical Engineering Library.
         le/   -- the source of the Leisure Library.

@@ -62,6 +62,11 @@
             <arg value="ml"/>
         </exec>
         <exec executable="util/mlmake">
+            <arg value="modules/bd"/>
+            <arg value="${out.res.absolute.dir}/raw"/>
+            <arg value="bd"/>
+        </exec>
+        <exec executable="util/mlmake">
             <arg value="modules/le"/>
             <arg value="${out.res.absolute.dir}/raw"/>
             <arg value="le"/>

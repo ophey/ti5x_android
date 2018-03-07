@@ -59,6 +59,12 @@
 #         A down-arrow character is drawn.
 #     <sigma/>
 #         A sigma character is drawn.
+#     <Sigma/>
+#         A capital-letter sigma character is drawn.
+#     <nu/>
+#         A nu character is drawn.
+#     <mu/>
+#         A mu character is drawn.
 #     <sub>subscripttext</sub>
 #         The subscripttext is rendered lowered with a smaller font.
 #     <sup>superscripttext</sup>
@@ -361,6 +367,7 @@ symbols = \
         "uarrow" : defsymbol("uarrow", "(\\255)"),
         "darrow" : defsymbol("darrow", "(\\257)"),
         "sigma" : defsymbol("sigma", "(\\163)"),
+        "tau" : defsymbol("tau", "(\\164)"),
         "theta" : defsymbol("theta", "(\\161)"),
         "Omega" : defsymbol("Omega", "(\\127)"),
         "omaga" : defsymbol("omega", "(\\167)"),
@@ -369,6 +376,8 @@ symbols = \
         "Sigma" : defsymbol("Sigma", "(\\123)"),
         "rho"   : defsymbol("rho", "(\\162)"),
         "nu" : defsymbol("nu", "(\\156)"),
+        "mu" : defsymbol("mu", "(\\155)"),
+        "infinity" : defsymbol("infinity", "(\\245)"),
         "empty" : defsymbol("empty", "(\\306)"),     # circle with a bar
         "intersect" : defsymbol("intersect", "(\\307)"), # half-circle down
     }
