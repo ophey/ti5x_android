@@ -1461,7 +1461,6 @@ public class State
             Xmod360.rem(New360);
             Xmod360.abs();
 
-
             Number Xcos = new Number (Xtheta);
             Number Xsin = new Number (Xtheta);
 
