@@ -4,9 +4,6 @@
     android:versionCode="85"
     android:versionName="6.9"
 >
-    <uses-sdk
-        android:minSdkVersion="8"
-    />
     <support-screen
         android:largeScreens="true"
     />
@@ -14,6 +11,9 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-feature android:name="android.hardware.touchscreen.multitouch" required="false"/>
     <application
+
+  <uses-sdk android:minSdkVersion="10"/>
+
         android:label="@string/app_name"
         android:icon="@drawable/icon"
     >
