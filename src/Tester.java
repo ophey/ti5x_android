@@ -1008,6 +1008,61 @@ public class Tester
         return check(SMALL, true);
     }
 
+    private boolean Test_30()
+    {
+        Clear();
+
+        // 101
+        Calc.Digit('1');
+        Calc.Digit('0');
+        Calc.Digit('1');
+        Calc.Operator(Calc.STACKOP_SUB);
+        Calc.Digit('.');
+        Calc.Digit('5');
+        Calc.Equals();
+        Calc.SetDisplayMode(Calc.FORMAT_FIXED, 0);
+
+        if (!check("101", false))
+            return false;
+
+        // 102
+        Calc.Digit('1');
+        Calc.Digit('0');
+        Calc.Digit('2');
+        Calc.Operator(Calc.STACKOP_SUB);
+        Calc.Digit('.');
+        Calc.Digit('5');
+        Calc.Equals();
+        Calc.SetDisplayMode(Calc.FORMAT_FIXED, 0);
+
+        if (!check("102", false))
+            return false;
+
+        // 103
+        Calc.Digit('1');
+        Calc.Digit('0');
+        Calc.Digit('3');
+        Calc.Operator(Calc.STACKOP_SUB);
+        Calc.Digit('.');
+        Calc.Digit('5');
+        Calc.Equals();
+        Calc.SetDisplayMode(Calc.FORMAT_FIXED, 0);
+
+        if (!check("103", false))
+            return false;
+
+        // 104
+        Calc.Digit('1');
+        Calc.Digit('0');
+        Calc.Digit('4');
+        Calc.Operator(Calc.STACKOP_SUB);
+        Calc.Digit('.');
+        Calc.Digit('5');
+        Calc.Equals();
+        Calc.SetDisplayMode(Calc.FORMAT_FIXED, 0);
+        return check("104", false);
+    }
+
     public int Run()
     {
         Calc = Global.Calc;
@@ -1042,6 +1097,7 @@ public class Tester
         if (!Test_27()) return -27; Total++;
         if (!Test_28()) return -28; Total++;
         if (!Test_29()) return -29; Total++;
+        if (!Test_30()) return -30; Total++;
 
         Clear();
 

@@ -1,7 +1,7 @@
 /*
     ti5x calculator emulator -- BCD Number 13-digits
 
-    Copyright 2015 Pascal Obry <pascal@obry.net>.
+    Copyright 2015-2018 Pascal Obry <pascal@obry.net>.
 
     This program is free software: you can redistribute it and/or modify it under
     the terms of the GNU General Public License as published by the Free Software
@@ -23,6 +23,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 
 public class Number
 {
@@ -607,6 +608,7 @@ public class Number
         form.setMinimumFractionDigits(nrDecimals);
         form.setGroupingUsed(false);
         form.setDecimalFormatSymbols(decForm);
+        form.setRoundingMode(RoundingMode.HALF_UP);
         return form.format(v);
     }
 }
