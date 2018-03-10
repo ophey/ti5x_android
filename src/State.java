@@ -3518,9 +3518,7 @@ public class State
         boolean Ind
       )
       {
-        if (NewPC >= 0)
-          {
-            Enter((Greater ? (Ind  ? 72 : 77) : (Ind ? 62 : 67)));
+            Enter((Greater ? (Ind ? 72 : 77) : (Ind ? 62 : 67)));
             if
               (
                 InvState ?
@@ -3535,15 +3533,23 @@ public class State
                         X.compareTo(T) == 0
               )
               {
-                Transfer
-                  (
-                    /*Type =*/ TRANSFER_TYPE_GTO,
-                    /*BankNr =*/ BankNr,
-                    /*Loc =*/ NewPC,
-                    /*LocType =*/ Ind ? TRANSFER_LOC_INDIRECT : TRANSFER_LOC_DIRECT
-                  );
+                if (NewPC > 0)
+                  {
+                    Transfer
+                      (
+                       /*Type =*/ TRANSFER_TYPE_GTO,
+                       /*BankNr =*/ BankNr,
+                       /*Loc =*/ NewPC,
+                       /*LocType =*/ Ind ? TRANSFER_LOC_INDIRECT : TRANSFER_LOC_DIRECT
+                       );
+                  }
+                else
+                  {
+                    //  jump to unknown location
+                    SetErrorState(true);
+                    return;
+                  }
               } /*if*/
-          } /*if*/
 
         // if the location we land is a number it must replace the current X
 
@@ -3805,7 +3811,14 @@ public class State
                 break;
                 case 67: /*x=t*/
                 case 77: /*x≥t*/
+                    final int BranchPC = RunPC;
                     CompareBranch(Op == 77, RunBank, GetLoc(true, RunBank), false);
+                    if (InErrorState())
+                      {
+                          // in case of error, go to the branch op
+                          RunPC = BranchPC;
+                          PC = BranchPC;
+                      }
                 break;
                 case 68: /*Nop*/
                   /* No effect */
