@@ -1,5 +1,9 @@
 Feature highlights:
 
+v6.11, 2018 March 13th:
+   Fix handling of error state.
+   Fix Internet web links in help and about.
+
 v6.10, 2018 March 10th:
    Fix PC location when missing label in program.
    Fix rounding when using fixed notation.
