@@ -1614,6 +1614,8 @@ public class State
         boolean NewProgMode
       )
       {
+        // entering the program mode always clear the error state
+        inError = false;
         ProgMode = NewProgMode;
         if (ProgMode)
           {
