@@ -17,6 +17,9 @@ package net.obry.ti5x;
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
+import java.util.Calendar;
+import java.util.Date;
+
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -655,7 +658,11 @@ public class Main extends android.app.Activity
                       {
                         VersionName = "CANTFINDME"; /*!*/
                       } /*catch*/
-                    ShowHelp("help/about.html", new String[] {VersionName});
+                    Date today = new Date(); // Fri Jun 17 14:54:28 PDT 2016
+                    Calendar cal = Calendar.getInstance();
+                    cal.setTime(today);
+                    ShowHelp("help/about.html",
+                             new String[] {VersionName, String.valueOf(cal.get(Calendar.YEAR))});
                   } /*run*/
               } /*Runnable*/
           );
