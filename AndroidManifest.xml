@@ -9,6 +9,7 @@
   <support-screen android:largeScreens="true"/>
   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
   <uses-permission android:name="android.permission.VIBRATE"/>
+  <uses-permission android:name="android.permission.INTERNET"/>
   <uses-feature android:name="android.hardware.touchscreen.multitouch" required="false"/>
   <application
       android:label="@string/app_name"
