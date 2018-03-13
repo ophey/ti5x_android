@@ -1,12 +1,12 @@
 Feature highlights:
 
 v6.10, 2018 March 10th:
-   Fix PC location when missing label in program
-   Fix rounding when using fixed notation
+   Fix PC location when missing label in program.
+   Fix rounding when using fixed notation.
 
 v6.9, 2017 November 12th:
-   Adjust exponent rendering on card
-   Fix small number detection
+   Adjust exponent rendering on card.
+   Fix small number detection.
 
 v6.8, 2017 November 1st:
    Adjust font size for new cards.
