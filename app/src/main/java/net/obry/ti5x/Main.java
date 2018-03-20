@@ -656,13 +656,14 @@ public class Main extends android.app.Activity
                       }
                     catch (android.content.pm.PackageManager.NameNotFoundException CantFindMe)
                       {
-                        VersionName = "CANTFINDME"; /*!*/
+                        VersionName = "Xperimental"; /*!*/
                       } /*catch*/
                     Date today = new Date(); // Fri Jun 17 14:54:28 PDT 2016
                     Calendar cal = Calendar.getInstance();
                     cal.setTime(today);
+                    String YearStr = String.valueOf(cal.get(Calendar.YEAR));
                     ShowHelp("help/about.html",
-                             new String[] {VersionName, String.valueOf(cal.get(Calendar.YEAR))});
+                             new String[] {VersionName, YearStr, YearStr});
                   } /*run*/
               } /*Runnable*/
           );
