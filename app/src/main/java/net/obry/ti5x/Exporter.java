@@ -17,165 +17,136 @@ package net.obry.ti5x;
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-public class Exporter
-  {
-    final android.content.Context ctx;
-    java.io.OutputStream Out;
-    java.io.PrintStream PrintOut;
-    public boolean NumbersOnly = true; /* actually initial value irrelevant */
+public class Exporter {
+  final android.content.Context ctx;
+  java.io.OutputStream Out;
+  java.io.PrintStream PrintOut;
+  public boolean NumbersOnly = true; /* actually initial value irrelevant */
 
-    public Exporter
+  public Exporter
       (
-        android.content.Context ctx
+          android.content.Context ctx
+      ) {
+    this.ctx = ctx;
+    Out = null;
+    PrintOut = null;
+  } /*Exporter*/
+
+  public boolean IsOpen() {
+    return
+        Out != null;
+  } /*IsOpen*/
+
+  public void Open
+      (
+          String FileName,
+          boolean Append,
+          boolean NumbersOnly
       )
-      {
-        this.ctx = ctx;
-        Out = null;
+      throws RuntimeException {
+    try {
+      Out = new java.io.FileOutputStream(FileName, Append);
+      this.NumbersOnly = NumbersOnly;
+      if (this.NumbersOnly) {
+        PrintOut = new java.io.PrintStream(Out);
+      } /*if*/
+    } catch (java.io.FileNotFoundException DirErr) {
+      throw new RuntimeException(DirErr.toString());
+    } catch (SecurityException PermErr) {
+      throw new RuntimeException(PermErr.toString());
+    } /*try*/
+  } /*Open*/
+
+  public void Flush() {
+    if (Out != null) {
+      try {
+        if (PrintOut != null) {
+          PrintOut.flush();
+        } /*if*/
+        Out.flush();
+      } catch (java.io.IOException WriteErr) {
+        android.widget.Toast.makeText
+            (
+                    /*context =*/ ctx,
+                    /*text =*/
+                String.format
+                    (
+                        Global.StdLocale,
+                        ctx.getString(R.string.export_error),
+                        WriteErr.toString()
+                    ),
+                    /*duration =*/ android.widget.Toast.LENGTH_LONG
+            ).show();
         PrintOut = null;
-      } /*Exporter*/
+        Out = null;
+      } /*try*/
+    } /*if*/
+  } /*Flush*/
 
-    public boolean IsOpen()
-      {
-        return
-            Out != null;
-      } /*IsOpen*/
+  public void Close() {
+    if (Out != null) {
+      try {
+        if (PrintOut != null) {
+          PrintOut.flush();
+          PrintOut.close();
+        } /*if*/
+        Out.flush();
+        Out.close();
+      } catch (java.io.IOException WriteErr) {
+        android.widget.Toast.makeText
+            (
+                    /*context =*/ ctx,
+                    /*text =*/
+                String.format
+                    (
+                        Global.StdLocale,
+                        ctx.getString(R.string.export_error),
+                        WriteErr.toString()
+                    ),
+                    /*duration =*/ android.widget.Toast.LENGTH_LONG
+            ).show();
+      } /*try*/
+      PrintOut = null;
+      Out = null;
+    } /*if*/
+  } /*Close*/
 
-    public void Open
+  public void WriteLine
       (
-        String FileName,
-        boolean Append,
-        boolean NumbersOnly
+          String Line
       )
-    throws RuntimeException
-      {
-        try
-          {
-            Out = new java.io.FileOutputStream(FileName, Append);
-            this.NumbersOnly = NumbersOnly;
-            if (this.NumbersOnly)
-              {
-                PrintOut = new java.io.PrintStream(Out);
-              } /*if*/
-          }
-        catch (java.io.FileNotFoundException DirErr)
-          {
-            throw new RuntimeException(DirErr.toString());
-          }
-        catch (SecurityException PermErr)
-          {
-            throw new RuntimeException(PermErr.toString());
-          } /*try*/
-      } /*Open*/
-
-    public void Flush()
-      {
-        if (Out != null)
-          {
-            try
-              {
-                if (PrintOut != null)
-                  {
-                    PrintOut.flush();
-                  } /*if*/
-                Out.flush();
-              }
-            catch (java.io.IOException WriteErr)
-              {
-                android.widget.Toast.makeText
-                  (
+      /* writes another line to the export data file. */ {
+    if (Out != null) {
+      try {
+        Out.write(Line.getBytes());
+        Out.write("\n".getBytes());
+      } catch (java.io.IOException WriteErr) {
+        android.widget.Toast.makeText
+            (
                     /*context =*/ ctx,
                     /*text =*/
-                        String.format
-                          (
-                            Global.StdLocale,
-                            ctx.getString(R.string.export_error),
-                            WriteErr.toString()
-                          ),
+                String.format
+                    (
+                        Global.StdLocale,
+                        ctx.getString(R.string.export_error),
+                        WriteErr.toString()
+                    ),
                     /*duration =*/ android.widget.Toast.LENGTH_LONG
-                  ).show();
-                PrintOut = null;
-                Out = null;
-              } /*try*/
-          } /*if*/
-      } /*Flush*/
+            ).show();
+        Out = null;
+      } /*try*/
+    } /*if*/
+  } /*Write*/
 
-    public void Close()
-      {
-        if (Out != null)
-          {
-            try
-              {
-                if (PrintOut != null)
-                  {
-                    PrintOut.flush();
-                    PrintOut.close();
-                  } /*if*/
-                Out.flush();
-                Out.close();
-              }
-            catch (java.io.IOException WriteErr)
-              {
-                android.widget.Toast.makeText
-                  (
-                    /*context =*/ ctx,
-                    /*text =*/
-                        String.format
-                          (
-                            Global.StdLocale,
-                            ctx.getString(R.string.export_error),
-                            WriteErr.toString()
-                          ),
-                    /*duration =*/ android.widget.Toast.LENGTH_LONG
-                  ).show();
-              } /*try*/
-            PrintOut = null;
-            Out = null;
-          } /*if*/
-      } /*Close*/
-
-    public void WriteLine
+  public void WriteNum
       (
-        String Line
-      )
-      /* writes another line to the export data file. */
-      {
-        if (Out != null)
-          {
-            try
-              {
-                Out.write(Line.getBytes());
-                Out.write("\n".getBytes());
-              }
-            catch (java.io.IOException WriteErr)
-              {
-                android.widget.Toast.makeText
-                  (
-                    /*context =*/ ctx,
-                    /*text =*/
-                        String.format
-                          (
-                            Global.StdLocale,
-                            ctx.getString(R.string.export_error),
-                            WriteErr.toString()
-                          ),
-                    /*duration =*/ android.widget.Toast.LENGTH_LONG
-                  ).show();
-                Out = null;
-              } /*try*/
-          } /*if*/
-      } /*Write*/
-
-    public void WriteNum
-      (
-        Number Num
+          Number Num
       )
       /* writes a number to the export data file in a standard form that can
-        be read in again by myself or other programs. */
-      {
-        if (PrintOut != null)
-          {
-            PrintOut.printf (Num.formatString(Global.StdLocale, Global.NrSigFigures));
-          } /*if*/
-      } /*WriteNum*/
+        be read in again by myself or other programs. */ {
+    if (PrintOut != null) {
+      PrintOut.printf(Num.formatString(Global.StdLocale, Global.NrSigFigures));
+    } /*if*/
+  } /*WriteNum*/
 
-  } /*Exporter*/
+} /*Exporter*/

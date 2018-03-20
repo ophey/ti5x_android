@@ -18,212 +18,188 @@ package net.obry.ti5x;
 
 import android.graphics.RectF;
 
-public class LabelCard extends android.view.View
-  {
-    final android.content.Context TheContext;
-    android.graphics.Bitmap CardImage, NewCardImage;
-    byte[] Help;
-    final int Dark, LEDOff;
+public class LabelCard extends android.view.View {
+  final android.content.Context TheContext;
+  android.graphics.Bitmap CardImage, NewCardImage;
+  byte[] Help;
+  final int Dark, LEDOff;
 
-    final float SlideDuration = 0.5f; /* seconds */
+  final float SlideDuration = 0.5f; /* seconds */
 
-    public LabelCard
+  public LabelCard
       (
-        android.content.Context TheContext,
-        android.util.AttributeSet TheAttributes
-      )
-      {
-        super(TheContext, TheAttributes);
-        this.TheContext = TheContext;
-        final android.content.res.Resources Res = TheContext.getResources();
-        Dark = Res.getColor(R.color.dark);
-        LEDOff = Res.getColor(R.color.led_off);
-        CardImage = null;
-        Help = null;
-        setOnTouchListener
-          (
-            new android.view.View.OnTouchListener()
-              {
-                public boolean onTouch
+          android.content.Context TheContext,
+          android.util.AttributeSet TheAttributes
+      ) {
+    super(TheContext, TheAttributes);
+    this.TheContext = TheContext;
+    final android.content.res.Resources Res = TheContext.getResources();
+    Dark = Res.getColor(R.color.dark);
+    LEDOff = Res.getColor(R.color.led_off);
+    CardImage = null;
+    Help = null;
+    setOnTouchListener
+        (
+            new android.view.View.OnTouchListener() {
+              public boolean onTouch
                   (
-                    android.view.View TheView,
-                    android.view.MotionEvent TheEvent
-                  )
-                  {
-                    boolean Handled = false;
-                    if (!Global.BGTaskInProgress())
-                      {
-                        switch (TheEvent.getAction())
-                          {
-                        case android.view.MotionEvent.ACTION_DOWN:
-                        case android.view.MotionEvent.ACTION_MOVE:
-                            if (Help != null)
-                              {
-                                final android.content.Intent ShowHelp =
-                                    new android.content.Intent(android.content.Intent.ACTION_VIEW);
-                                ShowHelp.putExtra(net.obry.ti5x.Help.ContentID, Help);
-                                ShowHelp.setClass(LabelCard.this.TheContext, Help.class);
-                                LabelCard.this.TheContext.startActivity(ShowHelp);
-                              }
-                            else
-                              {
-                                android.widget.Toast.makeText
-                                  (
+                      android.view.View TheView,
+                      android.view.MotionEvent TheEvent
+                  ) {
+                boolean Handled = false;
+                if (!Global.BGTaskInProgress()) {
+                  switch (TheEvent.getAction()) {
+                    case android.view.MotionEvent.ACTION_DOWN:
+                    case android.view.MotionEvent.ACTION_MOVE:
+                      if (Help != null) {
+                        final android.content.Intent ShowHelp =
+                            new android.content.Intent(android.content.Intent.ACTION_VIEW);
+                        ShowHelp.putExtra(net.obry.ti5x.Help.ContentID, Help);
+                        ShowHelp.setClass(LabelCard.this.TheContext, Help.class);
+                        LabelCard.this.TheContext.startActivity(ShowHelp);
+                      } else {
+                        android.widget.Toast.makeText
+                            (
                                     /*context =*/ LabelCard.this.TheContext,
                                     /*text =*/ LabelCard.this.TheContext.getString(R.string.no_prog_help),
                                     /*duration =*/ android.widget.Toast.LENGTH_SHORT
-                                  ).show();
-                              } /*if*/
-                            Handled = true;
-                        break;
-                        case android.view.MotionEvent.ACTION_UP:
-                        case android.view.MotionEvent.ACTION_CANCEL:
-                          /* ignore */
-                            Handled = true;
-                        break;
-                          } /*switch*/
+                            ).show();
                       } /*if*/
-                    return
-                        Handled;
-                  } /*onClick*/
-              }
-          );
-      } /*LabelCard*/
+                      Handled = true;
+                      break;
+                    case android.view.MotionEvent.ACTION_UP:
+                    case android.view.MotionEvent.ACTION_CANCEL:
+                          /* ignore */
+                      Handled = true;
+                      break;
+                  } /*switch*/
+                } /*if*/
+                return
+                    Handled;
+              } /*onClick*/
+            }
+        );
+  } /*LabelCard*/
 
-    void SlideInNewCard()
-      {
-        clearAnimation();
-        CardImage = NewCardImage;
-        if (CardImage != null)
-          {
-            final android.view.animation.Animation SlideIn =
-                new android.view.animation.TranslateAnimation
-                  (
+  void SlideInNewCard() {
+    clearAnimation();
+    CardImage = NewCardImage;
+    if (CardImage != null) {
+      final android.view.animation.Animation SlideIn =
+          new android.view.animation.TranslateAnimation
+              (
                     /*fromXDelta =*/ getWidth(),
                     /*toXDelta =*/ 0.0f,
                     /*fromYDelta =*/ 0.0f,
                     /*toYDelta =*/ 0.0f
-                  );
-            SlideIn.setDuration((int)(SlideDuration * 1000));
-            startAnimation(SlideIn);
-          }
-        else
-          {
-            invalidate(); /* make sure red overlap is properly drawn */
-          } /*if*/
-      } /*SlideInNewCard*/
+              );
+      SlideIn.setDuration((int) (SlideDuration * 1000));
+      startAnimation(SlideIn);
+    } else {
+      invalidate(); /* make sure red overlap is properly drawn */
+    } /*if*/
+  } /*SlideInNewCard*/
 
-    void SlideOutOldCard()
-      {
-        clearAnimation(); /* if any */
-        final android.view.animation.Animation SlideOut =
-            new android.view.animation.TranslateAnimation
-              (
+  void SlideOutOldCard() {
+    clearAnimation(); /* if any */
+    final android.view.animation.Animation SlideOut =
+        new android.view.animation.TranslateAnimation
+            (
                 /*fromXDelta =*/ 0.0f,
                 /*toXDelta =*/ getWidth(),
                 /*fromYDelta =*/ 0.0f,
                 /*toYDelta =*/ 0.0f
-              );
-        SlideOut.setDuration((int)(SlideDuration * 1000));
-        SlideOut.setAnimationListener
-          (
-            new android.view.animation.Animation.AnimationListener()
-              {
+            );
+    SlideOut.setDuration((int) (SlideDuration * 1000));
+    SlideOut.setAnimationListener
+        (
+            new android.view.animation.Animation.AnimationListener() {
 
-                public void onAnimationStart
+              public void onAnimationStart
                   (
-                    android.view.animation.Animation TheAnimation
-                  )
-                  {
+                      android.view.animation.Animation TheAnimation
+                  ) {
                   /* nothing interesting */
-                  } /*onAnimationStart*/
+              } /*onAnimationStart*/
 
-                public void onAnimationEnd
+              public void onAnimationEnd
                   (
-                    android.view.animation.Animation TheAnimation
-                  )
-                  {
-                    SlideInNewCard();
-                  } /*onAnimationEnd*/
+                      android.view.animation.Animation TheAnimation
+                  ) {
+                SlideInNewCard();
+              } /*onAnimationEnd*/
 
-                public void onAnimationRepeat
+              public void onAnimationRepeat
                   (
-                    android.view.animation.Animation TheAnimation
-                  )
-                  {
+                      android.view.animation.Animation TheAnimation
+                  ) {
                   /* won't occur */
-                  } /*onAnimationRepeat*/
+              } /*onAnimationRepeat*/
 
-              } /*AnimationListener*/
-          );
-        startAnimation(SlideOut);
-      } /*SlideOutOldCard*/
+            } /*AnimationListener*/
+        );
+    startAnimation(SlideOut);
+  } /*SlideOutOldCard*/
 
-    public void SetHelp
+  public void SetHelp
       (
-        android.graphics.Bitmap NewCardImage,
-        byte[] NewHelp
-      )
-      {
-        this.NewCardImage = NewCardImage;
-        if (CardImage != null)
-          {
-            SlideOutOldCard();
-          }
-        else if (NewCardImage != null)
-          {
-            SlideInNewCard();
-          } /*if*/
-        Help = NewHelp;
+          android.graphics.Bitmap NewCardImage,
+          byte[] NewHelp
+      ) {
+    this.NewCardImage = NewCardImage;
+    if (CardImage != null) {
+      SlideOutOldCard();
+    } else if (NewCardImage != null) {
+      SlideInNewCard();
+    } /*if*/
+    Help = NewHelp;
       /* invalidate(); */ /* leave it to animation */
-      } /*SetHelp*/
+  } /*SetHelp*/
 
-    @Override
-    public void onDraw
+  @Override
+  public void onDraw
       (
-        android.graphics.Canvas Draw
-      )
-      {
-        super.onDraw(Draw);
-        final android.graphics.PointF CardSize =
-            new android.graphics.PointF(getWidth(), getHeight());
-        Draw.drawRect
-          (
+          android.graphics.Canvas Draw
+      ) {
+    super.onDraw(Draw);
+    final android.graphics.PointF CardSize =
+        new android.graphics.PointF(getWidth(), getHeight());
+    Draw.drawRect
+        (
             new RectF(0.0f, 0.0f, CardSize.x, CardSize.y),
             GraphicsUseful.FillWithColor(Dark)
-          );
-        if (CardImage != null)
-          {
-            final android.graphics.Matrix ImageMap = new android.graphics.Matrix();
-            ImageMap.setRectToRect
-              (
+        );
+    if (CardImage != null) {
+      final android.graphics.Matrix ImageMap = new android.graphics.Matrix();
+      ImageMap.setRectToRect
+          (
                 /*src =*/ new RectF
                   (
-                    0,
-                    0,
-                    CardImage.getWidth() * 70.0f / 72.0f,
+                      0,
+                      0,
+                      CardImage.getWidth() * 70.0f / 72.0f,
                       /* right-hand edge of card disappears in entry slot */
-                    CardImage.getHeight()
+                      CardImage.getHeight()
                   ),
                 /*dst =*/ new RectF(0, 0, CardSize.x, CardSize.y),
                 /*stf =*/ android.graphics.Matrix.ScaleToFit.CENTER
-              );
-            final android.graphics.Paint DrawBits = new android.graphics.Paint();
-            DrawBits.setFilterBitmap(true);
-            Draw.drawBitmap
-              (
+          );
+      final android.graphics.Paint DrawBits = new android.graphics.Paint();
+      DrawBits.setFilterBitmap(true);
+      Draw.drawBitmap
+          (
                 /*bitmap =*/ CardImage,
                 /*matrix =*/ ImageMap,
                 /*paint =*/ DrawBits
-              );
-          } /*if*/
-        Draw.drawRect /* on top of CardImage */
-          (
-            new RectF(- CardSize.x, 0.0f, CardSize.x, CardSize.y * 0.25f),
+          );
+    } /*if*/
+    Draw.drawRect /* on top of CardImage */
+        (
+            new RectF(-CardSize.x, 0.0f, CardSize.x, CardSize.y * 0.25f),
               /* extend red overlap for slide animation--note this also
                 requires clipChildren=false in parent layout */
             GraphicsUseful.FillWithColor(LEDOff)
-          );
-      } /*onDraw*/
+        );
+  } /*onDraw*/
 
-  } /*LabelCard*/
+} /*LabelCard*/

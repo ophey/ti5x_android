@@ -29,53 +29,47 @@ import android.support.v4.app.ActivityCompat;
  * Utility class that wraps access to the runtime permissions API in M and provides basic helper
  * methods.
  */
-public abstract class PermissionUtil
-  {
+public abstract class PermissionUtil {
 
-    /**
-     * Check that all given permissions have been granted by verifying that each entry in the
-     * given array is of the value {@link PackageManager#PERMISSION_GRANTED}.
-     *
-     * @see Activity#onRequestPermissionsResult(int, String[], int[])
-     */
-    public static boolean verifyPermissions(int[] grantResults)
-      {
-        // At least one result must be checked.
-        if ( grantResults.length < 1 )
-          {
-            return false;
-          }
+  /**
+   * Check that all given permissions have been granted by verifying that each entry in the
+   * given array is of the value {@link PackageManager#PERMISSION_GRANTED}.
+   *
+   * @see Activity#onRequestPermissionsResult(int, String[], int[])
+   */
+  public static boolean verifyPermissions(int[] grantResults) {
+    // At least one result must be checked.
+    if (grantResults.length < 1) {
+      return false;
+    }
 
-        // Verify that each required permission has been granted, otherwise return false.
-        for ( int result : grantResults )
-          {
-            if ( result != PackageManager.PERMISSION_GRANTED )
-              {
-                return false;
-              }
-          }
-        return true;
+    // Verify that each required permission has been granted, otherwise return false.
+    for (int result : grantResults) {
+      if (result != PackageManager.PERMISSION_GRANTED) {
+        return false;
       }
-    /**
-     * Just a check to see if we have marshmallow (version 23)
-     *
-     * @return
-     */
-    public static boolean shouldAskPermission()
-      {
+    }
+    return true;
+  }
 
-        return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
+  /**
+   * Just a check to see if we have marshmallow (version 23)
+   *
+   * @return
+   */
+  public static boolean shouldAskPermission() {
 
-      }
-
-    public static boolean hasCorrectPermission(Context ctx)
-      {
-        return (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.READ_EXTERNAL_STORAGE)
-                == PackageManager.PERMISSION_GRANTED)
-                &&
-                (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                        == PackageManager.PERMISSION_GRANTED);
-      }
-
+    return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
 
   }
+
+  public static boolean hasCorrectPermission(Context ctx) {
+    return (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.READ_EXTERNAL_STORAGE)
+        == PackageManager.PERMISSION_GRANTED)
+        &&
+        (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            == PackageManager.PERMISSION_GRANTED);
+  }
+
+
+}

@@ -16,24 +16,20 @@ package net.obry.ti5x;
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-class BuiltinLibrary
-{
-    int name;
-    int lib;
+class BuiltinLibrary {
+  int name;
+  int lib;
 
-    public BuiltinLibrary (int name, int lib)
-    {
-      this.name = name;
-      this.lib = lib;
-    }
+  public BuiltinLibrary(int name, int lib) {
+    this.name = name;
+    this.lib = lib;
+  }
 
-    public String getName(android.content.Context ctx)
-    {
-      return ctx.getString(name);
-    }
+  public String getName(android.content.Context ctx) {
+    return ctx.getString(name);
+  }
 
-    public java.io.InputStream getInputStream(android.content.Context ctx)
-    {
-      return ctx.getResources().openRawResource(lib);
-    }
+  public java.io.InputStream getInputStream(android.content.Context ctx) {
+    return ctx.getResources().openRawResource(lib);
+  }
 }

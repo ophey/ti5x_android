@@ -16,67 +16,57 @@ package net.obry.ti5x;
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-public class PrinterView extends android.app.Activity
-  {
-    android.widget.ScrollView PaperScroll;
-    PaperView ThePaper;
-    boolean FirstView = true;
+public class PrinterView extends android.app.Activity {
+  android.widget.ScrollView PaperScroll;
+  PaperView ThePaper;
+  boolean FirstView = true;
 
-    class PaperChangedListener implements Printer.Notifier
-      {
+  class PaperChangedListener implements Printer.Notifier {
 
-        public void PaperChanged()
-          {
-            PaperScroll.scrollTo(0, ThePaper.GetViewHeight());
-            ThePaper.invalidate();
-          } /*PaperChanged*/
+    public void PaperChanged() {
+      PaperScroll.scrollTo(0, ThePaper.GetViewHeight());
+      ThePaper.invalidate();
+    } /*PaperChanged*/
 
-      } /*PaperChangedListener*/
+  } /*PaperChangedListener*/
 
-    @Override
-    public void onCreate
+  @Override
+  public void onCreate
       (
-        android.os.Bundle savedInstanceState
-      )
-      {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.printer);
-        PaperScroll = (android.widget.ScrollView)findViewById(R.id.paper_scroll);
-        ThePaper = (PaperView)findViewById(R.id.paper);
-      } /*onCreate*/
+          android.os.Bundle savedInstanceState
+      ) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.printer);
+    PaperScroll = (android.widget.ScrollView) findViewById(R.id.paper_scroll);
+    ThePaper = (PaperView) findViewById(R.id.paper);
+  } /*onCreate*/
 
-    @Override
-    public void onPause()
-      {
-        super.onPause();
-        if (Global.Print != null)
-          {
-            Global.Print.PrintListener = null;
-          } /*if*/
-      } /*onPause*/
+  @Override
+  public void onPause() {
+    super.onPause();
+    if (Global.Print != null) {
+      Global.Print.PrintListener = null;
+    } /*if*/
+  } /*onPause*/
 
-    @Override
-    public void onResume()
-      {
-        super.onResume();
-        if (Global.Print != null)
-          {
-            Global.Print.PrintListener = new PaperChangedListener();
-          } /*if*/
-      } /*onResume*/
+  @Override
+  public void onResume() {
+    super.onResume();
+    if (Global.Print != null) {
+      Global.Print.PrintListener = new PaperChangedListener();
+    } /*if*/
+  } /*onResume*/
 
-    @Override
-    public void onWindowFocusChanged
+  @Override
+  public void onWindowFocusChanged
       (
-        boolean HasFocus
-      )
-      {
-        super.onWindowFocusChanged(HasFocus);
-        if (HasFocus && FirstView)
-          {
-            PaperScroll.fullScroll(android.view.View.FOCUS_DOWN);
-            FirstView = false;
-          } /*if*/
-      } /*onWindowFocusChanged*/
+          boolean HasFocus
+      ) {
+    super.onWindowFocusChanged(HasFocus);
+    if (HasFocus && FirstView) {
+      PaperScroll.fullScroll(android.view.View.FOCUS_DOWN);
+      FirstView = false;
+    } /*if*/
+  } /*onWindowFocusChanged*/
 
-  } /*PrinterView*/
+} /*PrinterView*/
