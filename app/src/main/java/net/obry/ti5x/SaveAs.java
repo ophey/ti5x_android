@@ -32,7 +32,7 @@ public class SaveAs extends android.app.Activity {
   class OverwriteConfirm
       extends android.app.AlertDialog
       implements android.content.DialogInterface.OnClickListener {
-    public OverwriteConfirm
+    OverwriteConfirm
         (
             android.content.Context ctx,
             String FileName

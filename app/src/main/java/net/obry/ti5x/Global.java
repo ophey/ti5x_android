@@ -18,29 +18,29 @@ package net.obry.ti5x;
 */
 
 public class Global {
-  public static Display Disp;
-  public static LabelCard Label;
-  public static ButtonGrid Buttons;
-  public static State Calc;
-  public static Importer Import;
-  public static Exporter Export;
-  public static Printer Print;
-  public static Tester Test;
+  static Display Disp;
+  static LabelCard Label;
+  static ButtonGrid Buttons;
+  static State Calc;
+  static Importer Import;
+  static Exporter Export;
+  static Printer Print;
+  static Tester Test;
 
-  public static final int NrSigFigures = 16;
+  static final int NrSigFigures = 16;
   /* for formatting reals */
   public static final java.util.Locale StdLocale = java.util.Locale.US;
       /* for all those places I don't want formatting to be locale-specific */
 
-  public static android.view.View ProgressWidgets;
-  public static android.widget.TextView ProgressMessage;
-  public static android.os.Handler UIRun;
+  static android.view.View ProgressWidgets;
+  static android.widget.TextView ProgressMessage;
+  static android.os.Handler UIRun;
 
   public static class Task {
-    public int TaskStatus = 0;
-    public Throwable TaskFailure = null;
+    int TaskStatus = 0;
+    Throwable TaskFailure = null;
 
-    public void SetStatus
+    void SetStatus
         (
             int NewStatus,
             Throwable NewFailure
@@ -100,7 +100,7 @@ public class Global {
 
   private static BGTask CurrentBGTask;
 
-  public static void StartBGTask
+  static void StartBGTask
       (
           Task RunWhat,
           String ProgressMessage /* null to leave unchanged */
@@ -135,12 +135,12 @@ public class Global {
     } /*if*/
   } /*StartingBGTask*/
 
-  public static boolean BGTaskInProgress() {
+  static boolean BGTaskInProgress() {
     return
         CurrentBGTask != null;
   } /*BGTaskInProgress*/
 
-  public static void KillBGTask() {
+  static void KillBGTask() {
     CurrentBGTask = null; /* can't actually kill it, just orphan it */
   } /*KilLBGTask*/
 

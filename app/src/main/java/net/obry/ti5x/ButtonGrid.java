@@ -40,7 +40,7 @@ public class ButtonGrid extends android.view.View {
     final String Text, AltText, MergedText;
     final int TextColor, ButtonColor, AltTextColor, OverlayColor, BGColor;
 
-    public ButtonDef
+    ButtonDef
         (
             String Text,
             String AltText,
@@ -58,7 +58,7 @@ public class ButtonGrid extends android.view.View {
       this.BGColor = Dark;
     } /*ButtonDef*/
 
-    public ButtonDef
+    ButtonDef
         (
             String Text,
             String AltText,
@@ -229,9 +229,7 @@ public class ButtonGrid extends android.view.View {
     OverlayBlue = Res.getColor(R.color.overlay_blue);
     MakeButtonDefs();
     MakeNoise = new android.media.SoundPool(1, android.media.AudioManager.STREAM_MUSIC, 0);
-    if (MakeNoise != null) {
-      ButtonDown = MakeNoise.load(TheContext, R.raw.button_down, 1);
-    } /*if*/
+    ButtonDown = MakeNoise.load(TheContext, R.raw.button_down, 1);
     Vibrate = (android.os.Vibrator) TheContext.getSystemService(android.content.Context.VIBRATOR_SERVICE);
     SetFeedbackType(FEEDBACK_CLICK);
     setOnTouchListener
@@ -768,7 +766,7 @@ public class ButtonGrid extends android.view.View {
                   Calc.StoreInstr(GotInd ? 72 : 42);
                   StoreOperand(2, false);
                 } else {
-                  Calc.MemoryOp(Calc.MEMOP_STO, AccumDigits, GotInd);
+                  Calc.MemoryOp(State.MEMOP_STO, AccumDigits, GotInd);
 
                                 /* special case, if pgm is 01 then store mm in 00 is selecting an
                                    alternate program to have printout. In this case we change the
@@ -788,7 +786,7 @@ public class ButtonGrid extends android.view.View {
                   Calc.StoreInstr(GotInd ? 73 : 43);
                   StoreOperand(2, false);
                 } else {
-                  Calc.MemoryOp(Calc.MEMOP_RCL, AccumDigits, GotInd);
+                  Calc.MemoryOp(State.MEMOP_RCL, AccumDigits, GotInd);
                 } /*if*/
                 break;
               case 44: /*SUM*/
@@ -796,7 +794,7 @@ public class ButtonGrid extends android.view.View {
                   Calc.StoreInstr(GotInd ? 74 : 44);
                   StoreOperand(2, false);
                 } else {
-                  Calc.MemoryOp(Calc.MEMOP_ADD, AccumDigits, GotInd);
+                  Calc.MemoryOp(State.MEMOP_ADD, AccumDigits, GotInd);
                 } /*if*/
                 break;
               case 48: /*Exc*/
@@ -804,7 +802,7 @@ public class ButtonGrid extends android.view.View {
                   Calc.StoreInstr(GotInd ? 63 : 48);
                   StoreOperand(2, false);
                 } else {
-                  Calc.MemoryOp(Calc.MEMOP_EXC, AccumDigits, GotInd);
+                  Calc.MemoryOp(State.MEMOP_EXC, AccumDigits, GotInd);
                 } /*if*/
                 break;
               case 49: /*Prd*/
@@ -812,7 +810,7 @@ public class ButtonGrid extends android.view.View {
                   Calc.StoreInstr(GotInd ? 64 : 49);
                   StoreOperand(2, false);
                 } else {
-                  Calc.MemoryOp(Calc.MEMOP_MUL, AccumDigits, GotInd);
+                  Calc.MemoryOp(State.MEMOP_MUL, AccumDigits, GotInd);
                 } /*if*/
                 break;
               case 58: /*Fix*/
@@ -855,18 +853,18 @@ public class ButtonGrid extends android.view.View {
                       (
                                     /*Type =*/
                           Calc.InvState ?
-                              Calc.TRANSFER_TYPE_LEA /*extension!*/
+                              State.TRANSFER_TYPE_LEA /*extension!*/
                               :
-                              Calc.TRANSFER_TYPE_GTO,
+                              State.TRANSFER_TYPE_GTO,
                                     /*BankNr =*/ Calc.CurBank,
                                     /*Loc =*/ IsSymbolic ? ButtonCode : AccumDigits,
                                     /*LocType =*/
                           IsSymbolic ?
-                              Calc.TRANSFER_LOC_SYMBOLIC
+                              State.TRANSFER_LOC_SYMBOLIC
                               : GotInd ?
-                              Calc.TRANSFER_LOC_INDIRECT
+                              State.TRANSFER_LOC_INDIRECT
                               :
-                              Calc.TRANSFER_LOC_DIRECT
+                              State.TRANSFER_LOC_DIRECT
                       );
                 } /*if*/
                 break;
@@ -879,16 +877,16 @@ public class ButtonGrid extends android.view.View {
                   Calc.FillInLabels();
                   Calc.Transfer
                       (
-                                    /*Type =*/ Calc.TRANSFER_TYPE_INTERACTIVE_CALL,
+                                    /*Type =*/ State.TRANSFER_TYPE_INTERACTIVE_CALL,
                                     /*BankNr =*/ Calc.CurBank,
                                     /*Loc =*/ IsSymbolic ? ButtonCode : AccumDigits,
                                     /*LocType =*/
                           IsSymbolic ?
-                              Calc.TRANSFER_LOC_SYMBOLIC
+                              State.TRANSFER_LOC_SYMBOLIC
                               : GotInd ?
-                              Calc.TRANSFER_LOC_INDIRECT
+                              State.TRANSFER_LOC_INDIRECT
                               :
-                              Calc.TRANSFER_LOC_DIRECT
+                              State.TRANSFER_LOC_DIRECT
                       );
                 } /*if*/
                 break;
@@ -925,11 +923,11 @@ public class ButtonGrid extends android.view.View {
                               FirstOperand, GotFirstInd,
                               Calc.CurBank, AccumDigits,
                               IsSymbolic ?
-                                  Calc.TRANSFER_LOC_SYMBOLIC
+                                  State.TRANSFER_LOC_SYMBOLIC
                                   : GotInd ?
-                                  Calc.TRANSFER_LOC_INDIRECT
+                                  State.TRANSFER_LOC_INDIRECT
                                   :
-                                  Calc.TRANSFER_LOC_DIRECT
+                                  State.TRANSFER_LOC_DIRECT
                           );
                     } else /*Dsz*/ {
                       Calc.DecrementSkip
@@ -937,11 +935,11 @@ public class ButtonGrid extends android.view.View {
                               FirstOperand, GotFirstInd,
                               Calc.CurBank, AccumDigits,
                               IsSymbolic ?
-                                  Calc.TRANSFER_LOC_SYMBOLIC
+                                  State.TRANSFER_LOC_SYMBOLIC
                                   : GotInd ?
-                                  Calc.TRANSFER_LOC_INDIRECT
+                                  State.TRANSFER_LOC_INDIRECT
                                   :
-                                  Calc.TRANSFER_LOC_DIRECT
+                                  State.TRANSFER_LOC_DIRECT
                           );
                     } /*if*/
                   } /*if*/
@@ -1139,10 +1137,10 @@ public class ButtonGrid extends android.view.View {
               Calc.FillInLabels();
               Calc.Transfer
                   (
-                            /*Type =*/ Calc.TRANSFER_TYPE_INTERACTIVE_CALL,
+                            /*Type =*/ State.TRANSFER_TYPE_INTERACTIVE_CALL,
                             /*BankNr =*/ Calc.CurBank,
                             /*Loc =*/ ButtonCode,
-                            /*LocType =*/ Calc.TRANSFER_LOC_SYMBOLIC
+                            /*LocType =*/ State.TRANSFER_LOC_SYMBOLIC
                   );
               break;
             case 21:
@@ -1213,7 +1211,7 @@ public class ButtonGrid extends android.view.View {
             break;
                   /* 42, 43, 44 handled above */
             case 45:
-              Calc.Operator(Calc.STACKOP_EXP);
+              Calc.Operator(State.STACKOP_EXP);
               break;
             case 46:
                       /* ignore? */
@@ -1236,9 +1234,9 @@ public class ButtonGrid extends android.view.View {
               break;
             case 55:
               if (Calc.InvState) /* extension! */ {
-                Calc.Operator(Calc.STACKOP_MOD);
+                Calc.Operator(State.STACKOP_MOD);
               } else {
-                Calc.Operator(Calc.STACKOP_DIV);
+                Calc.Operator(State.STACKOP_DIV);
               } /*if*/
               break;
             case 56:
@@ -1247,7 +1245,7 @@ public class ButtonGrid extends android.view.View {
             case 57:
               Calc.SetDisplayMode
                   (
-                      Calc.InvState ? Calc.FORMAT_FIXED : Calc.FORMAT_ENG,
+                      Calc.InvState ? State.FORMAT_FIXED : State.FORMAT_ENG,
                       Calc.CurNrDecimals
                   );
               break;
@@ -1272,7 +1270,7 @@ public class ButtonGrid extends android.view.View {
               Calc.Digit('9');
               break;
             case 65:
-              Calc.Operator(Calc.STACKOP_MUL);
+              Calc.Operator(State.STACKOP_MUL);
               break;
             case 66: /*Pause*/
                       /* ignore */
@@ -1288,7 +1286,7 @@ public class ButtonGrid extends android.view.View {
               break;
                   /* 69 handled above */
             case 60:
-              Calc.SetAngMode(Calc.ANG_DEG);
+              Calc.SetAngMode(State.ANG_DEG);
               break;
             case 71:
               if (Calc.InvState) {
@@ -1306,7 +1304,7 @@ public class ButtonGrid extends android.view.View {
               Calc.Digit('6');
               break;
             case 75:
-              Calc.Operator(Calc.STACKOP_SUB);
+              Calc.Operator(State.STACKOP_SUB);
               break;
             case 76:
                       /* ignore */
@@ -1319,7 +1317,7 @@ public class ButtonGrid extends android.view.View {
               Calc.StatsResult();
               break;
             case 70:
-              Calc.SetAngMode(Calc.ANG_RAD);
+              Calc.SetAngMode(State.ANG_RAD);
               break;
             case 81:
               Calc.ResetProg();
@@ -1334,7 +1332,7 @@ public class ButtonGrid extends android.view.View {
               Calc.Digit('3');
               break;
             case 85:
-              Calc.Operator(Calc.STACKOP_ADD);
+              Calc.Operator(State.STACKOP_ADD);
               break;
                   /* 86, 87 handled above */
             case 88:
@@ -1344,7 +1342,7 @@ public class ButtonGrid extends android.view.View {
               Calc.Pi();
               break;
             case 80:
-              Calc.SetAngMode(Calc.ANG_GRAD);
+              Calc.SetAngMode(State.ANG_GRAD);
               break;
             case 91:
               Calc.StartProgram();

@@ -17,14 +17,14 @@ package net.obry.ti5x;
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
-public class Importer {
+class Importer {
 
   class ImportDataFeeder extends State.ImportFeeder {
     java.io.InputStream Data;
     int LineNr, ColNr; /* for reporting locations of errors */
     boolean WasNL, WasCR, EOF;
 
-    public ImportDataFeeder
+    ImportDataFeeder
         (
             java.io.InputStream Data
         ) {
@@ -142,7 +142,7 @@ public class Importer {
 
   } /*ImportFeeder*/
 
-  public void ImportData
+  void ImportData
       (
           String FileName
       )

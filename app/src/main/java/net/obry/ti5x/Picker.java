@@ -92,7 +92,7 @@ public class Picker extends android.app.Activity {
       implements android.content.DialogInterface.OnClickListener {
     final PickerItem TheFile;
 
-    public DeleteConfirm
+    DeleteConfirm
         (
             android.content.Context ctx,
             PickerItem TheFile
@@ -179,7 +179,7 @@ public class Picker extends android.app.Activity {
     class OnSetCheck implements android.view.View.OnClickListener {
       final PickerItem MyItem;
 
-      public OnSetCheck
+      OnSetCheck
           (
               PickerItem TheItem
           ) {
@@ -258,8 +258,7 @@ public class Picker extends android.app.Activity {
                 } /*onLongClick*/
               } /*OnLongClickListener*/
           );
-      return
-          TheView;
+      return TheView;
     } /*getView*/
 
   } /*SelectedItemAdapter*/
@@ -355,6 +354,7 @@ public class Picker extends android.app.Activity {
     final android.widget.Button SelectButton =
         (android.widget.Button) findViewById(R.id.prog_select);
     SelectButton.setText(SelectLabel);
+
     SelectButton.setOnClickListener
         (
             new android.view.View.OnClickListener() {

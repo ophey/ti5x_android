@@ -20,6 +20,7 @@ package net.obry.ti5x;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +76,7 @@ public class Main extends android.app.Activity {
           new BuiltinLibrary(R.string.contribution_library, R.raw.ct)
       };
 
-  private static final String[] getBuiltinLibraries(android.content.Context ctx) {
+  private static String[] getBuiltinLibraries(android.content.Context ctx) {
     String[] result = new String[BuiltinLibraries.length];
 
     for (int i = 0; i < BuiltinLibraries.length; i++)
@@ -83,23 +84,19 @@ public class Main extends android.app.Activity {
     return result;
   }
 
-  ;
-
   public static final BuiltinLibrary[] BuiltinPrograms =
       {
           new BuiltinLibrary(R.string.input_code, R.raw.ee19_input_code),
           new BuiltinLibrary(R.string.construct_nam_code, R.raw.ee19_construct_nam_code)
       };
 
-  private static final String[] getBuiltinPrograms(android.content.Context ctx) {
+  private static String[] getBuiltinPrograms(android.content.Context ctx) {
     String[] result = new String[BuiltinPrograms.length];
 
     for (int i = 0; i < BuiltinPrograms.length; i++)
       result[i] = BuiltinPrograms[i].getName(ctx);
     return result;
   }
-
-  ;
 
   public void ShowHelp
       (
@@ -145,7 +142,7 @@ public class Main extends android.app.Activity {
       implements DialogInterface.OnClickListener {
     final Runnable LaunchWhat;
 
-    public ReplaceConfirm
+    ReplaceConfirm
         (
             android.content.Context ctx,
             int MsgID,
@@ -238,7 +235,6 @@ public class Main extends android.app.Activity {
         ) {
       Global.Buttons.SetFeedbackType(TheButtons.getCheckedRadioButtonId());
     } /*onDismiss*/
-
   } /*FeedbackDialog*/
 
   void LaunchImportPicker() {
@@ -1208,9 +1204,9 @@ public class Main extends android.app.Activity {
             /*flags =*/ 0
         );
     if (Ongoing) {
-      NotifyDone.flags = NotifyDone.FLAG_ONGOING_EVENT;
+      NotifyDone.flags = Notification.FLAG_ONGOING_EVENT;
     } else {
-      NotifyDone.flags = NotifyDone.FLAG_AUTO_CANCEL;
+      NotifyDone.flags = Notification.FLAG_AUTO_CANCEL;
     } /*if*/
     Notiman.notify(NotifyProgramDone, NotifyDone);
   } /*PostNotification*/

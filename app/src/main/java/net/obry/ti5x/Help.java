@@ -41,14 +41,7 @@ public class Help extends android.app.Activity {
             /*encoding =*/ "utf-8",
             /*historyUrl =*/ null
         );
-    if
-        (
-        (NewContent != null && LastContent != null ?
-            !NewContent.equals(LastContent)
-            :
-            NewContent != LastContent
-        )
-        ) {
+    if (LastContent == null || !NewContent.equals(LastContent)) {
       LastScroll = null;
     } /*if*/
     LastContent = NewContent;

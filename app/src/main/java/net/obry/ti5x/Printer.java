@@ -35,6 +35,7 @@ public class Printer {
   final static int CharHeight = 7;
   final static int CharHorGap = 1;
   final static int CharVertGap = 1;
+
   final static int CharLines = 200; /* perhaps make this configurable? */
 
   final int PaperWidth = (CharColumns * CharWidth + (CharColumns + 1) * CharHorGap) * (DotSize + DotGap) + DotGap;
@@ -44,7 +45,7 @@ public class Printer {
   final int PaperColor;
   final int InkColor;
 
-  static final int[][] Chars =
+  private static final int[][] Chars =
       {
           {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}, /*00*/
           {0x0e, 0x11, 0x11, 0x11, 0x11, 0x11, 0x0e}, /*01*/
@@ -112,113 +113,113 @@ public class Printer {
           {0x1f, 0x02, 0x04, 0x08, 0x04, 0x02, 0x1f}, /*77*/
       };
 
-  public static final String[] PrintMnemonics =
+  private static final String[] PrintMnemonics =
       {
         /* all are 3 characters */
-            /*01*/ " 01",
-            /*02*/ " 02",
-            /*03*/ " 03",
-            /*04*/ " 04",
-            /*05*/ " 05",
-            /*06*/ " 06",
-            /*07*/ " 07",
-            /*08*/ " 08",
-            /*09*/ " 09",
-            /*00*/ " 00",
-          /* note ones above need to be treated specially */
-            /*11*/ " A ",
-            /*12*/ " B ",
-            /*13*/ " C ",
-            /*14*/ " D ",
-            /*15*/ " E ",
-            /*16*/ "A' ",
-            /*17*/ "B' ",
-            /*18*/ "C' ",
-            /*19*/ "D' ",
-            /*10*/ "E' ",
-            /*21*/ "2ND",
-            /*22*/ "INV",
-            /*23*/ "LNX",
-            /*24*/ "CE ",
-            /*25*/ "CLR",
-            /*26*/ "2ND",
-            /*27*/ "INV", /* guess */
-            /*28*/ "LOG",
-            /*29*/ "CP ",
-            /*20*/ "CLR", /* guess */
-            /*31*/ "LRN",
-            /*32*/ "X⇌T",
-            /*33*/ "X² ",
-            /*34*/ "√X ",
-            /*35*/ "1/X",
-            /*36*/ "PGM",
-            /*37*/ "P/R",
-            /*38*/ "SIN",
-            /*39*/ "COS",
-            /*30*/ "TAN",
-            /*41*/ "SST",
-            /*42*/ "STO",
-            /*43*/ "RCL",
-            /*44*/ "SUM",
-            /*45*/ "Yⓧ ", /* standing in for y-superscript-x */
-            /*46*/ "INS", /* guess */
-            /*47*/ "CMS",
-            /*48*/ "EXC",
-            /*49*/ "PRD",
-            /*40*/ "IND",
-            /*51*/ "BST",
-            /*52*/ "EE ",
-            /*53*/ " ( ",
-            /*54*/ " ) ",
-            /*55*/ " ÷ ",
-            /*56*/ "DEL", /* guess */
-            /*57*/ "ENG",
-            /*58*/ "FIX",
-            /*59*/ "INT",
-            /*50*/ "I×I",
-            /*61*/ "GTO",
-            /*62*/ "PG*",
-            /*63*/ "EX*",
-            /*64*/ "PD*",
-            /*65*/ " × ",
-            /*66*/ "PAU",
-            /*67*/ " EQ",
-            /*68*/ "NOP",
-            /*69*/ "OP ",
-            /*60*/ "DEG",
-            /*71*/ "SBR",
-            /*72*/ "ST*",
-            /*73*/ "RC*",
-            /*74*/ "SM*",
-            /*75*/ " - ",
-            /*76*/ "LBL",
-            /*77*/ " GE",
-            /*78*/ "∑+ ",
-            /*79*/ " ẍ ", /* closest I can get in Unicode to an x with a bar over it */
-            /*70*/ "RAD",
-            /*81*/ "RST",
-            /*82*/ "HIR",
-            /*83*/ "GO*",
-            /*84*/ "OP*",
-            /*85*/ " + ",
-            /*86*/ "STF",
-            /*87*/ "IFF",
-            /*88*/ "DMS",
-            /*89*/ " π ",
-            /*80*/ "GRD",
-            /*91*/ "R/S",
-            /*92*/ "RTN",
-            /*93*/ " . ",
-            /*94*/ "+/-",
-            /*95*/ " = ",
-            /*96*/ "WRT",
-            /*97*/ "DSZ",
-            /*98*/ "ADV",
-            /*99*/ "PRT",
-            /*90*/ "LST",
+          /*01*/ " 01",
+          /*02*/ " 02",
+          /*03*/ " 03",
+          /*04*/ " 04",
+          /*05*/ " 05",
+          /*06*/ " 06",
+          /*07*/ " 07",
+          /*08*/ " 08",
+          /*09*/ " 09",
+          /*00*/ " 00",
+        /* note ones above need to be treated specially */
+          /*11*/ " A ",
+          /*12*/ " B ",
+          /*13*/ " C ",
+          /*14*/ " D ",
+          /*15*/ " E ",
+          /*16*/ "A' ",
+          /*17*/ "B' ",
+          /*18*/ "C' ",
+          /*19*/ "D' ",
+          /*10*/ "E' ",
+          /*21*/ "2ND",
+          /*22*/ "INV",
+          /*23*/ "LNX",
+          /*24*/ "CE ",
+          /*25*/ "CLR",
+          /*26*/ "2ND",
+          /*27*/ "INV", /* guess */
+          /*28*/ "LOG",
+          /*29*/ "CP ",
+          /*20*/ "CLR", /* guess */
+          /*31*/ "LRN",
+          /*32*/ "X⇌T",
+          /*33*/ "X² ",
+          /*34*/ "√X ",
+          /*35*/ "1/X",
+          /*36*/ "PGM",
+          /*37*/ "P/R",
+          /*38*/ "SIN",
+          /*39*/ "COS",
+          /*30*/ "TAN",
+          /*41*/ "SST",
+          /*42*/ "STO",
+          /*43*/ "RCL",
+          /*44*/ "SUM",
+          /*45*/ "Yⓧ ", /* standing in for y-superscript-x */
+          /*46*/ "INS", /* guess */
+          /*47*/ "CMS",
+          /*48*/ "EXC",
+          /*49*/ "PRD",
+          /*40*/ "IND",
+          /*51*/ "BST",
+          /*52*/ "EE ",
+          /*53*/ " ( ",
+          /*54*/ " ) ",
+          /*55*/ " ÷ ",
+          /*56*/ "DEL", /* guess */
+          /*57*/ "ENG",
+          /*58*/ "FIX",
+          /*59*/ "INT",
+          /*50*/ "I×I",
+          /*61*/ "GTO",
+          /*62*/ "PG*",
+          /*63*/ "EX*",
+          /*64*/ "PD*",
+          /*65*/ " × ",
+          /*66*/ "PAU",
+          /*67*/ " EQ",
+          /*68*/ "NOP",
+          /*69*/ "OP ",
+          /*60*/ "DEG",
+          /*71*/ "SBR",
+          /*72*/ "ST*",
+          /*73*/ "RC*",
+          /*74*/ "SM*",
+          /*75*/ " - ",
+          /*76*/ "LBL",
+          /*77*/ " GE",
+          /*78*/ "∑+ ",
+          /*79*/ " ẍ ", /* closest I can get in Unicode to an x with a bar over it */
+          /*70*/ "RAD",
+          /*81*/ "RST",
+          /*82*/ "HIR",
+          /*83*/ "GO*",
+          /*84*/ "OP*",
+          /*85*/ " + ",
+          /*86*/ "STF",
+          /*87*/ "IFF",
+          /*88*/ "DMS",
+          /*89*/ " π ",
+          /*80*/ "GRD",
+          /*91*/ "R/S",
+          /*92*/ "RTN",
+          /*93*/ " . ",
+          /*94*/ "+/-",
+          /*95*/ " = ",
+          /*96*/ "WRT",
+          /*97*/ "DSZ",
+          /*98*/ "ADV",
+          /*99*/ "PRT",
+          /*90*/ "LST",
       };
 
-  public static String KeyCodeSym
+  static String KeyCodeSym
       (
           int KeyCode
       )
@@ -272,7 +273,7 @@ public class Printer {
     } /*if*/
   } /*StartNewLine*/
 
-  public void Advance()
+  void Advance()
       /* advances the paper to the next line. */ {
     StartNewLine();
     if (Global.Export != null && !Global.Export.NumbersOnly) {
@@ -280,7 +281,7 @@ public class Printer {
     } /*if*/
   } /*Advance*/
 
-  public void Render
+  void Render
       (
           byte[] PrintReg
       ) {
@@ -339,7 +340,7 @@ public class Printer {
     } /*if*/
   } /*Render*/
 
-  public void Translate
+  void Translate
       (
           String Chars,
           byte[] Translated

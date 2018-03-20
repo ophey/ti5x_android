@@ -18,7 +18,6 @@ package net.obry.ti5x;
 */
 
 import android.util.Log;
-// Log.w("testname", Calc.CurDisplay);
 
 public class Tester {
   public static State Calc;
@@ -41,10 +40,10 @@ public class Tester {
   private void Clear() {
     Calc.ClearMemories();
     Calc.InvState = false;
-    Calc.CurState = Calc.ResultState;
-    Calc.CurFormat = Calc.FORMAT_FIXED;
+    Calc.CurState = State.ResultState;
+    Calc.CurFormat = State.FORMAT_FIXED;
     Calc.CurNrDecimals = -1;
-    Calc.CurAng = Calc.ANG_DEG;
+    Calc.CurAng = State.ANG_DEG;
     Calc.OpStackNext = 0;
     Calc.PreviousOp = -1;
     Calc.ResetEntry();
@@ -54,7 +53,7 @@ public class Tester {
   private void exp(double y, double x, boolean invstate) {
     SetX(y);
     Calc.InvState = invstate;
-    Calc.Operator(Calc.STACKOP_EXP);
+    Calc.Operator(State.STACKOP_EXP);
     Calc.InvState = false;
     SetX(x);
     Calc.Equals();
@@ -63,17 +62,11 @@ public class Tester {
   private boolean check(String display, boolean error) {
     boolean inError = Calc.InErrorState();
     if (inError) {
-      Calc.CurState = Calc.ResultState;
-      Calc.inError = false;
+      Calc.CurState = State.ResultState;
+      State.inError = false;
     }
 
-    if (!Calc.CurDisplay.equals(display))
-      return false;
-
-    if (inError != error)
-      return false;
-
-    return true;
+    return Calc.CurDisplay.equals(display) && inError == error;
   }
 
   private boolean Test_1() {
@@ -83,10 +76,7 @@ public class Tester {
     SetX(90);
     Calc.Cos();
 
-    if (Calc.X.getSignum() == 0)
-      return true;
-    else
-      return false;
+    return Calc.X.getSignum() == 0;
   }
 
   private boolean Test_2() {
@@ -135,10 +125,7 @@ public class Tester {
     Calc.Memory[1].set(-20.9);
     Calc.SpecialOp(21, true);
 
-    if (Calc.Memory[0].get() == 2)
-      return true;
-    else
-      return false;
+    return Calc.Memory[0].get() == 2;
   }
 
   private boolean Test_5() {
@@ -199,7 +186,7 @@ public class Tester {
     if (!check("5.", false))
       return false;
 
-    Calc.SetAngMode(Calc.ANG_RAD);
+    Calc.SetAngMode(State.ANG_RAD);
     SetX(4);
     SetT(3);
     Calc.InvState = true;
@@ -215,7 +202,7 @@ public class Tester {
 
     //  check result in proper quadran
 
-    Calc.SetAngMode(Calc.ANG_DEG);
+    Calc.SetAngMode(State.ANG_DEG);
     Calc.InvState = false;
 
     SetT(1);
@@ -304,13 +291,7 @@ public class Tester {
     Calc.InvState = false;
     Calc.SpecialOp(11, false);
 
-    if (!check("81.33333333", false))
-      return false;
-
-    if (Calc.Memory[1].get() != 504)
-      return false;
-
-    return true;
+    return check("81.33333333", false) && Calc.Memory[1].get() == 504;
   }
 
   private boolean Test_8() {
@@ -410,27 +391,27 @@ public class Tester {
 
     SetX(9.258);
 
-    Calc.SetDisplayMode(Calc.FORMAT_FIXED, 4);
+    Calc.SetDisplayMode(State.FORMAT_FIXED, 4);
     if (!check("9.2580", false))
       return false;
 
-    Calc.SetDisplayMode(Calc.FORMAT_FIXED, 3);
+    Calc.SetDisplayMode(State.FORMAT_FIXED, 3);
     if (!check("9.258", false))
       return false;
 
-    Calc.SetDisplayMode(Calc.FORMAT_FIXED, 2);
+    Calc.SetDisplayMode(State.FORMAT_FIXED, 2);
     if (!check("9.26", false))
       return false;
 
-    Calc.SetDisplayMode(Calc.FORMAT_FIXED, 1);
+    Calc.SetDisplayMode(State.FORMAT_FIXED, 1);
     if (!check("9.3", false))
       return false;
 
-    Calc.SetDisplayMode(Calc.FORMAT_FIXED, 0);
+    Calc.SetDisplayMode(State.FORMAT_FIXED, 0);
     if (!check("9", false))
       return false;
 
-    Calc.SetDisplayMode(Calc.FORMAT_FIXED, -1);
+    Calc.SetDisplayMode(State.FORMAT_FIXED, -1);
 
     return check("9.258", false);
   }
@@ -439,7 +420,7 @@ public class Tester {
     Clear();
 
     Calc.Digit('3');
-    Calc.Operator(Calc.STACKOP_EXP);
+    Calc.Operator(State.STACKOP_EXP);
     Calc.Digit('7');
     Calc.Equals();
 
@@ -447,7 +428,7 @@ public class Tester {
       return false;
 
     Calc.InvState = true;
-    Calc.Operator(Calc.STACKOP_EXP);
+    Calc.Operator(State.STACKOP_EXP);
     Calc.InvState = false;
     Calc.Digit('6');
     Calc.Equals();
@@ -467,12 +448,12 @@ public class Tester {
     if (!check("8.523 23", false))
       return false;
 
-    Calc.SetDisplayMode(Calc.FORMAT_ENG, -1);
+    Calc.SetDisplayMode(State.FORMAT_ENG, -1);
 
     if (!check("852.3 21", false))
       return false;
 
-    Calc.SetDisplayMode(Calc.FORMAT_FIXED, -1);
+    Calc.SetDisplayMode(State.FORMAT_FIXED, -1);
 
     Calc.DecimalPoint();
     Calc.Digit('1');
@@ -528,27 +509,27 @@ public class Tester {
     Clear();
 
     SetX(0);
-    Calc.MemoryOp(Calc.MEMOP_STO, 14, false);
+    Calc.MemoryOp(State.MEMOP_STO, 14, false);
 
     SetX(14.1);
-    Calc.MemoryOp(Calc.MEMOP_STO, 00, false);
+    Calc.MemoryOp(State.MEMOP_STO, 00, false);
 
     SetX(1);
-    Calc.MemoryOp(Calc.MEMOP_ADD, 00, true);
+    Calc.MemoryOp(State.MEMOP_ADD, 00, true);
 
     SetX(14.5);
-    Calc.MemoryOp(Calc.MEMOP_STO, 00, false);
+    Calc.MemoryOp(State.MEMOP_STO, 00, false);
 
     SetX(1);
-    Calc.MemoryOp(Calc.MEMOP_ADD, 00, true);
+    Calc.MemoryOp(State.MEMOP_ADD, 00, true);
 
     SetX(14.9);
-    Calc.MemoryOp(Calc.MEMOP_STO, 00, false);
+    Calc.MemoryOp(State.MEMOP_STO, 00, false);
 
     SetX(1);
-    Calc.MemoryOp(Calc.MEMOP_ADD, 00, true);
+    Calc.MemoryOp(State.MEMOP_ADD, 00, true);
 
-    Calc.MemoryOp(Calc.MEMOP_RCL, 14, false);
+    Calc.MemoryOp(State.MEMOP_RCL, 14, false);
 
     return check("3.", false);
   }
@@ -558,7 +539,7 @@ public class Tester {
     Clear();
 
     Calc.Digit('1');
-    Calc.Operator(Calc.STACKOP_ADD);
+    Calc.Operator(State.STACKOP_ADD);
     Calc.PreviousOp = 85; // 85 is add button
     Calc.Equals();
 
@@ -745,7 +726,7 @@ public class Tester {
     if (!check("9.9999999 99", false))
       return false;
 
-    Calc.Operator(Calc.STACKOP_MUL);
+    Calc.Operator(State.STACKOP_MUL);
     SetX(2);
     Calc.Equals();
 
@@ -769,7 +750,7 @@ public class Tester {
     Calc.Equals();
     Calc.ChangeSign();
 
-    Calc.Operator(Calc.STACKOP_MUL);
+    Calc.Operator(State.STACKOP_MUL);
     SetX(2);
     Calc.Equals();
 
@@ -793,7 +774,7 @@ public class Tester {
     // verified on real TI-59
     Clear();
 
-    Calc.SetDisplayMode(Calc.FORMAT_FIXED, 3);
+    Calc.SetDisplayMode(State.FORMAT_FIXED, 3);
     Calc.Digit('9');
     Calc.ChangeSign();
     Calc.InvState = true;
@@ -851,7 +832,7 @@ public class Tester {
     // verified on real TI-59
     Clear();
 
-    Calc.SetDisplayMode(Calc.FORMAT_ENG, -1);
+    Calc.SetDisplayMode(State.FORMAT_ENG, -1);
 
     if (!check("0. 00", false))
       return false;
@@ -878,7 +859,7 @@ public class Tester {
 
     SetX(-3);
     Calc.Ln();
-    Calc.Operator(Calc.STACKOP_DIV);
+    Calc.Operator(State.STACKOP_DIV);
     SetX(2);
     Calc.Equals();
 
@@ -888,7 +869,7 @@ public class Tester {
   private boolean Test_25() {
     Clear();
 
-    Calc.SetDisplayMode(Calc.FORMAT_ENG, -1);
+    Calc.SetDisplayMode(State.FORMAT_ENG, -1);
 
     SetX(.123456e-12);
     Calc.Equals();
@@ -953,15 +934,15 @@ public class Tester {
     Clear();
 
     Calc.Pi();
-    Calc.Operator(Calc.STACKOP_DIV);
+    Calc.Operator(State.STACKOP_DIV);
     SetX(100);
     Calc.Equals();
 
-    Calc.SetDisplayMode(Calc.FORMAT_FIXED, 4);
+    Calc.SetDisplayMode(State.FORMAT_FIXED, 4);
     if (!check("0.0314", false))
       return false;
 
-    Calc.SetDisplayMode(Calc.FORMAT_ENG, 4);
+    Calc.SetDisplayMode(State.FORMAT_ENG, 4);
 
     return check("31.4159-03", false);
   }
@@ -970,21 +951,21 @@ public class Tester {
     Clear();
 
     Calc.Pi();
-    Calc.Operator(Calc.STACKOP_DIV);
+    Calc.Operator(State.STACKOP_DIV);
     SetX(100);
     Calc.Equals();
 
-    Calc.SetDisplayMode(Calc.FORMAT_ENG, -1);
+    Calc.SetDisplayMode(State.FORMAT_ENG, -1);
     if (!check("31.415927-03", false))
       return false;
 
-    Calc.SetDisplayMode(Calc.FORMAT_ENG, 4);
+    Calc.SetDisplayMode(State.FORMAT_ENG, 4);
 
     if (!check("31.4159-03", false))
       return false;
 
     Calc.InvState = false;
-    Calc.SetDisplayMode(Calc.FORMAT_ENG, -1);
+    Calc.SetDisplayMode(State.FORMAT_ENG, -1);
 
     return check("31.415927-03", false);
   }
@@ -1011,11 +992,11 @@ public class Tester {
     Calc.Digit('1');
     Calc.Digit('0');
     Calc.Digit('1');
-    Calc.Operator(Calc.STACKOP_SUB);
+    Calc.Operator(State.STACKOP_SUB);
     Calc.Digit('.');
     Calc.Digit('5');
     Calc.Equals();
-    Calc.SetDisplayMode(Calc.FORMAT_FIXED, 0);
+    Calc.SetDisplayMode(State.FORMAT_FIXED, 0);
 
     if (!check("101", false))
       return false;
@@ -1024,11 +1005,11 @@ public class Tester {
     Calc.Digit('1');
     Calc.Digit('0');
     Calc.Digit('2');
-    Calc.Operator(Calc.STACKOP_SUB);
+    Calc.Operator(State.STACKOP_SUB);
     Calc.Digit('.');
     Calc.Digit('5');
     Calc.Equals();
-    Calc.SetDisplayMode(Calc.FORMAT_FIXED, 0);
+    Calc.SetDisplayMode(State.FORMAT_FIXED, 0);
 
     if (!check("102", false))
       return false;
@@ -1037,11 +1018,11 @@ public class Tester {
     Calc.Digit('1');
     Calc.Digit('0');
     Calc.Digit('3');
-    Calc.Operator(Calc.STACKOP_SUB);
+    Calc.Operator(State.STACKOP_SUB);
     Calc.Digit('.');
     Calc.Digit('5');
     Calc.Equals();
-    Calc.SetDisplayMode(Calc.FORMAT_FIXED, 0);
+    Calc.SetDisplayMode(State.FORMAT_FIXED, 0);
 
     if (!check("103", false))
       return false;
@@ -1050,15 +1031,15 @@ public class Tester {
     Calc.Digit('1');
     Calc.Digit('0');
     Calc.Digit('4');
-    Calc.Operator(Calc.STACKOP_SUB);
+    Calc.Operator(State.STACKOP_SUB);
     Calc.Digit('.');
     Calc.Digit('5');
     Calc.Equals();
-    Calc.SetDisplayMode(Calc.FORMAT_FIXED, 0);
+    Calc.SetDisplayMode(State.FORMAT_FIXED, 0);
     return check("104", false);
   }
 
-  public int Run() {
+  int Run() {
     Calc = Global.Calc;
     int Total = 0;
 
