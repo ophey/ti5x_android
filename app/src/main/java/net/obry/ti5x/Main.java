@@ -1267,6 +1267,29 @@ public class Main extends android.app.Activity {
               } /*onClick*/
             } /*OnClickListener*/
         );
+    ((android.widget.Button) findViewById(R.id.action_help)).setOnClickListener
+        (
+            new View.OnClickListener() {
+              public void onClick
+                  (
+                      View ButtonView
+                  ) {
+                if (Global.Calc != null && Global.Calc.ModuleHelp != null) {
+                  final Intent ShowHelp = new Intent(Intent.ACTION_VIEW);
+                  ShowHelp.putExtra(Help.ContentID, Global.Calc.ModuleHelp);
+                  ShowHelp.setClass(Main.this, Help.class);
+                  startActivity(ShowHelp);
+                } else {
+                  Toast.makeText
+                      (
+                      /*context =*/ Main.this,
+                      /*text =*/ getString(R.string.no_module_help),
+                      /*duration =*/ Toast.LENGTH_SHORT
+                      ).show();
+                } /*if*/
+              } /*onClick*/
+            } /*OnClickListener*/
+        );
     ((android.widget.Button) findViewById(R.id.action_print)).setOnClickListener
         (
             new View.OnClickListener() {
