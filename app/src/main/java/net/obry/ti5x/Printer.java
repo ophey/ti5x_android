@@ -340,8 +340,8 @@ public class Printer {
     } /*if*/
   } /*StartNewLine*/
 
-  void Advance()
-      /* advances the paper to the next line. */ {
+  void Advance() {
+    // advances the paper to the next line.
     StartNewLine();
     if (Global.Export != null && !Global.Export.NumbersOnly) {
       Global.Export.WriteLine("");
