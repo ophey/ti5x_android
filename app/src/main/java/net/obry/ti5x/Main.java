@@ -20,6 +20,7 @@ package net.obry.ti5x;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.ArrayList;
 
 import android.Manifest;
 import android.app.Notification;
@@ -511,13 +512,33 @@ public class Main extends android.app.Activity {
                        ),
                  };
               PickerExtra = (ViewGroup) getLayoutInflater().inflate(R.layout.prog_type, null);
+
+              // check if directories exists to avoid messages about unreadable location
+
+              ArrayList<String> CalcDirs = new ArrayList<String>();
+
+              final String ProgramsDir =
+                  android.os.Environment.getExternalStorageDirectory()
+                      .getAbsolutePath() + "/" + Persistent.ProgramsDir;
+
+              final String DataDir =
+                  android.os.Environment.getExternalStorageDirectory()
+                      .getAbsolutePath() + "/" + Persistent.DataDir;
+
+              if (new java.io.File(ProgramsDir).exists()) {
+                CalcDirs.add(Persistent.ProgramsDir);
+              }
+              if (new java.io.File(DataDir).exists()) {
+                CalcDirs.add(Persistent.DataDir);
+              }
+
               Picker.Launch
                  (
                     Main.this,
                     getString(R.string.load),
                     LoadProgramRequest,
                     PickerExtra,
-                    Persistent.ExternalCalcDirectories,
+                    CalcDirs.toArray(new String[0]),
                     AltLists
                  );
             } /*run*/
