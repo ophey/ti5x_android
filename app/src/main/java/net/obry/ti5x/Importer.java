@@ -26,20 +26,20 @@ class Importer {
     boolean WasNL, WasCR, EOF;
 
     ImportDataFeeder
-        (
-            java.io.InputStream Data
-        ) {
+       (
+          java.io.InputStream Data
+       ) {
       this.Data = Data;
       LineNr = 0;
       ColNr = 0;
       WasNL = true; /* so LineNr gets incremented to 1 on first character */
       WasCR = false;
       EOF = false;
-    } /*ImportDataFeeder*/
+    }
 
     @Override
     public Number Next()
-        throws State.ImportEOFException {
+       throws State.ImportEOFException {
       Number Result = new Number();
       StringBuilder LastNum = null;
       for (; ; ) {
@@ -51,29 +51,29 @@ class Importer {
             ch = Data.read();
           } catch (java.io.IOException Failed) {
             throw new Persistent.DataFormatException
-                (
-                    String.format
-                        (
-                            Global.StdLocale,
-                            "Couldn’t read input file at line %d, col %d: %s",
-                            LineNr,
-                            ColNr,
-                            Failed.toString()
-                        )
-                );
-          } /*try*/
+               (
+                  String.format
+                     (
+                        Global.StdLocale,
+                        "Couldn’t read input file at line %d, col %d: %s",
+                        LineNr,
+                        ColNr,
+                        Failed.toString()
+                     )
+               );
+          }
           if (ch < 0) {
             EOF = true;
             ch = '\n';
-          } /*if*/
+          }
           if (WasNL) {
             ++LineNr;
             ColNr = 0;
-          } /*if*/
+          }
           if (ch != '\n' && ch != '\015') {
             ++ColNr;
-          } /*if*/
-        } /*if*/
+          }
+        }
         WasNL = ch == '\n' && !WasCR || ch == '\015';
         WasCR = ch == '\015';
         if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\015' || ch == ',' || ch == ';') {
@@ -82,17 +82,17 @@ class Importer {
               Result = new Number(LastNum.toString());
             } catch (NumberFormatException Bad) {
               throw new Persistent.DataFormatException
-                  (
-                      String.format
-                          (
-                              Global.StdLocale,
-                              "Bad number \"%s\" on line %d, col %d",
-                              LastNum.toString(),
-                              LineNr,
-                              ColNr
-                          )
-                  );
-            } /*try*/
+                 (
+                    String.format
+                       (
+                          Global.StdLocale,
+                          "Bad number \"%s\" on line %d, col %d",
+                          LastNum.toString(),
+                          LineNr,
+                          ColNr
+                       )
+                 );
+            }
             break;
           } else if (EOF) {
             if (Data != null) {
@@ -100,71 +100,68 @@ class Importer {
                 Data.close();
               } catch (java.io.IOException WhoCares) {
                               /* I mean, really? */
-              } /*try*/
+              }
               Data = null;
-            } /*if*/
+            }
             throw new State.ImportEOFException("no more numbers");
-          } /*if*/
+          }
         } else if
-            (
-            ch >= '0' && ch <= '9'
-                ||
-                ch == '.'
-                ||
-                ch == '-'
-                ||
-                ch == '+'
-                ||
-                ch == 'e'
-                ||
-                ch == 'E'
-            ) {
+           (
+           ch >= '0' && ch <= '9'
+              ||
+              ch == '.'
+              ||
+              ch == '-'
+              ||
+              ch == '+'
+              ||
+              ch == 'e'
+              ||
+              ch == 'E'
+           ) {
           if (LastNum == null) {
             LastNum = new StringBuilder();
-          } /*if*/
+          }
           LastNum.appendCodePoint(ch);
         } else {
           throw new Persistent.DataFormatException
-              (
-                  String.format
-                      (
-                          Global.StdLocale,
-                          "Bad character \"%s\" at line %d, col %d",
-                          new String(new byte[]{(byte) ch}),
-                          LineNr,
-                          ColNr
-                      )
-              );
-        } /*if*/
-      } /*for*/
-      return
-          Result;
-    } /*Next*/
-
-  } /*ImportFeeder*/
+             (
+                String.format
+                   (
+                      Global.StdLocale,
+                      "Bad character \"%s\" at line %d, col %d",
+                      new String(new byte[]{(byte) ch}),
+                      LineNr,
+                      ColNr
+                   )
+             );
+        }
+      }
+      return Result;
+    }
+  }
 
   void ImportData
-      (
-          String FileName
-      )
-      throws Persistent.DataFormatException
-      /* starts importing numbers from the specified file. */ {
+     (
+        String FileName
+     )
+     throws Persistent.DataFormatException {
+    /* starts importing numbers from the specified file. */
     java.io.FileInputStream Data;
     try {
       Data = new java.io.FileInputStream(FileName);
     } catch (java.io.FileNotFoundException NotFound) {
       throw new Persistent.DataFormatException
-          (
-              String.format
-                  (
-                      Global.StdLocale,
-                      "Couldn’t open input file \"%s\": %s",
-                      FileName,
-                      NotFound.toString()
-                  )
-          );
-    } /*try*/
+         (
+            String.format
+               (
+                  Global.StdLocale,
+                  "Couldn’t open input file \"%s\": %s",
+                  FileName,
+                  NotFound.toString()
+               )
+         );
+    }
     Global.Calc.SetImport(new ImportDataFeeder(Data));
-  } /*ImportData*/
-
-} /*Importer*/
+  }
+}

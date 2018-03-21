@@ -20,45 +20,44 @@ package net.obry.ti5x;
 public class GraphicsUseful {
 
   public static android.graphics.Paint FillWithColor
-      (
-          int TheColor
-      )
-      /* returns a Paint that will fill with a solid colour. */ {
+     (
+        int TheColor
+     ) {
+    /* returns a Paint that will fill with a solid colour. */
     final android.graphics.Paint ThePaint = new android.graphics.Paint();
     ThePaint.setStyle(android.graphics.Paint.Style.FILL);
     ThePaint.setColor(TheColor);
-    return
-        ThePaint;
-  } /*FillWithColor*/
+    return ThePaint;
+  }
 
   public static void DrawCenteredText
-      (
-          android.graphics.Canvas Draw,
-          String TheText,
-          float x,
-          float y,
-          android.graphics.Paint UsePaint
-      )
-      /* draws text at position x, vertically centred around y. */ {
+     (
+        android.graphics.Canvas Draw,
+        String TheText,
+        float x,
+        float y,
+        android.graphics.Paint UsePaint
+     ) {
+    /* draws text at position x, vertically centred around y. */
     final android.graphics.Rect TextBounds = new android.graphics.Rect();
     UsePaint.getTextBounds(TheText, 0, TheText.length(), TextBounds);
     Draw.drawText
-        (
-            TheText,
-            x, /* depend on UsePaint to align horizontally */
-            y - (TextBounds.bottom + TextBounds.top) / 2.0f,
-            UsePaint
-        );
-  } /*DrawCenteredText*/
+       (
+          TheText,
+          x, /* depend on UsePaint to align horizontally */
+          y - (TextBounds.bottom + TextBounds.top) / 2.0f,
+          UsePaint
+       );
+  }
 
-  public static class HSVA
-      /* HSV colour space with alpha */ {
+  public static class HSVA {
+    /* HSV colour space with alpha */
     public final float H, S, V, A;
 
     public HSVA
-        (
-            int ARGB
-        ) {
+       (
+          int ARGB
+       ) {
       final float R = (ARGB >> 16 & 255) / 255.0f;
       final float G = (ARGB >> 8 & 255) / 255.0f;
       final float B = (ARGB & 255) / 255.0f;
@@ -82,7 +81,7 @@ public class GraphicsUseful {
         first = B;
         second = R;
         plus = 2.0f;
-      } /*if*/
+      }
       final float chroma = Max - Min;
       if (chroma > 0.0f) {
         H = (float) (Math.IEEEremainder(((first - second) / chroma + plus), 6.0) / 6.0);
@@ -90,23 +89,23 @@ public class GraphicsUseful {
       } else {
         H = 0.0f; /*actually undefined*/
         S = 0.0f;
-      } /*if*/
+      }
       V = Max;
       A = (ARGB >> 24 & 255) / 255.0f;
-    } /*HSVA*/
+    }
 
     public HSVA
-        (
-            float H,
-            float S,
-            float V,
-            float A
-        ) {
+       (
+          float H,
+          float S,
+          float V,
+          float A
+       ) {
       this.H = H;
       this.S = S;
       this.V = V;
       this.A = A;
-    } /*HSVA*/
+    }
 
     public int ToRGB() {
       final int hue = (int) (H * 360.0f);
@@ -115,6 +114,7 @@ public class GraphicsUseful {
       final int brighten = (int) (V * 255.0f) - chroma;
       final int[] RGB = new int[3];
       int primary, secondary, opposite;
+
       if (hue < 60) {
         primary = 0;
         secondary = 1;
@@ -139,20 +139,18 @@ public class GraphicsUseful {
         primary = 0;
         secondary = 2;
         opposite = 1;
-      } /*if*/
+      }
       RGB[primary] = Math.max(0, Math.min(chroma + brighten, 255));
       RGB[secondary] = Math.max(0, Math.min(second + brighten, 255));
       RGB[opposite] = Math.max(0, Math.min(brighten, 255));
       return
-          (int) (A * 255.0f) << 24
-              |
-              RGB[0] << 16
-              |
-              RGB[1] << 8
-              |
-              RGB[2];
-    } /*ToRGB*/
-
-  } /*HSVA*/
-
-} /*GraphicsUseful*/
+         (int) (A * 255.0f) << 24
+            |
+            RGB[0] << 16
+            |
+            RGB[1] << 8
+            |
+            RGB[2];
+    }
+  }
+}

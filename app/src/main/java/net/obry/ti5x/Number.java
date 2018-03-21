@@ -428,10 +428,10 @@ public class Number {
     }
   }
 
-    /* returns the number of figures before the decimal point in the
-       formatted representation of X scaled by Exp. This has to be
-       at least 1, because the decimal point is part of the display
-       of the preceding digit. */
+  /* returns the number of figures before the decimal point in the
+     formatted representation of X scaled by Exp. This has to be
+     at least 1, because the decimal point is part of the display
+     of the preceding digit. */
 
   public int figuresBeforeDecimal(int Exp) {
     int BeforeDecimal;
@@ -464,7 +464,7 @@ public class Number {
     return BeforeDecimal;
   }
 
-    /* returns the exponent scale to display X using the given format. */
+  /* returns the exponent scale to display X using the given format. */
 
   public int scaleExp(int UsingFormat) {
     int Exp = 0;

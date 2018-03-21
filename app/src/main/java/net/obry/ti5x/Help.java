@@ -26,25 +26,25 @@ public class Help extends android.app.Activity {
 
   @Override
   public void onCreate
-      (
-          android.os.Bundle savedInstanceState
-      ) {
+     (
+        android.os.Bundle savedInstanceState
+     ) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.help);
     HelpView = (android.webkit.WebView) findViewById(R.id.help_view);
     final android.content.Intent MyIntent = getIntent();
     final String NewContent = new String(MyIntent.getByteArrayExtra(ContentID));
     HelpView.loadDataWithBaseURL
-        (
-            /*baseUrl =*/ null,
-            /*data =*/ NewContent,
-            /*mimeType =*/ null, /* text/html */
-            /*encoding =*/ "utf-8",
-            /*historyUrl =*/ null
-        );
+       (
+          null,
+          NewContent,
+          null, /* text/html */
+          "utf-8",
+          null
+       );
     if (LastContent == null || !NewContent.equals(LastContent)) {
       LastScroll = null;
-    } /*if*/
+    }
     LastContent = NewContent;
 
     HelpView.setWebViewClient(new android.webkit.WebViewClient() {
@@ -53,16 +53,14 @@ public class Help extends android.app.Activity {
         if (LastScroll != null) {
           HelpView.scrollTo(LastScroll.x, LastScroll.y);
           LastScroll = null; /* only do once */
-        } /*if*/
+        }
       }
     });
-
-  } /*onCreate*/
+  }
 
   @Override
   public void onDestroy() {
     LastScroll = new android.graphics.Point(HelpView.getScrollX(), HelpView.getScrollY());
     super.onDestroy();
-  } /*onDestroy*/
-
-} /*Help*/
+  }
+}

@@ -1,6 +1,7 @@
 package net.obry.ti5x;
 
-//another class to handle item's id and name
+// another class to handle item's id and name
+
 public class ObjectItem {
 
   public int itemId;
@@ -11,5 +12,4 @@ public class ObjectItem {
     this.itemId = itemId;
     this.itemName = itemName;
   }
-
 }

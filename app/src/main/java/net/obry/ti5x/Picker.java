@@ -36,8 +36,8 @@ public class Picker extends android.app.Activity {
   static boolean Reentered = false; /* sanity check */
   public static Picker Current = null;
 
-  public static class PickerAltList
-      /* defining alternative lists of files for picker to display */ {
+  public static class PickerAltList {
+    /* defining alternative lists of files for picker to display */
     int RadioButtonID;
     String Prompt;
     String NoneFound;
@@ -45,20 +45,20 @@ public class Picker extends android.app.Activity {
     String[] SpecialItem; /* special item to add to list, null for none */
 
     public PickerAltList
-        (
-            int RadioButtonID,
-            String Prompt,
-            String NoneFound,
-            String[] FileExts,
-            String[] SpecialItem
-        ) {
+       (
+          int RadioButtonID,
+          String Prompt,
+          String NoneFound,
+          String[] FileExts,
+          String[] SpecialItem
+       ) {
       this.RadioButtonID = RadioButtonID;
       this.Prompt = Prompt;
       this.NoneFound = NoneFound;
       this.FileExts = FileExts;
       this.SpecialItem = SpecialItem;
-    } /*PickerAltList*/
-  } /*PickerAltList*/
+    }
+  }
 
   static String SelectLabel = null;
   static android.view.View Extra = null;
@@ -78,67 +78,66 @@ public class Picker extends android.app.Activity {
     boolean Selected;
 
     public PickerItem
-        (
-            String FullPath,
-            String DisplayName
-        ) {
+       (
+          String FullPath,
+          String DisplayName
+       ) {
       this.FullPath = FullPath;
       this.DisplayName = DisplayName;
       this.Selected = false;
-    } /*PickerItem*/
+    }
 
     public String toString() {
       return
-          DisplayName != null ?
-              DisplayName
-              :
-              new java.io.File(FullPath).getName();
-    } /*toString*/
-
-  } /*PickerItem*/
+         DisplayName != null ?
+            DisplayName
+            :
+            new java.io.File(FullPath).getName();
+    }
+  }
 
   class DeleteConfirm
-      extends android.app.AlertDialog
-      implements android.content.DialogInterface.OnClickListener {
+     extends android.app.AlertDialog
+     implements android.content.DialogInterface.OnClickListener {
     final PickerItem TheFile;
 
     DeleteConfirm
-        (
-            android.content.Context ctx,
-            PickerItem TheFile
-        ) {
+       (
+          android.content.Context ctx,
+          PickerItem TheFile
+       ) {
       super(ctx);
       this.TheFile = TheFile;
       setIcon(android.R.drawable.ic_delete); /* doesn't work? */
       setMessage
-          (
-              String.format
-                  (
-                      Global.StdLocale,
-                      ctx.getString(R.string.query_delete),
-                      TheFile.toString()
-                  )
-          );
+         (
+            String.format
+               (
+                  Global.StdLocale,
+                  ctx.getString(R.string.query_delete),
+                  TheFile.toString()
+               )
+         );
       setButton
-          (
-              android.content.DialogInterface.BUTTON_POSITIVE,
-              ctx.getString(R.string.delete),
-              this
-          );
+         (
+            android.content.DialogInterface.BUTTON_POSITIVE,
+            ctx.getString(R.string.delete),
+            this
+         );
       setButton
-          (
-              android.content.DialogInterface.BUTTON_NEGATIVE,
-              ctx.getString(R.string.cancel),
-              this
-          );
-    } /*DeleteConfirm*/
+         (
+            android.content.DialogInterface.BUTTON_NEGATIVE,
+            ctx.getString(R.string.cancel),
+            this
+         );
+    }
 
     @Override
     public void onClick
-        (
-            android.content.DialogInterface TheDialog,
-            int WhichButton
-        ) {
+       (
+          android.content.DialogInterface TheDialog,
+          int WhichButton
+       ) {
       if (WhichButton == android.content.DialogInterface.BUTTON_POSITIVE) {
         boolean Deleted;
         try {
@@ -146,39 +145,36 @@ public class Picker extends android.app.Activity {
           Deleted = true;
         } catch (SecurityException AccessDenied) {
           android.widget.Toast.makeText
-              (
-                        /*context =*/ Picker.this,
-                        /*text =*/
-                  String.format
-                      (
-                          Global.StdLocale,
-                          getString(R.string.file_delete_error),
-                          AccessDenied.toString()
-                      ),
-                        /*duration =*/ android.widget.Toast.LENGTH_LONG
-              ).show();
+             (
+                Picker.this,
+                String.format
+                   (
+                      Global.StdLocale,
+                      getString(R.string.file_delete_error),
+                      AccessDenied.toString()
+                   ),
+                android.widget.Toast.LENGTH_LONG
+             ).show();
           Deleted = false;
-        } /*try*/
+        }
         if (Deleted) {
           android.widget.Toast.makeText
-              (
-                        /*context =*/ Picker.this,
-                        /*text =*/
-                  String.format
-                      (
-                          Global.StdLocale,
-                          getString(R.string.file_deleted),
-                          TheFile.toString()
-                      ),
-                        /*duration =*/ android.widget.Toast.LENGTH_SHORT
-              ).show();
+             (
+                Picker.this,
+                String.format
+                   (
+                      Global.StdLocale,
+                      getString(R.string.file_deleted),
+                      TheFile.toString()
+                   ),
+                android.widget.Toast.LENGTH_SHORT
+             ).show();
           PopulatePickerList(SelectedAlt);
-        } /*if*/
-      } /*if*/
+        }
+      }
       dismiss();
-    } /*onClick*/
-
-  } /*DeleteConfirm*/
+    }
+  }
 
   class SelectedItemAdapter extends android.widget.ArrayAdapter<PickerItem> {
     final int ResID;
@@ -190,128 +186,126 @@ public class Picker extends android.app.Activity {
       final PickerItem MyItem;
 
       OnSetCheck
-          (
-              PickerItem TheItem
-          ) {
+         (
+            PickerItem TheItem
+         ) {
         MyItem = TheItem;
-      } /*OnSetCheck*/
+      }
 
       public void onClick
-          (
-              android.view.View TheView
-          ) {
+         (
+            android.view.View TheView
+         ) {
         if (MyItem != CurSelected) {
                   /* only allow one item to be selected at a time */
           if (CurSelected != null) {
             CurSelected.Selected = false;
             LastChecked.setChecked(false);
-          } /*if*/
+          }
           LastChecked =
-              TheView instanceof android.widget.RadioButton ?
-                  (android.widget.RadioButton) TheView
-                  :
-                  (android.widget.RadioButton)
-                      ((android.view.ViewGroup) TheView).findViewById(R.id.file_item_checked);
+             TheView instanceof android.widget.RadioButton ?
+                (android.widget.RadioButton) TheView
+                :
+                (android.widget.RadioButton)
+                   ((android.view.ViewGroup) TheView).findViewById(R.id.file_item_checked);
           CurSelected = MyItem;
           MyItem.Selected = true;
           LastChecked.setChecked(true);
-        } /*if*/
-      } /*onClick*/
-    } /*OnSetCheck*/
+        }
+      }
+    }
 
     SelectedItemAdapter
-        (
-            android.content.Context TheContext,
-            int ResID,
-            android.view.LayoutInflater TemplateInflater
-        ) {
+       (
+          android.content.Context TheContext,
+          int ResID,
+          android.view.LayoutInflater TemplateInflater
+       ) {
       super(TheContext, ResID);
       this.ResID = ResID;
       this.TemplateInflater = TemplateInflater;
       CurSelected = null;
       LastChecked = null;
-    } /*SelectedItemAdapter*/
+    }
 
     @Override
     public android.view.View getView
-        (
-            int Position,
-            android.view.View ReuseView,
-            android.view.ViewGroup Parent
-        ) {
+       (
+          int Position,
+          android.view.View ReuseView,
+          android.view.ViewGroup Parent
+       ) {
       android.view.View TheView = ReuseView;
       if (TheView == null) {
         TheView = TemplateInflater.inflate(ResID, null);
-      } /*if*/
+      }
       final PickerItem ThisItem = this.getItem(Position);
       ((android.widget.TextView) TheView.findViewById(R.id.select_file_name))
-          .setText(ThisItem.toString());
+         .setText(ThisItem.toString());
       android.widget.RadioButton ThisChecked =
-          (android.widget.RadioButton) TheView.findViewById(R.id.file_item_checked);
+         (android.widget.RadioButton) TheView.findViewById(R.id.file_item_checked);
       ThisChecked.setChecked(ThisItem.Selected);
       final OnSetCheck ThisSetCheck = new OnSetCheck(ThisItem);
       ThisChecked.setOnClickListener(ThisSetCheck);
-              /* otherwise radio button can get checked but I don't notice */
+      /* otherwise radio button can get checked but I don't notice */
       TheView.setOnClickListener(ThisSetCheck);
       TheView.setOnLongClickListener
-          (
-              new android.view.View.OnLongClickListener() {
-                public boolean onLongClick
-                    (
-                        android.view.View TheView
-                    ) {
-                  if (ThisItem.FullPath != null) /* cannot delete built-in item */ {
-                    new DeleteConfirm(Picker.this, ThisItem).show();
-                  } /*if*/
-                  return
-                      true;
-                } /*onLongClick*/
-              } /*OnLongClickListener*/
-          );
+         (
+            new android.view.View.OnLongClickListener() {
+              public boolean onLongClick
+                 (
+                    android.view.View TheView
+                 ) {
+                if (ThisItem.FullPath != null) {
+                  /* cannot delete built-in item */
+                  new DeleteConfirm(Picker.this, ThisItem).show();
+                }
+                return true;
+              } /*onLongClick*/
+            }
+         );
       return TheView;
-    } /*getView*/
+    }
+  }
 
-  } /*SelectedItemAdapter*/
-
-  class OnSelectCategory implements android.view.View.OnClickListener
-      /* handler for radio buttons selecting which category of files to display */ {
+  class OnSelectCategory implements android.view.View.OnClickListener {
+    /* handler for radio buttons selecting which category of files to display */
     final int SelectAlt;
 
     OnSelectCategory
-        (
-            int SelectAlt
-        ) {
+       (
+          int SelectAlt
+       ) {
       this.SelectAlt = SelectAlt;
-    } /*OnSelectCategory*/
+    }
 
     public void onClick
-        (
-            android.view.View TheView
-        ) {
+       (
+          android.view.View TheView
+       ) {
       PopulatePickerList(SelectAlt);
-    } /*onClick*/
-
-  } /*OnSelectCategory*/
+    }
+  }
 
   void PopulatePickerList
-      (
-          int NewAlt /* index into AltLists */
-      ) {
+     (
+        int NewAlt /* index into AltLists */
+     ) {
     SelectedAlt = NewAlt;
     final PickerAltList Alt = AltLists[SelectedAlt];
     String InaccessibleFolders = "";
     PickerList.clear();
 
     final String ExternalStorage =
-        android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
+       android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
 
     if (!PermissionUtil.hasCorrectPermission(this)) {
       android.widget.Toast.makeText
-          (
-                    /*context =*/ Picker.this,
-                    /*text =*/     R.string.storage_unavailable,
-                    /*duration =*/ android.widget.Toast.LENGTH_LONG
-          ).show();
+         (
+            Picker.this,
+            R.string.storage_unavailable,
+            android.widget.Toast.LENGTH_LONG
+         ).show();
     }
     try {
       for (String Here : LookIn) {
@@ -340,187 +334,186 @@ public class Picker extends android.app.Activity {
                 if (i == Alt.FileExts.length) {
                   MatchesExt = false;
                   break;
-                } /*if*/
+                }
                 if (ItemName.endsWith(Alt.FileExts[i])) {
                   MatchesExt = true;
                   break;
-                } /*if*/
+                }
                 ++i;
-              } /*for*/
+              }
             } else {
-                            /* match all files */
+              /* match all files */
               MatchesExt = true;
-            } /*if*/
+            }
             if (MatchesExt) {
               PickerList.add(new PickerItem(Item.getAbsolutePath(), null));
-            } /*if*/
-          } /*for*/
-        } /* if*/
-      } /*for*/
+            }
+          }
+        }
+      }
 
       FirstBuiltinIdx = 1;
       if (Alt.SpecialItem != null) {
         for (int i = 0; i < Alt.SpecialItem.length; i++)
           PickerList.add(new PickerItem(null, Alt.SpecialItem[i]));
-      } /*if*/
+      }
 
       PromptView.setText
-          (
-              PickerList.getCount() != 0 ?
-                  Alt.Prompt
-                  :
-                  Alt.NoneFound
-          );
+         (
+            PickerList.getCount() != 0 ?
+               Alt.Prompt
+               :
+               Alt.NoneFound
+         );
       PickerList.notifyDataSetChanged();
-    } /*try*/ catch (RuntimeException Failed) {
+    } catch (RuntimeException Failed) {
       Toast.makeText
-          (
-                    /*context =*/ Picker.this,
-                    /*text =*/
-              String.format
-                  (
-                      Global.StdLocale,
-                      getString(R.string.application_error),
-                      Failed.toString()
-                  ),
-                    /*duration =*/ Toast.LENGTH_LONG
-          ).show();
-    } /*catch*/
+         (
+            Picker.this,
+            String.format
+               (
+                  Global.StdLocale,
+                  getString(R.string.application_error),
+                  Failed.toString()
+               ),
+            Toast.LENGTH_LONG
+         ).show();
+    }
     if (InaccessibleFolders.length() > 0) {
       android.widget.Toast.makeText
-          (
-                        /*context =*/  Picker.this,
-                        /*text =*/     String.format
-                  (
-                      Global.StdLocale,
-                      getString(R.string.folder_unreadable),
-                      InaccessibleFolders.concat("\"\nIn Folder\n\"").concat(ExternalStorage)
-
-                  ),
-                        /*duration =*/ Toast.LENGTH_SHORT
-          ).show();
+         (
+            Picker.this,
+            String.format
+               (
+                  Global.StdLocale,
+                  getString(R.string.folder_unreadable),
+                  InaccessibleFolders.concat("\"\nIn Folder\n\"").concat(ExternalStorage)
+               ),
+            Toast.LENGTH_SHORT
+         ).show();
     }
-  } /*PopulatePickerList*/
+  }
 
   @Override
   public void onCreate
-      (
-          android.os.Bundle savedInstanceState
-      ) {
+     (
+        android.os.Bundle savedInstanceState
+     ) {
     super.onCreate(savedInstanceState);
     Picker.Current = this;
     MainViewGroup = (android.view.ViewGroup) getLayoutInflater().inflate(R.layout.picker, null);
     setContentView(MainViewGroup);
-      /* ExtraViewGroup = (android.view.ViewGroup)MainViewGroup.findViewById(R.id.picker_extra); */ /* doesn't work -- things added here don't show up */
+    /* ExtraViewGroup = (android.view.ViewGroup)MainViewGroup.findViewById(R.id.picker_extra); */
+    /* doesn't work -- things added here don't show up */
     PromptView = (android.widget.TextView) findViewById(R.id.picker_prompt);
     PickerList = new SelectedItemAdapter(this, R.layout.picker_item, getLayoutInflater());
     PickerListView = (android.widget.ListView) findViewById(R.id.prog_list);
     PickerListView.setAdapter(PickerList);
     final android.widget.Button SelectButton =
-        (android.widget.Button) findViewById(R.id.prog_select);
+       (android.widget.Button) findViewById(R.id.prog_select);
     SelectButton.setText(SelectLabel);
 
     SelectButton.setOnClickListener
-        (
-            new android.view.View.OnClickListener() {
-              public void onClick
-                  (
-                      android.view.View TheView
-                  ) {
-                PickerItem Selected = null;
-                int AltIdx = 0;
-                for (int i = 0; ; ) {
-                  if (i == PickerList.getCount())
-                    break;
-                  final PickerItem ThisItem =
-                      (PickerItem) PickerListView.getItemAtPosition(i);
-                  if (ThisItem.Selected) {
-                    Selected = ThisItem;
-                    AltIdx = i;
-                    break;
-                  } /*if*/
-                  ++i;
-                } /*for*/
-                if (Selected != null) {
-                  setResult
-                      (
-                          android.app.Activity.RESULT_OK,
-                          new android.content.Intent()
-                              .setData
+       (
+          new android.view.View.OnClickListener() {
+            public void onClick
+               (
+                  android.view.View TheView
+               ) {
+              PickerItem Selected = null;
+              int AltIdx = 0;
+              for (int i = 0; ; ) {
+                if (i == PickerList.getCount())
+                  break;
+                final PickerItem ThisItem =
+                   (PickerItem) PickerListView.getItemAtPosition(i);
+                if (ThisItem.Selected) {
+                  Selected = ThisItem;
+                  AltIdx = i;
+                  break;
+                }
+                ++i;
+              }
+              if (Selected != null) {
+                setResult
+                   (
+                      android.app.Activity.RESULT_OK,
+                      new android.content.Intent()
+                         .setData
+                            (
+                               android.net.Uri.fromFile
                                   (
-                                      android.net.Uri.fromFile
-                                          (
-                                              new java.io.File
-                                                  (
-                                                      Selected.FullPath != null ?
-                                                          Selected.FullPath
-                                                          :
-                                                          ""
-                                                  )
-                                          )
+                                     new java.io.File
+                                        (
+                                           Selected.FullPath != null ?
+                                              Selected.FullPath
+                                              :
+                                              ""
+                                        )
                                   )
-                              .putExtra(AltIndexID, SelectedAlt)
-                              .putExtra(SpeIndexID, AltIdx)
-                              .putExtra(BuiltinIndexID, FirstBuiltinIdx)
-                      );
-                  finish();
-                } /*if*/
-              } /*onClick*/
-            } /*OnClickListener*/
-        );
+                            )
+                         .putExtra(AltIndexID, SelectedAlt)
+                         .putExtra(SpeIndexID, AltIdx)
+                         .putExtra(BuiltinIndexID, FirstBuiltinIdx)
+                   );
+                finish();
+              }
+            } /*onClick*/
+          }
+       );
     SelectedAlt = 0;
-  } /*onCreate*/
+  }
 
   @Override
   public void onDestroy() {
     super.onDestroy();
     Picker.Current = null;
-  } /*onDestroy*/
+  }
 
   @Override
   public void onPause() {
     super.onPause();
     if (Extra != null) {
-          /* so it can be properly added again should the orientation change */
+      /* so it can be properly added again should the orientation change */
       MainViewGroup.removeView(Extra);
-    } /*if*/
-  } /*onPause*/
+    }
+  }
 
   @Override
   public void onResume() {
     super.onResume();
     if (Extra != null) {
       MainViewGroup.addView
-          (
-              Extra,
-              new android.view.ViewGroup.LayoutParams
-                  (
-                      android.view.ViewGroup.LayoutParams.FILL_PARENT,
-                      android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-                  )
-          );
+         (
+            Extra,
+            new android.view.ViewGroup.LayoutParams
+               (
+                  android.view.ViewGroup.LayoutParams.FILL_PARENT,
+                  android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+               )
+         );
       for (int i = 0; i < AltLists.length; ++i) {
         final PickerAltList ThisAlt = AltLists[i];
         if (ThisAlt.RadioButtonID != 0) {
           final android.widget.RadioButton SelectThis =
-              (android.widget.RadioButton) Extra.findViewById(ThisAlt.RadioButtonID);
+             (android.widget.RadioButton) Extra.findViewById(ThisAlt.RadioButtonID);
           SelectThis.setChecked(i == SelectedAlt);
           SelectThis.setOnClickListener(new OnSelectCategory(i));
-        } /*if*/
-      } /*for*/
-    } /*if*/
+        }
+      }
+    }
     PopulatePickerList(SelectedAlt);
-  } /*onResume*/
+  }
 
   public static void Launch
-      (
-          android.app.Activity Acting,
-          String SelectLabel,
-          int RequestCode,
-          android.view.View Extra,
-          String[] LookIn, /* array of names of subdirectories within external storage */
-          PickerAltList[] AltLists
-      ) {
+     (
+        android.app.Activity Acting,
+        String SelectLabel,
+        int RequestCode,
+        android.view.View Extra,
+        String[] LookIn, /* array of names of subdirectories within external storage */
+        PickerAltList[] AltLists
+     ) {
     if (!Reentered) {
       Reentered = true; /* until Picker activity terminates */
       Picker.SelectLabel = SelectLabel;
@@ -528,24 +521,23 @@ public class Picker extends android.app.Activity {
       Picker.LookIn = LookIn;
       Picker.AltLists = AltLists;
       Acting.startActivityForResult
-          (
-              new android.content.Intent(android.content.Intent.ACTION_PICK)
-                  .setClass(Acting, Picker.class),
-              RequestCode
-          );
+         (
+            new android.content.Intent(android.content.Intent.ACTION_PICK)
+               .setClass(Acting, Picker.class),
+            RequestCode
+         );
     } else {
-          /* can happen if user gets impatient and selects from menu twice, just ignore */
-    } /*if*/
-  } /*Launch*/
+      /* can happen if user gets impatient and selects from menu twice, just ignore */
+    }
+  }
 
-  public static void Cleanup()
-      /* Client must call this to do explicit cleanup; I tried doing it in
-        onDestroy, but of course that gets called when user rotates screen,
-        which means picker context is lost. */ {
+  public static void Cleanup() {
+    /* Client must call this to do explicit cleanup; I tried doing it in
+       onDestroy, but of course that gets called when user rotates screen,
+       which means picker context is lost. */
     Extra = null;
     LookIn = null;
     AltLists = null;
     Reentered = false;
-  } /*Cleanup*/
-
-} /*Picker*/
+  }
+}

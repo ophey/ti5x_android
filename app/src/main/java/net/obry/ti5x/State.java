@@ -20,8 +20,9 @@ package net.obry.ti5x;
 
 import android.util.Log;
 
-public class State
-  /* the calculator state, number entry and programs */ {
+public class State {
+  /* the calculator state, number entry and programs */
+
   android.content.Context ctx;
   /* number-entry state */
   final static int EntryState = 0;
@@ -45,33 +46,32 @@ public class State
   private Runnable RunProg = null;
   Runnable OnStop = null;
 
-  static class ImportEOFException extends RuntimeException
-      /* indicates no more data to import. */ {
+  static class ImportEOFException extends RuntimeException {
+    /* indicates no more data to import. */
 
     ImportEOFException
-        (
-            String Message
-        ) {
+       (
+          String Message
+       ) {
       super(Message);
-    } /*ImportEOFException*/
-
-  } /*ImportEOFException*/
+    }
+  }
 
   static abstract class ImportFeeder {
     abstract Number Next()
-        throws
-        ImportEOFException,
-        Persistent.DataFormatException;
-          /* returns the next input value or raises ImportEOFException if none. */
+       throws
+       ImportEOFException,
+       Persistent.DataFormatException;
+    /* returns the next input value or raises ImportEOFException if none. */
 
-    void End()
-          /* stops further invocations of the task. Subclass may add
-            further cleanup, but must also invoke this superclass method. */ {
+    void End() {
+      /* stops further invocations of the task. Subclass may add
+        further cleanup, but must also invoke this superclass method. */
       if (Global.Calc != null) {
         Global.Calc.Import = null;
-      } /*if*/
-    } /*End*/
-  } /*ImportFeeder*/
+      }
+    }
+  }
 
   ImportFeeder Import = null;
 
@@ -111,24 +111,23 @@ public class State
     int ParenFollows;
 
     public OpStackEntry
-        (
-            Number Operand,
-            int Operator,
-            int ParenFollows
-        ) {
+       (
+          Number Operand,
+          int Operator,
+          int ParenFollows
+       ) {
       this.Operand = Operand;
       this.Operator = Operator;
       this.ParenFollows = ParenFollows;
-    } /*OpStackEntry*/
-
-  } /*OpStackEntry*/
+    }
+  }
 
   final int MaxOpStack = 8;
   private final static int MaxParen = 9;
   Number X, T;
   OpStackEntry[] OpStack;
   int OpStackNext;
-   int PreviousOp = -1;
+  int PreviousOp = -1;
   // wether the last entry was an operator requiring 2 operands:
   // 1 + = (should set calculator in error)
 
@@ -144,18 +143,17 @@ public class State
     byte[] Help; /* HTML help to display, can be null */
 
     ProgBank
-        (
-            byte[] Program,
-            android.graphics.Bitmap Card,
-            byte[] Help
-        ) {
+       (
+          byte[] Program,
+          android.graphics.Bitmap Card,
+          byte[] Help
+       ) {
       this.Program = Program;
       this.Card = Card;
       this.Help = Help;
       this.Labels = null;
-    } /*ProgBank*/
-
-  } /*ProgBank*/
+    }
+  }
 
   boolean ProgMode; /* true for program-entry mode, false for calculation mode */
   final int MaxMemories = 100; /* maximum addressable */
@@ -174,7 +172,7 @@ public class State
   /* special flag numbers: */
   private final static int FLAG_ERROR_COND = 7;
   /* can be set by Op 18/19 to indicate error/no-error, and
-        by Op 40 to indicate printer present */
+     by Op 40 to indicate printer present */
   private final static int FLAG_STOP_ON_ERROR = 8; /* if set, program stops on error */
 
   int PC, CurBank;
@@ -200,17 +198,16 @@ public class State
     boolean FromInteractive;
 
     public ReturnStackEntry
-        (
-            int BankNr,
-            int Addr,
-            boolean FromInteractive
-        ) {
+       (
+          int BankNr,
+          int Addr,
+          boolean FromInteractive
+       ) {
       this.BankNr = BankNr;
       this.Addr = Addr;
       this.FromInteractive = FromInteractive;
-    } /*ReturnStackEntry*/
-
-  } /*ReturnStackEntry*/
+    }
+  }
 
   final int MaxReturnStack = 6;
   ReturnStackEntry[] ReturnStack; /* for subroutine calls */
@@ -221,10 +218,10 @@ public class State
   final byte[] PrintRegister;
 
   void Reset
-      (
-          boolean ClearLibs /* wipe out loaded library module as well */
-      )
-      /* resets to power-up/blank state. */ {
+     (
+        boolean ClearLibs /* wipe out loaded library module as well */
+     ) {
+    /* resets to power-up/blank state. */
     CurFormat = FORMAT_FIXED;
     CurNrDecimals = -1;
     CurAng = ANG_DEG;
@@ -246,44 +243,44 @@ public class State
     inError = false;
     for (int i = 0; i < MaxFlags; ++i) {
       Flag[i] = false;
-    } /*for*/
+    }
     for (int i = 0; i < MaxMemories; ++i) {
       Memory[i] = new Number();
-    } /*for*/
+    }
     for (int i = 0; i < MaxProgram; ++i) {
       Program[i] = (byte) 0;
-    } /*if*/
+    }
     if (ClearLibs) {
       ResetLibs();
-    } /*if*/
+    }
     ProgMode = false;
     for (int i = 0; i < PrintRegister.length; ++i) {
       PrintRegister[i] = 0;
-    } /*for*/
+    }
     ResetEntry();
-  } /*Reset*/
+  }
 
-  public void ResetLibs()
-      /* wipes out loaded library modules */ {
+  public void ResetLibs() {
+    /* wipes out loaded library modules */
     for (int i = 1; i < MaxBanks; ++i) {
       if (Bank[i] != null && Bank[i].Card != null) {
-              /* avoid "bitmap allocation exceeds budget" crashes */
+        /* avoid "bitmap allocation exceeds budget" crashes */
         if (CurBank == i) {
           Global.Label.SetHelp(null, null);
-        } /*if*/ else {
+        } else {
           Bank[i].Card.recycle();
           Bank[i].Card = null;
         }
-      } /*if*/
+      }
       Bank[i] = null;
-    } /*for*/
+    }
     ModuleHelp = null;
-  } /*ResetLibs*/
+  }
 
   public State
-      (
-          android.content.Context ctx
-      ) {
+     (
+        android.content.Context ctx
+     ) {
     this.ctx = ctx;
     OpStack = new OpStackEntry[MaxOpStack];
     Memory = new Number[MaxMemories];
@@ -298,24 +295,24 @@ public class State
     ReturnStack = new ReturnStackEntry[MaxReturnStack];
     PrintRegister = new byte[Printer.CharColumns];
     Reset(true);
-  } /*State*/
+  }
 
   class DelayedStep implements Runnable {
     public void run() {
       ShowCurProg();
-    } /*run*/
-  } /*DelayedStep*/
+    }
+  }
 
   private void ClearDelayedStep() {
     if (DelayTask != null) {
       BGTask.removeCallbacks(DelayTask);
-    } /*if*/
-  } /*ClearDelayedStep*/
+    }
+  }
 
   private void SetShowing
-      (
-          String ToDisplay
-      ) {
+     (
+        String ToDisplay
+     ) {
     ClearDelayedStep();
     LastShowing = ToDisplay;
     if (!TaskRunning || ProgRunningSlowly) {
@@ -323,79 +320,78 @@ public class State
         Global.Disp.SetShowingError(ToDisplay);
       } else {
         Global.Disp.SetShowing(ToDisplay);
-      } /*if*/
+      }
     }
-  } /*SetShowing*/
+  }
 
   void ResetEntry() {
     CurState = EntryState;
     CurDisplay = "0";
     ExponentEntered = false;
     SetShowing(CurDisplay);
-  } /*ResetEntry*/
+  }
 
-  void Enter(int op)
-      /* finishes the entry of the current number. */ {
+  void Enter(int op) {
+    /* finishes the entry of the current number. */
     if (CurState != ResultState) {
       int Exp;
       if (ExponentEntered) {
         Exp = Integer.parseInt(CurDisplay.substring(CurDisplay.length() - 2));
         if (CurDisplay.charAt(CurDisplay.length() - 3) == '-') {
           Exp = -Exp;
-        } /*if*/
+        }
       } else {
         Exp = 0;
-      } /*if*/
+      }
       X = new Number
-          (
-              CurDisplay.substring
-                  (
-                      0,
-                      ExponentEntered ? CurDisplay.length() - 3 : CurDisplay.length()
-                  )
-          );
+         (
+            CurDisplay.substring
+               (
+                  0,
+                  ExponentEntered ? CurDisplay.length() - 3 : CurDisplay.length()
+               )
+         );
       if (ExponentEntered) {
         Number E = new Number(Math.pow(10, Exp));
         X.mult(E);
-      } /*if*/
+      }
 
       SetX(X, false);
       FromResult = false;
-    } /*if*/
+    }
 
     if (TracePrintActivated && Global.Print != null) {
-              /*  */
       TraceDisplay
-          // no number when:
-              (op != 53     // opening a parenthesis
-                      && op != 25  // clr
-                      && op != 24, // ce
-                  (InvState ? "I" : " ") + Printer.KeyCodeSym(op));
-    } /*if*/
-  } /*Enter*/
+         // no number when:
+            (op != 53     // opening a parenthesis
+                  && op != 25  // clr
+                  && op != 24, // ce
+               (InvState ? "I" : " ") + Printer.KeyCodeSym(op));
+    }
+  }
 
   void SetErrorState
-      (
-          boolean AlsoStopProgram
-      ) {
+     (
+        boolean AlsoStopProgram
+     ) {
     ClearDelayedStep();
     if (!TaskRunning || ProgRunningSlowly) {
       Global.Disp.SetShowingError(LastShowing);
-    } /*if*/
+    }
     inError = true;
     if (AlsoStopProgram || Flag[FLAG_STOP_ON_ERROR]) {
       StopProgram();
-    } /*if*/
-  } /*SetErrorState*/
+    }
+  }
 
   boolean InErrorState() {
     return inError;
-  } /*InErrorState*/
+  }
 
   boolean ImportInProgress() {
     return
-        Import != null;
-  } /*ImportInProgress*/
+       Import != null;
+  }
 
   void ClearAll() {
     Enter(25);
@@ -406,7 +402,7 @@ public class State
     if (CurFormat == FORMAT_FLOAT)
       CurFormat = FORMAT_FIXED;
     ResetEntry();
-  } /*ClearAll*/
+  }
 
   void ClearEntry() {
     if (inError) {
@@ -414,15 +410,15 @@ public class State
       SetX(X, true);
     } else if (CurState != ResultState)
       ResetEntry();
-  } /*ClearEntry*/
+  }
 
   void Digit
-      (
-          char TheDigit
-      ) {
+     (
+        char TheDigit
+     ) {
     if (CurState == ResultState) {
       ResetEntry();
-    } /*if*/
+    }
 
     String SaveExponent = "";
 
@@ -432,9 +428,9 @@ public class State
         if (ExponentEntered) {
           SaveExponent = CurDisplay.substring(CurDisplay.length() - 3);
           CurDisplay = CurDisplay.substring(0, CurDisplay.length() - 3);
-        } /*if*/
+        }
         break;
-    } /*switch*/
+    }
 
     switch (CurState) {
       case EntryState:
@@ -444,35 +440,35 @@ public class State
           CurDisplay = "-" + new String(new char[]{TheDigit}) + CurDisplay.substring(2);
         } else {
           CurDisplay =
-              CurDisplay.substring(0, CurDisplay.length())
-                  +
-                  new String(new char[]{TheDigit})
-                  +
-                  CurDisplay.substring(CurDisplay.length());
-        } /*if*/
+             CurDisplay.substring(0, CurDisplay.length())
+                +
+                new String(new char[]{TheDigit})
+                +
+                CurDisplay.substring(CurDisplay.length());
+        }
         break;
       case DecimalEntryState:
         CurDisplay = CurDisplay + new String(new char[]{TheDigit});
         break;
       case ExponentEntryState:
-          /* old exponent units digit becomes tens digit, new digit
-            becomes units digit */
+        /* old exponent units digit becomes tens digit, new digit
+           becomes units digit */
         CurDisplay =
-            CurDisplay.substring(0, CurDisplay.length() - 2)
-                +
-                CurDisplay.substring(CurDisplay.length() - 1)
-                +
-                new String(new char[]{TheDigit});
+           CurDisplay.substring(0, CurDisplay.length() - 2)
+              +
+              CurDisplay.substring(CurDisplay.length() - 1)
+              +
+              new String(new char[]{TheDigit});
         break;
-    } /*switch*/
+    }
     CurDisplay += SaveExponent;
     SetShowing(CurDisplay);
-  } /*Digit*/
+  }
 
   void DecimalPoint() {
     if (CurState == ResultState) {
       ResetEntry();
-    } /*if*/
+    }
     switch (CurState) {
       case EntryState:
       case ExponentEntryState:
@@ -483,30 +479,29 @@ public class State
           final int len = CurDisplay.length();
           if (ExponentEntered) {
             CurDisplay =
-                CurDisplay.substring(0, len - 3)
-                    +
-                    new String(new char[]{'.'})
-                    +
-                    CurDisplay.substring(len - 3);
+               CurDisplay.substring(0, len - 3)
+                  +
+                  new String(new char[]{'.'})
+                  +
+                  CurDisplay.substring(len - 3);
           } else {
             CurDisplay = CurDisplay + ".";
           }
           SetShowing(CurDisplay);
         }
         break;
-      /* otherwise ignore */
-    } /*CurState*/
-  } /*DecimalPoint*/
+    }
+  }
 
   private boolean NullExponent() {
     return CurDisplay.length() <= 3
-        || CurDisplay.substring(CurDisplay.length() - 3).equals(" 00");
+       || CurDisplay.substring(CurDisplay.length() - 3).equals(" 00");
   }
 
   private boolean HasExponent() {
     return CurDisplay.length() > 3
-        && (CurDisplay.charAt(CurDisplay.length() - 3) == '-'
-        || CurDisplay.charAt(CurDisplay.length() - 3) == ' ');
+       && (CurDisplay.charAt(CurDisplay.length() - 3) == '-'
+       || CurDisplay.charAt(CurDisplay.length() - 3) == ' ');
   }
 
   void EnterExponent() {
@@ -517,7 +512,7 @@ public class State
           CurDisplay = CurDisplay + " 00";
           if (CurFormat == FORMAT_FIXED)
             CurFormat = FORMAT_FLOAT;
-        } /*if*/
+        }
         CurState = ExponentEntryState;
         SetShowing(CurDisplay);
         ExponentEntered = true;
@@ -552,7 +547,7 @@ public class State
               CurFormat = FORMAT_FIXED;
             CurNrDecimals = -1;
             SetX(X, false); /* will cause redisplay */
-          } /*if*/
+          }
         } else {
           FromResult = true;
           CurFormat = FORMAT_FLOAT;
@@ -568,17 +563,17 @@ public class State
               ExponentEntered = true;
             }
           }
-        } /*if*/
+        }
         break;
-    } /*switch*/
-  } /*EnterExponent*/
+    }
+  }
 
   private static String RemoveTrailingZeros(String str) {
     String Result = str;
 
     while (Result.length() != 0
-        &&
-        Result.charAt(Result.length() - 1) == '0') {
+       &&
+       Result.charAt(Result.length() - 1) == '0') {
       Result = Result.substring(0, Result.length() - 1);
     }
 
@@ -598,13 +593,13 @@ public class State
   }
 
   private static String FormatNumber
-      (
-          Number X,
-          int UseFormat,
-          int NrDecimals,
-          boolean ExponentPad /* leave spaces if exponent is omitted */
-      )
-      /* formats X for display according to the specified settings. */ {
+     (
+        Number X,
+        int UseFormat,
+        int NrDecimals,
+        boolean ExponentPad /* leave spaces if exponent is omitted */
+     ) {
+    /* formats X for display according to the specified settings. */
     String Result = null;
 
     Number aX = new Number(X);
@@ -613,10 +608,10 @@ public class State
     // check that FORMAT_FIXED can be used, if outside supported range use FORMAT_FLOAT
 
     if (UseFormat == FORMAT_FIXED
-        && NrDecimals == -1
-        && X.getSignum() != 0
-        && (aX.compareTo(minFixed) < 0
-        || aX.compareTo(maxFixed) >= 0)) {
+       && NrDecimals == -1
+       && X.getSignum() != 0
+       && (aX.compareTo(minFixed) < 0
+       || aX.compareTo(maxFixed) >= 0)) {
       UseFormat = FORMAT_FLOAT;
     }
 
@@ -649,7 +644,7 @@ public class State
       case FORMAT_FIXED:
         if (NrDecimals >= 0) {
           Result = X.formatString
-              (Global.StdLocale, Math.max(Math.min(NrDecimals, 10 - BeforeDecimal), 0));
+             (Global.StdLocale, Math.max(Math.min(NrDecimals, 10 - BeforeDecimal), 0));
         } else {
           final int UseNrDecimals = Math.max(10 - BeforeDecimal, 0);
           Result = X.formatString(Global.StdLocale, UseNrDecimals);
@@ -663,27 +658,27 @@ public class State
               Result = RemoveLeadingZero(Result, 12);
           } else {
             Result += ".";
-          } /*if*/
-        } /*if*/
+          }
+        }
 
         if (Result.length() == 0) {
           Result = "0.";
-        } /*if*/
+        }
         if (ExponentPad) {
           Result += "   ";
-        } /*if*/
+        }
         break;
-    } /*switch*/
+    }
 
     return Result;
-  } /*FormatNumber*/
+  }
 
   void SetX
-      (
-          Number NewX,
-          boolean Trace
-      )
-      /* sets the display to show the specified value. */ {
+     (
+        Number NewX,
+        boolean Trace
+     ) {
+    /* sets the display to show the specified value. */
     CurState = ResultState;
     if (NewX.isInfinite() || NewX.isSmall()) {
       SetErrorState(false);
@@ -694,10 +689,10 @@ public class State
       SetShowing(CurDisplay);
     } else {
       SetErrorState(false);
-    } /*if*/
+    }
     if (Trace)
       TraceDisplay(true, "");
-  } /*SetX*/
+  }
 
   void ChangeSign() {
     switch (CurState) {
@@ -707,35 +702,35 @@ public class State
           CurDisplay = CurDisplay.substring(1);
         } else {
           CurDisplay = "-" + CurDisplay;
-        } /*if*/
+        }
         SetShowing(CurDisplay);
         break;
       case ExponentEntryState:
         CurDisplay =
-            CurDisplay.substring(0, CurDisplay.length() - 3)
-                +
-                (CurDisplay.charAt(CurDisplay.length() - 3) == '-' ? ' ' : '-')
-                +
-                CurDisplay.substring(CurDisplay.length() - 2);
+           CurDisplay.substring(0, CurDisplay.length() - 3)
+              +
+              (CurDisplay.charAt(CurDisplay.length() - 3) == '-' ? ' ' : '-')
+              +
+              CurDisplay.substring(CurDisplay.length() - 2);
         SetShowing(CurDisplay);
         break;
       case ResultState:
         X.negate();
         SetX(X, true);
         break;
-    } /*switch*/
-  } /*ChangeSign*/
+    }
+  }
 
   void SetDisplayMode
-      (
-          int NewMode,
-          int NewNrDecimals
-      ) {
+     (
+        int NewMode,
+        int NewNrDecimals
+     ) {
     Enter(NewMode == FORMAT_FIXED ? 58 : 57);
     CurFormat = NewMode;
     CurNrDecimals = NewNrDecimals >= 0 && NewNrDecimals < 9 ? NewNrDecimals : -1;
     SetX(X, true);
-  } /*SetDisplayMode*/
+  }
 
   private void DoStackTop() {
     final OpStackEntry ThisOp = OpStack[--OpStackNext];
@@ -774,8 +769,8 @@ public class State
       case STACKOP_ROOT:
         if (X.getSignum() == 0) {
           if (ThisOp.Operand.getSignum() == 0
-              || ThisOp.Operand.compareTo(Number.ONE) == 0
-              || ThisOp.Operand.compareTo(Number.mONE) == 0) {
+             || ThisOp.Operand.compareTo(Number.ONE) == 0
+             || ThisOp.Operand.compareTo(Number.mONE) == 0) {
             X.set(1);
           } else {
             X.set(Number.ERROR);
@@ -799,14 +794,14 @@ public class State
           X = ThisOp.Operand;
         }
         break;
-    } /*switch*/
-      /* leave it to caller to update display */
-  } /*DoStackTop*/
+    }
+    /* leave it to caller to update display */
+  }
 
   private static int Precedence
-      (
-          int OpCode
-      ) {
+     (
+        int OpCode
+     ) {
     int Result = -1;
     switch (OpCode) {
       case STACKOP_ADD:
@@ -822,54 +817,53 @@ public class State
       case STACKOP_ROOT:
         Result = 3;
         break;
-    } /*switch*/
-    return
-        Result;
-  } /*Precedence*/
+    }
+    return Result;
+  }
 
   private void StackPush
-      (
-          int OpCode
-      ) {
+     (
+        int OpCode
+     ) {
     if (OpStackNext == MaxOpStack) {
-          /* overflow! */
+      /* overflow! */
       SetErrorState(false);
     } else {
       OpStack[OpStackNext++] = new OpStackEntry(new Number(X), OpCode, 0);
-    } /*if*/
-  } /*StackPush*/
+    }
+  }
 
   void Operator
-      (
-          int OpCode
-      ) {
+     (
+        int OpCode
+     ) {
     Enter(STACKOP_CODE[OpCode - 1]);
     if (InvState) {
       switch (OpCode) {
         case STACKOP_EXP:
           OpCode = STACKOP_ROOT;
           break;
-      } /*switch*/
-    } /*if*/
+      }
+    }
     boolean PoppedSomething = false;
     for (; ; ) {
       if
-          (
-          OpStackNext == 0
-              ||
-              OpStack[OpStackNext - 1].ParenFollows != 0
-              ||
-              Precedence(OpStack[OpStackNext - 1].Operator) < Precedence(OpCode)
-          )
+         (
+         OpStackNext == 0
+            ||
+            OpStack[OpStackNext - 1].ParenFollows != 0
+            ||
+            Precedence(OpStack[OpStackNext - 1].Operator) < Precedence(OpCode)
+         )
         break;
       DoStackTop();
       PoppedSomething = true;
-    } /*for*/
+    }
     if (PoppedSomething) {
       SetX(X, false);
-    } /*if*/
+    }
     StackPush(OpCode);
-  } /*Operator*/
+  }
 
   void LParen() {
     Enter(53);
@@ -881,9 +875,8 @@ public class State
 
     if (OpStackNext != 0) {
       ++OpStack[OpStackNext - 1].ParenFollows;
-    } /*if*/
-      /* else ignored */
-  } /*LParen*/
+    }
+  }
 
   void RParen() {
     Enter(54);
@@ -895,14 +888,14 @@ public class State
       if (OpStack[OpStackNext - 1].ParenFollows != 0) {
         --OpStack[OpStackNext - 1].ParenFollows;
         break;
-      } /*if*/
+      }
       DoStackTop();
       PoppedSomething = true;
-    } /*for*/
+    }
     if (PoppedSomething) {
       SetX(X, true);
-    } /*if*/
-  } /*RParen*/
+    }
+  }
 
   void Equals() {
     Enter(95);
@@ -914,20 +907,20 @@ public class State
       } /*while*/
       SetX(X, true);
     }
-  } /*Equals*/
+  }
 
   void SetAngMode
-      (
-          int NewMode
-      ) {
+     (
+        int NewMode
+     ) {
     CurAng = NewMode;
-  } /*SetAngMode*/
+  }
 
   void Square() {
     Enter(33);
     X.x2();
     SetX(X, true);
-  } /*Square*/
+  }
 
   void Sqrt() {
     Enter(34);
@@ -936,7 +929,7 @@ public class State
       SetErrorState(false);
     }
     SetX(X, true);
-  } /*Sqrt*/
+  }
 
   void Reciprocal() {
     Enter(35);
@@ -945,7 +938,7 @@ public class State
       SetErrorState(false);
     }
     SetX(X, true);
-  } /*Reciprocal*/
+  }
 
   void Sin() {
     Enter(38);
@@ -956,9 +949,10 @@ public class State
       }
     } else {
       X.sin(CurAng);
-    } /*if*/
+    }
+
     SetX(X, true);
-  } /*Sin*/
+  }
 
   void Cos() {
     Enter(39);
@@ -969,10 +963,10 @@ public class State
       }
     } else {
       X.cos(CurAng);
-    } /*if*/
+    }
 
     SetX(X, true);
-  } /*Cos*/
+  }
 
   void Tan() {
     Enter(30);
@@ -987,7 +981,7 @@ public class State
     }
 
     SetX(X, true);
-  } /*Tan*/
+  }
 
   void Ln() {
     Enter(23);
@@ -1002,7 +996,7 @@ public class State
     }
 
     SetX(X, true);
-  } /*Ln*/
+  }
 
   void Log() {
     Enter(28);
@@ -1019,7 +1013,7 @@ public class State
     }
 
     SetX(X, true);
-  } /*Log*/
+  }
 
   void Percent() {
     Enter(20);
@@ -1035,16 +1029,16 @@ public class State
     }
 
     SetX(X, true);
-  } /*Percent*/
+  }
 
   void Pi() {
     if (InvState) /* extension! */ {
       X.trigScale(CurAng); // ?? check that it is on same order or reciprocal
     } else {
       X.Pi();
-    } /*if*/
+    }
     SetX(X, true);
-  } /*Pi*/
+  }
 
   void Int() {
     Enter(59);
@@ -1052,24 +1046,24 @@ public class State
       X.fracPart();
     } else {
       X.intPart();
-    } /*if*/
+    }
 
     SetX(X, true);
-  } /*Int*/
+  }
 
   void Abs() {
     Enter(50);
 
     X.abs();
     SetX(X, true);
-  } /*Abs*/
+  }
 
   void SwapT() {
     Enter(32);
     final Number SwapTemp = X;
     SetX(T, true);
     T = SwapTemp;
-  } /*SwapT*/
+  }
 
   void Polar() {
     Enter(37);
@@ -1078,16 +1072,17 @@ public class State
     Number OldX, OldT;
     Number New180;
     Number New360;
-        /*
-         *  To ensure that we handle all cases equally, we initialize
-         *  the semicircle and full-circle parameters for the various
-         *  coordinate systems.
-         *
-         *  Full-Circle:
-         *    Gradian system = 400
-         *    Radian system  =  2π
-         *    Degree system  = 360
-         */
+
+    /*
+     *  To ensure that we handle all cases equally, we initialize
+     *  the semicircle and full-circle parameters for the various
+     *  coordinate systems.
+     *
+     *  Full-Circle:
+     *    Gradian system = 400
+     *    Radian system  =  2π
+     *    Degree system  = 360
+     */
     switch (CurAng) {
       case ANG_GRAD:
         New180 = new Number(200);
@@ -1121,137 +1116,135 @@ public class State
       NewY = X;
       NewY.div(T);
       NewY.atan(CurAng);
-            /*
-             *  20161012: SZoppi
-             *
-             *  The function must NOW determine the quadrant in which the
-             *  result is delivered...
-             *
-             *                  y
-             *                  ^
-             *        II        |         I
-             *           θ=+    |   θ=+
-             *                  |
-             *     -x <---------+---------> x
-             *                  |
-             *           θ=+    |   θ=-
-             *        III       |        IV
-             *                  V
-             *                  -y
-             *
-             *    For Cartesian (Rectangular) to Polar, we need to be careful
-             *    to note when the hardware inverts the sign of the angle in
-             *    the expected result so we use the following tests:
-             *
-             *      (x= 1, y= 0) = (R=1,     θ=   0°) Ok
-             *      (x= 1, y= 1) = (R=1.41~, θ=  45°) Ok
-             *      (x= 0, y= 1) = (R=1,     θ=  90°) Ok
-             *      (x=-1, y= 1) = (R=1.41~, θ= 135°) Ok
-             *      (x=-1, y= 0) = (R=1,     θ= 180°) Ok
-             *      (x=-1, y=-1) = (R=1.41~, θ= 225°) Ok
-             *      NOTE: At ≥270°, the Hardware returns
-             *            a NEGATIVE Angular result
-             *      (x= 0, y=-1) = (R=1,     θ= -90°) Ok
-             *      (x= 1, y=-1) = (R=1.41~, θ= -45°) Ok
-             *
-             *  General Rules:
-             *
-             *  Quadrant  Value of atan
-             *  I         (Use Calculator Value) = 45
-             *            Coordinates (8[x],8[t])
-             *  II        Add 180 to the calculator value (Use Calculator Value)
-             *            Coordinates (-8[x],8[t])
-             *  III       Add 180 to the calculator value
-             *            Coordinates (-8[x],-8[t])
-             *  IV        Add 360 to the calculator value (Use Calculator Value)
-             *            Coordinates (8[x],-8[t])
-             *
-             *  OldX is "Y"
-             *  OltT is "X"
-             */
+
+      /*
+       *  The function must NOW determine the quadrant in which the
+       *  result is delivered...
+       *
+       *                  y
+       *                  ^
+       *        II        |         I
+       *           θ=+    |   θ=+
+       *                  |
+       *     -x <---------+---------> x
+       *                  |
+       *           θ=+    |   θ=-
+       *        III       |        IV
+       *                  V
+       *                  -y
+       *
+       *    For Cartesian (Rectangular) to Polar, we need to be careful
+       *    to note when the hardware inverts the sign of the angle in
+       *    the expected result so we use the following tests:
+       *
+       *      (x= 1, y= 0) = (R=1,     θ=   0°) Ok
+       *      (x= 1, y= 1) = (R=1.41~, θ=  45°) Ok
+       *      (x= 0, y= 1) = (R=1,     θ=  90°) Ok
+       *      (x=-1, y= 1) = (R=1.41~, θ= 135°) Ok
+       *      (x=-1, y= 0) = (R=1,     θ= 180°) Ok
+       *      (x=-1, y=-1) = (R=1.41~, θ= 225°) Ok
+       *      NOTE: At ≥270°, the Hardware returns
+       *            a NEGATIVE Angular result
+       *      (x= 0, y=-1) = (R=1,     θ= -90°) Ok
+       *      (x= 1, y=-1) = (R=1.41~, θ= -45°) Ok
+       *
+       *  General Rules:
+       *
+       *  Quadrant  Value of atan
+       *  I         (Use Calculator Value) = 45
+       *            Coordinates (8[x],8[t])
+       *  II        Add 180 to the calculator value (Use Calculator Value)
+       *            Coordinates (-8[x],8[t])
+       *  III       Add 180 to the calculator value
+       *            Coordinates (-8[x],-8[t])
+       *  IV        Add 360 to the calculator value (Use Calculator Value)
+       *            Coordinates (8[x],-8[t])
+       *
+       *  OldX is "Y"
+       *  OltT is "X"
+       */
       if (OldX.compareTo(Number.ZERO) < 0) {
         if (OldT.compareTo(Number.ZERO) < 0) {
-                  /*
-                   * Quadrant III
-                   * -X,-Y
-                   */
+          /*
+           * Quadrant III
+           * -X,-Y
+           */
           NewY.add(New180);
         } else {
-                  /*
-                   * Quadrant IV
-                   * +X,-Y
-                   */
+          /*
+           * Quadrant IV
+           * +X,-Y
+           */
           NewY.abs();
           NewY.negate();
         }
 
       } else {
         if (OldT.compareTo(Number.ZERO) < 0) {
-                  /*
-                   * Quadrant II
-                   * -X,+Y
-                   */
+          /*
+           * Quadrant II
+           * -X,+Y
+           */
           NewY.add(New180);
         } else {
-                  /*
-                   * Quadrant I
-                   * +X,+Y
-                   */
+          /*
+           * Quadrant I
+           * +X,+Y
+           */
           // We don't bother adding because the signs are correct
         }
       }
     } else {
-            /*
-             *  20170106 SZoppi: Fixed Function
-             *  to convert from Cartesian Coordinates (x,y) to Polar Coordinates (r,θ):
-             *
-             *    r = √ ( x2 + y2 )
-             *    θ = tan-1 ( y / x )
-             *
-             *  Calculators may give the wrong value of tan-1 () when x or y are negative
-             *
-             *  The function must NOW determine the quadrant in which the
-             *  result is delivered...
-             *    t=R
-             *    θ=X
-             *  Result:
-             *    t=x
-             *    X=y
-             *
-             *    On the Hardware:
-             *
-             *    For Polar to Cartesian (Rectangular):
-             *
-             *      Java Reliable below θ=180°             Result OK  Modified
-             *                                             in Java?   Routine?
-             *      ------------------------------------------------------------
-             *      (R=1, θ=   0°) = (x= 1,     y=  0    ) Ok         Ok
-             *      (R=1, θ=  45°) = (x= 0.70~, y=  0.70~) Ok         Ok
-             *      (R=1, θ=  90°) = (x= 0,     y=  1    ) Ok         Ok
-             *      (R=1, θ= 135°) = (x=-0.70~, y=  0.70~) Ok         Ok
-             *      ------------------------------------------------------------
-             *      (R=1, θ= 180°) = (x=-1,     y=  0    ) NO         Ok
-             *      (R=1, θ= 225°) = (x=-0.70~, y= -0.70~) Ok         Ok
-             *      (R=1, θ= 270°) = (x= 0,     y= -1    ) NO         Ok
-             *      (R=1, θ= 315°) = (x= 0.70~, y= -0.70~) Ok         Ok
-             *      ------------------------------------------------------------
-             *
-             *    To Address the Discrepancies:
-             *
-             *    We need to modify the routine to calculate the return
-             *    quadrants because the Java library doesn't do an appropriate
-             *    job returning these values (at θ above 180°).
-             *
-             *    The means by which we can keep the angular values of θ
-             *    below 180 requires a little trick: we take the modulo(180) of θ
-             *    and use OldX (Modulo 360) value to determine the quadrant,
-             *    and therefore, correct the signs of the result are returned.
-             *
-             *    This algorithm works for all values of positive and negative θ.
-             *
-             */
+      /*
+       *  to convert from Cartesian Coordinates (x,y) to Polar Coordinates (r,θ):
+       *
+       *    r = √ ( x2 + y2 )
+       *    θ = tan-1 ( y / x )
+       *
+       *  Calculators may give the wrong value of tan-1 () when x or y are negative
+       *
+       *  The function must NOW determine the quadrant in which the
+       *  result is delivered...
+       *    t=R
+       *    θ=X
+       *  Result:
+       *    t=x
+       *    X=y
+       *
+       *    On the Hardware:
+       *
+       *    For Polar to Cartesian (Rectangular):
+       *
+       *      Java Reliable below θ=180°             Result OK  Modified
+       *                                             in Java?   Routine?
+       *      ------------------------------------------------------------
+       *      (R=1, θ=   0°) = (x= 1,     y=  0    ) Ok         Ok
+       *      (R=1, θ=  45°) = (x= 0.70~, y=  0.70~) Ok         Ok
+       *      (R=1, θ=  90°) = (x= 0,     y=  1    ) Ok         Ok
+       *      (R=1, θ= 135°) = (x=-0.70~, y=  0.70~) Ok         Ok
+       *      ------------------------------------------------------------
+       *      (R=1, θ= 180°) = (x=-1,     y=  0    ) NO         Ok
+       *      (R=1, θ= 225°) = (x=-0.70~, y= -0.70~) Ok         Ok
+       *      (R=1, θ= 270°) = (x= 0,     y= -1    ) NO         Ok
+       *      (R=1, θ= 315°) = (x= 0.70~, y= -0.70~) Ok         Ok
+       *      ------------------------------------------------------------
+       *
+       *    To Address the Discrepancies:
+       *
+       *    We need to modify the routine to calculate the return
+       *    quadrants because the Java library doesn't do an appropriate
+       *    job returning these values (at θ above 180°).
+       *
+       *    The means by which we can keep the angular values of θ
+       *    below 180 requires a little trick: we take the modulo(180) of θ
+       *    and use OldX (Modulo 360) value to determine the quadrant,
+       *    and therefore, correct the signs of the result are returned.
+       *
+       *    This algorithm works for all values of positive and negative θ.
+       *
+       */
 
-            /* Polar -> Rectangular */
+      /* Polar -> Rectangular */
 
       Number Xtheta = new Number(X);
       Number Xmod360 = new Number(X);
@@ -1280,7 +1273,7 @@ public class State
 
     T = NewX;
     SetX(NewY, true);
-  } /*Polar*/
+  }
 
   void D_MS() {
     Enter(88);
@@ -1331,76 +1324,76 @@ public class State
     X.mult(Sign);
 
     SetX(X, true);
-  } /*D_MS*/
+  }
 
   private void ShowCurProg() {
     SetShowing
-        (
-            CurBank != 0 ?
-                String.format
-                    (
-                        Global.StdLocale,
-                        "%02d %03d %02d",
-                        CurBank,
-                        PC,
-                        (int) Bank[CurBank].Program[PC]
-                    )
-                :
-                String.format(Global.StdLocale, "%03d %02d", PC, (int) Program[PC])
-        );
-  } /*ShowCurProg*/
+       (
+          CurBank != 0 ?
+             String.format
+                (
+                   Global.StdLocale,
+                   "%02d %03d %02d",
+                   CurBank,
+                   PC,
+                   (int) Bank[CurBank].Program[PC]
+                )
+             :
+             String.format(Global.StdLocale, "%03d %02d", PC, (int) Program[PC])
+       );
+  }
 
   private void TraceDisplay
-      (
-          boolean Data,
-          String Label
-      ) {
+     (
+        boolean Data,
+        String Label
+     ) {
     String L4 = (Label.length() == 1 ? "  " + Label + " "
-        : (Label.length() == 4 ? Label :
-        String.format(Global.StdLocale, "%4s", Label)));
+       : (Label.length() == 4 ? Label :
+       String.format(Global.StdLocale, "%4s", Label)));
     if (TracePrintActivated && Global.Print != null)
       PrintDisplay(Data, false, L4);
   }
 
   void PrintDisplay
-      (
-          boolean Data,
-          boolean Labelled,
-          String Label
-      ) {
+     (
+        boolean Data,
+        boolean Labelled,
+        String Label
+     ) {
     if (Global.Print != null && CurDisplay != null) {
       final byte[] Translated = new byte[Printer.CharColumns];
       String Disp = (Data ? CurDisplay : "");
       Global.Print.Translate
-          (
-              String.format
-                  (
-                      Global.StdLocale,
-                      String.format
-                          (Global.StdLocale, "%%%ds", Math.max(1, 14 - Disp.length())),
-                      " "
-                  ).substring(1) /* because I can't have a 0-length format width */
-                  + Disp
-                  + (InErrorState() ? "?" : " ")
-                  + (Label.length() == 4 ? Label : ""),
-              Translated
-          );
+         (
+            String.format
+               (
+                  Global.StdLocale,
+                  String.format
+                     (Global.StdLocale, "%%%ds", Math.max(1, 14 - Disp.length())),
+                  " "
+               ).substring(1) /* because I can't have a 0-length format width */
+               + Disp
+               + (InErrorState() ? "?" : " ")
+               + (Label.length() == 4 ? Label : ""),
+            Translated
+         );
 
       if (Labelled) {
-                /* clear left-most characters of the last column */
+        /* clear left-most characters of the last column */
         Translated[Printer.CharColumns - 5] = 0;
         for (int i = Printer.CharColumns - 4; i < Printer.CharColumns; ++i) {
           Translated[i] = PrintRegister[i];
-        } /*for*/
-      } /*if*/
+        }
+      }
       Global.Print.Render(Translated);
-    } /*if*/
-  } /*PrintDisplay*/
+    }
+  }
 
   void SetProgMode
-      (
-          boolean NewProgMode
-      ) {
+     (
+        boolean NewProgMode
+     ) {
     // entering the program mode always clear the error state
     inError = false;
     ProgMode = NewProgMode;
@@ -1408,40 +1401,40 @@ public class State
       ShowCurProg();
     } else {
       SetShowing(CurDisplay);
-    } /*if*/
-  } /*SetProgMode*/
+    }
+  }
 
   void ClearMemories() {
     Enter(24); /*?*/
     for (int i = 0; i < MaxMemories; ++i) {
       Memory[i].set(0);
-    } /*for*/
-  } /*ClearMemories*/
+    }
+  }
 
   void ClearProgram() {
     Enter(29); /*?*/
     for (int i = 0; i < MaxProgram; ++i) {
       Program[i] = (byte) 0;
-    } /*if*/
+    }
     PC = 0;
     ReturnLast = -1;
     T.set(0);
     for (int i = 0; i < MaxFlags; ++i) {
       Flag[i] = false;
-    } /*for*/
+    }
       /* wipe any loaded help as well */
     if (CurBank == 0) {
       Global.Label.SetHelp(null, null);
-    } /*if*/
+    }
     Bank[0].Card = null;
     Bank[0].Help = null;
-  } /*ClearProgram*/
+  }
 
   void SelectProgram
-      (
-          int ProgNr,
-          boolean Indirect
-      ) {
+     (
+        int ProgNr,
+        boolean Indirect
+     ) {
     if (ProgNr >= 0) {
       boolean OK = false;
       do /*once*/ {
@@ -1452,7 +1445,7 @@ public class State
           ProgNr = (int) Memory[ProgNr].getInt();
           if (ProgNr < 0)
             break;
-        } /*if*/
+        }
         if (ProgNr >= MaxBanks || Bank[ProgNr] == null)
           break;
         FillInLabels(ProgNr); /* if not done already */
@@ -1462,17 +1455,17 @@ public class State
           CurBank = ProgNr;
           if (Global.Label != null) {
             Global.Label.SetHelp(Bank[ProgNr].Card, Bank[ProgNr].Help);
-          } /*if*/
-        } /*if*/
-              /* all done */
+          }
+        }
+        /* all done */
         OK = true;
       }
       while (false);
       if (!OK) {
         SetErrorState(true);
-      } /*if*/
-    } /*if*/
-  } /*SelectProgram*/
+      }
+    }
+  }
 
   static final int MEMOP_STO = 1;
   static final int MEMOP_RCL = 2;
@@ -1485,11 +1478,11 @@ public class State
   private static final int[] MEMOP_CODE = {42, 43, 44, 44, 49, 49, 48};
 
   void MemoryOp
-      (
-          int Op,
-          int RegNr,
-          boolean Indirect
-      ) {
+     (
+        int Op,
+        int RegNr,
+        boolean Indirect
+     ) {
     if (RegNr >= 0) {
       Enter(MEMOP_CODE[Op - 1]);
       if (InvState) {
@@ -1500,8 +1493,8 @@ public class State
           case MEMOP_MUL:
             Op = MEMOP_DIV;
             break;
-        } /*switch*/
-      } /*if*/
+        }
+      }
       boolean OK = false; /* to begin with */
       do /*once*/ {
         RegNr = (RegNr + RegOffset) % 100;
@@ -1511,7 +1504,7 @@ public class State
           RegNr = ((int) Memory[RegNr].getInt() + RegOffset) % 100;
           if (RegNr < 0 || RegNr >= MaxMemories)
             break;
-        } /*if*/
+        }
         switch (Op) {
           case MEMOP_STO:
             Memory[RegNr] = new Number(X);
@@ -1539,16 +1532,16 @@ public class State
             Memory[RegNr] = X;
             SetX(Temp, true);
             break;
-        } /*switch*/
-              /* all done */
+        }
+        /* all done */
         OK = true;
       }
       while (false);
       if (!OK) {
         SetErrorState(true);
-      } /*if*/
-    } /*if*/
-  } /*MemoryOp*/
+      }
+    }
+  }
 
   private static final int HIROP_STO = 0;
   private static final int HIROP_RCL = 1;
@@ -1580,9 +1573,9 @@ public class State
   }
 
   private void HirOp
-      (
-          int Code
-      ) {
+     (
+        int Code
+     ) {
     if (Code >= 0) {
       Enter(Code);
       boolean OK = false; /* to begin with */
@@ -1637,13 +1630,13 @@ public class State
             if (X.isError())
               SetErrorState(false);
             break;
-        } /*switch*/
-                /* all done */
+        }
+        /* all done */
         OK = true;
       }
       while (false);
 
-            /* emulate the printer registers HIR 05 is the OP 01 register and so on */
+      /* emulate the printer registers HIR 05 is the OP 01 register and so on */
 
       if (RegNr >= 5 && RegNr <= 8) {
         final Number Factor = new Number(1e10);
@@ -1668,22 +1661,22 @@ public class State
 
       if (!OK) {
         SetErrorState(true);
-      } /*if*/
-    } /*if*/
-  } /*HirOp*/
+      }
+    }
+  }
 
-  private boolean StatsRegsAvailable()
-      /* ensures the statistics registers are accessible with the current
-        partition/offset setting. */ {
+  private boolean StatsRegsAvailable() {
+    /* ensures the statistics registers are accessible with the current
+       partition/offset setting. */
     return
-          /* sufficient to check that first & last reg are within accessible range */
-        (RegOffset + STATSREG_FIRST) % 100 < MaxMemories
-            &&
-            (RegOffset + STATSREG_LAST) % 100 < MaxMemories;
-  } /*StatsRegsAvailable*/
+       /* sufficient to check that first & last reg are within accessible range */
+       (RegOffset + STATSREG_FIRST) % 100 < MaxMemories
+          &&
+          (RegOffset + STATSREG_LAST) % 100 < MaxMemories;
+  }
 
-  private Number StatsSlope()
-      /* estimated slope from linear regression, used in a lot of other results. */ {
+  private Number StatsSlope() {
+    /* estimated slope from linear regression, used in a lot of other results. */
     Number Result;
 
     Number C1 = new Number(Memory[(RegOffset + STATSREG_SIGMAX) % 100]);
@@ -1705,10 +1698,10 @@ public class State
   }
 
   void SpecialOp
-      (
-          int OpNr,
-          boolean Indirect
-      ) {
+     (
+        int OpNr,
+        boolean Indirect
+     ) {
     if (OpNr >= 0) {
       Enter(OpNr);
       boolean OK = false;
@@ -1723,22 +1716,22 @@ public class State
             break;
           }
           OpNr = (int) Memory[OpNr].getInt();
-        } /*if*/
+        }
         if (OpNr >= 20 && OpNr < 30) {
           Memory[OpNr - 20].add(Number.ONE);
           OK = true;
           break;
-        } /*if*/
+        }
         if (OpNr >= 30 && OpNr < 40) {
           Memory[OpNr - 30].sub(Number.ONE);
           OK = true;
           break;
-        } /*if*/
+        }
         switch (OpNr) {
           case 0:
             for (int i = 0; i < PrintRegister.length; ++i) {
               PrintRegister[i] = 0;
-            } /*for*/
+            }
             OK = true;
             break;
           case 1:
@@ -1757,8 +1750,8 @@ public class State
             OpStack[OpNr + 3].Operand = new Number(X);
             OpStack[OpNr + 3].Operand.div(E12);
 
-                        /* manual says fractional part of display is discarded as a side-effect,
-                           tested on a real TI-59 */
+            /* manual says fractional part of display is discarded as a side-effect,
+               tested on a real TI-59 */
 
             X.intPart();
             X.abs();
@@ -1776,7 +1769,7 @@ public class State
           case 5:
             if (Global.Print != null) {
               Global.Print.Render(PrintRegister);
-            } /*if*/
+            }
             OK = true;
             break;
           case 6:
@@ -1791,42 +1784,42 @@ public class State
                 final byte[] Plot = new byte[Printer.CharColumns];
                 for (int i = 0; i < Printer.CharColumns; ++i) {
                   Plot[i] = (byte) (i == PlotX ? 51 : 0);
-                } /*for*/
+                }
                 Global.Print.Render(Plot);
               } else {
                 SetErrorState(false);
-              } /*if*/
-            } /*if*/
+              }
+            }
             OK = true;
             break;
           case 8:
             if (!TaskRunning) {
               StartLabelListing();
-            } /*if*/
+            }
             OK = true;
             break;
           case 9:
             if (!TaskRunning && CurBank > 0) {
               final ProgBank Bank = this.Bank[CurBank];
               if
-                  (
-                  Bank != null
-                      &&
-                      Bank.Program != null
-                      &&
-                      Bank.Program.length <= MaxProgram
-                  ) {
+                 (
+                 Bank != null
+                    &&
+                    Bank.Program != null
+                    &&
+                    Bank.Program.length <= MaxProgram
+                 ) {
                 for (int i = 0; i < Bank.Program.length; ++i) {
                   Program[i] = Bank.Program[i];
-                } /*for*/
+                }
                 for (int i = Bank.Program.length; i < MaxProgram; ++i) {
                   Program[i] = 0;
-                } /*for*/
+                }
                 ResetLabels();
               } else {
                 SetErrorState(true);
-              } /*if*/
-            } /*if*/
+              }
+            }
             OK = true;
             break;
           case 10:
@@ -1864,7 +1857,7 @@ public class State
 
               SetX(X, true);
               OK = true;
-            } /*if*/
+            }
             break;
           case 12:
                     /* slope and intercept */
@@ -1884,7 +1877,7 @@ public class State
               X.div(N_N);
               SetX(X, true);
               OK = true;
-            } /*if*/
+            }
             break;
           case 13:
                     /* correlation coefficient */
@@ -1916,7 +1909,7 @@ public class State
 
               SetX(X, true);
               OK = true;
-            } /*if*/
+            }
             break;
           case 14:
                     /* estimated y from x */
@@ -1936,7 +1929,7 @@ public class State
               X.add(C1);
               SetX(X, true);
               OK = true;
-            } /*if*/
+            }
             break;
           case 15:
                     /* estimated x from y */
@@ -1957,10 +1950,10 @@ public class State
 
               SetX(X, true);
               OK = true;
-            } /*if*/
+            }
             break;
           case 17:
-                  /* not implemented, fall through */
+            /* not implemented, fall through */
           case 16:
             Number N = new Number(MaxMemories);
             N.sub(1);
@@ -1974,15 +1967,15 @@ public class State
           case 19:
             if (OpNr == (InErrorState() ? 19 : 18)) {
               Flag[FLAG_ERROR_COND] = !InvState;
-                      /* meaning of INV Op 18/19 taken from “52 Notes” volume 2 number 8 */
-            } /*if*/
+              /* meaning of INV Op 18/19 taken from “52 Notes” volume 2 number 8 */
+            }
             OK = true;
             break;
-              /* 20-39 handled above */
+          /* 20-39 handled above */
           case 40:
             if (Global.Print != null) {
               Flag[FLAG_ERROR_COND] = true;
-            } /*if*/
+            }
             OK = true;
             break;
           case 50: /* extension! TIME IN SECONDS */
@@ -1994,21 +1987,21 @@ public class State
             byte[] V = new byte[7];
             Random.nextBytes(V);
             X.set((double) (((long) V[0] & 255)
-                |
-                ((long) V[1] & 255) << 8
-                |
-                ((long) V[2] & 255) << 16
-                |
-                ((long) V[3] & 255) << 24
-                |
-                ((long) V[4] & 255) << 32
-                |
-                ((long) V[5] & 255) << 40
-                |
-                ((long) V[6] & 255) << 48
+               |
+               ((long) V[1] & 255) << 8
+               |
+               ((long) V[2] & 255) << 16
+               |
+               ((long) V[3] & 255) << 24
+               |
+               ((long) V[4] & 255) << 32
+               |
+               ((long) V[5] & 255) << 40
+               |
+               ((long) V[6] & 255) << 48
             )
-                /
-                (double) 0x0100000000000000L);
+               /
+               (double) 0x0100000000000000L);
             SetX(X, true);
           }
           OK = true;
@@ -2023,7 +2016,7 @@ public class State
             if (NewRegOffset >= 0 && NewRegOffset < 100) {
               RegOffset = NewRegOffset;
               OK = true;
-            } /*if*/
+            }
           }
           break;
           case 98:
@@ -2041,14 +2034,14 @@ public class State
 
             OK = true;
             break;
-        } /*switch*/
+        }
       }
       while (false);
       if (!OK) {
         SetErrorState(true);
-      } /*if*/
-    } /*if*/
-  } /*SpecialOp*/
+      }
+    }
+  }
 
   void StatsSum() {
     Enter(78);
@@ -2063,7 +2056,7 @@ public class State
       XT.mult(T);
 
       if (InvState) {
-                      /* remove sample */
+        /* remove sample */
         Memory[(RegOffset + STATSREG_SIGMAY) % 100].sub(X);
         Memory[(RegOffset + STATSREG_SIGMAY2) % 100].sub(X2);
         Memory[(RegOffset + STATSREG_N) % 100].sub(1);
@@ -2073,7 +2066,7 @@ public class State
 
         T.sub(1);
       } else {
-                      /* accumulate sample */
+        /* accumulate sample */
         Memory[(RegOffset + STATSREG_SIGMAY) % 100].add(X);
         Memory[(RegOffset + STATSREG_SIGMAY2) % 100].add(X2);
         Memory[(RegOffset + STATSREG_N) % 100].add(1);
@@ -2082,13 +2075,13 @@ public class State
         Memory[(RegOffset + STATSREG_SIGMAXY) % 100].add(XT);
 
         T.add(1);
-      } /*if*/
+      }
 
       SetX(Memory[(RegOffset + STATSREG_N) % 100], true);
     } else {
       SetErrorState(true);
-    } /*if*/
-  } /*StatsSum*/
+    }
+  }
 
   void StatsResult() {
     if (StatsRegsAvailable()) {
@@ -2136,11 +2129,11 @@ public class State
       }
     } else {
       SetErrorState(true);
-    } /*if*/
-  } /*StatsResult*/
+    }
+  }
 
-  void GetNextImport()
-      /* gets next value from current importer, if any. */ {
+  void GetNextImport() {
+    /* gets next value from current importer, if any. */
     boolean OK = true;
     boolean EOF = true;
     Number Value;
@@ -2155,21 +2148,21 @@ public class State
         break;
       } catch (Persistent.DataFormatException Bad) {
         android.widget.Toast.makeText
-            (
-                    /*context =*/ ctx,
-                    /*text =*/
-                String.format
-                    (
-                        Global.StdLocale,
-                        ctx.getString(R.string.import_error),
-                        Bad.toString()
-                    ),
-                    /*duration =*/ android.widget.Toast.LENGTH_LONG
-            ).show();
+           (
+              ctx,
+
+              String.format
+                 (
+                    Global.StdLocale,
+                    ctx.getString(R.string.import_error),
+                    Bad.toString()
+                 ),
+              android.widget.Toast.LENGTH_LONG
+           ).show();
         OK = false;
         Import.End();
         break;
-      } /*try*/
+      }
       SetX(Value, false);
       OK = true;
     }
@@ -2177,106 +2170,106 @@ public class State
     Flag[FLAG_ERROR_COND] = EOF;
     if (!OK) {
       SetErrorState(true);
-    } /*if*/
-  } /*GetNextImport*/
+    }
+  }
 
   void StepPC
-      (
-          boolean Forward
-      ) {
+     (
+        boolean Forward
+     ) {
     if (Forward) {
       if (PC < Bank[CurBank].Program.length - 1) {
         ++PC;
         ShowCurProg();
-      } /*if*/
+      }
     } else {
       if (PC > 0) {
         --PC;
         ShowCurProg();
-      } /*if*/
-    } /*if*/
-  } /*StepPC*/
+      }
+    }
+  }
 
-  void ResetLabels()
-      /* invalidates labels because of a change to user-entered program contents. */ {
+  void ResetLabels() {
+    /* invalidates labels because of a change to user-entered program contents. */
     Bank[0].Labels = null;
-  } /*ResetLabels*/
+  }
 
-  boolean ProgramWritable()
-      /* can the user enter code into the currently-selected bank. */ {
+  boolean ProgramWritable() {
+    /* can the user enter code into the currently-selected bank. */
     return CurBank == 0;
-  } /*ProgramWritable*/
+  }
 
   void StoreInstr
-      (
-          int Instr
-      ) {
+     (
+        int Instr
+     ) {
     ResetLabels();
     Program[PC] = (byte) Instr;
     if (PC < MaxProgram - 1) {
       ClearDelayedStep();
       if (DelayTask == null) {
         DelayTask = new DelayedStep();
-      } /*if*/
+      }
       ShowCurProg(); /* show updated contents of current location */
       ++PC;
-          /* give user a chance to see current contents before stepping to next location
-            -- this is a nicety the original calculator did not have */
+      /* give user a chance to see current contents before stepping to next location
+         -- this is a nicety the original calculator did not have */
       BGTask.postDelayed(DelayTask, 250);
     } else {
       SetProgMode(false);
-    } /*if*/
-  } /*StoreInstr*/
+    }
+  }
 
   void StorePrevInstr
-      (
-          int Instr
-      ) {
+     (
+        int Instr
+     ) {
     if (PC > 0) {
       --PC;
       StoreInstr(Instr);
     } else {
       SetErrorState(true);
-    } /*if*/
-  } /*StorePrevInstr*/
+    }
+  }
 
   void InsertAtCurInstr() {
     for (int i = MaxProgram; i > PC + 1; --i) {
       Program[i - 1] = Program[i - 2];
-    } /*for*/
+    }
     Program[PC] = (byte) 0;
     ResetLabels();
     ShowCurProg();
-  } /*InsertAtCurInstr*/
+  }
 
   void DeleteCurInstr() {
     for (int i = PC; i < MaxProgram - 1; ++i) {
       Program[i] = Program[i + 1];
-    } /*for*/
+    }
     Program[MaxProgram - 1] = (byte) 0;
     ResetLabels();
     ShowCurProg();
-  } /*DeleteCurInstr*/
+  }
 
   void StepProgram() {
     SetProgramStarted(false);
     Interpret(true);
     PC = RunPC;
     SetProgramStopped();
-      /* fixme: if I just executed a Pgm nn instruction, this setting
-        of NextBank will not be properly passed to the next instruction */
-      /* fixme: should single-stepping to a subroutine call cause execution
-        of the complete subroutine, stopping when it returns? */
-  } /*StepProgram*/
+    /* fixme: if I just executed a Pgm nn instruction, this setting
+       of NextBank will not be properly passed to the next instruction */
+    /* fixme: should single-stepping to a subroutine call cause execution
+       of the complete subroutine, stopping when it returns? */
+  }
 
   class TaskRunner implements Runnable {
     public void run() {
       if (TaskRunning && RunProg != null) {
         RunProg.run();
         ContinueTaskRunner();
-      } /*if*/
-    } /*run*/
-  } /*TaskRunner*/
+      }
+    }
+  }
 
   private void ContinueTaskRunner() {
     if (TaskRunning) {
@@ -2284,17 +2277,17 @@ public class State
         Global.Disp.SetShowing(LastShowing);
         BGTask.postDelayed(ExecuteTask, 600);
       } else {
-              /* run as fast as possible */
+        /* run as fast as possible */
         BGTask.post(ExecuteTask);
-      } /*if*/
-    } /*if*/
-  } /*ContinueTaskRunner*/
+      }
+    }
+  }
 
   class ProgRunner implements Runnable {
     public void run() {
       Interpret(true);
-    } /*run*/
-  } /*ProgRunner*/
+    }
+  }
 
   class LabelLister implements Runnable {
     class LabelDef {
@@ -2302,15 +2295,14 @@ public class State
       int Loc;
 
       LabelDef
-          (
-              int Code,
-              int Loc
-          ) {
+         (
+            int Code,
+            int Loc
+         ) {
         this.Code = Code;
         this.Loc = Loc;
-      } /*LabelDef*/
-
-    } /*LabelDef*/
+      }
+    }
 
     final LabelDef[] SortedLabels;
     int Index;
@@ -2318,60 +2310,59 @@ public class State
     LabelLister() {
       super();
       final java.util.TreeSet<LabelDef> SortedLabelsTemp =
-          new java.util.TreeSet<LabelDef>
-              (
-                  new java.util.Comparator<LabelDef>() {
-                    @Override
-                    public int compare
-                        (
-                            LabelDef Label1,
-                            LabelDef Label2
-                        ) {
-                      return
-                          new Integer(Label1.Loc).compareTo(Label2.Loc);
-                    } /*compare*/
-                  } /*Comparator*/
-              );
+         new java.util.TreeSet<LabelDef>
+            (
+               new java.util.Comparator<LabelDef>() {
+                 @Override
+                 public int compare
+                    (
+                       LabelDef Label1,
+                       LabelDef Label2
+                    ) {
+                   return
+                      new Integer(Label1.Loc).compareTo(Label2.Loc);
+                 } /*compare*/
+               }
+            );
       for (java.util.Map.Entry<Integer, Integer> ThisLabel : Bank[0].Labels.entrySet()) {
         if (ThisLabel.getValue() >= PC + 2) {
           SortedLabelsTemp.add(new LabelDef(ThisLabel.getKey(), ThisLabel.getValue()));
-        } /*if*/
-      } /*for*/
+        }
+      }
       SortedLabels = new LabelDef[SortedLabelsTemp.size()];
       int i = 0;
       for (LabelDef ThisLabel : SortedLabelsTemp) {
         SortedLabels[i++] = ThisLabel;
-      } /*for*/
+      }
       Index = 0;
-    } /*LabelLister*/
+    }
 
     public void run() {
       if (Index < SortedLabels.length) {
         final LabelDef ThisLabel = SortedLabels[Index];
         final byte[] Translated = new byte[Printer.CharColumns];
         Global.Print.Translate
-            (
-                String.format
-                    (
-                        Global.StdLocale,
-                        "      %03d  %02d %3s",
-                        ThisLabel.Loc - 1,
+           (
+              String.format
+                 (
+                    Global.StdLocale,
+                    "      %03d  %02d %3s",
+                    ThisLabel.Loc - 1,
                           /* seems to match original, pointing at label symbol
                             (location of "Lbl" + 1) */
-                        ThisLabel.Code,
-                        Printer.KeyCodeSym(ThisLabel.Code)
-                    ),
-                Translated
-            );
+                    ThisLabel.Code,
+                    Printer.KeyCodeSym(ThisLabel.Code)
+                 ),
+              Translated
+           );
         Global.Print.Render(Translated);
         ++Index;
-      } /*if*/
+      }
       if (Index == SortedLabels.length) {
         StopTask();
-      } /*if*/
-    } /*run*/
-
-  } /*LabelLister*/
+      }
+    }
+  }
 
   class RegisterLister implements Runnable {
     int CurReg;
@@ -2379,41 +2370,40 @@ public class State
     boolean Wrapped;
 
     RegisterLister
-        (
-            int StartReg
-        ) {
+       (
+          int StartReg
+       ) {
       CurReg = (StartReg + RegOffset) % 100;
       EndReg = (RegOffset + MaxMemories) % 100;
       Wrapped = CurReg < EndReg;
-    } /*RegisterLister*/
+    }
 
     public void run() {
       if (CurReg == MaxMemories && !Wrapped) {
         CurReg = 0;
         Wrapped = true;
-      } /*if*/
+      }
       if (CurReg < (Wrapped ? EndReg : MaxMemories)) {
         final byte[] Translated = new byte[Printer.CharColumns];
         Global.Print.Translate
-            (
-                String.format
-                    (
-                        Global.StdLocale,
-                        "%16s  %02d",
-                        FormatNumber(Memory[CurReg], FORMAT_FIXED, -1, true),
-                        CurReg /* post-RegOffset number */
-                    ),
-                Translated
-            );
+           (
+              String.format
+                 (
+                    Global.StdLocale,
+                    "%16s  %02d",
+                    FormatNumber(Memory[CurReg], FORMAT_FIXED, -1, true),
+                    CurReg /* post-RegOffset number */
+                 ),
+              Translated
+           );
         Global.Print.Render(Translated);
         ++CurReg;
-      } /*if*/
+      }
       if (Wrapped && CurReg >= EndReg) {
         StopTask();
-      } /*if*/
-    } /*run*/
-
-  } /*RegisterLister*/
+      }
+    }
+  }
 
   class ProgramLister implements Runnable {
     int ListPC, EndPC;
@@ -2437,10 +2427,10 @@ public class State
         --EndPC;
         if (Program[EndPC] != 0)
           break;
-      } /*for*/
+      }
       Expecting = ExpectOpcode;
       InvState = false;
-    } /*ProgramLister*/
+    }
 
     public void run() {
       if (ListPC < MaxProgram) {
@@ -2451,12 +2441,12 @@ public class State
         switch (Expecting) {
           case ExpectOpcode:
             if (Val < 10) {
-                      /* digit entry */
+              /* digit entry */
               Symbol = String.format(Global.StdLocale, " %1d ", Val);
-            } /*if*/
+            }
             switch (Val) {
               case 22: /*INV*/
-                  /* case 27: */ /*?*/
+                /* case 27: */ /*?*/
                 InvState = !InvState;
                 WasModifier = true;
                 break;
@@ -2480,7 +2470,7 @@ public class State
               case 57: /*Fix*/
                 if (!InvState) {
                   NextExpecting = ExpectRegFlag;
-                } /*if*/
+                }
                 break;
               case 61: /*GTO*/
                 NextExpecting = ExpectLoc;
@@ -2488,7 +2478,7 @@ public class State
               case 71: /*SBR*/
                 if (!InvState) {
                   NextExpecting = ExpectLoc;
-                } /*if*/
+                }
                 break;
               case 67: /*x=t*/
               case 77: /*x≥t*/
@@ -2504,7 +2494,7 @@ public class State
               case 97: /*Dsz*/
                 NextExpecting = ExpectRegPlusLoc;
                 break;
-            } /*switch*/
+            }
             break;
           case ExpectTwoDigits:
             Symbol = String.format(Global.StdLocale, " %02d", Val);
@@ -2512,14 +2502,14 @@ public class State
           case ExpectLoc:
             if (Val < 10 || Val == 40) {
               NextExpecting = ExpectTwoDigits;
-            } /*if*/
+            }
             break;
           case ExpectRegFlag:
             if (Val == 40) {
               NextExpecting = ExpectTwoDigits;
             } else {
               Symbol = String.format(Global.StdLocale, " %02d", Val);
-            } /*if*/
+            }
             break;
           case ExpectTwoDigitsPlusLoc:
             Symbol = String.format(Global.StdLocale, " %02d", Val);
@@ -2531,47 +2521,46 @@ public class State
             } else {
               Symbol = String.format(Global.StdLocale, " %02d", Val);
               NextExpecting = ExpectLoc;
-            } /*if*/
+            }
             break;
           case ExpectSym:
             Symbol = Printer.KeyCodeSym(Val);
             break;
-        } /*switch*/
+        }
         if (!WasModifier) {
           InvState = false;
-        } /*if*/
+        }
         final byte[] Translated = new byte[Printer.CharColumns];
         Global.Print.Translate
-            (
-                String.format
-                    (
-                        Global.StdLocale,
-                        "       %03d  %02d %3s  ",
-                        ListPC,
-                        Val,
-                        Symbol
-                    ),
-                Translated
-            );
+           (
+              String.format
+                 (
+                    Global.StdLocale,
+                    "       %03d  %02d %3s  ",
+                    ListPC,
+                    Val,
+                    Symbol
+                 ),
+              Translated
+           );
         Global.Print.Render(Translated);
         Expecting = NextExpecting;
         ++ListPC;
-      } /*if*/
+      }
       if (ListPC == MaxProgram || ListPC > EndPC && Expecting == ExpectOpcode) {
         StopTask();
-      } /*if*/
-    } /*run*/
-
-  } /*ProgramLister*/
+      }
+    }
+  }
 
   private void SetShowingRunning() {
     Global.Disp.SetShowingRunning(Import != null || Global.Export.IsOpen() ? 'c' : 'C');
-  } /*SetShowingRunning*/
+  }
 
   private void SetProgramStarted
-      (
-          boolean AllowRunningSlowly
-      ) {
+     (
+        boolean AllowRunningSlowly
+     ) {
     ClearDelayedStep();
     FillInLabels(CurBank);
     ProgRunningSlowly = false; /* just in case */
@@ -2582,7 +2571,7 @@ public class State
     RunPC = PC;
     RunBank = CurBank;
     NextBank = RunBank;
-  } /*SetProgramStarted*/
+  }
 
   private void SetProgramStopped() {
     TaskRunning = false;
@@ -2592,33 +2581,33 @@ public class State
       Global.Disp.SetShowingError(LastShowing);
     } else {
       Global.Disp.SetShowing(LastShowing);
-    } /*if*/
-  } /*SetProgramStopped*/
+    }
+  }
 
   private void StartTask
-      (
-          Runnable TheTask,
-          boolean AllowRunningSlowly
-      ) {
+     (
+        Runnable TheTask,
+        boolean AllowRunningSlowly
+     ) {
     RunProg = TheTask;
     SetProgramStarted(AllowRunningSlowly);
     ContinueTaskRunner();
-  } /*StartTask*/
+  }
 
   private void StopTask() {
     SetProgramStopped();
     BGTask.removeCallbacks(ExecuteTask);
     RunProg = null;
-  } /*StopTask*/
+  }
 
   void StartProgram() {
     StartTask(new ProgRunner(), true);
-  } /*StartProgram*/
+  }
 
   void StopProgram() {
     if (TaskRunning && OnStop != null) {
       OnStop.run();
-    } /*if*/
+    }
 
     // if the PC is past the last instruction, move it back to last one
     if (TaskRunning && RunPC >= Bank[CurBank].Program.length)
@@ -2626,14 +2615,14 @@ public class State
 
     PC = RunPC;
     StopTask();
-  } /*StopProgram*/
+  }
 
   void WriteBank() {
     Enter(96);
     int N = (int) Math.abs(X.getInt());
     if (N < 1 || N > 4) {
       SetErrorState(true);
-    } /*if*/ else if (InvState) {
+    } else if (InvState) {
       for (int k = (4 - N) * 30; k < (4 - N + 1) * 30; k++) {
         if (k < MaxMemories) {
           Memory[k] = new Number(CardMemory[k]);
@@ -2651,81 +2640,81 @@ public class State
       for (int k = (N - 1) * 240; k < N * 240; k++) {
         CardProgram[k] = Program[k];
       }
-    } /*if*/
-  } /*WriteBank*/
+    }
+  }
 
   private void StartLabelListing() {
     FillInLabels(0); /* because that's the one I list */
     StartTask(new LabelLister(), false);
-  } /*StartLabelListing*/
+  }
 
   void StartRegisterListing() {
     StartTask(new RegisterLister((int) X.getInt()), false);
-  } /*StartRegisterListing*/
+  }
 
   void StartProgramListing() {
     StartTask(new ProgramLister(), false);
-  } /*StartProgramListing*/
+  }
 
   void SetSlowExecution
-      (
-          boolean Slow
-      ) {
+     (
+        boolean Slow
+     ) {
     if (AllowRunningSlowly && ProgRunningSlowly != Slow) {
       ProgRunningSlowly = Slow;
       SaveRunningSlowly = Slow;
       if (!ProgRunningSlowly) {
         SetShowingRunning();
-      } /*if*/
-    } /*if*/
-  } /*SetSlowExecution*/
+      }
+    }
+  }
 
   void SetImport
-      (
-          ImportFeeder NewImport
-      ) {
+     (
+        ImportFeeder NewImport
+     ) {
     if (Import != null) {
       throw new RuntimeException("attempt to queue multiple ImportFeeders");
-    } /*if*/
+    }
     Import = NewImport;
-  } /*SetImport*/
+  }
 
   void ClearImport() {
     if (Import != null) {
       Import.End();
       Import = null;
-    } /*if*/
-  } /*ClearImport*/
+    }
+  }
 
-  void ResetReturns()
-      /* clears the subroutine return stack. */ {
+  void ResetReturns() {
+    /* clears the subroutine return stack. */
     ReturnLast = -1;
-  } /*ResetReturns*/
+  }
 
   void ResetProg() {
     if (InvState) /* extension! */ {
       ClearImport();
       if (Global.Export != null) {
         Global.Export.Close();
-      } /*if*/
+      }
     } else {
       for (int i = 0; i < MaxFlags; ++i) {
         Flag[i] = false;
-      } /*for*/
+      }
       if (TaskRunning) {
         RunPC = 0;
       } else {
         PC = 0;
-      } /*if*/
+      }
       ResetReturns();
-    } /*if*/
-  } /*ResetProg*/
+    }
+  }
 
   private int GetProg
-      (
-          boolean Executing
-      )
-      /* returns the next program instruction byte, or -1 if run off the end. */ {
+     (
+        boolean Executing
+     ) {
+    /* returns the next program instruction byte, or -1 if run off the end. */
     byte Result;
     if (RunPC < Bank[RunBank].Program.length) {
       Result = Bank[RunBank].Program[RunPC++];
@@ -2734,19 +2723,18 @@ public class State
       if (Executing) {
         RunPC = 0;
         StopProgram();
-      } /*if*/
-    } /*if*/
-    return
-        (int) Result;
-  } /*GetProg*/
+      }
+    }
+    return (int) Result;
+  }
 
   private int GetLoc
-      (
-          boolean Executing,
-          int BankNr /* for interpreting symbolic label */
-      )
-      /* fetches a program location from the instruction stream, or -1 on failure.
-        Assumes Labels has been filled in. */ {
+     (
+        boolean Executing,
+        int BankNr /* for interpreting symbolic label */
+     ) {
+    /* fetches a program location from the instruction stream, or -1 on failure.
+       Assumes Labels has been filled in. */
     int Result = -1;
     final int NextByte = GetProg(Executing);
     if (NextByte >= 0) {
@@ -2755,48 +2743,47 @@ public class State
         final int NextByte2 = GetProg(Executing);
         if (NextByte2 >= 0) {
           Result = NextByte * 100 + NextByte2;
-        } /*if*/
+        }
       } else if (NextByte == 40) /*Ind*/ {
         final int Reg = (GetProg(Executing) + RegOffset) % 100;
         if (Reg >= 0 && Reg < MaxMemories) {
           Result = (int) Memory[Reg].getInt();
           if (Result < 0 || Result >= Bank[RunBank].Program.length) {
             Result = -1;
-          } /*if*/
-        } /*if*/
+          }
+        }
       } else if (NextByte == 51) {
-              /* 1-digit location. This is an hidden feature that cannot be enterred directly, to have it:
-                    - Key in DSZ 00 A, to put the keycodes [97 00 11] into program memory.
-                    - Then go back and delete the 00.
-                    - Insert two steps between the 97 and 11 and key in STO 36.
-                    - You will then have [97 42 36 11] as keycodes.
-                    - Go back and delete the 42. Then delete the 11.
-                    - You will now have [97 36]. Now key in after the 36 keycode STO 51.
-                    - You will then have [97 36 42 51]. Then delete the 42.
-                    - The final code is: [97 36 51]
+        /* 1-digit location. This is an hidden feature that cannot be enterred directly, to have it:
+            - Key in DSZ 00 A, to put the keycodes [97 00 11] into program memory.
+            - Then go back and delete the 00.
+            - Insert two steps between the 97 and 11 and key in STO 36.
+            - You will then have [97 42 36 11] as keycodes.
+            - Go back and delete the 42. Then delete the 11.
+            - You will now have [97 36]. Now key in after the 36 keycode STO 51.
+            - You will then have [97 36 42 51]. Then delete the 42.
+            - The final code is: [97 36 51]
 
-                    So "DSZ 36 51" which means decrement register 36 only (no jump).
-              */
+           So "DSZ 36 51" which means decrement register 36 only (no jump).
+         */
         Result = 9900 + NextByte;
       } else /* symbolic label */ {
         if (Bank[BankNr].Labels.containsKey(NextByte)) {
           Result = Bank[BankNr].Labels.get(NextByte);
-        } /*if*/
-      } /*if*/
-    } /*if*/
-    return
-        Result;
-  } /*GetLoc*/
+        }
+      }
+    }
+    return Result;
+  }
 
   private int GetUnitOp
-      (
-          boolean Executing,
-          boolean AllowLarge /* allow value > 9 */
-      )
-      /* fetches one or two bytes from the instruction stream; if the
-        first (only) byte is < 10, then that's the value; otherwise
-        a value of 40 indicates indirection through the register
-        number in the next byte. Any other value is invalid. */ {
+     (
+        boolean Executing,
+        boolean AllowLarge /* allow value > 9 */
+     ) {
+    /* fetches one or two bytes from the instruction stream; if the
+       first (only) byte is < 10, then that's the value; otherwise
+       a value of 40 indicates indirection through the register
+       number in the next byte. Any other value is invalid. */
     int Result = -1;
     final int NextByte = GetProg(Executing);
     if (NextByte >= 0) {
@@ -2808,23 +2795,23 @@ public class State
           OK = Result >= 0 && Result < MaxMemories;
           if (!OK) {
             Result = -1;
-          } /*if*/
+          }
         } else {
           OK = false;
-        } /*if*/
+        }
       } else if (AllowLarge || NextByte < 10) {
         Result = NextByte;
         OK = true;
       } else {
         OK = false;
-      } /*if*/
+      }
       if (Executing && !OK) {
         SetErrorState(true);
-      } /*if*/
-    } /*if*/
+      }
+    }
     return
-        Result;
-  } /*GetUnitOp*/
+       Result;
+  }
 
   /* transfer types */
   static final int TRANSFER_TYPE_GTO = 1; /* goto that address */
@@ -2839,13 +2826,13 @@ public class State
   static final int TRANSFER_LOC_INDIRECT = 3; /* Loc is number of register containing address */
 
   void Transfer
-      (
-          int Type, /* one of the above TRANSFER_TYPE_xxx values */
-          int BankNr,
-          int Loc,
-          int LocType /* one of the above TRANSFER_LOC_xxx values */
-      )
-      /* implements GTO and SBR. Also called from other functions to implement branches. */ {
+     (
+        int Type, /* one of the above TRANSFER_TYPE_xxx values */
+        int BankNr,
+        int Loc,
+        int LocType /* one of the above TRANSFER_LOC_xxx values */
+     ) {
+    /* implements GTO and SBR. Also called from other functions to implement branches. */
     if (Loc >= 0) {
       boolean OK = false;
       do /*once*/ {
@@ -2859,7 +2846,7 @@ public class State
           if (!Bank[BankNr].Labels.containsKey(Loc))
             break;
           Loc = Bank[BankNr].Labels.get(Loc);
-        } /*if*/
+        }
         if (Loc < 0 || Loc >= Bank[BankNr].Program.length)
           break;
         if (Type == TRANSFER_TYPE_LEA) /* extension! */ {
@@ -2872,35 +2859,35 @@ public class State
                              call is done and it is not an error. */
             if (ReturnLast < MaxReturnStack - 1)
               ReturnStack[++ReturnLast] =
-                  new ReturnStackEntry(RunBank, RunPC, Type == TRANSFER_TYPE_INTERACTIVE_CALL);
-          } /*if*/
+                 new ReturnStackEntry(RunBank, RunPC, Type == TRANSFER_TYPE_INTERACTIVE_CALL);
+          }
           if (TaskRunning) {
             RunBank = BankNr;
             RunPC = Loc;
           } else {
-                      /* interactive, assert BankNr = CurBank */
+            /* interactive, assert BankNr = CurBank */
             PC = Loc;
-          } /*if*/
+          }
           if (Type == TRANSFER_TYPE_INTERACTIVE_CALL) {
             StartProgram();
-          } /*if*/
-        } /*if*/
-              /* all successfully done */
+          }
+        }
+        /* all successfully done */
         OK = true;
       }
       while (false);
       if (!OK) {
         SetErrorState(true);
-      } /*if*/
-    } /*if*/ else {
+      }
+    } else {
       // trying to transfer from an invalid loc
       RunPC--;
       SetErrorState(true);
     }
-  } /*Transfer*/
+  }
 
-  void Return()
-      /* returns to the last-saved location on the return stack. */ {
+  void Return() {
+    /* returns to the last-saved location on the return stack. */
     boolean OK = false;
     do /*once*/ {
       if (ReturnLast < 0) {
@@ -2914,13 +2901,13 @@ public class State
       }
       final ReturnStackEntry ReturnTo = ReturnStack[ReturnLast--];
       if
-          (
-          ReturnTo.Addr < 0
-              ||
-              Bank[ReturnTo.BankNr] == null
-              ||
-              ReturnTo.Addr >= Bank[ReturnTo.BankNr].Program.length
-          )
+         (
+         ReturnTo.Addr < 0
+            ||
+            Bank[ReturnTo.BankNr] == null
+            ||
+            ReturnTo.Addr >= Bank[ReturnTo.BankNr].Program.length
+         )
         break;
       if (ReturnTo.FromInteractive) {
         if (!InErrorState()) {
@@ -2930,29 +2917,29 @@ public class State
         StopProgram();
         OK = true;
         break;
-      } /*if*/
+      }
       if (TaskRunning) {
         RunBank = ReturnTo.BankNr;
         RunPC = ReturnTo.Addr;
       } else {
         CurBank = ReturnTo.BankNr;
         PC = ReturnTo.Addr;
-      } /*if*/
-          /* all successfully done */
+      }
+      /* all successfully done */
       OK = true;
     }
     while (false);
     if (!OK) {
       SetErrorState(true);
-    } /*if*/
-  } /*Return*/
+    }
+  }
 
   void SetFlag
-      (
-          int FlagNr,
-          boolean Ind,
-          boolean Set
-      ) {
+     (
+        int FlagNr,
+        boolean Ind,
+        boolean Set
+     ) {
     Enter(86);
     if (FlagNr >= 0) {
       if (Ind) {
@@ -2961,24 +2948,24 @@ public class State
           FlagNr = (int) Memory[FlagNr].getInt();
         } else {
           FlagNr = -1;
-        } /*if*/
-      } /*if*/
+        }
+      }
       if (FlagNr >= 0 && FlagNr < MaxFlags) {
         Flag[FlagNr] = Set;
       } else {
         SetErrorState(true);
-      } /*if*/
-    } /*if*/
-  } /*SetFlag*/
+      }
+    }
+  }
 
   void BranchIfFlag
-      (
-          int FlagNr,
-          boolean FlagNrInd,
-          int BankNr,
-          int Target,
-          int TargetType /* one of the above TRANSFER_LOC_xxx values */
-      ) {
+     (
+        int FlagNr,
+        boolean FlagNrInd,
+        int BankNr,
+        int Target,
+        int TargetType /* one of the above TRANSFER_LOC_xxx values */
+     ) {
     if (FlagNr >= 0) {
       if (FlagNrInd) {
         FlagNr = (FlagNr + RegOffset) % 100;
@@ -2986,21 +2973,21 @@ public class State
           FlagNr = (int) Memory[FlagNr].getInt();
         } else {
           FlagNr = -1;
-        } /*if*/
-      } /*if*/
+        }
+      }
       if (FlagNr >= 0 && FlagNr < MaxFlags) {
         if (InvState != Flag[FlagNr]) {
           Transfer
-              (
-                        /*Type =*/ TRANSFER_TYPE_GTO,
-                        /*BankNr =*/ BankNr,
-                        /*Loc =*/ Target,
-                        /*LocType =*/ TargetType
-              );
-        } /*if*/
+             (
+                TRANSFER_TYPE_GTO,
+                BankNr,
+                Target,
+                TargetType
+             );
+        }
       } else {
         SetErrorState(true);
-      } /*if*/
+      }
 
       // if the location we land is a number it must replace the current X
 
@@ -3011,45 +2998,44 @@ public class State
 
       if (Result >= 0 && Result <= 9)
         ResetEntry();
-
-    } /*if*/
-  } /*BranchIfFlag*/
+    }
+  }
 
   void CompareBranch
-      (
-          boolean Greater,
-          int BankNr,
-          int NewPC,
-          boolean Ind
-      ) {
+     (
+        boolean Greater,
+        int BankNr,
+        int NewPC,
+        boolean Ind
+     ) {
     Enter((Greater ? (Ind ? 72 : 77) : (Ind ? 62 : 67)));
     if
-        (
-        InvState ?
-            Greater ?
-                X.compareTo(T) < 0
-                :
-                X.compareTo(T) != 0
-            :
-            Greater ?
-                X.compareTo(T) >= 0
-                :
-                X.compareTo(T) == 0
-        ) {
+       (
+       InvState ?
+          Greater ?
+             X.compareTo(T) < 0
+             :
+             X.compareTo(T) != 0
+          :
+          Greater ?
+             X.compareTo(T) >= 0
+             :
+             X.compareTo(T) == 0
+       ) {
       if (NewPC > 0) {
         Transfer
-            (
-                       /*Type =*/ TRANSFER_TYPE_GTO,
-                       /*BankNr =*/ BankNr,
-                       /*Loc =*/ NewPC,
-                       /*LocType =*/ Ind ? TRANSFER_LOC_INDIRECT : TRANSFER_LOC_DIRECT
-            );
+           (
+              TRANSFER_TYPE_GTO,
+              BankNr,
+              NewPC,
+              Ind ? TRANSFER_LOC_INDIRECT : TRANSFER_LOC_DIRECT
+           );
       } else {
         //  jump to unknown location
         SetErrorState(true);
         return;
       }
-    } /*if*/
+    }
 
     // if the location we land is a number it must replace the current X
 
@@ -3060,16 +3046,16 @@ public class State
 
     if (Result >= 0 && Result <= 9)
       ResetEntry();
-  } /*CompareBranch*/
+  }
 
   void DecrementSkip
-      (
-          int Reg,
-          boolean RegInd,
-          int Bank,
-          int Target,
-          int TargetType /* one of the above TRANSFER_LOC_xxx values */
-      ) {
+     (
+        int Reg,
+        boolean RegInd,
+        int Bank,
+        int Target,
+        int TargetType /* one of the above TRANSFER_LOC_xxx values */
+     ) {
     if (Reg >= 0) {
       Reg = (Reg + RegOffset) % 100;
       if (RegInd) {
@@ -3077,8 +3063,8 @@ public class State
           Reg = ((int) Memory[Reg].getInt() + RegOffset) % 100;
         } else {
           Reg = -1;
-        } /*if*/
-      } /*if*/
+        }
+      }
       if (Reg >= 0 && Reg < MaxMemories) {
         Number N = new Number(Memory[Reg]);
         int Sign = N.getSignum();
@@ -3090,25 +3076,25 @@ public class State
         // do not jump if Target is on-byte value 51 (encoded as 9951)
         if (InvState == (Memory[Reg].getSignum() == 0) && Target != 9951) {
           Transfer
-              (
-                        /*Type =*/ TRANSFER_TYPE_GTO,
-                        /*BankNr =*/ Bank,
-                        /*Loc =*/ Target,
-                        /*LocType =*/ TargetType
-              );
-        } /*if*/
+             (
+                TRANSFER_TYPE_GTO,
+                Bank,
+                Target,
+                TargetType
+             );
+        }
       } else {
         SetErrorState(true);
-      } /*if*/
-    } /*if*/
-  } /*DecrementSkip*/
+      }
+    }
+  }
 
   private void Interpret
-      (
-          boolean Execute /* false to just collect labels */
-      )
-      /* main program interpreter loop: interprets one instruction and
-        advances/jumps RunPC accordingly. */ {
+     (
+        boolean Execute /* false to just collect labels */
+     ) {
+    /* main program interpreter loop: interprets one instruction and
+       advances/jumps RunPC accordingly. */
     final int Op = GetProg(Execute);
     if (Op >= 0) {
       boolean KeepModifier = false;
@@ -3140,7 +3126,7 @@ public class State
           case 10:
             Transfer(TRANSFER_TYPE_CALL, NextBank, Op, TRANSFER_LOC_SYMBOLIC);
             break;
-              /* 21 invalid */
+          /* 21 invalid */
           case 22:
           case 27:
             InvState = !InvState;
@@ -3159,8 +3145,8 @@ public class State
             ClearAll();
             Enter(25);
             break;
-              /* 26 invalid */
-              /* 27 same as 22 */
+          /* 26 invalid */
+          /* 27 same as 22 */
           case 28:
             Log();
             break;
@@ -3168,8 +3154,8 @@ public class State
             Enter(29);
             T.set(Number.ZERO);
             break;
-              /* 20 same as 25 */
-              /* 31 invalid */
+          /* 20 same as 25 */
+          /* 31 invalid */
           case 32:
             SwapT();
             break;
@@ -3198,7 +3184,7 @@ public class State
           case 30:
             Tan();
             break;
-              /* 41 invalid */
+          /* 41 invalid */
           case 42:
             MemoryOp(MEMOP_STO, GetProg(true), false);
             break;
@@ -3211,7 +3197,7 @@ public class State
           case 45:
             Operator(STACKOP_EXP);
             break;
-              /* 46 invalid */
+          /* 46 invalid */
           case 47:
             ClearMemories();
             break;
@@ -3221,7 +3207,7 @@ public class State
           case 49:
             MemoryOp(MEMOP_MUL, GetProg(true), false);
             break;
-              /* 51 invalid */
+          /* 51 invalid */
           case 52:
             EnterExponent();
             break;
@@ -3236,22 +3222,22 @@ public class State
               Operator(STACKOP_MOD);
             } else {
               Operator(STACKOP_DIV);
-            } /*if*/
+            }
             break;
-              /* 56 invalid */
+          /* 56 invalid */
           case 57: /*Eng*/
             SetDisplayMode
-                (
-                    InvState ? FORMAT_FIXED : FORMAT_ENG,
-                    CurNrDecimals
-                );
+               (
+                  InvState ? FORMAT_FIXED : FORMAT_ENG,
+                  CurNrDecimals
+               );
             break;
           case 58: /*Fix*/
             if (InvState) {
               SetDisplayMode(CurFormat, -1);
             } else {
               SetDisplayMode(CurFormat, GetProg(true));
-            } /*if*/
+            }
             break;
           case 59:
             Int();
@@ -3261,16 +3247,15 @@ public class State
             break;
           case 61: /*GTO*/
             Transfer
-                (
-                        /*Type =*/
-                    InvState ?
-                        TRANSFER_TYPE_LEA /*extension!*/
-                        :
-                        TRANSFER_TYPE_GTO,
-                        /*BankNr =*/ NextBank,
-                        /*Loc =*/ GetLoc(true, NextBank),
-                        /*LocType =*/ TRANSFER_LOC_DIRECT
-                );
+               (
+                  InvState ?
+                     TRANSFER_TYPE_LEA /*extension!*/
+                     :
+                     TRANSFER_TYPE_GTO,
+                  NextBank,
+                  GetLoc(true, NextBank),
+                  TRANSFER_LOC_DIRECT
+               );
             break;
           case 62: /*Pgm Ind*/
             SelectProgram(GetProg(true), true);
@@ -3299,7 +3284,6 @@ public class State
             }
             break;
           case 68: /*Nop*/
-                  /* No effect */
             KeepModifier = true;
             break;
           case 69:
@@ -3313,7 +3297,7 @@ public class State
               Return();
             } else {
               Transfer(TRANSFER_TYPE_CALL, NextBank, GetLoc(true, NextBank), TRANSFER_LOC_DIRECT);
-            } /*if*/
+            }
             break;
           case 72:
             MemoryOp(MEMOP_STO, GetProg(true), true);
@@ -3331,7 +3315,7 @@ public class State
             GetProg(true); /* just skip label, assume Labels already filled in */
             KeepModifier = true;
             break;
-              /* 77 handled above */
+          /* 77 handled above */
           case 78:
             StatsSum();
             break;
@@ -3349,16 +3333,15 @@ public class State
             break;
           case 83: /*GTO Ind*/
             Transfer
-                (
-                        /*Type =*/
-                    InvState ?
-                        TRANSFER_TYPE_LEA /*extension!*/
-                        :
-                        TRANSFER_TYPE_GTO,
-                        /*BankNr =*/ NextBank,
-                        /*Loc =*/ GetProg(true),
-                        /*LocType =*/ TRANSFER_LOC_INDIRECT
-                );
+               (
+                  InvState ?
+                     TRANSFER_TYPE_LEA /*extension!*/
+                     :
+                     TRANSFER_TYPE_GTO,
+                  NextBank,
+                  GetProg(true),
+                  TRANSFER_LOC_INDIRECT
+               );
             break;
           case 84:
             SpecialOp(GetProg(true), true);
@@ -3400,7 +3383,7 @@ public class State
           case 95:
             Equals();
             break;
-              /* 96 same as 91 */
+          /* 96 same as 91 */
           case 97: /*Dsz*/ {
             final int Reg = GetUnitOp(true, true);
             final int Target = GetLoc(true, RunBank);
@@ -3411,12 +3394,12 @@ public class State
             if (Global.Calc.InvState) /* extension! */ {
               if (Global.Export != null) {
                 Global.Export.Close();
-              } /*if*/
+              }
             } else {
               if (Global.Print != null) {
                 Global.Print.Advance();
-              } /*if*/
-            } /*if*/
+              }
+            }
             break;
           case 99: /*Prt*/
             Enter(99);
@@ -3425,9 +3408,9 @@ public class State
             } else {
               if (Global.Export != null && Global.Export.NumbersOnly) {
                 Global.Export.WriteNum(X);
-              } /*if*/
+              }
               PrintDisplay(true, false, "");
-            } /*if*/
+            }
             break;
           case 90: /*List*/
                   /* no-op in program? */
@@ -3435,12 +3418,12 @@ public class State
           default:
             SetErrorState(true);
             break;
-        } /*switch*/
+        }
         if (!BankSet) {
           NextBank = RunBank;
-        } /*if*/
+        }
       } else {
-              /* just advance RunPC past instruction and update Labels as appropriate */
+        /* just advance RunPC past instruction and update Labels as appropriate */
         switch (Op) {
           case 22:
           case 27:
@@ -3468,7 +3451,7 @@ public class State
           case 57: /*Fix*/
             if (!InvState) {
               GetUnitOp(false, false);
-            } /*if*/
+            }
             break;
           case 61: /*GTO*/
             GetLoc(false, RunBank /* irrelevant */);
@@ -3480,18 +3463,17 @@ public class State
           case 71: /*SBR*/
             if (!InvState) /* in case it wasn't merged */ {
               GetLoc(false, RunBank /* irrelevant */);
-            } /*if*/
+            }
             break;
           case 76: /*Lbl*/ {
             final int TheLabel = GetProg(false);
             if (TheLabel >= 0 && RunPC >= 0 && !Bank[RunBank].Labels.containsKey(TheLabel)) {
               Bank[RunBank].Labels.put(TheLabel, RunPC);
-            } /*if*/
+            }
           }
           KeepModifier = true;
           break;
           case 68: /*Nop*/
-                  /* No effect */
             KeepModifier = true;
             break;
           case 86: /*St flg*/
@@ -3502,25 +3484,25 @@ public class State
             GetUnitOp(false, true); /*register/flag*/
             GetLoc(false, RunBank); /*branch target*/
             break;
-        } /*switch*/
-      } /*if*/
+        }
+      }
       if (!KeepModifier) {
         InvState = false;
-      } /*if*/
-    } /*if*/
+      }
+    }
     PreviousOp = Op;
-  } /*Interpret*/
+  }
 
   void FillInLabels
-      (
-          int BankNr
-      ) {
+     (
+        int BankNr
+     ) {
     if (Bank[BankNr].Labels == null) {
       Bank[BankNr].Labels = new java.util.HashMap<Integer, Integer>();
       final boolean SaveInvState = InvState;
       final int SaveRunPC = RunPC;
       final int SaveRunBank = RunBank;
-      InvState = false; /*?*/
+      InvState = false;
       RunPC = 0;
       RunBank = BankNr;
       do {
@@ -3530,11 +3512,10 @@ public class State
       InvState = SaveInvState;
       RunPC = SaveRunPC;
       RunBank = SaveRunBank;
-    } /*if*/
-  } /*FillInLabels*/
+    }
+  }
 
   void FillInLabels() {
     FillInLabels(CurBank);
-  } /*FillInLabels*/
-
-} /*State*/
+  }
+}

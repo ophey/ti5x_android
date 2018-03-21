@@ -25,8 +25,8 @@ public class ButtonGrid extends android.view.View {
   static final int NrButtonRows = 9;
   static final int NrButtonCols = 5;
   final android.graphics.Typeface MFont =
-      Typeface.createFromAsset(getContext().getAssets(),
-          "fonts/dejavusans-bold.ttf");
+     Typeface.createFromAsset(getContext().getAssets(),
+        "fonts/dejavusans-bold.ttf");
 
   android.media.SoundPool MakeNoise;
   android.os.Vibrator Vibrate;
@@ -35,20 +35,20 @@ public class ButtonGrid extends android.view.View {
 
   final int Dark, White, ButtonBrown, ButtonYellow, OverlayBlue;
 
-  class ButtonDef
-      /* defines appearance of a button */ {
+  class ButtonDef {
+    /* defines appearance of a button */
     int BaseCode;
     final String Text, AltText, MergedText;
     final int TextColor, ButtonColor, AltTextColor, OverlayColor, BGColor;
 
     ButtonDef
-        (
-            String Text,
-            String AltText,
-            String MergedText, /* may be null */
-            int TextColor,
-            int ButtonColor
-        ) {
+       (
+          String Text,
+          String AltText,
+          String MergedText, /* may be null */
+          int TextColor,
+          int ButtonColor
+       ) {
       this.Text = Text;
       this.AltText = AltText;
       this.MergedText = MergedText;
@@ -57,104 +57,103 @@ public class ButtonGrid extends android.view.View {
       this.AltTextColor = White;
       this.OverlayColor = OverlayBlue;
       this.BGColor = Dark;
-    } /*ButtonDef*/
+    }
 
     ButtonDef
-        (
-            String Text,
-            String AltText,
-            int TextColor,
-            int ButtonColor
-        ) {
+       (
+          String Text,
+          String AltText,
+          int TextColor,
+          int ButtonColor
+       ) {
       this(Text, AltText, null, TextColor, ButtonColor);
-    } /*ButtonDef*/
-
-  } /*ButtonDef*/
+    }
+  }
 
   ButtonDef[][] ButtonDefs;
 
   void MakeButtonDefs() {
     ButtonDefs = new ButtonDef[][]
-        {
-            new ButtonDef[]
-                {
-                    new ButtonDef("A", "A´", White, ButtonBrown),
-                    new ButtonDef("B", "B´", White, ButtonBrown),
-                    new ButtonDef("C", "C´", White, ButtonBrown),
-                    new ButtonDef("D", "D´", White, ButtonBrown),
-                    new ButtonDef("E", "E´", White, ButtonBrown),
-                },
-            new ButtonDef[]
-                {
-                    new ButtonDef("2nd", "", Dark, ButtonYellow),
-                    new ButtonDef("INV", "", White, ButtonBrown),
-                    new ButtonDef("lnx", "log", White, ButtonBrown),
-                    new ButtonDef("CE", "CP", White, ButtonBrown),
-                    new ButtonDef("CLR", "%", Dark, ButtonYellow),
-                },
-            new ButtonDef[]
-                {
-                    new ButtonDef("LRN", "Pgm", White, ButtonBrown),
-                    new ButtonDef("x⇌t", "P→R", White, ButtonBrown),
-                    new ButtonDef("x²", "sin", White, ButtonBrown),
-                    new ButtonDef("√x", "cos", White, ButtonBrown),
-                    new ButtonDef("1/x", "tan", White, ButtonBrown),
-                },
-            new ButtonDef[]
-                {
-                    new ButtonDef("SST", "Ins", White, ButtonBrown),
-                    new ButtonDef("STO", "CMs", White, ButtonBrown),
-                    new ButtonDef("RCL", "Exc", White, ButtonBrown),
-                    new ButtonDef("SUM", "Prd", White, ButtonBrown),
-                    new ButtonDef("yˣ", "Ind", White, ButtonBrown),
-                },
-            new ButtonDef[]
-                {
-                    new ButtonDef("BST", "Del", White, ButtonBrown),
-                    new ButtonDef("EE", "Eng", White, ButtonBrown),
-                    new ButtonDef("(", "Fix", White, ButtonBrown),
-                    new ButtonDef(")", "Int", White, ButtonBrown),
-                    new ButtonDef("÷", "|x|", Dark, ButtonYellow),
-                },
-            new ButtonDef[]
-                {
-                    new ButtonDef("GTO", "Pause", White, ButtonBrown),
-                    new ButtonDef("7", "x=t", "Pgm Ind", Dark, White),
-                    new ButtonDef("8", "Nop", "Exc Ind", Dark, White),
-                    new ButtonDef("9", "Op", "Prd Ind", Dark, White),
-                    new ButtonDef("×", "Deg", Dark, ButtonYellow),
-                },
-            new ButtonDef[]
-                {
-                    new ButtonDef("SBR", "Lbl", White, ButtonBrown),
-                    new ButtonDef("4", "x≥t", "STO Ind", Dark, White),
-                    new ButtonDef("5", "∑+", "RCL Ind", Dark, White),
-                    new ButtonDef("6", "x̅", "SUM Ind", Dark, White),
-                    new ButtonDef("-", "Rad", Dark, ButtonYellow),
-                },
-            new ButtonDef[]
-                {
-                    new ButtonDef("RST", "St flg", White, ButtonBrown),
-                    new ButtonDef("1", "If flg", Dark, White),
-                    new ButtonDef("2", "D.MS", "GTO Ind", Dark, White),
-                    new ButtonDef("3", "π", "Op Ind", Dark, White),
-                    new ButtonDef("+", "Grad", Dark, ButtonYellow),
-                },
-            new ButtonDef[]
-                {
-                    new ButtonDef("R/S", "Write", White, ButtonBrown),
-                    new ButtonDef("0", "Dsz", "INV SBR", Dark, White),
-                    new ButtonDef(".", "Adv", Dark, White),
-                    new ButtonDef("+/-", "Prt", Dark, White),
-                    new ButtonDef("=", "List", Dark, ButtonYellow),
-                },
-        };
+       {
+          new ButtonDef[]
+             {
+                new ButtonDef("A", "A´", White, ButtonBrown),
+                new ButtonDef("B", "B´", White, ButtonBrown),
+                new ButtonDef("C", "C´", White, ButtonBrown),
+                new ButtonDef("D", "D´", White, ButtonBrown),
+                new ButtonDef("E", "E´", White, ButtonBrown),
+             },
+          new ButtonDef[]
+             {
+                new ButtonDef("2nd", "", Dark, ButtonYellow),
+                new ButtonDef("INV", "", White, ButtonBrown),
+                new ButtonDef("lnx", "log", White, ButtonBrown),
+                new ButtonDef("CE", "CP", White, ButtonBrown),
+                new ButtonDef("CLR", "%", Dark, ButtonYellow),
+             },
+          new ButtonDef[]
+             {
+                new ButtonDef("LRN", "Pgm", White, ButtonBrown),
+                new ButtonDef("x⇌t", "P→R", White, ButtonBrown),
+                new ButtonDef("x²", "sin", White, ButtonBrown),
+                new ButtonDef("√x", "cos", White, ButtonBrown),
+                new ButtonDef("1/x", "tan", White, ButtonBrown),
+             },
+          new ButtonDef[]
+             {
+                new ButtonDef("SST", "Ins", White, ButtonBrown),
+                new ButtonDef("STO", "CMs", White, ButtonBrown),
+                new ButtonDef("RCL", "Exc", White, ButtonBrown),
+                new ButtonDef("SUM", "Prd", White, ButtonBrown),
+                new ButtonDef("yˣ", "Ind", White, ButtonBrown),
+             },
+          new ButtonDef[]
+             {
+                new ButtonDef("BST", "Del", White, ButtonBrown),
+                new ButtonDef("EE", "Eng", White, ButtonBrown),
+                new ButtonDef("(", "Fix", White, ButtonBrown),
+                new ButtonDef(")", "Int", White, ButtonBrown),
+                new ButtonDef("÷", "|x|", Dark, ButtonYellow),
+             },
+          new ButtonDef[]
+             {
+                new ButtonDef("GTO", "Pause", White, ButtonBrown),
+                new ButtonDef("7", "x=t", "Pgm Ind", Dark, White),
+                new ButtonDef("8", "Nop", "Exc Ind", Dark, White),
+                new ButtonDef("9", "Op", "Prd Ind", Dark, White),
+                new ButtonDef("×", "Deg", Dark, ButtonYellow),
+             },
+          new ButtonDef[]
+             {
+                new ButtonDef("SBR", "Lbl", White, ButtonBrown),
+                new ButtonDef("4", "x≥t", "STO Ind", Dark, White),
+                new ButtonDef("5", "∑+", "RCL Ind", Dark, White),
+                new ButtonDef("6", "x̅", "SUM Ind", Dark, White),
+                new ButtonDef("-", "Rad", Dark, ButtonYellow),
+             },
+          new ButtonDef[]
+             {
+                new ButtonDef("RST", "St flg", White, ButtonBrown),
+                new ButtonDef("1", "If flg", Dark, White),
+                new ButtonDef("2", "D.MS", "GTO Ind", Dark, White),
+                new ButtonDef("3", "π", "Op Ind", Dark, White),
+                new ButtonDef("+", "Grad", Dark, ButtonYellow),
+             },
+          new ButtonDef[]
+             {
+                new ButtonDef("R/S", "Write", White, ButtonBrown),
+                new ButtonDef("0", "Dsz", "INV SBR", Dark, White),
+                new ButtonDef(".", "Adv", Dark, White),
+                new ButtonDef("+/-", "Prt", Dark, White),
+                new ButtonDef("=", "List", Dark, ButtonYellow),
+             },
+       };
     for (int Row = 0; Row < NrButtonRows; ++Row) {
       for (int Col = 0; Col < NrButtonCols; ++Col) {
         ButtonDefs[Row][Col].BaseCode = (Row + 1) * 10 + Col + 1;
-      } /*for*/
-    } /*for*/
-  } /*MakeButtonDefs*/
+      }
+    }
+  }
 
   public int FeedbackType;
   public static final int FEEDBACK_NONE = 0;
@@ -185,42 +184,42 @@ public class ButtonGrid extends android.view.View {
 
   long LastClick = 0;
 
-  public void Reset()
-      /* resets to power-up state. */ {
+  public void Reset() {
+    /* resets to power-up state. */
     AltState = false;
     ResetOperands();
     OverlayVisible = false;
     invalidate();
-  } /*Reset*/
+  }
 
   public void SetFeedbackType
-      (
-          int NewFeedbackType
-      ) {
+     (
+        int NewFeedbackType
+     ) {
     FeedbackType = NewFeedbackType;
-      /* everything else has to be set up in constructor which has access to Context object */
-  } /*SetFeedbackType*/
+    /* everything else has to be set up in constructor which has access to Context object */
+  }
 
   public void DoFeedback() {
     switch (FeedbackType) {
       case FEEDBACK_CLICK:
         if (MakeNoise != null && ButtonDown != 0) {
           MakeNoise.play(ButtonDown, 1.0f, 1.0f, 0, 0, 1.0f);
-        } /*if*/
+        }
         break;
       case FEEDBACK_VIBRATE:
         if (Vibrate != null) {
           Vibrate.vibrate(50);
-        } /*if*/
+        }
         break;
-    } /*switch*/
-  } /*DoFeedback*/
+    }
+  }
 
   public ButtonGrid
-      (
-          android.content.Context TheContext,
-          android.util.AttributeSet TheAttributes
-      ) {
+     (
+        android.content.Context TheContext,
+        android.util.AttributeSet TheAttributes
+     ) {
     super(TheContext, TheAttributes);
     FeedbackType = FEEDBACK_NONE;
     final android.content.res.Resources Res = TheContext.getResources();
@@ -234,190 +233,191 @@ public class ButtonGrid extends android.view.View {
     ButtonDown = MakeNoise.load(TheContext, R.raw.button_down, 1);
     Vibrate = (android.os.Vibrator) TheContext.getSystemService(android.content.Context.VIBRATOR_SERVICE);
     SetFeedbackType(FEEDBACK_CLICK);
+
     setOnTouchListener
-        (
-            new android.view.View.OnTouchListener() {
-              public boolean onTouch
-                  (
-                      android.view.View TheView,
-                      MotionEvent TheEvent
-                  ) {
-                boolean Handled = false;
-                if (!Global.BGTaskInProgress()) {
-                  final ButtonGrid TheButtons = (ButtonGrid) TheView;
-                  final int EventAction = TheEvent.getAction() & (1 << MotionEvent.ACTION_POINTER_ID_SHIFT) - 1;
-                  switch (EventAction) {
-                    case MotionEvent.ACTION_DOWN:
-                    case MotionEvent.ACTION_POINTER_DOWN:
-                    case MotionEvent.ACTION_MOVE:
-                      final long ThisClick = java.lang.System.currentTimeMillis();
-                      if
-                          (
-                          (
-                              ThisClick - LastClick > 100 /* debounce */
-                                  ||
-                                  !SecondPress && EventAction == MotionEvent.ACTION_POINTER_DOWN
-                                          /* no need to debounce second touch */
-                          )
-                              &&
-                              (EventAction != MotionEvent.ACTION_MOVE || !SecondPress)
-                                      /* ignore move events once second finger goes down */
-                          ) {
-                        if (EventAction == MotionEvent.ACTION_POINTER_DOWN) {
-                          SecondPress = true;
-                        } /*if*/
-                        final RectF GridBounds =
-                            new RectF(0.0f, 0.0f, TheView.getWidth(), TheView.getHeight());
-                        final int PointerIndex =
-                            EventAction == MotionEvent.ACTION_POINTER_DOWN ?
-                                (TheEvent.getAction() & MotionEvent.ACTION_POINTER_ID_MASK)
-                                    >>
-                                    MotionEvent.ACTION_POINTER_ID_SHIFT
-                                :
-                                -1;
-                        android.graphics.PointF ClickWhere =
-                            EventAction == MotionEvent.ACTION_POINTER_DOWN ?
-                                new android.graphics.PointF
-                                    (
-                                        TheEvent.getX(PointerIndex),
-                                        TheEvent.getY(PointerIndex)
-                                    )
-                                :
-                                new android.graphics.PointF(TheEvent.getX(), TheEvent.getY());
-                        final float CellWidth = (float) TheView.getWidth() / NrButtonCols;
-                        final float CellHeight = (float) TheView.getHeight() / NrButtonRows;
-                        final android.graphics.Point ClickedCell =
-                            new android.graphics.Point
-                                (
-                                    Math.max(0, Math.min((int) Math.floor(ClickWhere.x / CellWidth), NrButtonCols - 1)),
-                                    Math.max(0, Math.min((int) Math.floor(ClickWhere.y / CellHeight), NrButtonRows - 1))
-                                );
-                        final RectF CellBounds = new RectF
+       (
+          new android.view.View.OnTouchListener() {
+            public boolean onTouch
+               (
+                  android.view.View TheView,
+                  MotionEvent TheEvent
+               ) {
+              boolean Handled = false;
+              if (!Global.BGTaskInProgress()) {
+                final ButtonGrid TheButtons = (ButtonGrid) TheView;
+                final int EventAction = TheEvent.getAction() & (1 << MotionEvent.ACTION_POINTER_ID_SHIFT) - 1;
+                switch (EventAction) {
+                  case MotionEvent.ACTION_DOWN:
+                  case MotionEvent.ACTION_POINTER_DOWN:
+                  case MotionEvent.ACTION_MOVE:
+                    final long ThisClick = java.lang.System.currentTimeMillis();
+                    if
+                       (
+                       (
+                          ThisClick - LastClick > 100 /* debounce */
+                             ||
+                             !SecondPress && EventAction == MotionEvent.ACTION_POINTER_DOWN
+                          /* no need to debounce second touch */
+                       )
+                          &&
+                          (EventAction != MotionEvent.ACTION_MOVE || !SecondPress)
+                          /* ignore move events once second finger goes down */
+                       ) {
+                      if (EventAction == MotionEvent.ACTION_POINTER_DOWN) {
+                        SecondPress = true;
+                      }
+                      final RectF GridBounds =
+                         new RectF(0.0f, 0.0f, TheView.getWidth(), TheView.getHeight());
+                      final int PointerIndex =
+                         EventAction == MotionEvent.ACTION_POINTER_DOWN ?
+                            (TheEvent.getAction() & MotionEvent.ACTION_POINTER_ID_MASK)
+                               >>
+                               MotionEvent.ACTION_POINTER_ID_SHIFT
+                            :
+                            -1;
+                      android.graphics.PointF ClickWhere =
+                         EventAction == MotionEvent.ACTION_POINTER_DOWN ?
+                            new android.graphics.PointF
+                               (
+                                  TheEvent.getX(PointerIndex),
+                                  TheEvent.getY(PointerIndex)
+                               )
+                            :
+                            new android.graphics.PointF(TheEvent.getX(), TheEvent.getY());
+                      final float CellWidth = (float) TheView.getWidth() / NrButtonCols;
+                      final float CellHeight = (float) TheView.getHeight() / NrButtonRows;
+                      final android.graphics.Point ClickedCell =
+                         new android.graphics.Point
                             (
-                                GridBounds.left + CellWidth * ClickedCell.x,
-                                GridBounds.top + CellHeight * ClickedCell.y,
-                                GridBounds.left + CellWidth * (ClickedCell.x + 1),
-                                GridBounds.top + CellHeight * (ClickedCell.y + 1)
+                               Math.max(0, Math.min((int) Math.floor(ClickWhere.x / CellWidth), NrButtonCols - 1)),
+                               Math.max(0, Math.min((int) Math.floor(ClickWhere.y / CellHeight), NrButtonRows - 1))
                             );
-                        final RectF ButtonBounds = new RectF
-                            (
-                                CellBounds.left + (CellBounds.right - CellBounds.left) * ButtonRelTouchMargins.left,
-                                CellBounds.top + (CellBounds.bottom - CellBounds.top) * ButtonRelTouchMargins.top,
-                                CellBounds.right + (CellBounds.left - CellBounds.right) * ButtonRelTouchMargins.right,
-                                CellBounds.bottom + (CellBounds.top - CellBounds.bottom) * ButtonRelTouchMargins.bottom
-                            );
-                        int NewSelectedButton;
-                        if (ButtonBounds.contains(ClickWhere.x, ClickWhere.y)) {
-                          NewSelectedButton = ButtonDefs[ClickedCell.y][ClickedCell.x].BaseCode;
+                      final RectF CellBounds = new RectF
+                         (
+                            GridBounds.left + CellWidth * ClickedCell.x,
+                            GridBounds.top + CellHeight * ClickedCell.y,
+                            GridBounds.left + CellWidth * (ClickedCell.x + 1),
+                            GridBounds.top + CellHeight * (ClickedCell.y + 1)
+                         );
+                      final RectF ButtonBounds = new RectF
+                         (
+                            CellBounds.left + (CellBounds.right - CellBounds.left) * ButtonRelTouchMargins.left,
+                            CellBounds.top + (CellBounds.bottom - CellBounds.top) * ButtonRelTouchMargins.top,
+                            CellBounds.right + (CellBounds.left - CellBounds.right) * ButtonRelTouchMargins.right,
+                            CellBounds.bottom + (CellBounds.top - CellBounds.bottom) * ButtonRelTouchMargins.bottom
+                         );
+                      int NewSelectedButton;
+                      if (ButtonBounds.contains(ClickWhere.x, ClickWhere.y)) {
+                        NewSelectedButton = ButtonDefs[ClickedCell.y][ClickedCell.x].BaseCode;
+                      } else {
+                        NewSelectedButton = -1;
+                      }
+                      if (SelectedButton != NewSelectedButton) {
+                        SelectedButton = NewSelectedButton;
+                        if (SelectedButton != -1) {
+                          DoFeedback();
+                          Invoke();
                         } else {
-                          NewSelectedButton = -1;
-                        } /*if*/
-                        if (SelectedButton != NewSelectedButton) {
-                          SelectedButton = NewSelectedButton;
-                          if (SelectedButton != -1) {
-                            DoFeedback();
-                            Invoke();
-                          } else {
-                            SecondPress = false;
-                          } /*if*/
-                          TheView.invalidate();
-                        } /*if*/
-                        Handled = true;
-                        LastClick = ThisClick;
-                      } /*if*/
-                      break;
-                    case MotionEvent.ACTION_UP:
-                    case MotionEvent.ACTION_CANCEL:
-                      if (SelectedButton != -1) {
-                        if
-                            (
-                            SelectedButton == 61
-                                &&
-                                Global.Calc != null
-                                &&
-                                Global.Calc.TaskRunning
-                            ) {
-                          Global.Calc.SetSlowExecution(false);
-                        } /*if*/
-                        SelectedButton = -1;
-                        SecondPress = false;
+                          SecondPress = false;
+                        }
                         TheView.invalidate();
-                      } /*if*/
+                      }
                       Handled = true;
-                      break;
-                  } /*switch*/
-                } /*if*/
-                return
-                    Handled;
-              } /*onClick*/
-            } /*View.OnTouchListener*/
-        );
-      /* need to set myself focusable because volume up/down buttons are keys */
+                      LastClick = ThisClick;
+                    }
+                    break;
+                  case MotionEvent.ACTION_UP:
+                  case MotionEvent.ACTION_CANCEL:
+                    if (SelectedButton != -1) {
+                      if
+                         (
+                         SelectedButton == 61
+                            &&
+                            Global.Calc != null
+                            &&
+                            Global.Calc.TaskRunning
+                         ) {
+                        Global.Calc.SetSlowExecution(false);
+                      }
+                      SelectedButton = -1;
+                      SecondPress = false;
+                      TheView.invalidate();
+                    }
+                    Handled = true;
+                    break;
+                }
+              }
+              return
+                 Handled;
+            } /*onClick*/
+          }
+       );
+    /* need to set myself focusable because volume up/down buttons are keys */
     setFocusable(true);
     setFocusableInTouchMode(true);
     setOnKeyListener
-        (
-            new android.view.View.OnKeyListener() {
-              public boolean onKey
-                  (
-                      android.view.View TheView,
-                      int KeyCode,
-                      android.view.KeyEvent TheEvent
-                  ) {
-                boolean Handled = false;
-                switch (TheEvent.getAction()) {
-                  case android.view.KeyEvent.ACTION_DOWN:
-                    switch (KeyCode) {
-                      case android.view.KeyEvent.KEYCODE_VOLUME_DOWN:
-                        if (FeedbackType != FEEDBACK_NONE) {
-                          SetFeedbackType
-                              (
-                                  FeedbackType == FEEDBACK_CLICK ?
-                                      FEEDBACK_VIBRATE
-                                      :
-                                      FEEDBACK_NONE
-                              );
-                          DoFeedback();
-                          Handled = true;
-                        } /*if*/
-                        break;
-                      case android.view.KeyEvent.KEYCODE_VOLUME_UP:
-                        if (FeedbackType != FEEDBACK_CLICK) {
-                          SetFeedbackType
-                              (
-                                  FeedbackType == FEEDBACK_NONE ?
-                                      FEEDBACK_VIBRATE
-                                      :
-                                      FEEDBACK_CLICK
-                              );
-                          DoFeedback();
-                          Handled = true;
-                        } /*if*/
-                        break;
-                    } /*switch*/
-                    break;
-                  case android.view.KeyEvent.ACTION_UP:
-                    switch (KeyCode) {
-                      case android.view.KeyEvent.KEYCODE_VOLUME_DOWN:
-                      case android.view.KeyEvent.KEYCODE_VOLUME_UP:
+       (
+          new android.view.View.OnKeyListener() {
+            public boolean onKey
+               (
+                  android.view.View TheView,
+                  int KeyCode,
+                  android.view.KeyEvent TheEvent
+               ) {
+              boolean Handled = false;
+              switch (TheEvent.getAction()) {
+                case android.view.KeyEvent.ACTION_DOWN:
+                  switch (KeyCode) {
+                    case android.view.KeyEvent.KEYCODE_VOLUME_DOWN:
+                      if (FeedbackType != FEEDBACK_NONE) {
+                        SetFeedbackType
+                           (
+                              FeedbackType == FEEDBACK_CLICK ?
+                                 FEEDBACK_VIBRATE
+                                 :
+                                 FEEDBACK_NONE
+                           );
+                        DoFeedback();
                         Handled = true;
-                        break;
-                    } /*switch*/
-                    break;
-                } /*switch*/
-                return
-                    Handled;
-              } /*onKey*/
-            } /*View.OnKeyListener*/
-        );
+                      }
+                      break;
+                    case android.view.KeyEvent.KEYCODE_VOLUME_UP:
+                      if (FeedbackType != FEEDBACK_CLICK) {
+                        SetFeedbackType
+                           (
+                              FeedbackType == FEEDBACK_NONE ?
+                                 FEEDBACK_VIBRATE
+                                 :
+                                 FEEDBACK_CLICK
+                           );
+                        DoFeedback();
+                        Handled = true;
+                      }
+                      break;
+                  }
+                  break;
+                case android.view.KeyEvent.ACTION_UP:
+                  switch (KeyCode) {
+                    case android.view.KeyEvent.KEYCODE_VOLUME_DOWN:
+                    case android.view.KeyEvent.KEYCODE_VOLUME_UP:
+                      Handled = true;
+                      break;
+                  }
+                  break;
+              }
+              return
+                 Handled;
+            } /*onKey*/
+          }
+       );
     Reset();
-  } /*ButtonGrid*/
+  }
 
   @Override
   public void onDraw
-      (
-          android.graphics.Canvas Draw
-      ) {
+     (
+        android.graphics.Canvas Draw
+     ) {
     super.onDraw(Draw);
     final RectF GridBounds = new RectF(0.0f, 0.0f, getWidth(), getHeight());
     final float CellWidth = GridBounds.right / NrButtonCols;
@@ -426,22 +426,22 @@ public class ButtonGrid extends android.view.View {
       for (int Col = 0; Col < NrButtonCols; ++Col) {
         final ButtonDef ThisButton = ButtonDefs[Row][Col];
         final RectF CellBounds = new RectF
-            (
-                GridBounds.left + CellWidth * Col,
-                GridBounds.top + CellHeight * Row,
-                GridBounds.left + CellWidth * (Col + 1),
-                GridBounds.top + CellHeight * (Row + 1)
-            );
+           (
+              GridBounds.left + CellWidth * Col,
+              GridBounds.top + CellHeight * Row,
+              GridBounds.left + CellWidth * (Col + 1),
+              GridBounds.top + CellHeight * (Row + 1)
+           );
         final RectF ButtonBounds = new RectF
-            (
-                CellBounds.left + (CellBounds.right - CellBounds.left) * ButtonRelDisplayMargins.left,
-                CellBounds.top + (CellBounds.bottom - CellBounds.top) * ButtonRelDisplayMargins.top,
-                CellBounds.right + (CellBounds.left - CellBounds.right) * ButtonRelDisplayMargins.right,
-                CellBounds.bottom + (CellBounds.top - CellBounds.bottom) * ButtonRelDisplayMargins.bottom
-            );
+           (
+              CellBounds.left + (CellBounds.right - CellBounds.left) * ButtonRelDisplayMargins.left,
+              CellBounds.top + (CellBounds.bottom - CellBounds.top) * ButtonRelDisplayMargins.top,
+              CellBounds.right + (CellBounds.left - CellBounds.right) * ButtonRelDisplayMargins.right,
+              CellBounds.bottom + (CellBounds.top - CellBounds.bottom) * ButtonRelDisplayMargins.bottom
+           );
         if (ThisButton.BaseCode == SelectedButton) {
           ButtonBounds.offset(2.0f, 2.0f);
-        } /*if*/
+        }
         Draw.drawRect(CellBounds, GraphicsUseful.FillWithColor(ThisButton.BGColor));
         final android.graphics.Paint TextPaint = new android.graphics.Paint();
         TextPaint.setStyle(android.graphics.Paint.Style.FILL);
@@ -452,87 +452,87 @@ public class ButtonGrid extends android.view.View {
         TextPaint.setTextSize(BaseTextSize * 0.9f);
         TextPaint.setTypeface(MFont);
         GraphicsUseful.DrawCenteredText
-            (
-                Draw,
-                ThisButton.AltText,
-                (CellBounds.left + CellBounds.right) / 2.0f,
-                CellBounds.top + (CellBounds.bottom - CellBounds.top) * ButtonRelDisplayMargins.top / 2.0f,
-                TextPaint
-            );
+           (
+              Draw,
+              ThisButton.AltText,
+              (CellBounds.left + CellBounds.right) / 2.0f,
+              CellBounds.top + (CellBounds.bottom - CellBounds.top) * ButtonRelDisplayMargins.top / 2.0f,
+              TextPaint
+           );
         {
           RectF DrawBounds;
           final GraphicsUseful.HSVA ButtonColor =
-              new GraphicsUseful.HSVA(ThisButton.ButtonColor);
+             new GraphicsUseful.HSVA(ThisButton.ButtonColor);
           TextPaint.setColor
-              (
-                  new GraphicsUseful.HSVA
-                      (
-                          ButtonColor.H,
-                          ButtonColor.S,
-                          1.0f - (1.0f - ButtonColor.V) * 0.75f, /* lighten */
-                          ButtonColor.A
-                      ).ToRGB()
-              );
+             (
+                new GraphicsUseful.HSVA
+                   (
+                      ButtonColor.H,
+                      ButtonColor.S,
+                      1.0f - (1.0f - ButtonColor.V) * 0.75f, /* lighten */
+                      ButtonColor.A
+                   ).ToRGB()
+             );
           DrawBounds = new RectF(ButtonBounds);
           DrawBounds.offset(-1.0f, -1.0f);
           Draw.drawRoundRect
-              (
+             (
+                DrawBounds,
+                CornerRoundness,
+                CornerRoundness,
+                TextPaint
+             );
+          if (ThisButton.BaseCode != SelectedButton) {
+            final GraphicsUseful.HSVA Darken = new GraphicsUseful.HSVA(Dark);
+            TextPaint.setColor
+               (
+                  new GraphicsUseful.HSVA
+                     (
+                        Darken.H,
+                        Darken.S,
+                        Darken.V / 2.0f, /* darken */
+                        Darken.A
+                     ).ToRGB()
+               );
+            DrawBounds = new RectF(ButtonBounds);
+            DrawBounds.offset(2.0f, 2.0f);
+            Draw.drawRoundRect
+               (
                   DrawBounds,
                   CornerRoundness,
                   CornerRoundness,
                   TextPaint
-              );
-          if (ThisButton.BaseCode != SelectedButton) {
-            final GraphicsUseful.HSVA Darken = new GraphicsUseful.HSVA(Dark);
-            TextPaint.setColor
-                (
-                    new GraphicsUseful.HSVA
-                        (
-                            Darken.H,
-                            Darken.S,
-                            Darken.V / 2.0f, /* darken */
-                            Darken.A
-                        ).ToRGB()
-                );
-            DrawBounds = new RectF(ButtonBounds);
-            DrawBounds.offset(2.0f, 2.0f);
-            Draw.drawRoundRect
-                (
-                    DrawBounds,
-                    CornerRoundness,
-                    CornerRoundness,
-                    TextPaint
-                );
-          } /*if*/
+               );
+          }
           TextPaint.setColor(ButtonColor.ToRGB());
           Draw.drawRoundRect
-              (
-                  ButtonBounds,
-                  CornerRoundness,
-                  CornerRoundness,
-                  TextPaint
-              );
+             (
+                ButtonBounds,
+                CornerRoundness,
+                CornerRoundness,
+                TextPaint
+             );
         }
         if (OverlayVisible) {
           TextPaint.setTextAlign(android.graphics.Paint.Align.LEFT);
           final boolean HasBaseOverlay =
-              ThisButton.BaseCode != 21
-                  &&
-                  ThisButton.BaseCode != 31
-                  &&
-                  ThisButton.BaseCode != 41
-                  &&
-                  ThisButton.BaseCode != 51;
+             ThisButton.BaseCode != 21
+                &&
+                ThisButton.BaseCode != 31
+                &&
+                ThisButton.BaseCode != 41
+                &&
+                ThisButton.BaseCode != 51;
           final boolean HasAltOverlay =
-              ThisButton.BaseCode != 21
-                  &&
-                  ThisButton.BaseCode != 41
-                  &&
-                  ThisButton.BaseCode != 51;
+             ThisButton.BaseCode != 21
+                &&
+                ThisButton.BaseCode != 41
+                &&
+                ThisButton.BaseCode != 51;
           final boolean HasMergedOverlay = ThisButton.MergedText != null;
           if (HasBaseOverlay || HasAltOverlay || HasMergedOverlay) {
             final float Left = CellBounds.left + (CellBounds.right - CellBounds.left) * 0.0f;
-                          /* not quite authentic position, but what the hey */
+            /* not quite authentic position, but what the hey */
             TextPaint.setTextSize(BaseTextSize * 0.6f);
             TextPaint.setColor(ThisButton.OverlayColor);
             if (HasBaseOverlay) {
@@ -556,63 +556,63 @@ public class ButtonGrid extends android.view.View {
                 case 92: /*digit 0*/
                   BaseCode = 0;
                   break;
-              } /*switch*/
+              }
               Draw.drawText
-                  (
-                      String.format(Global.StdLocale, "%02d", BaseCode),
-                      Left,
-                      CellBounds.bottom + (ButtonBounds.top - ButtonBounds.bottom) * 0.2f,
-                      TextPaint
-                  );
-            } /*if*/
+                 (
+                    String.format(Global.StdLocale, "%02d", BaseCode),
+                    Left,
+                    CellBounds.bottom + (ButtonBounds.top - ButtonBounds.bottom) * 0.2f,
+                    TextPaint
+                 );
+            }
             if (HasMergedOverlay) {
               Draw.drawText
-                  (
-                      String.format
-                          (
-                              Global.StdLocale,
-                              "%02d  %s",
-                              ThisButton.BaseCode,
-                              ThisButton.MergedText
-                          ),
-                      Left,
-                      CellBounds.bottom + (ButtonBounds.top - ButtonBounds.bottom) * 0.8f,
-                      TextPaint
-                  );
-            } /*if*/
+                 (
+                    String.format
+                       (
+                          Global.StdLocale,
+                          "%02d  %s",
+                          ThisButton.BaseCode,
+                          ThisButton.MergedText
+                       ),
+                    Left,
+                    CellBounds.bottom + (ButtonBounds.top - ButtonBounds.bottom) * 0.8f,
+                    TextPaint
+                 );
+            }
             if (HasAltOverlay) {
               Draw.drawText
-                  (
-                      String.format
-                          (
-                              Global.StdLocale,
-                              "%02d",
-                              ThisButton.BaseCode / 10 * 10
-                                  +
-                                  (ThisButton.BaseCode % 10 + 5) % 10
-                          ),
-                      Left,
-                      CellBounds.bottom + (ButtonBounds.top - ButtonBounds.bottom) * 1.4f,
-                      TextPaint
-                  );
-            } /*if*/
-          } /*if*/
-        } /*if*/
+                 (
+                    String.format
+                       (
+                          Global.StdLocale,
+                          "%02d",
+                          ThisButton.BaseCode / 10 * 10
+                             +
+                             (ThisButton.BaseCode % 10 + 5) % 10
+                       ),
+                    Left,
+                    CellBounds.bottom + (ButtonBounds.top - ButtonBounds.bottom) * 1.4f,
+                    TextPaint
+                 );
+            }
+          }
+        }
         TextPaint.setTextAlign(android.graphics.Paint.Align.CENTER);
         TextPaint.setColor(ThisButton.TextColor);
         TextPaint.setTypeface(MFont);
         TextPaint.setTextSize(BaseTextSize * 1.1f);
         GraphicsUseful.DrawCenteredText
-            (
-                Draw,
-                ThisButton.Text,
-                (ButtonBounds.left + ButtonBounds.right) / 2.0f,
-                (ButtonBounds.bottom + ButtonBounds.top) / 2.0f,
-                TextPaint
-            );
-      } /*for*/
-    } /*for*/
-  } /*onDraw*/
+           (
+              Draw,
+              ThisButton.Text,
+              (ButtonBounds.left + ButtonBounds.right) / 2.0f,
+              (ButtonBounds.bottom + ButtonBounds.top) / 2.0f,
+              TextPaint
+           );
+      }
+    }
+  }
 
   void ResetOperands() {
     DigitsNeeded = 0;
@@ -624,17 +624,17 @@ public class ButtonGrid extends android.view.View {
     IsSymbolic = false;
     GotInd = false;
     CollectingForFunction = -1;
-  } /*ResetOperands*/
+  }
 
   void StoreOperand
-      (
-          int NrDigits, /* 1, 2 or 3 */
-          boolean SeparateInd
-      )
-      /* stores operand for a program instruction. */ {
+     (
+        int NrDigits, /* 1, 2 or 3 */
+        boolean SeparateInd
+     )
+    /* stores operand for a program instruction. */ {
     if (SeparateInd && GotInd) {
       Global.Calc.StoreInstr(40);
-    } /*if*/
+    }
     if (IsSymbolic) {
       Global.Calc.StoreInstr(ButtonCode);
     } else {
@@ -643,9 +643,9 @@ public class ButtonGrid extends android.view.View {
       } else {
         Global.Calc.StoreInstr(AccumDigits / 100);
         Global.Calc.StoreInstr(AccumDigits % 100);
-      } /*if*/
-    } /*if*/
-  } /*StoreOperand*/
+      }
+    }
+  }
 
   public void Invoke() {
     final State Calc = Global.Calc; /* shorten references */
@@ -656,7 +656,7 @@ public class ButtonGrid extends android.view.View {
         ButtonCode = SelectedButton / 10 * 10 + (SelectedButton % 10 + 5) % 10;
       } else {
         ButtonCode = SelectedButton;
-      } /*if*/
+      }
       if (Calc.TaskRunning) {
         switch (ButtonCode) {
           case 61:
@@ -669,7 +669,7 @@ public class ButtonGrid extends android.view.View {
           case 96: /* write */
             Calc.WriteBank();
             break;
-        } /*switch*/
+        }
         Handled = true; /* ignore everything else */
       } else if (CollectingForFunction != -1) {
         int Digit = -1;
@@ -679,15 +679,15 @@ public class ButtonGrid extends android.view.View {
             if (AcceptInd && AccumDigits < 0) {
               GotInd = !GotInd;
             } else if (NextLiteral) {
-                      /* note I can't use Ind as label because I can't goto/gosub it */
+              /* note I can't use Ind as label because I can't goto/gosub it */
               Calc.SetErrorState(true);
             } else {
               Handled = false;
-            } /*if*/
+            }
             break;
           case 21:
           case 26:
-                  /* needed for Ind and Lbl */
+            /* needed for Ind and Lbl */
             AltState = !AltState;
             WasModifier = true;
             break;
@@ -698,7 +698,7 @@ public class ButtonGrid extends android.view.View {
               Calc.SetErrorState(true);
             } else {
               Digit = ButtonCode - 55;
-            } /*if*/
+            }
             break;
           case 72: /*digit 4*/
           case 73: /*digit 5*/
@@ -707,7 +707,7 @@ public class ButtonGrid extends android.view.View {
               Calc.SetErrorState(true);
             } else {
               Digit = ButtonCode - 68;
-            } /*if*/
+            }
             break;
           case 82: /*digit 1*/
           case 83: /*digit 2*/
@@ -716,23 +716,23 @@ public class ButtonGrid extends android.view.View {
               Calc.SetErrorState(true);
             } else {
               Digit = ButtonCode - 81;
-            } /*if*/
+            }
             break;
           case 92: /*digit 0*/
             if (NextLiteral) {
               Calc.SetErrorState(true);
             } else {
               Digit = 0;
-            } /*if*/
+            }
             break;
           default:
             if (AcceptSymbolic || NextLiteral) {
               IsSymbolic = true;
             } else {
               Handled = false;
-            } /*if*/
+            }
             break;
-        } /*switch*/
+        }
 
         if (Digit >= 0) {
           if (AccumDigits < 0) {
@@ -740,17 +740,17 @@ public class ButtonGrid extends android.view.View {
             AcceptSymbolic = false;
             if (GotInd) {
               DigitsNeeded = 2; /* for register number */
-            } /*if*/
-          } /*if*/
+            }
+          }
           AccumDigits = AccumDigits * 10 + Digit;
-        } /*if*/
+        }
         if (Handled) {
           if (Digit >= 0) {
             --DigitsNeeded;
-          } /*if*/
+          }
         } else {
           DigitsNeeded = 0; /* non-digit cuts short digit entry */
-        } /*if*/
+        }
         if (!WasModifier && (DigitsNeeded == 0 || IsSymbolic)) {
           boolean Finished = true; /* to begin with */
           if (IsSymbolic || AccumDigits >= 0) {
@@ -761,7 +761,7 @@ public class ButtonGrid extends android.view.View {
                   StoreOperand(2, false);
                 } else {
                   Calc.SelectProgram(AccumDigits, GotInd);
-                } /*if*/
+                }
                 break;
               case 42: /*STO*/
                 if (Calc.ProgMode) {
@@ -778,10 +778,10 @@ public class ButtonGrid extends android.view.View {
                     if (ProgNr >= 1 && ProgNr <= Calc.MaxBanks && Calc.Bank[ProgNr] != null) {
                       Calc.FillInLabels(ProgNr); // if not done already
                       Global.Label.SetHelp
-                          (Calc.Bank[ProgNr].Card, Calc.Bank[ProgNr].Help);
+                         (Calc.Bank[ProgNr].Card, Calc.Bank[ProgNr].Help);
                     }
                   }
-                } /*if*/
+                }
                 break;
               case 43: /*RCL*/
                 if (Calc.ProgMode) {
@@ -789,7 +789,7 @@ public class ButtonGrid extends android.view.View {
                   StoreOperand(2, false);
                 } else {
                   Calc.MemoryOp(State.MEMOP_RCL, AccumDigits, GotInd);
-                } /*if*/
+                }
                 break;
               case 44: /*SUM*/
                 if (Calc.ProgMode) {
@@ -797,7 +797,7 @@ public class ButtonGrid extends android.view.View {
                   StoreOperand(2, false);
                 } else {
                   Calc.MemoryOp(State.MEMOP_ADD, AccumDigits, GotInd);
-                } /*if*/
+                }
                 break;
               case 48: /*Exc*/
                 if (Calc.ProgMode) {
@@ -805,7 +805,7 @@ public class ButtonGrid extends android.view.View {
                   StoreOperand(2, false);
                 } else {
                   Calc.MemoryOp(State.MEMOP_EXC, AccumDigits, GotInd);
-                } /*if*/
+                }
                 break;
               case 49: /*Prd*/
                 if (Calc.ProgMode) {
@@ -813,7 +813,7 @@ public class ButtonGrid extends android.view.View {
                   StoreOperand(2, false);
                 } else {
                   Calc.MemoryOp(State.MEMOP_MUL, AccumDigits, GotInd);
-                } /*if*/
+                }
                 break;
               case 58: /*Fix*/
                           /* assert not Calc.InvState */
@@ -822,7 +822,7 @@ public class ButtonGrid extends android.view.View {
                   StoreOperand(1, true);
                 } else {
                   Calc.SetDisplayMode(Calc.CurFormat, AccumDigits);
-                } /*if*/
+                }
                 break;
               case 67: /*x=t*/
               case 77: /*x≥t*/
@@ -831,11 +831,11 @@ public class ButtonGrid extends android.view.View {
                   StoreOperand(3, true);
                 } else {
                   Calc.CompareBranch
-                      (
-                          CollectingForFunction == 77,
-                          Calc.CurBank, AccumDigits, GotInd
-                      );
-                } /*if*/
+                     (
+                        CollectingForFunction == 77,
+                        Calc.CurBank, AccumDigits, GotInd
+                     );
+                }
                 break;
               case 69: /*Op*/
                 if (Calc.ProgMode) {
@@ -843,7 +843,7 @@ public class ButtonGrid extends android.view.View {
                   StoreOperand(2, false);
                 } else {
                   Calc.SpecialOp(AccumDigits, GotInd);
-                } /*if*/
+                }
                 break;
               case 61: /*GTO*/
                 if (Calc.ProgMode) {
@@ -852,23 +852,21 @@ public class ButtonGrid extends android.view.View {
                 } else {
                   Calc.FillInLabels();
                   Calc.Transfer
-                      (
-                                    /*Type =*/
-                          Calc.InvState ?
-                              State.TRANSFER_TYPE_LEA /*extension!*/
-                              :
-                              State.TRANSFER_TYPE_GTO,
-                                    /*BankNr =*/ Calc.CurBank,
-                                    /*Loc =*/ IsSymbolic ? ButtonCode : AccumDigits,
-                                    /*LocType =*/
-                          IsSymbolic ?
-                              State.TRANSFER_LOC_SYMBOLIC
-                              : GotInd ?
-                              State.TRANSFER_LOC_INDIRECT
-                              :
-                              State.TRANSFER_LOC_DIRECT
-                      );
-                } /*if*/
+                     (
+                        Calc.InvState ?
+                           State.TRANSFER_TYPE_LEA /*extension!*/
+                           :
+                           State.TRANSFER_TYPE_GTO,
+                        Calc.CurBank,
+                        IsSymbolic ? ButtonCode : AccumDigits,
+                        IsSymbolic ?
+                           State.TRANSFER_LOC_SYMBOLIC
+                           : GotInd ?
+                           State.TRANSFER_LOC_INDIRECT
+                           :
+                           State.TRANSFER_LOC_DIRECT
+                     );
+                }
                 break;
               case 71: /*SBR*/
                 if (Calc.ProgMode) {
@@ -878,19 +876,18 @@ public class ButtonGrid extends android.view.View {
                   Calc.ResetReturns(); /* seems to be what the real calculator does */
                   Calc.FillInLabels();
                   Calc.Transfer
-                      (
-                                    /*Type =*/ State.TRANSFER_TYPE_INTERACTIVE_CALL,
-                                    /*BankNr =*/ Calc.CurBank,
-                                    /*Loc =*/ IsSymbolic ? ButtonCode : AccumDigits,
-                                    /*LocType =*/
-                          IsSymbolic ?
-                              State.TRANSFER_LOC_SYMBOLIC
-                              : GotInd ?
-                              State.TRANSFER_LOC_INDIRECT
-                              :
-                              State.TRANSFER_LOC_DIRECT
-                      );
-                } /*if*/
+                     (
+                        State.TRANSFER_TYPE_INTERACTIVE_CALL,
+                        Calc.CurBank,
+                        IsSymbolic ? ButtonCode : AccumDigits,
+                        IsSymbolic ?
+                           State.TRANSFER_LOC_SYMBOLIC
+                           : GotInd ?
+                           State.TRANSFER_LOC_INDIRECT
+                           :
+                           State.TRANSFER_LOC_DIRECT
+                     );
+                }
                 break;
               case 76: /*Lbl*/
                 if (Calc.ProgMode) {
@@ -898,7 +895,7 @@ public class ButtonGrid extends android.view.View {
                   Calc.StoreInstr(ButtonCode); /* always symbolic */
                 } else {
                               /* ignore */
-                } /*if*/
+                }
                 break;
               case 86: /*St flg*/
                 if (Calc.ProgMode) {
@@ -906,7 +903,7 @@ public class ButtonGrid extends android.view.View {
                   StoreOperand(1, true);
                 } else {
                   Calc.SetFlag(AccumDigits, GotInd, !Calc.InvState);
-                } /*if*/
+                }
                 break;
               case 87: /*If flg*/
               case 97: /*Dsz*/
@@ -915,36 +912,36 @@ public class ButtonGrid extends android.view.View {
                     Calc.StoreInstr(CollectingForFunction);
                     if (GotFirstInd) {
                       Calc.StoreInstr(40);
-                    } /*if*/
+                    }
                     Calc.StoreInstr(FirstOperand);
                     StoreOperand(3, true);
                   } else {
                     if (CollectingForFunction == 87) /*If flg*/ {
                       Calc.BranchIfFlag
-                          (
-                              FirstOperand, GotFirstInd,
-                              Calc.CurBank, AccumDigits,
-                              IsSymbolic ?
-                                  State.TRANSFER_LOC_SYMBOLIC
-                                  : GotInd ?
-                                  State.TRANSFER_LOC_INDIRECT
-                                  :
-                                  State.TRANSFER_LOC_DIRECT
-                          );
+                         (
+                            FirstOperand, GotFirstInd,
+                            Calc.CurBank, AccumDigits,
+                            IsSymbolic ?
+                               State.TRANSFER_LOC_SYMBOLIC
+                               : GotInd ?
+                               State.TRANSFER_LOC_INDIRECT
+                               :
+                               State.TRANSFER_LOC_DIRECT
+                         );
                     } else /*Dsz*/ {
                       Calc.DecrementSkip
-                          (
-                              FirstOperand, GotFirstInd,
-                              Calc.CurBank, AccumDigits,
-                              IsSymbolic ?
-                                  State.TRANSFER_LOC_SYMBOLIC
-                                  : GotInd ?
-                                  State.TRANSFER_LOC_INDIRECT
-                                  :
-                                  State.TRANSFER_LOC_DIRECT
-                          );
-                    } /*if*/
-                  } /*if*/
+                         (
+                            FirstOperand, GotFirstInd,
+                            Calc.CurBank, AccumDigits,
+                            IsSymbolic ?
+                               State.TRANSFER_LOC_SYMBOLIC
+                               : GotInd ?
+                               State.TRANSFER_LOC_INDIRECT
+                               :
+                               State.TRANSFER_LOC_DIRECT
+                         );
+                    }
+                  }
                 } else {
                   GotFirstInd = GotInd;
                   GotInd = false;
@@ -955,26 +952,25 @@ public class ButtonGrid extends android.view.View {
                   DigitsNeeded = 3;
                   AcceptSymbolic = true;
                   Finished = false;
-                } /*if*/
+                }
                 break;
               default:
-                          /* shouldn't occur */
+                /* shouldn't occur */
                 throw new RuntimeException("unhandled collected function " + CollectingForFunction);
-                      /* break; */
-            } /*switch*/
+            }
             Calc.PreviousOp = CollectingForFunction;
           } else {
             Calc.SetErrorState(true);
             Handled = true;
-          } /*if*/
+          }
           if (Finished) {
             CollectingForFunction = -1;
             ResetOperands();
-          } /*if*/
-        } /*if*/
-      } /*if CollectingForFunction*/
+          }
+        }
+      }
       if (!Handled) {
-              /* check for functions needing further entry */
+        /* check for functions needing further entry */
         if (!Calc.ProgMode || Calc.ProgramWritable()) {
           Handled = true; /* next assumption */
           switch (ButtonCode) {
@@ -994,7 +990,7 @@ public class ButtonGrid extends android.view.View {
                 AcceptInd = true;
               } else {
                 Handled = false; /* no special handling required */
-              } /*if*/
+              }
               break;
             case 67: /* x = t */
             case 77: /* x ≥ t */
@@ -1010,7 +1006,7 @@ public class ButtonGrid extends android.view.View {
                 DigitsNeeded = 3;
                 AcceptInd = true;
                 AcceptSymbolic = true;
-              } /*if*/
+              }
               break;
             case 76: /* Lbl */
               NextLiteral = true;
@@ -1030,37 +1026,36 @@ public class ButtonGrid extends android.view.View {
                       /* wasn't one of these after all */
               Handled = false;
               break;
-          } /*ButtonCode*/
+          }
           if (Handled) {
             CollectingForFunction = ButtonCode;
-          } /*if*/
-        } /*if*/
-      } /*if*/
+          }
+        }
+      }
       if (!Handled && ButtonCode == 40 /*Ind*/) {
-              /* ignore? */
+        /* ignore? */
         Handled = true;
-      } /*if*/
+      }
       if (!Handled) {
-              /* deal with everything not already handled */
+        /* deal with everything not already handled */
         if (Calc.ProgMode) {
           if
-              (
-              Calc.ProgramWritable()
-                  ||
-                  ButtonCode == 31 /*LRN*/
-                  ||
-                  ButtonCode == 41 /*SST*/
-                  ||
-                  ButtonCode == 51 /*BST*/
-              ) {
+             (
+             Calc.ProgramWritable()
+                ||
+                ButtonCode == 31 /*LRN*/
+                ||
+                ButtonCode == 41 /*SST*/
+                ||
+                ButtonCode == 51 /*BST*/
+             ) {
             switch (ButtonCode) /* undo effect of 2nd key on buttons with no alt function */ {
               case 27: /* INV */
                 ButtonCode = 22;
                 break;
-            } /*switch*/
-            switch (ButtonCode)
-                          /* special handling of program-editing/viewing functions
-                            and number entry */ {
+            }
+            switch (ButtonCode) {
+              /* special handling of program-editing/viewing functions and number entry */
               case 21:
               case 26:
                 AltState = !AltState;
@@ -1100,15 +1095,15 @@ public class ButtonGrid extends android.view.View {
               case 71: /*SBR*/
                 if (Calc.InvState) {
                   Calc.StorePrevInstr(92);
-                } /*if*/
-                          /* else handled above */
+                }
+                /* else handled above */
                 break;
               case 72: /*digit 4*/
               case 73: /*digit 5*/
               case 74: /*digit 6*/
                 Calc.StoreInstr(ButtonCode - 68);
                 break;
-                      /* 76 handled above */
+              /* 76 handled above */
               case 82: /*digit 1*/
               case 83: /*digit 2*/
               case 84: /*digit 3*/
@@ -1120,9 +1115,8 @@ public class ButtonGrid extends android.view.View {
               default:
                 Calc.StoreInstr(ButtonCode);
                 break;
-            } /*switch*/
-          } /*if*/
-                      /* else ignore program entry attempts */
+            }
+          }
         } else /* calculation mode */ {
           switch (ButtonCode) {
             case 11:
@@ -1138,12 +1132,12 @@ public class ButtonGrid extends android.view.View {
               Calc.ResetReturns(); /* seems to be what the real calculator does */
               Calc.FillInLabels();
               Calc.Transfer
-                  (
-                            /*Type =*/ State.TRANSFER_TYPE_INTERACTIVE_CALL,
-                            /*BankNr =*/ Calc.CurBank,
-                            /*Loc =*/ ButtonCode,
-                            /*LocType =*/ State.TRANSFER_LOC_SYMBOLIC
-                  );
+                 (
+                    State.TRANSFER_TYPE_INTERACTIVE_CALL,
+                    Calc.CurBank,
+                    ButtonCode,
+                    State.TRANSFER_LOC_SYMBOLIC
+                 );
               break;
             case 21:
             case 26:
@@ -1167,15 +1161,15 @@ public class ButtonGrid extends android.view.View {
             case 25:
               Calc.ClearAll();
               break;
-                  /* 26 same as 21 */
-                  /* 27 same as 22 */
+            /* 26 same as 21 */
+            /* 27 same as 22 */
             case 28:
               Calc.Log();
               break;
             case 29:
               Calc.ClearProgram();
               break;
-                  /* 20 same as 25 */
+            /* 20 same as 25 */
             case 31: /*LRN*/
               Calc.SetProgMode(true);
               ResetOperands();
@@ -1192,7 +1186,7 @@ public class ButtonGrid extends android.view.View {
             case 35:
               Calc.Reciprocal();
               break;
-                  /* 36 handled above */
+            /* 36 handled above */
             case 37:
               Calc.Polar();
               break;
@@ -1211,19 +1205,17 @@ public class ButtonGrid extends android.view.View {
               WasModifier = Calc.InvState != SaveInvState; /* just did an INV */
             }
             break;
-                  /* 42, 43, 44 handled above */
+            /* 42, 43, 44 handled above */
             case 45:
               Calc.Operator(State.STACKOP_EXP);
               break;
             case 46:
-                      /* ignore? */
               break;
             case 47:
               Calc.ClearMemories();
               break;
-                  /* 48, 49, 40 handled above */
+            /* 48, 49, 40 handled above */
             case 51:
-                      /* ignore */
               break;
             case 52:
               Calc.EnterExponent();
@@ -1239,20 +1231,19 @@ public class ButtonGrid extends android.view.View {
                 Calc.Operator(State.STACKOP_MOD);
               } else {
                 Calc.Operator(State.STACKOP_DIV);
-              } /*if*/
+              }
               break;
             case 56:
-                      /* ignore */
               break;
             case 57:
               Calc.SetDisplayMode
-                  (
-                      Calc.InvState ? State.FORMAT_FIXED : State.FORMAT_ENG,
-                      Calc.CurNrDecimals
-                  );
+                 (
+                    Calc.InvState ? State.FORMAT_FIXED : State.FORMAT_ENG,
+                    Calc.CurNrDecimals
+                 );
               break;
             case 58:
-                      /* assert Calc.InvState */
+              /* assert Calc.InvState */
               Calc.SetDisplayMode(Calc.CurFormat, -1);
               break;
             case 59:
@@ -1261,7 +1252,7 @@ public class ButtonGrid extends android.view.View {
             case 50:
               Calc.Abs();
               break;
-                  /* 61 handled above */
+            /* 61 handled above */
             case 62:
               Calc.Digit('7');
               break;
@@ -1275,26 +1266,24 @@ public class ButtonGrid extends android.view.View {
               Calc.Operator(State.STACKOP_MUL);
               break;
             case 66: /*Pause*/
-                      /* ignore */
               break;
-                  /* 67 handled above */
+            /* 67 handled above */
             case 68: /*Nop*/
-                      /* No semantic effect, but why not do some saving of
-                        volatile state, just in case */
+              /* No semantic effect, but why not do some saving of
+                 volatile state, just in case */
               Persistent.SaveState(getContext(), false);
               if (Global.Export != null) {
                 Global.Export.Flush();
-              } /*if*/
+              }
               break;
-                  /* 69 handled above */
+            /* 69 handled above */
             case 60:
               Calc.SetAngMode(State.ANG_DEG);
               break;
             case 71:
               if (Calc.InvState) {
                 Calc.Return();
-              } /*if*/
-                        /* else handled above */
+              }
               break;
             case 72:
               Calc.Digit('4');
@@ -1309,9 +1298,8 @@ public class ButtonGrid extends android.view.View {
               Calc.Operator(State.STACKOP_SUB);
               break;
             case 76:
-                      /* ignore */
               break;
-                  /* 77 handled above */
+            /* 77 handled above */
             case 78:
               Calc.StatsSum();
               break;
@@ -1336,7 +1324,7 @@ public class ButtonGrid extends android.view.View {
             case 85:
               Calc.Operator(State.STACKOP_ADD);
               break;
-                  /* 86, 87 handled above */
+            /* 86, 87 handled above */
             case 88:
               Calc.D_MS();
               break;
@@ -1364,17 +1352,17 @@ public class ButtonGrid extends android.view.View {
             case 96: /* write */
               Calc.WriteBank();
               break;
-                  /* 97 handled above */
+            /* 97 handled above */
             case 98: /*Adv*/
               if (Calc.InvState) /* extension! */ {
                 if (Global.Export != null) {
                   Global.Export.Close();
-                } /*if*/
+                }
               } else {
                 if (Global.Print != null) {
                   Global.Print.Advance();
-                } /*if*/
-              } /*if*/
+                }
+              }
               break;
             case 99: /*Prt*/
               Calc.Enter(99);
@@ -1383,9 +1371,9 @@ public class ButtonGrid extends android.view.View {
               } else {
                 if (Global.Export != null && Global.Export.NumbersOnly) {
                   Global.Export.WriteNum(Calc.X);
-                } /*if*/
+                }
                 Calc.PrintDisplay(true, false, "");
-              } /*if*/
+              }
               break;
             case 90: /*List*/
               Calc.Enter(90);
@@ -1394,23 +1382,22 @@ public class ButtonGrid extends android.view.View {
                   Calc.StartRegisterListing();
                 } else {
                   Calc.StartProgramListing();
-                } /*if*/
-              } /*if*/
+                }
+              }
               break;
-          } /*switch*/
+          }
           Calc.PreviousOp = ButtonCode;
-        } /*if ProgMode*/
-      } /*if not Handled*/
+        }
+      }
       if (!WasModifier) {
         AltState = false;
-      } /*if*/
+      }
       if (Calc.InErrorState()) {
         ResetOperands(); /* abandon */
-      } /*if*/
+      }
       if (!WasModifier && CollectingForFunction < 0) {
         Calc.InvState = false;
-      } /*if*/
-    } /*if*/
-  } /*Invoke*/
-
-} /*ButtonGrid*/
+      }
+    }
+  }
+}

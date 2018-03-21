@@ -25,64 +25,63 @@ public class Exporter {
   public boolean NumbersOnly = true; /* actually initial value irrelevant */
 
   public Exporter
-      (
-          android.content.Context ctx
-      ) {
+     (
+        android.content.Context ctx
+     ) {
     this.ctx = ctx;
     Out = null;
     PrintOut = null;
-  } /*Exporter*/
+  }
 
   public boolean IsOpen() {
     return
-        Out != null;
-  } /*IsOpen*/
+       Out != null;
+  }
 
   public void Open
-      (
-          String FileName,
-          boolean Append,
-          boolean NumbersOnly
-      )
-      throws RuntimeException {
+     (
+        String FileName,
+        boolean Append,
+        boolean NumbersOnly
+     )
+     throws RuntimeException {
     try {
       Out = new java.io.FileOutputStream(FileName, Append);
       this.NumbersOnly = NumbersOnly;
       if (this.NumbersOnly) {
         PrintOut = new java.io.PrintStream(Out);
-      } /*if*/
+      }
     } catch (java.io.FileNotFoundException DirErr) {
       throw new RuntimeException(DirErr.toString());
     } catch (SecurityException PermErr) {
       throw new RuntimeException(PermErr.toString());
-    } /*try*/
-  } /*Open*/
+    }
+  }
 
   public void Flush() {
     if (Out != null) {
       try {
         if (PrintOut != null) {
           PrintOut.flush();
-        } /*if*/
+        }
         Out.flush();
       } catch (java.io.IOException WriteErr) {
         android.widget.Toast.makeText
-            (
-                    /*context =*/ ctx,
-                    /*text =*/
-                String.format
-                    (
-                        Global.StdLocale,
-                        ctx.getString(R.string.export_error),
-                        WriteErr.toString()
-                    ),
-                    /*duration =*/ android.widget.Toast.LENGTH_LONG
-            ).show();
+           (
+              ctx,
+              String.format
+                 (
+                    Global.StdLocale,
+                    ctx.getString(R.string.export_error),
+                    WriteErr.toString()
+                 ),
+              android.widget.Toast.LENGTH_LONG
+           ).show();
         PrintOut = null;
         Out = null;
-      } /*try*/
-    } /*if*/
-  } /*Flush*/
+      }
+    }
+  }
 
   public void Close() {
     if (Out != null) {
@@ -90,64 +89,61 @@ public class Exporter {
         if (PrintOut != null) {
           PrintOut.flush();
           PrintOut.close();
-        } /*if*/
+        }
         Out.flush();
         Out.close();
       } catch (java.io.IOException WriteErr) {
         android.widget.Toast.makeText
-            (
-                    /*context =*/ ctx,
-                    /*text =*/
-                String.format
-                    (
-                        Global.StdLocale,
-                        ctx.getString(R.string.export_error),
-                        WriteErr.toString()
-                    ),
-                    /*duration =*/ android.widget.Toast.LENGTH_LONG
-            ).show();
-      } /*try*/
+           (
+              ctx,
+              String.format
+                 (
+                    Global.StdLocale,
+                    ctx.getString(R.string.export_error),
+                    WriteErr.toString()
+                 ),
+              android.widget.Toast.LENGTH_LONG
+           ).show();
+      }
       PrintOut = null;
       Out = null;
-    } /*if*/
-  } /*Close*/
+    }
+  }
 
   public void WriteLine
-      (
-          String Line
-      )
-      /* writes another line to the export data file. */ {
+     (
+        String Line
+     ) {
+    /* writes another line to the export data file. */
     if (Out != null) {
       try {
         Out.write(Line.getBytes());
         Out.write("\n".getBytes());
       } catch (java.io.IOException WriteErr) {
         android.widget.Toast.makeText
-            (
-                    /*context =*/ ctx,
-                    /*text =*/
-                String.format
-                    (
-                        Global.StdLocale,
-                        ctx.getString(R.string.export_error),
-                        WriteErr.toString()
-                    ),
-                    /*duration =*/ android.widget.Toast.LENGTH_LONG
-            ).show();
+           (
+              ctx,
+              String.format
+                 (
+                    Global.StdLocale,
+                    ctx.getString(R.string.export_error),
+                    WriteErr.toString()
+                 ),
+              android.widget.Toast.LENGTH_LONG
+           ).show();
         Out = null;
-      } /*try*/
-    } /*if*/
-  } /*Write*/
+      }
+    }
+  }
 
   public void WriteNum
-      (
-          Number Num
-      )
-      /* writes a number to the export data file in a standard form that can
-        be read in again by myself or other programs. */ {
+     (
+        Number Num
+     ) {
+    /* writes a number to the export data file in a standard form that can
+       be read in again by myself or other programs. */
     if (PrintOut != null) {
       PrintOut.printf(Num.formatString(Global.StdLocale, Global.NrSigFigures));
-    } /*if*/
-  } /*WriteNum*/
-
-} /*Exporter*/
+    }
+  }
+}

@@ -42,107 +42,102 @@ public class Global {
     Throwable TaskFailure = null;
 
     void SetStatus
-        (
-            int NewStatus,
-            Throwable NewFailure
-        ) {
+       (
+          int NewStatus,
+          Throwable NewFailure
+       ) {
       TaskStatus = NewStatus;
       TaskFailure = NewFailure;
-    } /*SetStatus*/
+    }
 
-    public boolean PreRun()
-          /* to be run before BGRun in calling thread, return false to abort */ {
-      return
-          true;
-    } /*PreRun*/
+    public boolean PreRun() {
+      /* to be run before BGRun in calling thread, return false to abort */
+      return true;
+    }
 
     public void BGRun() {
     }
-          /* to be run in a background thread */
+    /* to be run in a background thread */
 
     public void PostRun() {
     }
-          /* to be run on UI thread after BGRun has finished */
-
-  } /*Task*/
+    /* to be run on UI thread after BGRun has finished */
+  }
 
   private static class BGTask extends Thread {
     private final Task RunWhat;
 
     public BGTask
-        (
-            Task RunWhat
-        ) {
+       (
+          Task RunWhat
+       ) {
       super();
       this.RunWhat = RunWhat;
-    } /*BGTask*/
+    }
 
     public void run() {
       RunWhat.BGRun();
       if (CurrentBGTask == this) {
         UIRun.post
-            (
-                new Runnable() {
-                  public void run() {
-                    CurrentBGTask = null;
-                    RunWhat.PostRun();
-                    if (CurrentBGTask == null) {
-                      ProgressWidgets.setVisibility(android.view.View.INVISIBLE);
-                    } /*if*/
-                  } /*run*/
-                } /*Runnable*/
-            );
+           (
+              new Runnable() {
+                public void run() {
+                  CurrentBGTask = null;
+                  RunWhat.PostRun();
+                  if (CurrentBGTask == null) {
+                    ProgressWidgets.setVisibility(android.view.View.INVISIBLE);
+                  }
+                } /*run*/
+              }
+           );
       } else {
-              /* I've been orphaned! */
-      } /*if*/
-    } /*run*/
-
-  } /*BGTask*/
+        /* I've been orphaned! */
+      }
+    }
+  }
 
   private static BGTask CurrentBGTask;
 
   static void StartBGTask
-      (
-          Task RunWhat,
-          String ProgressMessage /* null to leave unchanged */
-      ) {
+     (
+        Task RunWhat,
+        String ProgressMessage /* null to leave unchanged */
+     ) {
     if (CurrentBGTask == null) {
       if (ProgressMessage != null) {
         Global.ProgressMessage.setText(ProgressMessage);
-      } /*if*/
+      }
       CurrentBGTask = new BGTask(RunWhat);
       if (RunWhat.PreRun()) {
         if (ProgressWidgets.getVisibility() != android.view.View.VISIBLE) {
-                  /* short delay before making progress widget visible so that user
-                    doesn't see anything if task finishes quickly enough */
+          /* short delay before making progress widget visible so that user
+             doesn't see anything if task finishes quickly enough */
           UIRun.postDelayed
-              (
-                  new Runnable() {
-                    public void run() {
-                      if (CurrentBGTask != null) {
-                        ProgressWidgets.setVisibility(android.view.View.VISIBLE);
-                      } /*if*/
-                    } /*run*/
-                  } /*Runnable*/,
-                  1000
-              );
-        } /*if*/
+             (
+                new Runnable() {
+                  public void run() {
+                    if (CurrentBGTask != null) {
+                      ProgressWidgets.setVisibility(android.view.View.VISIBLE);
+                    }
+                  } /*run*/
+                } /*Runnable*/,
+                1000
+             );
+        }
         CurrentBGTask.start();
       } else {
         CurrentBGTask = null;
-      } /*if*/
+      }
     } else {
       throw new RuntimeException("Trying to start second background task");
-    } /*if*/
-  } /*StartingBGTask*/
+    }
+  }
 
   static boolean BGTaskInProgress() {
-    return
-        CurrentBGTask != null;
-  } /*BGTaskInProgress*/
+    return CurrentBGTask != null;
+  }
 
   static void KillBGTask() {
     CurrentBGTask = null; /* can't actually kill it, just orphan it */
-  } /*KilLBGTask*/
-
-} /*Global*/
+  }
+}
