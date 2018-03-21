@@ -1276,7 +1276,7 @@ public class Main extends android.app.Activity {
               } /*onClick*/
             } /*OnClickListener*/
         );
-    ((android.widget.Button) findViewById(R.id.action_help)).setOnClickListener
+    ((android.widget.Button) findViewById(R.id.action_helpmod)).setOnClickListener
         (
             new View.OnClickListener() {
               public void onClick
