@@ -2,7 +2,7 @@
     Support routines for the API Level 23 and above requirements for
     discretionary/dynamic permissions.
 
-    Copyright 2017       Steven Zoppi <about-ti5x@zoppi.org>.
+    Copyright 2017-2018  Steven Zoppi <about-ti5x@zoppi.org>.
 
     This program is free software: you can redistribute it and/or modify it under
     the terms of the GNU General Public License as published by the Free Software

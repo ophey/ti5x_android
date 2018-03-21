@@ -1,8 +1,9 @@
-package net.obry.ti5x;
 /*
     ti5x calculator emulator -- virtual printer display
 
-    Copyright 2011 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+    Copyright 2011      Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+    Copyright 2015-2018 Pascal Obry <pascal@obry.net>.
+    Copyright 2016-2018 Steven Zoppi <about-ti5x@zoppi.org>.
 
     This program is free software: you can redistribute it and/or modify it under
     the terms of the GNU General Public License as published by the Free Software
@@ -15,6 +16,8 @@ package net.obry.ti5x;
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
+
+package net.obry.ti5x;
 
 public class PrinterView extends android.app.Activity {
   android.widget.ScrollView PaperScroll;

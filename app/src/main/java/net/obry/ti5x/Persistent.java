@@ -1,4 +1,3 @@
-package net.obry.ti5x;
 /*
     Saving/loading of programs, program libraries and calculator state
 
@@ -16,6 +15,8 @@ package net.obry.ti5x;
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
+
+package net.obry.ti5x;
 
 import java.util.zip.ZipEntry;
 

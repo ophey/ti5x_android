@@ -1,4 +1,3 @@
-package net.obry.ti5x;
 /*
     Let the user enter a name for saving a new program file.
 
@@ -15,6 +14,8 @@ package net.obry.ti5x;
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
+
+package net.obry.ti5x;
 
 public class SaveAs extends android.app.Activity {
   static android.view.View Extra = null;

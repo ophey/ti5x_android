@@ -1,4 +1,3 @@
-package net.obry.ti5x;
 /*
     ti5x calculator emulator -- data importer context
 
@@ -16,6 +15,8 @@ package net.obry.ti5x;
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
+
+package net.obry.ti5x;
 
 class Importer {
 

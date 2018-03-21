@@ -1,4 +1,3 @@
-package net.obry.ti5x;
 /*
     Help-page display
 
@@ -15,6 +14,8 @@ package net.obry.ti5x;
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
+
+package net.obry.ti5x;
 
 public class Help extends android.app.Activity {
   public static String ContentID = "net.obry.ti5x.HelpContent";

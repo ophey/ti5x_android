@@ -1,9 +1,8 @@
-package net.obry.ti5x;
 /*
     ti5x calculator emulator
 
     Copyright 2017-2018 Pascal Obry <pascal@obry.net>.
-    Copyright 2017-2018 Steven Zoppi <szoppi_accounts@collabri.com>
+    Copyright 2017-2018 Steven Zoppi <about-ti5x@zoppi.org>.
 
     This program is free software: you can redistribute it and/or modify it under
     the terms of the GNU General Public License as published by the Free Software
@@ -17,6 +16,7 @@ package net.obry.ti5x;
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 
+package net.obry.ti5x;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;

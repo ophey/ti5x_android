@@ -1,8 +1,8 @@
-package net.obry.ti5x;
 /*
     let the user choose a program or library to load
 
-    Copyright 2011 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+    Copyright 2011      Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+    Copyright 2016-2018 Steven Zoppi <about-ti5x@zoppi.org>.
 
     This program is free software: you can redistribute it and/or modify it under
     the terms of the GNU General Public License as published by the Free Software
@@ -15,6 +15,8 @@ package net.obry.ti5x;
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
+
+package net.obry.ti5x;
 
 public class Picker extends android.app.Activity {
   public static String AltIndexID = "net.obry.ti5x.PickedIndex";

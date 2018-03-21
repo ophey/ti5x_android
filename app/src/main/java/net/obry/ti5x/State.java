@@ -1,9 +1,8 @@
-package net.obry.ti5x;
 /*
     The calculation state, number entry and programs.
 
-    Copyright 2011 - 2012 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
-    Copyright 2014 - 2015 Pascal Obry <pascal@obry.net>.
+    Copyright 2011-2012 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+    Copyright 2014-2015 Pascal Obry <pascal@obry.net>.
 
     This program is free software: you can redistribute it and/or modify it under
     the terms of the GNU General Public License as published by the Free Software
@@ -16,6 +15,8 @@ package net.obry.ti5x;
     You should have received a copy of the GNU General Public License
     along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
+
+package net.obry.ti5x;
 
 import android.util.Log;
 
