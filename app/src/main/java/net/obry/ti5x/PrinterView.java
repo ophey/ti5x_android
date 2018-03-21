@@ -19,9 +19,17 @@
 
 package net.obry.ti5x;
 
+import android.view.View;
+import android.widget.Button;
+import android.widget.ToggleButton;
+
 public class PrinterView extends android.app.Activity {
   android.widget.ScrollView PaperScroll;
   PaperView ThePaper;
+  Button ClearButton;
+  Button TearButton;
+  ToggleButton TraceButton;
+
   boolean FirstView = true;
 
   class PaperChangedListener implements Printer.Notifier {
@@ -30,7 +38,6 @@ public class PrinterView extends android.app.Activity {
       PaperScroll.scrollTo(0, ThePaper.GetViewHeight());
       ThePaper.invalidate();
     } /*PaperChanged*/
-
   } /*PaperChangedListener*/
 
   @Override
@@ -42,7 +49,60 @@ public class PrinterView extends android.app.Activity {
     setContentView(R.layout.printer);
     PaperScroll = (android.widget.ScrollView) findViewById(R.id.paper_scroll);
     ThePaper = (PaperView) findViewById(R.id.paper);
+    addListenerOnButtons();
   } /*onCreate*/
+
+  public void addListenerOnButtons() {
+    // Saves Papertape Image and Clears Scroll
+
+    TearButton = (Button) findViewById(R.id.TearTapeButton);
+    TearButton.setOnClickListener
+        (
+            new View.OnClickListener() {
+
+              @Override
+              public void onClick(View arg0) {
+                Global.Print.Advance();
+                Global.Print.Advance();
+                Global.Print.SavePaper(getApplicationContext());
+                PaperScroll.scrollTo(0, ThePaper.GetViewHeight());
+              }
+
+            }
+        );
+
+    // Clears and re-initializes the Paper Tape
+
+    ClearButton = (Button) findViewById(R.id.ClearTapeButton);
+    ClearButton.setOnClickListener
+        (
+            new View.OnClickListener() {
+
+              @Override
+              public void onClick(View arg0) {
+                Global.Print.ClearPaper(getApplicationContext());
+                ThePaper.invalidate();
+                PaperScroll.scrollTo(0, ThePaper.GetViewHeight());
+              }
+            }
+        );
+
+    // Enables Toggle of Tracing
+
+    TraceButton = (ToggleButton) findViewById(R.id.TracePrintButton);
+    TraceButton.setChecked(Global.Calc.TracePrintActivated);
+    TraceButton.setOnClickListener
+        (
+            new View.OnClickListener() {
+
+              @Override
+              public void onClick(View arg0) {
+                Global.Calc.TracePrintActivated = !Global.Calc.TracePrintActivated;
+                TraceButton.setChecked(Global.Calc.TracePrintActivated);
+              }
+            }
+        );
+  } /*AddListenerOnButtons*/
 
   @Override
   public void onPause() {

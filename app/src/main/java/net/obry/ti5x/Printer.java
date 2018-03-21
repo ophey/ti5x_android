@@ -19,6 +19,17 @@
 
 package net.obry.ti5x;
 
+import android.graphics.Bitmap;
+import android.os.Environment;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Printer {
   public android.graphics.Bitmap Paper;
       /* the idea is that this is low-resolution but will be displayed scaled up
@@ -253,9 +264,62 @@ public class Printer {
     Paper.prepareToDraw();
   } /*Printer*/
 
-  public void StartNewLine()
-      /* advances the paper to the next line. */ {
-    // source rectangle, skip top line
+  void SavePaper(android.content.Context ctx) {
+    // Clears and re-initializes the Paper Tape
+
+    String extStorageDirectory;
+    extStorageDirectory = Environment.getExternalStorageState();
+
+    if (Environment.MEDIA_MOUNTED.equals(extStorageDirectory)) {
+      extStorageDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
+    } else {
+      extStorageDirectory = Environment.getDownloadCacheDirectory().toString();
+    }
+
+    OutputStream outputStream = null;
+    String outString = new SimpleDateFormat("dd-MM-yyyy hh-mm-ss").format(new Date());
+    File file = new File(extStorageDirectory + "/ti5x " + outString + ".png");
+
+    try {
+      outputStream = new FileOutputStream(file);
+      Paper.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+    } catch (FileNotFoundException ex) {
+      //exception handling code
+      ex.printStackTrace();
+      Toast.makeText(ctx, "Can't Create. " + extStorageDirectory +
+          "/ti5x " + outString + ".png !", Toast.LENGTH_LONG).show();
+    } finally {
+      try {
+        if (outputStream != null) {
+          outputStream.close();
+          Toast.makeText(ctx, "Saved to " + extStorageDirectory +
+              "/ti5x " + outString + ".png !", Toast.LENGTH_SHORT).show();
+        }
+      } catch (java.io.IOException ex) {
+        ex.printStackTrace();
+        Toast.makeText(ctx, "Error Occurred.", Toast.LENGTH_LONG).show();
+      }
+    }
+  } /* SavePaper */
+
+  void ClearPaper(android.content.Context ctx) {
+    // Clears and re-initializes the Paper Tape
+    Paper = android.graphics.Bitmap.createBitmap
+        (
+            /*width =*/ PaperWidth,
+            /*height =*/ PaperHeight,
+            /*config =*/ android.graphics.Bitmap.Config.ARGB_4444
+        );
+    PaperDraw = new android.graphics.Canvas(Paper);
+    PaperDraw.drawPaint(GraphicsUseful.FillWithColor(PaperColor));
+    Paper.prepareToDraw();
+    Toast.makeText(ctx, "Paper Reloaded!", Toast.LENGTH_SHORT).show();
+
+  } /* ClearPaper */
+
+  void StartNewLine() {
+    // advances the paper to the next line.
+    // source rectangle, skip top line.
     android.graphics.Rect srcRect = new android.graphics.Rect
         (0, LineHeight, PaperWidth, PaperHeight);
 
