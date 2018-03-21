@@ -17,9 +17,9 @@
 
 package net.obry.ti5x;
 
-public class GraphicsUseful {
+class GraphicsUseful {
 
-  public static android.graphics.Paint FillWithColor
+  static android.graphics.Paint FillWithColor
      (
         int TheColor
      ) {
@@ -30,7 +30,7 @@ public class GraphicsUseful {
     return ThePaint;
   }
 
-  public static void DrawCenteredText
+  static void DrawCenteredText
      (
         android.graphics.Canvas Draw,
         String TheText,
@@ -50,11 +50,11 @@ public class GraphicsUseful {
        );
   }
 
-  public static class HSVA {
+  static class HSVA {
     /* HSV colour space with alpha */
-    public final float H, S, V, A;
+    final float H, S, V, A;
 
-    public HSVA
+    HSVA
        (
           int ARGB
        ) {
@@ -94,7 +94,7 @@ public class GraphicsUseful {
       A = (ARGB >> 24 & 255) / 255.0f;
     }
 
-    public HSVA
+    HSVA
        (
           float H,
           float S,
@@ -107,7 +107,7 @@ public class GraphicsUseful {
       this.A = A;
     }
 
-    public int ToRGB() {
+    int ToRGB() {
       final int hue = (int) (H * 360.0f);
       final int chroma = (int) (V * S * 255.0f);
       final int second = chroma * (60 - Math.abs(hue % 120 - 60)) / 60;

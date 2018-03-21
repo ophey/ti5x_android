@@ -30,7 +30,7 @@ public class Global {
 
   static final int NrSigFigures = 16;
   /* for formatting reals */
-  public static final java.util.Locale StdLocale = java.util.Locale.US;
+  static final java.util.Locale StdLocale = java.util.Locale.US;
       /* for all those places I don't want formatting to be locale-specific */
 
   static android.view.View ProgressWidgets;
@@ -67,7 +67,7 @@ public class Global {
   private static class BGTask extends Thread {
     private final Task RunWhat;
 
-    public BGTask
+    BGTask
        (
           Task RunWhat
        ) {
@@ -90,8 +90,6 @@ public class Global {
                 } /*run*/
               }
            );
-      } else {
-        /* I've been orphaned! */
       }
     }
   }

@@ -18,6 +18,7 @@
 
 package net.obry.ti5x;
 
+import android.support.annotation.NonNull;
 import android.widget.Toast;
 
 import java.io.File;
@@ -36,7 +37,7 @@ public class Picker extends android.app.Activity {
   static boolean Reentered = false; /* sanity check */
   public static Picker Current = null;
 
-  public static class PickerAltList {
+  static class PickerAltList {
     /* defining alternative lists of files for picker to display */
     int RadioButtonID;
     String Prompt;
@@ -44,7 +45,7 @@ public class Picker extends android.app.Activity {
     String[] FileExts; /* list of extensions to match, or null to match all files */
     String[] SpecialItem; /* special item to add to list, null for none */
 
-    public PickerAltList
+    PickerAltList
        (
           int RadioButtonID,
           String Prompt,
@@ -77,7 +78,7 @@ public class Picker extends android.app.Activity {
     String FullPath, DisplayName;
     boolean Selected;
 
-    public PickerItem
+    PickerItem
        (
           String FullPath,
           String DisplayName
@@ -228,6 +229,7 @@ public class Picker extends android.app.Activity {
       LastChecked = null;
     }
 
+    @NonNull
     @Override
     public android.view.View getView
        (

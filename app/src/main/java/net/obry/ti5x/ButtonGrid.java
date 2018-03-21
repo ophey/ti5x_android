@@ -244,7 +244,6 @@ public class ButtonGrid extends android.view.View {
                ) {
               boolean Handled = false;
               if (!Global.BGTaskInProgress()) {
-                final ButtonGrid TheButtons = (ButtonGrid) TheView;
                 final int EventAction = TheEvent.getAction() & (1 << MotionEvent.ACTION_POINTER_ID_SHIFT) - 1;
                 switch (EventAction) {
                   case MotionEvent.ACTION_DOWN:
@@ -769,10 +768,9 @@ public class ButtonGrid extends android.view.View {
                   StoreOperand(2, false);
                 } else {
                   Calc.MemoryOp(State.MEMOP_STO, AccumDigits, GotInd);
-
-                                /* special case, if pgm is 01 then store mm in 00 is selecting an
-                                   alternate program to have printout. In this case we change the
-                                   actual card/help to correspond to the target program. */
+                  /* special case, if pgm is 01 then store mm in 00 is selecting an
+                     alternate program to have printout. In this case we change the
+                     actual card/help to correspond to the target program. */
                   if (Calc.CurBank == 1 && AccumDigits == 0 && Global.Label != null) {
                     int ProgNr = (int) Calc.X.getInt();
                     if (ProgNr >= 1 && ProgNr <= Calc.MaxBanks && Calc.Bank[ProgNr] != null) {
@@ -893,8 +891,6 @@ public class ButtonGrid extends android.view.View {
                 if (Calc.ProgMode) {
                   Calc.StoreInstr(76);
                   Calc.StoreInstr(ButtonCode); /* always symbolic */
-                } else {
-                              /* ignore */
                 }
                 break;
               case 86: /*St flg*/
@@ -1023,7 +1019,7 @@ public class ButtonGrid extends android.view.View {
               GotFirstOperand = false;
               break;
             default:
-                      /* wasn't one of these after all */
+              /* wasn't one of these after all */
               Handled = false;
               break;
           }
@@ -1070,7 +1066,7 @@ public class ButtonGrid extends android.view.View {
                 Calc.SetProgMode(false);
                 ResetOperands();
                 break;
-                      /* 40 handled above */
+              /* 40 handled above */
               case 41: /*SST*/
                 Calc.StepPC(true);
                 ResetOperands();

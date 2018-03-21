@@ -18,13 +18,13 @@
 
 package net.obry.ti5x;
 
-public class Exporter {
-  final android.content.Context ctx;
-  java.io.OutputStream Out;
-  java.io.PrintStream PrintOut;
-  public boolean NumbersOnly = true; /* actually initial value irrelevant */
+class Exporter {
+  private final android.content.Context ctx;
+  private java.io.OutputStream Out;
+  private java.io.PrintStream PrintOut;
+  boolean NumbersOnly = true; /* actually initial value irrelevant */
 
-  public Exporter
+  Exporter
      (
         android.content.Context ctx
      ) {
@@ -33,12 +33,12 @@ public class Exporter {
     PrintOut = null;
   }
 
-  public boolean IsOpen() {
+  boolean IsOpen() {
     return
        Out != null;
   }
 
-  public void Open
+  void Open
      (
         String FileName,
         boolean Append,
@@ -58,7 +58,7 @@ public class Exporter {
     }
   }
 
-  public void Flush() {
+  void Flush() {
     if (Out != null) {
       try {
         if (PrintOut != null) {
@@ -83,7 +83,7 @@ public class Exporter {
     }
   }
 
-  public void Close() {
+  void Close() {
     if (Out != null) {
       try {
         if (PrintOut != null) {
@@ -110,7 +110,7 @@ public class Exporter {
     }
   }
 
-  public void WriteLine
+  void WriteLine
      (
         String Line
      ) {
@@ -136,7 +136,7 @@ public class Exporter {
     }
   }
 
-  public void WriteNum
+  void WriteNum
      (
         Number Num
      ) {

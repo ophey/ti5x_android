@@ -55,7 +55,7 @@ public class Main extends android.app.Activity {
   static final int SaveProgramRequest = 3;
   static final int ExportDataRequest = 4;
 
-  static final int SwitchSaveAs = android.app.Activity.RESULT_FIRST_USER + 0;
+  static final int SwitchSaveAs = android.app.Activity.RESULT_FIRST_USER;
   static final int SwitchAppend = android.app.Activity.RESULT_FIRST_USER + 1;
 
   // Response Results for Permissions Interactions
@@ -198,7 +198,7 @@ public class Main extends android.app.Activity {
     final android.content.Context ctx;
     android.widget.RadioGroup TheButtons;
 
-    public FeedbackDialog
+    FeedbackDialog
        (
           android.content.Context ctx
        ) {
@@ -786,7 +786,7 @@ public class Main extends android.app.Activity {
               final boolean IsLib = Data.getIntExtra(Picker.AltIndexID, 0) != 0;
                       /* assumes AltLists array passed to Picker has element 0 for
                         saved programs and element 1 for libraries */
-              final boolean LoadingBuiltinLibrary = IsLib && ProgName.intern() == "/";
+              final boolean LoadingBuiltinLibrary = IsLib && ProgName.intern().equals("/");
                   /* It appears onActivityResult is liable to be called before
                     onResume. Therefore I do additional restoring/saving state
                     here to ensure the saved state includes the newly-loaded
@@ -807,7 +807,7 @@ public class Main extends android.app.Activity {
                   Subtask = null;
                 }
 
-                public LoadProgram() {
+                private LoadProgram() {
                   this
                      (
                         StateLoaded ?

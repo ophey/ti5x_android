@@ -75,7 +75,7 @@ public class State {
 
   ImportFeeder Import = null;
 
-  java.security.SecureRandom Random = new java.security.SecureRandom();
+  private java.security.SecureRandom Random = new java.security.SecureRandom();
 
   /* number-display format */
   static final int FORMAT_FIXED = 0;
@@ -85,8 +85,8 @@ public class State {
   int CurNrDecimals = -1;
 
   /* Max and Min number that can be represented using a fixed format */
-  final static Number minFixed = new Number(5.0 * Math.pow(10.0, -9.0));
-  final static Number maxFixed = new Number(Math.pow(10.0, 10.0));
+  private final static Number minFixed = new Number(5.0 * Math.pow(10.0, -9.0));
+  private final static Number maxFixed = new Number(Math.pow(10.0, 10.0));
 
   /* angle units */
   static final int ANG_RAD = 1;
@@ -105,12 +105,12 @@ public class State {
 
   private static final int[] STACKOP_CODE = {85, 75, 65, 55, 55, 45, 34};
 
-  public static class OpStackEntry {
+  static class OpStackEntry {
     Number Operand;
     int Operator;
     int ParenFollows;
 
-    public OpStackEntry
+    OpStackEntry
        (
           Number Operand,
           int Operator,
@@ -193,11 +193,11 @@ public class State {
   private static final int STATSREG_FIRST = 1; /* lowest-numbered memory used for stats */
   private static final int STATSREG_LAST = 6; /* highest-numbered memory used for stats */
 
-  public static class ReturnStackEntry {
+  static class ReturnStackEntry {
     int BankNr, Addr;
     boolean FromInteractive;
 
-    public ReturnStackEntry
+    ReturnStackEntry
        (
           int BankNr,
           int Addr,
@@ -260,7 +260,7 @@ public class State {
     ResetEntry();
   }
 
-  public void ResetLibs() {
+  void ResetLibs() {
     /* wipes out loaded library modules */
     for (int i = 1; i < MaxBanks; ++i) {
       if (Bank[i] != null && Bank[i].Card != null) {
@@ -277,7 +277,7 @@ public class State {
     ModuleHelp = null;
   }
 
-  public State
+  State
      (
         android.content.Context ctx
      ) {
@@ -475,7 +475,7 @@ public class State {
         CurState = DecimalEntryState;
 
         // Add decimal point if needed
-        if (CurDisplay.indexOf(".") == -1) {
+        if (!CurDisplay.contains(".")) {
           final int len = CurDisplay.length();
           if (ExponentEntered) {
             CurDisplay =
@@ -2319,8 +2319,7 @@ public class State {
                        LabelDef Label1,
                        LabelDef Label2
                     ) {
-                   return
-                      new Integer(Label1.Loc).compareTo(Label2.Loc);
+                   return new Integer(Label1.Loc).compareTo(Label2.Loc);
                  } /*compare*/
                }
             );

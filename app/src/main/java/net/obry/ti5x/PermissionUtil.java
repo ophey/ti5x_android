@@ -61,7 +61,7 @@ public abstract class PermissionUtil {
     return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
   }
 
-  public static boolean hasCorrectPermission(Context ctx) {
+  static boolean hasCorrectPermission(Context ctx) {
     return (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.READ_EXTERNAL_STORAGE)
         == PackageManager.PERMISSION_GRANTED)
         &&

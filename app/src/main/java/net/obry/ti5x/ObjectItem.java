@@ -4,8 +4,8 @@ package net.obry.ti5x;
 
 public class ObjectItem {
 
-  public int itemId;
-  public String itemName;
+  private int itemId;
+  private String itemName;
 
   // constructor
   public ObjectItem(int itemId, String itemName) {

@@ -23,11 +23,11 @@ import java.util.zip.ZipEntry;
 class ZipComponentWriter
   /* convenient writing of components to a ZIP archive, with automatic
      calculation of size and CRC fields. */ {
-  protected java.util.zip.ZipOutputStream Parent;
-  protected ZipEntry Entry;
-  public java.io.ByteArrayOutputStream Out;
+  private java.util.zip.ZipOutputStream Parent;
+  private ZipEntry Entry;
+  java.io.ByteArrayOutputStream Out;
 
-  public ZipComponentWriter
+  ZipComponentWriter
      (
         java.util.zip.ZipOutputStream Parent,
         String Name,
@@ -45,31 +45,21 @@ class ZipComponentWriter
     Out = new java.io.ByteArrayOutputStream();
   }
 
-  public void write
-     (
-        byte[] buffer,
-        int offset,
-        int len
-     ) {
-    /* writes more data making up the component. */
-    Out.write(buffer, offset, len);
-  }
-
-  public void write
+  void write
      (
         byte[] buffer
      ) {
-    write(buffer, 0, buffer.length);
+    Out.write(buffer, 0, buffer.length);
   }
 
-  public void write
+  void write
      (
         String data
      ) {
     write(data.getBytes());
   }
 
-  public void close()
+  void close()
      throws java.io.IOException {
      /* finalizes output of this archive component. */
     Out.close();
@@ -86,39 +76,39 @@ class ZipComponentWriter
 
 public class Persistent {
   /* saving/loading of libraries and calculator state. */
-  public static final String CalcMimeType = "application/vnd.nz.gen.geek_central.ti5x";
-  public static final String StateExt = ".ti5s"; /* for saved calculator state */
-  public static final String ProgExt = ".ti5p"; /* for saved user program */
-  public static final String LibExt = ".ti5l"; /* for library */
-  public static final String ProgramsDir = "Programs"; /* where to save user programs */
-  public static final String DataDir = "Download"; /* where to save exported data */
-  public static final String[] ExternalCalcDirectories =
+  static final String CalcMimeType = "application/vnd.nz.gen.geek_central.ti5x";
+  private static final String StateExt = ".ti5s"; /* for saved calculator state */
+  static final String ProgExt = ".ti5p"; /* for saved user program */
+  static final String LibExt = ".ti5l"; /* for library */
+  static final String ProgramsDir = "Programs"; /* where to save user programs */
+  static final String DataDir = "Download"; /* where to save exported data */
+  static final String[] ExternalCalcDirectories =
       /* where to load programs/libraries from */
      {
         ProgramsDir,
         DataDir,
      };
-  public static final String[] ExternalDataDirectories =
+  static final String[] ExternalDataDirectories =
       /* where to load data files from */
      {
         DataDir,
      };
-  public static final String[] LikelyDataExts =
+  static final String[] LikelyDataExts =
       /* most likely extensions for import data files */
      {
         ".dat",
         ".txt",
      };
-  public static final String SavedStateName = "state" + StateExt;
+  static final String SavedStateName = "state" + StateExt;
   /* for saved state other than loaded library */
-  public static final String SavedLibName = "module" + LibExt;
+  static final String SavedLibName = "module" + LibExt;
   /* loaded library saved separately so it doesn't have to be re-saved
      every time state changes */
 
-  public static class DataFormatException extends RuntimeException {
+  static class DataFormatException extends RuntimeException {
     /* indicates a problem parsing a saved state file. */
 
-    public DataFormatException
+    DataFormatException
        (
           String Message
        ) {
@@ -126,7 +116,7 @@ public class Persistent {
     }
   }
 
-  static void SaveBool
+  private static void SaveBool
      (
         java.io.PrintStream POut,
         String Name,
@@ -137,7 +127,7 @@ public class Persistent {
     POut.printf(Global.StdLocale, "<param name=\"%s\" value=\"%s\"/>\n", Name, Value ? "1" : "0");
   }
 
-  static void SaveInt
+  private static void SaveInt
      (
         java.io.PrintStream POut,
         String Name,
@@ -148,7 +138,7 @@ public class Persistent {
     POut.printf(Global.StdLocale, "<param name=\"%s\" value=\"%d\"/>\n", Name, Value);
   }
 
-  static void SaveNumber
+  private static void SaveNumber
      (
         java.io.PrintStream POut,
         String Name,
@@ -209,7 +199,7 @@ public class Persistent {
     return Result;
   }
 
-  static void SaveProg
+  private static void SaveProg
      (
         byte[] Program,
         java.io.PrintStream POut,
@@ -262,7 +252,7 @@ public class Persistent {
 
   /* Note Importer and Exporter states are NOT saved/restored */
 
-  public static void Save
+  private static void Save
      (
         ButtonGrid Buttons, /* ignored unless CalcState */
         State Calc,
@@ -399,7 +389,7 @@ public class Persistent {
                );
           }
           SaveBool(POut, "exponent_entered", Calc.ExponentEntered, 8);
-          SaveBool(POut, "error_state", Calc.inError, 8);
+          SaveBool(POut, "error_state", State.inError, 8);
           if (Calc.CurState != State.ResultState) {
             POut.printf
                (
@@ -566,7 +556,7 @@ public class Persistent {
     }
   }
 
-  public static void Save
+  static void Save
      (
         ButtonGrid Buttons, /* ignored unless CalcState */
         State Calc,
@@ -594,7 +584,7 @@ public class Persistent {
     }
   }
 
-  public static byte[] ReadAll
+  static byte[] ReadAll
      (
         java.io.InputStream From
      )
@@ -612,11 +602,11 @@ public class Persistent {
   }
 
   static class CalcStateLoader extends org.xml.sax.helpers.DefaultHandler {
-    protected Display Disp;
-    protected ButtonGrid Buttons;
+    Display Disp;
+    ButtonGrid Buttons;
     protected State Calc;
-    protected int BankNr;
-    protected boolean CalcState;
+    int BankNr;
+    boolean CalcState;
 
     private final int AtTopLevel = 0;
     private final int DoingState = 1;
@@ -634,7 +624,7 @@ public class Persistent {
     private boolean AllowContent;
     java.io.ByteArrayOutputStream Content = null;
 
-    public CalcStateLoader
+    CalcStateLoader
        (
           Display Disp,
           ButtonGrid Buttons,
@@ -667,49 +657,49 @@ public class Persistent {
       boolean Handled = false;
       AllowContent = false; /* to begin with */
       if (ParseState == AtTopLevel) {
-        if (localName == "state" && !DoneState) {
+        if (localName.equals("state") && !DoneState) {
           ParseState = DoingState;
           Handled = true;
         }
       } else if (ParseState == DoingState) {
-        if (CalcState && localName == "buttons") {
+        if (CalcState && localName.equals("buttons")) {
           ParseState = DoingButtons;
           Handled = true;
-        } else if (localName == "calc") {
+        } else if (localName.equals("calc")) {
           ParseState = DoingCalc;
           Handled = true;
         }
       } else if (ParseState == DoingButtons) {
-        if (localName == "param") {
+        if (localName.equals("param")) {
           final String Name = attributes.getValue("name").intern();
           final String Value = attributes.getValue("value");
-          if (Name == "alt") {
+          if (Name.equals("alt")) {
             Buttons.AltState = GetBool(Value);
-          } else if (Name == "overlay") {
+          } else if (Name.equals("overlay")) {
             Buttons.OverlayVisible = GetBool(Value);
-          } else if (Name == "selected_button") {
+          } else if (Name.equals("selected_button")) {
             Buttons.SelectedButton = GetInt(Value);
-          } else if (Name == "digits_needed") {
+          } else if (Name.equals("digits_needed")) {
             Buttons.DigitsNeeded = GetInt(Value);
-          } else if (Name == "accept_symbolic") {
+          } else if (Name.equals("accept_symbolic")) {
             Buttons.AcceptSymbolic = GetBool(Value);
-          } else if (Name == "accept_ind") {
+          } else if (Name.equals("accept_ind")) {
             Buttons.AcceptInd = GetBool(Value);
-          } else if (Name == "next_literal") {
+          } else if (Name.equals("next_literal")) {
             Buttons.NextLiteral = GetBool(Value);
-          } else if (Name == "accum_digits") {
+          } else if (Name.equals("accum_digits")) {
             Buttons.AccumDigits = GetInt(Value);
-          } else if (Name == "first_operand") {
+          } else if (Name.equals("first_operand")) {
             Buttons.FirstOperand = GetInt(Value);
-          } else if (Name == "got_first_operand") {
+          } else if (Name.equals("got_first_operand")) {
             Buttons.GotFirstOperand = GetBool(Value);
-          } else if (Name == "got_first_ind") {
+          } else if (Name.equals("got_first_ind")) {
             Buttons.GotFirstInd = GetBool(Value);
-          } else if (Name == "is_symbolic") {
+          } else if (Name.equals("is_symbolic")) {
             Buttons.IsSymbolic = GetBool(Value);
-          } else if (Name == "got_ind") {
+          } else if (Name.equals("got_ind")) {
             Buttons.GotInd = GetBool(Value);
-          } else if (Name == "collecting_for_function") {
+          } else if (Name.equals("collecting_for_function")) {
             Buttons.CollectingForFunction = GetInt(Value);
           } else {
             throw new DataFormatException
@@ -720,41 +710,41 @@ public class Persistent {
           Handled = true;
         }
       } else if (ParseState == DoingCalc) {
-        if (CalcState && localName == "param") {
+        if (CalcState && localName.equals("param")) {
           final String Name = attributes.getValue("name").intern();
           final String Value = attributes.getValue("value").intern();
-          if (Name == "state") {
-            if (Value == "entry") {
+          if (Name.equals("state")) {
+            if (Value.equals("entry")) {
               Calc.CurState = State.EntryState;
-            } else if (Value == "decimal_entry") {
+            } else if (Value.equals("decimal_entry")) {
               Calc.CurState = State.DecimalEntryState;
-            } else if (Value == "exponent_entry") {
+            } else if (Value.equals("exponent_entry")) {
               Calc.CurState = State.ExponentEntryState;
-            } else if (Value == "result") {
+            } else if (Value.equals("result")) {
               Calc.CurState = State.ResultState;
-            } else if (Value == "error") {
+            } else if (Value.equals("error")) {
               // for compatibility with previous version
-              Calc.inError = true;
+              State.inError = true;
             } else {
               throw new RuntimeException
                  (
                     String.format(Global.StdLocale, "unrecognized calc state \"%s\"", Value)
                  );
             }
-          } else if (Name == "exponent_entered") {
+          } else if (Name.equals("exponent_entered")) {
             Calc.ExponentEntered = GetBool(Value);
-          } else if (Name == "error_state") {
-            Calc.inError = GetBool(Value);
-          } else if (Name == "display") {
+          } else if (Name.equals("error_state")) {
+            State.inError = GetBool(Value);
+          } else if (Name.equals("display")) {
             Calc.CurDisplay = Value;
-          } else if (Name == "inv") {
+          } else if (Name.equals("inv")) {
             Calc.InvState = GetBool(Value);
-          } else if (Name == "format") {
-            if (Value == "fixed") {
+          } else if (Name.equals("format")) {
+            if (Value.equals("fixed")) {
               Calc.CurFormat = State.FORMAT_FIXED;
-            } else if (Value == "float") {
+            } else if (Value.equals("float")) {
               Calc.CurFormat = State.FORMAT_FLOAT;
-            } else if (Value == "eng") {
+            } else if (Value.equals("eng")) {
               Calc.CurFormat = State.FORMAT_ENG;
             } else {
               throw new RuntimeException
@@ -762,14 +752,14 @@ public class Persistent {
                     String.format(Global.StdLocale, "unrecognized calc format \"%s\"", Value)
                  );
             }
-          } else if (Name == "nr_decimals") {
+          } else if (Name.equals("nr_decimals")) {
             Calc.CurNrDecimals = GetInt(Value);
-          } else if (Name == "angle_units") {
-            if (Value == "radians") {
+          } else if (Name.equals("angle_units")) {
+            if (Value.equals("radians")) {
               Calc.CurAng = State.ANG_RAD;
-            } else if (Value == "degrees") {
+            } else if (Value.equals("degrees")) {
               Calc.CurAng = State.ANG_DEG;
-            } else if (Value == "gradians") {
+            } else if (Value.equals("gradians")) {
               Calc.CurAng = State.ANG_GRAD;
             } else {
               throw new RuntimeException
@@ -777,17 +767,17 @@ public class Persistent {
                     String.format(Global.StdLocale, "unrecognized calc angle_units \"%s\"", Value)
                  );
             }
-          } else if (Name == "X") {
+          } else if (Name.equals("X")) {
             Calc.X = new Number(Value);
-          } else if (Name == "T") {
+          } else if (Name.equals("T")) {
             Calc.T = new Number(Value);
-          } else if (Name == "learn_mode") {
+          } else if (Name.equals("learn_mode")) {
             Calc.ProgMode = GetBool(Value);
-          } else if (Name == "PC") {
+          } else if (Name.equals("PC")) {
             Calc.PC = GetInt(Value);
-          } else if (Name == "bank") {
+          } else if (Name.equals("bank")) {
             Calc.CurBank = GetInt(Value);
-          } else if (Name == "regoffset") {
+          } else if (Name.equals("regoffset")) {
             Calc.RegOffset = GetInt(Value);
           } else {
             throw new DataFormatException
@@ -796,59 +786,59 @@ public class Persistent {
                );
           }
           Handled = true;
-        } else if (CalcState && localName == "opstack") {
+        } else if (CalcState && localName.equals("opstack")) {
           Calc.OpStackNext = 0;
           ParseState = DoingOpStack;
           Handled = true;
-        } else if (CalcState && localName == "mem") {
+        } else if (CalcState && localName.equals("mem")) {
           ParseState = DoingMem;
           StartContent();
           Handled = true;
-        } else if (CalcState && localName == "feedback") {
+        } else if (CalcState && localName.equals("feedback")) {
           final String Kind = attributes.getValue("kind").intern();
-          if (Kind == "none") {
+          if (Kind.equals("none")) {
             Buttons.FeedbackType = ButtonGrid.FEEDBACK_NONE;
-          } else if (Kind == "vibrate") {
+          } else if (Kind.equals("vibrate")) {
             Buttons.FeedbackType = ButtonGrid.FEEDBACK_VIBRATE;
           } else {
             Buttons.FeedbackType = ButtonGrid.FEEDBACK_CLICK;
           }
           ParseState = DoingEmptyTag;
           Handled = true;
-        } else if (localName == "prog") /* only one allowed if not CalcState */ {
+        } else if (localName.equals("prog")) /* only one allowed if not CalcState */ {
           ParseState = DoingProg;
           StartContent();
           Handled = true;
-        } else if (CalcState && localName == "flags") {
+        } else if (CalcState && localName.equals("flags")) {
           ParseState = DoingFlags;
           StartContent();
           Handled = true;
-        } else if (CalcState && localName == "retstack") {
+        } else if (CalcState && localName.equals("retstack")) {
           Calc.ReturnLast = -1;
           ParseState = DoingRetStack;
           Handled = true;
-        } else if (CalcState && localName == "printreg") {
+        } else if (CalcState && localName.equals("printreg")) {
           ParseState = DoingPrintReg;
           StartContent();
           Handled = true;
         }
       } else if (ParseState == DoingOpStack) {
-        if (localName == "op") {
+        if (localName.equals("op")) {
           final String OpName = attributes.getValue("name").intern();
           int Op;
-          if (OpName == "add") {
+          if (OpName.equals("add")) {
             Op = State.STACKOP_ADD;
-          } else if (OpName == "sub") {
+          } else if (OpName.equals("sub")) {
             Op = State.STACKOP_SUB;
-          } else if (OpName == "mul") {
+          } else if (OpName.equals("mul")) {
             Op = State.STACKOP_MUL;
-          } else if (OpName == "div") {
+          } else if (OpName.equals("div")) {
             Op = State.STACKOP_DIV;
-          } else if (OpName == "mod") {
+          } else if (OpName.equals("mod")) {
             Op = State.STACKOP_MOD;
-          } else if (OpName == "exp") {
+          } else if (OpName.equals("exp")) {
             Op = State.STACKOP_EXP;
-          } else if (OpName == "root") {
+          } else if (OpName.equals("root")) {
             Op = State.STACKOP_ROOT;
           } else {
             throw new DataFormatException
@@ -871,7 +861,7 @@ public class Persistent {
           Handled = true;
         }
       } else if (ParseState == DoingRetStack) {
-        if (localName == "ret") {
+        if (localName.equals("ret")) {
           if (Calc.ReturnLast == Calc.MaxReturnStack - 1) {
             throw new DataFormatException
                (
@@ -917,42 +907,43 @@ public class Persistent {
        ) {
       localName = localName.intern();
       final String ContentStr = Content != null ? Content.toString() : null;
+      final int ContentStrLen = ContentStr == null ? 0 : ContentStr.length();
       Content = null;
       AllowContent = false;
       switch (ParseState) {
         case DoingState:
-          if (localName == "state") {
+          if (localName.equals("state")) {
             ParseState = AtTopLevel;
             DoneState = true;
           }
           break;
         case DoingButtons:
-          if (localName == "buttons") {
+          if (localName.equals("buttons")) {
             ParseState = DoingState;
           }
           break;
         case DoingCalc:
-          if (localName == "calc") {
+          if (localName.equals("calc")) {
             ParseState = DoingState;
           }
           break;
         case DoingOpStack:
-          if (localName == "opstack") {
+          if (localName.equals("opstack")) {
             ParseState = DoingCalc;
           }
           break;
         case DoingRetStack:
-          if (localName == "retstack") {
+          if (localName.equals("retstack")) {
             ParseState = DoingCalc;
           }
           break;
         case DoingPrintReg:
-          if (localName == "printreg") {
+          if (localName.equals("printreg")) {
             int Place = 0;
             int i = 0;
             for (; ; ) {
               for (; ; ) {
-                if (i == ContentStr.length())
+                if (i == ContentStrLen)
                   break;
                 if (ContentStr.charAt(i) > ' ')
                   break;
@@ -960,7 +951,7 @@ public class Persistent {
               }
               final int Start = i;
               for (; ; ) {
-                if (i == ContentStr.length())
+                if (i == ContentStrLen)
                   break;
                 if (ContentStr.charAt(i) <= ' ')
                   break;
@@ -981,19 +972,19 @@ public class Persistent {
                 Calc.PrintRegister[Place++] =
                    (byte) GetInt(ContentStr.substring(Start, i));
               }
-              if (i == ContentStr.length())
+              if (i == ContentStrLen)
                 break;
             }
             ParseState = DoingCalc;
           }
           break;
         case DoingMem:
-          if (localName == "mem") {
+          if (localName.equals("mem")) {
             int Reg = 0;
             int i = 0;
             for (; ; ) {
               for (; ; ) {
-                if (i == ContentStr.length())
+                if (i == ContentStrLen)
                   break;
                 if (ContentStr.charAt(i) > ' ')
                   break;
@@ -1001,7 +992,7 @@ public class Persistent {
               }
               final int Start = i;
               for (; ; ) {
-                if (i == ContentStr.length())
+                if (i == ContentStrLen)
                   break;
                 if (ContentStr.charAt(i) <= ' ')
                   break;
@@ -1016,14 +1007,14 @@ public class Persistent {
                 }
                 Calc.Memory[Reg++] = new Number(ContentStr.substring(Start, i));
               }
-              if (i == ContentStr.length())
+              if (i == ContentStrLen)
                 break;
             }
             ParseState = DoingCalc;
           }
           break;
         case DoingProg:
-          if (localName == "prog") {
+          if (localName.equals("prog")) {
             java.util.ArrayList<Byte> Prog = null;
             if (BankNr == 0) {
               for (int i = 0; i < Calc.MaxProgram; ++i) {
@@ -1037,7 +1028,7 @@ public class Persistent {
             int i = 0;
             for (; ; ) {
               for (; ; ) {
-                if (i == ContentStr.length())
+                if (i == ContentStrLen)
                   break;
                 if (ContentStr.charAt(i) > ' ')
                   break;
@@ -1045,7 +1036,7 @@ public class Persistent {
               }
               final int Start = i;
               for (; ; ) {
-                if (i == ContentStr.length())
+                if (i == ContentStrLen)
                   break;
                 if (ContentStr.charAt(i) <= ' ')
                   break;
@@ -1070,7 +1061,7 @@ public class Persistent {
                   Calc.Program[Addr++] = val;
                 }
               }
-              if (i == ContentStr.length())
+              if (i == ContentStrLen)
                 break;
             }
             if (BankNr != 0) {
@@ -1083,12 +1074,12 @@ public class Persistent {
           }
           break;
         case DoingFlags:
-          if (localName == "flags") {
+          if (localName.equals("flags")) {
             int Flag = 0;
             int i = 0;
             for (; ; ) {
               for (; ; ) {
-                if (i == ContentStr.length())
+                if (i == ContentStrLen)
                   break;
                 if (ContentStr.charAt(i) > ' ')
                   break;
@@ -1096,7 +1087,7 @@ public class Persistent {
               }
               final int Start = i;
               for (; ; ) {
-                if (i == ContentStr.length())
+                if (i == ContentStrLen)
                   break;
                 if (ContentStr.charAt(i) <= ' ')
                   break;
@@ -1111,7 +1102,7 @@ public class Persistent {
                 }
                 Calc.Flag[Flag++] = GetBool(ContentStr.substring(Start, i));
               }
-              if (i == ContentStr.length())
+              if (i == ContentStrLen)
                 break;
             }
             ParseState = DoingCalc;
@@ -1180,13 +1171,13 @@ public class Persistent {
           }
           if
              (
-             In.entries().nextElement().getName().intern() != "mimetype"
+              !In.entries().nextElement().getName().intern().equals("mimetype")
                 ||
                 MimeType.getMethod() != ZipEntry.STORED
              ) {
             throw new DataFormatException("mimetype must be uncompressed and first in archive");
           }
-          if (new String(ReadAll(In.getInputStream(MimeType))).intern() != CalcMimeType) {
+          if (!new String(ReadAll(In.getInputStream(MimeType))).intern().equals(CalcMimeType)) {
             throw new DataFormatException("wrong MIME type");
           }
           if (Libs) {
@@ -1267,7 +1258,7 @@ public class Persistent {
               Calc.SetX(Calc.X, false);
               break;
           }
-          if (Calc.inError) {
+          if (State.inError) {
             Calc.SetX(Calc.X, false);
             Calc.SetErrorState(false);
           }
@@ -1293,7 +1284,7 @@ public class Persistent {
       so I need to make a temporary copy of the master library out of my raw resources. */
     private final String TempLibName = "temp.ti5x"; /* name for temporary copy */
 
-    public LoadBuiltin
+    LoadBuiltin
        (
           android.content.Context ctx,
           boolean IsLib,
@@ -1325,7 +1316,7 @@ public class Persistent {
       try {
         final java.io.InputStream LibFile = Prog.getInputStream(ctx);
         final java.io.OutputStream TempLib =
-           ctx.openFileOutput(TempLibName, ctx.MODE_PRIVATE);
+           ctx.openFileOutput(TempLibName, android.content.Context.MODE_PRIVATE);
         {
           byte[] Buffer = new byte[2048]; /* some convenient size */
           for (; ; ) {
@@ -1356,7 +1347,7 @@ public class Persistent {
     }
   }
 
-  public static void SaveState
+  static void SaveState
      (
         android.content.Context ctx,
         boolean SaveLib /* true to save loaded library, false to save rest of state */
@@ -1370,7 +1361,7 @@ public class Persistent {
             :
             SavedStateName;
       ctx.deleteFile(StateName);
-      CurSave = ctx.openFileOutput(StateName, ctx.MODE_PRIVATE);
+      CurSave = ctx.openFileOutput(StateName, android.content.Context.MODE_PRIVATE);
     } catch (java.io.FileNotFoundException Eh) {
       throw new RuntimeException("ti5x save-state create error " + Eh.toString());
     }
@@ -1421,7 +1412,7 @@ public class Persistent {
       Subtask = null;
     }
 
-    public RestoreState
+    RestoreState
        (
           android.content.Context ctx
        ) {
@@ -1512,7 +1503,7 @@ public class Persistent {
     }
   }
 
-  public static void ResetState
+  static void ResetState
      (
         android.content.Context ctx
      ) {

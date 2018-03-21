@@ -31,7 +31,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Printer {
-  public android.graphics.Bitmap Paper;
+  android.graphics.Bitmap Paper;
   /* the idea is that this is low-resolution but will be displayed scaled up
      to make matrix dots more visible */
 
@@ -39,25 +39,25 @@ public class Printer {
     public void PaperChanged();
   }
 
-  public Notifier PrintListener; /* to notify when content of Paper changes */
-  android.graphics.Canvas PaperDraw;
+  Notifier PrintListener; /* to notify when content of Paper changes */
+  private android.graphics.Canvas PaperDraw;
 
-  final static int DotSize = 2;
-  final static int DotGap = 1;
-  public final static int CharColumns = 20;
-  final static int CharWidth = 5;
-  final static int CharHeight = 7;
-  final static int CharHorGap = 1;
-  final static int CharVertGap = 1;
+  private final static int DotSize = 2;
+  private final static int DotGap = 1;
+  final static int CharColumns = 20;
+  private final static int CharWidth = 5;
+  private final static int CharHeight = 7;
+  private final static int CharHorGap = 1;
+  private final static int CharVertGap = 1;
 
-  final static int CharLines = 200; /* perhaps make this configurable? */
+  private final static int CharLines = 200; /* perhaps make this configurable? */
 
-  final int PaperWidth = (CharColumns * CharWidth + (CharColumns + 1) * CharHorGap) * (DotSize + DotGap) + DotGap;
-  final int PaperHeight = (CharLines * CharHeight + (CharLines + 1) * CharVertGap) * (DotSize + DotGap) + DotGap;
-  final int LineHeight = (CharHeight + CharVertGap) * (DotSize + DotGap);
+  private final int PaperWidth = (CharColumns * CharWidth + (CharColumns + 1) * CharHorGap) * (DotSize + DotGap) + DotGap;
+  private final int PaperHeight = (CharLines * CharHeight + (CharLines + 1) * CharVertGap) * (DotSize + DotGap) + DotGap;
+  private final int LineHeight = (CharHeight + CharVertGap) * (DotSize + DotGap);
 
-  final int PaperColor;
-  final int InkColor;
+  private final int PaperColor;
+  private final int InkColor;
 
   private static final int[][] Chars =
      {
@@ -316,7 +316,7 @@ public class Printer {
 
   }
 
-  void StartNewLine() {
+  private void StartNewLine() {
     // advances the paper to the next line.
     // source rectangle, skip top line.
     android.graphics.Rect srcRect = new android.graphics.Rect
@@ -482,8 +482,6 @@ public class Printer {
         glyph = 76;
       } else if (ch == '∑') {
         glyph = 77;
-      } else {
-              /* leave at 0 = blank */
       }
       Translated[i] = (byte) glyph;
     }
@@ -492,7 +490,7 @@ public class Printer {
     }
   }
 
-  String BackToText
+  private String BackToText
      (
         byte[] PrintReg
      ) {
@@ -568,8 +566,6 @@ public class Printer {
         ch = 'Π';
       } else if (b == 77) /* '∑' */ {
         ch = '∑';
-      } else {
-        /* ignore untranslateable ones */
       }
       if (ch != 0) {
         Result.appendCodePoint(ch);

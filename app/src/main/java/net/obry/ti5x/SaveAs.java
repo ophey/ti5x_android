@@ -17,6 +17,8 @@
 
 package net.obry.ti5x;
 
+import android.os.Environment;
+
 public class SaveAs extends android.app.Activity {
   static android.view.View Extra = null;
   static String SaveWhat = null;
@@ -90,12 +92,7 @@ public class SaveAs extends android.app.Activity {
      ) {
     super.onCreate(savedInstanceState);
     SaveAs.Current = this;
-    if
-       (
-       android.os.Environment.getExternalStorageState().intern()
-          ==
-          android.os.Environment.MEDIA_MOUNTED
-       ) {
+    if (Environment.getExternalStorageState().intern().equals(Environment.MEDIA_MOUNTED)) {
       MainViewGroup =
          (android.view.ViewGroup) getLayoutInflater().inflate(R.layout.save_as, null);
       setContentView(MainViewGroup);
@@ -241,8 +238,6 @@ public class SaveAs extends android.app.Activity {
                .setClass(Acting, SaveAs.class),
             RequestCode
          );
-    } else {
-      /* can happen if user gets impatient and selects from menu twice, just ignore */
     }
   }
 

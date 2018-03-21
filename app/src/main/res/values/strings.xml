@@ -7,12 +7,12 @@
     <string name="show_module_help">Module Help</string>
     <string name="show_overlay">Key Codes</string>
     <string name="show_printer">Printer</string>
-    <string name="load_prog">Load Program...</string>
-    <string name="opt_feedback">Feedback...</string>
-    <string name="import_data">Import Data...</string>
-    <string name="export_data">Export Data...</string>
-    <string name="save_program_as">Save Program...</string>
-    <string name="about_me">About ti5x...</string>
+    <string name="load_prog">Load Program…</string>
+    <string name="opt_feedback">Feedback…</string>
+    <string name="import_data">Import Data…</string>
+    <string name="export_data">Export Data…</string>
+    <string name="save_program_as">Save Program…</string>
+    <string name="about_me">About ti5x…</string>
     <string name="turn_off">Off</string>
 
     <!-- context menu -->
@@ -64,8 +64,8 @@
     <string name="construct_nam_code">EE-19 Construct NAM Code</string>
 
     <!-- messages -->
-    <string name="loading">Loading...</string>
-    <string name="saving">Saving...</string>
+    <string name="loading">Loading…</string>
+    <string name="saving">Saving…</string>
     <string name="prog_running">ti5x program is running.</string>
     <string name="prog_done">ti5x program has finished running.</string>
     <string name="paste_nan">The Clipboard does not contain a valid number</string>
@@ -114,7 +114,6 @@
 
         ]]>
     </string>
-
 
     <!-- Strings related to Settings -->
 
