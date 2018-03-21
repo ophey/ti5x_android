@@ -18,13 +18,20 @@
 
 package net.obry.ti5x;
 
+import android.widget.Toast;
+
+import java.io.File;
+
 public class Picker extends android.app.Activity {
+
+  // index for the selection either prog or libraries in the menu
   public static String AltIndexID = "net.obry.ti5x.PickedIndex";
-  // index for the selection either prog or librairies in the menu
-  public static String SpeIndexID = "net.obry.ti5x.SpecialIndex";
+
   // index of the SpecialItem, in this case the selected library 0:Master, 1:xyz
-  public static String BuiltinIndexID = "net.obry.ti5x.BuiltinIndex";
+  public static String SpeIndexID = "net.obry.ti5x.SpecialIndex";
+
   // index of the first Builtin item in the list
+  public static String BuiltinIndexID = "net.obry.ti5x.BuiltinIndex";
 
   static boolean Reentered = false; /* sanity check */
   public static Picker Current = null;
@@ -64,6 +71,7 @@ public class Picker extends android.app.Activity {
   SelectedItemAdapter PickerList;
   int SelectedAlt; /* index into AltLists */
   int FirstBuiltinIdx = 0;
+
 
   public static class PickerItem {
     String FullPath, DisplayName;
@@ -291,14 +299,40 @@ public class Picker extends android.app.Activity {
       ) {
     SelectedAlt = NewAlt;
     final PickerAltList Alt = AltLists[SelectedAlt];
+    String InaccessibleFolders = "";
     PickerList.clear();
-    {
-      final String ExternalStorage =
-          android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
+
+    final String ExternalStorage =
+        android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
+
+    if (!PermissionUtil.hasCorrectPermission(this)) {
+      android.widget.Toast.makeText
+          (
+                    /*context =*/ Picker.this,
+                    /*text =*/     R.string.storage_unavailable,
+                    /*duration =*/ android.widget.Toast.LENGTH_LONG
+          ).show();
+    }
+    try {
       for (String Here : LookIn) {
         final java.io.File ThisDir = new java.io.File(ExternalStorage + "/" + Here);
-        if (ThisDir.isDirectory()) {
-          for (java.io.File Item : ThisDir.listFiles()) {
+        /*
+         * We need to ensure that the lack of permissions doesn't harm us
+         * if the user didn't grant them ... this logic ensures that no error
+         * is thrown due to incorrect permissions.
+         */
+        if (!ThisDir.canRead()) {
+          if (InaccessibleFolders.length() > 0) {
+            InaccessibleFolders = InaccessibleFolders.concat(", ");
+          }
+          InaccessibleFolders = InaccessibleFolders.concat(Here);
+        } else {
+          /*
+           * This segment iterates on all of the files contained
+           * withing the folder context.
+           */
+          File ourFiles[] = ThisDir.listFiles();
+          for (java.io.File Item : ourFiles) {
             boolean MatchesExt;
             if (Alt.FileExts != null) {
               final String ItemName = Item.getName();
@@ -314,7 +348,7 @@ public class Picker extends android.app.Activity {
                 ++i;
               } /*for*/
             } else {
-                          /* match all files */
+                            /* match all files */
               MatchesExt = true;
             } /*if*/
             if (MatchesExt) {
@@ -323,20 +357,49 @@ public class Picker extends android.app.Activity {
           } /*for*/
         } /* if*/
       } /*for*/
+
+      FirstBuiltinIdx = 1;
+      if (Alt.SpecialItem != null) {
+        for (int i = 0; i < Alt.SpecialItem.length; i++)
+          PickerList.add(new PickerItem(null, Alt.SpecialItem[i]));
+      } /*if*/
+
+      PromptView.setText
+          (
+              PickerList.getCount() != 0 ?
+                  Alt.Prompt
+                  :
+                  Alt.NoneFound
+          );
+      PickerList.notifyDataSetChanged();
+    } /*try*/ catch (RuntimeException Failed) {
+      Toast.makeText
+          (
+                    /*context =*/ Picker.this,
+                    /*text =*/
+              String.format
+                  (
+                      Global.StdLocale,
+                      getString(R.string.application_error),
+                      Failed.toString()
+                  ),
+                    /*duration =*/ Toast.LENGTH_LONG
+          ).show();
+    } /*catch*/
+    if (InaccessibleFolders.length() > 0) {
+      android.widget.Toast.makeText
+          (
+                        /*context =*/  Picker.this,
+                        /*text =*/     String.format
+                  (
+                      Global.StdLocale,
+                      getString(R.string.folder_unreadable),
+                      InaccessibleFolders.concat("\"\nIn Folder\n\"").concat(ExternalStorage)
+
+                  ),
+                        /*duration =*/ Toast.LENGTH_SHORT
+          ).show();
     }
-    FirstBuiltinIdx = PickerList.getCount();
-    if (Alt.SpecialItem != null) {
-      for (int i = 0; i < Alt.SpecialItem.length; i++)
-        PickerList.add(new PickerItem(null, Alt.SpecialItem[i]));
-    } /*if*/
-    PromptView.setText
-        (
-            PickerList.getCount() != 0 ?
-                Alt.Prompt
-                :
-                Alt.NoneFound
-        );
-    PickerList.notifyDataSetChanged();
   } /*PopulatePickerList*/
 
   @Override

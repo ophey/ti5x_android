@@ -21,6 +21,7 @@ package net.obry.ti5x;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.Manifest;
 import android.app.Notification;
 import android.content.Intent;
 import android.view.View;
@@ -28,6 +29,8 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.Toast;
 import android.content.DialogInterface;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 
 public class Main extends android.app.Activity {
   android.text.ClipboardManager Clipboard;
@@ -53,9 +56,18 @@ public class Main extends android.app.Activity {
 
   static final int SwitchSaveAs = android.app.Activity.RESULT_FIRST_USER + 0;
   static final int SwitchAppend = android.app.Activity.RESULT_FIRST_USER + 1;
+
+  // Response Results for Permissions Interactions
+
+  private final static int READ_EXTERNAL_RESULT = 100;
+  private final static int WRITE_EXTERNAL_RESULT = 101;
+  private final static int CHOOSE_FILE_RESULT = 102;
+
   boolean ExportAppend, ExportNumbersOnly;
 
   ViewGroup PickerExtra, SaveAsExtra;
+  View mLayout;
+
   boolean ShuttingDown = false;
   boolean StateLoaded = false; /* will be reset to false every time activity is killed and restarted */
 
@@ -1244,6 +1256,26 @@ public class Main extends android.app.Activity {
     Clipboard = (android.text.ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
     registerForContextMenu(Global.Disp);
     Notiman = (android.app.NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+    /*
+     * check to see if we should ask for permissions before we do anything else
+     */
+    mLayout = findViewById(R.id.keyboard_main_layout);
+
+    if (!PermissionUtil.hasCorrectPermission(this)) {
+      // Storage READ permission has not been granted yet. Request it directly.
+      ActivityCompat.requestPermissions(
+         this,
+         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+         READ_EXTERNAL_RESULT);
+
+      // Storage WRITE permission has not been granted yet. Request it directly.
+      ActivityCompat.requestPermissions(
+         this,
+         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+         WRITE_EXTERNAL_RESULT);
+    }
+
     Global.Calc.OnStop = new Runnable() {
       public void run() {
         if (!hasWindowFocus()) {
@@ -1403,4 +1435,30 @@ public class Main extends android.app.Activity {
         Handled;
   } /*dispatchKeyEvent*/
 
+  public void openFileUsingFM(String mimeType) {
+    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+    intent.setType(mimeType);
+    intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+    // special intent for Samsung file manager
+    Intent sIntent = new Intent("com.sec.android.app.myfiles.PICK_DATA");
+    // if you want any file type, you can skip next line
+    sIntent.putExtra("CONTENT_TYPE", mimeType);
+    sIntent.addCategory(Intent.CATEGORY_DEFAULT);
+
+    Intent chooserIntent;
+    if (getPackageManager().resolveActivity(sIntent, 0) != null) {
+      // it is device with samsung file manager
+      chooserIntent = Intent.createChooser(sIntent, "Open file");
+      chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{intent});
+    } else {
+      chooserIntent = Intent.createChooser(intent, "Open file");
+    }
+
+    try {
+      startActivityForResult(chooserIntent, CHOOSE_FILE_RESULT);
+    } catch (android.content.ActivityNotFoundException ex) {
+      Toast.makeText(getApplicationContext(), "No suitable File Manager was found.", Toast.LENGTH_SHORT).show();
+    }
+  }
 } /*Main*/

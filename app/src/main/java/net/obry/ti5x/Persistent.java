@@ -97,7 +97,7 @@ public class Persistent
       /* where to load programs/libraries from */
       {
           ProgramsDir,
-          "Download",
+          DataDir,
       };
   public static final String[] ExternalDataDirectories =
       /* where to load data files from */
@@ -1338,7 +1338,7 @@ public class Persistent
       try {
         final java.io.InputStream LibFile = Prog.getInputStream(ctx);
         final java.io.OutputStream TempLib =
-            ctx.openFileOutput(TempLibName, ctx.MODE_WORLD_READABLE);
+            ctx.openFileOutput(TempLibName, ctx.MODE_PRIVATE);
         {
           byte[] Buffer = new byte[2048]; /* some convenient size */
           for (; ; ) {
@@ -1384,7 +1384,7 @@ public class Persistent
               :
               SavedStateName;
       ctx.deleteFile(StateName);
-      CurSave = ctx.openFileOutput(StateName, ctx.MODE_WORLD_READABLE);
+      CurSave = ctx.openFileOutput(StateName, ctx.MODE_PRIVATE);
     } catch (java.io.FileNotFoundException Eh) {
       throw new RuntimeException("ti5x save-state create error " + Eh.toString());
     } /*try*/
