@@ -160,6 +160,7 @@ public class ButtonGrid extends android.view.View {
   public static final int FEEDBACK_NONE = 0;
   public static final int FEEDBACK_CLICK = 1;
   public static final int FEEDBACK_VIBRATE = 2;
+  public static final int FEEDBACK_BOTH = 3;
 
   public boolean OverlayVisible;
 

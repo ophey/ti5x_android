@@ -214,15 +214,23 @@ public class Main extends android.app.Activity {
         final RadioButton FeedbackClick = new RadioButton(ctx);
         FeedbackClick.setText(R.string.feedback_click);
         FeedbackClick.setId(ButtonGrid.FEEDBACK_CLICK);
+
         final RadioButton FeedbackVibrate = new RadioButton(ctx);
         FeedbackVibrate.setText(R.string.feedback_vibrate);
         FeedbackVibrate.setId(ButtonGrid.FEEDBACK_VIBRATE);
+
+        final RadioButton FeedbackBoth = new RadioButton(ctx);
+        FeedbackBoth.setText(R.string.feedback_click_and_vibrate);
+        FeedbackBoth.setId(ButtonGrid.FEEDBACK_BOTH);
+
         final RadioButton FeedbackNone = new RadioButton(ctx);
         FeedbackNone.setText(R.string.feedback_none);
         FeedbackNone.setId(ButtonGrid.FEEDBACK_NONE);
+
         TheButtons.addView(FeedbackClick, 0, ButtonLayout);
         TheButtons.addView(FeedbackVibrate, 1, ButtonLayout);
-        TheButtons.addView(FeedbackNone, 2, ButtonLayout);
+        TheButtons.addView(FeedbackBoth, 2, ButtonLayout);
+        TheButtons.addView(FeedbackNone, 3, ButtonLayout);
       }
       MainLayout.addView(TheButtons, ButtonLayout);
       TheButtons.check(Global.Buttons.FeedbackType);
