@@ -47,7 +47,7 @@ public class Main extends android.app.Activity {
     );
   }
 
-  java.util.Map<Integer, RequestResponseAction> ActivityResultActions;
+  android.util.SparseArray<RequestResponseAction> ActivityResultActions;
 
   /* request codes, all arbitrarily assigned */
   static final int LoadProgramRequest = 1;
@@ -792,7 +792,7 @@ public class Main extends android.app.Activity {
   }
 
   void BuildActivityResultActions() {
-    ActivityResultActions = new java.util.HashMap<Integer, RequestResponseAction>();
+    ActivityResultActions = new android.util.SparseArray<RequestResponseAction>();
     ActivityResultActions.put
        (
           LoadProgramRequest,
