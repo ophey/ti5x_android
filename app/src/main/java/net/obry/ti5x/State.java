@@ -2319,7 +2319,7 @@ class State {
                        LabelDef Label1,
                        LabelDef Label2
                     ) {
-                   return new Integer(Label1.Loc).compareTo(Label2.Loc);
+                   return Label1.Loc - Label2.Loc;
                  } /*compare*/
                }
             );
