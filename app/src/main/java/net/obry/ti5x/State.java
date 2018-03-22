@@ -2150,7 +2150,6 @@ public class State {
         android.widget.Toast.makeText
            (
               ctx,
-
               String.format
                  (
                     Global.StdLocale,
@@ -2808,8 +2807,7 @@ public class State {
         SetErrorState(true);
       }
     }
-    return
-       Result;
+    return Result;
   }
 
   /* transfer types */

@@ -31,7 +31,7 @@ public class Global {
   static final int NrSigFigures = 16;
   /* for formatting reals */
   static final java.util.Locale StdLocale = java.util.Locale.US;
-      /* for all those places I don't want formatting to be locale-specific */
+  /* for all those places I don't want formatting to be locale-specific */
 
   static android.view.View ProgressWidgets;
   static android.widget.TextView ProgressMessage;

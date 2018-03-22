@@ -34,8 +34,7 @@ class Exporter {
   }
 
   boolean IsOpen() {
-    return
-       Out != null;
+    return Out != null;
   }
 
   void Open

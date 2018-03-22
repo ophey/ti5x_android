@@ -445,11 +445,13 @@ public class Main extends android.app.Activity {
             public void run() {
               Global.Buttons.OverlayVisible = !Global.Buttons.OverlayVisible;
               Global.Buttons.invalidate();
-              /* ToggleOverlayItem.setChecked(Global.Buttons.OverlayVisible); */ /* apparently can't do this in initial part of options menu */
+              /* ToggleOverlayItem.setChecked(Global.Buttons.OverlayVisible); */
+              /* apparently can't do this in initial part of options menu */
             } /*run*/
           }
        );
-    /* ThisItem.setCheckable(true); */ /* apparently can't do this in initial part of options menu */
+    /* ThisItem.setCheckable(true); */
+    /* apparently can't do this in initial part of options menu */
     OptionsMenu.put
        (
           TheMenu.add(R.string.show_module_help),
@@ -895,7 +897,6 @@ public class Main extends android.app.Activity {
                         StateLoaded = true;
                         Global.StartBGTask
                            (
-
                               new LoadProgram
                                  (
                                     LoadingBuiltinLibrary ?
@@ -912,7 +913,6 @@ public class Main extends android.app.Activity {
                           Toast.makeText
                              (
                                 Main.this,
-
                                 String.format
                                    (
                                       Global.StdLocale,
@@ -932,7 +932,6 @@ public class Main extends android.app.Activity {
                              ).show();
                           Global.StartBGTask
                              (
-
                                 new Global.Task() {
                                   @Override
                                   public void BGRun() {
@@ -945,7 +944,6 @@ public class Main extends android.app.Activity {
                           Toast.makeText
                              (
                                 Main.this,
-
                                 String.format
                                    (
                                       Global.StdLocale,
@@ -984,15 +982,10 @@ public class Main extends android.app.Activity {
                ) {
               final String TheName =
                  Data.getData().getPath().substring(1) /* ignoring leading slash */
-                    +
-                    Persistent.ProgExt;
+                    + Persistent.ProgExt;
               final String SaveDir =
                  android.os.Environment.getExternalStorageDirectory()
-                    .getAbsolutePath()
-                    +
-                    "/"
-                    +
-                    Persistent.ProgramsDir;
+                    .getAbsolutePath() + "/" + Persistent.ProgramsDir;
               Global.StartBGTask
                  (
 
@@ -1032,7 +1025,6 @@ public class Main extends android.app.Activity {
                           Toast.makeText
                              (
                                 Main.this,
-
                                 String.format
                                    (
                                       Global.StdLocale,

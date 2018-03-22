@@ -74,8 +74,7 @@ public class LabelCard extends android.view.View {
                     break;
                 }
               }
-              return
-                 Handled;
+              return Handled;
             } /*onClick*/
           }
        );

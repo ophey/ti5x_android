@@ -421,6 +421,7 @@ public class ButtonGrid extends android.view.View {
     final RectF GridBounds = new RectF(0.0f, 0.0f, getWidth(), getHeight());
     final float CellWidth = GridBounds.right / NrButtonCols;
     final float CellHeight = GridBounds.bottom / NrButtonRows;
+
     for (int Row = 0; Row < NrButtonRows; ++Row) {
       for (int Col = 0; Col < NrButtonCols; ++Col) {
         final ButtonDef ThisButton = ButtonDefs[Row][Col];
@@ -438,9 +439,11 @@ public class ButtonGrid extends android.view.View {
               CellBounds.right + (CellBounds.left - CellBounds.right) * ButtonRelDisplayMargins.right,
               CellBounds.bottom + (CellBounds.top - CellBounds.bottom) * ButtonRelDisplayMargins.bottom
            );
+
         if (ThisButton.BaseCode == SelectedButton) {
           ButtonBounds.offset(2.0f, 2.0f);
         }
+
         Draw.drawRect(CellBounds, GraphicsUseful.FillWithColor(ThisButton.BGColor));
         final android.graphics.Paint TextPaint = new android.graphics.Paint();
         TextPaint.setStyle(android.graphics.Paint.Style.FILL);
@@ -481,6 +484,7 @@ public class ButtonGrid extends android.view.View {
                 CornerRoundness,
                 TextPaint
              );
+
           if (ThisButton.BaseCode != SelectedButton) {
             final GraphicsUseful.HSVA Darken = new GraphicsUseful.HSVA(Dark);
             TextPaint.setColor
@@ -512,6 +516,7 @@ public class ButtonGrid extends android.view.View {
                 TextPaint
              );
         }
+
         if (OverlayVisible) {
           TextPaint.setTextAlign(android.graphics.Paint.Align.LEFT);
           final boolean HasBaseOverlay =
@@ -529,11 +534,13 @@ public class ButtonGrid extends android.view.View {
                 &&
                 ThisButton.BaseCode != 51;
           final boolean HasMergedOverlay = ThisButton.MergedText != null;
+
           if (HasBaseOverlay || HasAltOverlay || HasMergedOverlay) {
             final float Left = CellBounds.left + (CellBounds.right - CellBounds.left) * 0.0f;
             /* not quite authentic position, but what the hey */
             TextPaint.setTextSize(BaseTextSize * 0.6f);
             TextPaint.setColor(ThisButton.OverlayColor);
+
             if (HasBaseOverlay) {
               int BaseCode = ThisButton.BaseCode;
               switch (BaseCode) {
@@ -564,6 +571,7 @@ public class ButtonGrid extends android.view.View {
                     TextPaint
                  );
             }
+
             if (HasMergedOverlay) {
               Draw.drawText
                  (
@@ -579,6 +587,7 @@ public class ButtonGrid extends android.view.View {
                     TextPaint
                  );
             }
+
             if (HasAltOverlay) {
               Draw.drawText
                  (
@@ -648,6 +657,7 @@ public class ButtonGrid extends android.view.View {
 
   public void Invoke() {
     final State Calc = Global.Calc; /* shorten references */
+
     if (Calc != null && SelectedButton > 0) {
       boolean WasModifier = false;
       boolean Handled = false;
@@ -743,6 +753,7 @@ public class ButtonGrid extends android.view.View {
           }
           AccumDigits = AccumDigits * 10 + Digit;
         }
+
         if (Handled) {
           if (Digit >= 0) {
             --DigitsNeeded;
@@ -750,6 +761,7 @@ public class ButtonGrid extends android.view.View {
         } else {
           DigitsNeeded = 0; /* non-digit cuts short digit entry */
         }
+
         if (!WasModifier && (DigitsNeeded == 0 || IsSymbolic)) {
           boolean Finished = true; /* to begin with */
           if (IsSymbolic || AccumDigits >= 0) {
@@ -965,6 +977,7 @@ public class ButtonGrid extends android.view.View {
           }
         }
       }
+
       if (!Handled) {
         /* check for functions needing further entry */
         if (!Calc.ProgMode || Calc.ProgramWritable()) {
@@ -1028,10 +1041,12 @@ public class ButtonGrid extends android.view.View {
           }
         }
       }
+
       if (!Handled && ButtonCode == 40 /*Ind*/) {
         /* ignore? */
         Handled = true;
       }
+
       if (!Handled) {
         /* deal with everything not already handled */
         if (Calc.ProgMode) {
@@ -1385,6 +1400,7 @@ public class ButtonGrid extends android.view.View {
           Calc.PreviousOp = ButtonCode;
         }
       }
+
       if (!WasModifier) {
         AltState = false;
       }
