@@ -806,13 +806,13 @@ public class Main extends android.app.Activity {
               final int SelId = Data.getIntExtra(Picker.SpeIndexID, 0);
               final int FirstBuiltinId = Data.getIntExtra(Picker.BuiltinIndexID, 0);
               final boolean IsLib = Data.getIntExtra(Picker.AltIndexID, 0) != 0;
-                      /* assumes AltLists array passed to Picker has element 0 for
-                        saved programs and element 1 for libraries */
+              /* assumes AltLists array passed to Picker has element 0 for
+                 saved programs and element 1 for libraries */
               final boolean LoadingBuiltinLibrary = IsLib && ProgName.intern().equals("/");
-                  /* It appears onActivityResult is liable to be called before
-                    onResume. Therefore I do additional restoring/saving state
-                    here to ensure the saved state includes the newly-loaded
-                    program/library. */
+              /* It appears onActivityResult is liable to be called before
+                 onResume. Therefore I do additional restoring/saving state
+                 here to ensure the saved state includes the newly-loaded
+                 program/library. */
               class LoadProgram extends Global.Task {
                 private static final int LOAD_STATE = 0;
                 private static final int LOAD_BUILTIN_LIBRARY = 1;

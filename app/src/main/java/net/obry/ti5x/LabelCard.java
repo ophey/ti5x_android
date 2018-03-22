@@ -74,7 +74,7 @@ class LabelCard extends android.view.View {
                 }
               }
               return Handled;
-            } /*onClick*/
+            }
           }
        );
   }
@@ -117,21 +117,19 @@ class LabelCard extends android.view.View {
                (
                   android.view.animation.Animation TheAnimation
                ) {
-                  /* nothing interesting */
-            } /*onAnimationStart*/
+            }
 
             public void onAnimationEnd
                (
                   android.view.animation.Animation TheAnimation
                ) {
               SlideInNewCard();
-            } /*onAnimationEnd*/
+            }
 
             public void onAnimationRepeat
                (
                   android.view.animation.Animation TheAnimation
                ) {
-              /* won't occur */
             }
           }
        );

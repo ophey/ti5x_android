@@ -53,7 +53,7 @@ public class Display extends android.view.View {
     }
     OtherShowing = Showing.clone();
     Idler = new android.os.Handler();
-  } /*Display*/
+  }
 
   /*
       Segment masks are
@@ -251,14 +251,14 @@ public class Display extends android.view.View {
     YOrigin -= Size * SegmentHalfWidth; /* so there is no overhang below */
     final PointF[] ControlPoint = new PointF[]
        {
-              /* control points for positioning digit segments: */
+           /* control points for positioning digit segments: */
           new PointF(XOrigin + Size * Slant, YOrigin - Size),
           new PointF(XOrigin + Size * (Slant + DigitWidth), YOrigin - Size),
           new PointF(XOrigin + Size * Slant / 2.0f, YOrigin - Size / 2.0f),
           new PointF(XOrigin + Size * (Slant / 2.0f + DigitWidth), YOrigin - Size / 2.0f),
           new PointF(XOrigin, YOrigin),
           new PointF(XOrigin + Size * DigitWidth, YOrigin),
-              /* control point for positioning dot: */
+           /* control point for positioning dot: */
           new PointF
              (
                 XOrigin + Size * (DigitWidth * 1.2f + Slant * 0.25f),
@@ -270,7 +270,7 @@ public class Display extends android.view.View {
     final float XOffset1 = Slant * SegmentMargin * Size;
     final float XOffset2 = Slant * SegmentHalfWidth * Size;
     for (int i = 1; i <= 3; ++i) {
-          /* render horizontal segments */
+      /* render horizontal segments */
       if ((Segments & 1 << 3 * (i - 1)) != 0) {
         final PointF Left = ControlPoint[2 * i - 2];
         final PointF Right = ControlPoint[2 * i - 1];
