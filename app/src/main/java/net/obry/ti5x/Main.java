@@ -30,7 +30,6 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.Toast;
 import android.content.DialogInterface;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 
 public class Main extends android.app.Activity {

@@ -18,7 +18,6 @@
 
 package net.obry.ti5x;
 
-import android.util.Log;
 import android.util.SparseIntArray;
 
 class State {
