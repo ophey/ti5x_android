@@ -389,8 +389,7 @@ class State {
   }
 
   boolean ImportInProgress() {
-    return
-       Import != null;
+    return Import != null;
   }
 
   void ClearAll() {

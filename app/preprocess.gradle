@@ -5,7 +5,7 @@ def resRaw = 'src/main/res/raw'
 configurations {
 }
 
-dependencies{
+dependencies {
 }
 
 android {
@@ -13,51 +13,52 @@ android {
 
 task preprocess {
     doLast {
-           def processModule = {
-             println "generate resources for ${it.name}"
+        def processModule = {
+            println "generate resources for ${it.name}"
 
-             def moddata = "${it.canonicalPath}"
-             def module = "${it.name}"
-             def (modcode, modname) = "$module".tokenize('-')
+            def moddata = "${it.canonicalPath}"
+            def module = "${it.name}"
+            //noinspection GroovyUnusedAssignment
+            def (modcode, modname) = "$module".tokenize('-')
 
-             exec {
-                  executable '../util/mlmake'
-                  args "$moddata", "$resRaw", "$modcode"
-             }
-           }
+            exec {
+                executable '../util/mlmake'
+                args "$moddata", "$resRaw", "$modcode"
+            }
+        }
 
-           def processProgram = {
-             println "generate resources for ${it.name}"
+        def processProgram = {
+            println "generate resources for ${it.name}"
 
-             def progdata = "${it.canonicalPath}"
-             def module = "${it.name}"
+            def progdata = "${it.canonicalPath}"
+            def module = "${it.name}"
 
-             exec {
-                  executable '../util/makeprog'
-                  args "${resRaw}/${module}.ti5p",
-                       "help00=$progdata/help",
-                       "cardsrc00=$progdata/card",
-                       "progsrc00=$progdata/prog"
-             }
-           }
+            exec {
+                executable '../util/makeprog'
+                args "${resRaw}/${module}.ti5p",
+                        "help00=$progdata/help",
+                        "cardsrc00=$progdata/card",
+                        "progsrc00=$progdata/prog"
+            }
+        }
 
-           // handle modules
+        // handle modules
 
-           def moduleDir = "modules"
-           def mDir = new File(moduleDir)
+        def moduleDir = "modules"
+        def mDir = new File(moduleDir)
 
-           mDir.eachFileRecurse (FileType.DIRECTORIES) {
-              file -> processModule file
-           }
+        mDir.eachFileRecurse(FileType.DIRECTORIES) {
+            file -> processModule file
+        }
 
-           // handle programs
+        // handle programs
 
-           def programDir = "programs"
-           def pDir = new File(programDir)
+        def programDir = "programs"
+        def pDir = new File(programDir)
 
-           pDir.eachFileRecurse (FileType.DIRECTORIES) {
-              file -> processProgram file
-           }
+        pDir.eachFileRecurse(FileType.DIRECTORIES) {
+            file -> processProgram file
+        }
     }
 }
 

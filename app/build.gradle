@@ -4,8 +4,8 @@ apply from: 'preprocess.gradle'
 android {
     def propFile = file(project.rootProject.file('keystore.properties'))
     if (propFile.canRead()) {
-      Properties properties = new Properties()
-      properties.load(new FileInputStream(propFile))
+        Properties properties = new Properties()
+        properties.load(new FileInputStream(propFile))
         signingConfigs {
             release {
                 keyAlias properties['keystore.alias']
