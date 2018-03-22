@@ -53,7 +53,7 @@ class PrinterView extends android.app.Activity {
   }
 
   public void addListenerOnButtons() {
-    // Saves Papertape Image and Clears Scroll
+    // Saves paper-tape Image and Clears Scroll
 
     TearButton = (Button) findViewById(R.id.TearTapeButton);
     TearButton.setOnClickListener

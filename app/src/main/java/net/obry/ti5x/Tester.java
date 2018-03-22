@@ -198,7 +198,7 @@ class Tester {
     if (!check("5.", false))
       return false;
 
-    //  check result in proper quadran
+    //  check result in proper quadrant
 
     Calc.SetAngMode(State.ANG_DEG);
     Calc.InvState = false;
