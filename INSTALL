@@ -10,19 +10,24 @@ tree: local.properties, and keystore.properties. These are excluded
 from the Git repository because their contents are specific to your
 setup.
 
-local.properties defines a property sdk.dir, which points to the
-top-level directory where you installed the Android SDK. E.g.
+[local.properties]
+
+    defines a property sdk.dir, which points to the
+    top-level directory where you installed the Android SDK. E.g.
 
     sdk.dir=/path/to/android-sdk-linux_x86
 
-keystore.properties defines three properties to do with signing of
-the application package: keystore.path is the path to your keystore
-file, keystore.alias is the name (alias) of the key in the keystore
-to use, and keystore.password is the password for accessing that key.
-E.g.
+[keystore.properties]
 
-    keystore.path=/home/ldo/my.keystore
+    defines three properties to do with signing of
+    the application package: keystore.path is the path to your keystore
+    file, keystore.alias is the name (alias) of the key in the keystore
+    to use, and keystore.password is the password for accessing that key.
+    E.g.
+
+    keystore.path=/path/to/my.keystore
     keystore.alias=my-key
+    keystore.key_password=please
     keystore.password=please
 
 Because it has to contain a password, I would recommend you do
