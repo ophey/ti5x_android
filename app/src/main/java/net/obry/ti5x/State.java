@@ -1383,9 +1383,12 @@ class State {
       if (Labelled) {
         /* clear left-most characters of the last column */
         Translated[Printer.CharColumns - 5] = 0;
-        for (int i = Printer.CharColumns - 4; i < Printer.CharColumns; ++i) {
-          Translated[i] = PrintRegister[i];
-        }
+        System.arraycopy
+           (
+              PrintRegister,Printer.CharColumns - 4,
+              Translated,   Printer.CharColumns - 4,
+              4
+           );
       }
       Global.Print.Render(Translated);
     }
@@ -1810,9 +1813,12 @@ class State {
                     &&
                     Bank.Program.length <= MaxProgram
                  ) {
-                for (int i = 0; i < Bank.Program.length; ++i) {
-                  Program[i] = Bank.Program[i];
-                }
+                System.arraycopy
+                   (
+                      Bank.Program, 0,
+                      Program, 0,
+                      Bank.Program.length
+                   );
                 for (int i = Bank.Program.length; i < MaxProgram; ++i) {
                   Program[i] = 0;
                 }
@@ -2234,18 +2240,14 @@ class State {
   }
 
   void InsertAtCurInstr() {
-    for (int i = MaxProgram; i > PC + 1; --i) {
-      Program[i - 1] = Program[i - 2];
-    }
+    System.arraycopy(Program, PC, Program,PC + 1,MaxProgram - 1 - PC);
     Program[PC] = (byte) 0;
     ResetLabels();
     ShowCurProg();
   }
 
   void DeleteCurInstr() {
-    for (int i = PC; i < MaxProgram - 1; ++i) {
-      Program[i] = Program[i + 1];
-    }
+    System.arraycopy(Program,PC + 1, Program, PC,MaxProgram - 1 - PC);
     Program[MaxProgram - 1] = (byte) 0;
     ResetLabels();
     ShowCurProg();
@@ -2628,18 +2630,24 @@ class State {
           Memory[k] = new Number(CardMemory[k]);
         }
       }
-      for (int k = (N - 1) * 240; k < N * 240; k++) {
-        Program[k] = CardProgram[k];
-      }
+      System.arraycopy
+         (
+            CardProgram,(N - 1) * 240,
+            Program,    (N - 1) * 240,
+            240
+         );
     } else {
       for (int k = (4 - N) * 30; k < (4 - N + 1) * 30; k++) {
         if (k < MaxMemories) {
           CardMemory[k] = new Number(Memory[k]);
         }
       }
-      for (int k = (N - 1) * 240; k < N * 240; k++) {
-        CardProgram[k] = Program[k];
-      }
+      System.arraycopy
+         (
+            Program,    (N - 1) * 240,
+            CardProgram,(N - 1) * 240,
+            240
+         );
     }
   }
 
