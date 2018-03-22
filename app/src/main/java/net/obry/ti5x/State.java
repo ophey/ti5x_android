@@ -19,6 +19,7 @@
 package net.obry.ti5x;
 
 import android.util.Log;
+import android.util.SparseIntArray;
 
 class State {
   /* the calculator state, number entry and programs */
@@ -137,7 +138,7 @@ class State {
 
   static class ProgBank {
     byte[] Program;
-    java.util.Map<Integer, Integer> Labels;
+    SparseIntArray Labels;
     /* mapping from symbolic codes to program locations */
     android.graphics.Bitmap Card; /* card image to display when bank is selected, can be null */
     byte[] Help; /* HTML help to display, can be null */
@@ -2322,9 +2323,10 @@ class State {
                  } /*compare*/
                }
             );
-      for (java.util.Map.Entry<Integer, Integer> ThisLabel : Bank[0].Labels.entrySet()) {
-        if (ThisLabel.getValue() >= PC + 2) {
-          SortedLabelsTemp.add(new LabelDef(ThisLabel.getKey(), ThisLabel.getValue()));
+      for (int i =0; i < Bank[0].Labels.size(); i++) {
+        final int Value = Bank[0].Labels.valueAt(i);
+        if (Value >= PC + 2) {
+          SortedLabelsTemp.add(new LabelDef(Bank[0].Labels.keyAt(i), Value));
         }
       }
       SortedLabels = new LabelDef[SortedLabelsTemp.size()];
@@ -2765,7 +2767,7 @@ class State {
          */
         Result = 9900 + NextByte;
       } else /* symbolic label */ {
-        if (Bank[BankNr].Labels.containsKey(NextByte)) {
+        if (Bank[BankNr].Labels.indexOfKey(NextByte) >= 0) {
           Result = Bank[BankNr].Labels.get(NextByte);
         }
       }
@@ -2840,7 +2842,7 @@ class State {
           Loc = (int) Memory[Loc].getInt();
         } else if (LocType == TRANSFER_LOC_SYMBOLIC) {
           FillInLabels(BankNr); /* if not already done */
-          if (!Bank[BankNr].Labels.containsKey(Loc))
+          if (Bank[BankNr].Labels.indexOfKey(Loc) < 0)
             break;
           Loc = Bank[BankNr].Labels.get(Loc);
         }
@@ -3464,7 +3466,7 @@ class State {
             break;
           case 76: /*Lbl*/ {
             final int TheLabel = GetProg(false);
-            if (TheLabel >= 0 && RunPC >= 0 && !Bank[RunBank].Labels.containsKey(TheLabel)) {
+            if (TheLabel >= 0 && RunPC >= 0 && Bank[RunBank].Labels.indexOfKey(TheLabel) < 0) {
               Bank[RunBank].Labels.put(TheLabel, RunPC);
             }
           }
@@ -3495,7 +3497,7 @@ class State {
         int BankNr
      ) {
     if (Bank[BankNr].Labels == null) {
-      Bank[BankNr].Labels = new java.util.HashMap<Integer, Integer>();
+      Bank[BankNr].Labels = new SparseIntArray();
       final boolean SaveInvState = InvState;
       final int SaveRunPC = RunPC;
       final int SaveRunBank = RunBank;
