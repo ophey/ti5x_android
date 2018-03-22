@@ -19,13 +19,12 @@ package net.obry.ti5x;
 
 import android.graphics.RectF;
 
-public class LabelCard extends android.view.View {
-  final android.content.Context TheContext;
-  android.graphics.Bitmap CardImage, NewCardImage;
-  byte[] Help;
-  final int Dark, LEDOff;
+class LabelCard extends android.view.View {
+  private android.graphics.Bitmap CardImage, NewCardImage;
+  private byte[] Help;
+  private final int Dark, LEDOff;
 
-  final float SlideDuration = 0.5f; /* seconds */
+  private final float SlideDuration = 0.5f; /* seconds */
 
   public LabelCard
      (
@@ -33,8 +32,8 @@ public class LabelCard extends android.view.View {
         android.util.AttributeSet TheAttributes
      ) {
     super(TheContext, TheAttributes);
-    this.TheContext = TheContext;
-    final android.content.res.Resources Res = TheContext.getResources();
+    final android.content.Context ctx = TheContext;
+    final android.content.res.Resources Res = ctx.getResources();
     Dark = Res.getColor(R.color.dark);
     LEDOff = Res.getColor(R.color.led_off);
     CardImage = null;
@@ -56,13 +55,13 @@ public class LabelCard extends android.view.View {
                       final android.content.Intent ShowHelp =
                          new android.content.Intent(android.content.Intent.ACTION_VIEW);
                       ShowHelp.putExtra(net.obry.ti5x.Help.ContentID, Help);
-                      ShowHelp.setClass(LabelCard.this.TheContext, Help.class);
-                      LabelCard.this.TheContext.startActivity(ShowHelp);
+                      ShowHelp.setClass(ctx, Help.class);
+                      ctx.startActivity(ShowHelp);
                     } else {
                       android.widget.Toast.makeText
                          (
-                            LabelCard.this.TheContext,
-                            LabelCard.this.TheContext.getString(R.string.no_prog_help),
+                            ctx,
+                            ctx.getString(R.string.no_prog_help),
                             android.widget.Toast.LENGTH_SHORT
                          ).show();
                     }
