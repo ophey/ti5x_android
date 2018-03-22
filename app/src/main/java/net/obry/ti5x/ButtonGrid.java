@@ -249,6 +249,7 @@ class ButtonGrid extends android.view.View {
                 final int EventAction = TheEvent.getAction() & (1 << MotionEvent.ACTION_POINTER_ID_SHIFT) - 1;
                 switch (EventAction) {
                   case MotionEvent.ACTION_DOWN:
+                    TheView.performClick();
                   case MotionEvent.ACTION_POINTER_DOWN:
                   case MotionEvent.ACTION_MOVE:
                     final long ThisClick = java.lang.System.currentTimeMillis();
@@ -328,6 +329,7 @@ class ButtonGrid extends android.view.View {
                     }
                     break;
                   case MotionEvent.ACTION_UP:
+                    TheView.performClick();
                   case MotionEvent.ACTION_CANCEL:
                     if (SelectedButton != -1) {
                       if

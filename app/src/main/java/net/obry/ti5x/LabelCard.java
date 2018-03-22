@@ -50,6 +50,7 @@ class LabelCard extends android.view.View {
               if (!Global.BGTaskInProgress()) {
                 switch (TheEvent.getAction()) {
                   case android.view.MotionEvent.ACTION_DOWN:
+                    TheView.performClick();
                   case android.view.MotionEvent.ACTION_MOVE:
                     if (Help != null) {
                       final android.content.Intent ShowHelp =
@@ -68,6 +69,7 @@ class LabelCard extends android.view.View {
                     Handled = true;
                     break;
                   case android.view.MotionEvent.ACTION_UP:
+                    TheView.performClick();
                   case android.view.MotionEvent.ACTION_CANCEL:
                     Handled = true;
                     break;
