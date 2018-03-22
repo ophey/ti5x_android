@@ -79,7 +79,7 @@ class LabelCard extends android.view.View {
        );
   }
 
-  void SlideInNewCard() {
+  private void SlideInNewCard() {
     clearAnimation();
     CardImage = NewCardImage;
     if (CardImage != null) {
@@ -98,7 +98,7 @@ class LabelCard extends android.view.View {
     }
   }
 
-  void SlideOutOldCard() {
+  private void SlideOutOldCard() {
     clearAnimation(); /* if any */
     final android.view.animation.Animation SlideOut =
        new android.view.animation.TranslateAnimation

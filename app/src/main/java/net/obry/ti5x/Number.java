@@ -95,7 +95,7 @@ class Number {
   }
 
   public int compareTo(Number n) {
-    return (int) v.compareTo(n.v);
+    return v.compareTo(n.v);
   }
 
   public int compareTo(long i) {
@@ -477,13 +477,13 @@ class Number {
       switch (UsingFormat) {
         case State.FORMAT_FLOAT:
           if (l.v.signum() < 0)
-            Exp = (int) l.v.setScale(0, RoundingMode.FLOOR).intValue();
+            Exp = l.v.setScale(0, RoundingMode.FLOOR).intValue();
           else
-            Exp = (int) l.v.setScale(0, RoundingMode.FLOOR).intValue();
+            Exp = l.v.setScale(0, RoundingMode.FLOOR).intValue();
           break;
         case State.FORMAT_ENG:
           l.v = l.v.divide(B_THREE, mc);
-          Exp = (int) l.v.setScale(0, RoundingMode.FLOOR).intValue() * 3;
+          Exp = l.v.setScale(0, RoundingMode.FLOOR).intValue() * 3;
           break;
       }
 

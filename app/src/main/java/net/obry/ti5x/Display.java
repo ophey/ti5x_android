@@ -21,21 +21,21 @@ package net.obry.ti5x;
 import android.graphics.PointF;
 import android.graphics.Path;
 
-public class Display extends android.view.View {
+class Display extends android.view.View {
   /* rendering parameters */
-  static final float DigitWidth = 0.5f; /* as fraction of size */
-  static final float SegmentHalfWidth = 0.05f; /* as fraction of size */
-  static final float SegmentMargin = 0.025f; /* as fraction of size */
-  static final float Slant = 0.1f; /* tangent of slant angle to right from vertical */
-  static final float DotScale = 1.5f; /* make dot bigger than line thickness */
-  static final int NrDigits = 12;
-  final int LEDLight, LEDDim, LEDOff;
-  int[] Showing;
-  int[] OtherShowing;
-  int ShowingColor, OtherColor;
-  float AnimDelay;
-  android.os.Handler Idler;
-  Runnable IdleTask = null;
+  private static final float DigitWidth = 0.5f; /* as fraction of size */
+  private static final float SegmentHalfWidth = 0.05f; /* as fraction of size */
+  private static final float SegmentMargin = 0.025f; /* as fraction of size */
+  private static final float Slant = 0.1f; /* tangent of slant angle to right from vertical */
+  private static final float DotScale = 1.5f; /* make dot bigger than line thickness */
+  private static final int NrDigits = 12;
+  private final int LEDLight, LEDDim, LEDOff;
+  private int[] Showing;
+  private int[] OtherShowing;
+  private int ShowingColor, OtherColor;
+  private float AnimDelay;
+  private final android.os.Handler Idler;
+  private Runnable IdleTask = null;
 
   public Display
      (
@@ -63,7 +63,7 @@ public class Display extends android.view.View {
       | 0x010    | 0x020
            --- 0x040  . 0x100
   */
-  public static int SegmentCode
+  private static int SegmentCode
   (
      char ForChar
   ) {
@@ -132,7 +132,7 @@ public class Display extends android.view.View {
        TheCode;
   }
 
-  public void SetShowing
+  private void SetShowing
      (
         int[] ToShow /* sequence of segment codes */
      ) {
@@ -196,7 +196,7 @@ public class Display extends android.view.View {
     }
   }
 
-  void ClearAnimShowing() {
+  private void ClearAnimShowing() {
     if (IdleTask != null) {
       Idler.removeCallbacks(IdleTask);
       IdleTask = null;
@@ -234,7 +234,7 @@ public class Display extends android.view.View {
     Idler.postDelayed(IdleTask, (int) (AnimDelay * 1000.0f));
   }
 
-  static void RenderSegments
+  private static void RenderSegments
      (
         android.graphics.Canvas Draw,
         int Segments,

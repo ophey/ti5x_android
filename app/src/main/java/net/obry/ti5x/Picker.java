@@ -208,7 +208,7 @@ class Picker extends android.app.Activity {
                 (android.widget.RadioButton) TheView
                 :
                 (android.widget.RadioButton)
-                   ((android.view.ViewGroup) TheView).findViewById(R.id.file_item_checked);
+                   TheView.findViewById(R.id.file_item_checked);
           CurSelected = MyItem;
           MyItem.Selected = true;
           LastChecked.setChecked(true);
@@ -235,7 +235,7 @@ class Picker extends android.app.Activity {
        (
           int Position,
           android.view.View ReuseView,
-          android.view.ViewGroup Parent
+          @NonNull android.view.ViewGroup Parent
        ) {
       android.view.View TheView = ReuseView;
       if (TheView == null) {

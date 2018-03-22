@@ -40,7 +40,7 @@ class Importer {
     @Override
     public Number Next()
        throws State.ImportEOFException {
-      Number Result = new Number();
+      Number Result;
       StringBuilder LastNum = null;
       for (; ; ) {
         int ch;
@@ -55,7 +55,7 @@ class Importer {
                   String.format
                      (
                         Global.StdLocale,
-                        "Couldn’t read input file at line %d, col %d: %s",
+                        "Couldn't read input file at line %d, col %d: %s",
                         LineNr,
                         ColNr,
                         Failed.toString()
@@ -156,7 +156,7 @@ class Importer {
             String.format
                (
                   Global.StdLocale,
-                  "Couldn’t open input file \"%s\": %s",
+                  "Couldn't open input file \"%s\": %s",
                   FileName,
                   NotFound.toString()
                )

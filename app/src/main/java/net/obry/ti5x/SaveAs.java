@@ -20,17 +20,17 @@ package net.obry.ti5x;
 import android.os.Environment;
 
 class SaveAs extends android.app.Activity {
-  static android.view.View Extra = null;
-  static String SaveWhat = null;
-  static String SaveWhere = null;
-  static String FileExt = null;
+  private static android.view.View Extra = null;
+  private static String SaveWhat = null;
+  private static String SaveWhere = null;
+  private static String FileExt = null;
 
-  static boolean Reentered = false; /* sanity check */
+  private static boolean Reentered = false; /* sanity check */
   public static SaveAs Current = null;
 
-  android.view.ViewGroup MainViewGroup;
-  android.widget.EditText SaveAsText;
-  String TheCleanedText;
+  private android.view.ViewGroup MainViewGroup;
+  private android.widget.EditText SaveAsText;
+  private String TheCleanedText;
 
   class OverwriteConfirm
      extends android.app.AlertDialog
@@ -73,7 +73,7 @@ class SaveAs extends android.app.Activity {
     }
   }
 
-  void ReturnResult() {
+  private void ReturnResult() {
     setResult
        (
           android.app.Activity.RESULT_OK,

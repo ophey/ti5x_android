@@ -14,10 +14,10 @@ android {
 task preprocess {
     doLast {
            def processModule = {
-             println "generate resources for ${it.name}";
+             println "generate resources for ${it.name}"
 
-             def moddata = "${it.canonicalPath}";
-             def module = "${it.name}";
+             def moddata = "${it.canonicalPath}"
+             def module = "${it.name}"
              def (modcode, modname) = "$module".tokenize('-')
 
              exec {
@@ -27,10 +27,10 @@ task preprocess {
            }
 
            def processProgram = {
-             println "generate resources for ${it.name}";
+             println "generate resources for ${it.name}"
 
-             def progdata = "${it.canonicalPath}";
-             def module = "${it.name}";
+             def progdata = "${it.canonicalPath}"
+             def module = "${it.name}"
 
              exec {
                   executable '../util/makeprog'
@@ -43,8 +43,8 @@ task preprocess {
 
            // handle modules
 
-           def moduleDir = "modules";
-           def mDir = new File(moduleDir);
+           def moduleDir = "modules"
+           def mDir = new File(moduleDir)
 
            mDir.eachFileRecurse (FileType.DIRECTORIES) {
               file -> processModule file
@@ -52,8 +52,8 @@ task preprocess {
 
            // handle programs
 
-           def programDir = "programs";
-           def pDir = new File(programDir);
+           def programDir = "programs"
+           def pDir = new File(programDir)
 
            pDir.eachFileRecurse (FileType.DIRECTORIES) {
               file -> processProgram file

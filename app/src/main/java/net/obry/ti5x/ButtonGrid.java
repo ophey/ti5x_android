@@ -22,18 +22,22 @@ import android.graphics.Typeface;
 import android.view.MotionEvent;
 
 class ButtonGrid extends android.view.View {
-  static final int NrButtonRows = 9;
-  static final int NrButtonCols = 5;
-  final android.graphics.Typeface MFont =
+  private static final int NrButtonRows = 9;
+  private static final int NrButtonCols = 5;
+  private final android.graphics.Typeface MFont =
      Typeface.createFromAsset(getContext().getAssets(),
         "fonts/dejavusans-bold.ttf");
 
-  android.media.SoundPool MakeNoise;
-  android.os.Vibrator Vibrate;
+  private final android.media.SoundPool MakeNoise;
+  private final android.os.Vibrator Vibrate;
   /* it appears SoundPool allocates loaded sound IDs starting from 1 */
-  int ButtonDown = 0;
+  private int ButtonDown = 0;
 
-  final int Dark, White, ButtonBrown, ButtonYellow, OverlayBlue;
+  private final int Dark;
+  private final int White;
+  private final int ButtonBrown;
+  private final int ButtonYellow;
+  private final int OverlayBlue;
 
   class ButtonDef {
     /* defines appearance of a button */
@@ -70,9 +74,9 @@ class ButtonGrid extends android.view.View {
     }
   }
 
-  ButtonDef[][] ButtonDefs;
+  private ButtonDef[][] ButtonDefs;
 
-  void MakeButtonDefs() {
+  private void MakeButtonDefs() {
     ButtonDefs = new ButtonDef[][]
        {
           new ButtonDef[]
@@ -163,26 +167,24 @@ class ButtonGrid extends android.view.View {
 
   public boolean OverlayVisible;
 
-  final RectF ButtonRelDisplayMargins = new RectF(0.175f, 0.5f, 0.175f, 0.05f);
+  private final RectF ButtonRelDisplayMargins = new RectF(0.175f, 0.5f, 0.175f, 0.05f);
   /* relative bounds of button within grid cell */
-  final RectF ButtonRelTouchMargins = new RectF(0.0f, 0.25f, 0.0f, 0.0f);
-  /* wider touch-sensitive areas to improve sensitivity */
-  final float CornerRoundness = 1.5f;
+  private final RectF ButtonRelTouchMargins = new RectF(0.0f, 0.25f, 0.0f, 0.0f);
 
   /* global modifier state */
   public boolean AltState;
 
   public int SelectedButton = -1;
-  public boolean SecondPress = false;
+  private boolean SecondPress = false;
 
   public int DigitsNeeded;
   public boolean AcceptSymbolic, AcceptInd, NextLiteral;
   public int AccumDigits, FirstOperand;
   public boolean GotFirstOperand, GotFirstInd, IsSymbolic, GotInd;
   public int CollectingForFunction;
-  int ButtonCode;
+  private int ButtonCode;
 
-  long LastClick = 0;
+  private long LastClick = 0;
 
   public void Reset() {
     /* resets to power-up state. */
@@ -200,7 +202,7 @@ class ButtonGrid extends android.view.View {
     /* everything else has to be set up in constructor which has access to Context object */
   }
 
-  public void DoFeedback() {
+  private void DoFeedback() {
     switch (FeedbackType) {
       case FEEDBACK_CLICK:
         if (MakeNoise != null && ButtonDown != 0) {
@@ -477,11 +479,12 @@ class ButtonGrid extends android.view.View {
              );
           DrawBounds = new RectF(ButtonBounds);
           DrawBounds.offset(-1.0f, -1.0f);
+          float cornerRoundness = 1.5f;
           Draw.drawRoundRect
              (
                 DrawBounds,
-                CornerRoundness,
-                CornerRoundness,
+                cornerRoundness,
+                cornerRoundness,
                 TextPaint
              );
 
@@ -502,8 +505,8 @@ class ButtonGrid extends android.view.View {
             Draw.drawRoundRect
                (
                   DrawBounds,
-                  CornerRoundness,
-                  CornerRoundness,
+                  cornerRoundness,
+                  cornerRoundness,
                   TextPaint
                );
           }
@@ -511,8 +514,8 @@ class ButtonGrid extends android.view.View {
           Draw.drawRoundRect
              (
                 ButtonBounds,
-                CornerRoundness,
-                CornerRoundness,
+                cornerRoundness,
+                cornerRoundness,
                 TextPaint
              );
         }
@@ -622,7 +625,7 @@ class ButtonGrid extends android.view.View {
     }
   }
 
-  void ResetOperands() {
+  private void ResetOperands() {
     DigitsNeeded = 0;
     AcceptSymbolic = false;
     AcceptInd = false;
@@ -634,7 +637,7 @@ class ButtonGrid extends android.view.View {
     CollectingForFunction = -1;
   }
 
-  void StoreOperand
+  private void StoreOperand
      (
         int NrDigits, /* 1, 2 or 3 */
         boolean SeparateInd
@@ -655,7 +658,7 @@ class ButtonGrid extends android.view.View {
     }
   }
 
-  public void Invoke() {
+  private void Invoke() {
     final State Calc = Global.Calc; /* shorten references */
 
     if (Calc != null && SelectedButton > 0) {

@@ -18,8 +18,8 @@
 package net.obry.ti5x;
 
 class BuiltinLibrary {
-  private int name;
-  private int lib;
+  private final int name;
+  private final int lib;
 
   BuiltinLibrary(int name, int lib) {
     this.name = name;

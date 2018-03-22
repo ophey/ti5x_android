@@ -40,7 +40,7 @@ public class Main extends android.app.Activity {
 
   interface RequestResponseAction {
     /* response to an activity result */
-    public void Run
+    void Run
     (
        int ResultCode,
        Intent Data
@@ -1303,7 +1303,7 @@ public class Main extends android.app.Activity {
           android.view.Window.FEATURE_CUSTOM_TITLE,
           R.layout.title_bar
        );
-    ((android.widget.Button) findViewById(R.id.action_help)).setOnClickListener
+    findViewById(R.id.action_help).setOnClickListener
        (
           new View.OnClickListener() {
             public void onClick
@@ -1314,7 +1314,7 @@ public class Main extends android.app.Activity {
             } /*onClick*/
           }
        );
-    ((android.widget.Button) findViewById(R.id.action_helpmod)).setOnClickListener
+    findViewById(R.id.action_helpmod).setOnClickListener
        (
           new View.OnClickListener() {
             public void onClick
@@ -1337,7 +1337,7 @@ public class Main extends android.app.Activity {
             } /*onClick*/
           }
        );
-    ((android.widget.Button) findViewById(R.id.action_print)).setOnClickListener
+    findViewById(R.id.action_print).setOnClickListener
        (
           new View.OnClickListener() {
             public void onClick
@@ -1352,7 +1352,7 @@ public class Main extends android.app.Activity {
             } /*onClick*/
           }
        );
-    ((android.widget.Button) findViewById(R.id.action_menu)).setOnClickListener
+    findViewById(R.id.action_menu).setOnClickListener
        (
           new View.OnClickListener() {
             public void onClick
