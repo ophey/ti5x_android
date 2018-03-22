@@ -25,7 +25,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 
-public class Number {
+class Number {
   private BigDecimal v;
   private boolean error;
   private final static MathContext mc = new MathContext(13, RoundingMode.HALF_DOWN);

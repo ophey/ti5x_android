@@ -23,7 +23,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
-public class Picker extends android.app.Activity {
+class Picker extends android.app.Activity {
 
   // index for the selection either prog or libraries in the menu
   public static String AltIndexID = "net.obry.ti5x.PickedIndex";

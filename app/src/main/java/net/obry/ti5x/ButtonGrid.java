@@ -21,7 +21,7 @@ import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.view.MotionEvent;
 
-public class ButtonGrid extends android.view.View {
+class ButtonGrid extends android.view.View {
   static final int NrButtonRows = 9;
   static final int NrButtonCols = 5;
   final android.graphics.Typeface MFont =

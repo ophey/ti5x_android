@@ -30,13 +30,13 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Printer {
+class Printer {
   android.graphics.Bitmap Paper;
   /* the idea is that this is low-resolution but will be displayed scaled up
      to make matrix dots more visible */
 
-  public static interface Notifier {
-    public void PaperChanged();
+  interface Notifier {
+    void PaperChanged();
   }
 
   Notifier PrintListener; /* to notify when content of Paper changes */

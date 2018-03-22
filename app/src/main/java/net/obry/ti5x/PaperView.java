@@ -17,7 +17,7 @@
 
 package net.obry.ti5x;
 
-public class PaperView extends android.view.View {
+class PaperView extends android.view.View {
   final int TargetWidth;
 
   public PaperView

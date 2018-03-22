@@ -18,19 +18,19 @@
 package net.obry.ti5x;
 
 class BuiltinLibrary {
-  int name;
-  int lib;
+  private int name;
+  private int lib;
 
-  public BuiltinLibrary(int name, int lib) {
+  BuiltinLibrary(int name, int lib) {
     this.name = name;
     this.lib = lib;
   }
 
-  public String getName(android.content.Context ctx) {
+  String getName(android.content.Context ctx) {
     return ctx.getString(name);
   }
 
-  public java.io.InputStream getInputStream(android.content.Context ctx) {
+  java.io.InputStream getInputStream(android.content.Context ctx) {
     return ctx.getResources().openRawResource(lib);
   }
 }

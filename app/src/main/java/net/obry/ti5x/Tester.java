@@ -17,10 +17,8 @@
 
 package net.obry.ti5x;
 
-import android.util.Log;
-
-public class Tester {
-  public static State Calc;
+class Tester {
+  private State Calc;
 
   private final static String SMALL = "1.-99";
   private final static String ERROR = "9.9999999 99";

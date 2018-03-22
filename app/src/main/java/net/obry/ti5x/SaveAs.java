@@ -19,7 +19,7 @@ package net.obry.ti5x;
 
 import android.os.Environment;
 
-public class SaveAs extends android.app.Activity {
+class SaveAs extends android.app.Activity {
   static android.view.View Extra = null;
   static String SaveWhat = null;
   static String SaveWhere = null;

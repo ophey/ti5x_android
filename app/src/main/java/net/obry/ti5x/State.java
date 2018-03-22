@@ -20,10 +20,10 @@ package net.obry.ti5x;
 
 import android.util.Log;
 
-public class State {
+class State {
   /* the calculator state, number entry and programs */
 
-  android.content.Context ctx;
+  private final android.content.Context ctx;
   /* number-entry state */
   final static int EntryState = 0;
   final static int DecimalEntryState = 1;

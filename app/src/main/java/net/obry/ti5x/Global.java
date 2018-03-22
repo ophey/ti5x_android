@@ -18,7 +18,7 @@
 
 package net.obry.ti5x;
 
-public class Global {
+final class Global {
   static Display Disp;
   static LabelCard Label;
   static ButtonGrid Buttons;
@@ -37,7 +37,7 @@ public class Global {
   static android.widget.TextView ProgressMessage;
   static android.os.Handler UIRun;
 
-  public static class Task {
+  static class Task {
     int TaskStatus = 0;
     Throwable TaskFailure = null;
 
@@ -50,16 +50,16 @@ public class Global {
       TaskFailure = NewFailure;
     }
 
-    public boolean PreRun() {
+    boolean PreRun() {
       /* to be run before BGRun in calling thread, return false to abort */
       return true;
     }
 
-    public void BGRun() {
+    void BGRun() {
     }
     /* to be run in a background thread */
 
-    public void PostRun() {
+    void PostRun() {
     }
     /* to be run on UI thread after BGRun has finished */
   }

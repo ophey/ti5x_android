@@ -29,7 +29,7 @@ import android.support.v4.app.ActivityCompat;
  * Utility class that wraps access to the runtime permissions API in M and provides basic helper
  * methods.
  */
-public abstract class PermissionUtil {
+abstract class PermissionUtil {
 
   /**
    * Check that all given permissions have been granted by verifying that each entry in the
