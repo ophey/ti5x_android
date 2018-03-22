@@ -497,8 +497,7 @@ class Printer {
         byte[] PrintReg
      ) {
     StringBuilder Result = new StringBuilder();
-    for (int i = 0; i < PrintReg.length; ++i) {
-      final int b = (int) PrintReg[i];
+    for (final int b : PrintReg) {
       int ch = 0;
       if (b == 0) {
         ch = ' ';
