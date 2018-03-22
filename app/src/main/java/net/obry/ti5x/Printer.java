@@ -19,6 +19,7 @@
 
 package net.obry.ti5x;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.widget.Toast;
@@ -276,6 +277,7 @@ class Printer {
     }
 
     OutputStream outputStream = null;
+    @SuppressLint("SimpleDateFormat") /* we want a specific format without slash as separator */
     String outString = new SimpleDateFormat("dd-MM-yyyy hh-mm-ss").format(new Date());
     File file = new File(extStorageDirectory + "/ti5x " + outString + ".png");
 
