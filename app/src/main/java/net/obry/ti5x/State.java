@@ -1740,7 +1740,7 @@ class State {
           case 3:
           case 4: {
             final int ColStart = (OpNr - 1) * 5;
-            long Contents = (long) Math.abs(X.getInt());
+            long Contents = Math.abs(X.getInt());
 
             // emulate the HIR register (OP 01 use HIR 05, 02 -> 06, 03 -> 07 and 04 -> 08) */
 
