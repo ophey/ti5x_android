@@ -26,24 +26,24 @@ import java.io.File;
 class Picker extends android.app.Activity {
 
   // index for the selection either prog or libraries in the menu
-  public static String AltIndexID = "net.obry.ti5x.PickedIndex";
+  public static final String AltIndexID = "net.obry.ti5x.PickedIndex";
 
   // index of the SpecialItem, in this case the selected library 0:Master, 1:xyz
-  public static String SpeIndexID = "net.obry.ti5x.SpecialIndex";
+  public static final String SpeIndexID = "net.obry.ti5x.SpecialIndex";
 
   // index of the first Builtin item in the list
-  public static String BuiltinIndexID = "net.obry.ti5x.BuiltinIndex";
+  public static final String BuiltinIndexID = "net.obry.ti5x.BuiltinIndex";
 
-  static boolean Reentered = false; /* sanity check */
+  private static boolean Reentered = false; /* sanity check */
   public static Picker Current = null;
 
   static class PickerAltList {
     /* defining alternative lists of files for picker to display */
-    int RadioButtonID;
-    String Prompt;
-    String NoneFound;
-    String[] FileExts; /* list of extensions to match, or null to match all files */
-    String[] SpecialItem; /* special item to add to list, null for none */
+    final int RadioButtonID;
+    final String Prompt;
+    final String NoneFound;
+    final String[] FileExts; /* list of extensions to match, or null to match all files */
+    final String[] SpecialItem; /* special item to add to list, null for none */
 
     PickerAltList
        (
@@ -61,21 +61,22 @@ class Picker extends android.app.Activity {
     }
   }
 
-  static String SelectLabel = null;
-  static android.view.View Extra = null;
-  static String[] LookIn;
-  static PickerAltList[] AltLists = null;
+  private static String SelectLabel = null;
+  private static android.view.View Extra = null;
+  private static String[] LookIn;
+  private static PickerAltList[] AltLists = null;
 
-  android.view.ViewGroup MainViewGroup;
-  android.widget.TextView PromptView;
-  android.widget.ListView PickerListView;
-  SelectedItemAdapter PickerList;
-  int SelectedAlt; /* index into AltLists */
-  int FirstBuiltinIdx = 0;
+  private android.view.ViewGroup MainViewGroup;
+  private android.widget.TextView PromptView;
+  private android.widget.ListView PickerListView;
+  private SelectedItemAdapter PickerList;
+  private int SelectedAlt; /* index into AltLists */
+  private int FirstBuiltinIdx = 0;
 
 
   public static class PickerItem {
-    String FullPath, DisplayName;
+    final String FullPath;
+    final String DisplayName;
     boolean Selected;
 
     PickerItem
@@ -289,7 +290,7 @@ class Picker extends android.app.Activity {
     }
   }
 
-  void PopulatePickerList
+  private void PopulatePickerList
      (
         int NewAlt /* index into AltLists */
      ) {
