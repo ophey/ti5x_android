@@ -33,9 +33,9 @@ abstract class PermissionUtil {
   static boolean hasCorrectPermission(Context ctx) {
     return Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN
        ||
-       (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.READ_EXTERNAL_STORAGE)
+       ((ActivityCompat.checkSelfPermission(ctx, Manifest.permission.READ_EXTERNAL_STORAGE)
           == PackageManager.PERMISSION_GRANTED)
        && (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-          == PackageManager.PERMISSION_GRANTED);
+          == PackageManager.PERMISSION_GRANTED));
   }
 }
