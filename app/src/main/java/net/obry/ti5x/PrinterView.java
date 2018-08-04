@@ -23,7 +23,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ToggleButton;
 
-class PrinterView extends android.app.Activity {
+public class PrinterView extends android.app.Activity {
   android.widget.ScrollView PaperScroll;
   PaperView ThePaper;
   Button ClearButton;

@@ -17,7 +17,7 @@
 
 package net.obry.ti5x;
 
-class BuiltinLibrary {
+public class BuiltinLibrary {
   private final int name;
   private final int lib;
 

@@ -601,7 +601,7 @@ public class Persistent {
     return Result.toByteArray();
   }
 
-  static class CalcStateLoader extends org.xml.sax.helpers.DefaultHandler {
+  public static class CalcStateLoader extends org.xml.sax.helpers.DefaultHandler {
     Display Disp;
     ButtonGrid Buttons;
     protected State Calc;

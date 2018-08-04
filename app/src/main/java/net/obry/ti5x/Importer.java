@@ -18,7 +18,7 @@
 
 package net.obry.ti5x;
 
-class Importer {
+public class Importer {
 
   class ImportDataFeeder extends State.ImportFeeder {
     java.io.InputStream Data;

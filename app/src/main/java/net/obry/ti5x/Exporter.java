@@ -18,7 +18,7 @@
 
 package net.obry.ti5x;
 
-class Exporter {
+public class Exporter {
   private final android.content.Context ctx;
   private java.io.OutputStream Out;
   private java.io.PrintStream PrintOut;
