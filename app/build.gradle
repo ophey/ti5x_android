@@ -15,12 +15,12 @@ android {
             }
         }
     }
-    compileSdkVersion 23
+    compileSdkVersion 26
     defaultConfig {
         applicationId "net.obry.ti5x"
         minSdkVersion 11
-        targetSdkVersion 23
-        versionCode 89
+        targetSdkVersion 26
+        versionCode 99
         versionName "7.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true

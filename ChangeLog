@@ -1,5 +1,11 @@
 Feature highlights:
 
+v7.0, 2018 August 4th:
+   Move to Android Studio.
+   Update interface.
+   Allow saving printer paper to png.
+   Large code clean-up.
+
 v6.11, 2018 March 13th:
    Fix handling of error state.
    Fix Internet web links in help and about.
