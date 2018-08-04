@@ -203,17 +203,15 @@ class ButtonGrid extends android.view.View {
   }
 
   private void DoFeedback() {
-    switch (FeedbackType) {
-      case FEEDBACK_CLICK:
-        if (MakeNoise != null && ButtonDown != 0) {
-          MakeNoise.play(ButtonDown, 1.0f, 1.0f, 0, 0, 1.0f);
-        }
-        break;
-      case FEEDBACK_VIBRATE:
-        if (Vibrate != null) {
-          Vibrate.vibrate(50);
-        }
-        break;
+    if (FeedbackType == FEEDBACK_CLICK || FeedbackType == FEEDBACK_BOTH) {
+      if (MakeNoise != null && ButtonDown != 0) {
+        MakeNoise.play(ButtonDown, 1.0f, 1.0f, 0, 0, 1.0f);
+      }
+    }
+    if (FeedbackType == FEEDBACK_VIBRATE || FeedbackType == FEEDBACK_BOTH) {
+      if (Vibrate != null) {
+        Vibrate.vibrate(50);
+      }
     }
   }
 
