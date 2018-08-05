@@ -1,9 +1,10 @@
 Feature highlights:
 
-v7.0, 2018 August 4th:
+v7.0, 2018 August 6th:
    Move to Android Studio.
    Update interface.
    Allow saving printer paper to png.
+   Louder click feedback.
    Large code clean-up.
 
 v6.11, 2018 March 13th:
