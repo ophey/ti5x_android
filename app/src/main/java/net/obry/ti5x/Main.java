@@ -60,8 +60,7 @@ public class Main extends android.app.Activity {
 
   // Response Results for Permissions Interactions
 
-  private final static int READ_EXTERNAL_RESULT = 100;
-  private final static int WRITE_EXTERNAL_RESULT = 101;
+  private final static int READ_WRITE_EXTERNAL_RESULT = 100;
   private final static int CHOOSE_FILE_RESULT = 102;
 
   boolean ExportAppend, ExportNumbersOnly;
@@ -1272,14 +1271,9 @@ public class Main extends android.app.Activity {
       // Storage READ permission has not been granted yet. Request it directly.
       ActivityCompat.requestPermissions(
          this,
-         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-         READ_EXTERNAL_RESULT);
-
-      // Storage WRITE permission has not been granted yet. Request it directly.
-      ActivityCompat.requestPermissions(
-         this,
-         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-         WRITE_EXTERNAL_RESULT);
+         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE},
+         READ_WRITE_EXTERNAL_RESULT);
     }
 
     Global.Calc.OnStop = new Runnable() {
