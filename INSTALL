@@ -1,6 +1,6 @@
-To build the ti5x app for Android, you will need the Android SDK,
-available from <http://developer.android.com/>, along with its
-prerequisites, including the Sun JDK and Ant.
+To build the ti5x app for Android, you will need the Android Studio
+and SDK, available from <http://developer.android.com/>, along with
+its prerequisites, including the Sun JDK.
 
 The scripts in the util directory require Python 3.1 or later.
 The rendercard script requires GhostScript to do the rendering.
@@ -10,19 +10,24 @@ tree: local.properties, and keystore.properties. These are excluded
 from the Git repository because their contents are specific to your
 setup.
 
-local.properties defines a property sdk.dir, which points to the
-top-level directory where you installed the Android SDK. E.g.
+[local.properties]
+
+    defines a property sdk.dir, which points to the
+    top-level directory where you installed the Android SDK. E.g.
 
     sdk.dir=/path/to/android-sdk-linux_x86
 
-keystore.properties defines three properties to do with signing of
-the application package: keystore.path is the path to your keystore
-file, keystore.alias is the name (alias) of the key in the keystore
-to use, and keystore.password is the password for accessing that key.
-E.g.
+[keystore.properties]
 
-    keystore.path=/home/ldo/my.keystore
+    defines three properties to do with signing of
+    the application package: keystore.path is the path to your keystore
+    file, keystore.alias is the name (alias) of the key in the keystore
+    to use, and keystore.password is the password for accessing that key.
+    E.g.
+
+    keystore.path=/path/to/my.keystore
     keystore.alias=my-key
+    keystore.key_password=please
     keystore.password=please
 
 Because it has to contain a password, I would recommend you do
@@ -40,25 +45,18 @@ for keystorepassword, your own name for the key for keyalias, and of course
 your own identification details in the value for -dname.
 
 Now you should be able to build the complete package with the
-following command:
+following helper script on the top level directory:
 
-    ant signed
+    ./wrapper.sh build
 
 If this completes without errors, you should have a file
 bin/ti5x-release.apk, which is the application package.
 
-You can also install this automatically to an Android device
-connected via USB. First, make sure "USB Debugging" is enabled
-on that device. Now do
+You may clean the build tree with:
 
-    ant install
+    ./wrapper.sh clean
 
-which will invoke the building and signing (as necessary), and
-then install the package on the default connected Android device.
-
-To debug, before launching the application start the logcat process:
-
-   adb shell
-   # logcal
-
-Then start the application, Java back-trace will be printed there.
+You can also install, debug or execute the application to an Android
+emulator directly under the emulator using Android Studio. It is also
+possible to install the application into an Android device connected
+via USB.

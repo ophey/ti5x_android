@@ -35,8 +35,8 @@ utildir = os.path.dirname(sys.argv[0])
 srcdir = sys.argv[1]
 dstdir = sys.argv[2]
 name = sys.argv[3]
-dstfile = os.path.join(os.path.dirname(utildir), os.path.join(dstdir, name + ".ti5l"))
-sys.stderr.write("%s => %s\n" % (srcdir, dstfile)) # debug
+dstfile = os.path.join(dstdir, name + ".ti5l")
+# sys.stderr.write("%s => %s\n" % (srcdir, dstfile)) # debug
 libhelpname = "help.html"
 
 sources = []

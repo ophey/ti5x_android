@@ -2,3 +2,8 @@
 /gen/
 /local.properties
 /keystore.properties
+/app/build
+/.idea
+/build
+/.gradle
+*.ti5*
