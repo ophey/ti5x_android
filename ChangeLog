@@ -1,5 +1,8 @@
 Feature highlights:
 
+v7.1, 2018 August 6th:
+   Fix "2 * )" which is error.
+
 v7.0, 2018 August 6th:
    Move to Android Studio.
    Update interface.
