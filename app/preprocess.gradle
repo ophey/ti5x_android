@@ -63,16 +63,18 @@ task preprocess {
 }
 
 task customClean(type: Delete) {
-    def mDir = new File("app/$resRaw")
+    doLast {
+        def mDir = new File("app/$resRaw")
 
-    def deleteModule = {
-        if (it.name.endsWith('.ti5l') || it.name.endsWith('.ti5p')) {
-            delete "${it.canonicalPath}"
+        def deleteModule = {
+            if (it.name.endsWith('.ti5l') || it.name.endsWith('.ti5p')) {
+                delete "${it.canonicalPath}"
+            }
         }
-    }
 
-    mDir.eachFileRecurse(FileType.FILES) {
-        file -> deleteModule file
+        mDir.eachFileRecurse(FileType.FILES) {
+            file -> deleteModule file
+        }
     }
 }
 
