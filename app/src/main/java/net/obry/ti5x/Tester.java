@@ -1037,6 +1037,29 @@ class Tester {
     return check("104", false);
   }
 
+  private boolean Test_31() {
+    //  tested on real TI-59 : "2 * =" and "2 * )" should go in error state
+
+    Clear();
+
+    Calc.Digit('2');
+    Calc.Operator(State.STACKOP_MUL);
+    Calc.PreviousOp = 65; // 65 is mult button
+    Calc.Equals();
+
+    if (!check("2.", true))
+      return false;
+
+    Clear();
+
+    Calc.Digit('4');
+    Calc.Operator(State.STACKOP_MUL);
+    Calc.PreviousOp = 65; // 65 is mult button
+    Calc.RParen();
+
+    return check("4.", true);
+  }
+
   int Run() {
     Calc = Global.Calc;
     int Total = 0;
@@ -1100,6 +1123,8 @@ class Tester {
     if (!Test_29()) return -29;
     Total++;
     if (!Test_30()) return -30;
+    Total++;
+    if (!Test_31()) return -31;
     Total++;
 
     Clear();

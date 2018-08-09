@@ -879,20 +879,24 @@ class State {
 
   void RParen() {
     Enter(54);
-    ParenCount--;
-    boolean PoppedSomething = false;
-    for (; ; ) {
-      if (OpStackNext == 0)
-        break;
-      if (OpStack[OpStackNext - 1].ParenFollows != 0) {
-        --OpStack[OpStackNext - 1].ParenFollows;
-        break;
+    if (IsOperator(PreviousOp))
+      SetErrorState(false);
+    else {
+      ParenCount--;
+      boolean PoppedSomething = false;
+      for (; ; ) {
+        if (OpStackNext == 0)
+          break;
+        if (OpStack[OpStackNext - 1].ParenFollows != 0) {
+          --OpStack[OpStackNext - 1].ParenFollows;
+          break;
+        }
+        DoStackTop();
+        PoppedSomething = true;
       }
-      DoStackTop();
-      PoppedSomething = true;
-    }
-    if (PoppedSomething) {
-      SetX(X, true);
+      if (PoppedSomething) {
+        SetX(X, true);
+      }
     }
   }
 
