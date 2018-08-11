@@ -161,7 +161,7 @@ class Printer {
           /*27*/ "INV", /* guess */
           /*28*/ "LOG",
           /*29*/ "CP ",
-          /*20*/ "CLR", /* guess */
+          /*20*/ " % ", /* extended % */
           /*31*/ "LRN",
           /*32*/ "X⇌T",
           /*33*/ "X² ",
