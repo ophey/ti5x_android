@@ -42,6 +42,7 @@ class Printer {
 
   Notifier PrintListener; /* to notify when content of Paper changes */
   private android.graphics.Canvas PaperDraw;
+  private android.content.Context PrtContext;
 
   private final static int DotSize = 2;
   private final static int DotGap = 1;
@@ -51,7 +52,7 @@ class Printer {
   private final static int CharHorGap = 1;
   private final static int CharVertGap = 1;
 
-  private final static int CharLines = 200; /* perhaps make this configurable? */
+  private final static int CharLines = 150; /* perhaps make this configurable? */
 
   private final int PaperWidth = (CharColumns * CharWidth + (CharColumns + 1) * CharHorGap) * (DotSize + DotGap) + DotGap;
   private final int PaperHeight = (CharLines * CharHeight + (CharLines + 1) * CharVertGap) * (DotSize + DotGap) + DotGap;
@@ -59,6 +60,7 @@ class Printer {
 
   private final int PaperColor;
   private final int InkColor;
+  private       int IXCurLine = 0;  /* Current Line Counter */
 
   private static final int[][] Chars =
      {
@@ -251,6 +253,8 @@ class Printer {
         android.content.Context ctx
      ) {
     final android.content.res.Resources Res = ctx.getResources();
+    //  This context is needed so we can call SavePaper (and other functions) properly
+    PrtContext = ctx;
     PaperColor = Res.getColor(R.color.paper);
     InkColor = Res.getColor(R.color.ink);
     Paper = android.graphics.Bitmap.createBitmap
@@ -278,7 +282,7 @@ class Printer {
 
     OutputStream outputStream = null;
     @SuppressLint("SimpleDateFormat") /* we want a specific format without slash as separator */
-    String outString = new SimpleDateFormat("dd-MM-yyyy hh-mm-ss").format(new Date());
+    String outString = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss.SSS").format(new Date());
     File file = new File(extStorageDirectory + "/ti5x " + outString + ".png");
 
     try {
@@ -321,6 +325,12 @@ class Printer {
   private void StartNewLine() {
     // advances the paper to the next line.
     // source rectangle, skip top line.
+    IXCurLine += 1;
+    if (IXCurLine >= this.CharLines)
+    {
+      SavePaper(PrtContext);
+      IXCurLine = 0;
+    }
     android.graphics.Rect srcRect = new android.graphics.Rect
        (0, LineHeight, PaperWidth, PaperHeight);
 
