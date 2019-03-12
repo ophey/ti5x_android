@@ -788,7 +788,7 @@ class ButtonGrid extends android.view.View {
                      actual card/help to correspond to the target program. */
                   if (Calc.CurBank == 1 && AccumDigits == 0 && Global.Label != null) {
                     int ProgNr = (int) Calc.X.getInt();
-                    if (ProgNr >= 1 && ProgNr <= Calc.MaxBanks && Calc.Bank[ProgNr] != null) {
+                    if (ProgNr >= 1 && ProgNr < Calc.MaxBanks && Calc.Bank[ProgNr] != null) {
                       Calc.FillInLabels(ProgNr); // if not done already
                       Global.Label.SetHelp
                          (Calc.Bank[ProgNr].Card, Calc.Bank[ProgNr].Help);
