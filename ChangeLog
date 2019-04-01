@@ -1,5 +1,8 @@
 Feature highlights:
 
+v7.3, 2019 April 1st:
+   Fix a crash when changing bank.
+
 v7.2, 2018 October 6th:
    Fix printer support for low memory phone.
 
