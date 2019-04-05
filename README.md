@@ -1,3 +1,4 @@
+# TI59 Emulator
 
 ti5x is an emulator, running on Android, for the venerable
 TI-58/58C/59 family of programmable scientific calculators
@@ -12,7 +13,7 @@ the /DSZ nn 51/ (decrement no-jump) instructions.
 With the current version it is possible to play the famous
 Treasure-Island and 3D-Tic-Tac-Toe games.
 
-Contents:
+## Content:
     src/ -- Java sources for the Android app
     res/ -- resources for the Android app
     assets/ -- additional data (help file) for the Android app
@@ -37,17 +38,22 @@ Contents:
     art/      -- artwork for diagrams, higher-res scan for icon
     tests/    -- some unit tests
     examples/ -- some simple examples for building user's programs
-    README    -- this file
+    README.md -- this file
     INSTALL   -- build/installation instructions
     COPYING   -- licence (GPLv3)
 
-Note all text files are in UTF-8 encoding, and literal Unicode
-characters abound.
+## MeWee
 
-Current Maintainer:
+   Come and join the TI59 group on MeWee.
+
+   https://mewe.com/join/ti59
+
+## Maintainers
+
+### Current
 
    Pascal Obry <pascal@obry.net>
 
-Original Author:
+### Original Author:
 
    Lawrence D'Oliveiro <ldo@geek-central.gen.nz>
