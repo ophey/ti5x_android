@@ -2659,7 +2659,7 @@ class State {
   }
 
   void StartRegisterListing() {
-    StartTask(new RegisterLister((int) X.getInt()), false);
+    StartTask(new RegisterLister((int) Math.abs(X.getInt())), false);
   }
 
   void StartProgramListing() {
