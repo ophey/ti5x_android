@@ -1,5 +1,9 @@
 Feature highlights:
 
+v7.4, 2019 April 29th:
+   Fix a crash when displaying data registers with a negative
+   number in the display.
+
 v7.3, 2019 April 1st:
    Fix a crash when changing bank.
 
