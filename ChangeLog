@@ -1,5 +1,8 @@
 Feature highlights:
 
+v7.5, 2019 August 12th:
+   Fix all icons for the launcher.
+
 v7.4, 2019 April 29th:
    Fix a crash when displaying data registers with a negative
    number in the display.
