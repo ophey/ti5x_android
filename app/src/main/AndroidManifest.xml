@@ -24,7 +24,7 @@
     <!--          android:theme="@style/Platform.AppCompat" -->
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/icon"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Holo.Light">

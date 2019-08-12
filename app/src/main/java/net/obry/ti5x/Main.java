@@ -1210,7 +1210,7 @@ public class Main extends android.app.Activity {
      ) {
     final android.app.Notification NotifyDone = new android.app.Notification
        (
-          R.drawable.icon,
+          R.mipmap.ic_launcher,
           getString(R.string.app_name),
           System.currentTimeMillis()
        );
