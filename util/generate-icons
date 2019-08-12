@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Source should be 192x192
+SOURCE=art/icon.png
+
+if [ ! -f $SOURCE ]; then
+    echo Source icon $SOURCE, not found.
+    exit 1
+fi
+
+# Now generate icons for each other size:
+
+# xxhdpi : 192
+convert $SOURCE -resize 192x192 app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+
+# xxhdpi : 144
+convert $SOURCE -resize 144x144 app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+
+# xhdpi : 96
+convert $SOURCE -resize 96x96 app/src/main/res/mipmap-xhdpi/ic_launcher.png
+
+# hdpi : 72
+convert $SOURCE -resize 72x72 app/src/main/res/mipmap-hdpi/ic_launcher.png
+
+# mdpi : 48
+convert $SOURCE -resize 48x48 app/src/main/res/mipmap-mdpi/ic_launcher.png
