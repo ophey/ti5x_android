@@ -504,6 +504,9 @@ public class Persistent {
             case ButtonGrid.FEEDBACK_VIBRATE:
               POut.print("vibrate");
               break;
+            case ButtonGrid.FEEDBACK_BOTH:
+              POut.print("both");
+              break;
             case ButtonGrid.FEEDBACK_NONE:
               POut.print("none");
               break;
@@ -800,6 +803,8 @@ public class Persistent {
             Buttons.FeedbackType = ButtonGrid.FEEDBACK_NONE;
           } else if (Kind.equals("vibrate")) {
             Buttons.FeedbackType = ButtonGrid.FEEDBACK_VIBRATE;
+          } else if (Kind.equals("both")) {
+            Buttons.FeedbackType = ButtonGrid.FEEDBACK_BOTH;
           } else {
             Buttons.FeedbackType = ButtonGrid.FEEDBACK_CLICK;
           }
