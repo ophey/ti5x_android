@@ -644,8 +644,12 @@ public class Main extends android.app.Activity {
           TheMenu.add(R.string.turn_off),
           new Runnable() {
             public void run() {
-              ShuttingDown = true; /* don't save any state */
-              Persistent.ResetState(Main.this);
+              /* In TI-59 we should clear the state when the calculator is turned off, but
+                 in TI-58 the state was persistent. Let's emulate the TI-58 here and after
+                 all this is more user's friendly
+
+                 ShuttingDown = true;
+                 Persistent.ResetState(Main.this); */
               finish(); /* start afresh next time */
             } /*run*/
           }
