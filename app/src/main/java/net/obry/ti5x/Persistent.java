@@ -797,7 +797,7 @@ public class Persistent {
           ParseState = DoingMem;
           StartContent();
           Handled = true;
-        } else if (CalcState && localName.equals("feedback")) {
+        } else if (localName.equals("feedback")) {
           final String Kind = attributes.getValue("kind").intern();
           if (Kind.equals("none")) {
             Buttons.FeedbackType = ButtonGrid.FEEDBACK_NONE;
