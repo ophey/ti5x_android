@@ -1,5 +1,8 @@
 Feature highlights:
 
+v7.8, 2020 October 22nd:
+   Fix possible crash when loading libraries.
+
 v7.7, 2019 August 16th:
    Fixes persistent state of feedback setting.
 
