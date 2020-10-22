@@ -275,6 +275,7 @@ class State {
       Bank[i] = null;
     }
     ModuleHelp = null;
+    PC = 0;
   }
 
   State
