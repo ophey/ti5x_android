@@ -1,5 +1,8 @@
 Feature highlights:
 
+v7.9, 2020 December 17th:
+   Fix saving programs on Android 10 and above.
+
 v7.8, 2020 October 22nd:
    Fix possible crash when loading libraries.
 
