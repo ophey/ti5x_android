@@ -518,12 +518,12 @@ public class Main extends android.app.Activity {
               ArrayList<String> CalcDirs = new ArrayList<String>();
 
               final String ProgramsDir =
-                  android.os.Environment.getExternalStorageDirectory()
-                      .getAbsolutePath() + "/" + Persistent.ProgramsDir;
+                 new java.io.File(getExternalFilesDir(null), Persistent.ProgramsDir)
+                 .getAbsolutePath();
 
               final String DataDir =
-                  android.os.Environment.getExternalStorageDirectory()
-                      .getAbsolutePath() + "/" + Persistent.DataDir;
+                 new java.io.File(getExternalFilesDir(null), Persistent.DataDir)
+                    .getAbsolutePath();
 
               if (new java.io.File(ProgramsDir).exists()) {
                 CalcDirs.add(Persistent.ProgramsDir);
@@ -986,8 +986,8 @@ public class Main extends android.app.Activity {
                  Data.getData().getPath().substring(1) /* ignoring leading slash */
                     + Persistent.ProgExt;
               final String SaveDir =
-                 android.os.Environment.getExternalStorageDirectory()
-                    .getAbsolutePath() + "/" + Persistent.ProgramsDir;
+                 new java.io.File(getExternalFilesDir(null), Persistent.ProgramsDir)
+                 .getAbsolutePath();
               Global.StartBGTask
                  (
 
@@ -1100,12 +1100,8 @@ public class Main extends android.app.Activity {
                     String FileName = Data.getData().getPath();
                     if (!ExportAppend) {
                       final String SaveDir =
-                         android.os.Environment.getExternalStorageDirectory()
-                            .getAbsolutePath()
-                            +
-                            "/"
-                            +
-                            Persistent.DataDir;
+                          new java.io.File(getExternalFilesDir(null), Persistent.DataDir)
+                          .getAbsolutePath();
                       new java.io.File(SaveDir).mkdirs();
                       FileName = SaveDir + FileName;
                       /* note FileName will have leading slash */

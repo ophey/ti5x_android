@@ -136,18 +136,8 @@ public class SaveAs extends android.app.Activity {
                        (
                        new java.io.File
                           (
-                             android.os.Environment.getExternalStorageDirectory()
-                                .getAbsolutePath()
-                                +
-                                "/"
-                                +
-                                SaveWhere
-                                +
-                                "/"
-                                +
-                                TheCleanedText
-                                +
-                                FileExt
+                           getExternalFilesDir(null),
+                           SaveWhere + "/" + TheCleanedText + FileExt
                           ).exists()
                        ) {
                       new OverwriteConfirm(SaveAs.this, TheCleanedText).show();

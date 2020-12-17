@@ -300,7 +300,7 @@ public class Picker extends android.app.Activity {
     PickerList.clear();
 
     final String ExternalStorage =
-       android.os.Environment.getExternalStorageDirectory().getAbsolutePath();
+        getExternalFilesDir(null).getAbsolutePath();
 
     if (!PermissionUtil.hasCorrectPermission(this)) {
       android.widget.Toast.makeText
