@@ -13,6 +13,20 @@ the /DSZ nn 51/ (decrement no-jump) instructions.
 With the current version it is possible to play the famous
 Treasure-Island and 3D-Tic-Tac-Toe games.
 
+## Location of programs:
+
+The saved programs where stored into the Programs directory at
+the root of the file system. Since Android-10 it is not possible
+anymore to access this location for security reasons.
+
+The programs are now saved into
+
+  Android/Data/net.obry.ti5x/files/Programs
+
+You need to manually move the programs from Programs/*.ti5p to
+Android/Data/net.obry.ti5x/files/Programs to get access to them
+with version 7.9.
+
 ## Content:
     src/ -- Java sources for the Android app
     res/ -- resources for the Android app
