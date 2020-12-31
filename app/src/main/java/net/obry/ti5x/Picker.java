@@ -34,6 +34,9 @@ public class Picker extends android.app.Activity {
   // index of the first Builtin item in the list
   public static final String BuiltinIndexID = "net.obry.ti5x.BuiltinIndex";
 
+  // index of the first user's item in the list
+  public static final String UserProgIndexID = "net.obry.ti5x.UserProgIndex";
+
   private static boolean Reentered = false; /* sanity check */
   public static Picker Current = null;
 
@@ -72,7 +75,7 @@ public class Picker extends android.app.Activity {
   private SelectedItemAdapter PickerList;
   private int SelectedAlt; /* index into AltLists */
   private int FirstBuiltinIdx = 0;
-
+  private int FirstUserProgIdx = 0;
 
   public static class PickerItem {
     final String FullPath;
@@ -359,10 +362,12 @@ public class Picker extends android.app.Activity {
         }
       }
 
-      FirstBuiltinIdx = PickerList.getCount();
+      FirstBuiltinIdx = 0; // PickerList.getCount();
+      FirstUserProgIdx = Alt.SpecialItem.length;
+
       if (Alt.SpecialItem != null) {
-        for (int i = 0; i < Alt.SpecialItem.length; i++)
-          PickerList.add(new PickerItem(null, Alt.SpecialItem[i]));
+        for (int i = Alt.SpecialItem.length - 1; i >= 0; i--)
+          PickerList.insert(new PickerItem(null, Alt.SpecialItem[i]),0);
       }
 
       PromptView.setText
@@ -462,6 +467,7 @@ public class Picker extends android.app.Activity {
                          .putExtra(AltIndexID, SelectedAlt)
                          .putExtra(SpeIndexID, AltIdx)
                          .putExtra(BuiltinIndexID, FirstBuiltinIdx)
+                         .putExtra(UserProgIndexID, FirstUserProgIdx)
                    );
                 finish();
               }

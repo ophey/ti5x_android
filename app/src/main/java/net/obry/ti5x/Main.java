@@ -808,6 +808,7 @@ public class Main extends android.app.Activity {
               final String ProgName = Data.getData().getPath();
               final int SelId = Data.getIntExtra(Picker.SpeIndexID, 0);
               final int FirstBuiltinId = Data.getIntExtra(Picker.BuiltinIndexID, 0);
+              final int FirstUserProgId = Data.getIntExtra(Picker.UserProgIndexID, 0);
               final boolean IsLib = Data.getIntExtra(Picker.AltIndexID, 0) != 0;
               /* assumes AltLists array passed to Picker has element 0 for
                  saved programs and element 1 for libraries */
@@ -853,9 +854,9 @@ public class Main extends android.app.Activity {
                       Subtask = new Persistent.LoadBuiltin(Main.this, true, SelId);
                       break;
                     case LOAD_PROG:
-                      if (SelId >= FirstBuiltinId) {
+                      if (SelId < FirstUserProgId) {
                         // a built-in programs
-                        Subtask = new Persistent.LoadBuiltin(Main.this, false, SelId - FirstBuiltinId);
+                        Subtask = new Persistent.LoadBuiltin(Main.this, false, SelId);
                       } else {
                         Subtask = new Persistent.Load
                            (
