@@ -331,8 +331,10 @@ public class Picker extends android.app.Activity {
           File ourFiles[] = ThisDir.listFiles();
           for (java.io.File Item : ourFiles) {
             boolean MatchesExt;
+            String DisplayName = "";
             if (Alt.FileExts != null) {
               final String ItemName = Item.getName();
+              DisplayName = ItemName;
               for (int i = 0; ; ) {
                 if (i == Alt.FileExts.length) {
                   MatchesExt = false;
@@ -340,6 +342,8 @@ public class Picker extends android.app.Activity {
                 }
                 if (ItemName.endsWith(Alt.FileExts[i])) {
                   MatchesExt = true;
+                  DisplayName = ItemName.substring(0,
+                     ItemName.length() - Alt.FileExts[i].length());
                   break;
                 }
                 ++i;
@@ -349,7 +353,7 @@ public class Picker extends android.app.Activity {
               MatchesExt = true;
             }
             if (MatchesExt) {
-              PickerList.add(new PickerItem(Item.getAbsolutePath(), null));
+              PickerList.add(new PickerItem(Item.getAbsolutePath(), DisplayName));
             }
           }
         }
