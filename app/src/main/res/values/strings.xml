@@ -56,6 +56,7 @@
     <string name="mathutil_library">Math Utilities Library</string>
     <string name="electrical_library">Electrical Engineering</string>
     <string name="contribution_library">Contribution Library</string>
+    <string name="civil_engineering_library">Civil Engineering Library</string>
     <string name="import_prompt">Data to load:</string>
     <string name="export_prompt">Append exported data to existing:</string>
     <string name="save_as_prompt">Save %s as:</string>

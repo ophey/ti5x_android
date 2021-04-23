@@ -1,0 +1,198 @@
+   clr
+   r/s
+   rst
+   02
+
+lbl prt
+   op 06
+   ifflg 1 op
+   r/s
+
+lbl op
+   inv sbr
+
+lbl A
+   rcl 00
+   r/s
+   sto 00
+   r/s
+
+lbl B
+   rcl 01
+   r/s
+   sto 01
+   r/s
+
+lbl C
+   rcl 02
+   r/s
+   sto 02
+   r/s
+
+lbl D
+   rcl 03
+   r/s
+   sto 03
+   r/s
+
+lbl E
+   rcl 04
+   r/s
+   sto 04
+   r/s
+
+lbl A'
+   op 00
+   35171537
+   op 01
+   op 05
+   rcl 00
+   ÷
+   2
+   =
+   sto 06
+   ×
+   rcl 00
+   x²
+   ×
+   rcl 01
+   ÷
+   6
+   =
+   sto 07
+   gto ÷
+
+lbl B'
+   op 00
+   130037
+   op 01
+   op 05
+   rcl 00
+   -
+   rcl 02
+   =
+   sto 05
+   ×
+   rcl 03
+   +
+   rcl 01
+   ×
+   rcl 02
+   =
+   1/x
+   ×
+   (
+   rcl 01
+   ×
+   rcl 02
+   x²
+   ÷
+   2
+   +
+   rcl 03
+   ×
+   rcl 05
+   ×
+   (
+   rcl 02
+   +
+   rcl 05
+   ÷
+   2
+   )
+   )
+   =
+   sto 06
+   -
+   rcl 02
+   =
+   sto 08
+   x²
+   ×
+   rcl 08
+   ×
+   (
+   rcl 03
+   -
+   rcl 01
+   )
+   +
+   rcl 06
+   y**x
+   3
+   ×
+   rcl 01
+   +
+   rcl 03
+   ×
+   (
+   rcl 00
+   -
+   rcl 06
+   )
+   y**x
+   3
+   =
+   ÷
+   3
+   =
+   sto 07
+   gto ×
+
+lbl C'
+   op 00
+   15243515
+   op 01
+   op 05
+   rcl 04
+   ÷
+   2
+   =
+   sto 06
+   rcl 04
+   y**x
+   4
+   ×
+   π
+   ÷
+   64
+   =
+   sto 07
+   16
+   op 04
+   rcl 04
+   sbr prt
+   gto =
+
+lbl ×
+   1301
+   op 04
+   rcl 02
+   op 06
+   1401
+   op 04
+   rcl 03
+   op 06
+
+lbl ÷
+   13
+   op 04
+   rcl 00
+   op 06
+   14
+   op 04
+   rcl 01
+   op 06
+
+lbl =
+   45552256
+   op 04
+   rcl 06
+   sbr prt
+   25632200
+   op 04
+   rcl 07
+   sbr prt
+   adv
+   r/s
+   rst
