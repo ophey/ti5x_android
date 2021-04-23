@@ -86,7 +86,8 @@ public class Main extends android.app.Activity {
         new BuiltinLibrary(R.string.surveying_library, R.raw.sy),
         new BuiltinLibrary(R.string.aviation_library, R.raw.av),
         new BuiltinLibrary(R.string.marine_navigation_library, R.raw.ng),
-        new BuiltinLibrary(R.string.contribution_library, R.raw.ct)
+        new BuiltinLibrary(R.string.contribution_library, R.raw.ct),
+        new BuiltinLibrary(R.string.civil_engineering_library, R.raw.ce)
      };
 
   private static String[] getBuiltinLibraries(android.content.Context ctx) {
