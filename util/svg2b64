@@ -14,7 +14,9 @@ ifile=$1
 ofile=$(basename $1 .svg).png
 b64=$ofile.b64
 
-inkscape -f $1 -w 250 -h 250 -e $ofile
+inkscape --export-area-drawing --batch-process \
+         --export-width=350 \
+         --export-filename=$ofile $1
 
 echo '<IMG ALT="TEXT TITLE HERE" SRC="data:image/png;base64,' > $b64
 base64 $ofile >> $b64
