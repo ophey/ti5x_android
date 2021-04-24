@@ -1,5 +1,13 @@
 Feature highlights:
 
+v8.1, 2022 January 12th:
+   Add Civil Engineering library.
+   Update layout & colors.
+   Add support for user's bank files.
+   Fix Op 2x/3x when register offset is used.
+   Fix Op 22 in assembler.
+   Add support for 2nd as label in assembler.
+
 v8.0, 2020 December 31st:
    Fix issue with long programs not being selectable.
 
