@@ -1,0 +1,223 @@
+
+lbl E
+   cms
+   inv stflg 3
+   inv stflg 2
+   8
+   op 17
+   10
+   y**x
+   5
+   =
+   sto 13
+   r/s
+
+lbl E'
+   sto 00
+   sto 01
+
+lbl B'
+   rcl 01
+
+lbl A'
+   ×
+   4
+   +
+   14
+   =
+   sto 02
+   -
+   1
+   =
+   sto 03
+   -
+   1
+   =
+   sto 04
+   -
+   1
+   =
+   sto 05
+   -
+   1
+   =
+   sto 06
+   +
+   5
+   =
+   sto 07
+   ifflg 3 d
+   ifflg 2 d'
+   rcl 01
+   r/s
+
+lbl A
+   int
+   |x|
+   sbr |x|
+   st* 03
+   r/s
+   int
+   |x|
+   sbr |x|
+   ÷
+   rcl 13
+   =
+   sm* 03
+   r/s
+   sto 08
+   r/s
+   sto 09
+   +
+   rcl 08
+   =
+   1/x
+   ×
+   rcl 08
+   ÷
+   2
+   ×
+   rcl 13
+   =
+   int
+   st* 04
+   rcl 08
+   +
+   rcl 09
+   =
+   1/x
+   ×
+   rcl 09
+   ÷
+   2
+   ×
+   rcl 13
+   =
+   int
+   ÷
+   rcl 13
+   =
+   sm* 04
+   dsz 1 b'
+   r/s
+
+lbl B
+   rcl 00
+   sto 01
+   stflg 2
+   gto b'
+
+lbl D'
+   rc* 03
+   inv int
+   ×
+   rcl 13
+   -
+   rc* 03
+   int
+   +
+   rc* 06
+   +
+   rc* 07
+   =
+   sto 10
+   ×
+   rc* 04
+   int
+   ÷
+   rcl 13
+   +/-
+   =
+   -
+   exc ind 02
+   =
+   sbr sum
+   rcl 10
+   ×
+   rc* 04
+   inv int
+   +/-
+   =
+   -
+   exc ind 05
+   =
+   sbr sum
+   dsz 1 b'
+   rcl 00
+   sto 01
+   rcl 00
+   ×
+   2
+   -
+   rcl 11
+   =
+   x=t c
+   0
+   sto 11
+   gto b'
+
+lbl C
+   stflg 3
+   gto b'
+
+lbl D
+   rcl 01
+   sbr ifflg
+   rc* 03
+   +/-
+   int
+   +
+   rc* 02
+   ×
+   2
+   +
+   rc* 07
+   =
+   int
+   sbr ifflg
+   dsz 1 b'
+   r/s
+
+lbl |x|
+   (
+   ce
+   -
+   rcl 13
+   )
+   x≥t √x
+   (
+   ce
+   +
+   rcl 13
+   )
+   inv sbr
+
+lbl √x
+   1
+   +/-
+   √x
+   r/s
+
+lbl sum
+   |x|
+   (
+   ce
+   -
+   1
+   )
+   x≥t mean(x)
+   1
+   sum 11
+
+lbl mean(x)
+   inv sbr
+
+lbl ifflg
+   ifflg 1 π
+   r/s
+   inv sbr
+
+lbl π
+   prt
+   inv sbr
+   inv sbr
