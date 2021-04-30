@@ -1,0 +1,275 @@
+
+lbl adv
+   ifflg 1 op
+   inv sbr
+
+lbl prt
+   ifflg 1 op
+   r/s
+   inv sbr
+
+lbl op
+   op 06
+   inv sbr
+
+lbl 2nd r/s
+   ifflg 1 list
+   inv sbr
+
+lbl list
+   op 05
+   inv sbr
+
+lbl ÷
+   (
+   (
+   rcl 03
+   ÷
+   rcl 02
+   ×
+   rcl 00
+   ÷
+   rcl 01
+   )
+   sto 07
+   ×
+   2
+   +
+   3
+   )
+   sto 08
+   inv sbr
+
+lbl A
+   sto 00
+   r/s
+
+lbl B
+   sto 01
+   r/s
+
+lbl C
+   sto 02
+   r/s
+
+lbl D
+   sto 03
+   r/s
+
+lbl A'
+   sto 04
+   34
+   op 04
+   rcl 04
+   sbr adv
+   sbr ÷
+   rcl 04
+   ×
+   rcl 01
+   ÷
+   2
+   =
+   sto 16
+   sto 17
+   ×
+   rcl 01
+   ÷
+   4
+   =
+   sto 13
+   ×
+   2
+   ÷
+   rcl 08
+   +/-
+   =
+   sto 11
+   sto 12
+   sum 13
+   +/-
+   ÷
+   rcl 00
+   =
+   sto 14
+   sto 15
+   gto =
+
+lbl B'
+   sto 04
+   3342
+   op 04
+   rcl 04
+   sbr adv
+   r/s
+   sto 05
+   1303
+   op 04
+   rcl 05
+   sbr adv
+   sbr ÷
+   (
+   rcl 01
+   -
+   rcl 05
+   )
+   sto 06
+   ×
+   rcl 04
+   ÷
+   rcl 01
+   =
+   sto 16
+   +/-
+   +
+   rcl 04
+   =
+   sto 17
+   ×
+   rcl 06
+   =
+   sto 13
+   ×
+   3
+   ÷
+   2
+   ÷
+   rcl 08
+   +/-
+   =
+   sto 11
+   sto 12
+   sum 13
+   +/-
+   ÷
+   rcl 00
+   =
+   sto 14
+   sto 15
+   gto =
+
+lbl C'
+   sto 04
+   3335
+   op 04
+   rcl 04
+   sbr adv
+   r/s
+   sto 05
+   1302
+   op 04
+   rcl 05
+   sbr adv
+   sbr ÷
+   (
+   rcl 00
+   -
+   rcl 05
+   )
+   sto 06
+   ÷
+   rcl 00
+   =
+   sto 10
+   +/-
+   +
+   1
+   =
+   sto 09
+   +
+   1
+   =
+   ×
+   rcl 10
+   ×
+   rcl 07
+   ÷
+   rcl 08
+   +/-
+   +
+   1
+   =
+   sto 11
+   -
+   2
+   =
+   sto 12
+   rcl 04
+   ×
+   rcl 05
+   ÷
+   2
+   =
+   prd 11
+   prd 12
+   rcl 11
+   +
+   rcl 04
+   ×
+   rcl 06
+   =
+   ×
+   rcl 09
+   =
+   sto 13
+   rcl 12
+   +/-
+   ÷
+   rcl 00
+   =
+   sto 15
+   -
+   rcl 04
+   =
+   sto 14
+   rcl 04
+   ×
+   rcl 05
+   ÷
+   rcl 01
+   =
+   sto 17
+   +/-
+   sto 16
+
+lbl =
+   op 00
+   30
+   op 03
+   sbr 2nd r/s
+   14
+   op 04
+   rcl 11
+   sbr prt
+   15
+   op 04
+   rcl 12
+   sbr prt
+   51
+   op 04
+   rcl 13
+   sbr prt
+   op 00
+   35
+   op 03
+   sbr 2nd r/s
+   13
+   op 04
+   rcl 14
+   sbr prt
+   16
+   op 04
+   rcl 15
+   sbr prt
+   op 00
+   42
+   op 03
+   sbr 2nd r/s
+   13
+   op 04
+   rcl 16
+   sbr prt
+   16
+   op 04
+   rcl 17
+   sbr prt
+   r/s
