@@ -1,0 +1,351 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #ce8c3b;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+  }
+
+.brownbutton
+  {
+    background : #4e3836;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #ac9e80;
+  }
+
+.whitebutton
+  {
+    background : #ac9e80;
+    padding : 1pt;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+  }
+
+.alttext
+  {
+    background : #222424;
+    padding : 1.5pt;
+    font-weight : bold;
+    color : #ac9e80;
+  }
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  }
+.deflist DD
+  {
+    margin-left : 4em;
+  }
+
+.display
+{
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+}
+</STYLE>
+</HEAD>
+<BODY>
+<H1>STR-04 — Continuous Beam</H1>
+
+<P>The program calculates the moments on the supports of a continuous
+  beam with a maximum of 16 supports (increased to 18 using the
+  “Ti5x app”). The input data are the moments of perfect embedding and
+  the stiffness of each span. The moments at the ends of each span
+  must first be calculated with the STR−03 program. It is possible to
+  treat beams with joints or jumps at the ends. If the extreme support
+  is a perfect joint, replace it with a span of infinite stiffness and
+  zero moments. The section of each span must be constant.
+
+<h2>Description Of The Method Used</h2>
+
+<p>The program uses Kani's method. For setting the data and
+  presenting the results, the supports are numbered from left to right.
+  Moments of perfect fit are assumed to be negative (according to the
+  construction science convention) and not greater than 99999. The sign
+  can be omitted. The scores of the results follow the construction
+  science convention. The precision set by the program is 1 on the
+  rates.
+
+<P><IMG ALT="Continuous Beam" src="data:image/png;base64,
+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
+pHIlZRUAAAAABJRU5ErkJggg==
+">
+
+<p>To calculate the continuous beam it is necessary to first
+  calculate, for each span and for any shelf, the moments at the ends
+  using the STR03 program considering each span perfectly fitted at
+  the two ends and the shelf  perfectly fitted to one end.
+
+<p>To calculate the beam in the figure, replace the joint with a span
+  of stiffness K = "9999999999" equal to the maximum value that can be
+  set with this program. The units of measurement of the forces and
+  moments indicated in the figure must be replaced with those of the
+  International System, 1 kg = 10 N (Newton) = 1 dN (decaNewton), 1
+  kgm = 1 dNm = 1 KNcm.  The program solves the system of equations by
+  continuous iteration.
+
+<h2>Example</h2>
+
+<OL>
+<LI>Print option: <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+  <SPAN CLASS="alttext">&nbsp;St flg&nbsp;</SPAN>
+  <SPAN CLASS="whitebutton">&nbsp;1&nbsp;</SPAN>
+
+<LI>Initialization, press <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+
+<LI>Set number of supports, enter 4, press
+  <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+  <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>,
+  display <SPAN CLASS="display">3</SPAN>.
+
+<LI>Set data of support "3":
+
+  <UL>
+    <LI>Perfect joint moment MI<sub>i</sub>:
+      <UL>
+        <LI>to the right, enter 2000, press
+          <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>,
+          display <SPAN CLASS="display">2000</SPAN>.
+        <LI>to the left, enter 666, press
+          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
+          display <SPAN CLASS="display">0.0666</SPAN>.
+      </UL>
+    <LI>Stiffness K in the pan:
+      <UL>
+        <LI>to the right, enter 0, press
+          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
+          display <SPAN CLASS="display">0</SPAN>.
+        <LI>to the left, enter 0.2, press
+          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
+          display <SPAN CLASS="display">2</SPAN>.
+      </UL>
+  </UL>
+
+<LI>Set data of support "2":
+
+  <UL>
+    <LI>Perfect joint moment MI<sub>i</sub>:
+      <UL>
+        <LI>to the right, enter 4166, press
+          <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>,
+          display <SPAN CLASS="display">4166</SPAN>.
+        <LI>to the left, enter 666, press
+          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
+          display <SPAN CLASS="display">0.0666</SPAN>.
+      </UL>
+    <LI>Stiffness K:
+      <UL>
+        <LI>to the right, enter 0.2, press
+          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
+          display <SPAN CLASS="display">0.2</SPAN>.
+        <LI>to the left, enter 0.2 (incorrect data), press
+          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
+          display <SPAN CLASS="display">1</SPAN>.
+      </UL>
+  </UL>
+
+<LI>Set data of support "1":
+
+  <UL>
+    <LI>Perfect joint moment MI<sub>i</sub>:
+      <UL>
+        <LI>to the right, enter 666, press
+          <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>,
+          display <SPAN CLASS="display">666</SPAN>.
+        <LI>to the left, enter 0, press
+          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
+          display <SPAN CLASS="display">0</SPAN>.
+      </UL>
+    <LI>Stiffness K:
+      <UL>
+        <LI>to the right, enter 0.5, press
+          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
+          display <SPAN CLASS="display">0.5</SPAN>.
+        <LI>to the left, enter 9999999999 (infinite stiffness), press
+          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
+          display <SPAN CLASS="display">0.49999</SPAN>.
+      </UL>
+  </UL>
+
+<LI>Data correction procedure.
+  <UL>Set data of support in which there is incorrect data:
+    <LI>to the right, enter 2,
+      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
+      <SPAN CLASS="alttext">&nbsp;A'&nbsp;</SPAN>,
+      display <SPAN CLASS="display">2</SPAN>.
+<LI>Set data of support "2":
+
+  <UL>
+    <LI>Perfect joint moment MI<sub>i</sub>:
+      <UL>
+        <LI>to the right, enter 4166, press
+          <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>,
+          display <SPAN CLASS="display">4166</SPAN>.
+        <LI>to the left, enter 666, press
+          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
+          display <SPAN CLASS="display">0.0666</SPAN>.
+      </UL>
+    <LI>Stiffness K:
+      <UL>
+        <LI>to the right, enter 0.2, press
+          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
+          display <SPAN CLASS="display">0.2</SPAN>.
+        <LI>to the left, enter 0.5 (correct data), press
+          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
+          display <SPAN CLASS="display">1</SPAN>.
+      </UL>
+  </UL>
+
+<LI>Start the calculation, press
+  <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>.
+
+</OL>
+
+<pre>
+        3.
+       −2000.
+           2.
+       -4191.
+           1.
+        1096.
+</pre>
+
+<p>If you enter MI<sub>i</sub> &gt; 99999, the display flashes. In
+  this case, press CLR and repeat the data input of the support “n”.
+
+<P>Flags used:
+<UL>
+<LI>1, 2, 3
+</UL>
+
+<P>Registers used: 00 to [(Nx4) + 15]
+<p>Labels: press (2nd OP 08)
+
+<pre>
+    I×I, √X, SUM, x, IFF, π
+</pre>
