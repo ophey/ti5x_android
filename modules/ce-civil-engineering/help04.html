@@ -7,7 +7,7 @@
 .yellowbutton
   {
     background : #ce8c3b;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
   }
@@ -15,7 +15,7 @@
 .brownbutton
   {
     background : #4e3836;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #ac9e80;
@@ -24,7 +24,7 @@
 .whitebutton
   {
     background : #ac9e80;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
@@ -33,7 +33,7 @@
 .alttext
   {
     background : #222424;
-    padding : 1.5pt;
+    padding : 0.1em 0.6em 0.1em;
     font-weight : bold;
     color : #ac9e80;
   }
@@ -49,14 +49,22 @@
   }
 
 .display
-{
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
     padding: 0em 0.5em 0em;
     color: red;
     background: #eeeeee;
     font-weight: bold;
     font-family: courier bold;
     font-size: 1.1em;
-}
+ }
 </STYLE>
 </HEAD>
 <BODY>
@@ -212,16 +220,16 @@ pHIlZRUAAAAABJRU5ErkJggg==
 <h2>Example</h2>
 
 <OL>
-<LI>Print option: <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-  <SPAN CLASS="alttext">&nbsp;St flg&nbsp;</SPAN>
-  <SPAN CLASS="whitebutton">&nbsp;1&nbsp;</SPAN>
+<LI>Print option: <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">St flg</SPAN>
+  <SPAN CLASS="whitebutton">1</SPAN>
 
-<LI>Initialization, press <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+<LI>Initialization, press <SPAN CLASS="brownbutton">E</SPAN>
 
 <LI>Set number of supports, enter 4, press
-  <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-  <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>,
-  display <SPAN CLASS="display">3</SPAN>.
+  <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">E'</SPAN>,
+  display <SPAN CLASS="displayb">3</SPAN>.
 
 <LI>Set data of support "3":
 
@@ -229,20 +237,20 @@ pHIlZRUAAAAABJRU5ErkJggg==
     <LI>Perfect joint moment MI<sub>i</sub>:
       <UL>
         <LI>to the right, enter 2000, press
-          <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>,
-          display <SPAN CLASS="display">2000</SPAN>.
+          <SPAN CLASS="brownbutton">A</SPAN>,
+          display <SPAN CLASS="displayb">2000</SPAN>.
         <LI>to the left, enter 666, press
-          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
-          display <SPAN CLASS="display">0.0666</SPAN>.
+          <SPAN CLASS="brownbutton">R/S</SPAN>,
+          display <SPAN CLASS="displayb">0.0666</SPAN>.
       </UL>
     <LI>Stiffness K in the pan:
       <UL>
         <LI>to the right, enter 0, press
-          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
-          display <SPAN CLASS="display">0</SPAN>.
+          <SPAN CLASS="brownbutton">R/S</SPAN>,
+          display <SPAN CLASS="displayb">0</SPAN>.
         <LI>to the left, enter 0.2, press
-          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
-          display <SPAN CLASS="display">2</SPAN>.
+          <SPAN CLASS="brownbutton">R/S</SPAN>,
+          display <SPAN CLASS="displayb">2</SPAN>.
       </UL>
   </UL>
 
@@ -252,20 +260,20 @@ pHIlZRUAAAAABJRU5ErkJggg==
     <LI>Perfect joint moment MI<sub>i</sub>:
       <UL>
         <LI>to the right, enter 4166, press
-          <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>,
-          display <SPAN CLASS="display">4166</SPAN>.
+          <SPAN CLASS="brownbutton">A</SPAN>,
+          display <SPAN CLASS="displayb">4166</SPAN>.
         <LI>to the left, enter 666, press
-          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
-          display <SPAN CLASS="display">0.0666</SPAN>.
+          <SPAN CLASS="brownbutton">R/S</SPAN>,
+          display <SPAN CLASS="displayb">0.0666</SPAN>.
       </UL>
     <LI>Stiffness K:
       <UL>
         <LI>to the right, enter 0.2, press
-          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
-          display <SPAN CLASS="display">0.2</SPAN>.
+          <SPAN CLASS="brownbutton">R/S</SPAN>,
+          display <SPAN CLASS="displayb">0.2</SPAN>.
         <LI>to the left, enter 0.2 (incorrect data), press
-          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
-          display <SPAN CLASS="display">1</SPAN>.
+          <SPAN CLASS="brownbutton">R/S</SPAN>,
+          display <SPAN CLASS="displayb">1</SPAN>.
       </UL>
   </UL>
 
@@ -275,54 +283,54 @@ pHIlZRUAAAAABJRU5ErkJggg==
     <LI>Perfect joint moment MI<sub>i</sub>:
       <UL>
         <LI>to the right, enter 666, press
-          <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>,
-          display <SPAN CLASS="display">666</SPAN>.
+          <SPAN CLASS="brownbutton">A</SPAN>,
+          display <SPAN CLASS="displayb">666</SPAN>.
         <LI>to the left, enter 0, press
-          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
-          display <SPAN CLASS="display">0</SPAN>.
+          <SPAN CLASS="brownbutton">R/S</SPAN>,
+          display <SPAN CLASS="displayb">0</SPAN>.
       </UL>
     <LI>Stiffness K:
       <UL>
         <LI>to the right, enter 0.5, press
-          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
-          display <SPAN CLASS="display">0.5</SPAN>.
+          <SPAN CLASS="brownbutton">R/S</SPAN>,
+          display <SPAN CLASS="displayb">0.5</SPAN>.
         <LI>to the left, enter 9999999999 (infinite stiffness), press
-          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
-          display <SPAN CLASS="display">0.49999</SPAN>.
+          <SPAN CLASS="brownbutton">R/S</SPAN>,
+          display <SPAN CLASS="displayb">0.49999</SPAN>.
       </UL>
   </UL>
 
 <LI>Data correction procedure.
   <UL>Set data of support in which there is incorrect data:
     <LI>to the right, enter 2,
-      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;A'&nbsp;</SPAN>,
-      display <SPAN CLASS="display">2</SPAN>.
+      <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">A'</SPAN>,
+      display <SPAN CLASS="displayb">2</SPAN>.
 <LI>Set data of support "2":
 
   <UL>
     <LI>Perfect joint moment MI<sub>i</sub>:
       <UL>
         <LI>to the right, enter 4166, press
-          <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>,
-          display <SPAN CLASS="display">4166</SPAN>.
+          <SPAN CLASS="brownbutton">A</SPAN>,
+          display <SPAN CLASS="displayb">4166</SPAN>.
         <LI>to the left, enter 666, press
-          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
-          display <SPAN CLASS="display">0.0666</SPAN>.
+          <SPAN CLASS="brownbutton">R/S</SPAN>,
+          display <SPAN CLASS="displayb">0.0666</SPAN>.
       </UL>
     <LI>Stiffness K:
       <UL>
         <LI>to the right, enter 0.2, press
-          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
-          display <SPAN CLASS="display">0.2</SPAN>.
+          <SPAN CLASS="brownbutton">R/S</SPAN>,
+          display <SPAN CLASS="displayb">0.2</SPAN>.
         <LI>to the left, enter 0.5 (correct data), press
-          <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>,
-          display <SPAN CLASS="display">1</SPAN>.
+          <SPAN CLASS="brownbutton">R/S</SPAN>,
+          display <SPAN CLASS="displayb">1</SPAN>.
       </UL>
   </UL>
 
 <LI>Start the calculation, press
-  <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>.
+  <SPAN CLASS="brownbutton">B</SPAN>.
 
 </OL>
 

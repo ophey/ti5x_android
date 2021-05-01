@@ -11,7 +11,7 @@
 .yellowbutton
   {
     background : #ce8c3b;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
   }
@@ -19,7 +19,7 @@
 .brownbutton
   {
     background : #4e3836;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #ac9e80;
@@ -28,7 +28,7 @@
 .whitebutton
   {
     background : #ac9e80;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
@@ -37,7 +37,7 @@
 .alttext
   {
     background : #222424;
-    padding : 1.5pt;
+    padding : 0.1em 0.6em 0.1em;
     font-weight : bold;
     color : #ac9e80;
   }
@@ -53,17 +53,27 @@
   }
 
 .display
-  {
-     color : red;
-     font-weight : bold;
-     text-align : right;
-     margin-right : 2em;
-  }
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
 <H1>NG-O8 — DMG, SMG, CMG From Two Objects<BR></H1>
-<P>The objective of this program is the evaluation of the distance (DMG), speed (SMG), and course made good (CMG) during the time interval between two observations.&nbsp; At each observation, the compass bearings to both object one (B<SUB>c1</SUB>,B<SUB>c1</SUB>') and object two (B<SUB>c2</SUB>, B<SUB>c2</SUB>') are to be taken.&nbsp; The magnetic variation (V) as well as the distance (D) and true bearing (B<SUB>t</SUB>) from object one to object two are required for computation.</P>
+<P>The objective of this program is the evaluation of the distance (DMG), speed (SMG), and course made good (CMG) during the time interval between two observations. At each observation, the compass bearings to both object one (B<SUB>c1</SUB>,B<SUB>c1</SUB>') and object two (B<SUB>c2</SUB>, B<SUB>c2</SUB>') are to be taken. The magnetic variation (V) as well as the distance (D) and true bearing (B<SUB>t</SUB>) from object one to object two are required for computation.</P>
 <P>Compass bearings are converted to true bearings (B<SUB>t</SUB>=B<SUB>c</SUB> - V - De) by the program, then the distances off objects one (D<SUB>1</SUB>) and (D<SUB>2</SUB>) are given by the equations:</P>
 <DIV style="TEXT-ALIGN: center"><BIG>D</BIG><SUB>1</SUB> = <BIG><BIG><BIG>|</BIG></BIG></BIG> <BIG>D</BIG> ( (sin(B<SUB>t</SUB> - B<SUB>t2</SUB>))/(sin(B<SUB>t2</SUB> - B<SUB>t1</SUB>)) <BIG><BIG><BIG>|</BIG></BIG></BIG><BR>and<BR><BIG>D</BIG><SUB>2</SUB> = <BIG><BIG><BIG>|</BIG></BIG></BIG> <BIG>D</BIG> ( (sin(B<SUB>t</SUB> - B<SUB>t1</SUB>))/(sin(B<SUB>t2</SUB> - B<SUB>t1</SUB>)) <BIG><BIG><BIG>|</BIG></BIG></BIG></DIV>
 <P>Distances D'<SUB>1</SUB> and D'<SUB>2</SUB> are found similarly.<BR></P>
@@ -477,6 +487,6 @@ z/AxlCep+k95c4AAAAAElFTkSuQmCC
 <CENTER><SUB></SUB>P<SUB>1</SUB> has magnitude D<SUB>1</SUB> and direction B<SUB>t1</SUB>,<BR>P<SUB>1</SUB>' has magnitude D<SUB>1</SUB>' and direction B<SUB>t1</SUB>'<SUB></SUB>, and</CENTER>
 <CENTER>P has magnitude DMG and direction CMG.</CENTER>
 <P>The speed made good is found by dividing the course made good by the time between observations.</P>
-<P><B>REMARKS:&nbsp; The magnetic deviation may be omitted in program calculations.</B></P>
+<P><B>REMARKS: The magnetic deviation may be omitted in program calculations.</B></P>
 <P><BR></P>
 </BODY>
