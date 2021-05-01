@@ -7,52 +7,64 @@
 .yellowbutton
   {
     background : #ce8c3b;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
-  } /*.yellowbutton*/
+  }
 
 .brownbutton
   {
     background : #4e3836;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #ac9e80;
-  } /*.brownbutton*/
+  }
 
 .whitebutton
   {
     background : #ac9e80;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-  } /*.whitebutton*/
+  }
 
 .alttext
   {
     background : #222424;
-    padding : 1.5pt;
+    padding : 0.1em 0.6em 0.1em;
     font-weight : bold;
     color : #ac9e80;
-  } /*alttext*/
+  }
 
 .deflist DT
   {
     display : compact;
     font-weight : bold;
-  } /*.deflist DT*/
+  }
 .deflist DD
   {
     margin-left : 4em;
-  } /*.deflist DD*/
-TD
-{
-  padding:.5em .5em 0em 2em;
-  text-align: center;
-  font-family: monospace;
-}
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
@@ -248,72 +260,72 @@ YII=
 
 <UL>
   <LI>Initialize program,
-    <SPAN CLASS="brownbutton">&nbsp;RST&nbsp;</SPAN>
+    <SPAN CLASS="brownbutton">RST</SPAN>
 
   <H3>Enter functions</H3>
 
   <LI>Select learn mode,
-    <SPAN CLASS="brownbutton">&nbsp;LRN&nbsp;</SPAN>
+    <SPAN CLASS="brownbutton">LRN</SPAN>
 
   <LI>Use A' as the label for x(t) subroutine, enter
-    <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-    <SPAN CLASS="alttext">&nbsp;Lbl&nbsp;</SPAN> and
-    <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-    <SPAN CLASS="alttext">&nbsp;A'&nbsp;</SPAN>
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">Lbl</SPAN> and
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">A'</SPAN>
 
   <LI>Enter x(t) as a series of keystrokes. Assume t is in the
-    display. Do not use <SPAN CLASS="yellowbutton">&nbsp;=&nbsp;</SPAN> or
-    <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN> or any used registers.
+    display. Do not use <SPAN CLASS="yellowbutton">=</SPAN> or
+    <SPAN CLASS="yellowbutton">CLR</SPAN> or any used registers.
 
-  <LI>End subroutine with <SPAN CLASS="brownbutton">&nbsp;INV&nbsp;</SPAN>
-    <SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN>
+  <LI>End subroutine with <SPAN CLASS="brownbutton">INV</SPAN>
+    <SPAN CLASS="brownbutton">SBR</SPAN>
 
   <LI>Use B' as the label for h(t) subroutine, enter
-    <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-    <SPAN CLASS="alttext">&nbsp;Lbl&nbsp;</SPAN> and
-    <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-    <SPAN CLASS="alttext">&nbsp;B'&nbsp;</SPAN>
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">Lbl</SPAN> and
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">B'</SPAN>
 
   <LI>Enter h(t) as for x(t)
 
   <LI>Exit learn mode,
-    <SPAN CLASS="brownbutton">&nbsp;LRN&nbsp;</SPAN>
+    <SPAN CLASS="brownbutton">LRN</SPAN>
 
   <H3>Compute convolution</H3>
 
   <LI>Select program 15,
-    <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-    <SPAN CLASS="alttext">&nbsp;Pgm&nbsp;</SPAN>
-    <SPAN CLASS="whitebutton">&nbsp;1&nbsp;</SPAN>
-    <SPAN CLASS="whitebutton">&nbsp;5&nbsp;</SPAN>
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">Pgm</SPAN>
+    <SPAN CLASS="whitebutton">1</SPAN>
+    <SPAN CLASS="whitebutton">5</SPAN>
 
   <LI>Enter number of panels in each &Delta;t (n<sub>0</sub>),
-    press <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    press <SPAN CLASS="brownbutton">A</SPAN>
 
   <LI>Number of values of y(t) desired (N),
-    press <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    press <SPAN CLASS="brownbutton">B</SPAN>
 
   <LI>Enter increment &Delta;t,
-    press <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    press <SPAN CLASS="brownbutton">C</SPAN>
 
   <LI>Execute without printer, press
-    <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-    <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>, display
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">E'</SPAN>, display
     t<sub>1</sub> and y(t<sub>1</sub>)
-    <P>press <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN> N times to
+    <P>press <SPAN CLASS="brownbutton">R/S</SPAN> N times to
       display the N values, display t<sub>i</sub> and y(t<sub>i</sub>)
 
   <LI>Execute with printer, press
-    <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>, print
+    <SPAN CLASS="brownbutton">E</SPAN>, print
     t<sub>i</sub> and y(t<sub>i</sub>)
 
   <LI>If additional values of y(t) are desired without printer,
-    <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-    <SPAN CLASS="alttext">&nbsp;D'&nbsp;</SPAN>, display
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">D'</SPAN>, display
     t<sub>N+1</sub> and y(t<sub>N+1</sub>)
 
   <LI>If additional values of y(t) are desired with printer,
-    <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>, print
+    <SPAN CLASS="brownbutton">D</SPAN>, print
     t<sub>N+1</sub> and y(t<sub>N+1</sub>)
 </UL>
 

@@ -7,46 +7,64 @@
 .yellowbutton
   {
     background : #ce8c3b;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
-  } /*.yellowbutton*/
+  }
 
 .brownbutton
   {
     background : #4e3836;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #ac9e80;
-  } /*.brownbutton*/
+  }
 
 .whitebutton
   {
     background : #ac9e80;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-  } /*.whitebutton*/
+  }
 
 .alttext
   {
     background : #222424;
-    padding : 1.5pt;
+    padding : 0.1em 0.6em 0.1em;
     font-weight : bold;
     color : #ac9e80;
-  } /*alttext*/
+  }
 
 .deflist DT
   {
     display : compact;
     font-weight : bold;
-  } /*.deflist DT*/
+  }
 .deflist DD
   {
     margin-left : 4em;
-  } /*.deflist DD*/
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
@@ -66,21 +84,21 @@
 
 <UL>
   <LI>Initialize program :
-    <SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>. 0 is displayed.
+    <SPAN CLASS="brownbutton">SBR</SPAN> <SPAN CLASS="yellowbutton">CLR</SPAN>. 0 is displayed.
 
-  <LI>Enter the number (max 94) of chips you wish to use and press <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>.
+  <LI>Enter the number (max 94) of chips you wish to use and press <SPAN CLASS="brownbutton">R/S</SPAN>.
 
-  <LI>If you which to make the first move, press <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>. The number of chips
+  <LI>If you which to make the first move, press <SPAN CLASS="brownbutton">A</SPAN>. The number of chips
     in the pile is displayed.
 
-  <LI>If you want the calculator to make the first move, press <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>.
+  <LI>If you want the calculator to make the first move, press <SPAN CLASS="brownbutton">B</SPAN>.
     The calculator then makes its move and displays the number of chips remaining in the pule.
 
-  <LI>Enter the number of chips you wish to take and press <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>. The
+  <LI>Enter the number of chips you wish to take and press <SPAN CLASS="brownbutton">R/S</SPAN>. The
     calculator then makes its move and returns the number of chips remaining after its move. Repeat
     this step until the display flashes. If 0 is flashed, you win. If &pi; is flashed, the calculator wins.
 
-  <LI>For a new game, press <SPAN CLASS="brownbutton">CE</SPAN> <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>. The
+  <LI>For a new game, press <SPAN CLASS="brownbutton">CE</SPAN> <SPAN CLASS="brownbutton">E</SPAN>. The
     number of chips used in the last game is displayed.
 </UL>
 

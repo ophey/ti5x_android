@@ -7,74 +7,92 @@
 .yellowbutton
   {
     background : #ce8c3b;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
-  } /*.yellowbutton*/
+  }
 
 .brownbutton
   {
     background : #4e3836;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #ac9e80;
-  } /*.brownbutton*/
+  }
 
 .whitebutton
   {
     background : #ac9e80;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-  } /*.whitebutton*/
+  }
 
 .alttext
   {
     background : #222424;
-    padding : 1.5pt;
+    padding : 0.1em 0.6em 0.1em;
     font-weight : bold;
     color : #ac9e80;
-  } /*alttext*/
+  }
 
 .deflist DT
   {
     display : compact;
     font-weight : bold;
-  } /*.deflist DT*/
+  }
 .deflist DD
   {
     margin-left : 4em;
-  } /*.deflist DD*/
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
 <H1>ML-03 — Matrix Addition and Multiplication</H1>
 
-<P>First, enter the number of rows in <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>,
-  and the number of columns in <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>. Then enter the
+<P>First, enter the number of rows in <SPAN CLASS="brownbutton">A</SPAN>,
+  and the number of columns in <SPAN CLASS="brownbutton">A</SPAN>. Then enter the
   elements of the matrix A starting with column 1. (To correct an entry error in column j, simply
-  enter j and press <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>. Then reenter the entire column
-  using the <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN> key)
+  enter j and press <SPAN CLASS="brownbutton">B</SPAN>. Then reenter the entire column
+  using the <SPAN CLASS="brownbutton">R/S</SPAN> key)
 
 <P>For Matrix Addition:
   <UL>
-    <LI>1 <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
-    <LI>Then enter the elements of matrix B using the <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <LI>1 <SPAN CLASS="brownbutton">C</SPAN>
+    <LI>Then enter the elements of matrix B using the <SPAN CLASS="brownbutton">R/S</SPAN>
       key. To correct en entry error in column j, simply enter j and press
-      <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>. Then reenter the entire column using the
-      <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN> key.
-    <LI>Enter &lambda;<sub>1</sub> <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
-    <LI>Enter &lambda;<sub>2</sub> <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN> (steps to be done in
+      <SPAN CLASS="brownbutton">C</SPAN>. Then reenter the entire column using the
+      <SPAN CLASS="brownbutton">R/S</SPAN> key.
+    <LI>Enter &lambda;<sub>1</sub> <SPAN CLASS="brownbutton">D</SPAN>
+    <LI>Enter &lambda;<sub>2</sub> <SPAN CLASS="brownbutton">D</SPAN> (steps to be done in
       sequence even if &lambda;<sub>1</sub> and &lambda;<sub>2</sub> are equal to 1)
     <LI>Calculate &lambda;<sub>1</sub> A + &lambda;<sub>2</sub> B
-      <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN> <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+      <SPAN CLASS="yellowbutton">CLR</SPAN> <SPAN CLASS="brownbutton">E</SPAN>
     <LI>Display the elements of C starting with column 1,
-      <SPAN CLASS="whitebutton">&nbsp;1&nbsp;</SPAN>
-      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;A'&nbsp;</SPAN>,
-      then press <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN> to show
+      <SPAN CLASS="whitebutton">1</SPAN>
+      <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">A'</SPAN>,
+      then press <SPAN CLASS="brownbutton">R/S</SPAN> to show
       c<sub>11</sub>, c<sub>21</sub>, ... c<sub>mn</sub> in sequence.
   </UL>
 
@@ -82,23 +100,23 @@
   <UL>
     <LI>Enter the elements of column j of matrix B starting with b<sub>1j</sub>.
       To correct an entry error for b<sub>ij</sub>, enter i, press
-      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;B'&nbsp;</SPAN> and reenter b<sub>ij</sub> using the
-      <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN> key.
+      <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">B'</SPAN> and reenter b<sub>ij</sub> using the
+      <SPAN CLASS="brownbutton">R/S</SPAN> key.
     <LI>Calculate column j of matrix C,
-      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;C'&nbsp;</SPAN>
+      <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">C'</SPAN>
     <LI>Display the elements of column j of matrix C, starting with c<sub>1j</sub>:
-      <SPAN CLASS="whitebutton">&nbsp;1&nbsp;</SPAN>
-      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;D'&nbsp;</SPAN>
-      and press <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>.
+      <SPAN CLASS="whitebutton">1</SPAN>
+      <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">D'</SPAN>
+      and press <SPAN CLASS="brownbutton">R/S</SPAN>.
       c<sub>1j</sub> .. c<sub>mj</sub> are displayed in sequence.
     <LI>To display c<sub>ij</sub> only :
-      <SPAN CLASS="whitebutton">&nbsp;i&nbsp;</SPAN>
-      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;D'&nbsp;</SPAN>
-      <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+      <SPAN CLASS="whitebutton">i</SPAN>
+      <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">D'</SPAN>
+      <SPAN CLASS="brownbutton">R/S</SPAN>
   </UL>
 
 <H3>Formulas Used</H3>

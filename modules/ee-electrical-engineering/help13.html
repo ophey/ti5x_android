@@ -7,52 +7,64 @@
 .yellowbutton
   {
     background : #ce8c3b;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
-  } /*.yellowbutton*/
+  }
 
 .brownbutton
   {
     background : #4e3836;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #ac9e80;
-  } /*.brownbutton*/
+  }
 
 .whitebutton
   {
     background : #ac9e80;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-  } /*.whitebutton*/
+  }
 
 .alttext
   {
     background : #222424;
-    padding : 1.5pt;
+    padding : 0.1em 0.6em 0.1em;
     font-weight : bold;
     color : #ac9e80;
-  } /*alttext*/
+  }
 
 .deflist DT
   {
     display : compact;
     font-weight : bold;
-  } /*.deflist DT*/
+  }
 .deflist DD
   {
     margin-left : 4em;
-  } /*.deflist DD*/
-TD
-{
-  padding:.5em .5em 0em 2em;
-  text-align: center;
-  font-family: monospace;
-}
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
@@ -380,53 +392,53 @@ I=
 
 <UL>
   <LI>Initialize program :
-    <SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN>
-    <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>
+    <SPAN CLASS="brownbutton">SBR</SPAN>
+    <SPAN CLASS="yellowbutton">CLR</SPAN>
 
   <P>Enter the following as needed</p>
 
   <UL>
     <LI>peaking factor &alpha; (LP, HP), n, press
-      <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+      <SPAN CLASS="brownbutton">A</SPAN>
 
     <LI>passband voltage gain A (LP, HP) or midband voltage gain (BP)
-      in dB, press <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+      in dB, press <SPAN CLASS="brownbutton">B</SPAN>
 
     <LI>cutoff frequency F (LP, HP) or center frenquency (BP) in hertz,
-      press <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+      press <SPAN CLASS="brownbutton">C</SPAN>
 
     <LI>3-dB bandwidth B (BP) in hertz,
-      press <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+      press <SPAN CLASS="brownbutton">D</SPAN>
 
     <LI>C<sub>1</sub> for (BP, LP) in farads,
-      press <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;A'&nbsp;</SPAN>
+      press <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">A'</SPAN>
 
     <LI>C<sub>2</sub> for (BP, HP) in farads,
-      press <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;B'&nbsp;</SPAN>
+      press <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">B'</SPAN>
   </UL>
 
     <P>Compute component values:</P>
 
   <LI>Bandpass, to display
-    <p>R<sub>1</sub> press <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;C'&nbsp;</SPAN>
-    <p>R<sub>2</sub> press <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
-    <p>R<sub>3</sub> press <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <p>R<sub>1</sub> press <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">C'</SPAN>
+    <p>R<sub>2</sub> press <SPAN CLASS="brownbutton">R/S</SPAN>
+    <p>R<sub>3</sub> press <SPAN CLASS="brownbutton">R/S</SPAN>
 
   <LI>Lowpass, to display
-    <p>C press <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;D'&nbsp;</SPAN>
-    <p>R<sub>2</sub> press <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
-    <p>R<sub>1</sub> press <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
-    <p>R<sub>3</sub> press <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <p>C press <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">D'</SPAN>
+    <p>R<sub>2</sub> press <SPAN CLASS="brownbutton">R/S</SPAN>
+    <p>R<sub>1</sub> press <SPAN CLASS="brownbutton">R/S</SPAN>
+    <p>R<sub>3</sub> press <SPAN CLASS="brownbutton">R/S</SPAN>
 
   <LI>Highpass, to display
-    <p>C press <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>
-    <p>R<sub>1</sub> press <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
-    <p>R<sub>2</sub> press <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <p>C press <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">E'</SPAN>
+    <p>R<sub>1</sub> press <SPAN CLASS="brownbutton">R/S</SPAN>
+    <p>R<sub>2</sub> press <SPAN CLASS="brownbutton">R/S</SPAN>
 </UL>
 
 <P>Registers: 10-18
