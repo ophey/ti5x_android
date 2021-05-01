@@ -1,0 +1,50 @@
+#!/bin/bash
+
+#  Helper script to write the HTML code
+
+
+#  Handled keys (prefix @ or @! (no output for 2nd, just the simple key)
+#    A, B, C, D, E, A', B', C', D', E'
+#    R/S RST
+#    OP
+#    <nb> (for white button)
+#
+#  Handled display (prefix $)
+#    <nb> (TI display)
+
+# Replaces the @<n> (for a key) to the corresponding <SPAN...> tag
+# Replaces all @<n> where n is not a key by a display
+
+if [ ! -f "$1" ]; then
+    echo "usage: $0 <html_file>"
+    exit 1
+fi
+
+sed -i "s,@CLR,<SPAN CLASS=\"yellowbutton\">CLR</SPAN>,g" $1
+sed -i "s,@XT,<SPAN CLASS=\"brownbutton\">X⇌T</SPAN>,g" $1
+sed -i "s,@RST,<SPAN CLASS=\"brownbutton\">RST</SPAN>,g" $1
+sed -i "s,@RS,<SPAN CLASS=\"brownbutton\">R/S</SPAN>,g" $1
+sed -i "s,@OP,<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">OP</SPAN>,g" $1
+
+sed -i "s,@!PRT,<SPAN CLASS=\"alttext\">Prt</SPAN>,g" $1
+sed -i "s,@!OP,<SPAN CLASS=\"alttext\">Op</SPAN>,g" $1
+sed -i "s,@!WRITE,<SPAN CLASS=\"alttext\">Write</SPAN>,g" $1
+sed -i "s,@!LIST,<SPAN CLASS=\"alttext\">List</SPAN>,g" $1
+
+sed -i "s,@A',<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">A'</SPAN>,g" $1
+sed -i "s,@B',<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">B'</SPAN>,g" $1
+sed -i "s,@C',<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">C'</SPAN>,g" $1
+sed -i "s,@D',<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">D'</SPAN>,g" $1
+sed -i "s,@E',<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">E'</SPAN>,g" $1
+
+sed -i "s,@OP,<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">Op</SPAN>,g" $1
+
+sed -i "s,@A,<SPAN CLASS=\"brownbutton\">A</SPAN>,g" $1
+sed -i "s,@B,<SPAN CLASS=\"brownbutton\">B</SPAN>,g" $1
+sed -i "s,@C,<SPAN CLASS=\"brownbutton\">C</SPAN>,g" $1
+sed -i "s,@D,<SPAN CLASS=\"brownbutton\">D</SPAN>,g" $1
+sed -i "s,@E,<SPAN CLASS=\"brownbutton\">E</SPAN>,g" $1
+
+sed -i "s,@\([0-9]*\),<SPAN CLASS=\"whitebutton\">\1</SPAN>,g" $1
+
+sed -i "s,\$\([0-9\.]*\),<SPAN CLASS=\"displayb\">\1</SPAN>,g" $1
