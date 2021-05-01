@@ -1,0 +1,324 @@
+
+lbl prt
+   ifflg 1 mean(x)
+   r/s
+   inv sbr
+
+lbl mean(x)
+   op 06
+   inv sbr
+
+lbl sin
+   sto 41
+   (
+   (
+   ce
+   inv lnx
+   -
+   rcl 41
+   +/-
+   inv lnx
+   )
+   ÷
+   2
+   )
+   inv sbr
+
+lbl cos
+   sto 41
+   (
+   (
+   ce
+   inv lnx
+   +
+   rcl 41
+   +/-
+   inv lnx
+   )
+   ÷
+   2
+   )
+   inv sbr
+
+lbl A
+   sto 42
+   cp
+   r/s
+   sto 43
+   ×
+   r/s
+   sto 44
+   ÷
+   r/s
+   ÷
+   r/s
+   ÷
+   4
+   =
+   √x
+   √x
+   sto 45
+   ×
+   rcl 42
+   =
+   sto 42
+   r/s
+   sto 46
+   sto 00
+
+lbl int
+   rcl 00
+   -
+   rcl 46
+   -
+   1
+   =
+   +/-
+   r/s
+
+lbl B
+   int
+   st* 00
+   r/s
+   ÷
+   4
+   inv log
+   =
+   sm* 00
+   dsz 0 int
+   0
+   r/s
+
+lbl C
+   rad
+   ×
+   rcl 45
+   =
+   sto 47
+   0
+   sto 48
+   sto 49
+   sto 50
+   rcl 46
+   sto 00
+
+lbl +
+   inv stflg 2
+   rc* 00
+   inv int
+   ×
+   4
+   inv log
+   =
+   ×
+   rcl 45
+   =
+   sto 51
+   -
+   rcl 42
+   =
+   +/-
+   sto 52
+   rcl 47
+   sto 53
+   -
+   rcl 51
+   =
+   inv x≥t ×
+   rcl 51
+   exc 52
+   sto 51
+   rcl 42
+   -
+   rcl 47
+   =
+   sto 53
+   stflg 2
+
+lbl ×
+   rcl 42
+   sbr sin
+   sto 54
+   ×
+   (
+   rcl 51
+   sin
+   ×
+   rcl 52
+   sbr cos
+   -
+   rcl 51
+   cos
+   ×
+   rcl 52
+   sbr sin
+   )
+   +
+   rcl 42
+   sin
+   ×
+   (
+   rcl 51
+   sbr sin
+   ×
+   rcl 52
+   cos
+   -
+   rcl 51
+   sbr cos
+   ×
+   rcl 52
+   sin
+   )
+   =
+   sto 55
+   rcl 54
+   ×
+   rcl 51
+   cos
+   ×
+   rcl 52
+   sbr cos
+   -
+   rcl 42
+   sin
+   ×
+   rcl 51
+   sbr cos
+   ×
+   rcl 52
+   cos
+   =
+   sto 56
+   rcl 53
+   sbr cos
+   ×
+   rcl 53
+   sin
+   =
+   sto 57
+   sto 58
+   rcl 53
+   sbr sin
+   ×
+   rcl 53
+   cos
+   =
+   sum 57
+   +/-
+   sum 58
+   2
+   ×
+   rcl 53
+   sbr cos
+   ×
+   rcl 53
+   cos
+   ×
+   rcl 56
+   +
+   rcl 57
+   ×
+   rcl 55
+   =
+   ×
+   rc* 00
+   int
+   =
+   sum 48
+   2
+   ×
+   rcl 53
+   sbr sin
+   ×
+   rcl 53
+   sin
+   ×
+   rcl 56
+   +
+   rcl 58
+   ×
+   rcl 55
+   =
+   ×
+   rc* 00
+   int
+   =
+   sum 49
+   rcl 57
+   ×
+   rcl 56
+   +
+   rcl 53
+   sbr sin
+   ×
+   rcl 53
+   sin
+   ×
+   rcl 55
+   =
+   ×
+   rc* 00
+   int
+   =
+   inv ifflg 2 +/-
+   +/-
+
+lbl +/-
+   sum 50
+   dsz 0 +
+   rcl 54
+   x²
+   -
+   rcl 42
+   sin
+   x²
+   =
+   1/x
+   prd 48
+   prd 49
+   prd 50
+   rcl 45
+   ÷
+   rcl 43
+   ÷
+   rcl 44
+   =
+   prd 48
+   rcl 45
+   ×
+   2
+   =
+   1/x
+   prd 49
+   op 00
+   44
+   op 04
+   rcl 47
+   ÷
+   rcl 45
+   =
+   sbr prt
+   45
+   op 04
+   rcl 48
+   sbr prt
+   77
+   op 04
+   rcl 48
+   ×
+   rcl 44
+   =
+   sbr prt
+   30
+   op 04
+   rcl 49
+   sbr prt
+   37
+   op 04
+   rcl 50
+   sbr prt
+   deg
+   adv
+   adv
+   r/s
