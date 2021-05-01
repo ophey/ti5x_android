@@ -7,46 +7,64 @@
 .yellowbutton
   {
     background : #ce8c3b;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
-  } /*.yellowbutton*/
+  }
 
 .brownbutton
   {
     background : #4e3836;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #ac9e80;
-  } /*.brownbutton*/
+  }
 
 .whitebutton
   {
     background : #ac9e80;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-  } /*.whitebutton*/
+  }
 
 .alttext
   {
     background : #222424;
-    padding : 1.5pt;
+    padding : 0.1em 0.6em 0.1em;
     font-weight : bold;
     color : #ac9e80;
-  } /*alttext*/
+  }
 
 .deflist DT
   {
     display : compact;
     font-weight : bold;
-  } /*.deflist DT*/
+  }
 .deflist DD
   {
     margin-left : 4em;
-  } /*.deflist DD*/
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
@@ -78,27 +96,27 @@ Rules:
     dealer's total goes over 21. Otherwise you loose.
 <UL>
   <LI>Initialize program :
-    <SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>. 0 is displayed.
+    <SPAN CLASS="brownbutton">SBR</SPAN> <SPAN CLASS="yellowbutton">CLR</SPAN>. 0 is displayed.
 
-  <LI>Key in a number (0 to 199017) and press <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>. The dealer's show card,
+  <LI>Key in a number (0 to 199017) and press <SPAN CLASS="brownbutton">E</SPAN>. The dealer's show card,
     your hole card, and your show card are briefly displayed. You total number of points is then displayed
     and printed.
 
 
   <LI>Player Hits (Optional)
     <UL>
-      <LI>If you wish to be dealt additional cards, press <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN> for each
+      <LI>If you wish to be dealt additional cards, press <SPAN CLASS="brownbutton">A</SPAN> for each
         new card. The card is briefly displayed and printed followed by your new total.
       <LI>Each Ace dealt to you is automatically counted as 1 point. If you wish an Ace to be scored
-        as 11 points, press <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN><SPAN CLASS="alttext">&nbsp;A'&nbsp;</SPAN> after you have taken all the cards
+        as 11 points, press <SPAN CLASS="yellowbutton">2nd</SPAN><SPAN CLASS="alttext">A'</SPAN> after you have taken all the cards
         you desire.
     </UL>
 
-  <LI>After taking all the cards you desire, press <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>. The dealer then
+  <LI>After taking all the cards you desire, press <SPAN CLASS="brownbutton">B</SPAN>. The dealer then
     reveals his hole card and takes other cards as needed. The cards are displayed and printed along
     with the dealer's total, in the same way as for the player.
 
-  <LI>Press <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN> and go Player Hits for a new hand.
+  <LI>Press <SPAN CLASS="brownbutton">D</SPAN> and go Player Hits for a new hand.
 </UL>
 
 </BODY>

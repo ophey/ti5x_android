@@ -7,61 +7,64 @@
 .yellowbutton
   {
     background : #ce8c3b;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
-  } /*.yellowbutton*/
+  }
 
 .brownbutton
   {
     background : #4e3836;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #ac9e80;
-  } /*.brownbutton*/
+  }
 
 .whitebutton
   {
     background : #ac9e80;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-  } /*.whitebutton*/
+  }
 
 .alttext
   {
     background : #222424;
-    padding : 1.5pt;
+    padding : 0.1em 0.6em 0.1em;
     font-weight : bold;
     color : #ac9e80;
-  } /*alttext*/
+  }
 
 .deflist DT
   {
     display : compact;
     font-weight : bold;
-  } /*.deflist DT*/
+  }
 .deflist DD
   {
     margin-left : 4em;
-  } /*.deflist DD*/
+  }
 
-TABLE.functions
-  {
-    border-collapse : collapse;
-  }
-TABLE.functions > TBODY > TR > TD, TABLE.functions > TBODY > TR > TH
-  {
-    border : 1px solid;
-    border-color : #C0C0C0;
-    padding : 0.25em;
-  }
-TABLE.functions > TBODY > TR > TD.unused
-  {
-    background : #D5D5D5;
-  }
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
@@ -76,26 +79,26 @@ TABLE.functions > TBODY > TR > TD.unused
 
 <UL>
   <LI>Select degree mode, press
-    <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-    <SPAN CLASS="alttext">&nbsp;Deg&nbsp;</SPAN>
-  <LI>Initialize, press <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-    <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>
-  <LI>Enter slope distance, press <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
-  <LI>Enter zenith angle, press <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
-  <LI>Enter height of DM unit, press <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
-  <LI>Enter reflector height, press <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
-  <LI>Enter theodolite height, press <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
-  <LI>Enter target height, press <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
-  <LI>Enter DM unit elevation, press <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">Deg</SPAN>
+  <LI>Initialize, press <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">E'</SPAN>
+  <LI>Enter slope distance, press <SPAN CLASS="brownbutton">A</SPAN>
+  <LI>Enter zenith angle, press <SPAN CLASS="brownbutton">B</SPAN>
+  <LI>Enter height of DM unit, press <SPAN CLASS="brownbutton">C</SPAN>
+  <LI>Enter reflector height, press <SPAN CLASS="brownbutton">R/S</SPAN>
+  <LI>Enter theodolite height, press <SPAN CLASS="brownbutton">D</SPAN>
+  <LI>Enter target height, press <SPAN CLASS="brownbutton">R/S</SPAN>
+  <LI>Enter DM unit elevation, press <SPAN CLASS="brownbutton">E</SPAN>
   <LI>Compute Hz Dist (IEL), press
-    <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-    <SPAN CLASS="alttext">&nbsp;A'&nbsp;</SPAN>
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">A'</SPAN>
   <LI>Compute Hz Dist (SL), press
-    <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-    <SPAN CLASS="alttext">&nbsp;B'&nbsp;</SPAN>
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">B'</SPAN>
   <LI>Compute &Delta; Elev, press
-    <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-    <SPAN CLASS="alttext">&nbsp;C'&nbsp;</SPAN>
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">C'</SPAN>
 </UL>
 
 <P>Registers used: 01-11, 15 and 17

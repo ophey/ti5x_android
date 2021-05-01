@@ -7,61 +7,64 @@
 .yellowbutton
   {
     background : #ce8c3b;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
-  } /*.yellowbutton*/
+  }
 
 .brownbutton
   {
     background : #4e3836;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #ac9e80;
-  } /*.brownbutton*/
+  }
 
 .whitebutton
   {
     background : #ac9e80;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-  } /*.whitebutton*/
+  }
 
 .alttext
   {
     background : #222424;
-    padding : 1.5pt;
+    padding : 0.1em 0.6em 0.1em;
     font-weight : bold;
     color : #ac9e80;
-  } /*alttext*/
+  }
 
 .deflist DT
   {
     display : compact;
     font-weight : bold;
-  } /*.deflist DT*/
+  }
 .deflist DD
   {
     margin-left : 4em;
-  } /*.deflist DD*/
+  }
 
-TABLE.functions
-  {
-    border-collapse : collapse;
-  }
-TABLE.functions > TBODY > TR > TD, TABLE.functions > TBODY > TR > TH
-  {
-    border : 1px solid;
-    border-color : #C0C0C0;
-    padding : 0.25em;
-  }
-TABLE.functions > TBODY > TR > TD.unused
-  {
-    background : #D5D5D5;
-  }
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
@@ -79,20 +82,20 @@ TABLE.functions > TBODY > TR > TD.unused
 </P>
 
 <P>The key to interdependent use of these programs is the
-  <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN> keystroke. Basically,
+  <SPAN CLASS="brownbutton">E</SPAN> keystroke. Basically,
   this arranges the data present in the storage registers for use in
   calculating the next leg of a traverse. While only the total
   horizontal distance is displayed following
-  <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>, several other things
+  <SPAN CLASS="brownbutton">E</SPAN>, several other things
   also happen that re quite difficult to correct once
   completed. Therefore, be certain that all data for that leg is
-  correct before pressing <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>.
+  correct before pressing <SPAN CLASS="brownbutton">E</SPAN>.
 </P>
 
 <P>For the first leg, select the proper program (usually
   Azimuth/Bearing or Field Angle), initialize, and enter the reference
   data. This should be the <i>only</i> time you need to enter this
-  data. The <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN> command
+  data. The <SPAN CLASS="brownbutton">E</SPAN> command
   will do it otherwise. Once the (closed) traverse is complete, it is
   best to do to the Closure program, although Inverse Traverse will
   also work for closure. Then the Balance programs will distribute
@@ -100,7 +103,7 @@ TABLE.functions > TBODY > TR > TD.unused
 </P>
 
 <P>In the first three programs, if an error occurs
-  before <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>, it may be
+  before <SPAN CLASS="brownbutton">E</SPAN>, it may be
   corrected by doing that leg again; but the Circle Arc program is
   somewhat different.
 </P>
@@ -112,58 +115,58 @@ TABLE.functions > TBODY > TR > TD.unused
   departure, latitude, and end coordinates of a traverse leg.
 </P>
 
-<P>The keystroke <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN> acts
+<P>The keystroke <SPAN CLASS="brownbutton">E</SPAN> acts
   just as it does in the preceding programs.
 </P>
 
 <UL>
   <LI>Select degree mode,, press
-    <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-    <SPAN CLASS="alttext">&nbsp;Deg&nbsp;</SPAN>
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">Deg</SPAN>
 
   <LI>Enter Reference North, press
-    <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-    <SPAN CLASS="alttext">&nbsp;A'&nbsp;</SPAN>
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">A'</SPAN>
   <LI>Enter Reference East, press
-    <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <SPAN CLASS="brownbutton">R/S</SPAN>
   <LI>Enter Reference azimuth, press
-    <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <SPAN CLASS="brownbutton">R/S</SPAN>
 
   <LI>Enter either:
     <UL>
       <LI>Angle right (DD.MMSS), press
-        <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+        <SPAN CLASS="brownbutton">A</SPAN>
       <LI>Angle left (DD.MMSS), press
-        <SPAN CLASS="whitebutton">&nbsp;+/-&nbsp;</SPAN>
-        <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+        <SPAN CLASS="whitebutton">+/-</SPAN>
+        <SPAN CLASS="brownbutton">A</SPAN>
       <LI>Deflection right, press
-        <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+        <SPAN CLASS="brownbutton">B</SPAN>
       <LI>Deflection left, press
-        <SPAN CLASS="whitebutton">&nbsp;+/-&nbsp;</SPAN>
-        <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+        <SPAN CLASS="whitebutton">+/-</SPAN>
+        <SPAN CLASS="brownbutton">B</SPAN>
     </UL>
 
   <LI>Compute bearing, press
-    <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <SPAN CLASS="brownbutton">R/S</SPAN>
 
   <LI>Compute quadrant, press
-    <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <SPAN CLASS="brownbutton">R/S</SPAN>
 
   <LI>Enter distance, press
-    <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <SPAN CLASS="brownbutton">C</SPAN>
 
   <LI>Either:
     <UL>
       <LI>If dist above is horizontal, enter
-        <SPAN CLASS="whitebutton">&nbsp;0&nbsp;</SPAN>
-        <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+        <SPAN CLASS="whitebutton">0</SPAN>
+        <SPAN CLASS="brownbutton">R/S</SPAN>
     </UL>
 
     or
 
     <UL>
       <LI>If a slope Dist and vertical angle known, enter vertical angle
-      (DD.MMSS), press <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+      (DD.MMSS), press <SPAN CLASS="brownbutton">R/S</SPAN>
     </UL>
 
     or
@@ -171,21 +174,21 @@ TABLE.functions > TBODY > TR > TD.unused
     <UL>
       <LI>If slope Dist and zenith angle known, enter zenith angle
         (DD.MMSS), press
-        <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-        <SPAN CLASS="alttext">&nbsp;C'&nbsp;</SPAN>
+        <SPAN CLASS="yellowbutton">2nd</SPAN>
+        <SPAN CLASS="alttext">C'</SPAN>
     </UL>
 
   <LI>Compute Departure, press
-    <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <SPAN CLASS="brownbutton">D</SPAN>
   <LI>Compute Latitude, press
-    <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <SPAN CLASS="brownbutton">R/S</SPAN>
   <LI>Compute next North, press
-    <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <SPAN CLASS="brownbutton">R/S</SPAN>
   <LI>Compute next East, press
-    <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <SPAN CLASS="brownbutton">R/S</SPAN>
 
   <LI>Occupy next station and compute total distance thus far, press
-    <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+    <SPAN CLASS="brownbutton">E</SPAN>
 </UL>
 
 <P>Registers used: 00-05, 07-20.

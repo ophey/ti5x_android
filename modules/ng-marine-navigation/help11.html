@@ -11,7 +11,7 @@
 .yellowbutton
   {
     background : #ce8c3b;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
   }
@@ -19,7 +19,7 @@
 .brownbutton
   {
     background : #4e3836;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #ac9e80;
@@ -28,7 +28,7 @@
 .whitebutton
   {
     background : #ac9e80;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
@@ -37,7 +37,7 @@
 .alttext
   {
     background : #222424;
-    padding : 1.5pt;
+    padding : 0.1em 0.6em 0.1em;
     font-weight : bold;
     color : #ac9e80;
   }
@@ -53,16 +53,26 @@
   }
 
 .display
-  {
-     color : red;
-     font-weight : bold;
-     text-align : right;
-     margin-right : 2em;
-  }
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
-<H1>NG-11 — Rhumbline (Mercator) Navigation<BR></H1>Given the position coordinates of the starting and destination points specified by the navigator, this program is designed to compute the rhumbline course from the start to the destination.&nbsp; The routine will also give the distance between the two points along the rhumbline and keep track of the cumulative distance if more than one leg is computed.&nbsp; Another computation possible is the speed over the bottom (SMG) necessary to complete the voyage in a time interval (Δt) established by the navigator.<BR>
+<H1>NG-11 — Rhumbline (Mercator) Navigation<BR></H1>Given the position coordinates of the starting and destination points specified by the navigator, this program is designed to compute the rhumbline course from the start to the destination. The routine will also give the distance between the two points along the rhumbline and keep track of the cumulative distance if more than one leg is computed. Another computation possible is the speed over the bottom (SMG) necessary to complete the voyage in a time interval (Δt) established by the navigator.<BR>
 <P>L<SUB>DR</SUB> = ( Δt × SMG × cos(CMG) ) / 60 + L<SUB>S</SUB>.</P>
 <P><BR></P>
 <TABLE style="HEIGHT: 149px; WIDTH: 751px; TEXT-ALIGN: left" cellSpacing=2 cellPadding=2 border=0>
@@ -79,7 +89,7 @@
 <P><FONT size=+1>={<BR></FONT></P></TD>
 <TD style="VERTICAL-ALIGN: middle; FONT-WEIGHT: bold; TEXT-ALIGN: left">
 <P><FONT size=+1><SPAN style="FONT-WEIGHT: normal">60 | ( λ<SUB>D</SUB></SPAN><SUB><SPAN style="FONT-WEIGHT: normal"></SPAN></SUB><SPAN style="FONT-WEIGHT: normal"> - </SPAN></FONT><FONT size=+1><SPAN style="FONT-WEIGHT: normal">λ<SUB>s</SUB></SPAN></FONT><FONT size=+1><SPAN style="FONT-WEIGHT: normal">) cos(</SPAN> L<SUB>s</SUB> ) |<BR></FONT></P></TD>
-<TD style="VERTICAL-ALIGN: middle; FONT-WEIGHT: normal; COLOR: rgb(0,102,0); TEXT-ALIGN: left"><FONT size=+1>if L<SUB>D</SUB> = </FONT><FONT size=+1>L<SUB>S</SUB> </FONT><FONT size=+1>&nbsp;</FONT> </TD></TR>
+<TD style="VERTICAL-ALIGN: middle; FONT-WEIGHT: normal; COLOR: rgb(0,102,0); TEXT-ALIGN: left"><FONT size=+1>if L<SUB>D</SUB> = </FONT><FONT size=+1>L<SUB>S</SUB> </FONT><FONT size=+1></FONT> </TD></TR>
 <TR>
 <TD style="VERTICAL-ALIGN: middle; FONT-WEIGHT: bold; TEXT-ALIGN: left">
 <P><FONT size=+1><SPAN style="FONT-WEIGHT: normal">60 | ( λ<SUB>D</SUB></SPAN><SUB><SPAN style="FONT-WEIGHT: normal"></SPAN></SUB><SPAN style="FONT-WEIGHT: normal"> - </SPAN></FONT><FONT size=+1><SPAN style="FONT-WEIGHT: normal">λ<SUB>s</SUB></SPAN></FONT><FONT size=+1><SPAN style="FONT-WEIGHT: normal">) cos(</SPAN> CMG<SUB></SUB> ) |</FONT></P></TD>

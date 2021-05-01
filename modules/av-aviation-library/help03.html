@@ -7,54 +7,64 @@
 .yellowbutton
   {
     background : #ce8c3b;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
-  } /*.yellowbutton*/
+  }
 
 .brownbutton
   {
     background : #4e3836;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #ac9e80;
-  } /*.brownbutton*/
+  }
 
 .whitebutton
   {
     background : #ac9e80;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-  } /*.whitebutton*/
+  }
 
 .alttext
   {
     background : #222424;
-    padding : 1.5pt;
+    padding : 0.1em 0.6em 0.1em;
     font-weight : bold;
     color : #ac9e80;
-  } /*alttext*/
+  }
 
 .deflist DT
   {
     display : compact;
     font-weight : bold;
-  } /*.deflist DT*/
+  }
 .deflist DD
   {
     margin-left : 4em;
-  } /*.deflist DD*/
+  }
 
 .display
-  {
-     color : red;
-     font-weight : bold;
-     text-align : right;
-     margin-right : 2em;
-  }
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
@@ -82,7 +92,7 @@
 <P>Given two values of the following equations, the third can be
   calculated</p>
 
-<p>Dist = &Delta;t x GS &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Fuel =
+<p>Dist = &Delta;t x GS  Fuel =
   &Delta;t x Burn
 
 <H2>Flight Plan (pre-flight)</H2>
@@ -93,8 +103,8 @@
   lefsz previous to the checkpoint. The following equations are
   used:<P>
 
-<p>ETA = ETD + &Delta;t &nbsp;&nbsp;&nbsp;&nbsp;
-  tt = &Sigma;&Delta;t &nbsp;&nbsp;&nbsp;&nbsp;
+<p>ETA = ETD + &Delta;t 
+  tt = &Sigma;&Delta;t 
   tD = &Sigma;Dist
 </P>
 
@@ -305,58 +315,58 @@ YbxmZrlwB/AK8BLa4XBkcH8n4KeoK8RJqC3PC6ie7mwac7zbA7cXXfMrwNPAbXEO3Mwsi/
 
 <DL class="deflist">
   <DT>Select degree mode
-    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN> <SPAN CLASS="alttext">&nbsp;Deg&nbsp;</SPAN></DT>
+    <DD><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Deg</SPAN></DT>
 </DL>
 
 <h3>Time-Speed-Distance or Time-Fuel-Burn</h3>
 
 <DL class="deflist">
   <DT>Initialize
-    <DD><SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">SBR</SPAN> <SPAN CLASS="yellowbutton">CLR</SPAN>
     <DD CLASS="display">0.000</DD></DT>
 
   <h3>- distance</h3>
 
   <DT>Enter time
-    <DD>&Delta;t <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD>&Delta;t <SPAN CLASS="brownbutton">B</SPAN>
     <DD CLASS="display">0.0000
   </DT>
   <DT>Enter ground speed (or burn)
-    <DD>GS (or burn) <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD>GS (or burn) <SPAN CLASS="brownbutton">C</SPAN>
     <DD CLASS="display">0.0000
   </DT>
   <DT>Calculate distance (or fuel)
-    <DD><SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">D</SPAN>
     <DD CLASS="display">Dist (or fuel)</DD>
   </DT>
 
   <h3>- speed (or burn)</h3>
 
   <DT>Enter time
-    <DD>&Delta;t <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD>&Delta;t <SPAN CLASS="brownbutton">B</SPAN>
     <DD CLASS="display">0.0000
   </DT>
   <DT>Enter distance (or fuel)
-    <DD>Dist (or fuel) <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD>Dist (or fuel) <SPAN CLASS="brownbutton">D</SPAN>
     <DD CLASS="display">0.0000
   </DT>
   <DT>Calculate ground speed (or burn)
-    <DD><SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">C</SPAN>
     <DD CLASS="display">GS (or burn)</DD>
   </DT>
 
   <h3>- time</h3>
 
   <DT>Enter ground speed (or burn)
-    <DD>GS (or burn) <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD>GS (or burn) <SPAN CLASS="brownbutton">C</SPAN>
     <DD CLASS="display">0.0000
   </DT>
   <DT>Enter distance (or fuel)
-    <DD>Dist (or fuel) <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD>Dist (or fuel) <SPAN CLASS="brownbutton">D</SPAN>
     <DD CLASS="display">0.0000
   </DT>
   <DT>Calculate time
-    <DD><SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">B</SPAN>
     <DD CLASS="display">&Delta;t (HH.MMSS)</DD>
   </DT>
 </DL>
@@ -365,39 +375,39 @@ YbxmZrlwB/AK8BLa4XBkcH8n4KeoK8RJqC3PC6ie7mwac7zbA7cXXfMrwNPAbXEO3Mwsi/
 
 <DL class="deflist">
   <DT>Initialize
-    <DD><SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">SBR</SPAN> <SPAN CLASS="yellowbutton">CLR</SPAN>
     <DD CLASS="display">0.000</DD></DT>
 
   <DT>Enter take-off time
-    <DD>ETD (HH.MMSS) <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    <DD>ETD (HH.MMSS) <SPAN CLASS="brownbutton">A</SPAN>
     <DD CLASS="display">ETD</DT>
 
   <DT>Enter ground speed
-    <DD>GS <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD>GS <SPAN CLASS="brownbutton">C</SPAN>
     <DD CLASS="display">0.0000</DT>
 
   <DT>Enter distance
-    <DD>Dist <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD>Dist <SPAN CLASS="brownbutton">D</SPAN>
     <DD CLASS="display">0.0000</DD>
   </DT>
 
   <DT>Calculate leg time
-    <DD><SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">B</SPAN>
     <DD CLASS="display">&Delta;t (HH.MMSS)</DD>
   </DT>
 
   <DT>Calculate ETA
-    <DD><SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">E</SPAN>
     <DD CLASS="display">ETA (HH.MMSS)</DD>
   </DT>
 
   <DT>Calculate total distance
-    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-        <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>
+    <DD><SPAN CLASS="yellowbutton">2nd</SPAN>
+        <SPAN CLASS="alttext">E'</SPAN>
     <DD CLASS="display">ETA</DD>
-    <DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">R/S</SPAN>
     <DD CLASS="display">tD</DD>
-    <DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">R/S</SPAN>
     <DD CLASS="display">tt (HH.MMSS)</DD>
   </DT>
 </DL>
@@ -406,47 +416,47 @@ YbxmZrlwB/AK8BLa4XBkcH8n4KeoK8RJqC3PC6ie7mwac7zbA7cXXfMrwNPAbXEO3Mwsi/
 
 <DL class="deflist">
   <DT>Initialize
-    <DD><SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">SBR</SPAN> <SPAN CLASS="yellowbutton">CLR</SPAN>
     <DD CLASS="display">0.000</DD></DT>
 
   <DT>Enter take-off time
-    <DD>ETD (HH.MMSS) <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    <DD>ETD (HH.MMSS) <SPAN CLASS="brownbutton">A</SPAN>
     <DD CLASS="display">ETD</DT>
 
   <DT>Enter anticipated ground speed
-    <DD>GS <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD>GS <SPAN CLASS="brownbutton">C</SPAN>
     <DD CLASS="display">0.0000</DT>
 
   <DT>Enter distance
-    <DD>Dist <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD>Dist <SPAN CLASS="brownbutton">D</SPAN>
     <DD CLASS="display">0.0000</DD>
   </DT>
 
   <DT>Calculate ETA
-    <DD><SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">E</SPAN>
     <DD CLASS="display">ETA (HH.MMSS)</DD>
   </DT>
 
   <DT>Enter actual time of arrival and calculates total distance and
   time flown
-    <DD>ATA (HH.MMSS)<SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-        <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>
+    <DD>ATA (HH.MMSS)<SPAN CLASS="yellowbutton">2nd</SPAN>
+        <SPAN CLASS="alttext">E'</SPAN>
     <DD CLASS="display">ATA (HH.MMSS)</DD>
-    <DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">R/S</SPAN>
     <DD CLASS="display">tD</DD>
-    <DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">R/S</SPAN>
     <DD CLASS="display">tt (HH.MMSS)</DD>
   </DT>
 
   <DT>Display actual leg time
-    <DD><SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
-      <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">B</SPAN>
+      <SPAN CLASS="brownbutton">B</SPAN>
     <DD CLASS="display">&Delta;t</DD>
   </DT>
 
   <DT>Display actual ground speed
-    <DD><SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
-      <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">C</SPAN>
+      <SPAN CLASS="brownbutton">C</SPAN>
     <DD CLASS="display">GS</DD>
   </DT>
 </DL>
@@ -455,63 +465,63 @@ YbxmZrlwB/AK8BLa4XBkcH8n4KeoK8RJqC3PC6ie7mwac7zbA7cXXfMrwNPAbXEO3Mwsi/
 
 <DL class="deflist">
   <DT>Enter ground speed
-    <DD>GS <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD>GS <SPAN CLASS="brownbutton">C</SPAN>
     <DD CLASS="display">0.0000</DT>
 
   <DT>Enter anticipated ground speed
-    <DD>GS <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD>GS <SPAN CLASS="brownbutton">C</SPAN>
     <DD CLASS="display">0.0000</DT>
 
   <DT>Enter time
-    <DD>&Delta;t <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD>&Delta;t <SPAN CLASS="brownbutton">B</SPAN>
     <DD CLASS="display">0.0000
   </DT>
   <DT>Enter distance (or fuel)
-    <DD>Dist (or fuel) <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD>Dist (or fuel) <SPAN CLASS="brownbutton">D</SPAN>
     <DD CLASS="display">0.0000
   </DT>
   <DT>Calculate ground speed (or burn)
-    <DD><SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">C</SPAN>
     <DD CLASS="display">GS (or burn)</DD>
   </DT>
 
   <DT>Enter take-off time
-    <DD>ETD (HH.MMSS) <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    <DD>ETD (HH.MMSS) <SPAN CLASS="brownbutton">A</SPAN>
     <DD CLASS="display">ETD</DT>
 
   <DT>Enter distance
-    <DD>Dist <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD>Dist <SPAN CLASS="brownbutton">D</SPAN>
     <DD CLASS="display">0.0000</DD>
   </DT>
 
   <DT>Enter actual time of arrival and calculates total distance and
   time flown
-    <DD>ATA (HH.MMSS) <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-        <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>
+    <DD>ATA (HH.MMSS) <SPAN CLASS="yellowbutton">2nd</SPAN>
+        <SPAN CLASS="alttext">E'</SPAN>
     <DD CLASS="display">ATA (HH.MMSS)</DD>
-    <DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">R/S</SPAN>
     <DD CLASS="display">tD</DD>
-    <DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">R/S</SPAN>
     <DD CLASS="display">tt (HH.MMSS)</DD>
   </DT>
 
   <DT>Enter wind direction
-    <DD>WD <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;B'&nbsp;</SPAN>
+    <DD>WD <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">B'</SPAN>
     <DD CLASS="display">WD</DD>
   </DT>
 
   <DT>Enter wind velocity
-    <DD>WC <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;C'&nbsp;</SPAN>
+    <DD>WC <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">C'</SPAN>
     <DD CLASS="display">WV</DD>
   </DT>
 
   <DT>Enter true course and compute true heading and true airspeed
-    <DD>TC <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;D'&nbsp;</SPAN>
+    <DD>TC <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">D'</SPAN>
     <DD CLASS="display">TH</DD>
-    <DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">R/S</SPAN>
     <DD CLASS="display">TAS</DD>
   </DT>
 </DL>

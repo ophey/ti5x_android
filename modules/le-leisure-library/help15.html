@@ -7,46 +7,64 @@
 .yellowbutton
   {
     background : #ce8c3b;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
-  } /*.yellowbutton*/
+  }
 
 .brownbutton
   {
     background : #4e3836;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #ac9e80;
-  } /*.brownbutton*/
+  }
 
 .whitebutton
   {
     background : #ac9e80;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-  } /*.whitebutton*/
+  }
 
 .alttext
   {
     background : #222424;
-    padding : 1.5pt;
+    padding : 0.1em 0.6em 0.1em;
     font-weight : bold;
     color : #ac9e80;
-  } /*alttext*/
+  }
 
 .deflist DT
   {
     display : compact;
     font-weight : bold;
-  } /*.deflist DT*/
+  }
 .deflist DD
   {
     margin-left : 4em;
-  } /*.deflist DD*/
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
@@ -64,17 +82,17 @@
 
 <UL>
   <LI>Initialize program :
-    <SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>
+    <SPAN CLASS="brownbutton">SBR</SPAN> <SPAN CLASS="yellowbutton">CLR</SPAN>
 
-  <LI>Enter the "probability of truth" as a number between 0 and 100 and press <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+  <LI>Enter the "probability of truth" as a number between 0 and 100 and press <SPAN CLASS="brownbutton">A</SPAN>
 
-  <LI>Enter a seed number between 0 and 199017 and press <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>. The program then
+  <LI>Enter a seed number between 0 and 199017 and press <SPAN CLASS="brownbutton">B</SPAN>. The program then
     generates an integer between 0 and 100.
 
-  <LI>Enter a guess (0 to 100) press <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>. If your guess is too high, 1 is displayed;
+  <LI>Enter a guess (0 to 100) press <SPAN CLASS="brownbutton">E</SPAN>. If your guess is too high, 1 is displayed;
     too low, -1 is displayed. If your guess is correct, the correct number is flashed in the display.
 
-  <LI>Press <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN> to display how many guesses you have taken.
+  <LI>Press <SPAN CLASS="brownbutton">D</SPAN> to display how many guesses you have taken.
 </UL>
 
 </BODY>

@@ -7,54 +7,64 @@
 .yellowbutton
   {
     background : #ce8c3b;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
-  } /*.yellowbutton*/
+  }
 
 .brownbutton
   {
     background : #4e3836;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #ac9e80;
-  } /*.brownbutton*/
+  }
 
 .whitebutton
   {
     background : #ac9e80;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-  } /*.whitebutton*/
+  }
 
 .alttext
   {
     background : #222424;
-    padding : 1.5pt;
+    padding : 0.1em 0.6em 0.1em;
     font-weight : bold;
     color : #ac9e80;
-  } /*alttext*/
+  }
 
 .deflist DT
   {
     display : compact;
     font-weight : bold;
-  } /*.deflist DT*/
+  }
 .deflist DD
   {
     margin-left : 4em;
-  } /*.deflist DD*/
+  }
 
 .display
-  {
-     color : red;
-     font-weight : bold;
-     text-align : right;
-     margin-right : 2em;
-  }
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
@@ -72,7 +82,7 @@
   (start and destination), and magnetic variation. Outputs are the
   true course, magnetic course, distance along the rhumb line, and
   cumulative distance for several legs. The single keystroke
-  <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN> causes the
+  <SPAN CLASS="brownbutton">A</SPAN> causes the
   dstrination coordinates for the present leg to become the start
   coordinates for the succeeding leg, thus facilitating multiple-leg
   computations.
@@ -214,72 +224,72 @@ HQvhY9/pxsbE9vZlaU/wc/r0pe3jymkAAAAABJRU5ErkJggg==
 
 <DL class="deflist">
   <DT>Select degree mode
-    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN> <SPAN CLASS="alttext">&nbsp;Deg&nbsp;</SPAN>
+    <DD><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Deg</SPAN>
   </DT>
 
   <DT>Initialize
-    <DD><SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">SBR</SPAN> <SPAN CLASS="yellowbutton">CLR</SPAN>
     <DD CLASS="display">0.00</DD>
   </DT>
 
   <DT>Enter mag. variation (if needed) (+W, -E)
     <DD>Var (deg)
-      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;A'&nbsp;</SPAN>
+      <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">A'</SPAN>
     <DD CLASS="display">Var</dd>
   </DT>
 
   <DT>Enter latitude of start
-    <DD>L<sub>s</sub> (DD.MMSS) <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD>L<sub>s</sub> (DD.MMSS) <SPAN CLASS="brownbutton">B</SPAN>
     <DD CLASS="display">L<sub>s</sub></dd>
   </DT>
   <DT>Enter longitude of start
     <DD>&lambda;<sub>s</sub>  (DD.MMSS)
-      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;B'&nbsp;</SPAN>
+      <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">B'</SPAN>
     <DD CLASS="display">&lambda;<sub>s</sub></dd>
   </DT>
 
   <DT>Enter latitude of destination
-    <DD>L<sub>d</sub> (DD.MMSS) <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD>L<sub>d</sub> (DD.MMSS) <SPAN CLASS="brownbutton">C</SPAN>
     <DD CLASS="display">L<sub>d</sub></dd>
   </DT>
   <DT>Enter longitude of destination
     <DD>&lambda;<sub>d</sub>  (DD.MMSS)
-      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;C'&nbsp;</SPAN>
+      <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">C'</SPAN>
     <DD CLASS="display">&lambda;<sub>d</sub></dd>
   </DT>
 
   <DT>Calculate results
-    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;D'&nbsp;</SPAN>
+    <DD><SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">D'</SPAN>
     <DD CLASS="display">0.00</dd>
   </DT>
 
   <DT>Display true course
-    <DD><SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">D</SPAN>
     <DD CLASS="display">TC (deg)</dd>
     <p>optionally magnetic course
-    <DD><SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">R/S</SPAN>
     <DD CLASS="display">MC (deg)</dd>
   </DT>
 
   <DT>Display distance
-    <DD><SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">E</SPAN>
     <DD CLASS="display">Dist</dd>
   </DT>
 
   <DT>Display total distance
-    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>
+    <DD><SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">E'</SPAN>
     <DD CLASS="display">tot Dist</dd>
   </DT>
 
   <DT>For multiple legs, make (L<sub>d</sub>, &lambda;<sub>d</sub>)
   the new (L<sub>s</sub>, &lambda;<sub>s</sub>), then restart above
     but skip entering L<sub>s</sub> and &lambda;<sub>s</sub>.
-    <DD><SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">A</SPAN>
     <DD CLASS="display">0.00</dd>
   </DT>
 </DL>

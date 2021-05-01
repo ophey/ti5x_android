@@ -7,54 +7,64 @@
 .yellowbutton
   {
     background : #ce8c3b;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
-  } /*.yellowbutton*/
+  }
 
 .brownbutton
   {
     background : #4e3836;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #ac9e80;
-  } /*.brownbutton*/
+  }
 
 .whitebutton
   {
     background : #ac9e80;
-    padding : 1pt;
+    padding : 0.1em 0.5em 0.1em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-  } /*.whitebutton*/
+  }
 
 .alttext
   {
     background : #222424;
-    padding : 1.5pt;
+    padding : 0.1em 0.6em 0.1em;
     font-weight : bold;
     color : #ac9e80;
-  } /*alttext*/
+  }
 
 .deflist DT
   {
     display : compact;
     font-weight : bold;
-  } /*.deflist DT*/
+  }
 .deflist DD
   {
     margin-left : 4em;
-  } /*.deflist DD*/
+  }
 
 .display
-  {
-     color : red;
-     font-weight : bold;
-     text-align : right;
-     margin-right : 2em;
-  }
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
@@ -240,49 +250,49 @@ gXm8Rj5swL+R6Sb8S5gNw/Dw/0QR6YaeF7b0AAAAAElFTkSuQmCC
 
 <DL class="deflist">
   <DT>Select degree mode
-    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN> <SPAN CLASS="alttext">&nbsp;Deg&nbsp;</SPAN>
+    <DD><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Deg</SPAN>
   </DT>
 
   <DT>Initialize
-    <DD><SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">SBR</SPAN> <SPAN CLASS="yellowbutton">CLR</SPAN>
     <DD CLASS="display">0.</DD>
   </DT>
 
   <h3>For all line-of-sight distance or altitude:</h3>
 
   <DT>Enter altitude of terrain (MSL)
-    <DD>Terr (ft) <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    <DD>Terr (ft) <SPAN CLASS="brownbutton">A</SPAN>
     <DD CLASS="display">Terr</sub></dd>
   </DT>
 
   <DT>Enter transmitter altitude (MSL)
-    <DD>Trans (ft) <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD>Trans (ft) <SPAN CLASS="brownbutton">B</SPAN>
     <DD CLASS="display">Trans</sub></dd>
   </DT>
 
   <h3>To calculate line-of-sight distance given ALT:</h3>
 
   <DT>Enter aircraft altitude (MSL)
-    <DD>ALT (ft) <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD>ALT (ft) <SPAN CLASS="brownbutton">C</SPAN>
     <DD CLASS="display">ALT</sub></dd>
   </DT>
 
   <DT>Compute line-of-sight distance
-    <DD><SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
-      <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">E</SPAN>
+      <SPAN CLASS="brownbutton">D</SPAN>
     <DD CLASS="display">Dist (n. mi.)</sub></dd>
   </DT>
 
   <h3>To calculate ALT given line-of-sight distance:</h3>
 
   <DT>Enter line-of-sight distance
-    <DD>Dist (n. mi.) <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD>Dist (n. mi.) <SPAN CLASS="brownbutton">D</SPAN>
     <DD CLASS="display">Dist</sub></dd>
   </DT>
 
   <DT>Compute minimum altitude required
-    <DD><SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
-      <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">E</SPAN>
+      <SPAN CLASS="brownbutton">C</SPAN>
     <DD CLASS="display">ALT (ft)</sub></dd>
   </DT>
 
@@ -290,22 +300,22 @@ gXm8Rj5swL+R6Sb8S5gNw/Dw/0QR6YaeF7b0AAAAAElFTkSuQmCC
 
   <DT>Enter magnetic course
     <DD>MC (deg)
-      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;A'&nbsp;</SPAN>
+      <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">A'</SPAN>
     <DD CLASS="display">MC</dd>
   </DT>
 
   <DT>Enter radial to (or from) the DME station
     <DD>R<sub>DME</sub>
-      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;B'&nbsp;</SPAN>
+      <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">B'</SPAN>
     <DD CLASS="display">R<sub>DME</sub></dd>
   </DT>
 
   <DT>Enter DME<sub>sp</sub> and calculate ground speed
     <DD>DME<sub>sp</sub> (knots)
-      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;C'&nbsp;</SPAN>
+      <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">C'</SPAN>
     <DD CLASS="display">GS (knots)</dd>
   </DT>
 
@@ -313,16 +323,16 @@ gXm8Rj5swL+R6Sb8S5gNw/Dw/0QR6YaeF7b0AAAAAElFTkSuQmCC
 
   <DT>Enter distance to DME station
     <DD>Dist<sub>DME</sub> (n. mi.)
-      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;D'&nbsp;</SPAN>
+      <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">D'</SPAN>
     <DD CLASS="display">Dist<sub>DME</sub></dd>
   </DT>
 
   <DT>Enter difference between aircraft and DME station altitude and
   compute the corrected ground speed
     <DD>&Delta;h (ft)
-      <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>
+      <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">E'</SPAN>
     <DD CLASS="display">GS (knots)</dd>
   </DT>
 </DL>
