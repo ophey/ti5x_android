@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/python3
 #
 # Change base64 encoded images from help file. The source image must be in SVG
 # format. In the HTML file, just place initially:
@@ -45,7 +45,7 @@ if len(sys.argv) != 3:
 art = sys.argv[1]
 file = sys.argv[2]
 
-print file
+print(file)
 
 content = open(file, 'r').readlines()
 newcontent = []
@@ -53,20 +53,20 @@ newcontent = []
 is_img=False
 
 for c in content:
-    if string.find(string.lower(c), "<img") != -1:
+    if c.lower().find("<img") != -1:
         alt = re.search('^(.*) ALT="([^"]*)".*$', c)
         if alt != None:
-            svgfile = os.path.join(art,string.lower(alt.group(2)) + '.svg').replace(' ', '-')
+            svgfile = os.path.join(art,alt.group(2).lower() + '.svg').replace(' ', '-')
 
 
             if os.path.exists(svgfile):
                 is_img = True
-                os.system("inkscape -f %s -w %d -e /tmp/art.png" % (svgfile, WIDTH))
+                os.system("inkscape --export-area-drawing --batch-process --export-width=%d --export-filename=/tmp/art.png %s" % (WIDTH, svgfile))
 
                 initial_data = open('/tmp/art.png', 'rb').read()
-                encoded_data = base64.b64encode(initial_data)
+                encoded_data = base64.b64encode(initial_data).decode('utf-8')
                 newcontent.append('%s ALT="%s" src="data:image/png;base64,' % (alt.group(1), alt.group(2)) + '\n')
-                for i in xrange((len(encoded_data)/70)+1):
+                for i in range((int)(len(encoded_data)/70)+1):
                     newcontent.append(encoded_data[i*70:(i+1)*70] + '\n')
             else:
                 print("skip: svg file '%s' not found" % svgfile)
@@ -74,7 +74,7 @@ for c in content:
     if not is_img:
         newcontent.append(c);
 
-    if is_img == True and string.find(string.lower(c), '">') != -1:
+    if is_img == True and c.lower().find('">') != -1:
         is_img=False
         newcontent.append(c);
 
