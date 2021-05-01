@@ -1,0 +1,7 @@
+<carddef style="user">
+<label slot="titleleft">BEAM ON ELASTIC GROUND</label>
+<label slot="titleright">STR-07</label>
+<label slot="a">LBKJEN</label>
+<label slot="b">P<sub>i</sub> &gt; a<sub>i</sub> :</label>
+<label slot="c">X &gt; results</label>
+</carddef>
