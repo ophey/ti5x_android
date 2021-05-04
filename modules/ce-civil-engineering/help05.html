@@ -225,6 +225,16 @@ xFWiIim/AKahDS03o/G92PZdMrNIbkM3Ozegv9EX0X6Jg9IMqjn8dnlrHdAP72w0rNAxdO
 Gp6GNpa1MlINHAfcC5yPk69ZWroBdwJjKYFhhUL+D7xH9QqTL4VTAAAAAElFTkSuQmCC
 ">
 
+  <DL>
+    <DD>K = <sup>J<sub>2</sub></sup> &frasl; <sub>J<sub>1</sub></sub>
+      . <sup>H</sup> &frasl; <sub>L</sub>
+    <DD>D = 2K + 3
+    <DD>B<sub>1</sub> = H - A<sub>1</sub>
+    <DD>B<sub>2</sub> = L - A<sub>2</sub>
+    <DD>&alpha; = <sup>A<sub>1</sub></sup> &frasl; <sub>H</sub>
+    <DD>&beta; = 1 - &alpha;
+  </DL>
+
 <h2>Example</h2>
 
 <OL>
@@ -236,14 +246,16 @@ Gp6GNpa1MlINHAfcC5yPk69ZWroBdwJjKYFhhUL+D7xH9QqTL4VTAAAAAElFTkSuQmCC
   <UL>
     <LI>height, enter 300 cm, press <SPAN CLASS="brownbutton">A</SPAN>, display <SPAN CLASS="displayb">300</SPAN>.
     <LI>length, enter 500 cm, press <SPAN CLASS="brownbutton">B</SPAN>, display <SPAN CLASS="displayb">500</SPAN>.
-    <LI>mom. inertia J<sub>1</sub>:, enter 16000 cm<sup>4</sup>, press <SPAN CLASS="brownbutton">C</SPAN>,
-    display <SPAN CLASS="displayb">16000</SPAN>.
+    <LI>mom. inertia J<sub>1</sub>:, enter 160000 cm<sup>4</sup>, press <SPAN CLASS="brownbutton">C</SPAN>,
+    display <SPAN CLASS="displayb">160000</SPAN>.
     <LI>mom. inertia J<sub>2</sub>:, enter 312500 cm<sup>4</sup>, press <SPAN CLASS="brownbutton">D</SPAN>,
       display <SPAN CLASS="displayb">312500</SPAN>.
   </UL>
 <LI>Set the load and start the calculation:
+  <BR>Without print option each result will be displayed by pressing R/S in succession.
   <UL>
-    <LI>load Q, enter 40 dN/cm, press <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">A'</SPAN>
+    <LI>Uniform load Q on the beam:<BR>
+      load Q, enter 40 dN/cm, press <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">A'</SPAN>
       <pre>
           40.      Q
               M
@@ -257,7 +269,9 @@ Gp6GNpa1MlINHAfcC5yPk69ZWroBdwJjKYFhhUL+D7xH9QqTL4VTAAAAAElFTkSuQmCC
        10000.      A
        10000.      D
       </pre>
-    <LI>Or load P<sub>V</sub>, enter 2000 dN, press <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">B'</SPAN>, display <SPAN CLASS="displayb">2000</SPAN>
+      (*) = moment in the middle of the beam
+    <LI>Or Force concentrated P<sub>v</sub> on the beam:
+      <BR>load P<sub>V</sub>, enter 2000 dN, press <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">B'</SPAN>, display <SPAN CLASS="displayb">2000</SPAN>
       <BR>coordinated A<sub>2</sub>, enter 250 cm, press <SPAN CLASS="brownbutton">R/S</SPAN>
       <pre>
         2000.     PV
@@ -273,7 +287,10 @@ Gp6GNpa1MlINHAfcC5yPk69ZWroBdwJjKYFhhUL+D7xH9QqTL4VTAAAAAElFTkSuQmCC
         1000.      A
         1000.      D
       </pre>
-    <LI>Or load P<sub>R</sub>, enter 4000 dN, press <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">C'</SPAN>, display <SPAN CLASS="displayb">4000</SPAN>
+      <BR>
+      (*) = moment under the load
+    <LI>Or Force concentrated P<sub>R</sub> on the pillar:<BR>
+      load P<sub>R</sub>, enter 4000 dN, press <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">C'</SPAN>, display <SPAN CLASS="displayb">4000</SPAN>
       <BR>coordinated A<sub>1</sub>, enter 300 cm, press <SPAN CLASS="brownbutton">R/S</SPAN>:
       <pre>
         4000.     PR
@@ -289,6 +306,7 @@ Gp6GNpa1MlINHAfcC5yPk69ZWroBdwJjKYFhhUL+D7xH9QqTL4VTAAAAAElFTkSuQmCC
        -2400.      A
         2400.      D
       </pre>
+      (*) = moment under the load
   </UL>
 
   <LI>For a new calculation, go back to step 3 if only the load data

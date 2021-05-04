@@ -3,7 +3,7 @@
 <label slot="titleright">STR-04</label>
 <label slot="a">M<sub>i</sub> : K<sub>i</sub> :</label>
 <label slot="b">Result.</label>
-<label slot="e">Initializ.i</label>
+<label slot="e">Initializ.</label>
 <label slot="aprime">Corr.</label>
 <label slot="eprime">Supports</label>
 </carddef>

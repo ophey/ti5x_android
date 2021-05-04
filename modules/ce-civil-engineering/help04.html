@@ -204,6 +204,17 @@ ioZbj3X7lKJrWeWWa1ET1JqInSUoZnNZ7CU22oqxhHUCdM1PStvnbveJMjTGMrWK/wOBzq
 pHIlZRUAAAAABJRU5ErkJggg==
 ">
 
+<DL class="deflist">
+  <DD>M<sub>3,4</sub> = 2000 Kg/m
+  <DD>M<sub>2,3</sub> = M<sub>3,2</sub> = 4166 Kg/m
+  <DD>M<sub>1,2</sub> = M<sub>2,1</sub> = 666 Kg/m
+  <DD>M<sub>1,0</sub> = 0 Kg/m
+  <DD>K<sub>1,2</sub> = 0.5
+  <DD>K<sub>2,3</sub> = 0.2
+  <DD>K<sub>3,4</sub> = 0
+  <DD>K<sub>1,0</sub> = &infin;
+</DL>
+
 <p>To calculate the continuous beam it is necessary to first
   calculate, for each span and for any shelf, the moments at the ends
   using the STR03 program considering each span perfectly fitted at
@@ -230,6 +241,9 @@ pHIlZRUAAAAABJRU5ErkJggg==
   <SPAN CLASS="yellowbutton">2nd</SPAN>
   <SPAN CLASS="alttext">E'</SPAN>,
   display <SPAN CLASS="displayb">3</SPAN>.
+  <BR>
+  Delete the T register: <SPAN CLASS="yellowbutton">CLR</SPAN>
+  <SPAN CLASS="brownbutton">X⇌T</SPAN>
 
 <LI>Set data of support "3":
 
@@ -241,7 +255,7 @@ pHIlZRUAAAAABJRU5ErkJggg==
           display <SPAN CLASS="displayb">2000</SPAN>.
         <LI>to the left, enter 666, press
           <SPAN CLASS="brownbutton">R/S</SPAN>,
-          display <SPAN CLASS="displayb">0.0666</SPAN>.
+          display <SPAN CLASS="displayb">0.00666</SPAN>.
       </UL>
     <LI>Stiffness K in the pan:
       <UL>
@@ -264,7 +278,7 @@ pHIlZRUAAAAABJRU5ErkJggg==
           display <SPAN CLASS="displayb">4166</SPAN>.
         <LI>to the left, enter 666, press
           <SPAN CLASS="brownbutton">R/S</SPAN>,
-          display <SPAN CLASS="displayb">0.0666</SPAN>.
+          display <SPAN CLASS="displayb">0.00666</SPAN>.
       </UL>
     <LI>Stiffness K:
       <UL>
@@ -316,7 +330,7 @@ pHIlZRUAAAAABJRU5ErkJggg==
           display <SPAN CLASS="displayb">4166</SPAN>.
         <LI>to the left, enter 666, press
           <SPAN CLASS="brownbutton">R/S</SPAN>,
-          display <SPAN CLASS="displayb">0.0666</SPAN>.
+          display <SPAN CLASS="displayb">0.00666</SPAN>.
       </UL>
     <LI>Stiffness K:
       <UL>
@@ -352,7 +366,9 @@ pHIlZRUAAAAABJRU5ErkJggg==
 </UL>
 
 <P>Registers used: 00 to [(Nx4) + 15]
-<p>Labels: press (2nd OP 08)
+<p>Labels: press (<SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">OP</SPAN>
+  <SPAN CLASS="whitebutton">08</SPAN>)
 
 <pre>
     I×I, √X, SUM, x, IFF, π
