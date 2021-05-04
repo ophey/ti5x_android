@@ -1,7 +1,7 @@
 <carddef style="user">
 <label slot="titleleft">HINGED PORTAL</label>
 <label slot="titleright">STR-05</label>
-<label slot="a">M</label>
+<label slot="a">H</label>
 <label slot="b">L</label>
 <label slot="c">J<sub>1</sub></label>
 <label slot="d">J<sub>2</sub></label>
