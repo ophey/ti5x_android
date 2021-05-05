@@ -71,13 +71,11 @@
 <H1>STR-03 — Single Span Beams</H1>
 
 <P>The program calculates shear and bending moment in equidistant
-  points whose number is set by the operator. There are four constraint
-  conditions: left joint, 2 supports, left joint and right support, 2
-  joints.  The loads, applicable separately or in combination, can be:
-  moment at the extremity, force concentrated in any point, uniform
-  load.
+  points whose number is set by the operator. The loads, applicable
+  separately or in combination, can be: moment at the extremity, force
+  concentrated in any point, uniform load.
 
-<p>The four supoorted cases:
+<p>There are four constraint conditions:
   <UL>
     <LI>Left Joint:
       <BR>
@@ -473,22 +471,33 @@ PfATyDdVdV8X/xmSfkoNdbmAAAAABJRU5ErkJggg==
       <SPAN CLASS="yellowbutton">2nd</SPAN>
       <SPAN CLASS="alttext">E'</SPAN>
   </UL>
-  <P>Results in "n+1" coordinates (from X<sub>0</sub> to X<sub>n</sub>
-    = L), X<sub>0</sub> is displayed.</p>
-  <UL>
-    <LI>X<sub>0</sub> coordinated, M(X<sub>0</sub>) is displayed.
-    <LI>press <SPAN CLASS="brownbutton">R/S</SPAN>,
-      T(X<sub>0</sub>) is displayed.
-    <LI>press <SPAN CLASS="brownbutton">R/S</SPAN>,
-      X(X<sub>1</sub>) is displayed.
-    <LI>continues in the next coordinate X<sub>1</sub> to
-      X<sub>n</sub> = L
-  </UL>
+  <P>Results in "n+1" coordinates, from X=0 to L:
+    <UL>
+      <LI>X<sub>n</sub> is displayed,
+      <LI>press <SPAN CLASS="brownbutton">R/S</SPAN>
+        M(X<sub>n</sub>) is displayed: bending moment in X<sub>n</sub>
+      <LI>press <SPAN CLASS="brownbutton">R/S</SPAN>,
+        T(X<sub>n</sub>) is displayed: shear moment in  X<sub>n</sub>
+      <LI>press <SPAN CLASS="brownbutton">R/S</SPAN>,
+        continue in the next coordinate n+1
+    </UL>
+    <p>If flag 1 has been activated, the results will be printed in
+    automatic sequence.
 
-<LI>For a new calculation go back to step 2
+<LI>For a new calculation go back to step 2.
+  <p>To calculate the beam, the program uses only the necessary data
+    according to the assigned constraints. For another type of beam,
+    there is no need to reset the unchanged data.
 </OL>
 
 <h2>Example</h2>
+
+<p>Calculate a beam of the Joint-Support (fig.3):
+
+  <pre>
+    L=300 cm    P=500 dN    E=150 cm
+    Q=2 dN/cm   MD=0 dN/cm
+  </pre>
 
 <OL>
 <LI>Print option: <SPAN CLASS="yellowbutton">2nd</SPAN>
@@ -505,6 +514,8 @@ PfATyDdVdV8X/xmSfkoNdbmAAAAABJRU5ErkJggg==
       press <SPAN CLASS="brownbutton">R/S</SPAN>
     <LI>Uniform load: enter 2,
       press <SPAN CLASS="brownbutton">C</SPAN>
+    <LI>Moment to right: enter 0,
+      press <SPAN CLASS="brownbutton">E</SPAN>
   </UL>
 
 <LI>Set the number of subdivisions of the beam, enter 10,
@@ -534,9 +545,6 @@ PfATyDdVdV8X/xmSfkoNdbmAAAAABJRU5ErkJggg==
      -29962.5   M(X)
        658.75   T(X)
           60.      X
-</pre>
-
-<pre>
       -11100.   M(X)
        598.75   T(X)
           90.      X
@@ -550,9 +558,6 @@ PfATyDdVdV8X/xmSfkoNdbmAAAAABJRU5ErkJggg==
        -81.25   T(X)
          180.      X
        31350.   M(X)
-</pre>
-
-<pre>
       -141.25   T(X)
          210.      X
       26212.5   M(X)
@@ -574,3 +579,7 @@ PfATyDdVdV8X/xmSfkoNdbmAAAAABJRU5ErkJggg==
 </UL>
 
 <P>Registers used: 0 to 8.
+<p>Labels: press <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">OP</SPAN>
+  <SPAN CLASS="whitebutton">08</SPAN>:
+  <BR><SPAN CLASS="brownbutton">R/S</SPAN>, <SPAN CLASS="alttext">Prt</SPAN>, <SPAN CLASS="alttext">Op</SPAN>, <SPAN CLASS="alttext">Write</SPAN>, <SPAN CLASS="alttext">List</SPAN>
