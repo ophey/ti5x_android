@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #ce8c3b;
+    padding : 0.1em 0.5em 0.1em;
+    border : 1pt solid black;
+    font-weight : bold;
+  }
+
+.brownbutton
+  {
+    background : #4e3836;
+    padding : 0.1em 0.5em 0.1em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #ac9e80;
+  }
+
+.whitebutton
+  {
+    background : #ac9e80;
+    padding : 0.1em 0.5em 0.1em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+  }
+
+.alttext
+  {
+    background : #222424;
+    padding : 0.1em 0.6em 0.1em;
+    font-weight : bold;
+    color : #ac9e80;
+  }
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  }
+.deflist DD
+  {
+    margin-left : 4em;
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
+</STYLE>
+</HEAD>
+<BODY>
+<H1>STR-08 - SUPPORTED RECTANGULAR PLATE</H1>
+
+<P>The program calculates the bending moments in both directions M(X),
+   M(Y) and the sag F in the center of a rectangular plate resting on
+   the edge and uniformly loaded on its surface.
+   The units of measurement of the forces and moments indicated in the
+   figure must be those of the International System, forces in N
+   (newton) or dN (decanewton=10N=1 kg); moments in kNm or kNcm
+   (1 kNcm = 1 kgm).
+
+<P>
+<IMG ALT="Supported Rectangular Plate" src="data:image/png;base64,
+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
+3KmUMNkhSZwSulNzh1AYrL4JXSG0E4Tew24BBgi7TlKG+O8UrpLQdOAx4DjgAWVdudhDMd
+5qUrTXkweMttv9QFqF9mES6WmFRtewPnAqsI5/B+Bfgh4eIKFZjBW16/JJyapOKYsNH3a4
+G3gRWEPdiew9AtBYO3vFYCD6UuQg3bgTC0MIiwkeVTwI3AHODNdGUpDwavlN444ALgcsIk
+22/SlqO8GbxSeouAk1MXoXg8nUySIjN4JSkyg1eSIjN4JSkyg1eSIjN4JSkyg1eSIjN4JS
+kyg1eSIjN4JSkyg1eSIjN4JSkyg1eSIjN4JSkyg1eSIjN4JSkyg1eSIjN4JSkyg1eSIjN4
+JSkyg1eSIjN4JSkyg1eSIjN4JSkyg1eSIjN4JSkyg1eSIjN4JSkyg1eSIjN4JSkyg1eSIj
+N4JSkyg1eSIjN4JSkyg1eSIjN4JSkyg1eSIjN4JSkyg1eS4hpr8EpSHBXgeOD/OlNXIklt
+YBpwNfB+cKhBkvI0GrgKeJRq6ALY45Wk7HUCnwFmAiN7elCSlJ3pwDeA3Xt7QgXYuYf73w
+0MyakoSSqjbYBbgR/RR+hCCN6/Az5Ud99k4Brg7ZyKk6Qy6QQ+CzwNfAro2NwPVICHgXuA
+PYAJ1e+fz69GSSqNGcBc4Epgq0Z/qAL8O7AC+CLwecIQwy05FChJZbEtcDMwB9ilvz9cAR
+YAS4CxwBhgMeHUB0lSd0OAc4FngL+ggWGFntTO4/1Z3X0vAuuaKk2SymcG8L/ApcCIZl6o
+Frw3A68D64HbmypNksple+BfgQeAXbN4wdp5vD8FVgJrgDuzeGFJKrjBwJnARcCWWb5wLX
+jXAYsIY7wLszyAJBXQRwhrK/R0nUPT6q9cmw1MzeMgLehAMv4NJikTOwL/k/D4OwBXAEfm
+eZD64L0SmJTnwVrE48DlqYuQ1KOHCBP8sQ0BzgAupsmJs0bUB++Caiu7NwgnPEtSzcHABU
+QIXXBZSEnl9Ea1NeouwnIJ/4in00pSdHsCjwBdOTZJ0kY6CNv0LMDglaSoRhHW1l2LwStJ
+UU0BfoLBK0lRdRAWxnkVg1eSohoOfBlYjcErSVHtRtjmx+CVpIg6gGOBlzF4JSmq2vDDWx
+i8khTVLoTtgAxeSYrsMOAFDF5JimoYvQ8/SJJy9B7gHgxeSYruMOB5oGtAWxNLkgZkGHB+
+6iIkSZIkSZIkSZIkSZIkSZIkSZIkSWXjJcMqopHAtOrtR4HXE9YiSW3hCsIKT+uBmYlrka
+TSGwQ8BSwDVgG/SluO1H+V1AVI/XQEMBF4hbDB4LuAGUkrkqSSe4gwzHA1cEf19r1JK5Kk
+Etue0NN9BZgE7A0sAV4ExiasS5JK6wZCD/fhuvvmAuuAi5JUJEklNgT4NfAmcHzd/RcQgv
+cJPD1SkjJ1IiF0XwPmAc9V2zzC2Q2/Aw5MVp3UD57VoKI4A9gCWE73XVq7CKE7EvhCgrok
+qZR2AhYCi4Ddenj8YEL4OskmSRn5HqFn+1gvj3cATxKuZLskVlGSVFbDgBeANcBZfTxvFi
+F4n8ZJNrW4ztQFSJvxLmAOocf7z3087zJga2AtYbhhUf6lSZIkSZIkSZIkSZIkSZIkSZIk
+SZIkSZIkSVIaHcCo1EVIJbMVMCh1Ea3AHSg2eCdhL6/7gQfxH4iUtTXA94GHgM8AE9KWox
+Q6gL0I67j+N2H/rtXVr6MT1iWV2VDCgvZrCLuKPElY7vMA2miZ2nZbMLoDOBz4GrAt4YMe
+Vvf4UuBawuaJkvIxGDgV2K7uvtXVtgy4CLiZsLZyKbXNb5iqLuCHhGGFo4DJhE0SxxNCuY
+uwb9ecVAVKbWBXunf6VlTb88Ad1Vba0FWwI3AeYdxpHmEL8cOTViSV1x7A68ACYC5h55Dd
+k1ak5IYChwJXEAJZUnbGA18HjiGc4SBJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJkiRJki
+RJkiRJkiRJktSIdtveveZDhC2mJbWeB4F1qYvIU7tt716zNTAkdRGSelSh5MErSZIkSZKU
+oXacXKsAE1IXIalHa4FFqYvIWztOrm0HvJS6CEk9+i2wfeoi8lZJXYAktRuDV5IiM3glKT
+KDV5Iia8fJtfXAitRFSOpmEDAidRHK3+HY45dawSDgF0AX8CowMm05ystE4DXglNSFSOKz
+hNCttcvSlqO8fI/wAS8FxiSuRWpn44Hf0T143wZ2SVmUsjedMM5b+5CvTVuO1Na+RffQrb
+U5CWtSxgYDT9L9A14H7J2yKKlN7Uv3TtDG7Zh0pSlL59DzB/woTrRJMQ0CHqf30O0C5uOZ
+DoU3gU3HkurbSelKk9rOX9J36NbapakKVDZuo+8PeAkwOll1UvsYByyjseBdDeycpkw168
+P0PZZUa9ckqk9qJzfRWOjW2v1pylQzOoG5NPYBrwOmpSlTagvTCP/P+hO8XcAnUhSrgfsc
+/fuAf44TbVIeKoT/X/0N3S7COr1OtBVETydnN9JOTFGsVHJnMrDQrbW/j1+yBuJWBvYBLy
+RsAS8pG2NpfEKtr4m2ybELV//sT2MTar21b8QvWSqtG2gudGvt3tiFq3H9mVDrra0FpsYu
+XCqhDzCwCbXe2tFxy1ejNl7taKDtIdpzJ2YpKxXgZ2QXul2EzWqHx3wT2ryBTqj11k6IW7
+5UKqeRbejW2kUx34Q271/I9gNeAIyK+g6kcngnsJh8gnc18N54b0V92Y/mJtR6a1fGfBNS
+SVxPPqFba7PjvRX1ppHVjgba1gJT4r0VqfD2ItsJtd7aEbHekHp2Fvl+wE60SY2pEJZazT
+t0u4AXcaItmXHAcvL/kI+L9YakAjuZOKFbazPjvC1t7CbifMALcAdUqS9bA4uIG7xv4RVt
+0X2QfCbUemuXx3lbUiFdQ9zQrbW7Yrw5Bc2sdjTQtgbYPcabkwpmT8JEdIrg7QIOy/8tZq
+Pok0VnAt9McNz/AmYQPmxJwbeBfRIefx5wCOFsCuUki9WOmmnH5v8WJam1ZLXa0UDbqzjR
+JmkA/h9rs4ZNYBIAbgAAAABJRU5ErkJggg==
+">
+
+<p>
+
+<h2>Example</h2>
+
+<OL>
+<LI>Reset T−register: press <SPAN CLASS="yellowbutton">CLR</SPAN>
+  <SPAN CLASS="brownbutton">x⇌t</SPAN>
+<LI>Print option: press <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">St flg</SPAN>
+  <SPAN CLASS="whitebutton">1</SPAN>
+
+<LI>Set data:
+  <UL>
+    <LI>side A:, enter <b>300</b> cm, press <SPAN CLASS="brownbutton">A</SPAN>
+    <LI>side B:, enter <b>500</b> cm, press <SPAN CLASS="brownbutton">B</SPAN>
+    <LI>thikness S:, enter <b>15</b> cm, press <SPAN CLASS="brownbutton">C</SPAN>
+    <LI>elasticity modulus E:, enter <b>200000</b> kg/cm<sup>2</sup>, press <SPAN CLASS="brownbutton">D</SPAN>
+    <LI>Poisson's ratio V:, enter <b>0.1</b>, press <SPAN CLASS="brownbutton">R/S</SPAN>
+  </UL>
+
+<LI>Results:
+<UL>
+    <LI>set Q load:, enter 0.1 dN/cm<sup>2</sup>, press <SPAN CLASS="brownbutton">E</SPAN>
+  <pre>
+    760.0941417     M(X)
+    292.0568407     M(Y)
+    0.123557824        F
+  </pre>
+<P>
+    <LI>set Q load:, enter 0.12 dN/cm<sup>2</sup>, press <SPAN CLASS="brownbutton">E</SPAN>
+  <pre>
+    912.1129791     M(X)
+    350.4682184     M(Y)
+    0.148269389        F
+  </pre>
+</UL>
+<p> Without print option each result will be displayed by pressing <SPAN CLASS="brownbutton">R/S</SPAN> in succession.
+<LI> For a new calculation, go back to step 4 if only the load data changes, else go back to step 3.
+</OL>
+
+<P> Registers used: <b>00</b> to <b>12</b>
+<P> Flags used: <b>1</b>
+<p>Labels: <SPAN CLASS="alttext">Prt</SPAN>, <SPAN CLASS="alttext">Op</SPAN>,
+<SPAN CLASS="brownbutton">R/S</SPAN>,
+<SPAN CLASS="yellowbutton">=</SPAN> and definable keys
+<SPAN CLASS="brownbutton">A</SPAN> to <SPAN CLASS="brownbutton">E</SPAN>
+
+</BODY>
