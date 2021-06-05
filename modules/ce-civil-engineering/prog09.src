@@ -1,0 +1,157 @@
+
+lbl prt
+   ifflg 1 op
+   r/s
+   inv sbr
+
+lbl op
+   op 06
+   inv sbr
+
+lbl r/s
+   ifflg 1 op
+   inv sbr
+
+lbl sto
+   (
+   rcl 03
+   ×
+   rcl 07
+   x²
+   ÷
+   60
+   )
+   sto 10
+   sto 11
+   (
+   (
+   1
+   +
+   9
+   ×
+   rcl 06
+   )
+   ÷
+   4
+   )
+   prd 10
+   (
+   1
+   +
+   4
+   ×
+   rcl 06
+   )
+   +/-
+   prd 11
+   inv sbr
+
+lbl A
+   sto 00
+   r/s
+
+lbl B
+   sto 01
+   r/s
+
+lbl C
+   sto 02
+   r/s
+   000
+
+lbl D
+   sto 04
+   r/s
+   sto 05
+   r/s
+
+lbl E
+   sto 03
+   rcl 00
+   ÷
+   rcl 01
+   =
+   y**x
+   4
+   =
+   sto 06
+   +/-
+   +
+   7.5
+   =
+   ÷
+   6.5
+   ÷
+   (
+   1
+   +
+   rcl 06
+   )
+   =
+   sto 06
+   ×
+   6.5
+   +
+   1
+   =
+   ×
+   rcl 03
+   ×
+   rcl 00
+   y**x
+   4
+   ×
+   (
+   1
+   -
+   rcl 05
+   x²
+   )
+   ÷
+   rcl 04
+   ÷
+   rcl 02
+   y**x
+   3
+   ÷
+   240
+   =
+   sto 12
+   rcl 00
+   sto 07
+   sbr sto
+   rcl 10
+   sto 08
+   rcl 11
+   sto 09
+   rcl 01
+   sto 07
+   rcl 06
+   +/-
+   +
+   1
+   =
+   sto 06
+   sbr sto
+   30445715
+   op 04
+   rcl 08
+   sbr prt
+   30455715
+   op 04
+   rcl 10
+   sbr prt
+   30445714
+   op 04
+   rcl 09
+   sbr prt
+   30455713
+   op 04
+   rcl 11
+   sbr prt
+   215715
+   op 04
+   rcl 12
+   sbr r/s
+   adv
+   r/s
