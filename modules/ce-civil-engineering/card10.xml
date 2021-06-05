@@ -1,0 +1,11 @@
+<carddef style="user">
+<label slot="titleleft">CIRCULAR PLATE</label>
+<label slot="titleright">STR-10</label>
+<label slot="a">R</label>
+<label slot="b">S</label>
+<label slot="c">Q</label>
+<label slot="d">E</label>
+<label slot="e">V</label>
+<label slot="aprime"><sub>^</sub> <sup>---</sup> <sub>^</sub></label>
+<label slot="bprime">| --- |</label>
+</carddef>
