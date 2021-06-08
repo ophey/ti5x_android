@@ -122,31 +122,31 @@ class ButtonGrid extends android.view.View {
           new ButtonDef[]
              {
                 new ButtonDef("GTO", "Pause", White, ButtonBrown),
-                new ButtonDef("7", "x=t", "Pgm Ind", Dark, White),
-                new ButtonDef("8", "Nop", "Exc Ind", Dark, White),
-                new ButtonDef("9", "Op", "Prd Ind", Dark, White),
+                new ButtonDef("7", "x=t", "Pg*", Dark, White),
+                new ButtonDef("8", "Nop", "Ex*", Dark, White),
+                new ButtonDef("9", "Op", "PD*", Dark, White),
                 new ButtonDef("×", "Deg", Dark, ButtonYellow),
              },
           new ButtonDef[]
              {
                 new ButtonDef("SBR", "Lbl", White, ButtonBrown),
-                new ButtonDef("4", "x≥t", "STO Ind", Dark, White),
-                new ButtonDef("5", "∑+", "RCL Ind", Dark, White),
-                new ButtonDef("6", "x̅", "SUM Ind", Dark, White),
+                new ButtonDef("4", "x≥t", "ST*", Dark, White),
+                new ButtonDef("5", "∑+", "RC*", Dark, White),
+                new ButtonDef("6", "x̅", "SM*", Dark, White),
                 new ButtonDef("-", "Rad", Dark, ButtonYellow),
              },
           new ButtonDef[]
              {
                 new ButtonDef("RST", "St flg", White, ButtonBrown),
                 new ButtonDef("1", "If flg", Dark, White),
-                new ButtonDef("2", "D.MS", "GTO Ind", Dark, White),
-                new ButtonDef("3", "π", "Op Ind", Dark, White),
+                new ButtonDef("2", "D.MS", "GT*", Dark, White),
+                new ButtonDef("3", "π", "Op*", Dark, White),
                 new ButtonDef("+", "Grad", Dark, ButtonYellow),
              },
           new ButtonDef[]
              {
                 new ButtonDef("R/S", "Write", White, ButtonBrown),
-                new ButtonDef("0", "Dsz", "INV SBR", Dark, White),
+                new ButtonDef("0", "Dsz", "RTN", Dark, White),
                 new ButtonDef(".", "Adv", Dark, White),
                 new ButtonDef("+/-", "Prt", Dark, White),
                 new ButtonDef("=", "List", Dark, ButtonYellow),
