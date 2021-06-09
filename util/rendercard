@@ -383,8 +383,8 @@ suboffset = -0.2 # vertical offset for subscript, relative to basefontsize
 superoffset = 0.3 # vertical offset for superscript, relative to basefontsize
 superoffsetb = 0.4 # vertical offset for superscript before, relative to basefontsize
 xheightscale = 0.65
-orange = tuple(i / 170 for i in (0x95, 0x50, 0x1c))
-dorange = tuple(i / 255 for i in (0x95, 0x50, 0x1c))
+orange = tuple(i / 330 for i in (0xfc, 0xd1, 0x71))
+dorange = tuple(i / 315 for i in (0xfc, 0xd1, 0x71))
 black = (0.02, 0.02, 0.02)
 colors = \
     {
