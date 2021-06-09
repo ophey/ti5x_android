@@ -27,6 +27,9 @@ class ButtonGrid extends android.view.View {
   private final android.graphics.Typeface MFont =
      Typeface.createFromAsset(getContext().getAssets(),
         "fonts/dejavusans-bold.ttf");
+  private final android.graphics.Typeface MFontL =
+          Typeface.createFromAsset(getContext().getAssets(),
+                  "fonts/dejavusans.ttf");
 
   private final android.media.SoundPool MakeNoise;
   private final android.os.Vibrator Vibrate;
@@ -37,6 +40,7 @@ class ButtonGrid extends android.view.View {
   private final int White;
   private final int ButtonBrown;
   private final int ButtonYellow;
+  private final int AltButtonColor;
   private final int OverlayBlue;
 
   class ButtonDef {
@@ -58,7 +62,7 @@ class ButtonGrid extends android.view.View {
       this.MergedText = MergedText;
       this.TextColor = TextColor;
       this.ButtonColor = ButtonColor;
-      this.AltTextColor = White;
+      this.AltTextColor = AltButtonColor;
       this.OverlayColor = OverlayBlue;
       this.BGColor = Dark;
     }
@@ -228,6 +232,7 @@ class ButtonGrid extends android.view.View {
     ButtonBrown = Res.getColor(R.color.button_brown);
     ButtonYellow = Res.getColor(R.color.button_yellow);
     OverlayBlue = Res.getColor(R.color.overlay_blue);
+    AltButtonColor = Res.getColor(R.color.alt_button_color);
     MakeButtonDefs();
     MakeNoise = new android.media.SoundPool(1, android.media.AudioManager.STREAM_MUSIC, 0);
     ButtonDown = MakeNoise.load(TheContext, R.raw.button_down, 1);
@@ -453,8 +458,9 @@ class ButtonGrid extends android.view.View {
         TextPaint.setTextAlign(android.graphics.Paint.Align.CENTER);
         TextPaint.setAntiAlias(true);
         final float BaseTextSize = CellHeight * 0.33f;
-        TextPaint.setTextSize(BaseTextSize * 0.9f);
-        TextPaint.setTypeface(MFont);
+        // alt text
+        TextPaint.setTextSize(BaseTextSize * 0.75f);
+        TextPaint.setTypeface(MFontL);
         GraphicsUseful.DrawCenteredText
            (
               Draw,
@@ -611,6 +617,7 @@ class ButtonGrid extends android.view.View {
             }
           }
         }
+        // label on buttons
         TextPaint.setTextAlign(android.graphics.Paint.Align.CENTER);
         TextPaint.setColor(ThisButton.TextColor);
         TextPaint.setTypeface(MFont);
