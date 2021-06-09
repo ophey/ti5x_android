@@ -539,7 +539,9 @@ class ButtonGrid extends android.view.View {
           final boolean HasMergedOverlay = ThisButton.MergedText != null;
 
           if (HasBaseOverlay || HasAltOverlay || HasMergedOverlay) {
-            final float Left = CellBounds.left + (CellBounds.right - CellBounds.left) * 0.0f;
+            float offs = -0.1f;
+            if(Col == 0) offs = 0.015f;
+            final float Left = CellBounds.left + (CellBounds.right - CellBounds.left) * offs;
             /* not quite authentic position, but what the hey */
             TextPaint.setTextSize(BaseTextSize * 0.6f);
             TextPaint.setColor(ThisButton.OverlayColor);

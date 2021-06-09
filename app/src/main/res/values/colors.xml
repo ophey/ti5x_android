@@ -12,7 +12,7 @@
     <!-- buttons -->
     <color name="button_brown">#53301B</color>
     <color name="button_yellow">#fcd171</color>
-    <color name="overlay_blue">#ff1c929a</color>
+    <color name="overlay_blue">#ff4d92a9</color>
 
     <!-- printer -->
     <color name="paper">#ffffffff</color>
