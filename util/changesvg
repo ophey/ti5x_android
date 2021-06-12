@@ -35,6 +35,9 @@ import os
 import string
 import re
 import base64
+import pyexiv2
+
+MAX_HEIGHT = 350
 
 # width of the PNG image, the height is kept with proportion
 WIDTH = 350
@@ -46,6 +49,15 @@ art = sys.argv[1]
 file = sys.argv[2]
 
 print(file)
+
+def set_new_width(file):
+    global WIDTH
+    metadata = pyexiv2.ImageMetadata(file)
+    metadata.read()
+    dim = metadata.dimensions
+    if(dim[1] > MAX_HEIGHT):
+        WIDTH *= (MAX_HEIGHT / dim[1])
+    WIDTH = int(WIDTH)
 
 content = open(file, 'r').readlines()
 newcontent = []
@@ -62,7 +74,9 @@ for c in content:
             if os.path.exists(svgfile):
                 is_img = True
                 os.system("inkscape --export-area-drawing --batch-process --export-width=%d --export-filename=/tmp/art.png %s" % (WIDTH, svgfile))
-
+                set_new_width("/tmp/art.png")
+                if(WIDTH != 350):
+                    os.system("inkscape --export-area-drawing --batch-process --export-width=%d --export-filename=/tmp/art.png %s" % (WIDTH, svgfile))
                 initial_data = open('/tmp/art.png', 'rb').read()
                 encoded_data = base64.b64encode(initial_data).decode('utf-8')
                 newcontent.append('%s ALT="%s" src="data:image/png;base64,' % (alt.group(1), alt.group(2)) + '\n')
