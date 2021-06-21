@@ -1,0 +1,9 @@
+<carddef style="user">
+<label slot="titleleft">MAXIMUM MOMENT AND SHEAR</label>
+<label slot="titleright">STR-11</label>
+<label slot="a">M<sub>A</sub></label>
+<label slot="b">M<sub>B</sub></label>
+<label slot="c">L</label>
+<label slot="d">Q</label>
+<label slot="e">RESULTS</label>
+</carddef>
