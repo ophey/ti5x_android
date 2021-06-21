@@ -1,0 +1,570 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #FFE071;
+    padding : 0.1em 0.5em 0.1em;
+    border : 1pt solid black;
+    font-weight : bold;
+  }
+
+.brownbutton
+  {
+    background : #63452B;
+    padding : 0.1em 0.5em 0.1em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #F0EDD5;
+  }
+
+.whitebutton
+  {
+    background : #E0DDC5;
+    padding : 0.1em 0.5em 0.1em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+  }
+
+.alttext
+  {
+    background : #121414;
+    padding : 0.1em 0.6em 0.1em;
+    font-weight : bold;
+    color : #ac9e80;
+  }
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  }
+.deflist DD
+  {
+    margin-left : 4em;
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
+</STYLE>
+</HEAD>
+<BODY>
+<H2>STR 11 - Maximum Moment and Shear</H2>
+
+<P>In a beam, or beam segment, in which the uniform load Q≠0 and the
+    moments M<sub>A</sub>, M<sub>B</sub> at the ends left and right
+    are known, the program calculates:
+  <ul>
+<li>the shear stress T<sub>A</sub>, T<sub>B</sub> at the ends;
+<li>the maximum bending moment MX;
+<li>the abscissa X<sub>0</sub> in which T=0 and moment M=M<sub>X</sub>;
+<li>the abscissas X<sub>1</sub>, X<sub>2</sub> in which M=0;
+<li>the areas S<sub>A</sub>, S<sub>B</sub> of the shear stress
+diagram to the left and right of the X<sub>0</sub> coordinate.
+</ul>
+
+<p>The units of measurement must be consistents and those of the
+  International System: lengths in meters, forces in Newton and
+  related multiples or submultiples. If the lengths are measured in
+  meters (m) and the forces in (dN), the bending moment must be
+  measured in (dNm) and the distributed load Q in (dN/m).
+
+<p>The sign of the bending moment and shear stress must respect the
+  convention of the Science of the Construction.
+</p>
+
+<IMG ALT="Max Moment Shear s01" src="data:image/png;base64,
+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
+AYcNo+Mj0OV41prmmpkl5kBUQf4QeBatdDGzANwkNJ2eQxPMt0FbAJyCV4KYWSfGop6HVh
+zr4fuvliJpvid5NqqgnqWxX5oBHb5/CdpfO0uGdvh8HtnqZ9iHpbeMmIVG7ztaFTgS3YM9
+HK1MMrMKRgGHhQ7CmuogdE826/uGm5mZmZmZmZmZmZmZmZmZmTWJV9xY3AYDE9Ec3JnRsX
+VRx/U38OZaZlZwLWit+QsoYQ5FE8Kn4ibPZmYArI726r4AuAjtdbNG9LUWYHs0YXz5INGZ
+maXAiWjp5HzUJxOUIG+Ojn+AlibuGCQ6syq5M7kl5RmgV/T4R3RsdbRp12lojfYStEOkmV
+mh9EN79twHPAg8jRqNlPsCanBxcnNDMzML7zy0heyG0WMO2qaiZC/Uieku3MjCzApmI7R3
++Nllx85DI9zrAAegBHoZqjjNUs1TMqyZVgIeBWYAF0bHZqKK0sys8PZBCbL8cVPQiMzMzC
+zffEvAzIJJcwLaDTgC7Y1yTuBYzLKkP3Aq8D5aDnoTne8nZFVI80ZgC1AzhEXRx2ZWnZ7A
+QrTaaS6atG9mZmZmZmZmZmZmZmZmZmZmZmZmZmZmZtVK85ayRwNbo47W08OGYmZFleYkuS
+lwMepcvTdq5voGathqZtYUaV67XfJC9OiLNr0fBUxD+6d4TaqZJSoLSbJkHnBr9PF44EjU
+xeg2tMezmVnsspQky7m6NLOmyGqSLHF1aWaJynqSLOfq0sxil6ckWdKxujwq+tjVpZnVLI
+9JspyrSzNrSN6TZImrSzOrS1GSZDlXl2ZWtSImyRJXl2bWrSInyXKuLs2sU06S7bm6NLN2
+nCQrc3VpZk6SVXB1aVZgTpK1cXVpVjBOkvVxdWlWEE6SjXN1aZZjTpLxcXVplkNOksnorL
+p8Ffgjri7NMsVJMlmuLs0yLokkuQWqnsotAi4CPkjg9bKiVF32AXbF1aVZJiSVJA8D+gHL
+oh0OW4BrKHaSLJmPq0szA45DSbF/nd8/JcZY0q60be4xwI7oTcXMUiDEPclJwFjg+wFeO6
+1cXZqlVLOTZF/gQlRdTgWebvLrZ4HvXZqlSLOT5GR0KTkD+DZwQJNfP0tcXZqlQJJJckkn
+558MPAI8BpwADARmJxhDXri6NMuhYcAmQGv0+abAp6iKfAXNITyji+8v0sBNPcYDR0ePkY
+FjMcutZo6i3gasCVwRfb4f0BtYt8LzpwCXNCGurHN1aZYDywLvAeeWHdsemIPmVXbGlWTt
+XF2aZdRgYCOWnjO5ITC6wvc4SdbP8y7NCsBJMh6uLs0a4AYX+eeRcbMGOEkWh+ddmtXBSb
+KYXF2aVclJsthcXZp1w0nSSlxdmnXCSdI6cnVpVsZJ0rri6tIKz0nSquHq0grLSdJq5erS
+CsVJ0url6tIKwUnS4uDq0nLLSdLi5OrScsdJ0pLi6tJywUnSkubq0jLNSdKaydWlZY6TpI
+Xg6tIyI81JsgcwPHQQlrj3gN+h/Y4mAiOA6cBDuLosug+BRaGDSHOS7AXMDB2EmQXU7yO4
+AAACzElEQVSzF3B76CDSvPdJP2BM6CAsqN7ANuiKYgbas93VZTH0BzYGfhM4jlRXknOBaa
+GDsOBeiP4cj3bYBN+7LIIBwAahg4B0J0mzch4ZtyCcJC1rPDJuTeUkaVnm6tIS5yRpeeDq
+0hLjJGl54+rSYuUkaXnl6tJi4SRpReDq0urmJGlF0ll1uQSt6nB1aZ1ykrSicnVpVXGStK
+Irry7XwNWldeAkadbmxejh6tL+zUnSbGmuLu3fnCTNuubqsuCcJM2q4+qyoJwkzWrn6rJA
+nCTN6ufqsgCcJM3i4eoyp5wkzeLl6jJnnCTNkuPqMgecJM2S5+qyMcsCQzs5/jqwsMmxmF
+mT9AH2Bo4BdiTdO5eGMAA4PPr4V8Cn0WN29Oc8YGyQyMys6dYAjkYV5qjAsaRFeZJcBv1c
+zgHeiz4eBbQ2IxBfbpuF53uXXZsTPT6JPn8n+nMMsFz08UfAdGBR3C/uJGmWHpXuXU6lLT
+FYm+8AXwZ6AAtQlbkL8HKcL+IkaZZOri671wq8DWyMBnceBI4FTovzRZwkzdLN1WV7HQe4
+lgGuAAYBg4Fb4n5BJ0mz7Ch6dfkn2u5BdjQP/QwOAR5uWkRmlnp5HRkvH92u5JfAK2Wf3w
+E8FncgriTNsq3o1eVw4BmgL/q7XxH3CzhJmuVDEe9d3oD+3gCzgHuAh8KFY2ZZU1rV81Xg
+ADRVJiuqudxuCleSZvnVsbo8Dl2WXge8ESqorHGSNCuG8nuXewCT0L3LW0hglUqeOEmaFc
+t84OboY1eXVXCSNCsuV5dVcJI0M1eXXXCSNLNyri47cJI0s864uow4SZpZdwpdXTpJmlm1
+ClldOkmaWT0KU106SZpZI3JfXTpJmllcclldOkmaWdxyVV06SZpZkjJfXTpJmlkzZLa6dJ
+I0s2bLVHXpJGlmoXRVXX4YKqiOnCTNLA1K1WVfYB9gBVJyGf5/N8jK6ZlO4n4AAAAASUVO
+RK5CYII=
+">
+
+<H3>Instructions</H3>
+
+<p>The instructions for using the program are summarized in the "card
+    emulation”, similar to the magnetic card of the TI-59, which
+    appears below the display when the APP calls the program from the
+    library module. It summarizes the instructions assigned to each
+    definable key, transcribed in the box referring to the key.
+<br>
+
+<p>
+<b>1 - Provide the data:</b> Each input procedure is independent.
+<UL>
+<li>enter MA (dNm), press <span class="brownbutton">&ensp;A&ensp;</span>: display= previously stored data.
+<li>enter MB (dNm), press <span class="brownbutton">&ensp;B&ensp;</span>: display= previously stored data.
+<li>enter L (m),    press <span class="brownbutton">&ensp;C&ensp;</span>: display= previously stored data.
+<li>enter Q (dN/m), press <span class="brownbutton">&ensp;D&ensp;</span>: display= previously stored data.
+</UL>
+
+<p>To view a data, press its definable key twice.
+A first time to view it  and correct it if necessary.
+A second time, to store it again in the same register.
+<p>
+<b>2 - Results:</b>
+<br>
+<br>Pressing <span class="brownbutton">&ensp;E&ensp;</span> the program will display the results <b>T<sub>A</sub></b>.
+<br>Pressing in succession <span class="brownbutton">R/S</span> wll display the others results T<sub>B</sub>, X<sub>0</sub>, S<sub>A</sub>, S<sub>B</sub>, M<sub>X</sub>, X<sub>1</sub>, X<sub>2</sub>.
+<br>The program will also print a report with data and results.
+<br>If M has a constant sign, the program, instead of X<sub>1</sub> and X<sub>2</sub>, displays M<sub>X</sub> flashing and prints M CONST SIGN.
+<br>If M changes sign on the outside of the beam, there will be X<sub>1</sub><0 and/or X<sub>2</sub>>L.
+<br>For a new calculation, reset only the data that changes.
+
+<h3>Example 1</h3>
+<p> Beam data: MA=-4000 dNm, MB=-3000 dNm, L= 5.5 m, Q= 3000 dN/m;
+<OL>
+<LI>Set data:
+ <UL>
+    <LI>M<sub>A</sub>: enter <b>-4000</b> dNm, press <span class="brownbutton">A</span>>. Display = previous data stored.
+    <LI>M<sub>B</sub>: enter <b>-3000</b> dNm, press <span class="brownbutton">B</span>. Display = previous data stored.
+    <LI>L:  enter <b>5.5</b> m, press <span class="brownbutton">C</span>. Display = previous data stored.
+    <LI>Q:  enter <b>3000</b> dN/m, press <span class="brownbutton">D</span>. Display = previous data stored.
+  </UL>
+
+<LI>Results: press <span class="brownbutton">E</span>. The program display T<sub>A</sub> = <B>8431.818182</B> dN.
+<br>Pressing <span class="brownbutton">R/S</span> in sequence will display the other results, in order:
+<br>T<sub>B</sub>, S<sub>A</sub>, S<sub>B</sub>, X<sub>0</sub>, M<sub>X</sub>, X<sub>1</sub>, X<sub>2</sub>.
+<br>The program will also print the following report:
+<pre>
+--------------------
+STR11
+       -4000.     MA
+       -3000.     MB
+          5.5      L
+        3000.      Q
+  8431.818182     TA
+ -8068.181818     TB
+  2.810606061     X0
+  11849.25964     SA
+ -10849.25964     SB
+  7849.259642     MX
+  0.523065949     X1
+  5.098146172     X2
+--------------------
+</pre>
+
+<BR>Diagram M-T:
+
+<IMG ALT="Max Moment Shear d01" src="data:image/png;base64,
+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
+tIQv8B8LJVxMl4jvsAAAAASUVORK5CYII=
+">
+
+<LI>For a new calculation, go back to step 1 and provide only the data that changes.
+</OL>
+</P>
+
+<h3>Example 2</h3>
+
+<p>Beam data: M<sub>A</sub>=-2000 dNm, M<sub>B</sub>=-3000 dNm, L= 3 m, Q= 500 dN/m.
+
+<OL>
+<LI> Set data that changes:
+ <UL>
+    <LI>M<sub>A</sub>: enter <b>-2000</b> dNm, press <span class="brownbutton">A</span>. Display=<b>-4000</b> (previous data stored).
+    <LI>L: enter <b>3</b> m, press <span class="brownbutton">C</span>. Display=<b>5.5</b> (previous data stored).
+    <LI>Q: enter <b>500</b> dN/m, press <span class="brownbutton">E</span>. Display=<b>3000</b> (previous data stored).
+  </UL>
+<LI> Results: press <span class="brownbutton">E</span>:  The program display T<sub>A</sub> = <b>416.6666667</b> dN
+    <br>Pressing <span class="brownbutton">R/S</span> in sequence will displays the other results by flashing M<sub>X</sub>.
+    <BR>The program will also print the following report
+    <pre>
+--------------------
+STR11
+       -2000.     MA
+       -3000.     MB
+           3.      L
+         500.      Q
+  416.6666667     TA
+ -1083.333333     TB
+  0.833333333     X0
+  173.6111111     SA
+ -1173.611111     SB
+ -1826.388889     MX
+ M CONST SIGN
+--------------------
+    </pre>
+<BR>Diagram M-T:
+
+<IMG ALT="Max Moment Shear d02" src="data:image/png;base64,
+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
+">
+
+<LI>For a new calculation, go back to step 1 and provide only the data that changes.
+</OL>
+</P>
+
+<h3>Example 3</h3>
+
+  <p>Beam data: M<sub>A</sub> = 4000 dNm, M<sub>B</sub> = -3000 dNm,
+    L = 4 m, Q = 1500 dN/m.
+
+<OL>
+<LI> Set data that changes:
+   <UL>
+    <LI>M<sub>A</sub>: enter <b>4000</b> dNm; press <span class="brownbutton">A</span>. Display=<b>-2000</b> (previous data stored).
+    <LI>L:  enter <b>4</b> m; press <span class="brownbutton">C</span>. Display=<b>3</b> (previous data stored).
+    <LI>Q:  enter <b>1500</b> dN/m; press <span class="brownbutton">D</span>. Display=<b>500</b> (previous data stored).
+  </UL>
+<LI>Results: press <span class="brownbutton">E</span>: display TA = <b>1250</b> dN
+    <br>Pressing <span class="brownbutton">R/S</span>in sequence will display the other results.
+    <BR>The program will also print the following report
+    <pre>
+--------------------
+STR11
+        4000.     MA
+       -3000.     MB
+           4.      L
+        1500.      Q
+        1250.     TA
+       -4750.     TB
+  0.833333333     X0
+  520.8333333     SA
+ -7520.833333     SB
+  4520.833333     MX
+ -1.621819977     X1
+  3.288486644     X2
+--------------------
+    </pre>
+
+Diagram M-T:
+
+<IMG ALT="Max Moment Shear d03" src="data:image/png;base64,
+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
+">
+
+<LI>For a new calculation, go back to step 1 and provide only the data that changes.
+</OL>
+</P>
+
+<BR>
+<H3>About The Program</H3>
+<P>Registers used: <b>00</b> to <b>12</b>
+<br>Flags used: <b>1, 2</b>
+<br>Labels: <span class="alttext">Deg</span>, <span class="brownbutton">RCL</span>,
+<span class="alttext">Rad</span> and definable keys.
+</P>
+</BODY>
