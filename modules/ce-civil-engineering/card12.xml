@@ -1,0 +1,12 @@
+<carddef style="user">
+<label slot="titleleft">RECTANG. SECTION - R.C. - BENDING CHECK</label>
+<label slot="titleright">STR-12</label>
+<label slot="a">M</label>
+<label slot="b">B</label>
+<label slot="c">A</label>
+<label slot="d">H'</label>
+<label slot="e">G</label>
+<label slot="aprime">A<sub>FT</sub></label>
+<label slot="bprime">A<sub>FC</sub></label>
+<label slot="eprime">RESULTS</label>
+</carddef>
