@@ -2632,8 +2632,12 @@ class State {
 
   void WriteBank() {
     Enter(96);
-    int N = (int) Math.abs(X.getInt());
-    final String BankFilename = String.format("bank%d.ti5b", N);
+    // special case, not compatible with original TI-59 but handy for the emulator to support
+    // many cards. The actual card number is entered as N.nn where N is the bank number between
+    // 1 and 4 and nn the optional nn a card index.
+    final int N = (int)Math.abs(X.getInt());
+    final int Bn = (N * 100) + (int)Math.round((X.get() - N) * 100);
+    final String BankFilename = String.format("bank%d.ti5b", Bn);
     if (N < 1 || N > 4) {
       SetErrorState(true);
     } else if (InvState) {
