@@ -29,6 +29,16 @@
 #     progsrcnn
 #         infile is the name of a text file containing program source to be assembled
 #         and loaded into the specified program bank
+#     banknnK (k in 1 .. 4)
+#         infile is the name of a text file containing a sequence of two-digit
+#         numbers indicating compiled program instructions to be loaded into the
+#         bank<K>
+#     banksrcnnK (k in 1 .. 4)
+#         infile is the name of a text file containing program source to be assembled
+#         and loaded into the bank<K>
+#     memnnK (k in 1 .. 4)
+#         infile is the name of a text file containing a sequence of max 30 numbers
+#         indicating the value of the memories to be loaded into the bank<K>
 #
 # To build a program file, include just a prog00 or progsrc00 component, plus optionally
 # a card00 or cardsrc00 component, and a help00 component.
@@ -66,7 +76,11 @@ mtime = 0
 
 components = {}
 for arg in sys.argv[2:] :
-    type, index, infile = re.search(r"^([a-z]+)(\d*)\=(.+)$", arg).groups()
+    type, index, bi, infile = re.search(r"^([a-z]+)([0-9][0-9])([0-9]?)\=(.+)$", arg).groups()
+
+    if len(bi) > 0:
+        type = type + bi
+
     if type == "help" and len(index) == 0 :
         index = 0
     else :
@@ -76,7 +90,10 @@ for arg in sys.argv[2:] :
     if index not in components :
         components[index] = {}
     #end if
-    assert type in ("card", "cardsrc", "help", "prog", "progsrc"), "invalid type"
+    assert type in ("card", "cardsrc", "help", "prog", "progsrc",
+                    "bank1", "banksrc1", "bank2", "banksrc2",
+                    "bank3", "banksrc3", "bank4", "banksrc4",
+                    "mem1", "mem2", "mem3", "mem4"), "invalid type"
     assert type not in components[index], "duplicate type for component %02d" % index
     if os.path.isfile(infile):
         mtime = max(mtime, os.path.getmtime(infile))
@@ -103,6 +120,9 @@ if not os.path.isfile(outfile) or os.path.getmtime(outfile) < mtime:
     mimetype.external_attr = 0o644 << 16
     mimetype.date_time = (2011, 4, 14, 13, 8, 44) # about when I first got mlmake working
     out.writestr(mimetype, b"application/vnd.nz.gen.geek_central.ti5x")
+    bank = [None, None, None, None]
+    mem = [None, None, None, None]
+
     for index in range(0, 100) :
         if index in components :
             component = components[index]
@@ -117,17 +137,51 @@ if not os.path.isfile(outfile) or os.path.getmtime(outfile) < mtime:
                 prog = open(component["prog"], "rb").read()
             else :
                 prog = None
+
+            for b in range(1,4):
+                if "banksrc%1d" % b in component :
+                    bank[b-1] = subprocess.check_output \
+                        (
+                            args = (os.path.join(utildir, "assemble"),),
+                            stdin = open(component["banksrc%1d" % b], "r"),
+                            close_fds = True
+                        )
+                elif "bank%1d" % b in component :
+                    bank[b-1] = open(component["bank%1d" % b], "rb").read()
+                else:
+                    bank[b-1] = None
+
+                if "mem%1d" % b in component :
+                    mem[b-1] = open(component["mem%1d" % b], "rb").read()
+                else:
+                    mem[b-1] = None
+
             #end if
             if prog != None :
-                out.writestr \
-                  (
-                    "prog%02d" % index,
-                        b"<state>\n    <calc>\n        <prog>\n"
-                    +
-                        b"".join(b" " * 12 + line + b"\n" for line in prog.rstrip(b"\n").split(b"\n"))
-                    +
-                        b"        </prog>\n    </calc>\n</state>\n"
-                  )
+                #  start prog
+                pdata = b"<state>\n    <calc>\n        <prog>\n"
+                #  add prog data
+                pdata = pdata + b"".join(b" " * 12 + line + b"\n" for line in prog.rstrip(b"\n").split(b"\n"))
+                #  end prog
+                pdata = pdata + b"        </prog>\n"
+
+                #  add bank / mem data if any
+
+                for b in range(1,4):
+                    if bank[b-1] != None:
+                        pdata = pdata + b"        <bankprog n='%1d'>\n" % b
+                        pdata = pdata + b"".join(b" " * 12 + line + b"\n" for line in bank[b-1].rstrip(b"\n").split(b"\n"))
+                        pdata = pdata + b"        </bankprog>\n"
+
+                    if mem[b-1] != None:
+                        pdata = pdata + b"        <bankmem n='%1d'>\n" % b
+                        pdata = pdata + b"".join(b" " * 12 + line + b"\n" for line in mem[b-1].rstrip(b"\n").split(b"\n"))
+                        pdata = pdata + b"        </bankmem>\n"
+
+                # end prog
+                pdata = pdata + b"    </calc>\n</state>\n"
+
+                out.writestr ("prog%02d" % index, pdata)
             #end if
             if "cardsrc" in component :
                 carddata = subprocess.check_output \
