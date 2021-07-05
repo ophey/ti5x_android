@@ -19,6 +19,9 @@
 package net.obry.ti5x;
 
 import java.util.zip.ZipEntry;
+import java.io.StreamTokenizer;
+import java.io.StringReader;
+import java.util.ArrayList;
 
 class ZipComponentWriter
   /* convenient writing of components to a ZIP archive, with automatic
@@ -197,6 +200,28 @@ public class Persistent {
       throw new DataFormatException(String.format(Global.StdLocale, "bad double value \"%s\"", Value));
     }
     return Result;
+  }
+
+  // read string content expected to have a set of values. This is designed to read
+  // progs & memories as saved into an XML file.
+  private static ArrayList<Double> parseNumbers(String content)
+  {
+    ArrayList<Double> opCodes = new ArrayList<Double>();
+    StringReader In = new StringReader(content);
+    StreamTokenizer sTokenizer = new StreamTokenizer(In);
+
+    try {
+      while(sTokenizer.nextToken() != StreamTokenizer.TT_EOF) {
+        if(sTokenizer.ttype == StreamTokenizer.TT_NUMBER) {
+          opCodes.add(new Double(sTokenizer.nval));
+        }
+      }
+    }
+    catch (Exception e) {
+      e.getStackTrace();
+    }
+
+    return opCodes;
   }
 
   private static void SaveProg
@@ -944,136 +969,73 @@ public class Persistent {
           break;
         case DoingPrintReg:
           if (localName.equals("printreg")) {
-            int Place = 0;
-            int i = 0;
-            for (; ; ) {
-              for (; ; ) {
-                if (i == ContentStrLen)
-                  break;
-                if (ContentStr.charAt(i) > ' ')
-                  break;
-                ++i;
-              }
-              final int Start = i;
-              for (; ; ) {
-                if (i == ContentStrLen)
-                  break;
-                if (ContentStr.charAt(i) <= ' ')
-                  break;
-                ++i;
-              }
-              if (i > Start) {
-                if (Place == Calc.PrintRegister.length) {
-                  throw new DataFormatException
-                     (
-                        String.format
-                           (
+
+            ArrayList<Double> r = parseNumbers(ContentStr);
+
+            if (r.size() > Calc.PrintRegister.length) {
+              throw new DataFormatException
+                  (
+                      String.format
+                          (
                               Global.StdLocale,
                               "too many columns in print register, only %d allowed",
                               Calc.PrintRegister.length
-                           )
-                     );
-                }
-                Calc.PrintRegister[Place++] =
-                   (byte) GetInt(ContentStr.substring(Start, i));
-              }
-              if (i == ContentStrLen)
-                break;
+                          ));
             }
+            for (int Place = 0; Place < r.size(); ++Place) {
+              Calc.PrintRegister[Place] = r.get(Place).byteValue();
+            }
+
             ParseState = DoingCalc;
           }
           break;
         case DoingMem:
           if (localName.equals("mem")) {
-            int Reg = 0;
-            int i = 0;
-            for (; ; ) {
-              for (; ; ) {
-                if (i == ContentStrLen)
-                  break;
-                if (ContentStr.charAt(i) > ' ')
-                  break;
-                ++i;
-              }
-              final int Start = i;
-              for (; ; ) {
-                if (i == ContentStrLen)
-                  break;
-                if (ContentStr.charAt(i) <= ' ')
-                  break;
-                ++i;
-              }
-              if (i > Start) {
-                if (Reg == Calc.MaxMemories) {
-                  throw new DataFormatException
-                     (
-                        String.format(Global.StdLocale, "too many memories, only %d allowed", Calc.MaxMemories)
-                     );
-                }
-                Calc.Memory[Reg++] = new Number(ContentStr.substring(Start, i));
-              }
-              if (i == ContentStrLen)
-                break;
+
+            ArrayList<Double> m = parseNumbers(ContentStr);
+
+            if (m.size() > Calc.MaxMemories) {
+              throw new DataFormatException
+                  (
+                      String.format(Global.StdLocale, "too many memories, only %d allowed", Calc.MaxMemories)
+                  );
+            }
+            for (int reg = 0; reg < m.size(); ++reg) {
+              Calc.Memory[reg] = new Number(m.get(reg));
             }
             ParseState = DoingCalc;
           }
           break;
         case DoingProg:
           if (localName.equals("prog")) {
-            java.util.ArrayList<Byte> Prog = null;
+
             if (BankNr == 0) {
               for (int i = 0; i < Calc.MaxProgram; ++i) {
                 Calc.Program[i] = (byte) 0;
               }
             } else {
-              Prog = new java.util.ArrayList<Byte>();
-              /* will be restricted to 1000 steps below */
-            }
-            int Addr = 0;
-            int i = 0;
-            for (; ; ) {
-              for (; ; ) {
-                if (i == ContentStrLen)
-                  break;
-                if (ContentStr.charAt(i) > ' ')
-                  break;
-                ++i;
+              ArrayList<Double> p = parseNumbers(ContentStr);
+
+              if (BankNr == 0 ? p.size() > Calc.MaxProgram : p.size() >= 1000) {
+                throw new DataFormatException
+                    (
+                        String.format(Global.StdLocale, "too many memories, only %d allowed", Calc.MaxMemories)
+                    );
               }
-              final int Start = i;
-              for (; ; ) {
-                if (i == ContentStrLen)
-                  break;
-                if (ContentStr.charAt(i) <= ' ')
-                  break;
-                ++i;
+              if (BankNr != 0) {
+                Calc.Bank[BankNr].Program = new byte[p.size()];
               }
-              if (i > Start) {
-                if (BankNr == 0 ? Addr == Calc.MaxProgram : Addr == 1000) {
-                  throw new DataFormatException
-                     (
-                        String.format
-                           (
-                              Global.StdLocale,
-                              "too many program steps, only %d allowed",
-                              BankNr == 0 ? Calc.MaxProgram : 1000
-                           )
-                     );
-                }
-                final byte val = (byte) GetInt(ContentStr.substring(Start, i));
+
+              for (int addr = 0; addr < p.size(); ++addr) {
+                byte val = p.get(addr).byteValue();
                 if (BankNr != 0) {
-                  Prog.add(val);
+                  Calc.Bank[BankNr].Program[addr] = val;
                 } else {
-                  Calc.Program[Addr++] = val;
+                  Calc.Program[addr] = val;
                 }
               }
-              if (i == ContentStrLen)
-                break;
+              ParseState = DoingCalc;
             }
-            if (BankNr != 0) {
-              Calc.Bank[BankNr].Program = new byte[Prog.size()];
-              for (i = 0; i < Prog.size(); ++i) {
-                Calc.Bank[BankNr].Program[i] = Prog.get(i);
-              }
             }
             ParseState = DoingCalc;
           }
