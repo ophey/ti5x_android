@@ -224,6 +224,139 @@ public class Persistent {
     return opCodes;
   }
 
+  public static void LoadBankFile
+      (
+          android.content.Context ctx,
+          int N,
+          String FileName,
+          State Calc,
+          Display Disp,
+          ButtonGrid Buttons
+      ) {
+
+    String ToFile = new java.io.File
+        (ctx.getExternalFilesDir(null), ProgramsDir + "/" + FileName).getAbsolutePath();
+
+    // open file
+    java.io.FileInputStream In;
+    try {
+      In = new java.io.FileInputStream(ToFile);
+      javax.xml.parsers.SAXParserFactory.newInstance().newSAXParser().parse
+            (
+                In,
+                new CalcStateLoader(Disp, Buttons, Calc, 0, false)
+            );
+      } catch (javax.xml.parsers.ParserConfigurationException Bug) {
+        throw new RuntimeException("SAX parser error: " + Bug.toString());
+      } catch (org.xml.sax.SAXException Bad) {
+        throw new DataFormatException("SAX parser error: " + Bad.toString());
+      } catch (java.io.FileNotFoundException Failed) {
+        throw new RuntimeException
+          (
+              "ti5x.Persistent.LoadBankFile opne error " + Failed.toString()
+          );
+      }  catch (java.io.IOException Failed) {
+        throw new RuntimeException
+          (
+            "ti5x.Persistent.LoadBankFile opne error " + Failed.toString()
+          );
+      }
+  }
+
+  public static void SaveBankFile
+      (
+          android.content.Context ctx,
+          int N,
+          String FileName,
+          State Calc
+      ) {
+
+    String ToFile = new java.io.File
+        (ctx.getExternalFilesDir(null), ProgramsDir + "/" + FileName).getAbsolutePath();
+
+    java.io.FileOutputStream Out;
+    try {
+      Out = new java.io.FileOutputStream(ToFile);
+    } catch (java.io.FileNotFoundException Failed) {
+      throw new RuntimeException
+          (
+              "ti5x.Persistent.SaveBankFile create error " + Failed.toString()
+          );
+    }
+
+    java.io.PrintStream POut = new java.io.PrintStream(Out);
+    POut.println("<state>");
+    POut.println("    <calc>");
+    // save now
+    SaveBank(N, Calc, Calc.Program, POut, 8);
+
+    POut.println("    </calc>");
+    POut.println("</state>");
+
+    try {
+      POut.flush();
+      Out.close();
+    } catch (java.io.IOException Failed) {
+      throw new RuntimeException("ti5x.Persistent.SaveBankFile error " + Failed.toString());
+    }
+  }
+
+  private static void SaveBank
+          (
+                  int N, /* bank number 1 to 4 */
+                  State Calc,
+                  byte[] Program,
+                  java.io.PrintStream POut,
+                  int Indent
+          ) {
+
+    POut.print(String.format(Global.StdLocale,
+        String.format(Global.StdLocale,
+            "%%%ds<bankprog n='%01d'>\n", Indent, N), ""));
+    int Cols = 0;
+
+    for (int k = (N - 1) * 240; k < N * 240; k++) {
+      if (Cols == 24) {
+        POut.print("\n");
+        Cols = 0;
+      }
+      if (Cols != 0) {
+        POut.print(" ");
+      } else {
+        POut.print
+          (
+            String.format
+              (
+                 Global.StdLocale,
+                 String.format(Global.StdLocale, "%%%ds", Indent + 4),
+                ""
+              )
+          );
+      }
+      POut.printf(Global.StdLocale, "%02d", Program[k]);
+      Cols++;
+    }
+    POut.print
+      (
+        String.format(Global.StdLocale,
+            String.format(Global.StdLocale,
+                "\n%%%ds</bankprog>\n", Indent), "")
+      );
+
+    POut.print(String.format(Global.StdLocale, String.format(Global.StdLocale, "%%%ds<bankmem n='%01d'>\n", Indent, N), ""));
+
+    for (int k = (4 - N) * 30; k < (4 - N + 1) * 30; k++) {
+      if (k < Calc.MaxMemories) {
+        POut.printf("            %s\n", Calc.Memory[k].formatString(Global.StdLocale, 16));
+      }
+    }
+
+    POut.print
+      (
+        String.format(Global.StdLocale, String.format(Global.StdLocale, "%%%ds</bankmem>\n", Indent, N), "")
+      );
+  }
+
   private static void SaveProg
      (
         byte[] Program,
@@ -540,6 +673,15 @@ public class Persistent {
         }
 
         SaveProg(Calc.Program, POut, 8);
+
+        for (int k = 1; k <= Calc.BankNumber; k++)
+        {
+          if (Calc.CardBankUsed[k-1])
+          {
+            SaveBank(k, Calc, Calc.CardProgram, POut,8);
+          }
+        }
+
         if (CalcState) {
           POut.print("        <flags>\n            ");
           for (int i = 0; i < Calc.Flag.length; ++i) {
@@ -635,6 +777,7 @@ public class Persistent {
     protected State Calc;
     int BankNr;
     boolean CalcState;
+    int Nattr;
 
     private final int AtTopLevel = 0;
     private final int DoingState = 1;
@@ -647,6 +790,8 @@ public class Persistent {
     private final int DoingRetStack = 14;
     private final int DoingPrintReg = 15;
     private final int DoingEmptyTag = 19;
+    private final int DoingBankProg = 20;
+    private final int DoingBankMem = 21;
     private int ParseState = AtTopLevel;
     private boolean DoneState = false;
     private boolean AllowContent;
@@ -822,6 +967,11 @@ public class Persistent {
           ParseState = DoingMem;
           StartContent();
           Handled = true;
+        } else if (localName.equals("bankmem")) {
+          ParseState = DoingBankMem;
+          Nattr = Integer.parseInt(attributes.getValue("n").intern());
+          StartContent();
+          Handled = true;
         } else if (localName.equals("feedback")) {
           final String Kind = attributes.getValue("kind").intern();
           if (Kind.equals("none")) {
@@ -837,6 +987,11 @@ public class Persistent {
           Handled = true;
         } else if (localName.equals("prog")) /* only one allowed if not CalcState */ {
           ParseState = DoingProg;
+          StartContent();
+          Handled = true;
+        } else if (localName.equals("bankprog")) {
+          ParseState = DoingBankProg;
+          Nattr = Integer.parseInt(attributes.getValue("n").intern());
           StartContent();
           Handled = true;
         } else if (CalcState && localName.equals("flags")) {
@@ -1006,6 +1161,28 @@ public class Persistent {
             ParseState = DoingCalc;
           }
           break;
+        case DoingBankMem:
+          if (localName.equals("bankmem")) {
+            Calc.CardBankUsed[Nattr - 1] = true;
+            ArrayList<Double> m = parseNumbers(ContentStr);
+
+            if (m.size() > 30) {
+              throw new DataFormatException
+                  (
+                      String.format(Global.StdLocale, "too many mem, only 30 allowed for a bank")
+                  );
+            }
+
+            final int offset = (Nattr - 1) * 240;
+
+            for (int addr = 0; addr < m.size(); ++addr) {
+              double val = m.get(addr);
+              Calc.CardMemory[addr + offset] = new Number(val);
+            }
+            ParseState = DoingCalc;
+          }
+
+          break;
         case DoingProg:
           if (localName.equals("prog")) {
 
@@ -1036,6 +1213,25 @@ public class Persistent {
               }
               ParseState = DoingCalc;
             }
+          }
+          break;
+        case DoingBankProg:
+          if (localName.equals("bankprog")) {
+            Calc.CardBankUsed[Nattr - 1] = true;
+            ArrayList<Double> p = parseNumbers(ContentStr);
+
+            if (p.size() > 240) {
+              throw new DataFormatException
+                  (
+                      String.format(Global.StdLocale, "too many opcodes, only 240 allowed for a bank")
+                  );
+            }
+
+            final int offset = (Nattr - 1) * 240;
+
+            for (int addr = 0; addr < p.size(); ++addr) {
+              byte val = p.get(addr).byteValue();
+              Calc.CardProgram[addr + offset] = val;
             }
             ParseState = DoingCalc;
           }

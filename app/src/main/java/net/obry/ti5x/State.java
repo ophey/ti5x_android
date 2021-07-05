@@ -159,12 +159,14 @@ class State {
   final int MaxMemories = 100; /* maximum addressable */
   final int MaxProgram = 960; /* absolute max on original model */
   final int MaxBanks = 100;
+  final int BankNumber = 4;
   /* 00 is user-entered program, others are loaded from library modules */
   final int MaxFlags = 10;
   final Number[] Memory;
-  private final Number[] CardMemory;
+  final Number[] CardMemory;
   final byte[] Program;
-  private final byte[] CardProgram;
+  final byte[] CardProgram;
+  final boolean[] CardBankUsed; // program or memory used in one of the 4 banks
   final ProgBank[] Bank; /* Bank[0].Program always points to Program */
   byte[] ModuleHelp; /* overall help for loaded library module */
   final boolean[] Flag;
@@ -246,9 +248,11 @@ class State {
     }
     for (int i = 0; i < MaxMemories; ++i) {
       Memory[i] = new Number();
+      CardMemory[i] = new Number();
     }
     for (int i = 0; i < MaxProgram; ++i) {
       Program[i] = (byte) 0;
+      CardProgram[i] = (byte) 0;
     }
     if (ClearLibs) {
       ResetLibs();
@@ -256,6 +260,9 @@ class State {
     ProgMode = false;
     for (int i = 0; i < PrintRegister.length; ++i) {
       PrintRegister[i] = 0;
+    }
+    for (int i = 0; i < BankNumber; ++i) {
+      CardBankUsed[i] = false;
     }
     ResetEntry();
   }
@@ -288,6 +295,7 @@ class State {
     Program = new byte[MaxProgram];
     CardMemory = new Number[MaxMemories];
     CardProgram = new byte[MaxProgram];
+    CardBankUsed = new boolean[BankNumber];
     Bank = new ProgBank[MaxBanks];
     Bank[0] = new ProgBank(Program, null, null);
     Flag = new boolean[MaxFlags];
@@ -2625,9 +2633,14 @@ class State {
   void WriteBank() {
     Enter(96);
     int N = (int) Math.abs(X.getInt());
+    final String BankFilename = String.format("bank%d.ti5b", N);
     if (N < 1 || N > 4) {
       SetErrorState(true);
     } else if (InvState) {
+      //  read the bank data from the corresponding file
+
+      Persistent.LoadBankFile(ctx, N, BankFilename, Global.Calc, Global.Disp, Global.Buttons);
+
       for (int k = (4 - N) * 30; k < (4 - N + 1) * 30; k++) {
         if (k < MaxMemories) {
           Memory[k] = new Number(CardMemory[k]);
@@ -2640,6 +2653,8 @@ class State {
             240
          );
     } else {
+      // write memory : 30 values for the given bank
+      CardBankUsed[N-1] = true;
       for (int k = (4 - N) * 30; k < (4 - N + 1) * 30; k++) {
         if (k < MaxMemories) {
           CardMemory[k] = new Number(Memory[k]);
@@ -2651,6 +2666,8 @@ class State {
             CardProgram,(N - 1) * 240,
             240
          );
+
+      Persistent.SaveBankFile(ctx, N, BankFilename, Global.Calc);
     }
   }
 
