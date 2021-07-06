@@ -2635,9 +2635,14 @@ class State {
 
   void WriteBank() {
     Enter(96);
+
+    final int BANK_MEM = 30;
+    final int BANK_PROG = 240;
+
     // special case, not compatible with original TI-59 but handy for the emulator to support
     // many cards. The actual card number is entered as N.nn where N is the bank number between
     // 1 and 4 and nn the optional nn a card index.
+
     final int N = (int)Math.abs(X.getInt());
     final int F = (int)Math.round((X.get() - N) * 100);
     final int Bn = (N * 100) + F;
@@ -2655,31 +2660,31 @@ class State {
         Persistent.LoadBankFile(ctx, N, BankFilename, Global.Calc, Global.Disp, Global.Buttons);
       }
 
-      for (int k = (4 - N) * 30; k < (4 - N + 1) * 30; k++) {
+      for (int k = (4 - N) * BANK_MEM; k < (4 - N + 1) * BANK_MEM; k++) {
         if (k < MaxMemories) {
           Memory[k] = new Number(CardMemory[k]);
         }
       }
       System.arraycopy
          (
-            CardProgram,(N - 1) * 240,
-            Program,    (N - 1) * 240,
-            240
+            CardProgram,(N - 1) * BANK_PROG,
+            Program,    (N - 1) * BANK_PROG,
+             BANK_PROG
          );
     } else {
       // write memory : 30 values for the given bank
       CardBankUsed[N-1] = true;
 
-      for (int k = (4 - N) * 30; k < (4 - N + 1) * 30; k++) {
+      for (int k = (4 - N) * BANK_MEM; k < (4 - N + 1) * BANK_MEM; k++) {
         if (k < MaxMemories) {
           CardMemory[k] = new Number(Memory[k]);
         }
       }
       System.arraycopy
          (
-            Program,    (N - 1) * 240,
-            CardProgram,(N - 1) * 240,
-            240
+            Program,    (N - 1) * BANK_PROG,
+            CardProgram,(N - 1) * BANK_PROG,
+             BANK_PROG
          );
 
       Persistent.SaveBankFile(ctx, N, BankFilename, Global.Calc);
