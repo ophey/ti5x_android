@@ -1164,6 +1164,8 @@ public class Persistent {
         case DoingBankMem:
           if (localName.equals("bankmem")) {
             Calc.CardBankUsed[Nattr - 1] = true;
+            Calc.ProgCardBankUsed[Nattr - 1] = true;
+
             ArrayList<Double> m = parseNumbers(ContentStr);
 
             if (m.size() > 30) {
@@ -1218,6 +1220,8 @@ public class Persistent {
         case DoingBankProg:
           if (localName.equals("bankprog")) {
             Calc.CardBankUsed[Nattr - 1] = true;
+            Calc.ProgCardBankUsed[Nattr - 1] = true;
+
             ArrayList<Double> p = parseNumbers(ContentStr);
 
             if (p.size() > 240) {
