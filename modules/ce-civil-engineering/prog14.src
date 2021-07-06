@@ -1,0 +1,257 @@
+   r/s
+   rst
+   d
+   1
+
+lbl rcl
+   op 04
+   rc* 02
+   op 22
+
+lbl prt
+   ifflg 1 op
+   r/s
+   inv sbr
+
+lbl op
+   op 06
+   inv sbr
+
+lbl A
+   exc 09
+   rst
+
+lbl B
+   exc 00
+   rst
+
+lbl C
+   exc 01
+   rst
+
+lbl D
+   exc 03
+   rst
+
+lbl E
+   exc 04
+   rst
+
+lbl A'
+   exc 05
+   rst
+
+lbl B'
+   exc 06
+   rst
+
+lbl C'
+   exc 07
+   rst
+
+lbl D'
+   exc 08
+   rst
+
+lbl E'
+   cp
+   stflg 1
+   rcl 03
+   -
+   rcl 05
+   =
+   sto 10
+   cp
+   inv stflg 2
+   rcl 01
+   sto 02
+
+lbl sto
+   (
+   rcl 04
+   ×
+   (
+   rcl 00
+   -
+   rcl 02
+   )
+   sto 11
+   +
+   rcl 06
+   ×
+   (
+   rcl 07
+   +
+   rcl 08
+   )
+   )
+   sto 12
+   (
+   rcl 04
+   x²
+   ×
+   rcl 11
+   +
+   2
+   ×
+   rcl 06
+   ×
+   (
+   rcl 07
+   ×
+   rcl 10
+   +
+   rcl 08
+   ×
+   rcl 05
+   )
+   )
+   +/-
+   sto 13
+   (
+   (
+   (
+   rcl 12
+   x²
+   -
+   rcl 02
+   ×
+   rcl 13
+   )
+   √x
+   -
+   rcl 12
+   )
+   ÷
+   rcl 02
+   )
+   sto 14
+   -
+   rcl 04
+   =
+   sto 15
+   ifflg 2 sum
+   x≥t sum
+   rcl 00
+   sto 02
+   stflg 2
+   gto sto
+
+lbl sum
+   (
+   rcl 00
+   ×
+   rcl 14
+   y**x
+   3
+   -
+   rcl 11
+   ×
+   rcl 15
+   x²
+   ×
+   rcl 15
+   )
+   ÷
+   3
+   +
+   rcl 06
+   ×
+   (
+   rcl 07
+   ×
+   (
+   rcl 10
+   -
+   rcl 14
+   )
+   sto 16
+   x²
+   +
+   rcl 08
+   ×
+   (
+   rcl 14
+   -
+   rcl 05
+   )
+   x²
+   )
+   =
+   1/x
+   ×
+   rcl 09
+   =
+   sto 17
+   ×
+   rcl 14
+   =
+   sto 18
+   rcl 17
+   ×
+   rcl 06
+   ×
+   rcl 16
+   =
+   sto 19
+
+lbl lnx
+   sbr -
+   3637350205
+   op 01
+   sbr +
+   sto 02
+   14
+   sbr rcl
+   1401
+   sbr rcl
+   op 22
+   13
+   sbr rcl
+   1301
+   sbr rcl
+   2365
+   sbr rcl
+   22
+   sbr rcl
+   132137
+   sbr rcl
+   132115
+   sbr rcl
+   30
+   sbr rcl
+   adv
+
+lbl adv
+   clr
+   44
+   op 04
+   rcl 14
+   sbr prt
+   7715
+   op 04
+   rcl 18
+   sbr prt
+   772137
+   op 04
+   rcl 19
+   sbr prt
+   inv ifflg 1 adv
+   sbr -
+   adv
+   inv stflg 1
+   gto adv
+
+lbl -
+   clr
+   2020202020
+   op 01
+   op 02
+   op 03
+   op 04
+
+lbl +
+   op 05
+   op 00
+   clr
+   inv sbr
