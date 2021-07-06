@@ -1,0 +1,331 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help14</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #FFE071;
+    padding : 0.1em 0.5em 0.1em;
+    border : 1pt solid black;
+    font-weight : bold;
+  }
+
+.brownbutton
+  {
+    background : #63452B;
+    padding : 0.1em 0.5em 0.1em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #F0EDD5;
+  }
+
+.whitebutton
+  {
+    background : #E0DDC5;
+    padding : 0.1em 0.5em 0.1em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+  }
+
+.alttext
+  {
+    background : #121414;
+    padding : 0.1em 0.6em 0.1em;
+    font-weight : bold;
+    color : #ac9e80;
+  }
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  }
+.deflist DD
+  {
+    margin-left : 4em;
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
+</STYLE>
+</HEAD>
+<BODY>
+
+<H2>STR-14 — T-Section in Reinforced Concrete - Bending Check</H2>
+
+<P>The program performs the bending check of a T-section in R.C.
+  (reinforced concrete), according to the method of admissible
+  stresses.
+
+<p>The units of measurement must be consistents and those of the International
+  System: lengths in meters, forces in Newton and related multiples or
+  submultiples. If the lengths are measured in cm and the forces in dN,
+  the bending moment must be measured in (dNcm) and the stress in
+  (dN/cm<sup>2</sup>).
+
+<p>The sign of the bending moment is positive (convention Science of the Constructions).
+
+<P>
+  <IMG ALT="T section bending check" src="data:image/png;base64,
+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
+  ">
+
+<H3>Instructions</H3>
+
+<p>The instructions for using the program are summarized in the
+  "card emulation”, similar to the magnetic card of the TI-59,
+  which appears below the display when the APP calls the program
+  from the library module. It summarizes the instructions assigned
+  to each definable key, transcribed in the box referring to the key.
+
+<p>
+<b>1 - Provide the data:</b>
+<p>Each input procedure is independent.
+<p>Enter data and press the definable key. The program stores the data
+  and displays previously stored data.
+
+<UL>
+<li>enter M (bending moment), press <span class="brownbutton">A</span>.
+<li>enter B (section width), press <span class="brownbutton">B</span>.
+<li>enter B0 (central rib thickness), press <span class="brownbutton">C</span>.
+<li>enter A (section height), press <span class="brownbutton">D</span>.
+<li>enter A0 (upper wing thickness), press <span class="brownbutton">E</span>.
+<li>enter H’(iron cover thickness), press <span class="yellowbutton">2nd</span><span class="alttext">A'</span>.
+<li>enter G (homogenization coefficient), press <span class="yellowbutton">2nd</span><span class="alttext">B'</span>.
+<li>enter AFT (tensioned irons area), press <span class="yellowbutton">2nd</span><span class="alttext">C'</span>.
+<li>enter AFC (compressed irons area), press <span class="yellowbutton">2nd</span><span class="alttext">D'</span>.
+</UL>
+
+<p>To view and correct a data, press its definable key twice.
+<p>A first time to view it  and correct it if necessary.
+<p>A second time, to store it again in the same register.
+<br>
+
+<p><b>2 - Results:</b>
+<p>Pressing <span class="yellowbutton">2nd</span><span class="alttext">E'</span>, the program will display the neutral axis <b>X</b>.
+<p>Pressing in succession <span class="brownbutton">R/S</span> will display the others results:
+<p>ΣC (stress in the concrete),
+<p>ΣFT (stress in tensioned irons),
+<p>For a new calculation, reset only the data that changes.
+
+<p>The program calculates X considering the T−section. If X&lt;A<sub>0</sub>
+  place B<sub>0</sub>=B and calculates X considering the rectangular section.
+  Then calculate the stress ΣC and ΣFT.
+
+<h3>Example</h3>
+<p>Calculate a T section in reinforced concrete with the following
+  data:
+<ul>
+  <li>A=60 cm;
+  <li>A0=10 cm;
+  <li>B=40 cm;
+  <li>B0=20 cm;
+  <li>H’=3 cm;
+  <li>G=10;
+  <li>AFT=14,07 cm,
+  <li>AFC=6.03 cm
+  <li>And subject to the bending moment M=1200000 dNcm.
+</ul>
+
+</p>
+
+<ol>
+<li>Set data:
+  <UL>
+    <LI>M: enter <b>1200000</b> dNcm, press <span class="brownbutton">A</span>.
+    <LI>B: enter <b>80</b> cm, press <span class="brownbutton">B</span>.
+    <LI>B<sub>0</sub>: enter <b>20</b> cm, press <span class="brownbutton">C</span>.
+    <LI>A: enter <b>70</b> cm, press <span class="brownbutton">D</span>.(*) data incorrect.
+    <LI>A<sub>0</sub>: enter <b>10</b> cm, press <span class="brownbutton">E</span>.
+    <li>H': enter <b>3</b> cm,
+      press <span class="yellowbutton">2nd</span>
+      <span class="alttext">A'</span>.
+    <li>G: enter <b>10</b>,
+      press <span class="yellowbutton">2nd</span>
+      <span class="alttext">B'</span>.
+    <li>A<sub>FT</sub>: enter <b>14.07</b> cm², press
+      <span class="yellowbutton">2nd</span><span class="alttext">C'</span>.
+    <li>A<sub>FC</sub>: enter <b>6.03</b> cm², press
+      <span class="yellowbutton">2nd</span><span class="alttext">D'</span>.
+<br>
+<br>
+    <li>(*) To correct A:
+    press <span class="brownbutton">D</span>. Display = <b>70</b>
+    (data incorrect),
+      <br> enter <b>60</b> cm, press <span class="brownbutton">D</span>
+      again to replace the previous incorrect data.
+
+    <li>To display M: press <span class="brownbutton">A</span>.
+      Display = <b>1200000</b> (data correct),
+      <br>press <span class="brownbutton">A</span> to store it again.
+  </UL>
+  </p>
+
+<li>Results: press <span class="yellowbutton">2nd</span>
+   <span class="alttext">E'</span>. Display = <b>12.14274375</b> cm (neutral axis X)
+<p>Pressing in succession <span class="brownbutton">R/S</span>
+  will display ΣC (dN/cm²), and ΣFT (dN/cm²).
+<p>he program will also print the following report
+</ol>
+
+<pre><b>
+--------------------
+STR14
+          80.      B
+          20.     B0
+          60.      A
+          10.     A0
+           3.     H'
+          10.      G
+        14.07    AFT
+         6.03    AFC
+     1200000.      M
+
+  12.14274375      X
+  43.40562593     ∑C
+  1603.473914    ∑FT
+--------------------
+</pre></b>
+For a new calculation, reset only the data that changes.
+</p>
+
+<h3>About The Program</h3>
+<p>Number of steps: from <b>000</b> to <b>417</b>.
+<p>Registers used: <b>00</b> to <b>19</b>
+<p>Flags used: <b>1</b>
+<p>Labels: <span class="brownbutton">STO</span>,
+  <span class="brownbutton">RCL</span>,
+  <span class="brownbutton">SUM</span>,
+  <span class="alttext">Prt</span>,
+  <span class="alttext">Op</span>,
+  <span class="alttext">LNx</span>,
+  <span class="alttext">Adv</span>
+  <span class="yellowbutton">-</span>,
+  <span class="yellowbutton">+</span>, and definable keys.
+</p>
+
+</BODY>

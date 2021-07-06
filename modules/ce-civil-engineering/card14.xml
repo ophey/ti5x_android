@@ -1,0 +1,14 @@
+<carddef style="user">
+<label slot="titleleft">T-SECTION IN R. C. - BENDING CHECK</label>
+<label slot="titleright">STR-14</label>
+<label slot="a">M</label>
+<label slot="b">B</label>
+<label slot="c">B<sub>0</sub></label>
+<label slot="d">A</label>
+<label slot="e">A<sub>0</sub></label>
+<label slot="aprime">H'</label>
+<label slot="bprime">G</label>
+<label slot="cprime">A<sub>FT</sub></label>
+<label slot="dprime">A<sub>FC</sub></label>
+<label slot="eprime">RESULTS</label>
+</carddef>
