@@ -16,8 +16,9 @@ task preprocess {
         def processModule = {
             println "generate resources for ${it.name}"
 
-            def moddata = "${it.canonicalPath}"
             def module = "${it.name}"
+            def moddata = "../modules/${it.name}"
+
             //noinspection GroovyUnusedAssignment
             def (modcode, modname) = "$module".tokenize('-')
 
@@ -30,8 +31,8 @@ task preprocess {
         def processProgram = {
             println "generate resources for ${it.name}"
 
-            def progdata = "${it.canonicalPath}"
             def module = "${it.name}"
+            def progdata = "../programs/${it.name}"
 
             exec {
                 executable '../util/makeprog'
