@@ -1,0 +1,21 @@
+
+lbl A
+    1
+    STO 01
+    R/S
+
+lbl B
+    3.900
+    INV 2nd write
+    4.900
+    INV 2nd write
+    D
+    R/S
+
+lbl C
+    3.901
+    INV 2nd write
+    4.901
+    INV 2nd write
+    E
+    R/S

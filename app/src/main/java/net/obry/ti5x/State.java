@@ -167,7 +167,6 @@ class State {
   final byte[] Program;
   final byte[] CardProgram;
   final boolean[] CardBankUsed; // program or memory used in one of the 4 banks
-  final boolean[] ProgCardBankUsed; // set to true if loaded as part of a prog or library
   final ProgBank[] Bank; /* Bank[0].Program always points to Program */
   byte[] ModuleHelp; /* overall help for loaded library module */
   final boolean[] Flag;
@@ -266,7 +265,6 @@ class State {
     }
     for (int i = 0; i < BankNumber; ++i) {
       CardBankUsed[i] = false;
-      ProgCardBankUsed[i] = false;
     }
     ResetEntry();
   }
@@ -300,7 +298,6 @@ class State {
     CardMemory = new Number[MaxMemories];
     CardProgram = new byte[MaxProgram];
     CardBankUsed = new boolean[BankNumber];
-    ProgCardBankUsed = new boolean[BankNumber];
     Store = new CardStore();
     Bank = new ProgBank[MaxBanks];
     Bank[0] = new ProgBank(Program, null, null);
@@ -2642,45 +2639,55 @@ class State {
     final int BANK_MEM = 30;
     final int BANK_PROG = 240;
 
-    // special case, not compatible with original TI-59 but handy for the emulator to support
-    // many cards. The actual card number is entered as N.nn where N is the bank number between
-    // 1 and 4 and nn the optional nn a card index.
+    // Special case, not compatible with original TI-59 but handy for the emulator to support
+    // many cards. The actual card number is entered as N.nnn where N is the bank number between
+    // 1 and 4 and nnn the optional card index. The 9nn indexes are reserved for the internal
+    // libraries and programs.
 
     final int N = (int)Math.abs(X.getInt());
-    final int F = (int)Math.round((X.get() - N) * 100);
-    final int Bn = (N * 100) + F;
-    final String BankFilename = String.format("bank%d.ti5b", Bn);
+    final int F = (int)Math.round((X.get() - N) * 1000);
+    final int Bn = (N * 1000) + F;
+    final String BankFilename = String.format("bank%04d.ti5b", Bn);
     if (N < 1 || N > 4) {
       SetErrorState(true);
     } else if (InvState) {
 
-      //  read the bank data from the corresponding file. We do that only if the fractional
+      //  Read the bank data from the corresponding file. We do that only if the fractional
       //  part is non zero or the bank is not loaded. When a single number between 1 and 4
       //  is used and the bank has been initialized from a loaded program or library we do
       //  use it.
 
-      if (F != 0 || !ProgCardBankUsed[N]) {
-        Persistent.LoadBankFile(ctx, N, BankFilename, Global.Calc, Global.Disp, Global.Buttons);
-      }
-
-      for (int k = (4 - N) * BANK_MEM; k < (4 - N + 1) * BANK_MEM; k++) {
-        if (k < MaxMemories) {
-          Memory[k] = new Number(CardMemory[k]);
+      if (F >= 900) {
+        if (Store.Contains(Bn)) {
+          Store.Get (Bn).LoadCard(this, N, Bn);
+        } else {
+          // card not found
+          SetErrorState(true);
         }
+      } else {
+        Persistent.LoadBankFile(ctx, N, BankFilename, Global.Calc, Global.Disp, Global.Buttons);
+
+        for (int k = (4 - N) * BANK_MEM; k < (4 - N + 1) * BANK_MEM; k++) {
+          if (k < MaxMemories) {
+            Memory[k] = new Number(CardMemory[k]);
+          }
+        }
+        System.arraycopy
+            (
+                CardProgram, (N - 1) * BANK_PROG,
+                Program, (N - 1) * BANK_PROG,
+                BANK_PROG
+            );
       }
-      System.arraycopy
-         (
-            CardProgram,(N - 1) * BANK_PROG,
-            Program,    (N - 1) * BANK_PROG,
-             BANK_PROG
-         );
+      // reset labels to take into account possible new ones in loaded cards
+      ResetInLabels();
     } else {
       // write memory : 30 values for the given bank
       CardBankUsed[N-1] = true;
 
       for (int k = (4 - N) * BANK_MEM; k < (4 - N + 1) * BANK_MEM; k++) {
         if (k < MaxMemories) {
-          CardMemory[k] = new Number(Memory[k]);
+         CardMemory[k] = new Number(Memory[k]);
         }
       }
       System.arraycopy
@@ -2690,7 +2697,7 @@ class State {
              BANK_PROG
          );
 
-      Persistent.SaveBankFile(ctx, N, BankFilename, Global.Calc);
+      Persistent.SaveBankFile(ctx, N, F, BankFilename, Global.Calc);
     }
   }
 
@@ -3418,8 +3425,10 @@ class State {
             SetAngMode(ANG_GRAD);
             break;
           case 91:
-          case 96:
             StopProgram();
+            break;
+          case 96:
+            WriteBank();
             break;
           case 92: /*INV SBR*/
             Return();
@@ -3567,5 +3576,11 @@ class State {
 
   void FillInLabels() {
     FillInLabels(CurBank);
+  }
+
+  void ResetInLabels() {
+    // This is only needed on user's bank 0 when loading a bank-card
+    Bank[0].Labels = null;
+    FillInLabels(0);
   }
 }

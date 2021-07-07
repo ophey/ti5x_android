@@ -99,8 +99,9 @@ public class Main extends android.app.Activity {
 
   public static final BuiltinLibrary[] BuiltinPrograms =
      {
-        new BuiltinLibrary(R.string.input_code, R.raw.ee19_input_code),
-        new BuiltinLibrary(R.string.construct_nam_code, R.raw.ee19_construct_nam_code)
+         new BuiltinLibrary(R.string.input_code, R.raw.ee19_input_code),
+         new BuiltinLibrary(R.string.construct_nam_code, R.raw.ee19_construct_nam_code),
+         new BuiltinLibrary(R.string.demo_card_store, R.raw.demo_card_store)
      };
 
   private static String[] getBuiltinPrograms(android.content.Context ctx) {

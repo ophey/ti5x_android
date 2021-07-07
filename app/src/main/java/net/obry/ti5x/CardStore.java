@@ -30,6 +30,7 @@ public class CardStore {
       C = Store.get(Id);
     } else {
       C = new Card();
+      Store.put(Id, C);
     }
 
     C.SetMem (Data);
@@ -45,6 +46,7 @@ public class CardStore {
       C = Store.get(Id);
     } else {
       C = new Card();
+      Store.put(Id, C);
     }
 
     C.SetProg (Data);

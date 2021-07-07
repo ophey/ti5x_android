@@ -22,6 +22,7 @@ import java.util.zip.ZipEntry;
 import java.io.StreamTokenizer;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.io.File;
 
 class ZipComponentWriter
   /* convenient writing of components to a ZIP archive, with automatic
@@ -235,7 +236,10 @@ public class Persistent {
       ) {
 
     String ToFile = new java.io.File
-        (ctx.getExternalFilesDir(null), ProgramsDir + "/" + FileName).getAbsolutePath();
+        (ctx.getExternalFilesDir(null), FileName).getAbsolutePath();
+
+    if(!new File(ToFile).isFile())
+      return;
 
     // open file
     java.io.FileInputStream In;
@@ -253,12 +257,12 @@ public class Persistent {
       } catch (java.io.FileNotFoundException Failed) {
         throw new RuntimeException
           (
-              "ti5x.Persistent.LoadBankFile opne error " + Failed.toString()
+              "ti5x.Persistent.LoadBankFile open error " + Failed.toString()
           );
       }  catch (java.io.IOException Failed) {
         throw new RuntimeException
           (
-            "ti5x.Persistent.LoadBankFile opne error " + Failed.toString()
+            "ti5x.Persistent.LoadBankFile open error " + Failed.toString()
           );
       }
   }
@@ -267,12 +271,13 @@ public class Persistent {
       (
           android.content.Context ctx,
           int N,
+          int Id,
           String FileName,
           State Calc
       ) {
 
     String ToFile = new java.io.File
-        (ctx.getExternalFilesDir(null), ProgramsDir + "/" + FileName).getAbsolutePath();
+        (ctx.getExternalFilesDir(null), FileName).getAbsolutePath();
 
     java.io.FileOutputStream Out;
     try {
@@ -288,7 +293,7 @@ public class Persistent {
     POut.println("<state>");
     POut.println("    <calc>");
     // save now
-    SaveBank(N, Calc, Calc.Program, POut, 8);
+    SaveBank(N, Id, Calc, Calc.Program, POut, 8);
 
     POut.println("    </calc>");
     POut.println("</state>");
@@ -304,6 +309,7 @@ public class Persistent {
   private static void SaveBank
           (
                   int N, /* bank number 1 to 4 */
+                  int Id,
                   State Calc,
                   byte[] Program,
                   java.io.PrintStream POut,
@@ -312,7 +318,7 @@ public class Persistent {
 
     POut.print(String.format(Global.StdLocale,
         String.format(Global.StdLocale,
-            "%%%ds<bankprog n='%01d'>\n", Indent, N), ""));
+            "%%%ds<bankprog n='%01d' id='%02d'>\n", Indent, N, Id), ""));
     int Cols = 0;
 
     for (int k = (N - 1) * 240; k < N * 240; k++) {
@@ -343,7 +349,7 @@ public class Persistent {
                 "\n%%%ds</bankprog>\n", Indent), "")
       );
 
-    POut.print(String.format(Global.StdLocale, String.format(Global.StdLocale, "%%%ds<bankmem n='%01d'>\n", Indent, N), ""));
+    POut.print(String.format(Global.StdLocale, String.format(Global.StdLocale, "%%%ds<bankmem n='%01d' id='%02d'>\n", Indent, N, Id), ""));
 
     for (int k = (4 - N) * 30; k < (4 - N + 1) * 30; k++) {
       if (k < Calc.MaxMemories) {
@@ -678,7 +684,7 @@ public class Persistent {
         {
           if (Calc.CardBankUsed[k-1])
           {
-            SaveBank(k, Calc, Calc.CardProgram, POut,8);
+            SaveBank(k, 0, Calc, Calc.CardProgram, POut,8);
           }
         }
 
@@ -971,7 +977,7 @@ public class Persistent {
         } else if (localName.equals("bankmem")) {
           ParseState = DoingBankMem;
           CardBankNr = Integer.parseInt(attributes.getValue("n").intern());
-          CardId = (CardBankNr * 100) +  Integer.parseInt(attributes.getValue("id").intern());
+          CardId = (CardBankNr * 1000) +  Integer.parseInt(attributes.getValue("id").intern());
           StartContent();
           Handled = true;
         } else if (localName.equals("feedback")) {
@@ -994,7 +1000,7 @@ public class Persistent {
         } else if (localName.equals("bankprog")) {
           ParseState = DoingBankProg;
           CardBankNr = Integer.parseInt(attributes.getValue("n").intern());
-          CardId = (CardBankNr * 100) + Integer.parseInt(attributes.getValue("id").intern());
+          CardId = (CardBankNr * 1000) + Integer.parseInt(attributes.getValue("id").intern());
           StartContent();
           Handled = true;
         } else if (CalcState && localName.equals("flags")) {
@@ -1194,29 +1200,28 @@ public class Persistent {
               for (int i = 0; i < Calc.MaxProgram; ++i) {
                 Calc.Program[i] = (byte) 0;
               }
-            } else {
-              ArrayList<Double> p = parseNumbers(ContentStr);
-
-              if (BankNr == 0 ? p.size() > Calc.MaxProgram : p.size() >= 1000) {
-                throw new DataFormatException
-                    (
-                        String.format(Global.StdLocale, "too many memories, only %d allowed", Calc.MaxMemories)
-                    );
-              }
-              if (BankNr != 0) {
-                Calc.Bank[BankNr].Program = new byte[p.size()];
-              }
-
-              for (int addr = 0; addr < p.size(); ++addr) {
-                byte val = p.get(addr).byteValue();
-                if (BankNr != 0) {
-                  Calc.Bank[BankNr].Program[addr] = val;
-                } else {
-                  Calc.Program[addr] = val;
-                }
-              }
-              ParseState = DoingCalc;
             }
+            ArrayList<Double> p = parseNumbers(ContentStr);
+
+            if (BankNr == 0 ? p.size() > Calc.MaxProgram : p.size() >= 1000) {
+              throw new DataFormatException
+                  (
+                      String.format(Global.StdLocale, "too many memories, only %d allowed", Calc.MaxMemories)
+                  );
+            }
+            if (BankNr != 0) {
+              Calc.Bank[BankNr].Program = new byte[p.size()];
+            }
+
+            for (int addr = 0; addr < p.size(); ++addr) {
+              byte val = p.get(addr).byteValue();
+              if (BankNr != 0) {
+                Calc.Bank[BankNr].Program[addr] = val;
+              } else {
+                Calc.Program[addr] = val;
+              }
+            }
+            ParseState = DoingCalc;
           }
           break;
         case DoingBankProg:
