@@ -13,32 +13,32 @@
 #
 #     cardnn
 #         infile is the name of a PNG file to be included as the specified card image
-#     cardsrcnn
+#     cardsrc<nn>
 #         infile is the name of an XML template file to be rendered through rendercard
 #         and included as the specified card image
 #     help
 #         infile is the name of an HTML text file to be included as help for
 #         the overall library
-#     helpnn
+#     help<nn>
 #         infile is the name of an HTML text file to be included as help for the
 #         specified program number
-#     prognn
+#     prog<nn>
 #         infile is the name of a text file containing a sequence of two-digit
 #         numbers indicating compiled program instructions to be loaded into the
 #         specified program bank
-#     progsrcnn
+#     progsrc<nn>
 #         infile is the name of a text file containing program source to be assembled
 #         and loaded into the specified program bank
-#     banknnK (k in 1 .. 4)
+#     bank<nnn><K> (k in 1 .. 4)
 #         infile is the name of a text file containing a sequence of two-digit
 #         numbers indicating compiled program instructions to be loaded into the
-#         bank<K>
-#     banksrcnnK (k in 1 .. 4)
+#         bank number <K>
+#     banksrc<nnn><K> (k in 1 .. 4)
 #         infile is the name of a text file containing program source to be assembled
-#         and loaded into the bank<K>
-#     memnnK (k in 1 .. 4)
+#         and loaded into the bank number <K>
+#     mem<nnn><K> (k in 1 .. 4)
 #         infile is the name of a text file containing a sequence of max 30 numbers
-#         indicating the value of the memories to be loaded into the bank<K>
+#         indicating the values of the memories to be loaded into the bank number <K>
 #
 # To build a program file, include just a prog00 or progsrc00 component, plus optionally
 # a card00 or cardsrc00 component, and a help00 component.
@@ -47,6 +47,7 @@
 # and a help component.
 #
 # Copyright 2011, 2013 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+# Copyright 2014, 2021 Pascal Obry <pascal@obry.net>.
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -76,30 +77,32 @@ mtime = 0
 
 components = {}
 for arg in sys.argv[2:] :
-    type, index, bi, infile = re.search(r"^([a-z]+)([0-9][0-9])([0-9]?)\=(.+)$", arg).groups()
+    type, index, bi, infile = re.search(r"^([a-z]+)([0-9]?[0-9]?[0-9]?)([0-9]?)\=(.+)$", arg).groups()
 
-    if len(bi) > 0:
-        type = type + bi
+    if bi == "":
+        bi = 0
+    else:
+        bi = int(bi);
 
     if type == "help" and len(index) == 0 :
         index = 0
     else :
         index = int(index)
-    #end if
-    assert index < 100, "component index out of range"
-    if index not in components :
+
+    assert index < 1000, "component index out of range"
+    if index not in components:
         components[index] = {}
-    #end if
+
     assert type in ("card", "cardsrc", "help", "prog", "progsrc",
-                    "bank1", "banksrc1", "bank2", "banksrc2",
-                    "bank3", "banksrc3", "bank4", "banksrc4",
-                    "mem1", "mem2", "mem3", "mem4"), "invalid type"
-    assert type not in components[index], "duplicate type for component %02d" % index
+                    "bank", "banksrc", "mem", "memsrc"), "invalid type"
+    assert type in ("bank", "banksrc", "mem", "memsrc") or type not in components[index], "duplicate type for component %03d - %1d" % (index , bi)
     if os.path.isfile(infile):
         mtime = max(mtime, os.path.getmtime(infile))
 
-    components[index][type] = infile
-#end for
+    if type not in components[index]:
+        components[index][type] = {}
+
+    components[index][type][bi] = infile
 
 if not os.path.isfile(outfile) or os.path.getmtime(outfile) < mtime:
     for index in components :
@@ -109,6 +112,12 @@ if not os.path.isfile(outfile) or os.path.getmtime(outfile) < mtime:
                 "prog" not in components[index]
             and
                 "progsrc" not in components[index]
+            and
+                "banksrc" not in components[index]
+            and
+                "bank" not in components[index]
+            and
+                "mem" not in components[index]
         ) :
             raise RuntimeError("no prog or progsrc for component %02d" % index)
         #end if
@@ -118,45 +127,52 @@ if not os.path.isfile(outfile) or os.path.getmtime(outfile) < mtime:
     mimetype.filename = "mimetype"
     mimetype.compress_type = zipfile.ZIP_STORED
     mimetype.external_attr = 0o644 << 16
-    mimetype.date_time = (2011, 4, 14, 13, 8, 44) # about when I first got mlmake working
+    mimetype.date_time = (2011, 4, 14, 13, 8, 44) # about when I first got libmake working
     out.writestr(mimetype, b"application/vnd.nz.gen.geek_central.ti5x")
-    bank = [None, None, None, None]
-    mem = [None, None, None, None]
+    banks = {}
+    mems = {}
 
-    for index in range(0, 100) :
+    for index in range(0, 1000) :
+        if index in components :
+            component = components[index]
+
+            if "banksrc" in component :
+                for bi in component["banksrc"]:
+                    if bi not in banks:
+                        banks[bi] = {}
+                    banks[bi][index] = subprocess.check_output \
+                        (
+                            args = (os.path.join(utildir, "assemble"),),
+                            stdin = open(component["banksrc"][bi], "r"),
+                            close_fds = True
+                        )
+            elif "bank" in component :
+                for bi in component["bank"]:
+                    if bi not in banks:
+                        banks[bi] = {}
+                    bank[bi][index] = open(component["bank"][bi], "rb").read()
+
+            if "mem" in component :
+                for bi in component["mem"]:
+                    if bi not in mems:
+                        mems[bi] = {}
+                    mems[bi][index] = open(component["mem"][bi], "rb").read()
+
+    for index in range(0, 1000) :
         if index in components :
             component = components[index]
             if "progsrc" in component :
                 prog = subprocess.check_output \
                   (
                     args = (os.path.join(utildir, "assemble"),),
-                    stdin = open(component["progsrc"], "r"),
+                    stdin = open(component["progsrc"][0], "r"),
                     close_fds = True
                   )
             elif "prog" in component :
-                prog = open(component["prog"], "rb").read()
+                prog = open(component["prog"][0], "rb").read()
             else :
                 prog = None
 
-            for b in range(1,4):
-                if "banksrc%1d" % b in component :
-                    bank[b-1] = subprocess.check_output \
-                        (
-                            args = (os.path.join(utildir, "assemble"),),
-                            stdin = open(component["banksrc%1d" % b], "r"),
-                            close_fds = True
-                        )
-                elif "bank%1d" % b in component :
-                    bank[b-1] = open(component["bank%1d" % b], "rb").read()
-                else:
-                    bank[b-1] = None
-
-                if "mem%1d" % b in component :
-                    mem[b-1] = open(component["mem%1d" % b], "rb").read()
-                else:
-                    mem[b-1] = None
-
-            #end if
             if prog != None :
                 #  start prog
                 pdata = b"<state>\n    <calc>\n        <prog>\n"
@@ -167,15 +183,16 @@ if not os.path.isfile(outfile) or os.path.getmtime(outfile) < mtime:
 
                 #  add bank / mem data if any
 
-                for b in range(1,4):
-                    if bank[b-1] != None:
-                        pdata = pdata + b"        <bankprog n='%1d'>\n" % b
-                        pdata = pdata + b"".join(b" " * 12 + line + b"\n" for line in bank[b-1].rstrip(b"\n").split(b"\n"))
+                for b in banks:
+                    for idx in banks[b]:
+                        pdata = pdata + b"        <bankprog n='%1d' id='%03d'>\n" % (b, idx)
+                        pdata = pdata + b"".join(b" " * 12 + line + b"\n" for line in banks[b][idx].rstrip(b"\n").split(b"\n"))
                         pdata = pdata + b"        </bankprog>\n"
 
-                    if mem[b-1] != None:
-                        pdata = pdata + b"        <bankmem n='%1d'>\n" % b
-                        pdata = pdata + b"".join(b" " * 12 + line + b"\n" for line in mem[b-1].rstrip(b"\n").split(b"\n"))
+                for m in mems:
+                    for idx in mems[m]:
+                        pdata = pdata + b"        <bankmem n='%1d' id='%03d'>\n" % (m, idx)
+                        pdata = pdata + b"".join(b" " * 12 + line + b"\n" for line in mems[m][idx].rstrip(b"\n").split(b"\n"))
                         pdata = pdata + b"        </bankmem>\n"
 
                 # end prog
@@ -187,11 +204,11 @@ if not os.path.isfile(outfile) or os.path.getmtime(outfile) < mtime:
                 carddata = subprocess.check_output \
                   (
                       args = (os.path.join(utildir, "rendercard"),),
-                      stdin = open(component["cardsrc"], "r"),
+                      stdin = open(component["cardsrc"][0], "r"),
                       close_fds = True
                   )
             elif "card" in component :
-                carddata = open(component["card"], "rb").read()
+                carddata = open(component["card"][0], "rb").read()
             else :
                 carddata = None
             #end if
@@ -203,7 +220,7 @@ if not os.path.isfile(outfile) or os.path.getmtime(outfile) < mtime:
                     out.writestr \
                       (
                         ("help", "%s%02d" % (type, index))[type != "help" or index != 0 or len(components) == 1],
-                        open(component[type], "rb").read()
+                        open(component[type][0], "rb").read()
                       )
                 #end if
             #end for
