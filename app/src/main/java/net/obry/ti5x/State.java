@@ -172,6 +172,8 @@ class State {
   byte[] ModuleHelp; /* overall help for loaded library module */
   final boolean[] Flag;
 
+  final CardStore Store;
+
   /* special flag numbers: */
   private final static int FLAG_ERROR_COND = 7;
   /* can be set by Op 18/19 to indicate error/no-error, and
@@ -299,6 +301,7 @@ class State {
     CardProgram = new byte[MaxProgram];
     CardBankUsed = new boolean[BankNumber];
     ProgCardBankUsed = new boolean[BankNumber];
+    Store = new CardStore();
     Bank = new ProgBank[MaxBanks];
     Bank[0] = new ProgBank(Program, null, null);
     Flag = new boolean[MaxFlags];

@@ -777,7 +777,8 @@ public class Persistent {
     protected State Calc;
     int BankNr;
     boolean CalcState;
-    int Nattr;
+    int CardBankNr;
+    int CardId;
 
     private final int AtTopLevel = 0;
     private final int DoingState = 1;
@@ -969,7 +970,8 @@ public class Persistent {
           Handled = true;
         } else if (localName.equals("bankmem")) {
           ParseState = DoingBankMem;
-          Nattr = Integer.parseInt(attributes.getValue("n").intern());
+          CardBankNr = Integer.parseInt(attributes.getValue("n").intern());
+          CardId = (CardBankNr * 100) +  Integer.parseInt(attributes.getValue("id").intern());
           StartContent();
           Handled = true;
         } else if (localName.equals("feedback")) {
@@ -991,7 +993,8 @@ public class Persistent {
           Handled = true;
         } else if (localName.equals("bankprog")) {
           ParseState = DoingBankProg;
-          Nattr = Integer.parseInt(attributes.getValue("n").intern());
+          CardBankNr = Integer.parseInt(attributes.getValue("n").intern());
+          CardId = (CardBankNr * 100) + Integer.parseInt(attributes.getValue("id").intern());
           StartContent();
           Handled = true;
         } else if (CalcState && localName.equals("flags")) {
@@ -1163,9 +1166,6 @@ public class Persistent {
           break;
         case DoingBankMem:
           if (localName.equals("bankmem")) {
-            Calc.CardBankUsed[Nattr - 1] = true;
-            Calc.ProgCardBankUsed[Nattr - 1] = true;
-
             ArrayList<Double> m = parseNumbers(ContentStr);
 
             if (m.size() > 30) {
@@ -1175,12 +1175,14 @@ public class Persistent {
                   );
             }
 
-            final int offset = (Nattr - 1) * 240;
+            Number[] CardMem = new Number[m.size()];
 
             for (int addr = 0; addr < m.size(); ++addr) {
               double val = m.get(addr);
-              Calc.CardMemory[addr + offset] = new Number(val);
+              CardMem[addr] = new Number(val);
             }
+            Calc.Store.SetMem(CardId, CardMem);
+
             ParseState = DoingCalc;
           }
 
@@ -1219,8 +1221,6 @@ public class Persistent {
           break;
         case DoingBankProg:
           if (localName.equals("bankprog")) {
-            Calc.CardBankUsed[Nattr - 1] = true;
-            Calc.ProgCardBankUsed[Nattr - 1] = true;
 
             ArrayList<Double> p = parseNumbers(ContentStr);
 
@@ -1231,12 +1231,15 @@ public class Persistent {
                   );
             }
 
-            final int offset = (Nattr - 1) * 240;
+            byte[] CardProg = new byte[p.size()];
 
             for (int addr = 0; addr < p.size(); ++addr) {
               byte val = p.get(addr).byteValue();
-              Calc.CardProgram[addr + offset] = val;
+              CardProg[addr] = val;
             }
+
+            Calc.Store.SetProg(CardId, CardProg);
+
             ParseState = DoingCalc;
           }
           break;
