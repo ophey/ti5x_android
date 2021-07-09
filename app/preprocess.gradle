@@ -42,10 +42,13 @@ task preprocess {
                             "help00=$progdata/help",
                             "cardsrc00=$progdata/card",
                             "progsrc00=$progdata/prog",
-                            "banksrc9004=$progdata/bank04",
-                            "banksrc9014=$progdata/bank14",
-                            "mem9003=$progdata/mem03",
-                            "mem9013=$progdata/mem13"
+                            "banksrc9004=$progdata/bank900",
+                            "banksrc9014=$progdata/bank901",
+                            "banksrc9022=$progdata/bank902",
+                            "banksrc9052=$progdata/bank905",
+                            "mem9033=$progdata/mem903",
+                            "mem9043=$progdata/mem904",
+                            "mem9052=$progdata/mem905"
                 }
             }
             else {

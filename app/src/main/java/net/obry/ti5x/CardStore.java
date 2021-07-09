@@ -23,13 +23,14 @@ public class CardStore {
   public void SetMem
       (
           int Id,
+          int BankNr,
           Number[] Data
       ) {
     Card C;
     if (Store.containsKey(Id)) {
       C = Store.get(Id);
     } else {
-      C = new Card();
+      C = new Card(BankNr);
       Store.put(Id, C);
     }
 
@@ -39,13 +40,14 @@ public class CardStore {
   public void SetProg
       (
           int Id,
+          int BankNr,
           byte[] Data
       ) {
     Card C;
     if (Store.containsKey(Id)) {
       C = Store.get(Id);
     } else {
-      C = new Card();
+      C = new Card(BankNr);
       Store.put(Id, C);
     }
 

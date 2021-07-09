@@ -876,13 +876,15 @@ register with the number showing in the display.
 
 <H2><A NAME="Card"></A>Card Emulation</H2>
 
-<P>The emulator implements the <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">write</SPAN> instruction using a single
-  emulated card.
+<P>The emulator implements
+  the <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">write</SPAN>
+  and <SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">write</SPAN>
+  instructions by storing the card bank on the phone storage.
 
-<P>The cards has 4 banks for storing the program and the memories. It
-  has the following layout:
+<P>The calculator has 4 banks for storing the program and the memories. It
+  has the following layout (there is no partitioning on the emulator):
 
-<TABLE class="card">
+<TABLE class="card" align="center">
   <TR><TD>Program</TD><TD style="visibility:collapse"/><TD>Memory</TD></TR>
   <TR class="cardsep"><TD colspan=3/></TR>
   <TR><TD>000</TD><TD rowspan=3><B>Bank 1</B></TD><TD>120</TD>
@@ -903,16 +905,36 @@ register with the number showing in the display.
 </TABLE>
 
 <UL>
-<LI><B>n</B> <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">write</SPAN> - write the bank number <B>n</B> into the card.
+  <LI><b>N.xxx</b> <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">write</SPAN> (<b>N</b> in 1 .. 4)
+  - write the bank number <b>N</b> into the
+  file <i>bank-xxx.ti5b</i>. In the emulator <b>xxx</b> is the
+  card-id. User&apos;s can have up to 900 cards recorded from <b>000</b>
+  to <b>899</b>. The ids from <b>900</b> to <b>999</b> are reserved
+  for the internal modules.
 
-<LI><B>n</B> <SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">write</SPAN> - read the bank number <B>n</B> and set the corresponding data.
+  <LI><b>N.xxx</b> <SPAN CLASS="brownbutton">INV</SPAN>
+    <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">write</SPAN>
+     (<b>N</b> in 0 .. 4)
+  - read the bank file <i>bank-xxx.ti5b</i> and place it into
+  bank <b>N</b>. Does nothing if the recorded bank number on the file
+  is not <b>N</b>. If <b>N</b> is 0 the bank number is taken as
+  recorded into the file.
 </UL>
 
+<p>Finaly, on the emulator there is no partitioning and both
+  the program and memories for the corresponding bank are recorded
+  into the bank file.
+
 <P>So for example, to store on the card the memories from 00 to 019
-  you need to store bank 4 which cover memories 00 through 29:
+  and the program from step 720 to 959 you need to record bank 4 which
+  covers memories 00 through 29 plus the steps 720 to 959:
   <UL>
-    <LI>4</B> <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">write</SPAN>
+    <LI>4.001</B> <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">write</SPAN>
   </UL>
+
+<p>After this command, the file <i>bank-001.ti5b</i> is created.
+
 <P><A HREF="#Topics">Back to Topics</A>
 
 <H2><A NAME="Undocumented"></A>Undocumented Features</H2>

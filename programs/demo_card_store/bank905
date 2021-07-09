@@ -1,0 +1,7 @@
+
+lbl E'
+    RCL 60
+    +
+    RCL 61
+    =
+    RTN

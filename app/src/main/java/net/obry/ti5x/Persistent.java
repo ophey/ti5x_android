@@ -229,6 +229,7 @@ public class Persistent {
       (
           android.content.Context ctx,
           int N,
+          int CardId,
           String FileName,
           State Calc,
           Display Disp,
@@ -238,8 +239,9 @@ public class Persistent {
     String ToFile = new java.io.File
         (ctx.getExternalFilesDir(null), FileName).getAbsolutePath();
 
-    if(!new File(ToFile).isFile())
-      return;
+    if(!new File(ToFile).isFile()) {
+      Calc.SetErrorState(true);
+    }
 
     // open file
     java.io.FileInputStream In;
@@ -248,7 +250,7 @@ public class Persistent {
       javax.xml.parsers.SAXParserFactory.newInstance().newSAXParser().parse
             (
                 In,
-                new CalcStateLoader(Disp, Buttons, Calc, 0, false)
+                new CalcStateLoader(Disp, Buttons, Calc, N, CardId,false)
             );
       } catch (javax.xml.parsers.ParserConfigurationException Bug) {
         throw new RuntimeException("SAX parser error: " + Bug.toString());
@@ -318,7 +320,7 @@ public class Persistent {
 
     POut.print(String.format(Global.StdLocale,
         String.format(Global.StdLocale,
-            "%%%ds<bankprog n='%01d' id='%02d'>\n", Indent, N, Id), ""));
+            "%%%ds<bankprog n='%01d' id='%03d'>\n", Indent, N, Id), ""));
     int Cols = 0;
 
     for (int k = (N - 1) * 240; k < N * 240; k++) {
@@ -349,7 +351,7 @@ public class Persistent {
                 "\n%%%ds</bankprog>\n", Indent), "")
       );
 
-    POut.print(String.format(Global.StdLocale, String.format(Global.StdLocale, "%%%ds<bankmem n='%01d' id='%02d'>\n", Indent, N, Id), ""));
+    POut.print(String.format(Global.StdLocale, String.format(Global.StdLocale, "%%%ds<bankmem n='%01d' id='%03d'>\n", Indent, N, Id), ""));
 
     for (int k = (4 - N) * 30; k < (4 - N + 1) * 30; k++) {
       if (k < Calc.MaxMemories) {
@@ -781,10 +783,11 @@ public class Persistent {
     Display Disp;
     ButtonGrid Buttons;
     protected State Calc;
-    int BankNr;
+    int BankNr = -1;
     boolean CalcState;
-    int CardBankNr;
-    int CardId;
+    int CardBankNr = -1;
+    int CardId = -1;
+    int UserCardId = -1;
 
     private final int AtTopLevel = 0;
     private final int DoingState = 1;
@@ -810,6 +813,7 @@ public class Persistent {
           ButtonGrid Buttons,
           State Calc,
           int BankNr,
+          int UserCardId,
           boolean CalcState
        ) {
       super();
@@ -818,6 +822,7 @@ public class Persistent {
       this.Calc = Calc;
       this.BankNr = BankNr;
       this.CalcState = CalcState;
+      this.UserCardId = UserCardId;
     } /*CalcStateLoader*/
 
     private void StartContent() {
@@ -977,7 +982,7 @@ public class Persistent {
         } else if (localName.equals("bankmem")) {
           ParseState = DoingBankMem;
           CardBankNr = Integer.parseInt(attributes.getValue("n").intern());
-          CardId = (CardBankNr * 1000) +  Integer.parseInt(attributes.getValue("id").intern());
+          CardId = Integer.parseInt(attributes.getValue("id").intern());
           StartContent();
           Handled = true;
         } else if (localName.equals("feedback")) {
@@ -1000,7 +1005,7 @@ public class Persistent {
         } else if (localName.equals("bankprog")) {
           ParseState = DoingBankProg;
           CardBankNr = Integer.parseInt(attributes.getValue("n").intern());
-          CardId = (CardBankNr * 1000) + Integer.parseInt(attributes.getValue("id").intern());
+          CardId = Integer.parseInt(attributes.getValue("id").intern());
           StartContent();
           Handled = true;
         } else if (CalcState && localName.equals("flags")) {
@@ -1181,13 +1186,17 @@ public class Persistent {
                   );
             }
 
-            Number[] CardMem = new Number[m.size()];
+            if (BankNr != 0 && CardBankNr != BankNr) {
+              Calc.SetErrorState(true);
+            } else {
+              Number[] CardMem = new Number[m.size()];
 
-            for (int addr = 0; addr < m.size(); ++addr) {
-              double val = m.get(addr);
-              CardMem[addr] = new Number(val);
+              for (int addr = 0; addr < m.size(); ++addr) {
+                double val = m.get(addr);
+                CardMem[addr] = new Number(val);
+              }
+              Calc.Store.SetMem(CardId, CardBankNr, CardMem);
             }
-            Calc.Store.SetMem(CardId, CardMem);
 
             ParseState = DoingCalc;
           }
@@ -1236,14 +1245,18 @@ public class Persistent {
                   );
             }
 
-            byte[] CardProg = new byte[p.size()];
+            if (BankNr != 0 && CardBankNr != BankNr) {
+              Calc.SetErrorState(true);
+            } else {
+              byte[] CardProg = new byte[p.size()];
 
-            for (int addr = 0; addr < p.size(); ++addr) {
-              byte val = p.get(addr).byteValue();
-              CardProg[addr] = val;
+              for (int addr = 0; addr < p.size(); ++addr) {
+                byte val = p.get(addr).byteValue();
+                CardProg[addr] = val;
+              }
+
+              Calc.Store.SetProg(CardId, CardBankNr, CardProg);
             }
-
-            Calc.Store.SetProg(CardId, CardProg);
 
             ParseState = DoingCalc;
           }
@@ -1395,7 +1408,7 @@ public class Persistent {
                   javax.xml.parsers.SAXParserFactory.newInstance().newSAXParser().parse
                      (
                         In.getInputStream(StateEntry),
-                        new CalcStateLoader(Disp, Buttons, Calc, BankNr, CalcState)
+                        new CalcStateLoader(Disp, Buttons, Calc, BankNr, 0, CalcState)
                      );
                 } catch (javax.xml.parsers.ParserConfigurationException Bug) {
                   throw new RuntimeException("SAX parser error: " + Bug.toString());

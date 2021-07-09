@@ -2645,10 +2645,9 @@ class State {
     // libraries and programs.
 
     final int N = (int)Math.abs(X.getInt());
-    final int F = (int)Math.round((X.get() - N) * 1000);
-    final int Bn = (N * 1000) + F;
-    final String BankFilename = String.format("bank%04d.ti5b", Bn);
-    if (N < 1 || N > 4) {
+    final int CardId = (int)Math.abs((int)Math.round((X.get() - N) * 1000));
+    final String BankFilename = String.format("bank-%03d.ti5b", CardId);
+    if ((N < 1 || N > 4) && (N != 0 || !InvState || CardId < 0)) {
       SetErrorState(true);
     } else if (InvState) {
 
@@ -2657,30 +2656,18 @@ class State {
       //  is used and the bank has been initialized from a loaded program or library we do
       //  use it.
 
-      if (F >= 900) {
-        if (Store.Contains(Bn)) {
-          Store.Get (Bn).LoadCard(this, N, Bn);
-        } else {
-          // card not found
-          SetErrorState(true);
-        }
-      } else {
-        Persistent.LoadBankFile(ctx, N, BankFilename, Global.Calc, Global.Disp, Global.Buttons);
-
-        for (int k = (4 - N) * BANK_MEM; k < (4 - N + 1) * BANK_MEM; k++) {
-          if (k < MaxMemories) {
-            Memory[k] = new Number(CardMemory[k]);
-          }
-        }
-        System.arraycopy
-            (
-                CardProgram, (N - 1) * BANK_PROG,
-                Program, (N - 1) * BANK_PROG,
-                BANK_PROG
-            );
+      if (CardId < 900) {
+        Persistent.LoadBankFile(ctx, N, CardId, BankFilename, Global.Calc, Global.Disp, Global.Buttons);
       }
-      // reset labels to take into account possible new ones in loaded cards
-      ResetInLabels();
+
+      if (Store.Contains(CardId)) {
+        Store.Get (CardId).LoadCard(this);
+        // reset labels to take into account possible new ones in loaded cards
+        ResetInLabels();
+      } else {
+        // card not found
+        SetErrorState(true);
+      }
     } else {
       // write memory : 30 values for the given bank
       CardBankUsed[N-1] = true;
@@ -2697,7 +2684,7 @@ class State {
              BANK_PROG
          );
 
-      Persistent.SaveBankFile(ctx, N, F, BankFilename, Global.Calc);
+      Persistent.SaveBankFile(ctx, N, CardId, BankFilename, Global.Calc);
     }
   }
 

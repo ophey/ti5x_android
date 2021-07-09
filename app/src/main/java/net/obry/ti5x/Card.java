@@ -25,19 +25,21 @@ public class Card {
   private int BankNr;
   private int Id;
 
-  Card()
+  Card (
+      int BankNr
+  )
   {
     ProgData = new byte[BANK_PROG];
     MemData = new Number[BANK_MEM];
-    BankNr = -1;
+    this.BankNr = BankNr;
     Id = -1;
 
-    for (int k=0; k < BANK_MEM; k++) {
-      MemData[k] = new Number(0.0);
+    for (int k = 0; k < BANK_PROG; k++) {
+      ProgData[k] = 0;
     }
 
-    for (int k=0; k < BANK_PROG; k++) {
-      ProgData[k] = 0;
+    for (int k = 0; k < BANK_MEM; k++) {
+      MemData[k] = new Number(0.0);
     }
   }
 
@@ -95,13 +97,11 @@ public class Card {
 
   public void LoadCard
       (
-          State Calc,
-          int BankNr,
-          int Id
+          State Calc
       )
   {
     int idx = 0;
-    for (int k = (4 - BankNr) * BANK_MEM; k < (4 - BankNr + 1) * BANK_MEM; k++) {
+    for (int k = (4 - this.BankNr) * BANK_MEM; k < (4 - this.BankNr + 1) * BANK_MEM; k++) {
       if (k < Calc.MaxMemories) {
         Calc.Memory[k] = new Number(MemData[idx++]);
       }
@@ -109,7 +109,7 @@ public class Card {
     System.arraycopy
         (
             ProgData,0,
-            Calc.Program,    (BankNr - 1) * BANK_PROG,
+            Calc.Program,    (this.BankNr - 1) * BANK_PROG,
             BANK_PROG
         );
   }
