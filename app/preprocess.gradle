@@ -16,8 +16,8 @@ task preprocess {
         def processModule = {
             println "generate resources for ${it.name}"
 
+            def moddata = "${it.canonicalPath}"
             def module = "${it.name}"
-            def moddata = "../modules/${it.name}"
 
             //noinspection GroovyUnusedAssignment
             def (modcode, modname) = "$module".tokenize('-')
@@ -31,8 +31,8 @@ task preprocess {
         def processProgram = {
             println "generate resources for ${it.name}"
 
+            def progdata = "${it.canonicalPath}"
             def module = "${it.name}"
-            def progdata = "../programs/${it.name}"
 
             exec {
                 executable '../util/makeprog'
@@ -45,7 +45,7 @@ task preprocess {
 
         // handle modules
 
-        def moduleDir = "modules"
+        def moduleDir = "${projectDir}/../modules"
         def mDir = new File(moduleDir)
 
         mDir.eachFileRecurse(FileType.DIRECTORIES) {
@@ -54,7 +54,7 @@ task preprocess {
 
         // handle programs
 
-        def programDir = "programs"
+        def programDir = "${projectDir}/../programs"
         def pDir = new File(programDir)
 
         pDir.eachFileRecurse(FileType.DIRECTORIES) {
@@ -65,11 +65,11 @@ task preprocess {
 
 task customClean(type: Delete) {
     doLast {
-        def mDir = new File("app/$resRaw")
+        def mDir = new File("${projectDir}/$resRaw")
 
         def deleteModule = {
             if (it.name.endsWith('.ti5l') || it.name.endsWith('.ti5p')) {
-                delete "${it.canonicalPath}"
+                project.delete "${it.canonicalPath}"
             }
         }
 
