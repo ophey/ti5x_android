@@ -19,5 +19,5 @@
     <color name="paper">#ffffffff</color>
     <color name="ink">#ff656565</color> <!-- not fully black -->
 
-    <color name="title_bar">#ae7834</color>
+    <color name="title_bar">#fffcd171</color>
 </resources>
