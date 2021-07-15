@@ -621,7 +621,7 @@ class ButtonGrid extends android.view.View {
         TextPaint.setTextAlign(android.graphics.Paint.Align.CENTER);
         TextPaint.setColor(ThisButton.TextColor);
         TextPaint.setTypeface(MFont);
-        TextPaint.setTextSize(BaseTextSize * 1.1f);
+        TextPaint.setTextSize(BaseTextSize * 0.9f);
         GraphicsUseful.DrawCenteredText
            (
               Draw,
