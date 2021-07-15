@@ -1,0 +1,235 @@
+;; This program implements a solver for "le compte est bon" game
+;; you need to enter 6 numbers amongst: ...
+;; and the result to be found with 3 digits.
+;;
+;; the goal is to find the result using the 6 numbers and simple operations
+;; +, -, × and ÷.
+;;
+;; registers:
+;; 00       : number to be found
+;; 01 -> 06 : the 6 numbers to combine
+;; 07       : number of number used to find result
+;; 08       : tmp var for indirect indexing (B' C')
+;; 09       : tmp var, counter C'
+;; 10       : current number (must be x=tual to 00 to find solution)
+;; 11 -> 16 : the index of the 6 numbers to use (used to shuffle the numbers)
+;; 21 -> 25 : the operator to combine number 1 = + ; 2 = - ; 3 = ÷ and 4 = ×
+;;
+;; 29       : tmp, used in C
+;;
+;;     ×11 [21] ×12 [22] ×13 [23] × 14 [24] ×15 [25] ×16 = result
+;;
+;; of course intermediate results are used to check if result is found.
+   125 sto 00
+   10  sto 01
+   5   sto 02
+   25  sto 03
+   1   sto 04
+   100 sto 05
+   50  sto 06
+   ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; init
+
+lbl A
+   1   sto 11 ; all numbers from 1 to 6 and operators set to 1 (+)
+   2   sto 12
+   3   sto 13
+   4   sto 14
+   5   sto 15
+   6   sto 16
+   a'
+   r/s
+   ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; init operators
+
+lbl A'
+   1
+   sto 21
+   sto 22
+   sto 23
+   sto 24
+   sto 25
+   rtn
+   ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; iterate over all operators
+
+lbl B'
+ iocomp:
+   b                 ; compute result, returns only if not found
+   21 sto 08         ; first operator index
+ ionext:
+   4 x<>t
+   rcl ind 08
+   x=t iofound
+   1
+   sum ind 08
+   gto iocomp
+ iofound:
+   1
+   sto ind 08
+   op 28
+   25 x<>t           ; last operator index
+   rcl ind 08
+   inv x=t ionext    ; not 25
+   rtn               ; 25, so we reset the last operator meaning all tested
+   ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; iterate over permutations
+
+lbl C'
+   6 sto 09
+ iploop:
+   11 sto 08
+ ipcomp:
+   b'
+   16 x<>t
+   rcl 08
+   inv x=t ipcont
+   dsz 09 e'
+   gto iploop
+ ipcont:
+   rcl ind 08   ; exchanx≥t ×11 <-> (*11)+1
+   op 28
+   exc ind 08
+   op 38
+   exc ind 08
+   op 28
+   gto ipcomp
+   ;lbl C'
+   ;ipcomp:
+   ;    B'
+   ;    11 sto 08
+   ;ipnext:
+   ;    6 x<>t
+   ;    rcl ind 08
+   ;    x=t ipfound
+   ;    1
+   ;    sum ind 08
+   ;    gto ipcomp
+   ;ipfound:
+   ;    1
+   ;    sto ind 08
+   ;    Op 28
+   ;    16 x<>t
+   ;    rcl ind 08
+   ;    inv x=t ipnext
+   ;    rtn
+   ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; compute ×11 [21] ×12 [22] ×13 [23] × 14 [24] ×15 [25] ×16
+;; checking every intermediate result with 00.
+
+lbl B
+   0 sto 07       ; nb of number used
+   rcl 00
+   x<>t
+   rcl ind 11
+   sto 10
+   ;
+   ; 1
+   op 27
+   x=t e
+   rcl 21
+   x<>t
+   rcl ind 12
+   c
+   ;
+   ; 2
+   op 27
+   x=t e
+   rcl 22
+   x<>t
+   rcl ind 13
+   c
+   ;
+   ; 3
+   op 27
+   x=t e
+   rcl 23
+   x<>t
+   rcl ind 14
+   c
+   ;
+   ; 4
+   op 27
+   x=t e
+   rcl 24
+   x<>t
+   rcl ind 15
+   c
+   ;
+   ; 5
+   op 27
+   x=t e
+   rcl 25
+   x<>t
+   rcl ind 16
+   c
+   ;
+   ; 6
+   op 27
+   x=t e
+   rtn
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; compute : 10 [op in t 1 .. 4] 29
+
+lbl C
+   sto 29
+   1
+   x=t +
+   2
+   x=t -
+   3
+   x=t ÷
+   rcl 29
+   prd 10
+   gto =
+
+lbl +
+   rcl 29
+   sum 10
+   gto =
+
+lbl -
+   rcl 29
+   inv sum 10
+   gto =
+
+lbl ÷
+   rcl 29
+   inv prd 10
+
+lbl =
+   rcl 00
+   x<>t
+   rcl 10
+   rtn
+   ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; found number, 07 contains the number of number used
+
+lbl E
+   11 sto 08
+   21 sto 09
+ fnnext:
+   rcl ind 08
+   prt
+   rcl ind 09
+   prt
+   dsz 07 fnend
+   op 28
+   op 29
+   gto fnnext
+ fnend:
+   r/s
+   ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; bit found
+
+lbl E'
+   -1
+   ; error flag
+   r/s
