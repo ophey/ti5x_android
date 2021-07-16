@@ -11,15 +11,19 @@ dos2unix $1 > /dev/null 2>&1
 
 # convert to lowercase
 
-sed -i 's/\(.*\)/\L\1/' $1
+sed -i 's/^\([^;].*\)/\L\1/' $1
 
 # removes empty lines
 
 sed -i '/^$/d' $1
 
-# indent 3 characters
+# indent 3 characters, keep double comments ;; at first col
 
-sed -i 's/^ *//g; s/^\(.*\)/   \1/g' $1
+sed -i 's/^ *//g; s/^\(.*\)/   \1/g; s/   ;;/;;/g' $1
+
+# indent 1 character for labels
+
+sed -i 's/^   \([a-zA-Z0-9]*\):$/ \1\:/g' $1
 
 # remote trailing white spaces
 
