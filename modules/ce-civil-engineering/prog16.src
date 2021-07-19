@@ -1,0 +1,277 @@
+   r/s
+   rst
+   a'
+   1
+
+lbl A
+   exc 00
+   rst
+
+lbl B
+   exc 01
+   rst
+
+lbl C
+   exc 02
+   rst
+
+lbl D
+   exc 03
+   rst
+
+lbl E
+   exc 04
+   rst
+
+lbl A'
+   exc 05
+   rst
+
+lbl B'
+   exc 06
+   rst
+
+lbl E'
+   cp
+   stflg 1
+   .1
+   sto 07
+   rcl 00
+   ÷
+   rcl 01
+   =
+   sto 08
+   -
+   rcl 03
+   ÷
+   6
+   =
+   inv x≥t π
+   rcl 08
+   -
+   rcl 03
+   ÷
+   2
+   =
+   sto 09
+   +
+   rcl 04
+   =
+   sto 10
+   +
+   rcl 03
+   -
+   2
+   ×
+   rcl 04
+   =
+   sto 11
+   rcl 03
+   -
+   rcl 04
+   =
+   sto 12
+   rcl 09
+   ×
+   3
+   =
+   sto 13
+   rcl 06
+   ×
+   rcl 05
+   ÷
+   rcl 02
+   =
+   sto 14
+   ×
+   rcl 08
+   ×
+   12
+   =
+   sto 15
+   rcl 14
+   ×
+   6
+   ×
+   (
+   rcl 10
+   ×
+   rcl 04
+   +
+   rcl 11
+   ×
+   rcl 12
+   )
+   =
+   +/-
+   sto 16
+   rcl 03
+   sto 17
+
+lbl eng
+   rcl 17
+   nop
+   y**x
+   3
+   +
+   rcl 17
+   x²
+   ×
+   rcl 13
+   +
+   rcl 17
+   ×
+   rcl 15
+   +
+   rcl 16
+   =
+   sto 18
+   rcl 17
+   x²
+   ×
+   3
+   +
+   rcl 17
+   ×
+   2
+   ×
+   rcl 13
+   +
+   rcl 15
+   =
+   1/x
+   ×
+   rcl 18
+   =
+   sto 19
+   +/-
+   +
+   rcl 17
+   =
+   sto 17
+   rcl 19
+   |x|
+   -
+   rcl 07
+   =
+   x≥t eng
+   2
+   -
+   rcl 03
+   ÷
+   rcl 17
+   =
+   ×
+   rcl 06
+   ×
+   rcl 05
+   +
+   rcl 02
+   ×
+   rcl 17
+   ÷
+   2
+   =
+   1/x
+   ×
+   rcl 01
+   =
+   sto 20
+   ×
+   rcl 06
+   ÷
+   rcl 17
+   =
+   sto 21
+   ×
+   (
+   rcl 12
+   -
+   rcl 17
+   )
+   =
+   sto 22
+   rcl 21
+   ×
+   (
+   rcl 17
+   -
+   rcl 04
+   )
+   =
+   sto 23
+
+lbl lnx
+   sbr -
+   3637350207
+   op 01
+   sbr +
+   sto 07
+   30
+   c'
+   31
+   c'
+   14
+   c'
+   13
+   c'
+   2365
+   c'
+   1321
+   c'
+   22
+   c'
+   adv
+
+lbl adv
+   17
+   sto 07
+   44
+   c'
+   2
+   sum 07
+   7715
+   c'
+   op 27
+   772137
+   c'
+   772115
+   c'
+   inv ifflg 1 adv
+   sbr -
+   inv stflg 1
+   gto adv
+
+lbl C'
+   op 04
+   rc* 07
+   op 27
+
+lbl prt
+   ifflg 1 mean(x)
+   r/s
+   inv sbr
+
+lbl mean(x)
+   op 06
+   inv sbr
+
+lbl π
+   1
+   +/-
+   √x
+   rst
+
+lbl -
+   clr
+   2020202020
+   op 01
+   op 02
+   op 03
+   op 04
+
+lbl +
+   op 05
+   op 00
+   clr
+   inv sbr
