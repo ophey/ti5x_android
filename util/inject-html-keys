@@ -24,12 +24,25 @@ sed -i "s,@CLR,<SPAN CLASS=\"yellowbutton\">CLR</SPAN>,g" $1
 sed -i "s,@XT,<SPAN CLASS=\"brownbutton\">X⇌T</SPAN>,g" $1
 sed -i "s,@RST,<SPAN CLASS=\"brownbutton\">RST</SPAN>,g" $1
 sed -i "s,@RS,<SPAN CLASS=\"brownbutton\">R/S</SPAN>,g" $1
+sed -i "s,@CE,<SPAN CLASS=\"brownbutton\">CE</SPAN>,g" $1
+sed -i "s,@SUM,<SPAN CLASS=\"brownbutton\">SUM</SPAN>,g" $1
+sed -i "s,@RCL,<SPAN CLASS=\"brownbutton\">RCL</SPAN>,g" $1
+sed -i "s,@STO,<SPAN CLASS=\"brownbutton\">STO</SPAN>,g" $1
+sed -i "s,@INV,<SPAN CLASS=\"brownbutton\">INV</SPAN>,g" $1
+sed -i "s,@LNX,<SPAN CLASS=\"brownbutton\">lnx</SPAN>,g" $1
+sed -i "s,@SQRT,<SPAN CLASS=\"brownbutton\">\&Sqrt\;x</SPAN>,g" $1
 sed -i "s,@OP,<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">OP</SPAN>,g" $1
+sed -i "s,@NOP,<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">NOP</SPAN>,g" $1
 
 sed -i "s,@!PRT,<SPAN CLASS=\"alttext\">Prt</SPAN>,g" $1
 sed -i "s,@!OP,<SPAN CLASS=\"alttext\">Op</SPAN>,g" $1
+sed -i "s,@!NOP,<SPAN CLASS=\"alttext\">Nop</SPAN>,g" $1
 sed -i "s,@!WRITE,<SPAN CLASS=\"alttext\">Write</SPAN>,g" $1
 sed -i "s,@!LIST,<SPAN CLASS=\"alttext\">List</SPAN>,g" $1
+sed -i "s,@!ADV,<SPAN CLASS=\"alttext\">Adv</SPAN>,g" $1
+sed -i "s,@!DSZ,<SPAN CLASS=\"alttext\">Dsz</SPAN>,g" $1
+sed -i "s,@!LOG,<SPAN CLASS=\"alttext\">log</SPAN>,g" $1
+sed -i "s,@!IFF,<SPAN CLASS=\"alttext\">If Flg</SPAN>,g" $1
 
 sed -i "s,@A',<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">A'</SPAN>,g" $1
 sed -i "s,@B',<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">B'</SPAN>,g" $1
@@ -44,6 +57,11 @@ sed -i "s,@B,<SPAN CLASS=\"brownbutton\">B</SPAN>,g" $1
 sed -i "s,@C,<SPAN CLASS=\"brownbutton\">C</SPAN>,g" $1
 sed -i "s,@D,<SPAN CLASS=\"brownbutton\">D</SPAN>,g" $1
 sed -i "s,@E,<SPAN CLASS=\"brownbutton\">E</SPAN>,g" $1
+
+sed -i "s,@\([+-=]\),<SPAN CLASS=\"yellowbutton\">\1</SPAN>,g" $1
+
+sed -i "s,@\(x\),<SPAN CLASS=\"yellowbutton\">×</SPAN>,g" $1
+sed -i "s,@\(/\),<SPAN CLASS=\"yellowbutton\">÷</SPAN>,g" $1
 
 sed -i "s,@\([0-9]*\),<SPAN CLASS=\"whitebutton\">\1</SPAN>,g" $1
 
