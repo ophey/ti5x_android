@@ -62,6 +62,7 @@
     <string name="button_feedback">Keypress Feedback Setting:</string>
     <string name="input_code">EE-19 Input Code</string>
     <string name="construct_nam_code">EE-19 Construct NAM Code</string>
+    <string name="demo_card_store">Demo Card Store</string>
 
     <!-- messages -->
     <string name="loading">Loading…</string>

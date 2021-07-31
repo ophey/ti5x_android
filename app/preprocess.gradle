@@ -23,7 +23,7 @@ task preprocess {
             def (modcode, modname) = "$module".tokenize('-')
 
             exec {
-                executable '../util/mlmake'
+                executable '../util/libmake'
                 args "$moddata", "$resRaw", "$modcode"
             }
         }
@@ -34,12 +34,31 @@ task preprocess {
             def progdata = "${it.canonicalPath}"
             def module = "${it.name}"
 
-            exec {
-                executable '../util/makeprog'
-                args "${resRaw}/${module}.ti5p",
-                        "help00=$progdata/help",
-                        "cardsrc00=$progdata/card",
-                        "progsrc00=$progdata/prog"
+            if(it.name == "demo_card_store")
+            {
+                exec {
+                    executable '../util/makeprog'
+                    args "${resRaw}/${module}.ti5p",
+                            "help00=$progdata/help",
+                            "cardsrc00=$progdata/card",
+                            "progsrc00=$progdata/prog",
+                            "banksrc9004=$progdata/bank900",
+                            "banksrc9014=$progdata/bank901",
+                            "banksrc9022=$progdata/bank902",
+                            "banksrc9052=$progdata/bank905",
+                            "mem9033=$progdata/mem903",
+                            "mem9043=$progdata/mem904",
+                            "mem9052=$progdata/mem905"
+                }
+            }
+            else {
+                exec {
+                    executable '../util/makeprog'
+                    args "${resRaw}/${module}.ti5p",
+                            "help00=$progdata/help",
+                            "cardsrc00=$progdata/card",
+                            "progsrc00=$progdata/prog"
+                }
             }
         }
 

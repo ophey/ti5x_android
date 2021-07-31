@@ -3,6 +3,7 @@
 # This script builds the master library file.
 #
 # Copyright 2011-2013 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+# Copyright 2014, 2021 Pascal Obry <pascal@obry.net>.
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -49,7 +50,7 @@ for nr in range(1, 100) :
     if os.path.isfile(srcfile) :
         entry = {"nr" : nr, "src" : srcfile}
         mtime = max(mtime, os.path.getmtime(srcfile))
-        for key, namefmt in (("card", "card%02d.xml"), ("help", "help%02d.html")) :
+        for key, namefmt in (("card", "card%02d.xml"), ("help", "help%02d.html")):
           # additional optional files: card image and help
             thefile = os.path.join(srcdir, namefmt % nr)
             if os.path.isfile(thefile) :
@@ -57,9 +58,22 @@ for nr in range(1, 100) :
                 entry[key] = thefile
             #end if
         #end for
+        # In the following loop we will add the bank/mem 9xx[1-4] where xx is from 0 to 99.
+        for bi in range(1, 4):
+            for name, ext in (("bank%03d%1d", ""), ("banksrc%03d%1d",".src"), ("mem%03d%1d", "")):
+                key = name % (900 + nr - 1, bi)
+                filename = key + ext
+                thefile = os.path.join(srcdir, filename)
+                if os.path.isfile(thefile) :
+                    mtime = max(mtime, mtime_if(thefile))
+                    entry[key] = thefile
+                #end if
+            #end for
+        #end for
         sources.append(entry)
     #end if
-#end while
+#end for
+
 if not os.path.isfile(dstfile) or os.path.getmtime(dstfile) < mtime :
     try :
         os.makedirs(dstdir)
@@ -79,6 +93,12 @@ if not os.path.isfile(dstfile) or os.path.getmtime(dstfile) < mtime :
         #end if
         if "help" in module :
             args.append("help%02d=%s" % (module["nr"], module["help"]))
+        for b in range(1,4):
+            for index in range(0, 99):
+                for name in ("bank%03d%1d", "banksrc%03d%1d", "mem%03d%1d"):
+                    key = name % (index, b)
+                    if key in module :
+                        args.append(key+"=%s" % module[key])
         #end if
         args.append("progsrc%02d=%s" % (module["nr"], module["src"]))
     #end for

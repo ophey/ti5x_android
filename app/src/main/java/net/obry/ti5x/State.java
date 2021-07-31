@@ -159,15 +159,19 @@ class State {
   final int MaxMemories = 100; /* maximum addressable */
   final int MaxProgram = 960; /* absolute max on original model */
   final int MaxBanks = 100;
+  final int BankNumber = 4;
   /* 00 is user-entered program, others are loaded from library modules */
   final int MaxFlags = 10;
   final Number[] Memory;
-  private final Number[] CardMemory;
+  final Number[] CardMemory;
   final byte[] Program;
-  private final byte[] CardProgram;
+  final byte[] CardProgram;
+  final boolean[] CardBankUsed; // program or memory used in one of the 4 banks
   final ProgBank[] Bank; /* Bank[0].Program always points to Program */
   byte[] ModuleHelp; /* overall help for loaded library module */
   final boolean[] Flag;
+
+  final CardStore Store;
 
   /* special flag numbers: */
   private final static int FLAG_ERROR_COND = 7;
@@ -246,9 +250,11 @@ class State {
     }
     for (int i = 0; i < MaxMemories; ++i) {
       Memory[i] = new Number();
+      CardMemory[i] = new Number();
     }
     for (int i = 0; i < MaxProgram; ++i) {
       Program[i] = (byte) 0;
+      CardProgram[i] = (byte) 0;
     }
     if (ClearLibs) {
       ResetLibs();
@@ -256,6 +262,9 @@ class State {
     ProgMode = false;
     for (int i = 0; i < PrintRegister.length; ++i) {
       PrintRegister[i] = 0;
+    }
+    for (int i = 0; i < BankNumber; ++i) {
+      CardBankUsed[i] = false;
     }
     ResetEntry();
   }
@@ -288,6 +297,8 @@ class State {
     Program = new byte[MaxProgram];
     CardMemory = new Number[MaxMemories];
     CardProgram = new byte[MaxProgram];
+    CardBankUsed = new boolean[BankNumber];
+    Store = new CardStore();
     Bank = new ProgBank[MaxBanks];
     Bank[0] = new ProgBank(Program, null, null);
     Flag = new boolean[MaxFlags];
@@ -2624,33 +2635,56 @@ class State {
 
   void WriteBank() {
     Enter(96);
-    int N = (int) Math.abs(X.getInt());
-    if (N < 1 || N > 4) {
+
+    final int BANK_MEM = 30;
+    final int BANK_PROG = 240;
+
+    // Special case, not compatible with original TI-59 but handy for the emulator to support
+    // many cards. The actual card number is entered as N.nnn where N is the bank number between
+    // 1 and 4 and nnn the optional card index. The 9nn indexes are reserved for the internal
+    // libraries and programs.
+
+    final int N = (int)Math.abs(X.getInt());
+    final int CardId = (int)Math.abs((int)Math.round((X.get() - N) * 1000));
+    final String BankFilename = String.format("%03d.ti5b", CardId);
+    if ((N < 1 || N > 4) && (N != 0 || !InvState || CardId < 0)) {
       SetErrorState(true);
     } else if (InvState) {
-      for (int k = (4 - N) * 30; k < (4 - N + 1) * 30; k++) {
-        if (k < MaxMemories) {
-          Memory[k] = new Number(CardMemory[k]);
-        }
+
+      //  Read the bank data from the corresponding file. We do that only if the fractional
+      //  part is non zero or the bank is not loaded. When a single number between 1 and 4
+      //  is used and the bank has been initialized from a loaded program or library we do
+      //  use it.
+
+      if (CardId < 900) {
+        Persistent.LoadBankFile(ctx, N, CardId, BankFilename, Global.Calc, Global.Disp, Global.Buttons);
       }
-      System.arraycopy
-         (
-            CardProgram,(N - 1) * 240,
-            Program,    (N - 1) * 240,
-            240
-         );
+
+      if (Store.Contains(CardId)) {
+        Store.Get (CardId).LoadCard(this);
+        // reset labels to take into account possible new ones in loaded cards
+        ResetInLabels();
+      } else {
+        // card not found
+        SetErrorState(true);
+      }
     } else {
-      for (int k = (4 - N) * 30; k < (4 - N + 1) * 30; k++) {
+      // write memory : 30 values for the given bank
+      CardBankUsed[N-1] = true;
+
+      for (int k = (4 - N) * BANK_MEM; k < (4 - N + 1) * BANK_MEM; k++) {
         if (k < MaxMemories) {
-          CardMemory[k] = new Number(Memory[k]);
+         CardMemory[k] = new Number(Memory[k]);
         }
       }
       System.arraycopy
          (
-            Program,    (N - 1) * 240,
-            CardProgram,(N - 1) * 240,
-            240
+            Program,    (N - 1) * BANK_PROG,
+            CardProgram,(N - 1) * BANK_PROG,
+             BANK_PROG
          );
+
+      Persistent.SaveBankFile(ctx, N, CardId, BankFilename, Global.Calc);
     }
   }
 
@@ -3378,8 +3412,10 @@ class State {
             SetAngMode(ANG_GRAD);
             break;
           case 91:
-          case 96:
             StopProgram();
+            break;
+          case 96:
+            WriteBank();
             break;
           case 92: /*INV SBR*/
             Return();
@@ -3527,5 +3563,11 @@ class State {
 
   void FillInLabels() {
     FillInLabels(CurBank);
+  }
+
+  void ResetInLabels() {
+    // This is only needed on user's bank 0 when loading a bank-card
+    Bank[0].Labels = null;
+    FillInLabels(0);
   }
 }
