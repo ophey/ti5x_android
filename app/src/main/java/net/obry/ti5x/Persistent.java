@@ -86,6 +86,7 @@ public class Persistent {
   static final String LibExt = ".ti5l"; /* for library */
   static final String ProgramsDir = "Programs"; /* where to save user programs */
   static final String DataDir = "Download"; /* where to save exported data */
+  static final String BankDir = "Banks"; /* where to save bank files */
   static final String[] ExternalCalcDirectories =
       /* where to load programs/libraries from */
      {
@@ -236,11 +237,16 @@ public class Persistent {
           ButtonGrid Buttons
       ) {
 
+    // create BankDir
+    new java.io.File (ctx.getExternalFilesDir(null), BankDir).mkdirs();
+
     String ToFile = new java.io.File
-        (ctx.getExternalFilesDir(null), FileName).getAbsolutePath();
+        (ctx.getExternalFilesDir(null),
+            BankDir + "/" + FileName).getAbsolutePath();
 
     if(!new File(ToFile).isFile()) {
       Calc.SetErrorState(true);
+      return;
     }
 
     // open file
@@ -278,8 +284,12 @@ public class Persistent {
           State Calc
       ) {
 
+    // create BankDir
+    new java.io.File (ctx.getExternalFilesDir(null), BankDir).mkdirs();
+
     String ToFile = new java.io.File
-        (ctx.getExternalFilesDir(null), FileName).getAbsolutePath();
+        (ctx.getExternalFilesDir(null),
+            BankDir + "/" + FileName).getAbsolutePath();
 
     java.io.FileOutputStream Out;
     try {

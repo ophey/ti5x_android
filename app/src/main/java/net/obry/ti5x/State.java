@@ -2646,7 +2646,7 @@ class State {
 
     final int N = (int)Math.abs(X.getInt());
     final int CardId = (int)Math.abs((int)Math.round((X.get() - N) * 1000));
-    final String BankFilename = String.format("bank-%03d.ti5b", CardId);
+    final String BankFilename = String.format("%03d.ti5b", CardId);
     if ((N < 1 || N > 4) && (N != 0 || !InvState || CardId < 0)) {
       SetErrorState(true);
     } else if (InvState) {
