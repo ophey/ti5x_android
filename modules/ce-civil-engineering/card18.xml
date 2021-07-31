@@ -1,0 +1,12 @@
+<carddef style="user">
+<label slot="titleleft">R-SECTION IN R.C. - SHEAR REINFORCEMENT</label>
+<label slot="titleright">STR-18</label>
+<label slot="a">&gt;L:</label>
+<label slot="b">&gt;H: B:</label>
+<label slot="c">&gt;T<sub>MX</sub>: T<sub>MIN</sub>:</label>
+<label slot="d">&gt;<Sigma/>F: RCK:</label>
+<label slot="e">&gt;N: IP:</label>
+<label slot="aprime">&gt;AP:</label>
+<label slot="bprime">&gt;DS:</label>
+<label slot="eprime">RESULTS</label>
+</carddef>
