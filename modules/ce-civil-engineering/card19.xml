@@ -1,0 +1,14 @@
+<carddef style="user">
+<label slot="titleleft">DISTRIBUTION OF THE SEISMIC SHEAR FORCE</label>
+<label slot="titleright">STR-19</label>
+<label slot="a">&gt; W<sub>n</sub>:</label>
+<label slot="b">&gt;X<sub>n</sub>:</label>
+<label slot="c">&gt;Y<sub>n</sub>:</label>
+<label slot="d">&gt;KX<sub>n</sub>:</label>
+<label slot="e">&gt;KY<sub>n</sub>:</label>
+<label slot="aprime">n &gt; RCL</label>
+<label slot="bprime">n &gt; STO</label>
+<label slot="cprime">G<sub>XY</sub> : K<sub>XY</sub></label>
+<label slot="dprime">n &gt; C<sub>XY</sub> : A<sub>XY</sub></label>
+<label slot="eprime">RESULTS</label>
+</carddef>
