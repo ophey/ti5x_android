@@ -1736,12 +1736,12 @@ class State {
           OpNr = (int) Memory[OpNr].getInt();
         }
         if (OpNr >= 20 && OpNr < 30) {
-          Memory[OpNr - 20].add(Number.ONE);
+          Memory[OpNr - 20 + RegOffset].add(Number.ONE);
           OK = true;
           break;
         }
         if (OpNr >= 30 && OpNr < 40) {
-          Memory[OpNr - 30].sub(Number.ONE);
+          Memory[OpNr - 30 + RegOffset].sub(Number.ONE);
           OK = true;
           break;
         }
