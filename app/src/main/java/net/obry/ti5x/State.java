@@ -2644,10 +2644,20 @@ class State {
     // 1 and 4 and nnn the optional card index. The 9nn indexes are reserved for the internal
     // libraries and programs.
 
-    final int N = (int)Math.abs(X.getInt());
+    int Part = 0; // part of the bank to read (0 = Pro & Mem, default)
+    int N = (int)Math.abs(X.getInt());
     final int CardId = (int)Math.abs((int)Math.round((X.get() - N) * 1000));
+
+    while(InvState && N >= 10) {
+      Part = Part + 1;
+      N = N - 10;
+    }
+
     final String BankFilename = String.format("%03d.ti5b", CardId);
-    if ((N < 1 || N > 4) && (N != 0 || !InvState || CardId < 0)) {
+    if (Part > 2
+        || ((N < 1 || N > 4)
+            && (N != 0 || !InvState || CardId < 0)))
+    {
       SetErrorState(true);
     } else if (InvState) {
 
@@ -2661,8 +2671,8 @@ class State {
       }
 
       if (Store.Contains(CardId)) {
-        Store.Get (CardId).LoadCard(this);
-        // reset labels to take into account possible new ones in loaded cards
+        Store.Get (CardId).LoadCard(this, Part);
+        // reset labels to take into account possible new ones in loaded card
         ResetInLabels();
       } else {
         // card not found
