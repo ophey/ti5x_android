@@ -102,16 +102,19 @@ TABLE.keycodes > TBODY > TR > TD.unused
 <LI><A HREF="#Export">Exporting Data</A>
 <LI><A HREF="#Printer">Printer Emulation</A>
 <LI><A HREF="#Card">Card Emulation</A>
+<LI><A HREF="#Extensions">Extensions</A>
 <LI><A HREF="#Undocumented">Undocumented Features</A>
 <LI><A HREF="#OptionsMenu">Options Menu</A>
 <LI><A HREF="#Additional">Additional Information</A>
 </UL>
 
 <H2><A NAME="Intro">Introduction</A></H2>
-<P>ti5x is an emulator for the TI-58/58C/59 family of programmable scientific
-calculators which were manufactured by Texas Instruments from the late 1970s.
-It mostly tries to follow the original functionality; features marked “extension”
-are additions not present in the original.
+<P>ti5x is an emulator for the TI-58/58C/59 family of programmable
+  scientific calculators which were manufactured by Texas Instruments
+  from the late 1970s.  It mostly tries to follow the original
+  functionality; some features are additions not present
+  in the original and described in
+  the <a href="#Extensions">Extensions</a> section.
 
 <H2><A NAME="BasicOps"></A>Basic Operation</H2>
 <UL class="spaced">
@@ -177,12 +180,6 @@ you will get an error message.
 above it, rather than on key itself.
 <LI><SPAN CLASS="brownbutton">INV</SPAN> — modify next key to perform “inverse” function
 (meaning depends on key).
-<LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="yellowbutton">÷</SPAN>
-— <B>extension:</B> remainder on division.
-<LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">%</SPAN>
-— <B>extension:</B> compute percent of current number (X <SPAN CLASS="yellowbutton">÷</SPAN> 100)
-or if an operand is on the stack the percent of the operand multiplied by the current number
-(Op * X <SPAN CLASS="yellowbutton">÷</SPAN> 100). Example: 15 <SPAN CLASS="yellowbutton">+</SPAN> 25 <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">%</SPAN> <SPAN CLASS="yellowbutton">=</SPAN> 18.75
 <LI><SPAN CLASS="brownbutton">y<sup>x</sup></SPAN> — raise number entered before to power of number
 entered after.
 <LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="brownbutton">y<sup>x</sup></SPAN> — raise number
@@ -202,17 +199,11 @@ with its log base 10.
 T registers.
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Op</SPAN> <I>nn</I> —
 performs various special operations, depending on the value of <I>nn</I>.
-<LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Op</SPAN> <B>50</B> —
-<B>extension:</B> return the current time in seconds since 00:00:00 1st January 1970 UTC.
-<LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Op</SPAN> <B>51</B> —
-<B>extension:</B> return a cryptographically-strong random value in [0.0 .. 1.0).
-<LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Op</SPAN> <B>98</B> —
-<B>extension:</B> Trace execution: the result of each calculation step will
-be printed on the printer. A second <SPAN CLASS="alttext">Op</SPAN> <B>98</B> will revert.
-<LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Op</SPAN> <B>99</B> —
-<B>extension:</B> run the integrated test suite, return the number
-of tests passed or the flashing number of the test in error.
 </UL>
+
+<p>Some extensions exists,
+  see <a href="#AdditionalOpsExt">Additional Operations Extenssion</a>
+  section.
 
 <P>If you use both <SPAN CLASS="yellowbutton">2nd</SPAN> and <SPAN CLASS="brownbutton">INV</SPAN>,
 they can be pressed in either order. If you press one of these by mistake, just press it
@@ -263,14 +254,12 @@ the actual register to operate on.
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Op</SPAN> <B>2</B><I>n</I> —
 adds 1 to memory <B>0</B><I>n</I>.
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Op</SPAN> <B>3</B><I>n</I> —
-subtracts 1 from memory <B>0</B><I>n</I>.
-<LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Op</SPAN> <B>52</B> —
-<B>extension:</B> returns the current <I>register offset</I> as <I>nn</I>
-(<I>nn</I> ∈ <B>00</B> .. <B>99</B>).
-<LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Op</SPAN> <B>53</B> —
-<B>extension:</B> sets the register offset to the current number <I>nn</I>
-(<I>nn</I> ∈ <B>00</B> .. <B>99</B>).
+  subtracts 1 from memory <B>0</B><I>n</I>.
 </UL>
+
+<p>Some memory extensions exists, see <a href="#MemoriesExt">Memories
+    Extenssion</a> section.
+
 <P>The register offset is an adjustment to the numbering of all the memory registers:
 when the offset is set to <I>nn</I>, all references to register <I>ii</I> actually become
 references to register <I>ii</I> + <I>nn</I> (modulo 100). The purpose of this is to
@@ -310,12 +299,6 @@ wants to call it.
 <H2><A NAME="Trigonometry"></A>Trigonometry</H2>
 <UL class="spaced">
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">π</SPAN> — enter π.
-<LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">π</SPAN> — <B>extension:</B> enter the equivalent of 1 radian in the current angle units
-(1 if in radians, 180 ÷ π if in degrees, 200 ÷ π if in gradians). Dividing an angle in the
-current angle units by this number converts it to radians; multiplying a value in radians
-by this number converts it to the current angle units. Many algorithms are easiest to express
-if all angles are in radians; at the same time, you can make your program more user-friendly
-if it accepts inputs and displays results in the current angle units.
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Deg</SPAN> — switches angle units
 to degrees (default).
 <LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Rad</SPAN> — switches angle units
@@ -346,6 +329,9 @@ T register and Y-coordinate in X register.
 — rectangular-to-polar coordinate conversion: input X-coordinate in T register and Y-coordinate in
 X register, output will be angle in X register and magnitude in T register.
 </UL>
+
+<p>Some trigonometry extensions exist, see
+  <a href="#TrigonometryExt">Trigonometry Extenssion</a> section.
 
 <P><A HREF="#Topics">Back to Topics</A>
 
@@ -429,9 +415,11 @@ instruction is executed, in which case control returns here to continue from the
 instruction.
 <LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="brownbutton">SBR</SPAN> — return
 from the last subroutine entered.
-<LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="brownbutton">GTO</SPAN> <I>loc</I> —
-<B>extension:</B> put the address of <I>loc</I> into the display register.
 </UL>
+
+<p>Some transfer of control extensions exist, see
+  <a href="#ControlTransferExt">Transfer of Control Extenssion</a> section.
+
 <P>Any of the preceding that take a <I>loc</I> operand may be prefixed by
 <SPAN CLASS="yellowbutton">2nd</SPAN>
 <SPAN CLASS="alttext">Pgm</SPAN> <I>nn</I> (or <SPAN CLASS="yellowbutton">2nd</SPAN>
@@ -488,13 +476,20 @@ execution immediately stops.
 
 <H3><A NAME="Looping"></A>Looping</H3>
 <UL class="spaced">
-<LI><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Dsz</SPAN> <I>n</I> <I>loc</I> —
-decrement register <B>0</B><I>n</I>, and branch to <I>loc</I> if its new value is nonzero,
-otherwise continue with the following instruction.
-<LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Dsz</SPAN> <I>n</I> <I>loc</I> —
-decrement register <B>0</B><I>n</I>, and branch to <I>loc</I> if its new value is zero,
-otherwise continue with the following instruction.
+  <LI><SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">Dsz</SPAN> <I>n</I> <I>loc</I>
+    — decrement register <B>0</B><I>n</I>, and branch to <I>loc</I> if its
+    new value is nonzero, otherwise continue with the following
+    instruction.
+  <LI><SPAN CLASS="brownbutton">INV</SPAN>
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">Dsz</SPAN> <I>n</I> <I>loc</I>
+    — decrement register <B>0</B><I>n</I>, and branch to <I>loc</I> if its
+    new value is zero, otherwise continue with the following instruction.
 </UL>
+
+<p>Some looping extensions exist, see <a href="#LoopingExt">Looping
+    Extenssion</a> section.
 
 <P><A HREF="#Topics">Back to Topics</A>
 
@@ -704,9 +699,11 @@ location, or stop execution if already running.
 <LI><SPAN CLASS="brownbutton">SST</SPAN> — in calculation mode: execute one instruction.
 <LI><SPAN CLASS="brownbutton">RST</SPAN> — clear all flags and the subroutine return stack,
 and set the current location to <B>000</B>.
-<LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="brownbutton">RST</SPAN> — <B>extension:</B>
-close the current data-import and data-export files.
 </UL>
+
+<p>Some program execution extension exist, see
+  <a href="#ProgramExecutionExt">Program Execution Extenssion</a> section.
+
 <P>While a program is running, you can hold down the
 <SPAN CLASS="brownbutton">GTO</SPAN>/<SPAN CLASS="alttext">Pause</SPAN>
 key to slow down execution and see intermediate results appearing in the display. Release
@@ -744,10 +741,8 @@ If the program bank has a help page, it can be shown by tapping in the label car
 the currently-selected program bank into the user program area.
 </UL>
 
-<P><B>Extension:</B> pressing <SPAN CLASS="brownbutton">LRN</SPAN> while a nonzero program
-number is selected will display the contents of the selected program, rather than the
-user-program-entry area. The program number additionally appears to the left of the program
-location number. Library programs cannot be edited.
+<p>Some library program extension exist, see
+  <a href="#LibraryProgramsExt">Library Programs Extenssion</a> section.
 
 <P><A HREF="#Topics">Back to Topics</A>
 
@@ -938,11 +933,119 @@ register with the number showing in the display.
 
 <P><A HREF="#Topics">Back to Topics</A>
 
+<H2><A NAME="Extensions"></A>Extensions</H2>
+
+Thoses instructions are extensions compared to the original
+calculator.
+
+<p><A NAME="AdditionalOpsExt"></A>Additional Operations:</p>
+
+<UL class="spaced">
+<LI><SPAN CLASS="brownbutton">INV</SPAN> <SPAN CLASS="yellowbutton">÷</SPAN>
+— remainder on division.
+<LI><SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">%</SPAN> — compute percent of current number
+  (X <SPAN CLASS="yellowbutton">÷</SPAN> 100) or if an operand is on
+  the stack the percent of the operand multiplied by the current
+  number (Op * X <SPAN CLASS="yellowbutton">÷</SPAN> 100). Example:
+  15 <SPAN CLASS="yellowbutton">+</SPAN>
+  25 <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">%</SPAN> <SPAN CLASS="yellowbutton">=</SPAN>
+  18.75
+<LI><SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">Op</SPAN> <B>50</B> —
+  return the current time in seconds since 00:00:00 1st January 1970 UTC.
+<LI><SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">Op</SPAN> <B>51</B> —
+  return a cryptographically-strong random value in [0.0 .. 1.0).
+<LI><SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">Op</SPAN> <B>98</B> — Trace execution: the
+  result of each calculation step will be printed on the printer. A
+  second <SPAN CLASS="alttext">Op</SPAN> <B>98</B> will revert.
+<LI><SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">Op</SPAN> <B>99</B> —
+  run the integrated test suite, return the number
+  of tests passed or the flashing number of the test in error.
+</UL>
+
+<p><A NAME="MemoriesExt"></A>Memories:</p>
+
+<ul>
+  <LI><SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">Op</SPAN> <B>52</B> —
+    returns the current <I>register offset</I> as <I>nn</I>
+    (<I>nn</I> ∈ <B>00</B> .. <B>99</B>).
+  <LI><SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">Op</SPAN> <B>53</B> —
+    sets the register offset to the current number <I>nn</I>
+    (<I>nn</I> ∈ <B>00</B> .. <B>99</B>).
+</ul>
+
+<p><A NAME="TrigonometryExt"></A>Trigonometry:</p>
+
+<ul>
+  <LI><SPAN CLASS="brownbutton">INV</SPAN>
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">π</SPAN> — enter the equivalent of 1 radian
+    in the current angle units (1 if in radians, 180 ÷ π if in degrees,
+    200 ÷ π if in gradians). Dividing an angle in the current angle units
+    by this number converts it to radians; multiplying a value in radians
+    by this number converts it to the current angle units. Many algorithms
+    are easiest to express if all angles are in radians; at the same time,
+    you can make your program more user-friendly if it accepts inputs and
+    displays results in the current angle units.
+</ul>
+
+<p><A NAME="ControlTransferExt"></A>Transfer of Control:</p>
+
+<ul>
+  <LI><SPAN CLASS="brownbutton">INV</SPAN>
+    <SPAN CLASS="brownbutton">GTO</SPAN> <I>loc</I> —
+    put the address of <I>loc</I> into the display register.
+</ul>
+
+<p><A NAME="LoopingExt"></A>Looping:</p>
+
+<ul>
+  <LI><SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">Dsz</SPAN> <I>nn</I> <I>loc</I>
+    — decrement register <I>nn</I>, and branch
+    to <I>loc</I> if its new value is nonzero, otherwise continue with
+    the following instruction.
+  <LI><SPAN CLASS="brownbutton">INV</SPAN>
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">Dsz</SPAN> <I>nn</I> <I>loc</I>
+    — decrement register <I>nn</I>, and branch
+    to <I>loc</I> if its new value is zero, otherwise continue with
+    the following instruction.
+</ul>
+
+<p><A NAME="ProgramExecutionExt"></A>Program Execution:</p>
+
+<ul>
+  <LI><SPAN CLASS="brownbutton">INV</SPAN>
+    <SPAN CLASS="brownbutton">RST</SPAN> — close the current
+    data-import and data-export files.
+</ul>
+
+<p><A NAME="LibraryProgramsExt"></A>Library Programs:</p>
+
+<ul>
+  <li>pressing <SPAN CLASS="brownbutton">LRN</SPAN> while a nonzero
+    program number is selected will display the contents of the selected
+    program, rather than the user-program-entry area. The program number
+    additionally appears to the left of the program location
+    number. Library programs cannot be edited.
+</ul>
+
+<P><A HREF="#Topics">Back to Topics</A>
+
 <H2><A NAME="Undocumented"></A>Undocumented Features</H2>
 
-Only available in programs.
+Only available in programs. Those features were present in the
+original calculator but not documented in official manual.
 
-<H3>The HIR instuction</H3>
+<H3>The HIR instruction</H3>
 
 <P>The HIR instructions can be used to access the stack values. The
   stack comprises the last 8 values entered and not yet used in the
@@ -1004,28 +1107,28 @@ something like this:
 Y2AYBSQBRjT+////8almRFHPRInNo5pHhuZRMJolRzWPZsnRLDmaPEc1jwIqAQAiywk6eQCZrwAA
 AABJRU5ErkJggg==" ALT="Overflow Icon" HEIGHT="20px">) brings up a menu with the following options:
 <UL>
-<LI>Calc Help — bring up this help page. This can also be brought up
-by tapping the question-mark icon in the application title bar.
-<LI>Key Codes — toggle the display of program key codes next to the corresponding keys.
-<LI>Module Help — bring up the main help page for the currently-loaded library module, if any.
-<LI>Printer — bring up the virtual printer display. (Use the Back button to return to
-the main calculator display.)
-<LI>Load Program... — load a library module or saved program from a file on the SD card.
-The list to pick from is built from the contents of the “Programs” and “Download”
-directories.
-<LI>Feedback... — lets you choose what kind of feedback is used to indicate a button
-press; either a click (the default), a short pulse of the vibrator, or nothing.
-<LI>Save Program... — save the user-entered program to a file on the SD card. The file is
-saved in the “Programs” directory.
-<LI>Import Data... — lets you open a data file in the “Download” directory on the SD card
-to begin importing numbers from. (See <A HREF="#Import">Importing Data</A> for more details.)
-<LI>Export Data... — lets you create a data file on the SD card (or append to an existing data file)
-to write exported data to. The file is saved in the “Download” directory.
-(See <A HREF="#Export">Exporting Data</A> for more details.)
+<LI>Load Program... — load a library module or saved program from a
+  file on the SD card.  The list to pick from is built from the contents
+  of the “Programs” and “Download” directories.
+<LI>Save Program... — save the user-entered program to a file on the
+  SD card. The file is saved in the “Programs” directory.
+<LI>Import Data... — lets you open a data file in the “Download”
+  directory on the SD card to begin importing numbers
+  from. (See <A HREF="#Import">Importing Data</A> for more details.)
+<LI>Export Data... — lets you create a data file on the SD card (or
+  append to an existing data file) to write exported data to. The file
+  is saved in the “Download” directory.
+  (See <A HREF="#Export">Exporting Data</A> for more details.)
+<LI>Key Codes — toggle the display of program key codes next to the
+  corresponding keys.
+<LI>Feedback... — lets you choose what kind of feedback is used to
+  indicate a button press; either a click (the default), a short pulse
+  of the vibrator, or nothing.
 <LI>About ti5x... — displays version and copyright information for the app.
-<LI>Off — simulate a complete power down and quit the app. <B>This completely wipes all user
-program and memory contents.</B> The next time the app is started, it will initialize
-as though freshly installed.
+<LI>Off — simulate a complete power down and quit the app. <B>This
+    completely wipes all user program and memory contents.</B> The next
+  time the app is started, it will initialize as though freshly
+  installed.
 </UL>
 
 <P><A HREF="#Topics">Back to Topics</A>
