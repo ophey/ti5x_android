@@ -24,6 +24,8 @@ public class Card {
   private Number[] MemData;
   private int BankNr;
   private int Id;
+  private boolean HasMem;
+  private boolean HasProg;
 
   Card (
       int BankNr
@@ -33,6 +35,8 @@ public class Card {
     MemData = new Number[BANK_MEM];
     this.BankNr = BankNr;
     Id = -1;
+    HasMem = false;
+    HasProg = false;
 
     for (int k = 0; k < BANK_PROG; k++) {
       ProgData[k] = 0;
@@ -55,6 +59,8 @@ public class Card {
         MemData[k] = new Number(0.0);
       }
     }
+
+    HasMem = true;
   }
 
   public void SetProg
@@ -69,6 +75,8 @@ public class Card {
         ProgData[k] = 0;
       }
     }
+
+    HasProg = true;
   }
 
   public void WriteCard
@@ -76,41 +84,51 @@ public class Card {
           State Calc,
           int BankNr,
           int Id
-      )
-  {
+      ) {
     this.BankNr = BankNr;
     this.Id = Id;
 
-    int idx = 0;
-    for (int k = (4 - BankNr) * BANK_MEM; k < (4 - BankNr + 1) * BANK_MEM; k++) {
-      if (k < Calc.MaxMemories) {
-        MemData[idx++] = new Number(Calc.Memory[k]);
+    if (HasMem) {
+      int idx = 0;
+      for (int k = (4 - BankNr) * BANK_MEM; k < (4 - BankNr + 1) * BANK_MEM; k++) {
+        if (k < Calc.MaxMemories) {
+          MemData[idx++] = new Number(Calc.Memory[k]);
+        }
       }
     }
-    System.arraycopy
-        (
-            Calc.Program,    (BankNr - 1) * BANK_PROG,
-            ProgData,0,
-            BANK_PROG
-        );
+
+    if(HasProg) {
+      System.arraycopy
+          (
+              Calc.Program, (BankNr - 1) * BANK_PROG,
+              ProgData, 0,
+              BANK_PROG
+          );
+    }
   }
 
   public void LoadCard
       (
-          State Calc
+          State Calc,
+          int Part
       )
   {
-    int idx = 0;
-    for (int k = (4 - this.BankNr) * BANK_MEM; k < (4 - this.BankNr + 1) * BANK_MEM; k++) {
-      if (k < Calc.MaxMemories) {
-        Calc.Memory[k] = new Number(MemData[idx++]);
+    if(HasMem && (Part == 0 || Part == 2)) {
+      int idx = 0;
+      for (int k = (4 - this.BankNr) * BANK_MEM; k < (4 - this.BankNr + 1) * BANK_MEM; k++) {
+        if (k < Calc.MaxMemories) {
+          Calc.Memory[k] = new Number(MemData[idx++]);
+        }
       }
     }
-    System.arraycopy
-        (
-            ProgData,0,
-            Calc.Program,    (this.BankNr - 1) * BANK_PROG,
-            BANK_PROG
-        );
+
+    if(HasProg && (Part == 0 || Part == 1)) {
+      System.arraycopy
+          (
+              ProgData, 0,
+              Calc.Program, (this.BankNr - 1) * BANK_PROG,
+              BANK_PROG
+          );
+    }
   }
 }

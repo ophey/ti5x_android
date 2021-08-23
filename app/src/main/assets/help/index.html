@@ -903,19 +903,25 @@ register with the number showing in the display.
 <UL>
   <LI><b>N.xxx</b> <SPAN CLASS="yellowbutton">2nd</SPAN>
     <SPAN CLASS="alttext">write</SPAN> (<b>N</b> in 1 .. 4)
-  - write the bank number <b>N</b> into the
+  <p>Write the bank number <b>N</b> into the
   file <i>xxx.ti5b</i>. In the emulator <b>xxx</b> is the
   card-id. User&apos;s can have up to 900 cards recorded from <b>000</b>
   to <b>899</b>. The ids from <b>900</b> to <b>999</b> are reserved
   for the internal modules.
-
-  <LI><b>N.xxx</b> <SPAN CLASS="brownbutton">INV</SPAN>
+<br><br>
+  <LI><b>PN.xxx</b> <SPAN CLASS="brownbutton">INV</SPAN>
     <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">write</SPAN>
-     (<b>N</b> in 0 .. 4)
-  - read the bank file <i>xxx.ti5b</i> and place it into
-  bank <b>N</b>. Does nothing if the recorded bank number on the file
-  is not <b>N</b>. If <b>N</b> is 0 the bank number is taken as
-  recorded into the file.
+     (<b>N</b> in 0 .. 4 and <b>P</b> in 0 .. 2)
+    <p>Read the bank file <i>xxx.ti5b</i> and place it into
+    bank <b>N</b>. Does nothing if the recorded bank number on the file
+    is not <b>N</b>. If <b>N</b> is 0 the bank number is taken as
+    recorded into the file.
+    <p>If <b>P</b> is specified a part of the bank card is read, either:
+    <ul>
+      <li><b>0</b> : read both the programs and the memories
+      <li><b>1</b> : read the programs only
+      <li><b>2</b> : read the memories only
+    </ul>
 </UL>
 
 <p>Finaly, on the emulator there is no partitioning and both
