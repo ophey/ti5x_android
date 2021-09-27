@@ -1018,6 +1018,18 @@ calculator.
     — decrement register <I>nn</I>, and branch
     to <I>loc</I> if its new value is nonzero, otherwise continue with
     the following instruction.
+
+    <P>To enter <SPAN CLASS="alttext">Dsz</SPAN> 28 B for example:
+      <UL>
+        <LI>Key in <SPAN CLASS="alttext">Dsz</SPAN> 0 B, to put the
+        keycodes <i>97 00 12</i> into program memory.
+        <LI>Then go back two steps to <i>00</i>.
+        <LI>Insert one step and key in <SPAN CLASS="brownbutton">STO</SPAN> 28.
+        <LI>You will then have <i>97 42 28 12</i> as keycodes.
+        <LI>Go back and delete the <i>42</i>.
+        <LI>You will then have <i>97 28 12</i>.
+      </UL>
+
   <LI><SPAN CLASS="brownbutton">INV</SPAN>
     <SPAN CLASS="yellowbutton">2nd</SPAN>
     <SPAN CLASS="alttext">Dsz</SPAN> <I>nn</I> <I>loc</I>
