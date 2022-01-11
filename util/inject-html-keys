@@ -22,15 +22,22 @@ fi
 
 sed -i "s,@CLR,<SPAN CLASS=\"yellowbutton\">CLR</SPAN>,g" $1
 sed -i "s,@XT,<SPAN CLASS=\"brownbutton\">X⇌T</SPAN>,g" $1
+sed -i "s,@EQ,<SPAN CLASS=\"alttext\">X=T</SPAN>,g" $1
 sed -i "s,@RST,<SPAN CLASS=\"brownbutton\">RST</SPAN>,g" $1
 sed -i "s,@RS,<SPAN CLASS=\"brownbutton\">R/S</SPAN>,g" $1
 sed -i "s,@CE,<SPAN CLASS=\"brownbutton\">CE</SPAN>,g" $1
+sed -i "s,@EE,<SPAN CLASS=\"brownbutton\">EE</SPAN>,g" $1
 sed -i "s,@SUM,<SPAN CLASS=\"brownbutton\">SUM</SPAN>,g" $1
 sed -i "s,@RCL,<SPAN CLASS=\"brownbutton\">RCL</SPAN>,g" $1
 sed -i "s,@STO,<SPAN CLASS=\"brownbutton\">STO</SPAN>,g" $1
+sed -i "s,@GTO,<SPAN CLASS=\"brownbutton\">GTO</SPAN>,g" $1
 sed -i "s,@INV,<SPAN CLASS=\"brownbutton\">INV</SPAN>,g" $1
 sed -i "s,@LNX,<SPAN CLASS=\"brownbutton\">lnx</SPAN>,g" $1
 sed -i "s,@SQRT,<SPAN CLASS=\"brownbutton\">\&Sqrt\;x</SPAN>,g" $1
+sed -i "s,@1X,<SPAN CLASS=\"brownbutton\">1/x</SPAN>,g" $1
+sed -i "s,@X2,<SPAN CLASS=\"brownbutton\">x<sup>2</sup></SPAN>,g" $1
+sed -i "s,@YX,<SPAN CLASS=\"brownbutton\">Y<sup>x</sup></SPAN>,g" $1
+sed -i "s,@XA,<SPAN CLASS=\"alttext\">|x|</SPAN>,g" $1
 sed -i "s,@OP,<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">OP</SPAN>,g" $1
 sed -i "s,@NOP,<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">NOP</SPAN>,g" $1
 
@@ -42,7 +49,16 @@ sed -i "s,@!LIST,<SPAN CLASS=\"alttext\">List</SPAN>,g" $1
 sed -i "s,@!ADV,<SPAN CLASS=\"alttext\">Adv</SPAN>,g" $1
 sed -i "s,@!DSZ,<SPAN CLASS=\"alttext\">Dsz</SPAN>,g" $1
 sed -i "s,@!LOG,<SPAN CLASS=\"alttext\">log</SPAN>,g" $1
+sed -i "s,@!FIX,<SPAN CLASS=\"alttext\">Fix</SPAN>,g" $1
+sed -i "s,@!INT,<SPAN CLASS=\"alttext\">Int</SPAN>,g" $1
+sed -i "s,@!EXC,<SPAN CLASS=\"alttext\">Exc</SPAN>,g" $1
+sed -i "s,@!PRD,<SPAN CLASS=\"alttext\">Prd</SPAN>,g" $1
+sed -i "s,@!ENG,<SPAN CLASS=\"alttext\">Eng</SPAN>,g" $1
+sed -i "s,@!DEG,<SPAN CLASS=\"alttext\">Deg</SPAN>,g" $1
+sed -i "s,@!RAD,<SPAN CLASS=\"alttext\">Rad</SPAN>,g" $1
+sed -i "s,@!GRAD,<SPAN CLASS=\"alttext\">Grad</SPAN>,g" $1
 sed -i "s,@!IFF,<SPAN CLASS=\"alttext\">If Flg</SPAN>,g" $1
+sed -i "s,@!STF,<SPAN CLASS=\"alttext\">St Flg</SPAN>,g" $1
 
 sed -i "s,@A',<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">A'</SPAN>,g" $1
 sed -i "s,@B',<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">B'</SPAN>,g" $1
@@ -58,10 +74,10 @@ sed -i "s,@C,<SPAN CLASS=\"brownbutton\">C</SPAN>,g" $1
 sed -i "s,@D,<SPAN CLASS=\"brownbutton\">D</SPAN>,g" $1
 sed -i "s,@E,<SPAN CLASS=\"brownbutton\">E</SPAN>,g" $1
 
-sed -i "s,@\([+-=]\),<SPAN CLASS=\"yellowbutton\">\1</SPAN>,g" $1
-
 sed -i "s,@\(x\),<SPAN CLASS=\"yellowbutton\">×</SPAN>,g" $1
 sed -i "s,@\(/\),<SPAN CLASS=\"yellowbutton\">÷</SPAN>,g" $1
+sed -i "s,@\([+-=]\),<SPAN CLASS=\"yellowbutton\">\1</SPAN>,g" $1
+sed -i "s,@\([()]\),<SPAN CLASS=\"brownbutton\">\1</SPAN>,g" $1
 
 sed -i "s,@\([0-9]*\),<SPAN CLASS=\"whitebutton\">\1</SPAN>,g" $1
 
