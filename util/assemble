@@ -472,6 +472,7 @@ while True :
                                 elif expect == "reg" or expect == "noindreg" :
                                     if opval < 100 :
                                         out(opval)
+                                        flushout()
                                     else :
                                         report_error("reg/op/pgm number can't be > 99")
                                     #end if
