@@ -80,6 +80,7 @@ codes = \
         28 : simple("log"),
         29 : simple("CP"),
         20 : simple("2nd CLR"),
+        21 : simple("2nd"),
         # 31 invalid
         32 : simple("x⇌t"),
         33 : simple("x²"),
