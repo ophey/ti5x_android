@@ -98,7 +98,7 @@ symbols = \
         "c'" : simpleop(18),
         "d'" : simpleop(19),
         "e'" : simpleop(10),
-        "2nd" : {"act" : set_alt_state, "modifier" : True},
+        "2nd" : {"op" : 21, "act" : set_alt_state, "modifier" : True},
         "inv" : simpleop2(22, 27),
         "lnx" : simpleop2(23, 28),
         "log" : simpleop(28),
@@ -420,6 +420,7 @@ while True :
                     symbol = symbols.get(lookup)
                     numeric = re.search(r"^[\+\-]?(?:\d+(?:\.\d*)?|\.\d+?)(?:[eE][\+\-]?\d+)?$", cursym) != None
                     integral = re.search(r"^\d+$", cursym) != None
+
                     if symbol != None:
                         if "op" in symbol.keys() and symbol["op"] == 97:
                             is_dsz_op = True
