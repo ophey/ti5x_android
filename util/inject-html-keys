@@ -57,8 +57,8 @@ sed -i "s,@!ENG,<SPAN CLASS=\"alttext\">Eng</SPAN>,g" $1
 sed -i "s,@!DEG,<SPAN CLASS=\"alttext\">Deg</SPAN>,g" $1
 sed -i "s,@!RAD,<SPAN CLASS=\"alttext\">Rad</SPAN>,g" $1
 sed -i "s,@!GRAD,<SPAN CLASS=\"alttext\">Grad</SPAN>,g" $1
-sed -i "s,@!IFF,<SPAN CLASS=\"alttext\">If Flg</SPAN>,g" $1
-sed -i "s,@!STF,<SPAN CLASS=\"alttext\">St Flg</SPAN>,g" $1
+sed -i "s,@!IFF,<SPAN CLASS=\"alttext\">If&nbsp;Flg</SPAN>,g" $1
+sed -i "s,@!STF,<SPAN CLASS=\"alttext\">St&nbsp;Flg</SPAN>,g" $1
 
 sed -i "s,@A',<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">A'</SPAN>,g" $1
 sed -i "s,@B',<SPAN CLASS=\"yellowbutton\">2nd</SPAN> <SPAN CLASS=\"alttext\">B'</SPAN>,g" $1
