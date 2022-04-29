@@ -96,7 +96,7 @@ codes = \
         43 : regop("RCL", True),
         44 : regop("SUM", True),
         45 : simple("y**x"),
-        # 46 invalid
+        46 : simple("Ins"),
         47 : simple("CMs"),
         48 : regop("Exc", True),
         49 : regop("Prd", True),
@@ -106,7 +106,7 @@ codes = \
         53 : simple("("),
         54 : simple(")"),
         55 : simple("÷"),
-        # 56 invalid
+        56 : simple("Del"),
         57 : simple("Eng"),
         58 : {"sym" : "Fix", "act" : fix},
         59 : simple("Int"),

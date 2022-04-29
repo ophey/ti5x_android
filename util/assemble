@@ -118,7 +118,7 @@ symbols = \
         "1/x" : simpleop2(35, 30),
         "tan" : simpleop(30),
         # no "sst"
-        # no "ins"
+        "ins" : simpleop(46),
         "sto" : regop(42, 72), # I don't correctly handle "2nd STO"
         "st*" : {"op" : 72, "expect" : "reg"},
         "cms" : simpleop(47),
@@ -133,7 +133,7 @@ symbols = \
         "y**x" : simpleop(45),
         "ind" : {"modifier" : True, "isind" : True}, # special handling by parser
         # no "bst"
-        # no "del"
+        "del": simpleop(56),
         "ee" : simpleop2(52, 57),
         "eng" : simpleop(57),
         "(" : simpleop2(53, 58),
