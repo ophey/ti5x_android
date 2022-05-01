@@ -104,8 +104,7 @@ symbols = \
         "log" : simpleop(28),
         "ce" : simpleop2(24, 29),
         "cp" : simpleop(29),
-        "clr" : simpleop(25),
-        "%" : simpleop(20),
+        "clr" : simpleop2(25, 20),
         # no "lrn"
         "pgm" : {"op" : 36, "expect" : "pgmno"},
         "pg*" : {"op" : 62, "expect" : "reg"},

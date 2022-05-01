@@ -377,6 +377,7 @@ class State {
          // no number when:
             (op != 53     // opening a parenthesis
                   && op != 25  // clr
+                  && op != 20  // 2nd clr
                   && op != 24, // ce
                (InvState ? "I" : " ") + Printer.KeyCodeSym(op));
     }
@@ -3193,7 +3194,8 @@ class State {
             ClearEntry();
             break;
           case 20:
-            Percent();
+            ClearAll();
+            Enter(20);
             break;
           case 25:
             ClearAll();

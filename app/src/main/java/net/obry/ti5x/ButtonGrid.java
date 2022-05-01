@@ -1162,6 +1162,9 @@ class ButtonGrid extends android.view.View {
                     State.TRANSFER_LOC_SYMBOLIC
                  );
               break;
+            case 20:
+              Calc.Percent();
+              break;
             case 21:
             case 26:
               AltState = !AltState;
@@ -1178,9 +1181,6 @@ class ButtonGrid extends android.view.View {
             case 24:
               Calc.ClearEntry();
               break;
-            case 20:
-              Calc.Percent();
-              break;
             case 25:
               Calc.ClearAll();
               break;
@@ -1192,7 +1192,6 @@ class ButtonGrid extends android.view.View {
             case 29:
               Calc.ClearProgram();
               break;
-            /* 20 same as 25 */
             case 31: /*LRN*/
               Calc.SetProgMode(true);
               ResetOperands();
