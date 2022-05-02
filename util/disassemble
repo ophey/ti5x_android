@@ -253,6 +253,9 @@ while True :
                         elif val == 40 :
                             sys.stdout.write("Ind ")
                             expect = "reg"
+                        elif val == 51 : # 51 in loc must be code 51 and not the % extension
+                            sys.stdout.write("51")
+                            expect = None
                         else :
                             if val in codes and "sym" in codes[val] :
                                 sys.stdout.write(codes[val]["sym"])

@@ -1034,7 +1034,10 @@ class State {
   void Percent() {
     Enter(20);
 
-    X.div(100);
+    if (InvState)
+      X.mult(100);
+    else
+      X.div(100);
 
     if (OpStackNext > 0) {
       X.mult(OpStack[OpStackNext - 1].Operand);
