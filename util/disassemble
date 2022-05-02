@@ -101,7 +101,7 @@ codes = \
         48 : regop("Exc", True),
         49 : regop("Prd", True),
         # 40 (Ind) specially handled
-        # 51 invalid
+        51 : simple("%"), # extension: % and INV %
         52 : simple("EE"),
         53 : simple("("),
         54 : simple(")"),

@@ -3263,7 +3263,9 @@ class State {
           case 49:
             MemoryOp(MEMOP_MUL, GetProg(true), false);
             break;
-          /* 51 invalid */
+          case 51: /* extension % */
+            Percent();
+            break;
           case 52:
             EnterExponent();
             break;

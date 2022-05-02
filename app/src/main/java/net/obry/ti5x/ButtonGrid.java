@@ -600,15 +600,19 @@ class ButtonGrid extends android.view.View {
             }
 
             if (HasAltOverlay) {
+              int oCode = ThisButton.BaseCode / 10 * 10
+                  +
+                  (ThisButton.BaseCode % 10 + 5) % 10;
+              if (oCode == 20) { /* extension % is code 51 */
+                oCode = 51;
+              }
               Draw.drawText
                  (
                     String.format
                        (
                           Global.StdLocale,
                           "%02d",
-                          ThisButton.BaseCode / 10 * 10
-                             +
-                             (ThisButton.BaseCode % 10 + 5) % 10
+                          oCode
                        ),
                     Left,
                     CellBounds.bottom + (ButtonBounds.top - ButtonBounds.bottom) * 1.4f,
@@ -1134,6 +1138,9 @@ class ButtonGrid extends android.view.View {
                 break;
               case 92: /*digit 0*/
                 Calc.StoreInstr(0);
+                break;
+              case 20: /* extension %, store as code 51 */
+                Calc.StoreInstr(51);
                 break;
               default:
                 Calc.StoreInstr(ButtonCode);

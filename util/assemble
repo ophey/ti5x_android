@@ -105,6 +105,7 @@ symbols = \
         "ce" : simpleop2(24, 29),
         "cp" : simpleop(29),
         "clr" : simpleop2(25, 20),
+        "%" : simpleop(51),  # extension: % and INV %
         # no "lrn"
         "pgm" : {"op" : 36, "expect" : "pgmno"},
         "pg*" : {"op" : 62, "expect" : "reg"},
