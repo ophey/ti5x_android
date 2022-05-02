@@ -1,0 +1,75 @@
+#!/bin/bash
+
+#  Script to check that assemble / disassemble are idempotent
+
+function do-clean()
+{
+    local F=$1
+
+    util/beautify $F
+    cp $F $F.b
+
+    cat $F |
+        sed 's/\([^;]*\);.*/\1/g' |
+        tr '\n' ' ' |
+        sed 's/     / /g;s/    / /g;s/   / /g;s/  / /g' |
+        sed 's/     / /g;s/    / /g;s/   / /g;s/  / /g' |
+        sed 's/d\.ms/dms/g;s/inv sbr/rtn/g;s/∑+/sigma/g;s/mean(x)/mean/g' |
+        sed 's/rcl ind/rc\*/g;s/x⇌t/x=t/g;s/x≥t/x>=t/g;s/x<>t/x=t/g;s,2nd r/s,wrt,g' |
+        sed 's/sto ind/st\*/g;s/stflg/stf/g;s/ifflg/iff/g;s/op ind/op*/g' |
+        sed "s/2nd fix/fix/g;s/a´/A\'/g;s/b´/B\'/g;s/c´/C\'/g;s/d´/D\'/g;s/e´/E\'/g" |
+        sed 's/√xt/√x/g;s/sum ind/sm\*/g;s/|x|/abs/g;s/exc ind/ex\*/g;s/yˣ/y**x/g' |
+        sed "s/e'/E'/g;s/b'/B'/g;s/write/wrt/g;s/p->r/p→r/g;s/lbl c/lbl C/g;s/lbl d/lbl D/g" |
+        sed "s/lbl e/lbl E/g;s/lbl a'/lbl A'/g" |
+        sed 's/pgm ind/pg*/g;s/prd ind/pd*/g' |
+        sed 's/ 0\([0-9.][0-9.][0-9.]\)[ $]/ \1 /g' |
+        sed 's/ 0\([0-9\.][0-9\.]\)[ $]/ \1 /g' |
+        sed 's/ 0\([0-9\.]\)[ $]/ \1 /g' |
+        sed 's/ 0\([0-9\.]\)[ $]/ \1 /g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ \([0-9\.]\)\([0-9\.]\)/ \1 \2/g' |
+        sed 's/ $//g' \
+        > $F.new
+
+    mv $F.new $F
+}
+
+for prog in modules/*/prog*.src; do
+    echo -n $prog
+
+    case $prog in
+        # some progs are skiped as containing labels
+        modules/ct-user-contributions/prog03.src|modules/ct-user-contributions/prog30.src|modules/sy-surveying-library/prog03.src|modules/ml-master-library/prog26.src|modules/mu-math-utilities/prog05.src|modules/mu-math-utilities/prog17.src)
+            echo " " skip
+            continue
+            ;;
+        *)
+            echo
+            ;;
+    esac
+
+    cp $prog /tmp/prjold
+    do-clean /tmp/prjold
+
+    cat $prog | util/assemble | util/disassemble > /tmp/prjnew
+    do-clean /tmp/prjnew
+
+    diff /tmp/prjold /tmp/prjnew
+
+    [[ $? != 0 ]] && wdiff --no-common /tmp/prjold /tmp/prjnew
+done
