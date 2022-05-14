@@ -1,0 +1,9 @@
+<carddef style="user">
+<label slot="titleleft">VIERENDEEL TRUSS ON SUP. - VERTICAL LOAD</label>
+<label slot="titleright">STR-23</label>
+<label slot="bprime">p> RESULT.</label>
+<label slot="a">> P: H:</label>
+<label slot="b">p> KP:K<sub>0</sub>:K<sub>1</sub></label>
+<label slot="c">p> Lp:Q<sub>0</sub>:Q<sub>1</sub></label>
+<label slot="e"><epsilon/>>CALC.</label>
+</carddef>
