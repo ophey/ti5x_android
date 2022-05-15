@@ -149,7 +149,7 @@ codes = \
         93 : simple("."),
         94 : simple("+/-"),
         95 : simple("="),
-        96 : simple("2nd R/S"),
+        96 : simple("Write"),
         97 : {"sym" : "Dsz", "expect" : "unitreg", "expect2" : "loc"},
         98 : simple("Adv"),
         99 : simple("Prt"),
