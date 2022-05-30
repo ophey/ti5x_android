@@ -1,0 +1,9 @@
+<carddef style="user">
+<label slot="titleleft">VIERENDEEL TRUSS ON SUP. - SEISMIC LOADS</label>
+<label slot="titleright">STR-24</label>
+<label slot="bprime">p> RESULT.</label>
+<label slot="a">> P: H: F:</label>
+<label slot="b">p> KP:K<sub>0</sub>:K<sub>1</sub></label>
+<label slot="c">p> L<sub>p</sub>:</label>
+<label slot="e"><epsilon/>>CALC.</label>
+</carddef>
