@@ -1036,11 +1036,12 @@ class State {
 
     if (InvState)
       X.mult(100);
-    else
+    else {
       X.div(100);
 
-    if (OpStackNext > 0) {
-      X.mult(OpStack[OpStackNext - 1].Operand);
+      if (OpStackNext > 0) {
+          X.mult(OpStack[OpStackNext - 1].Operand);
+      }
     }
 
     if (X.isError()) {
