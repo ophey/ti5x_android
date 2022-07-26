@@ -1,0 +1,517 @@
+   r/s
+
+lbl nop
+   +
+   =
+   rst
+   nop
+   nop
+
+lbl B'
+   (
+   inv int
+   ×
+   6
+   inv log
+   )
+   ifflg 2 a'
+   (
+   ÷
+   100
+   )
+   inv sbr
+
+lbl A'
+   (
+   int
+   -
+
+lbl D'
+   500000
+   )
+   inv sbr
+
+lbl D
+   clr
+   93
+   e'
+   94
+   e'
+   rst
+
+lbl C
+   clr
+   91
+   e'
+   rst
+
+lbl B
+   clr
+   92
+   sbr x≥t
+   rst
+
+lbl A
+   clr
+   90
+   e'
+   rst
+
+lbl E'
+   inv lbl x≥t
+   stflg 2
+   sto 95
+   rc* 95
+   a'
+   r/s
+   sbr sto
+   exc ind 95
+   inv int
+   sm* 95
+   rc* 95
+   b'
+   inv ifflg 2 int
+   inv stflg 2
+   r/s
+   sbr sto
+   ÷
+   x⇌t
+   6
+   gto tan
+
+lbl int
+   r/s
+
+lbl eng
+   |x|
+   inv %
+   int
+   %
+   ÷
+   x⇌t
+   4
+
+lbl tan
+   inv log
+   inv x≥t nop
+   =
+   exc ind 95
+   int
+   sm* 95
+   clr
+   inv sbr
+
+lbl sto
+   int
+   +
+   |x|
+   x⇌t
+   (
+   d'
+   inv x≥t nop
+   =
+   inv sbr
+
+lbl clr
+   x⇌t
+   clr
+   .5
+   sto 92
+   d'
+   sum 92
+   sto 90
+   sto 91
+   sto 93
+   sto 94
+   90
+   sto 95
+   x⇌t
+   sbr eng
+   rst
+
+lbl -
+   2020202020
+   op 02
+   op 03
+   op 04
+
+lbl y**x
+   op 01
+   op 05
+   op 00
+   clr
+   inv sbr
+
+lbl C'
+   op 04
+   x⇌t
+   op 06
+   op 00
+   inv sbr
+
+lbl pgm
+   inv stflg 2
+   rcl 90
+   a'
+   cp
+   x=t =
+   x⇌t
+   34
+   c'
+   sto 97
+   ×
+   (
+   rcl 90
+   b'
+   prd 97
+   ÷
+   2
+   -
+   rcl 95
+   =
+   sto 96
+   rcl 90
+   b'
+   -
+   rcl 95
+   =
+   ×
+   rcl 90
+   a'
+   ×
+   rcl 95
+   ÷
+   2
+   =
+   +/-
+   exc 97
+
+lbl op
+   x⇌t
+   33
+   c'
+   rcl 96
+   x⇌t
+   3744
+   c'
+   sum 98
+   rcl 97
+   x⇌t
+   3044
+   c'
+   sum 99
+   sbr -
+
+lbl =
+   rcl 96
+   x⇌t
+   rcl 97
+   inv sbr
+
+lbl E
+   |x|
+   x⇌t
+   rcl 90
+   b'
+   inv x≥t nop
+   x⇌t
+   sto 95
+   clr
+   sto 98
+   sto 99
+   sbr -
+   3637350308
+   sbr y**x
+   rcl 90
+   b'
+   x⇌t
+   27
+   c'
+   rcl 95
+   x⇌t
+   44
+   c'
+   sbr -
+   sbr pgm
+   sbr p→r
+   sbr sin
+   sbr cos
+   sbr -
+   rcl 98
+   x⇌t
+   773744
+   c'
+   rcl 99
+   x⇌t
+   773044
+   c'
+   sbr -
+   rcl 98
+   x⇌t
+   rcl 99
+   rst
+
+lbl p→r
+   stflg 2
+   rcl 92
+   a'
+   |x|
+   +
+   rcl 92
+   b'
+   |x|
+   =
+   cp
+   x=t =
+   x⇌t
+   sto 97
+   rcl 92
+   a'
+   x⇌t
+   3013
+   c'
+   +
+   rcl 92
+   b'
+   x⇌t
+   3014
+   c'
+   =
+   inv stflg 2
+   ÷
+   rcl 90
+   b'
+   =
+   +/-
+   sto 96
+   ×
+   rcl 95
+   +
+   rcl 92
+   a'
+   =
+   +/-
+   exc 97
+   gto op
+
+lbl sin
+   inv stflg 2
+   rcl 91
+   a'
+   cp
+   x=t =
+   sto 97
+   -
+   x⇌t
+   21
+   c'
+   ×
+   rcl 91
+   b'
+   x⇌t
+   4421
+   c'
+   ÷
+   rcl 90
+   b'
+   =
+   sto 96
+   rcl 95
+   x⇌t
+   rcl 91
+   b'
+   x≥t prt
+   rcl 97
+   +/-
+   sum 96
+   rcl 90
+   b'
+   -
+   rcl 95
+   =
+   gto adv
+
+lbl prt
+   rcl 95
+
+lbl adv
+   ×
+   rcl 96
+   =
+   +/-
+   exc 97
+   gto op
+
+lbl del
+   (
+   rcl 95
+   -
+   rcl 93
+   b'
+   )
+   inv sbr
+
+lbl dsz
+   (
+   rcl 94
+   b'
+   -
+   rcl 93
+   b'
+   )
+   inv sbr
+
+lbl d.ms
+   rcl 93
+   a'
+   +
+   rcl 94
+   a'
+   )
+   inv sbr
+
+lbl ifflg
+   rcl 97
+   ÷
+   rcl 90
+   b'
+   ×
+
+lbl grad
+   (
+   (
+   1
+   +
+   rcl 94
+   a'
+   ÷
+   (
+   sbr d.ms
+   )
+   ×
+   sbr dsz
+   ÷
+   3
+   +
+   rcl 93
+   b'
+   )
+   =
+   inv sbr
+
+lbl cos
+   inv stflg 2
+   inv stflg 3
+   sbr d.ms
+   cp
+   x=t =
+   ÷
+   2
+   ×
+   sbr dsz
+   =
+   sto 97
+   rcl 93
+   a'
+   x⇌t
+   3402
+   c'
+   rcl 93
+   b'
+   x⇌t
+   4402
+   c'
+   rcl 94
+   a'
+   x⇌t
+   3403
+   c'
+   rcl 94
+   b'
+   x⇌t
+   4403
+   c'
+   rcl 95
+   x⇌t
+   rcl 94
+   b'
+   x≥t rad
+   clr
+   stflg 3
+   gto ∑+
+
+lbl rad
+   rcl 93
+   b'
+   inv x≥t lbl
+   rcl 97
+
+lbl ∑+
+   -
+   sbr ifflg
+   sto 96
+   ×
+   (
+   inv ifflg 3 π
+   rcl 90
+   b'
+   -
+
+lbl π
+   rcl 95
+   =
+   +/-
+   exc 97
+   gto op
+
+lbl lbl
+   rcl 97
+   -
+   sbr ifflg
+   inv ifflg 3 deg
+   ×
+   rcl 95
+
+lbl deg
+   -
+   sbr del
+   inv ifflg 3 pause
+   x²
+   ÷
+   2
+
+lbl pause
+   ×
+   rcl 93
+   a'
+   -
+   sbr del
+   x²
+   ×
+   inv ifflg 3 |x|
+   √x
+   ÷
+   3
+   ×
+
+lbl |x|
+   (
+   1
+   +/-
+   ×
+   sbr d.ms
+   ÷
+   2
+   ÷
+   sbr dsz
+   =
+   inv ifflg 3 fix
+   inv stflg 3
+   +/-
+   exc 97
+   gto op
+
+lbl fix
+   sto 96
+   stflg 3
+   gto lbl
