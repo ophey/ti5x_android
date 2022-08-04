@@ -1,0 +1,333 @@
+   r/s
+   rst
+   log
+   1
+
+lbl nop
+   +
+   =
+   rst
+
+lbl -
+   2020202020
+   =
+   op 02
+   op 03
+   op 04
+
+lbl y**x
+   op 01
+   op 05
+   op 00
+   clr
+   inv sbr
+
+lbl ×
+   sto 95
+   rc* 95
+   r/s
+   |x|
+   st* 95
+   1
+   sum 95
+   rcl 95
+   inv sbr
+
+lbl B
+   clr
+   91
+   e
+
+lbl C
+   93
+   e
+
+lbl D
+   clr
+   96
+
+lbl E
+   sbr ×
+   sbr ×
+   clr
+   rst
+
+lbl rcl
+   clr
+   90
+   sto 95
+   27
+   sbr op
+   ifflg 0 sum
+   14
+   sbr op
+   1401
+   sbr op
+   23
+   sbr op
+   2301
+   gto op
+
+lbl sum
+   96
+   sto 95
+   16
+   sbr op
+   1601
+
+lbl op
+   op 04
+   rc* 95
+   op 06
+   1
+   sum 95
+   inv sbr
+
+lbl sto
+   sbr -
+   3637350309
+   gto y**x
+
+lbl rad
+   (
+   rcl 91
+   -
+   rcl 92
+   )
+   inv sbr
+
+lbl D'
+   stflg 0
+   sbr sto
+   π
+   ×
+   (
+   rcl 96
+   x²
+   x²
+   -
+   rcl 97
+   x²
+   x²
+   )
+   ÷
+   64
+   =
+   sto 98
+   rcl 96
+   ÷
+   2
+   =
+   x⇌t
+   1524351520
+   +
+
+lbl d.ms
+   20
+   =
+   op 01
+   rcl 98
+   ÷
+   rcl 90
+   =
+   |x|
+   sto 99
+   adv
+   3617153740
+   op 02
+   op 05
+   op 00
+   sbr rcl
+   44
+   op 04
+   x⇌t
+   op 06
+   x⇌t
+   98
+   sto 95
+   25
+   sbr op
+   26
+   sbr op
+   sbr -
+   inv stflg 0
+   rcl 99
+   rst
+   nop
+
+lbl A'
+   sbr sto
+   rcl 91
+   ×
+   rcl 93
+   y**x
+   3
+   -
+   rcl 92
+   ×
+   rcl 94
+   y**x
+   3
+   =
+   ÷
+   12
+   =
+   sto 98
+   rcl 93
+   ÷
+   2
+   =
+   x⇌t
+   3517153720
+   +
+   gto d.ms
+
+lbl B'
+   sbr sto
+   rcl 92
+   ×
+   rcl 93
+   x²
+   +
+   sbr rad
+   ×
+   rcl 94
+   x²
+   =
+   ÷
+   2
+   ÷
+   (
+   rcl 92
+   ×
+   rcl 93
+   +
+   sbr rad
+   ×
+   rcl 94
+   =
+   sto 98
+   x⇌t
+   rcl 98
+   y**x
+   3
+   ×
+   rcl 91
+   -
+   sbr rad
+   ×
+   (
+   rcl 98
+   -
+   rcl 94
+   )
+   y**x
+   3
+   +
+   rcl 92
+   ×
+   (
+   rcl 93
+   -
+   rcl 98
+   )
+   y**x
+   3
+   =
+   ÷
+   3
+   =
+   sto 98
+   clr
+   ifflg 1 deg
+   37
+   gto d.ms
+
+lbl deg
+   27
+   gto d.ms
+
+lbl C'
+   stflg 1
+   gto b'
+
+lbl E'
+   sbr sto
+   sbr rad
+   ×
+   rcl 93
+   x²
+   +
+   rcl 92
+   ×
+   (
+   rcl 93
+   -
+   rcl 94
+   )
+   x²
+   =
+   ÷
+   2
+   ÷
+   (
+   sbr rad
+   ×
+   rcl 93
+   +
+   rcl 92
+   ×
+   (
+   rcl 93
+   -
+   rcl 94
+   =
+   sto 98
+   x⇌t
+   rcl 98
+   y**x
+   3
+   ×
+   rcl 91
+   +
+   sbr rad
+   ×
+   (
+   rcl 93
+   -
+   rcl 98
+   )
+   y**x
+   3
+   -
+   rcl 92
+   ×
+   (
+   rcl 98
+   -
+   rcl 93
+   +
+   rcl 94
+   )
+   y**x
+   3
+   =
+   ÷
+   3
+   =
+   sto 98
+   41
+   gto d.ms
+
+lbl A
+   clr
+   rcl 90
+   r/s
+   |x|
+   x⇌t
+   clr
+   x=t nop
+   x⇌t
+   sto 90
+   clr
+   rst

@@ -1,0 +1,13 @@
+<carddef style="user">
+<label slot="titleleft">STIFFNESSES 1</label>
+<label slot="titleright">STR-28</label>
+<label slot="aprime">R</label>
+<label slot="bprime">T</label>
+<label slot="cprime">L</label>
+<label slot="dprime">O</label>
+<label slot="eprime">U</label>
+<label slot="a">> L:</label>
+<label slot="b">> B:B<sub>0</sub>:</label>
+<label slot="c">> H:H<sub>0</sub>:</label>
+<label slot="d">> D:D<sub>0</sub>:</label>
+</carddef>
