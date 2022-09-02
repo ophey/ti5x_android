@@ -1,0 +1,11 @@
+<carddef style="user">
+<label slot="titleleft">STIFFNESSES 2</label>
+<label slot="titleright">STR-29</label>
+<label slot="aprime">Double T</label>
+<label slot="bprime">[</label>
+<label slot="cprime">H</label>
+<label slot="dprime">Rev. T</label>
+<label slot="a">> L:</label>
+<label slot="b">> B:B<sub>0</sub>:B<sub>1</sub>:</label>
+<label slot="c">> H:H<sub>0</sub>:H<sub>1</sub>:</label>
+</carddef>
