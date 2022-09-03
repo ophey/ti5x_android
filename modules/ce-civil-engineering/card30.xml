@@ -1,0 +1,10 @@
+<carddef style="user">
+<label slot="titleleft">PERFECTLY INGED BEAM</label>
+<label slot="titleright">STR-30</label>
+<label slot="primecenter">RESET: L <button>SBR</button> <button>RST</button>        RESULT: <button>SBR</button> <button>=</button> <Sigma/>MA <button>R/S</button> <Sigma/>MB</label>
+<label slot="a">> Q:L:</label>
+<label slot="b">> F:XF:</label>
+<label slot="c">> C:XC:</label>
+<label slot="d">>Q<sub>1</sub>:X<sub>1</sub>:Q<sub>2</sub>:X<sub>2</sub>:</label>
+<label slot="e"> STORE ></label>
+</carddef>

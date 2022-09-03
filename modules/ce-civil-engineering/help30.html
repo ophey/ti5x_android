@@ -1,0 +1,820 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help30</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #FFE071;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    font-size: 0.8em;
+  }
+
+.brownbutton
+  {
+    background : #63452B;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #F0EDD5;
+    font-size: 0.8em;
+  }
+
+.whitebutton
+  {
+    background : #E0DDC5;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+    font-size: 0.8em;
+  }
+
+.alttext
+  {
+    background : #000000;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #dcb151;
+    font-size: 0.8em;
+  }
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  }
+.deflist DD
+  {
+    margin-left : 4em;
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
+table
+ {
+    border: 1px solid;
+    border-collapse: collapse;
+    width: 95%;
+ }
+th
+ {
+    border: 1px solid;
+    text-align:center;
+ }
+</STYLE>
+</HEAD>
+<BODY>
+<H2>STR30 - PERFECTLY INGED BEAM</H2>
+
+<P>The program calculates the bending moments MA and MB at the ends of
+  a perfectly inged beam.
+
+<p>Different load conditions are possible, combinable in any order:
+<ol type="A">
+<li>uniform load "Q" along the whole beam;
+<li>concentrated force "F" in the coordinate point "XF";
+<li>concentrated torque "C" in the coordinate point "XC";
+<li>distributed load linearly variable from Q1 to Q2, applied from the coordinate X1 to X2.
+</ol>
+
+<P><IMG ALT="Perfectly Inged Beam Fig1" WIDTH="98%" SRC="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAfQAAADiCAMAAACP8MWKAAADAFBMVEX///8AAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAALI7fhAAABAHRSTlMAoP+TAdxVOPAKSOoHzWCth2bF
+GPr+JANJGQwverooiOT9MZSR21MPXrsu6wYp70boBQJEp+2qTQRywquGJ4Dh8bgU0TJZxB
+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
+AzuXuVAAAAAElFTkSuQmCC
+">
+
+<p>The coordinates are measured from the left node A of the beam.
+<p>The units of measurement used must be consistent and those of the
+  International System and related multiples or submultiples.  If
+  the lengths are expressed in "m" and forces in "Newton", the load
+  Q and the torque C must be expressed respectively in "N/m" and
+  "Nm".  The moments will therefore be expressed in "Nm".
+
+<p>The sign of the bending moments must respect the "Physical
+  Convention", positive if right-handed.
+
+<p>The program uses only the memory registers from 90 to 99.
+  Therefore it can be recalled from the library also during the use
+  of the structural calculation programs from STR22 to STR27 of the
+  lybrary-module without altering the contents of their archives.
+
+<H3>Method Of Calculation And Formulas Used</h3>
+
+<p>With reference to Figure 1, called
+<p>L = length of the beam;
+<p>Q = uniform load intensity on the beam;
+<p>F = intensity of the concentrated force F applied in the XF coordinate;
+<p>C = intensity of the concentrated torque C applied in the XC coordinate,
+<p>Q1, Q2 = initial (left) and final (right) values of the intensity of the
+  linearly variable load applied on the beam from the X1 to X2 coordinate.
+<p>MA, MB = perfect interlocking moments in "A" and "B" ends of the beamm
+  produced by the single load;
+<p>∑MA, ∑MB = total bending moment in joints "A" and "B".
+
+<p>The program calculates the perfect joint moments MA and MB produced by each
+  type of load, using the following formulas:
+
+<ol type="A">
+<li>Uniform load Q across the beam:  MA= -(QL²/12); MB= (QL²/12)
+
+<li>Concentrated force F in the XF coordinate:
+
+<p>MA= F(XF/L²)(L-XF)²; MB= F(XF²/L²)(L-XF).
+
+<li>Concentrated torque "C" in the XC coordinate:
+<p> MA= C(1-XC/L)[2-3(1-XC/L)]; MB= C(XC/L)(2-3XC/L);
+
+<li>Linearly distributed load from Q1 to Q2 in coordinates from X1 to X2:
+<p>Called:
+<p>DX= (X2-X1)/L;
+<p>DQ= Q2-Q1;
+<p>A1= DX/2 + X1/L;
+<p>A2= 2DX/3 + X1/L;
+<p>B1= (1-A1);
+<p>B2= (1-B1);
+<p>R = (Q1xL²/4)(DXxA1)[4(1-A1²)-DX] +
+<p>+(DQxDXxL²/540)[270(A2-A2³)-DX²(45A2-2DX)];
+<p>S = (Q1xL²/4)(DXxB1)[4(1-B1²)-DX] +
+<p>+(DQxDXxL²/540)[270(B2-B2³)-DX²(45B2+2DX)];
+</ol>
+
+<p>the program calculates MA=(2S-R)/3 and MB=(2R-S)/3.
+
+<p>Finally the program calculates ∑MA and ∑MB as the sum of the relative MA and
+  MB values produced by each load applied to the beam.
+<p>The physical convention of signs is used.
+
+<H3>Instructions For Data Input And Printing Results</h3>
+
+<p>The instructions for using the program are summarized in the
+  "card emulation”, similar to the magnetic card of the TI-59,
+  which appears below the display when the APP calls the program
+  from the library module. It summarizes the instructions assigned
+  to each definable key, transcribed in the box referring to the key.
+
+<p>The data input procedures differ according to the type of load
+  acting in the beam.  Several loads of the same type can also act
+  in the beam (see example).  With the exception of the reset
+  procedure described in point 1, the others can be performed
+  without a specific order.
+
+<ol>
+<li>RESET DATA-ARCHIVE </h4>
+     Enter "L" and press <span class="brownbutton">SBR</span><span class="brownbutton">RST</span>.
+<P>The program reset the values of loads and their coordinates stored for a previous
+     calculation.
+<p>At the end the display show "0".
+<p>In addition the program print the title of the program "STR30" and the value of
+     the length "L" of the beam.
+<p>To see the report in the phone video, tap the printer icon at the top center of the
+     app keyboard and scroll the displayed image. To return  to the app keyboard
+     tap the "<" icon at the bottom left or rigth of the phone screen.
+
+<li>Set Uniform Load "Q" And Length "L":
+<OL>
+<li>Press <span class="brownbutton">A</span>key. Display = stored value of "Q".
+      If it is incorrect, enter the new value.
+<p>Press <span class="brownbutton">R/S</span>to store "Q" and display "L" stored value.
+      If it is incorrect, enter the new value;
+<p>Press <span class="brownbutton">R/S</span>to store "L". The program displays the
+      moment "MA" due to the load "Q".
+<p>By continuing to press <span class="brownbutton">R/S</span>,
+      "MB" and "MA" will be displayed alternately.
+<p><p>
+<li><u>Stores MA and MB and display "∑MA" and "∑MB":</u>
+<p>Having calculated and displayed the moments MA and MB due to the load Q on the beam,
+      press <span class="brownbutton">E</span>key to add them to the overall moments ∑MA and ∑MB
+      rispectively, already existing in the joints of the beam.
+<p>At the end the program displays the new value of ∑MA. By continuing to press
+      <span class="brownbutton">R/S</span>, "∑MB" and "∑MA" will be displayed alternately.
+<p>In addition the program prints the data of the load "Q", the length "L"
+      of the beam and the moments "MA" and "MB" produced by this load in the joints.
+<p><p>
+<li><u>Notes:</u>
+<p>To provide data for another similar load, repeat the procedure correcting only
+       the data that changes.
+<p>To correct the load and/or its coordinate before performing step 2, repeat step 1.
+<p>To correct ∑MA and ∑MB after performing step 2, repeat step 1 and 2 changing only
+       the sign of "Q". Then repeat the procedure with the new value of "Q" and "L".
+<p><p></ol>
+
+
+<li>Set Concentrated Force "F" And Its "XF" Coordinate:
+
+<ol>
+<li>Press <span class="brownbutton">B</span>key. Diplay shows the
+  stored value of "F".  If it is incorrect, enter the new value.
+  <p>Press <span class="brownbutton">R/S</span>to store "F" and
+    display "XF" stored value.  If it is incorrect, enter the new
+    value
+<p>Press <span class="brownbutton">R/S</span>to store "XF". The
+  program displays the bending moment "MA" due to the force "F".
+<p>By continuing to press <span class="brownbutton">R/S</span>, "MB"
+  and "MA" will be displayed alternately.
+
+<li>Stores MA and MB and display "∑MA" and "∑MB":
+<p>Press <span class="brownbutton">E</span>key to add MA and MB
+  results to the overall moments ∑MA and ∑MB rispectively.
+<p>Follow the instructions of the previous step 2.
+</ol>
+
+
+<li>Set Concentrated Torque "C" And Its "XC" Coordinate:
+
+<ol>
+<li>Press <span class="brownbutton">C</span>key. Diplay shows the
+  stored value of "F".  If it is incorrect, enter the new value.
+<p>Press <span class="brownbutton">R/S</span>to store "F" and display
+  "XF" stored value.  If it is incorrect, enter the new value
+<p>Press <span class="brownbutton">R/S</span>to store "XF". The
+  program displays the bending moment "MA" due to the force "F".
+<p>By continuing to press <span class="brownbutton">R/S</span>, "MB"
+  and "MA" will be displayed alternately.
+
+<li>Stores MA and MB and display "∑MA" and "∑MB":
+  <p>Press <span class="brownbutton">E</span>key to add MA and MB
+    results to the overall moments ∑MA and ∑MB rispectively.
+  <p>Follow the instructions of the previous step 2.
+</ol>
+
+<li>Set Linear Distributed Load From "Q1" To "Q2" And Its Coordinates:
+
+<OL>
+<li>Press <span class="brownbutton">D</span>key. Diplay shows the
+  stored value of "Q1".  If it is incorrect, enter the new value.
+<p>Press <span class="brownbutton">R/S</span>to display "X1". If it is
+  incorrect, enter the new value.
+<p>Press <span class="brownbutton">R/S</span>to diplay the stored
+  value of "Q2".  If it is incorrect, enter the new value.
+<p>Press <span class="brownbutton">R/S</span>to display "X2". If it is
+  incorrect, enter the new value.
+<p>Press <span class="brownbutton">R/S</span>to store it.
+<p>At the end display shows the bending moment "MA" due to the linear
+  distributed load "Q1-Q2".
+<p>By continuing to press <span class="brownbutton">R/S</span>, "MB"
+  and "MA" will be displayed alternately.
+
+<li>Stores MA and MB and display "∑MA" and "∑MB":
+<p>Press <span class="brownbutton">E</span>key to add MA and MB
+  results to ∑MA and ∑MB rispectively.
+<p>Follow the instructions of the previous step 2.
+</ol>
+
+<li>Display And Print The Results "∑MA" and "∑MB"
+<ol>
+  <li>Press <span class="brownbutton">SBR</span>
+    <span class="yellowbutton">=</span>keys
+    to complete the printing of the report with the final values of
+    ∑MA and ∑MB in the joints of the beam.
+    <p>At the end the program display the bending moment "∑MA". By
+    continuing to press
+      <span class="brownbutton">R/S</span>, "∑MB" and "∑MA" will be
+      displayed alternately.
+</ol>
+</ol>
+
+<p><b>Warning</b>
+
+<p>If the new beam has loads and/or dimensions different from the
+  previous one, the operator can only modify the data that change
+  otherwise, he must first reset all the data with the previous
+  procedure "1".
+<p>For loads Q, F and C, the program accepts integer values, positive
+  or negative, less than "500'000" in absolute value. The length
+  "L" of the beam and the coordinates of the loads must be integer,
+  positive and less than "10'000".  Otherwise the program stops
+  flashing the limit value not allowed. In this case, press CLR to
+  eliminate the blinking and repeat the procedure.
+<p>The program eliminates any decimal digit from the load value, and
+  the decimal digits beyond the second from the coordinates value.
+<p>To view the print results report, touch the printer icon at the top
+  center of the app's keyboard.
+
+<H3>Example</h3>
+
+<P>Calculate "∑MA" and "∑MB" in the joints of the beam shown in the
+  example 26, page 72 of the "Manual for the calculation of
+  structures" (Texas Instruments edition, 1978) and reproduced in
+  the following figure 2.
+<p>
+
+<P><IMG ALT="Perfectly Inged Beam Fig2" WIDTH="98%" SRC="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAfQAAADnCAMAAADfPVQ5AAADAFBMVEX///8AAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAALI7fhAAABAHRSTlMAGYG0tooiDV2fuJ4/C0F1mEJR
+mYU9prcMTqy1cgWol3YjjSY37sZuaLn2Sl/mk3Ck/mD5zIfj+5pr2MECXvyIosT/pWrrfw
+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
+">
+
+<p>The beam is subject at three loads:
+<ol>
+<li>load Q = 500 dN/m uniformly distributed along the beam;
+<li>first load linearly distributed from Q1=0 in the coordinate X1=2 m,
+to Q2=1500 dN/m in the coordinate X2=3.5 m;
+<li>second load linearly distributed from Q1=1500 dN/m in the
+  coordinate X1=3,5 m,
+  to Q2=0 in the coordinate X2=5 m.
+</ol>
+
+<p>The beam is therefore symmetrically loaded and the moments at the
+  joints "∑MA" and "∑MB" must be equal and opposite.
+
+<ol>
+  <li>Reset Data-Archive
+    <p>Enter L= <b>7</b>and
+      press <span class="brownbutton">SBR</span><span class="brownbutton">RST</span>.
+      The program displays "<b>0</b>".
+    <p>In addition the program starts printing the report with the header "STR30"
+      and the value of the length "L" of the beam.
+<pre style="font-size:70%">
+|--------------------|
+|STR30               |
+|           7.      L|     <-- lenght of the beam in meter.
+|--------------------|
+</pre>
+<p>To see this report tap the printer icon at the top center of the keyboard.
+<p><p><p>
+
+<li>Set The Uniform Load "Q":
+<OL>
+<li>Press <span class="brownbutton">A</span>key. Display = stored
+  value of "Q"= <b>0</b>dN/m.  It is incorrect, then enter the new
+  value <b>500</b>dN/m.
+  <p>Press <span class="brownbutton">R/S</span>to store "Q".
+  <p>The program displays the stored value of "L" = <b>7</b>m.
+  <p>It is correct. Then press <span class="brownbutton">R/S</span>to store "L".
+  <p>The program calculates and displays the moment
+    "MA"= <b>-2041,666667</b>dNm due to the load "Q".
+  <p>Press <span class="brownbutton">R/S</span>and displays the moment
+    "MB"= <b>2041,666667</b>dNm.
+
+<li>Press <span class="brownbutton">E</span>key to add MA and MB to
+  the moments ∑MA and ∑MB rispectively, already existing in the
+  joints of the beam.
+  <p>At the end the program displays the new value of ∑MA
+    = <b>-2041,666667</b>dNm.
+  <p>Press <span class="brownbutton">R/S</span>to display the moment
+    "∑MB"= <b>2041,666667</b>dNm.
+  <p>The program adds to the report the data of the load Q, the length
+    of the beam L and the relative moments MA and MB in the joints.
+
+<pre style="font-size:70%">
+|--------------------|
+|STR27               |
+|           7.      L| <-- lenght of the beam (m)
+|--------------------|
+|         500.      Q| <-- uniform load in the beam (dN/m)
+|           7.      L| <-- lenght of the beam (m)
+| -2041,666667     MA| <-- moment in the joint A due to the load Q (dNm)
+|  2041,666667     MB| <-- moment in the joint B due to the load Q (dNm)
+|--------------------|
+
+</pre>
+</ol>
+
+<li>Set The First Linear Load "Q1-Q2":
+
+<OL>
+  <li>Press <span class="brownbutton">D</span>key. Display = stored
+    value of "Q1"= <b>0</b>dN/m.  It is
+    correct. Press <span class="brownbutton">R/S</span>to store it.
+    <p>The program displays the stored value of "X1" = <b>0</b>.
+    <p>It is incorrect. Then enter the new value <b>2</b>and press
+      <span class="brownbutton">R/S</span>to store it.
+    <p>The program displays the stored value of "Q2" = <b>0</b>.
+    <p>It is incorrect. Then enter the new value <b>1500</b>and press
+      <span class="brownbutton">R/S</span>to store it.
+    <p>The program displays the stored value of "X2" = <b>0</b>.
+    <p>It is incorrect. Then enter the new value <b>3.5</b>and  press
+      <span class="brownbutton">R/S</span>to store it.
+    <p>The program calculates and displays the moment
+      "MA"= <b>-1087.117347</b> due to the first linear load.
+    <p>Press <span class="brownbutton">R/S</span>and displays the moment
+      "MB"= <b>821,647959</b>.
+    <p>Before pressing the <span class="brownbutton">E</span>key to
+      store the MA and MB results, it is still possible to repeat the
+      procedure to view the stored data and make any corrections.
+
+ <li>Press <span class="brownbutton">E</span>key to add MA and MB to
+   the moments ∑MA and ∑MB rispectively, already existing in the
+   joints of the beam.
+   <p>The program displays the new value of ∑MA = <b>-3128.784014</b>.
+   <p>Press <span class="brownbutton">R/S</span>to display the moment
+     "∑MB"= <b>2863.031463</b>.
+   <p>The program adds to the previous report the data of the first
+     linear load "Q1-Q2", its coordinates X1 and X2 and the relative
+     moments MA and MB in the joints.
+<pre style="font-size:70%">
+|--------------------|
+|STR27               |
+|           7.      L| <-- lenght of the beam (m)
+|--------------------|
+|         500.      Q| <-- uniform load in the beam (dN/m)
+|           7.      L| <-- lenght of the beam (m)
+| -2041,666667     MA| <-- moment in the joint A due to the load Q (dNm)
+|  2041,666667     MB| <-- moment in the joint B due to the load Q (dNm)
+|--------------------|
+|           0.     Q1| <-- initial value of the liner load (dN/m)
+|           2.     X1| <-- coordinate of Q1 (m)
+|        1500.     Q2| <-- final value of the liner load (dN/m)
+|          3.5     X2| <-- coordinate of Q2 (m)
+| -1087.117347     MA| <-- moment in the joint A due to the load Q1-Q2 (dNm)
+|   821,647959     MB| <-- moment in the joint B due to the load Q1-Q2 (dNm)
+|--------------------|
+</pre>
+</ol>
+<p>
+
+<li>Set The Second Linear Load "Q1-Q2":
+<OL>
+  <li>Press <span class="brownbutton">D</span>key. Display = stored
+    value of "Q1"= <b>0</b>.  It is incorrect. Then enter the new
+    value <b>1500</b>and press
+    <span class="brownbutton">R/S</span>to store it.
+    <p>The program displays the stored value of "X1" = <b>2</b>.
+    <p>It is incorrect. Then enter the new value <b>3.5</b>and press
+      <span class="brownbutton">R/S</span>to store it.
+    <p>The program displays the stored value of "Q2" = <b>1500</b>.
+    <p>It is incorrect. Then enter the new value <b>0</b>and press
+      <span class="brownbutton">R/S</span>to store it.
+    <p>The program displays the stored value of "X2" = <b>3.5</b>.
+    <p>It is incorrect. Then enter the new value <b>5</b>and press
+      <span class="brownbutton">R/S</span>to store it.
+    <p>The program calculates and displays the moment "MA"= <b>-821,647959</b>
+      due to the second linear load.
+    <p>Press <span class="brownbutton">R/S</span>and displays the
+      moment "MB"= <b>1087.117347</b>.
+
+<li>Press <span class="brownbutton">E</span>key to add MA and MB to
+  the moments ∑MA and ∑MB rispectively, already existing in the
+  joints of the beam.
+  <p>The program displays the new value of ∑MA = <b>-3950.14881</b>.
+  <p>Press <span class="brownbutton">R/S</span>to display the moment
+    "∑MB"= <b>3950.14881</b>.
+  <p>The program adds to the previous report the data of the second linear load.
+    its coordinates X1 and X2 and the relative moments MA and MB in the joints.
+</ol>
+
+<li>Print The Results "∑MA" and "∑MB"
+<ol>
+  <li>Press <span class="brownbutton">SBR</span>
+    <span class="yellowbutton">=</span>keys
+    to complete the printing of the report with the final values of
+    ∑MA and ∑MB in the joints of the beam.
+    <p>At the end the program display the bending moment "∑MA". By
+    continuing to press
+    <span class="brownbutton">R/S</span>, "∑MB" and "∑MA" will
+     be displayed alternately.
+
+    <p>To view the print results report, touch the printer icon at the
+      top center of the app's keyboard, and in the phone video you will
+      see the following report with the final results.
+
+<pre style="font-size:70%">
+|--------------------|
+|STR27               |
+|           7.      L| <-- lenght of the beam (m)
+|--------------------|
+|         500.      Q| <-- uniform load in the beam (dN/m)
+|           7.      L| <-- lenght of the beam (m)
+| -2041,666667     MA| <-- moment in the joint A due to the load Q (dNm)
+|  2041,666667     MB| <-- moment in the joint B due to the load Q (dNm)
+|--------------------|
+|           0.     Q1| <-- initial value of the firt linear load (dN/m)
+|           2.     X1| <-- coordinate of Q1 (m)
+|        1500.     Q2| <-- final value of the first linear load (dN/m)
+|          3.5     X2| <-- coordinate of Q2 (m)
+| -1087.117347     MA| <-- moment in the joint A due to the load Q1-Q2 (dNm)
+|   821,647959     MB| <-- moment in the joint B due to the load Q1-Q2 (dNm)
+|--------------------|
+|        1500.     Q1| <-- initial value of the second linear load (dN/m)
+|          3.5     X1| <-- coordinate of Q1 (m)
+|           0.     Q2| <-- final value of the second linear load (dN/m)
+|           5.     X2| <-- coordinate of Q2 (m)
+|  -821,647959     MA| <-- moment in the joint A due to the load Q1-Q2 (dNm)
+|  1087.117347     MB| <-- moment in the joint B due to the load Q1-Q2 (dNm)
+|--------------------|
+|--------------------|
+|  -3950.14881    ∑MA| <-- total bending moment in the joint A (dNm)
+|   3950.14881    ∑MB| <-- total bending moment in the joint B (dNm)
+|--------------------|
+</pre>
+
+<p>As illustrated in the report, the final moments ∑MA and ∑MB are
+  equal to the sum of the corresponding moments MA and MB due to
+  each load applied to the beam.
+<p>∑MA = -2041,666667 -1087.117347 -821,647959 = <b>-3950.14881</b>dNm
+<p>∑MB = +2041,666667 +821,647959 +1087.117347 = <b>+3950.14881</b>dNm
+<p>Given the symmetry of the loads applied symmetrically along the beam,
+  the two values of the final moments in the joints are equal and opposite.
+<p>∑MA is negative and left-handed. It then stretches the upper fibers of the
+  beam section. ∑MB is positive rigth-handed and therefore stretches the upper
+  fibers like MA.
+<p>According to the convention of the signs of the Science of Constructions,
+  both moments are negative because they stretch the upper fibers.
+</ol>
+</ol>
+
+<h3>About The Program</h3>
+Number of steps: from <b>000</b>to <b>628</b>.
+<p>Registers used: from <b>90</b>to <b>99</b>
+<p>Flags used: <b>0</b> and <b>1</b>
+<p>Labels: <SPAN CLASS="alttext">Nop</SPAN>, <SPAN CLASS="yellowbutton">-</SPAN>
+, <SPAN CLASS="brownbutton">Y<sup>x</sup></SPAN>, <SPAN CLASS="brownbutton">lnx</SPAN>, <SPAN CLASS="brownbutton">CE</SPAN>, <SPAN CLASS="alttext">log</SPAN>, <SPAN CLASS="alttext">Pgm</SPAN>, <SPAN CLASS="alttext">Eng</SPAN>, <SPAN CLASS="brownbutton">STO</SPAN>, <SPAN CLASS="brownbutton">RST</SPAN>, <SPAN CLASS="yellowbutton">CLR</SPAN>,
+    <SPAN CLASS="alttext">Rad</SPAN>, <SPAN CLASS="alttext">Fix</SPAN>, <SPAN CLASS="alttext">Int</SPAN>, <SPAN CLASS="yellowbutton">=</SPAN>, <SPAN CLASS="alttext">Grad</SPAN>, <SPAN CLASS="brownbutton">R/S</SPAN>, and the definable keys.
+
+</BODY>
