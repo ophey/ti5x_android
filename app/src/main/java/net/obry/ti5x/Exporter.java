@@ -142,7 +142,7 @@ public class Exporter {
     /* writes a number to the export data file in a standard form that can
        be read in again by myself or other programs. */
     if (PrintOut != null) {
-      PrintOut.printf(Num.formatString(Global.StdLocale, Global.NrSigFigures));
+      PrintOut.printf(Num.formatString(Global.StdLocale, Global.NrSigFigures) + "\n");
     }
   }
 }

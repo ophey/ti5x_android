@@ -64,6 +64,9 @@ class State {
        Persistent.DataFormatException;
     /* returns the next input value or raises ImportEOFException if none. */
 
+    abstract void Reset()
+       throws Persistent.DataFormatException;
+
     void End() {
       /* stops further invocations of the task. Subclass may add
         further cleanup, but must also invoke this superclass method. */
@@ -2045,6 +2048,10 @@ class State {
             }
           }
           break;
+          case 97:
+            ResetImport();
+            OK = true;
+            break;
           case 98:
             TracePrintActivated = !TracePrintActivated;
             OK = true;
@@ -2743,6 +2750,12 @@ class State {
     if (Import != null) {
       Import.End();
       Import = null;
+    }
+  }
+
+  void ResetImport() {
+    if (Import != null) {
+      Import.Reset();
     }
   }
 
