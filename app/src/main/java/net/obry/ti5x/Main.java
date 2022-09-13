@@ -416,7 +416,7 @@ public class Main extends android.app.Activity {
             getString(R.string.exported_data),
             Persistent.DataDir,
             SaveAsExtra,
-            ""
+            ".dat"
          );
     }
   }
@@ -1061,6 +1061,10 @@ public class Main extends android.app.Activity {
                           new java.io.File(getExternalFilesDir(null), Persistent.DataDir)
                           .getAbsolutePath();
                       new java.io.File(SaveDir).mkdirs();
+                      if(FileName.indexOf('.') == -1) {
+                        // no extension added, use default
+                        FileName = FileName + Persistent.DataExt;
+                      }
                       FileName = SaveDir + FileName;
                       /* note FileName will have leading slash */
                     }

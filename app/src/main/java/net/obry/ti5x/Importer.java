@@ -45,7 +45,7 @@ public class Importer {
     public void Reset() {
       if (Data != null) {
         try {
-          // reset() is not support, so we close and reopen the file
+          // reset() is not supported, so we close and reopen the file
           Data.close();
           Data = new java.io.FileInputStream (this.FileName);
           LineNr = 0;

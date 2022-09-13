@@ -2052,6 +2052,10 @@ class State {
             ResetImport();
             OK = true;
             break;
+          case 96:
+            ImportNew();
+            OK = true;
+            break;
           case 98:
             TracePrintActivated = !TracePrintActivated;
             OK = true;
@@ -2757,6 +2761,20 @@ class State {
     if (Import != null) {
       Import.Reset();
     }
+  }
+
+  void ImportNew() {
+      final int N = (int)Math.abs(X.getInt());
+      final String DataFilename = String.format("/%d.dat", N);
+      final String SaveDir =
+        new java.io.File(ctx.getExternalFilesDir(null), Persistent.DataDir)
+            .getAbsolutePath();
+      ClearImport();
+      try {
+        Global.Import.ImportData(SaveDir + DataFilename);
+      } catch (Persistent.DataFormatException Failed) {
+        SetErrorState(true);
+      }
   }
 
   void ResetReturns() {
