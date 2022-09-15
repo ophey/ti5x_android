@@ -2763,6 +2763,12 @@ class State {
     }
   }
 
+  void ResetExport() {
+    if(Global.Export !=null) {
+      Global.Export.Close();
+    }
+  }
+
   void ImportNew() {
       final int N = (int)Math.abs(X.getInt());
       final String DataFilename = String.format("/%d.dat", N);
@@ -2785,9 +2791,7 @@ class State {
   void ResetProg() {
     if (InvState) /* extension! */ {
       ClearImport();
-      if (Global.Export != null) {
-        Global.Export.Close();
-      }
+      ResetExport();
     } else {
       for (int i = 0; i < MaxFlags; ++i) {
         Flag[i] = false;
