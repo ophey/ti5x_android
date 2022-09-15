@@ -2053,7 +2053,11 @@ class State {
             OK = true;
             break;
           case 96:
-            ImportNew();
+            if (InvState) {
+              ExportNew();
+            } else {
+              ImportNew();
+            }
             OK = true;
             break;
           case 98:
@@ -2781,6 +2785,21 @@ class State {
       } catch (Persistent.DataFormatException Failed) {
         SetErrorState(true);
       }
+  }
+
+  void ExportNew() {
+    final int N = (int)Math.abs(X.getInt());
+    final String DataFilename = String.format("/%d.dat", N);
+    final String SaveDir =
+        new java.io.File(ctx.getExternalFilesDir(null), Persistent.DataDir)
+            .getAbsolutePath();
+    new java.io.File(SaveDir).mkdirs();
+    ResetExport();
+    try {
+      Global.Export.Open(SaveDir + DataFilename, false, true);
+    } catch (Persistent.DataFormatException Failed) {
+      SetErrorState(true);
+    }
   }
 
   void ResetReturns() {
