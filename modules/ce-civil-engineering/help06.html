@@ -1,0 +1,336 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #FFE071;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    font-size: 0.8em;
+  }
+
+.brownbutton
+  {
+    background : #63452B;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #F0EDD5;
+    font-size: 0.8em;
+  }
+
+.whitebutton
+  {
+    background : #E0DDC5;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+    font-size: 0.8em;
+  }
+
+.alttext
+  {
+    background : #000000;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #dcb151;
+    font-size: 0.8em;
+  }
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  }
+.deflist DD
+  {
+    margin-left : 4em;
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
+</STYLE>
+</HEAD>
+<BODY>
+<H1>STR-06 - Wedged Portal</H1>
+
+<P>The program calculates the support reactions, the moments at the
+  nodes and the moments in the position of the load in a symmetrical
+  wedged portal.  Three load conditions are foreseen: uniform load Q
+  on the beam, concentrated load PV in any position A<sub>2</sub> on
+  the beam, concentrated load PR in any position A<sub>1</sub> on the
+  pillar. The section J of pillars and beam must be constant.
+
+<P><IMG ALT="Wedged Portal" WIDTH="98%" SRC="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAfQAAAEpCAMAAABSqCBJAAADAFBMVEUAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAACzMPSIAAABAHRSTlMADO3x7Alq9v30Y9v/1zbvo/Pq
+LVhBC7DnDqUZyPj87ulbEP6Wp+gG1uTcLHf3KDTr9WZC8PJ/OYYB4dkR2Gnlt0Avkrymvf
+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
+">
+
+  <DL>
+    <DD>K = <sup>J<sub>2</sub></sup> &frasl; <sub>J<sub>1</sub></sub>
+    <DD>D<sub>1</sub> = K + 2
+    <DD>D<sub>2</sub> = 6 K + 1
+    <DD>B<sub>1</sub> = H - A<sub>1</sub>
+    <DD>B<sub>2</sub> = L - A<sub>2</sub>
+    <DD>&alpha;<sub>1</sub> = <sup>A<sub>1</sub></sup> &frasl; <sub>H</sub>
+    <DD>&alpha;<sub>2</sub> = <sup>A<sub>2</sub></sup> &frasl; <sub>L</sub>
+    <DD>&beta;<sub>1</sub> = 1 - &alpha;<sub>1</sub>
+    <DD>&beta;<sub>2</sub> = 1 - &alpha;<sub>2</sub>
+  </DL>
+
+<h2>Example</h2>
+
+<OL>
+<LI>Print option: <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">St flg</SPAN>
+  <SPAN CLASS="whitebutton">1</SPAN>
+
+<LI>Set geometric data:
+  <UL>
+    <LI>height, enter 300 cm, press <SPAN CLASS="brownbutton">A</SPAN>, display <SPAN CLASS="displayb">300</SPAN>.
+    <LI>length, enter 500 cm, press <SPAN CLASS="brownbutton">B</SPAN>, display <SPAN CLASS="displayb">500</SPAN>.
+    <LI>mom. inertia J<sub>1</sub>:, enter 160000 cm<sup>4</sup>, press <SPAN CLASS="brownbutton">C</SPAN>,
+    display <SPAN CLASS="displayb">160000</SPAN>.
+    <LI>mom. inertia J<sub>2</sub>:, enter 312500 cm<sup>4</sup>, press <SPAN CLASS="brownbutton">D</SPAN>,
+      display <SPAN CLASS="displayb">312500</SPAN>.
+  </UL>
+<LI>Set the load and start the calculation:
+  <BR>Without print option each result will be displayed by pressing R/S in succession.
+  <UL>
+    <LI>Uniform load Q on the beam<br>
+      load Q, enter 40 dN/cm, press <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">A'</SPAN>
+      <pre>
+          40.      Q
+              M
+  233918.1287      A
+ -467836.2573      B
+ -467836.2573      C
+  233918.1287      D
+  782163.7427      *
+              R
+  1754.385965      A
+  1754.385965      D
+              V
+       10000.      A
+       10000.      D
+      </pre>
+      (*) = moment in the middle of the beam
+    <LI>Or Force concentrated  P<sub>v</sub> on the beam<br>
+      load P<sub>V</sub>, enter 2000 dN, press <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">B'</SPAN>, display <SPAN CLASS="displayb">2000</SPAN>
+      <BR>coordinated A<sub>2</sub>, enter 250 cm, press <SPAN CLASS="brownbutton">R/S</SPAN>
+      <pre>
+        4000.     PV
+         250.     A2
+              M
+   70175.4386      A
+ -140350.8772      B
+ -140350.8772      C
+   70175.4386      D
+  359649.1228      *
+              R
+  526.3157895      A
+  526.3157895      D
+              V
+        2000.      A
+        2000.      D
+      </pre>
+      (*) = moment under the load
+    <LI>Or Force concentrated  P<sub>R</sub> on the pillar<br>
+    load P<sub>R</sub>, enter 4000 dN, press <SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">C'</SPAN>, display <SPAN CLASS="displayb">4000</SPAN>
+      <BR>coordinated A<sub>1</sub>, enter 300 cm, press <SPAN CLASS="brownbutton">R/S</SPAN>:
+      <pre>
+        2000.     PR
+         400.     A1
+              M
+ -219277.1084      A
+  180722.8916      B
+ -180722.8916      C
+  219277.1084      D
+           0.      *
+              R
+       -1000.      A
+        1000.      D
+              V
+ -722.8915663      A
+  722.8915663      D
+      </pre>
+      (*) = moment under the load
+  </UL>
+
+  <LI>For a new calculation, go back to step 3 if only the load data
+    changes, else go back to step 2.
+</OL>
+
+<P>Flags used:
+<UL>
+<LI>1
+</UL>
+
+<P>Registers used: 00 to 23
+<p>Labels: press <SPAN CLASS="brownbutton">RST</SPAN> (<SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">OP</SPAN> <SPAN CLASS="whitebutton">08</SPAN>)
+
+<pre>
+    Adv, Prt, Op, Wrt. Lst, :, =
+</pre>

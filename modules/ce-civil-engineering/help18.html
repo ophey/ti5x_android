@@ -1,0 +1,777 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #FFE071;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    font-size: 0.8em;
+  }
+
+.brownbutton
+  {
+    background : #63452B;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #F0EDD5;
+    font-size: 0.8em;
+  }
+
+.whitebutton
+  {
+    background : #E0DDC5;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+    font-size: 0.8em;
+  }
+
+.alttext
+  {
+    background : #000000;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #dcb151;
+    font-size: 0.8em;
+  }
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  }
+.deflist DD
+  {
+    margin-left : 4em;
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
+</STYLE>
+</HEAD>
+<BODY>
+
+<H2>STR18 − Rectangular Section in Reinforced Concrete - Shear Reinforcement</H2>
+<P>The program calculates the shear reinforcement of a beam section
+  reinforced concrete rectangular section.
+
+<p>The condition imposed by the operator is the area of the bend
+  irons present in section.
+
+<p>The units of measurement must be consistents and those of the
+  International System: lengths in meters, forces in Newton and
+  related multiples or submultiples.
+
+<p>The sign of the shear stress in the section is positive according
+  to the construction science convention.
+
+<P>   <! insert images base64 "18structure.jpg">
+<center>
+  <IMG ALT="Rectangular Section Shear Reinforcement" WIDTH="98%" SRC="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAfQAAAHZCAYAAABw5MliAAA0F0lEQVR4AezYA8wdaRjH0b
+pr27Zt27Zt2zaDtW2jtm3b1mfOnkl2kqkbN7fPLznXdyb+J2+d5bwoiqLdmMbxRFEURVGk
+LTjrf5uQtQn7shZZG7Av69KQfdmGNTmPk1mDrG3YlwYcxGVsz4KtzuFcys7UJWtH9mENLu
+Mo3ibhVnYgrT4HcimH04goiqIoWiH6lOlUUMlU3iXtExKuJOtVEh5gPWYwhDFUUM0ITiTt
+X4rpTClVzOYbsq5nOJWUUERH1iWtE1PoRUIlSU4vtqcvFbn7DORgCrooiqIo2pdi2rMfh9
+KJWezAx0sZ9FUYRzk/si/PMod2pP1INWM5nePowxwOYUPGMIJL2JkvqOEH0poyh7E8znU0
+IeFB9uFn5nAvu3MLk+lIQRdFURRFp1NNW7YgbRP2YOVlGPSVGMcoViKrKxNZmx9IeIWsx0
+n4iDtJ+IyslRhOP9KaUMOlZH1Fwgm538zhLlYibW+2IoqiKIoKuka0ooppdOZd1kfLPOg9
+yPcPReyaG/RzyTqZhB95n4T7yNeNsTSmCbPYbgmDfhKjqWIE/3AdK0RRFEVR1ICL+J1B1D
+CY9RYz6K8vYtA7LWXQaziKrBOo5Uc+IOFe8nVlLCvRhGlsuthBlzbmZdoyhTI+IIqiKIoK
+ujU5hnqkNeJrEh7kPRLuIevbRQz6YBqQ1WkRR+73k/UgCR9xd+51VuP8kfsyDHpdtmMPsr
+ZlIEOIoiiKooLuXUp5lU3YnN+o5iJuo5YmbMX5TCXhodygV/Am63M1M2hH2g/UMIxd2ZKu
+zOEQNmYsQzmCjfiAGr5bwqB/RsKz7M8IhnAk63AoQ+lNQRdFURRF69ONCmYwkyL+oD6r0J
+uEOcyjHwnP5QZ9DFOZThljOS036OUMYi4zKeMnsu5gAqVMp5zOrEtaK2axKVnnM5syRnFT
+7hrTKGUMV1DwRVEURVF9TuJx7uMA8q3CNTzFIWzAWWyTG/S2bMYD3MTGZP1AJYdyIY9zGH
+XJtwl38TCHUY+sAziTxuQ7gns4mLT1uZFnuJp1iKIoiqJoyeUGffFlg34AURRFURQth63E
+BDqwuP5j7yyA48jSNftVSSoSmamZmdvMzd3Ds8zMzLvDsPSYmZmZcWCx+3l4ZFVVyqNweN
+azzEz1vrjPCt9QWO2yqlJ1M/OciDM8ZutU/nnhRwg6AABA2kzbL7V/0W7Eb7dfbffbNSoG
+AAAAAAAAAADAfXaXBQAYnsWL29Xqn1Jn+U2a/dxeK0ScoOat9kENBQBAtqBm9oLa2VHpU7
+Nqnn9end5BtXrPSktzVhMQEQn6UABAq3+n2ivH1Ok+LZ2bsQo65FYh7u3eCbW7x6WlhlUS
+IhJ0AABH2hF3sE9qdnWf1XrDf6/VlpWCg7o6K0+FuE9yFI/IyB0A4FJbrex0UN15qw1tLd
++uZnaXVWx4im/3DqnVfUb+YGCFiLlJ0CMAoNM9EJ64/X58+Ah/aFp+Gre6plqauzqKz5pW
+1RZRv1M5sdN2VFEA4NzMlUVtJ+Wnbasb1rG2el01qIVRvL+fKo/iEc07ND4AALKm2v3DYc
+X6/PJOq80ZBX0YtdQI328YxV/uWCFWyDEGHQDYPx7G6o5wHPJRnO0/fuNxXpoLP4Z4UR1i
+BSToADACg5oa3UfDuLvRf8BqnIYRerwwbnijUXz/1AajeERG7gDA+/Hw9NzsvSwveLPKwx
+BlP2lbbdq1VwCtlbObe2JH5Am9pvIBwLazdnYkPJHHIc/R+D36CDKKxwqounKAbWtlAqC5
+fG/YItbJnpQGdautMny/GtSsxmA0is9Oa25ljxUibmjxgw4Ag6nwXrzZeyUczxqFfEsNHy
+JWt1mN2ZbCtKH7DPvYETe00EEHIORrT7Ct7h1WE3W+t0teeGeVh2vH0Ab9SsEKESMLFnQA
+aF+4VeEdc/9wcu+Y/RRtlbdXPsic0Vy22wpRWIygA8CgFp7CPVYP43UNpqwSc8uCbtcW/h
+0N32d8+xti8uoW5cRRe6vSBAAa2UNhK5dDbpW0nhxs/dTgcmdtFJ/WyXOInBQHAF7VvRap
+eKFZ8oZ3+f07rSai72oPo3i/z7dCTNIKBB0AOuf3q7nykjrZE9FYvUB+aFre+241Kdee2M
+NUwz8eK8SELHXQASA81XafuRLyulVhja9SnaTRKD6h+9gRyxd0AMgWwqIuB0d+Mrcqg1ci
+qqQMo/iVs/FlNIgTsixBB4AQlVb/uRC+Mo6EZ3qPJflEHJ7Yu8dD2Cf6OgNRJ5QTD9u9Ao
+D83497rB72j5f5xLP45rUU1aX21VH80pxVcUXULkX8TvuV9h3jFhE779bUm79eU7/9G1V/
+6kuq8XOuvzP8fIvwY516k39vfv+3qn7LB7fw+0U8qvHxK1zOApArFxbD/d5VvQo0fo+euu
+FI2d6JcIRuoRYkIqpj/4e9b9xBB4DFi9sVxurd4xUe50ZXqRZIrbaujuK781aIaau32/9r
+//5Ygg4Ag3pYCOYQqJE9aFV5Z/uPRwfiFM9O72D4YOYPaFaIKWp+xA7sr48UdABYmgsRb/
+afl7IFKwyGk+7UWHnYqqiG399wSE7/1HhH8Yj6AxoPn7ADe8F2rBZsUwAwJKutcLyov9Bv
+/ASH8UUthVZZc+28gDF8cEMc1z70e+y/t1+w/8X+dgHAkDS79ykcApM9yT7mIWz1nrUqle
+3eofBBZaTXCYhjCfoH7C/Yd9ovtz8mAHj9p/HwPrWZvSjvr7bCIfXK8RLut49G8ZZRPG7K
+sQT9d9h69G39Ll0LABhMyU/j4WnM74Ot8AaNbl4rpQqj+CMKOxouLFohDqcjPC42+LYAoH
+3h1hByf6Eedf84LjWim9fKqwa1cPqfzxwYLuyI+ht5Bb1hp1RlgKdxbzsLY/XW8u1W4xL7
+p6wqobrz4QOMXzUwisetHt+zbQ3AC9xCyNvZzVbjFleOWVVKLTXWRvE5L55DrHjQAeay3S
+E0NudtZxjfvFY5B/Ww3c1bHHPa7oZY3aAD287C03ijd79V/mJYUNhcuduqsjrm4dWDn9hH
+GcUjMnIHaPQfULP3ygTCghrU4rF7pdW5mbVR/JgmQ4hVCDpAd15rp3t1ugesJiKuv6gFNZ
+haG8VzCUxV1d15rXJ/2t6kMgDQOn+bWv3nFC4HGdSsJipeO+gYjeJXjnHyYNVkH/rGAPgQ
+kzBW94UgiX1xRC+MY3/26xhG8f3D4YPPwtIOq5KLBH09AOdmwrGsfsJJ+EQyHO7mNdSHpq
++M4k+X/S59FEEHCHTO7w/vH8NpbudmrBIXh7+oBT3NCAfUOO7lnDYhQQeYXd0Xxuo+DKZQ
+l37gJoKO4Yl9bRQ/v7zTqhRiVYMOMKip0X00jNUb2UNWWEBHuHkNz82sjeLLckgP6mBeQX
+/c7hdASsz3doUVwA5BCd4nYljj0L3DCjepVrddGcUfkZ/erRDXB/3t9i324cmLePqoZr7h
+T6nx936vdP9TZfl54YEnNPNlf3Ac3xZufzT8/Zj5oj+g6edOFPLngLvyekL/vfZT9p8X1A
+v28jX/O/x4YX5tavd9UvUTS6of/Iw0/WpJfv3P239nw8+n8tbPnI/+/av2347y7WHrNYW/
+M6eXpM5rY/228V/b38jx2/+DGh+lOimuY3/NfoXWAw/a19I+za17PIwRPWK3KpNmyn63/T
+E7o6oTHTBjGvbfawzA6rbwamqMo3jURbtTWwpBj6P+60WJOkG/3FFr5Wx4R17u9+NEPSac
+3hcWdeUSdBhMhVXxjvuIq+KRoCcT9S8XpBn09sot9pjCk8SltlU1JOomvnkt16DDaitMQ8
+IH5tWWFd6ouQf9T+QV9I6dUS4QdYK+1AhPDWF1bgi6KilRj25e28qgM4rfzAFMmGvQ2Yde
+tKgT9Kx55UjW56TVbVZI1Nfeo29l0GFQd9gPhQ/VjOKHkqATdYK+tn88PIV1j68PORJ1nt
+AnyaX22iJUDvm5jtUNOlEn6IO6OtkT4QtF88I9VrixZsp+j/1RO1O9hXHd+VSCzih+qWG1
+Tqxe0Ik6QV9qhHPVm72X5QVPVjiU1Y367Of2hpvXEgo6o/j+Ka5tXWf+Qf9LiSyKI+oEfW
+lO4WxpP5H7whQr3IRVjXqr+wxBT2sbaXhi999nntiDbFurQNQJeqP/QPiL78tSpEHNaiQx
+oagTdLiwGN6xM4on6AWK+pcR9BvhQ9PhlrNm/w1qX7iVkI8sUQ9Pgn92LvWgM4rPTmvx4n
+aryknQiXq5gn5uRp3u0+H9Wuv8bVa5idWKejO7S81fvDv1oMOnZsNEzhbxSFmOfiXqBN1X
+XIaxW6d3kLHbllqhqGdNtf752SIFnVF8OOHxaEW2uxH0IkedoA/q8nazMFZvLt8r/3ur3E
+TG781PPF/EoDOK7x8eyyiekftDeQX9Mbtf1aNjP2S/rLpBH9TUWH4kXJTikFslIFYh6gV+
+QoelubAOIoziB1NWJbOg+9BhNop6dYLe6R4IY/UwQuvOWyUlxlH/kVJGfeYfPy11/oMVFt
+VsYW0UX7ZLYAg6UU8/6O3sZjV7r4RtZ+l/ssYyR7398zerdsd/tMKCq0EtbHXzKD7x454J
+OlEvftDD+3Hv/WX/eEIS9YbqB/+zFZZEdefDrhhP/wq+DoegE/VEg14/cV5z2W4rLKTroz
+5dmqDX9v1HKyyZWpoLo3ibwiieJ3Si/qXsQ4fEmLLfW5Koc9taJQij+KNhFO+tb1aFMf+g
+P5pX0A/amwRjjzpBB6JO0CFbCFEPo/hBrfAjd/ahE3WCDkSdoHPy3Noo/lLbKlEJ+nAQdY
+IORJ2gM4p31NMdxRP04SHqBB2IOkEHxzyM4rOjVklJ0Ik6QQeiTtBhlFH85Y7V5CXoRJ2g
+A1En6DDCKL57POxlV7ZQ8stZ/lxeQZ+xdUEpok7QiXqxgw6wuk2t7MwER/HsQ69Q1D9sv4
+SgA1HPM+gAlztXR/GfmrXaIgk6USfokETUv8/+sJ0uT9CBUXzvRBjFb81lUgSdqBN0IOq5
+BR3Ad7BfWRV/JOcDagg6USfoQNTzDzrApXbuo/j8g/6n8gr6om0Jcog6QQeink/QAQZ1tX
+ong1qasxqfbFsj6gQdiPqEgg6M4vuHxzeKJ+iGqBN0IOqTCDrAamttFD/q4jmCDnHUCToQ
+9YkEHeBD02FFvFfGb/odO0E3MGs/Yr+EoANRn2DQARaWdiiM4nuHpEGNkTuMEvUvJuhA1C
+cddICsGU6dC6P4bCGRo1+fzCvoD9k9glyinmDQgah/v/0hO12doAOcm1EYxXePX+8SGPah
+Dw9RJ+hA1CcTdID55Z1hFN/pHZQGdQ6WgRGiTtCBqKcTdGAU3z2+bhRP0IeAqBN0IOqJBR
+1gqXF1FH+pbQn6cBB1gg5EPcGgA8z3doWwh1F8naC/LrBg/1mIOkEHop5u0IEn9vojX8g5
+6PflFfSj9lZB8lFPP+hA1IsfdIAE9qG/ZH/a/r5i7EMn6l9UwKADUc8/6AAE/a/Ygf0Kgk
+7UtzDoQNQJOhB0gk7UX7VfmWDQgaj/QBz1iQQdgKB/q/1++1H7y/b3TCboULO77H32mD0e
+efSKJ+wn7BcVLOhA1PMPOgBB/892yf6a/bz9V/ah/IMOTXu3PW2ftWfsvXZnDuP34gYdiD
+pBB4L+V4cM+qdsSwp8tR3Yv8+2tXyYsU/Y5+wpe/smv/AtxlEn6FDqqBN0IOjvGDLo36yr
+/BE7sN8+vqBD2x60x+zBEOMxEEc90aADUf/B8USdoANB38SiuN9nB/Y7CPro3GWftwdtQz
+kQRz3loANRL2LQAQg63GHfaO+1deXPov3n9osSCzrAjP3xKOqFCDoAQYdH7TF7p7aWOOr/
+kKBD6aJO0IGg/+G8gr7LdgRxyF+w84pIOurpBx2IOkEHgj48v8t+zP5lXeVF+3H7nutvW4
+OmfZO9WzHpRz39oANRJ+hA0POCoEfU7TF72NaUHouq3f0JaceXW92A+QcdiHrt6V+V6iHq
+RQ46AEEvPjfbt9pppUzzl98sTYUn9SSe0AHmst1qZG9R69dui5/Uixh0AIJefA7aI7amlF
+m8uF2N7MF4/D65oAOcm1Grf0rt7Kg0mLJDjN/TDDoAQS8+e+wZ21ERaK8cswpGUd/aoAN8
+albt3gm1+4elQc0q1szYn7A/cN2oE3Qg6EfzCvq9dpcmw3vtD9oDUuBv2u9d53fYP2dnxn
+TD2Yu2rUIwmIqCvj7q780/6ACDuhorD6uZvSBH3Wojh486QQf2oefwbU2cX7b/xT4sBX7a
+DuznI/+1/X/2E3avNs/T9pCKRLt7XMoWrGLjqOcWdIBW9w61eifV6t9pNYzro17poANBJ+
+gh3sej4yZvtT9i/6/9YW2OI/aACsXljlorZ62uZRz1sQYdoJnd5Zg/o073gNUNuz7qBB0I
+OkGP2GH/RQjYjXPC3quCEUbtWt1mtbFx1Ak6jMpSQ82Vl9ToPioN6labdH3Upwg6EHSCHo
+fp39sPaXim7Au2rSLSys5YXc846psLOsCHpsOq9fCKJ2tajcP1Ua9m0IGgE/S/Z/+w/SP2
+79lP2P9l36nhOWNvVRHxIqTo3fkQhqi/GkV9+KADIfeHxyGeyMf3pE7QgaDfnlfQT9nbE1
+sUF/s/7ar92iH3jNfsWdtSMYm3qg1vHPXrBR2gnd2sZvYmza7us8rT9VHPOegA7ENP7An9
+L9nnrviUndfwnLB3q6h0zu9Xo3e/1Q27PuoEHdbTOn9bGK03l++12jLXRb06QQeCTtCPa3
+M8YneryDT7b7DatHHUCTrER7U2ey/LK9itJuG6qLc3CjoAQSfot9ojKjKt5dvl9+dWoxhF
+/WsIOoQncp/yJq22rCarGvYn7A8RdCDo5Qr6r9v/FgX95+3/30TQt9vnVXRa/efWzsce3R
+D1T9vPq3pAOGUwOxJivi7kiUT9p+z/slMCGBsE/Y32fk2GZ+0fDvEJ6KT9w3bXJq4/ravI
+LCztkC9hsRqX5rD9r/Y9qg7Q6D+gZv+N6YU8VnP2f9vvyP/vLgDb1orCWbtoA0Vf2T5OzY
+P2Y/bVCkQd/KEwTHniRZVpGq9y/0lL1IGgE3Q9au8vwwUYOQb9NbtY4qhDu3eTPSE/mVsV
+wSjoDaIOBJ2g1+xplYAQc3XnrcZpFHSVMepwqR0Ohel0n5Y+NG1VFKOgi6gDQSfoJ21NRS
+dcwtJ9xmrMrgt6YFtJog6d7IlwE9rixe1WhTMKerWjDgSdoN9kD5bm6TyvL8px0EsQdRjU
+1OkdVCs7LV3uWBXWKOgVjDoQ9N+TV9D32TkVhyn7VpWF+Ok8/yf09VF/t6AYzPd2qd17m3
+ySoFXB3SjocdS/PYeoA7APPTGO2lmVgcbyI/G78zzfoW8Q9ddSjzqsbgt7yTvZk1alMQp6
+daMOBJ2gH9fGsFUtNg46US/gFrTsjPyhz6p0RkGvZtSBoBP0w7alMhBfwpKXcdALFHXek6
+88FWKupTmrUhoFvXpRB4JO0GftGZWFZu8Vq1yNg55+1GGm91gYr8+t7LEqscMGPT4mlqgD
+QS9R0I/bnaW5wjK+hCUvo6AnHHUIV5n23yBlC1aVMAp6BaMOBP1MXkG/025X2jTtsyoLze
+yF+BKW3IyCnmLUYbUVJjXpvyfP9R16taIOBJ196Afjd+dcwjKkUdBTijpkC2G07j3l0qBm
+VTmjoFcr6kDQCfoxVraPtso9kajzRB5+/3sn4pAT9KpEHQg6Qd9t77EqxyUs2VGrrXCEoM
+dRf5dgdJord6vVe1azn9trVXVHCHoc9W+zRB0I+iRg33l2JD5IJnejoE8o6uDFj+GJfHZ1
+n1UQRw06UYcYgl4Qpu2Z8tyMNfwxr7ke/Zp/1GF+eaca2VvUzm62WidGQa9g1IGg788r6M
+/au5Qm99rbVQLCqN1f5K22zDjoRH2LODcTbkHz73cuOxl4h07UoaBBZx/687ZWitO//P7U
+akuNgp531OFTs2G03u4fzn/BG0En6kDQixX0un1OZaDRfTR+d57kO/Tho/4bRD1mUA/vyZ
+vZi3LUrYYR46ATdSDoZQ/6XfYOtqrlu22NqI9Aa/n2MF5vZndZDS/GQSfqQNDLH/RjpfhL
+6dXN8SUsW2heQSfqDnhY4NjpHrDCTRgFvYJRB4LezCvoLya6z/sYl7CM73KWHKP+zkoteP
+NoPVyiokHdanR5h55T1H+aqAPb1gj6OEftt8hf/K0m4piCTtQHU/Kq9fDqRFnTaiQxv6AT
+dSDonA6XwCUsOTha0In6h6bDYUCtlbM8kSf7hE7UgaAnzkN2W9EPFomvSJ2AIwSdqIf348
+3sTeqc3281VjGHoBN1IOipcoyV7RNZ5U7UfVd9uAmt2b3PCnMxh6ATdSDoucD57YNawYJO
+1Od7u9RcecnebYU5u7VBj6P+rQlEHQj62/MK+i12UWlxUkXGp4XFB8lMyAkEPbC9aFG/eq
+XppbYV5m6uQSfqwD70dKjb08W+hGX0Y17zPvqVqIerbI+EmBPyUgWdqANBT4dt9slCP517
+fGs1WTcKOlEPB/00+28k5OUMOlEHgp4ON9u7VFSa/eetEnDSQY+j/g6lwMLSDrX6z6nRf8
+AKJ+ZEgx5F/WeIOhD0fLnXHlARaSw/ImULVgk48aBHUT830ai3ezfZE4ScoBN1IOhby5N2
+ka1qya9yTz/qYT1Ddlqd3kHpQ9NWmIhR0CsYdSDoL1ZllfsR21bRmMt2x5ewJGEU9MpFvZ
+M9EW5C85jdCpMyz6ATdWAfemJBny7gJSwvWyVlFPRqRH1QU6f7dHgq527yqtyHTtSBoCfM
+GRWM8I52tv+4VVLGQS951MPOgnbvbRzVytGvY4j6txD18UHQCXpNRcJXaqb5jjYOelmjfm
+ExHNXaWXnKCgthDkEn6kDQU+SwnSrWJSzLj1glZxz0skV98eJ2tbIzanQftcJCmUPQiToQ
+9BR5ys6wsr2Qq9zzj3p4T549GWKupTkrLKBR0CsYdSDoOzQ6h9YFPfz7FxO7e/xxO1ucoG
+dHrZI0/aDHUf87uh4zvcfCB6jZz+21wgI7atCJOrAP/cvsB+w77O+1P5niPvR77J6CLIY7
+lPZTYhz04kY93IAWjmq9sGiFxbcYQQ80E406EPRD9j/aJfvv7J9JMei32JuVPKst+RhRq2
+SNg17IqGfNsB1w/Xty5B06UQeCXrdLdmAv2V0pBn2PvbcQT+dzK3uskrVQQQ/stp+S9rwv
+rFwPJ7wNalZlE0cLOlEHgh74WTuw/yTVo19n7KECbFV7wSppCxf01ZaaP/Ky6idWpOl3WJ
+VVLFbQo6j/LFEn6GNgQePhT9n/b7/BBp5N8HazY0oZj4DjS1jStUBB93vycI/87Oo+Sbvt
+p8P4vaxAEYMeR/2bE4g6sG1tp/0f9qgNzNkfT8wP2x9P1qlnwo+vAP6ivZj0j7H29K/61/
+Mjqt3y8+v+u5+z/9H+Svj3ZRN/wv7rgv7Yf8r+K/tPS/v7g1+wP5Pjt/99Gh/Lth6PuF8Y
+Upw69Ds09Tv/6IjfDk498ds1/UXv1dQLv+91/nevTPrHiZjDn03EL9H4uE+w+WNerXCT6k
+PT4RY07yev5JWmiIgJnO4Gne4B+VpOqxsUdbmjdu+E2v3DFV65johI0It6CQsO6mpkD6m5
+8hJHtSIiWukNyok77XbBda/nvMEDTrC1fHt4Km9md1khImJuJrgPvfiXsGCrf2fYguZ74q
+0QETF3hws6DGpDXMKCOjcTDtyZ7T8uDaastkpERLx+0CEcQfqpWatriY63P/D81sr1rGm1
+1SIiIkG/Dg6Ux8dW60SHPKxab62clQZ1K0RE5Ak92afza9y/jd7Cp2b2JnXO77caTkRENG
++2ubDPzlm41rtzb7eyuiK2L9wabkJr9O63ukEREZF96BNgpvfY2iUslXd+eedvfbi5cI8V
+IiJuykkGna1qmB0Nx7XqUtsKERFHkKBvMXPZbjWX77WqpBrUHfIj8ocaQo6ISNCLS7P/vF
+U17d4nL3gj5IiIBL3YzK7uU2flKatKuXhxe9ii18getEJExByUOjYX3mjvt1DVS1i8BU0+
+c72wIUdERPahX/MSFh9dalV65ZF6Kzst77Uv+AcYRES8RtBZ2V6F+7p9r3tYub6wtMMKER
+ELLkGv2CUsne7TamVnSnY2PSIiEvQIL4Qrbeh8MIzavbfJ78utEBFxMppdNhdO2dttGeES
+Fl1YlI9qTWTVPiIism0t/6fzUl00otVtYbTu42utkhAREXMNetu+o9rW36mpP/ad5fm5vP
+S1mvr93yrteX9yPz5ERPxGmx9cwrK6zarQNrqPyuP1hK97RUTEHJ/QwRG0KqzNlbvV7L9R
+fl9ulayI+Jvs3QNwJGsXh/Ez0WC917Zt27Zt27Zt27ZtreJJJnZuam1k+3vSO1Pf1NS9wc
+1Odrrzf6p+XdoyzqbnffuIpHOg60Mynl3CYrGgBcv28M7v5CIiQjsjLa2KhdEv8+TJdosO
+mvdWoWzTxEdwxPbE+3gnyVt4FCtCKS8WwrAUYaSmVD+/hz6wYlHjs6cwT7Dq0Lzd5OXbmj
+lZMEDoUjhoRCyuGtPRhBPgtZR6Am0p6pCPe5ADpTTQ5y1hGZELy3j8Tu6+TWATHCyFxAc6
+nkOiXByHFhQjAC+l1NNw8DueinsDRWjHw1Cqnw90fju3SGxDWEbLi61lbELr9I68pA701H
+5EG5aBF1Ma6NcgucVQiwJkdEoDXUtYWJpiwdi+Fq5cFtYp6Wyg52AMahGBH1Ia6GT5qEIO
+Mi6lga4lLKwxdf8i5z8cWmnabckD/U9cGXcPvkM7PkKiJfASRqESMfyFB5CDTE9poB+Csf
+gdyS2CE3EHrsJuyEZmpQ5BWloYEfSfeNWeeUtYmiLzBnls8169OdChuOmYEjcRtXgHQ0EW
+xF+YjO/wEt5APtrxCjItpYEexR9x+ZiAJuyNRLegDrMxFlMwE6OwKjIndSVU7yvOs1B0R1
+hGMCfL/Z08WLG7WfFAWI9J8kB/HxvFrY0wktsaM/AxkhuIEpRhMDItpYH+W9zXeAWrI9Fm
+mIB87ItlsBZexnR8DZ+lga4isQ0yZoVoqHR5C5VtY8HYSrBekM4PxSW3A2bhp9Rh76FBrv
+TKPbVr4eARJBfAq7gH2VAa6D767TxYtidsgQpFV3CvoIXLloL1mvRkoAcxAnNRgg9woU7A
+ezwN9N0xDSU4EUOgNNB9voRlSO0w2ALBnXcLxna1AeXrmznZMJnvv6E/j65aGK+hBNPgoB
+U/YhMo5bWBTvYiJqAdtfgRT2ENKA10/11Vg/U5hrd72I3PtZpVh2Dzm9iS2BkrobtlYxs8
+gJ8xAzEMQyak1I0owGnoTtvgOfyOBjhoxfXInFS2rq31poGxRSxYuQqsz7iDvHwz4xBepn
+yqVSwLqyKA5AL4FA6OhVJebziuRR3qsSiU99NA7/OT7XzZzYKxfTLlAJ4A9BXacDhS+xBz
+cTSU8lKX4XXkIrWP0I5toTTQffDXOZvJYOlXuaz7aj2vbHVYZhE6BG2ow1u4FffgU0xEMQ
+ZCKS/1KWbhUYSQaB1E0YjFoTTQPR4H0dK+hGVQ6ULGXfLM360udDR+RSMmYhyq8CFWhVJe
+a42khS0V+AtjMDbuTigNdO//dZ72JSzuSlPuk1tTBCZeYcOwJpZHHpTyckNxHd7H1/gYz2
+NdZFZqaaSlLbCsz5ewpONAWtb/T67Xh2FdEBERyahra1rC4r5Wj+3j3b/IbTXchF2gVLoK
+4HRcgMXRnZbFFTgKSqWzg3ENVtA9dM8sYZmPQ5eP0rhfeMuLrQnzCorgILyCERiPV6BUug
+tjNMZjBJ7H9sgGWR52x4v4Dc34CTlQKp1l4TOMxWi8jX0RzLiBrjgEF6rYAdZrXD0zNqF5
+cJAvhT8wHe1w4mpwZR8RuQ5j4cTNxnTUYzrmwIn7G1fjyj4gchWa4cTNwXR8hYWRrnZHt1
+N8XrXX30q36pCFyrd1r7zFT8l7jwWwCR7C9yjHBFwIpdJdAK9iKirxPW7HiiBbHTfha1Rg
+Ch5BX6TULZiERvyGh7EOlK+WsPAfAvfkOtfRYH5Bw3EKPsauUCpdBXAB3sY+CKGzBuAwfI
+DjoFQ6OxQf4RgMgsrYv84HFw+H9VikYiMLxbY3yx8AExER8QYePvPflrDwHwALlx2glaYi
+IuJJPPxlYMWiPVrCYpVD3LvkkejGMBEREU/i4S+8Lod1yaqHuv+WHekwERERT+PhHxxgM9
+aVwjrlHnjjSptFB8FERES8j4dvuEtYivNg/ygvuq77en1A1WIwERER3+DhD/x2bpxQh6Wy
+UPmKFizf23jNDhMREfEfHn4QX8KSDYtDLOiuNOUVO0xERMS3eHhf6hIWiw5yX627X3hzAj
+ARERF/4+FxSUtYYkF3pSmfa02sTBUREdFA94QRue71s2BsJXcTWqRkCZiIiEi/wsPb3OUp
+5Ud4eZCLiIhooMdXmoqIiPRrPEREREQDXURERDTQRURERANdREREwENEREQ00EVEREQDXU
+RERDTQRUREBDzShi7AIwhiQZWDh3EJ/kNKKaWU+hYNGIx0tjNWxj8VRh1+gFJKKaUydKCH
+0YCn0jvQlVJKKQ30bfAi3sJ1CCNRFk7BS3gD12MQEj2KW7AJXsbbuALZWAmfYQYq8FQXA/
+0ovIVXcCySWxoP4h28jOOQaEm8iuNwN97CAAzDrXgdr+ICBKGUUkr5bqA3oRVRxDAXn4Is
+gI8wEyUYg6kYjSEgy0cMbShGNebgWWyLJjhoRLSTgd6AsShEI6bianS0BiowFqMQwzQ8io
+7WwmS0YhoasCoKMQFjUIoZ+AJKKaWU7wa6g48QQAR/YizWwTGYga+Rh47uQzseQUcjMQf3
+oaMhqEQBOjoRTjdeuU/HWehobTRiDLLwFFpxDToahELEkIVVMB6TcBSWwWlwkoZ+Ft5EMZ
+aGUkopX6WBPgUbIdFTcHApXkQ7bsTOcYeiEV+joxGoRRiJ/kA1snow0IsQQKIf0Iol0NHC
+2BLH4FzkowWLY2WMw89IdACmIx9XYgkopZTybRrozVgUia6Hg0fwIZx/UZg00KNI7hfUIL
+sHA/1XJPcJpmF9bIzRmIFJaMYEtGLJpIH+CRIF8BCqMRfN+Al7QimllO/SQG/DMkh0Dxzc
+jDcxGxdjZyTbZj4P9D+R3JcYh5XwI8biGqyEYfj+Hwb6x0htCM7Hp2hBA5aDr1JKKaWBPh
+vHItG7mI2DcTcc3INEYTyGzebzQK/BMHQUQD6qEEYpCpBoCVThbyz1LwP9cDyPXCR6DA6O
+g29SSimlvsck1OAmPIhGFCE3aXDW40lcgZ8wE9d2c6DvhXaMwOP4X3v3AJxnou9xfIJaqe
+0erm3bmNuzh+vt2ujtqm+Pbdu2bWvt7drern1/mXky80xum03SpnmfN5/PzLcMR795/9GY
+VDYq3ZoeTX9Ji9P305PpB6WXd3/6UHpruibdn55O7047r2TQ35meTr9K56W3pUvSXWleah
+gA8I90ffpGuj3dlS5K+6UOu6W/pVvSvenq9L7UlNpdlK5NZX8vDfqQ9Jd0R7opTUplk9NN
+6e/pr+medEv6Q5qW2u2SLk33pNvSd9Jr07Xp7nRyurnToA9KXyh9SV3H+3ZsalgAMLIY21
+UZWgxsc+qNcak7JqaRaWWmpxGpQ0tqTV1pTdPS2AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANADADAnzUwVBg
+C8Pz1RdHX6RnpTen3aPLWlOgcAvDsdm9rSovSF9MP0pfSrtDzdn/6dvplqaWHaJA1PdQQA
+DHpZc6exHpLWKYZ8cfpE+nNake4ohv8Txf/tl+al5gRAf8Ggd2FUOjttlDqMTZukQ9Pb0z
+fTv9PDaXn6UfHvi9KuaXICoL9g0AvDimE+N70tLUwjU2eD0ry0azHmH1jJCf+LaXHphD8s
+AQBrYdDLmtPm6ZWpJ4Z2OuF/sRj4B9Ly0gn/1LSrEz4A9OWgd21Y2jD11Ni0bVpUOuFfkR
+4rfv9m6YS/bRqTAKCPGPTB6aC0tGivNDT1VvmEf2r6hBM+APT9oJc1py3SkrRBWtPGpE2c
+8AEw6P2rKfWJXpzwRycAMOi9HN2lRXumoamvOeEDYND7+DR/bjHu66b+0NaLE35TAgCD3v
+eneCd8AAx6vZjYm9N8P5/wH1jFCX9oAoCBN+iF5rRlOjfV0pFpbOp/TvgAGPRem52mph5w
+wgfAoFfFpLRHGpKqxgm/AIBBby6G7pxUS8ekaanSujjhP+iED2DQB4I56YT0stSAnPABDD
+qD05BUYU74AAadCaXPmj88TUwDxVgn/EYEGHTmphPTsrQgdZ8T/qgEgEGnIgb38IS/TmpN
+ABj0ujEr1dJhvT7NO+F/IC1ywgcw6PV2mj/DuPfqhP+j8k+4K53wD02bOOEDGPS1bXQamV
+i9E/5+aXHphH9HeiD9OX3CCR/AoPeXOenQNCGx+if8WvqmEz7QXwy6UT861dKSYpxYM6al
+XZ3wgf5g0J3mF6bZifo64bckAIPOamtzmnfCBzDo1Tc+nZxq6Yy0TqK+T/gjE4BBZ5XGlB
+5BzkjU5wn/zoF6wgcMOjjhFwAMOi8tneZfmajWCf8+J/wywKAzJr0q1dIFaWLCCR8w6FRY
+S2pNOOE3IMCg84p0evE7TviAQafCxqRD0rJ0QdolDUqNzQn/Lif8xgUGnZa0fRqbBi4n/I
+ec8BsXBh1mOc13wQl/RAIMOhUwunSaPz/t7DRfbU74YNChJe2QzkvjE3TnhP+j9PbSCX9q
+Agw6daw1QU9P+LW00AkfDDr1Y53SaX4nA08XhqR10sLSCf/P6aF0R/pV6YS/X5rnhA8Gnb
+WvNe2YzisGvi1BT0/4h6a3O+E3Fgw6QGuaVzrhfyD9ygkfDDr9a+N0ftrRaR4nfDDoVFtr
+2qkY9mXpNWlIoj854U9JYNBXA7wsDU5Qryf84QkMOvTSBk7z1MkJ/+EuTvjNCQw6dKElbZ
+suKJ1GJydwwgeDTsVP86c5f1KhE/79PTvhg0GHNqd5nPCrD4MOLy991vyr09gEjXTCn5xg
+QA46TvNL09AETvgYdACc8OsRBh22Lp3m2xI08gn/4UY/4WPQ4eXp9FRLp6RBqcLACR+DDu
+MSRDjhr2i0E75BB7ZLh3R5mgcn/G3TmFTXDDowL52YaumM9IoEA9Wgbpzwv5gWl074w1Jd
+MejA+PS61JpKgBi6ihP+A2l56YR/atq1Xk/4Bh2Y3eXZEZzwt02LSif8K9Jjxe/frJcTvk
+EH5pQ+a/7kND8B3T/hn5o+UU8nfIMOTEhvSBf2+qQIjEmblE74X0z/HrgnfIMOgBP+aIPe
+F4BdUi2dlOYloMInfIMOTEiHplr639SU+gbQ1osTfpNB7ymgJQENesI36MDu6USneajMCX
+9o1Qa9LY1/kVrS6gMmpsNSLZ2btkmAE/4aGfTL051ddFdaJ61ZwOC0fapPQFOaVYz4CekD
+6WdpeTH2/0pfTUvqZdA/kL5S9Lv0Qrqy9G9fTVPS2gNsWonTPPgJdwenFfUy6GWHFIP+9d
+R/gPFpYaqlZWnXNCjVF6DJoAM9Oc3vls5Kqw0w6FukA9MGaWVmFP+/W2q3bfH3aamzWcX/
+bZVWDzA0dRtg0H9f/N9FaWW+U/z/Nand8emx9LfU2unRxr/To+nQtGaA71Z3bto6NadVAg
+z6L9OKYqR3TmUj0nXpkXRp6vCN9Gz6cOrwsfRc+lJac4Ahafd0YTozrRJg0G9M96TvpLJT
+0tPppk6DPjxdVDzPbmnndFf6TxqW+gEAGPSb01/T9Wlk6vC74tT+32LQyzZNt6XL0iXFnz
+dOax+wfzo3beU0Dwb9wvR8Oju1m5vuTt9K/yoGvbPz0xPpqVRL/QcYkvZIS1OtGHmgwQZ9
+j3RJ+kAXgz4+LU9/TO0+kh5N23Ux6O8sxvyZ9MlUP4D5qZLAoPdCadAHpe+n+9M66aJiyG
+Olg75TujP9I/093V+JRwTA3mnLxj7Ng0HfvfQlaU+kd69i0NvSZenWtH7RbenKNDbVL6A1
+bZvOSm9Oh6bRCWigQW9K/0n3pTvS1FUM+o/Sk6mWOrw5PV38X3UAG6QjE9Awgx7xgfRC8e
+/x/wZ9cXos/SY1pQ7N6U/p8XRGqj5ganVO82DQ35S+k1pSu2np+2mf1OFj6XNpSPpK+l6a
+njqbXzzvF1JrqjZg67S06KA0IvU/MOgAvbZhOiudlOoVGHQAwKADHJKWpgMb4DQPBr0AOM
+0vS69PFQQGvQxgZIIuGPQqA3iN0zwGHaAxrJNOTbV0cpqVwKBXGMCUtFeiccxKG71IEww6
+wMCxYSVP8/woPVnqiaInS73FoAMMHOuls9OydGyameof/5PeU/SBdFe6Nr2n1OYGHWBgmp
+qOTkel6mBEujX9M70ogw5Ac6o4g27QATg0LUuL0oxU/wz6lukt6bS0MqPTG4vaUruF6c1p
+Umq3f/EydkmdbVz830uqN+gATEvHpFo6LNUvg/6R9EJ6IL0idXZeer4Y15endj9Nz6QtUr
+vvphfStaktlb2t+L+jqj3oADSl+mbQn0/3p8+mzv5cDOvDpUH/cadB/056JD2VvmHQAQaW
+I9OiND31P4/Ql6fLUmvqsE56ID3UjUG/K12U7k97GHSAgWV66TS/OG2Q+odB/2d6Or0mdf
+hsMeZ/78ag35v2TXek/6TBBh1gYBqe1k/9w6AfW4zxT1O7lnRp+mv6RjcHfVb6WHoufcCg
+dwbA3mla6h2GpN+mr3cx6PulX6Xb05S0MD2V3tTDQR+SLipeznoGHYCySenQVEvnp21TU1
+p9lAf9qGKo35l+km5O43s06BEHpgfTHw16VwCc5vdPr0ms2UEfnK5M/0g3ls7vPRr0wvfS
+k+lSg94bAIxKvWHQI75cjPNT6VWrMegT03XpboPeGwC8LtXSOWljp/keD/oG6YF0WWrp7a
+AXzkiPG3SANcFpfmk6JK0ce6evp5elDu/vtHdHpK+kiandqelraWZqd0z6cmpbySh/MH09
+bWzQAaDhGfTeA+BEp3mDDkBjGJ4OSEuLtk0Y9IoDMCJTEgYdgAZ1pNO8Qa8+AIalXdN56a
+1pYRqZMOgVBUBz2jztlTDoADSoBaniDDoA7JeWFu2VhqaKM+gAOM0vSfunemXQAQCDDgBn
+pqVpT6f5ag86ADSnLdKSVEu7pYoz6AAwJDUogw4AZ6c9qj34Bh0AmtOW6dxUS0emSanCDD
+oAzE6bpEZk0AMAdqz4ad6gBwBsVTrNH1G907xB7wwAZqfj0+4G3aAD0LhaDXq1AUBTWlw+
+zRv0agOAOemEtCztYtABAINepwCgOV2QDk8TDXq1AcDcdGJals5I86o96ADA6DTLoANAY2
+pJb0gTqz3oAMCcdHSqpSVpk9RU3UEHAEanhWl7gw4AjWtCtQcdAGhNJ6VaOiOtszYG/eb0
+7z5JkiRdlJanO9JjqU+MT/MkSdJaaU4CAAAAAAAAAICG1JKaU0UBACPSLeniVGEAYNBvTf
+9KAIBBBwAMOgBg0AGgg0EHAAw6AGDQAQCDDgAG/Zb0q079Pk1KdQ4AGJauSpetpKvTjAQA
+AAAAAAAAAKwBw9LB6T1pUuoeAKApLUrnpllprVuQaunn6Zp0f9o29QwAMCT9Mz2QLkrfTP
+ukwanPHJQeTE+mF4qeTF9P5/YqSZJ0YbqvtK3PpifSV9LI1CeGpwPTV9K/0/3ppjQn9QwA
+0JS+lh5Ny9PvU60/TvAvSW9NX0qTUvcBgDE/qRj0vdPg1Of+D9/x4Wnz2Uc7AAAAAElFTk
+SuQmCC
+   ">
+</center>
+
+<H3>Symbols</H3>
+<p><UL>
+<li>L = Length of beam section (cm)
+<li>H = useful section height (cm)
+<li>B = beam section width (cm)
+<li>T<sub>MX</sub>, T<sub>MIN</sib> = max. and min. shear stress in
+the section (with equal sign)(dN)
+<li>TAU = maximum tangential stress in the section (dN/cm²)
+<li>N = number bracket arms
+<li>IP = inclination of bent bars with respect to  beam axis (degrees)
+<li>AP = = total area of ​​the bent bars in the section (cm²)
+<li>DS = iron diameter of the brackets (cm)
+<li>P<sub>S</sub> = brackets step (cm)
+<li>ASM = total area of ​​the brackets per meter (cm²)
+<li>ΩT = area of ​​the shear diagram in the section (dN)
+<li>ΩS = part of the ΩT absorbed by the brackets area (dN)
+<li>ΩP = part of the ΩT absorbed by the bent bars area (dN)
+<li>&percnt;S = percentage of the area of ​​the  shear diagram absorbed by the brackets
+<li>ΣF = stress in irons (dN/cm²)
+<li>RCK = concrete characteristic resistance (dN/cm²)
+  </UL>
+</p>
+
+<p>The italian legislation requires:
+<ul>
+<li>ASM ≥ 3 cm²
+<li>PS ≤ MIN(0.8H, 33cm);
+<li>&percnt;S ≥ 40 &percnt;.
+</ul></p>
+
+<H3>Instructions</H3>
+
+<p>The instructions for using the program are summarized in the "card emulation”
+  similar to the magnetic card of the TI-59.</p>
+
+<p>It summarizes the instructions assigned to each definable key, transcribed
+  in the box referring to the key.
+
+<p>Each input procedure is independent and the operator can perform it
+  without a predetermined order.
+
+<p>The “<b>&gt;</b>“ symbol indicates to start the procedure by
+  pressing its definable key to display the first data.
+
+<p>The symbol "<b>:</b>" after the data indicates to press
+  the <SPAN CLASS="brownbutton">R/S</SPAN> key to store it
+  and complete the procedure or display the next data.
+
+<p>At the end, the procedure displays "<b>0</b>".
+</p>
+
+<p>
+<ol>
+  <li>Provide the data:
+<br> Each input procedure is independent.
+
+<UL>
+  <li> <b>Set L (cm):</b>
+    <br> press <span class="brownbutton">A</span>. Display
+    = <b>stored value of L</b>.
+    <br> If it is incorrect enter the new value and
+    press <SPAN CLASS="brownbutton">R/S</SPAN>.
+    <br> Display = <b>0</b>. End of procedure.
+    <br></br>
+
+  <li><b>set H, B (cm):</b>
+    <br> press <span class="brownbutton">B</span>. Display
+    = <b>stored value of H (cm)</b>.
+    <br> If it is incorrect enter the new value.
+    <br> press <SPAN CLASS="brownbutton">R/S</SPAN>. Display
+    = <b>stored value of B (cm)</b>.
+    <br> If it is incorrect enter the new value and
+    press <SPAN CLASS="brownbutton">R/S</SPAN> to store it.
+    <br> Display = <b>0</b>. End of procedure.
+    <br><br>
+
+<li><b>set T<sub>MX</sub>, T<sub>MIN</sub> (dN): </b>
+  <br> press <span class="brownbutton">C</span>. Display
+  = <b>stored value of T<sub>MX</sub> (dN)</b>.
+  <br> If it is incorrect enter the new value.
+  <br> press <SPAN CLASS="brownbutton">R/S</SPAN>. Display
+  = <b>stored value of T<sub>MIN</sub> (dN)</b>.
+  <br> If it is incorrect enter the new value and
+  press <SPAN CLASS="brownbutton">R/S</SPAN> to store it.
+  <br> Display = <b>0</b>. End of procedure.
+  <br><br>
+
+<li><b>set ΣF, RCK (dN/cm²):</b>
+  <br> press <span class="brownbutton">D</span>. Display
+  = <b>stored value of ΣF (dN/cm²)</b>.
+  <br> If it is incorrect enter the new value.
+  <br> press <SPAN CLASS="brownbutton">R/S</SPAN>. Display
+  = <b>stored value of RCK (dN/cm²)</b>.
+  <br> If it is incorrect enter the new value and
+  press <SPAN CLASS="brownbutton">R/S</SPAN> to store it.
+  <br> Display = <b>0</b>. End of procedure.
+  <br><br>
+
+<li><b>set N, IP:</b>
+  <br> press <span class="brownbutton">E</span>. Display
+  = <b>stored value of N</b>.
+  <br> If it is incorrect enter the new value.
+  <br> press <SPAN CLASS="brownbutton">R/S</SPAN>. Display
+  = <b>stored value of IP (degrees)</b>.
+  <br> If it is incorrect enter the new value and
+  press <SPAN CLASS="brownbutton">R/S</SPAN> to store it.
+  <br> Display = <b>0</b>. End of procedure.
+  <br><br>
+
+<li><b>set AP (cm²):</b>
+  <br>press <span class="yellowbutton">2nd</span>
+  <span class="alttext">A'</span>. Display
+  = <b>stored value of AP (cm²)</b>.
+  <br>If it is incorrect enter the new value and
+  press <SPAN CLASS="brownbutton">R/S</SPAN>.
+  <br> Display = <b>0</b>. End of procedure.
+  <br><br>
+
+<li><b>set DS (cm):</b>
+  <br> press <span class="yellowbutton">2nd</span>
+  <span class="alttext">B'</span>. Display = <b>stored value of DS
+  (cm)</b>.
+  <br> If it is incorrect enter the new value and
+  press <SPAN CLASS="brownbutton">R/S</SPAN>.
+  <br> Display = <b>0</b>. End of procedure.
+  <br><br>
+</UL>
+
+<li>Results:
+  <p>Pressing <span class="yellowbutton">2nd</span>
+    <span class="alttext">E'</span>,
+     the program calculates the tangential stress TAU in the concrete
+     and compares it with the maximum value T1
+     and the minimum T0 allowed by Italian law for the RCK class of concrete.
+  <p>If TAU &gt; T1 the program stops and flashes TAU to advise the
+    operator to modify the resistant section of the beam.
+  <p>If TAU &lt; T0 the program assumes ASM = 3 cm²/meter and &percnt;S=
+  100&percnt;.
+  <p>If T0 &lt; TAU &lt; T1 the program calculates ΩT, ΩP, ΩS and &percnt;S.
+  <p>If &percnt;S &lt; 40 the program sets ΩS= 0.4 ΩT;  &percnt;S =
+    40&percnt; and calculates ASM.
+  <p>If ASM &lt; 3 cm²/meter the program sets ASM = 3 cm²/meter and
+    &percnt;S = 100&percnt;. Then calculate the step of brackets PS (cm).
+  <p>If PS ≥ Min(0.8H, 33cm) the program sets PS = MIN(0.8H, 33cm) and
+     flashes PS to advise the operator to choose
+     a smaller DS diameter.
+  <p>At the end the program
+    displays <b>&percnt;S</b>. Pressing <span class="brownbutton">R/S</span>
+    in sequence will display the other results ASM and PS.
+  <p>The programm will also print a report with the data and results.
+  <p>For a new calculation, reset only the data that changes.
+</ol>
+</p>
+
+<h3>Example 1</h3>
+
+<p>Calculate the shear reinforcement of a section of beam having the
+  following characteristics:
+
+  <ul>
+    <li>L=200 cm
+    <li>H=47 cm
+    <li>B=30 cm
+    <li>T<sub>MX</sub>=15000 dN
+    <li>T<sub>MIN</sub>=8000 dN
+    <li>ΣF=1900 dN/cm²
+    <li>     RCK=250 dN/cm²
+    <li>N=2
+    <li>IP=45°
+    <li>AP =6,03 cm²
+    <li>DS=1 cm.
+  </ul>
+
+<ol>
+<li>Provide the data:
+<UL>
+<li><b>Set L (cm):</b>
+  <br>press <span class="brownbutton">A</span>. Display = <b>stored
+  value of L</b>.
+  <br> It is incorrect. Enter <b>200</b> and
+  press <SPAN CLASS="brownbutton">R/S</SPAN>.
+  <br> Display = <b>0</b>. End of procedure.
+  <br><br>
+
+<li><b>set H, B (cm):</b>
+  <br>press <span class="brownbutton">B</span>. Display = <b>stored
+  value of H (cm)</b>.
+  <br>It is incorrect. Enter <b>47</b> and
+  press <SPAN CLASS="brownbutton">R/S</SPAN>.
+  <br> Display = <b>stored value of B (cm)</b>.
+  <br> It is incorrect, then enter <b>30</b> and
+  press <SPAN CLASS="brownbutton">R/S</SPAN> to store it.
+  <br> Display = <b>0</b>. End of procedure.
+  <br><br>
+
+<li><b>set T<sub>MX</sub>, T<sub>MIN</sub> (dN):</b>
+  <br>press <span class="brownbutton">C</span>. Display = <b>stored
+  value of T<sub>MX</sub> (dN)</b>.
+  <br>It is incorrect. Enter <b>15000</b> and
+  press <SPAN CLASS="brownbutton">R/S</SPAN>.
+  <br>Display = <b>incorrect stored value of T<sub>MIN</sub> (dN)</b>.
+  <br>Enter the new value <b>8000</b> dN and
+  press <SPAN CLASS="brownbutton">R/S</SPAN> to store it.
+  <br>Display = <b>0</b>. End of procedure.
+  <br><br>
+
+<li><b>set ΣF, RCK (dN/cm²):</b>
+  <br>press <span class="brownbutton">D</span>. Display = <b>incorrect
+  stored value of ΣF</b>.
+  <br>Enter the new value <b>1900</b> (dN/cm²) and
+  press <SPAN CLASS="brownbutton">R/S</SPAN>.
+  <br>Display = <b>incorrect stored value of RCK </b>.
+  <br>Enter <b>250</b> (dN/cm²) and
+  press <SPAN CLASS="brownbutton">R/S</SPAN> to store it.
+  <br>Display = <b>0</b>. End of procedure.
+  <br><br>
+
+<li><b>set N, IP:</b>
+  <br>press <span class="brownbutton">E</span>. Display = <b>incorrect
+  stored value of N</b>.
+  <br>Enter the new value <b>2</b> and
+  press <SPAN CLASS="brownbutton">R/S</SPAN>.
+  <br>Display = <b>incorrect stored value of IP </b>.
+  <br>Enter <b>45</b> (degrees) and
+  press <SPAN CLASS="brownbutton">R/S</SPAN> to store it.
+  <br>Display = <b>0</b>. End of procedure.
+  <br><br>
+
+<li><b>set AP (cm²):</b>
+  <br>press <span class="yellowbutton">2nd</span>
+  <span class="alttext">A'</span>. Display = <b>incorrect value of AP</b>.
+  <br>Enter <b>6.03</b> (cm²) and
+  press <SPAN CLASS="brownbutton">R/S</SPAN> to store it.
+  <br>Display = <b>0</b>. End of procedure.
+  <br><br>
+
+<li><b>set DS (cm):</b>
+  <br>press <span class="yellowbutton">2nd</span>
+  <span class="alttext">B'</span>. Display = <b>incorrect value of DS</b>.
+  <br>Enter the new value <b>1</b> (cm) and
+  press <SPAN CLASS="brownbutton">R/S</SPAN> to store it.
+  <br>Display = <b>0</b>. End of procedure.
+  <br><br>
+</UL>
+</p>
+
+<li>Results:
+  <p>Pressing <span class="yellowbutton">2nd</span>
+    <span class="alttext">E'</span>. the program display TAU
+    = <b>11,82033097</b> dN/cm².
+  <p>Pressing <span class="brownbutton">R/S</span> in sequence will display:
+  <p>&percnt;S= <b>70.20122285</b> &percnt;, ASM = <b>10.04496781</b> cm²,
+  PS=<b>15.63764421</b> cm, and repeat the sequence.
+  <p>The program will also print the following report:
+
+<pre><b>
+          --------------------
+          STR18
+                   200.      L
+                    47.      H
+                    30.      B
+                 15000.    TMX
+                  8000.    TMN
+                  1900.     ΣF
+                   250.    RCK
+                     2.      N
+                    45.     IP
+                   6.03     AP
+                     1.     DS
+
+            11.82033097    TAU
+            70.20122285     %S
+            10.04496781    ASM
+            15.63764421     PS
+          --------------------
+</b></pre></p>
+<p>To view the print report, touch the printer icon at the top
+  center of the phone display.</p>
+</ol>
+
+<h3>Example 2</h3>
+
+<p>Calculate the same beam as in example 1 by modifying the following
+  data:
+
+  <ul>
+    <li>X=4000 dN
+    <li>T<sub>MIN</sub>=2000 dN
+    <li>DS=0.8 cm.
+  </ul>
+
+<ol>
+  <li>Provide the data that changes:
+<UL>
+  <li><b>set T<sub>MX</sub>, T<sub>MIN</sub>: </b>
+    <br>press <span class="brownbutton">C</span>. Display T<sub>MX</sub> stored
+    data: <b>15000</b>.
+    <br>It is incorrect. Enter <b>4000</b> dN and
+    press <SPAN CLASS="brownbutton">R/S</SPAN>.
+    <br>Display T<sub>MIN</sub> stored data: <b>8000</b>. Data incorrect.
+    <br>Enter the new value <b>2000</b> dN and press <SPAN CLASS="brownbutton">R/S</SPAN> to store it.
+    <br> Display = <b>0</b>. End of procedure.
+    <br><br>
+
+<li><b>set DS (cm):</b>
+  <br>press <span class="yellowbutton">2nd</span>
+  <span class="alttext">B'</span>. Display DS stored data: <b>1</b>
+  cm. Data incorrect.
+  <br>Enter the new value: <b>0.8</b> cm and
+  press <SPAN CLASS="brownbutton">R/S</SPAN> to store it.
+  <br>Display = <b>0</b>. End of procedure.
+  <br><br>
+</UL>
+</p>
+
+<li<Results
+     <p>Pressing <span class="yellowbutton">2nd</span>
+       <span class="alttext">E'</span>. the program display TAU= <b>
+       3.152088258</b> dN/cm².
+     <p>Pressing <span class="brownbutton">R/S</span> in sequence will
+     display &percnt;S = <b>100</b>&percnt;, ASM = <b>3</b> cm²,
+     PS= <b>33</b> cm
+<p>And repeat the sequence.
+<p>The program flashes PS to advise the operator to choose a smaller
+  DS diameter.
+<p>The program will also print the following report:
+
+<pre><b>
+          --------------------
+          STR18
+                   200.      L
+                    47.      H
+                    30.      B
+                  4000.    TMX
+                  2000.    TMN
+                  1900.     ΣF
+                   250.    RCK
+                     2.      N
+                    45.     IP
+                   6.03     AP
+                    0.8     DS
+
+            3.152088258    TAU
+                   100.     %S
+                     3.    ASM
+                    33.     PS
+          --------------------
+</b></pre></p>
+</ol>
+
+
+<h3>Example 3</h3>
+
+<p>Calculate the same beam as in example 2 by modifying the following
+  data:
+  <ul>
+    <li> DS=0.6 cm.
+  </ul>
+
+<ol>
+<li>Provide the data that changes:
+<UL>
+<li><b>set DS (cm):</b>
+  <br>press <span class="yellowbutton">2nd</span>
+  <span class="alttext">B'</span>. Display
+  DS stored data: <b>0.8</b> cm. Data incorrect.
+  <br> Enter the new value: <b>0.6</b> cm and
+  press <SPAN CLASS="brownbutton">R/S</SPAN> to store it.
+  <br>Display = <b>0</b>. End of procedure.
+  <br><br>
+</UL>
+
+<li>Results:
+  <p>Pressing <span class="yellowbutton">2nd</span>
+    <span class="alttext">E'</span> the program display TAU = <b>
+    3.152088258</b> dN/cm².
+<p>Pressing <span class="brownbutton">R/S</span> in sequence will
+  display &percnt;S= <b>100</b>&percnt;, ASM = <b>3</b> cm², PS=<b>
+  18.84955592</b> cm,
+<p>And repeat the sequence.
+<p>The program will also print the following report:
+
+<pre><b>
+           --------------------
+           STR18
+                    200.      L
+                     47.      H
+                     30.      B
+                   4000.    TMX
+                   2000.    TMN
+                   1900.     ΣF
+                    250.    RCK
+                      2.      N
+                     45.     IP
+                    6.03     AP
+                     0.6     DS
+
+             3.152088258    TAU
+                    100.     %S
+                      3.    ASM
+             18.84955592     PS
+           --------------------
+</b></pre>
+</p>
+
+
+<h3>About The Program</h3>
+
+<p>Number of steps: from <b>000</b> to <b>464</b>.
+<p>Registers used: <b>00</b> to <b>23</b>
+<p>Flags used: <b>1</b>, <b>2</b>
+<p>Labels: <SPAN CLASS="brownbutton">&Sqrt;x</SPAN>,
+<SPAN CLASS="alttext">Prt</SPAN>,
+<SPAN CLASS="alttext">Op</SPAN>,
+<SPAN CLASS="yellowbutton">-</SPAN>,
+<SPAN CLASS="yellowbutton">×</SPAN>,
+<SPAN CLASS="yellowbutton">+</SPAN>,
+<SPAN CLASS="alttext">Adv</SPAN>,
+<SPAN CLASS="yellowbutton">=</SPAN>,
+<SPAN CLASS="brownbutton">lnx</SPAN>,
+<SPAN CLASS="alttext">log</SPAN>,
+<SPAN CLASS="yellowbutton">CLR</SPAN>,
+<SPAN CLASS="brownbutton">CE</SPAN>, and definable keys.
+
+</BODY>

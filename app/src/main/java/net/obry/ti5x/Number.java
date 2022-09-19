@@ -498,6 +498,10 @@ class Number {
     return Exp;
   }
 
+  public String toString() {
+    return v.toString();
+  }
+
   public String formatString(java.util.Locale locale, int nrDecimals) {
     final DecimalFormat form = new DecimalFormat();
     final DecimalFormatSymbols decForm = new DecimalFormatSymbols(locale);

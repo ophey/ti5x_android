@@ -6,47 +6,70 @@
 <STYLE TYPE="text/css">
 .yellowbutton
   {
-    background : #ce8c3b;
-    padding : 1pt;
+    background : #FFE071;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
-  } /*.yellowbutton*/
+    font-size: 0.8em;
+  }
 
 .brownbutton
   {
-    background : #4e3836;
-    padding : 1pt;
+    background : #63452B;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
-    color : #ac9e80;
-  } /*.brownbutton*/
+    color : #F0EDD5;
+    font-size: 0.8em;
+  }
 
 .whitebutton
   {
-    background : #ac9e80;
-    padding : 1pt;
+    background : #E0DDC5;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-  } /*.whitebutton*/
+    font-size: 0.8em;
+  }
 
 .alttext
   {
-    background : #222424;
-    padding : 1.5pt;
+    background : #000000;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
     font-weight : bold;
-    color : #ac9e80;
-  } /*alttext*/
+    color : #dcb151;
+    font-size: 0.8em;
+  }
 
 .deflist DT
   {
     display : compact;
     font-weight : bold;
-  } /*.deflist DT*/
+  }
 .deflist DD
   {
     margin-left : 4em;
-  } /*.deflist DD*/
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
@@ -57,20 +80,20 @@
 and coefficients have been entered, the polynomial may be evaluated for any number of
 different <I>x</I> values.
 
-<P>First, enter the integer <I>n</I> and press <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>.
+<P>First, enter the integer <I>n</I> and press <SPAN CLASS="brownbutton">A</SPAN>.
 <P>Then, enter the starting power (normally 0), and press
-<SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN> to start entering coefficients; it will
+<SPAN CLASS="brownbutton">B</SPAN> to start entering coefficients; it will
 show the next power, and after you have entered each coefficient, press
-<SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN> to continue. When you see <I>-n</I> being displayed, you know
+<SPAN CLASS="brownbutton">R/S</SPAN> to continue. When you see <I>-n</I> being displayed, you know
 you’re done.
 <P>If you make a mistake entering any coefficients, simply press
-<SPAN CLASS="brownbutton">&nbsp;RST&nbsp;</SPAN> to clear the pending subroutine return, put in
+<SPAN CLASS="brownbutton">RST</SPAN> to clear the pending subroutine return, put in
 the starting coefficient number from which you want to re-enter, press
-<SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>, and continue from there, entering
-coefficients and pressing <SPAN CLASS="brownbutton">&nbsp;R/S&nbsp;</SPAN> after each one as before.
+<SPAN CLASS="brownbutton">B</SPAN>, and continue from there, entering
+coefficients and pressing <SPAN CLASS="brownbutton">R/S</SPAN> after each one as before.
 
 <P>Once all the coefficients have been entered, simply enter a value <I>x</I> and press
-<SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN> to evaluate the polynomial for that value.
+<SPAN CLASS="brownbutton">C</SPAN> to evaluate the polynomial for that value.
 
 <H3>Formula Used</H3>
 <P>The polynomial is evaluated using Horner’s Rule, which can be expressed recursively

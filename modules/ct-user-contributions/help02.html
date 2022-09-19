@@ -1,46 +1,73 @@
 <html><head>
 <title>Triangle Solution</title>
-<style type="text/css"><!--
+<STYLE TYPE="text/css">
 .yellowbutton
-{
-    background : #ce8c3b;
-    padding : 1pt;
+  {
+    background : #FFE071;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
-}
+    font-size: 0.8em;
+  }
+
 .brownbutton
-{
-    background : #4e3836;
-    padding : 1pt;
+  {
+    background : #63452B;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
-    color : #ac9e80;
-}
+    color : #F0EDD5;
+    font-size: 0.8em;
+  }
+
 .whitebutton
-{
-    background : #ac9e80;
-    padding : 1pt;
+  {
+    background : #E0DDC5;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-}
+    font-size: 0.8em;
+  }
+
 .alttext
-{
-    background : #222424;
-    padding : 1.5pt;
+  {
+    background : #000000;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
     font-weight : bold;
-    color : #ac9e80;
-}
+    color : #dcb151;
+    font-size: 0.8em;
+  }
+
 .deflist DT
-{
+  {
     display : compact;
     font-weight : bold;
-}
+  }
 .deflist DD
-{
+  {
     margin-left : 4em;
-}
---></style>
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
+</STYLE>
 </head>
 <body>
 <h1>SB-02 — Triangle Solution</h1>
@@ -61,110 +88,110 @@
 <h3>Usage:</h3>
 <ul>
   <li>To initialize, press
-    <span class="brownbutton">&nbsp;D&nbsp;</span><br>&nbsp;
+    <span class="brownbutton">D</span><br>
   </li><li>Enter the length of side a, then press
-    <span class="brownbutton">&nbsp;A&nbsp;</span>
+    <span class="brownbutton">A</span>
   </li><li>Enter the length of side b, then press
-    <span class="brownbutton">&nbsp;B&nbsp;</span>
+    <span class="brownbutton">B</span>
   </li><li>Enter the length of side c, then press
-    <span class="brownbutton">&nbsp;C&nbsp;</span>
+    <span class="brownbutton">C</span>
   </li><li>Enter the angle &alpha;, then press
-    <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-    <span class="alttext">&nbsp;A'&nbsp;</span>
+    <span class="yellowbutton">2nd</span>
+    <span class="alttext">A'</span>
   </li><li>Enter the angle &beta;, then press
-    <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-    <span class="alttext">&nbsp;B'&nbsp;</span>
+    <span class="yellowbutton">2nd</span>
+    <span class="alttext">B'</span>
   </li><li>Enter the angle &gamma;, then press
-    <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-    <span class="alttext">&nbsp;C'&nbsp;</span><br>&nbsp;
+    <span class="yellowbutton">2nd</span>
+    <span class="alttext">C'</span><br>
   </li><li>To calculate the missing values, press
-    <span class="brownbutton">&nbsp;E&nbsp;</span><br>&nbsp;
+    <span class="brownbutton">E</span><br>
   </li><li>To display the length of side a, press
-    <span class="brownbutton">&nbsp;A&nbsp;</span>
+    <span class="brownbutton">A</span>
   </li><li>To display the length of side b, press
-    <span class="brownbutton">&nbsp;B&nbsp;</span>
+    <span class="brownbutton">B</span>
   </li><li>To display the length of side c, press
-    <span class="brownbutton">&nbsp;C&nbsp;</span>
+    <span class="brownbutton">C</span>
   </li><li>To display the angle &alpha;, press
-    <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-    <span class="alttext">&nbsp;A'&nbsp;</span>
+    <span class="yellowbutton">2nd</span>
+    <span class="alttext">A'</span>
   </li><li>To display the angle &beta;, press
-    <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-    <span class="alttext">&nbsp;B'&nbsp;</span>
+    <span class="yellowbutton">2nd</span>
+    <span class="alttext">B'</span>
   </li><li>To display the angle &gamma;, press
-    <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-    <span class="alttext">&nbsp;C'&nbsp;</span>
+    <span class="yellowbutton">2nd</span>
+    <span class="alttext">C'</span>
 </li></ul>
 <p>In case there is more than one solution
   (indicated by a blinking 2 after pressing
-  <span class="brownbutton">&nbsp;E&nbsp;</span>),
-  press <span class="brownbutton">&nbsp;E&nbsp;</span>
+  <span class="brownbutton">E</span>),
+  press <span class="brownbutton">E</span>
   again after viewing the first solution in order
   to display the values of the second solution.</p>
 
 <h3>Example:</h3>
 <p>Enter the three sides:
-  <span class="brownbutton">&nbsp;D&nbsp;</span>
-  <span class="whitebutton">&nbsp;3&nbsp;</span>
-  <span class="brownbutton">&nbsp;A&nbsp;</span>
-  <span class="whitebutton">&nbsp;4&nbsp;</span>
-  <span class="brownbutton">&nbsp;B&nbsp;</span>
-  <span class="whitebutton">&nbsp;5&nbsp;</span>
-  <span class="brownbutton">&nbsp;C&nbsp;</span>
+  <span class="brownbutton">D</span>
+  <span class="whitebutton">3</span>
+  <span class="brownbutton">A</span>
+  <span class="whitebutton">4</span>
+  <span class="brownbutton">B</span>
+  <span class="whitebutton">5</span>
+  <span class="brownbutton">C</span>
 
-<p>Then press <span class="brownbutton">&nbsp;E&nbsp;</span>
+<p>Then press <span class="brownbutton">E</span>
 
 <p>To display the other values:
   <ul>
-    <li>To display &alpha;, press <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-      <span class="alttext">&nbsp;A'&nbsp;</span>, 36.86989765
-    <li>To display &beta;, press <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-      <span class="alttext">&nbsp;B'&nbsp;</span>, 53.13010235
-    <li>To display &gamma;, press <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-      <span class="alttext">&nbsp;C'&nbsp;</span>, 90
+    <li>To display &alpha;, press <span class="yellowbutton">2nd</span>
+      <span class="alttext">A'</span>, 36.86989765
+    <li>To display &beta;, press <span class="yellowbutton">2nd</span>
+      <span class="alttext">B'</span>, 53.13010235
+    <li>To display &gamma;, press <span class="yellowbutton">2nd</span>
+      <span class="alttext">C'</span>, 90
   </ul>
 
 <h3>Good to know:</h3>
 <p>The program does not interfere with ongoing calculations.
   None of the functions
-  <span class="brownbutton">&nbsp;A&nbsp;</span>,
-  <span class="brownbutton">&nbsp;B&nbsp;</span>,
-  <span class="brownbutton">&nbsp;C&nbsp;</span>,
-  <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-  <span class="alttext">&nbsp;A'&nbsp;</span>,
-  <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-  <span class="alttext">&nbsp;B'&nbsp;</span>,
-  <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-  <span class="alttext">&nbsp;C'&nbsp;</span>,
-  <span class="brownbutton">&nbsp;D&nbsp;</span>
+  <span class="brownbutton">A</span>,
+  <span class="brownbutton">B</span>,
+  <span class="brownbutton">C</span>,
+  <span class="yellowbutton">2nd</span>
+  <span class="alttext">A'</span>,
+  <span class="yellowbutton">2nd</span>
+  <span class="alttext">B'</span>,
+  <span class="yellowbutton">2nd</span>
+  <span class="alttext">C'</span>,
+  <span class="brownbutton">D</span>
   and
-  <span class="brownbutton">&nbsp;E&nbsp;</span>
+  <span class="brownbutton">E</span>
   uses
-  <span class="yellowbutton">&nbsp;CLR&nbsp;</span>
+  <span class="yellowbutton">CLR</span>
   or
-  <span class="yellowbutton">&nbsp;=&nbsp;</span>
+  <span class="yellowbutton">=</span>
   internally.</p>
 <p>For example it is possible to enter
-  <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-  <span class="alttext">&nbsp;A'&nbsp;</span>
-  <span class="whitebutton">&nbsp;+&nbsp;</span>
-  <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-  <span class="alttext">&nbsp;B'&nbsp;</span>
-  <span class="whitebutton">&nbsp;+&nbsp;</span>
-  <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-  <span class="alttext">&nbsp;C'&nbsp;</span>
-  <span class="yellowbutton">&nbsp;=&nbsp;</span>
+  <span class="yellowbutton">2nd</span>
+  <span class="alttext">A'</span>
+  <span class="whitebutton">+</span>
+  <span class="yellowbutton">2nd</span>
+  <span class="alttext">B'</span>
+  <span class="whitebutton">+</span>
+  <span class="yellowbutton">2nd</span>
+  <span class="alttext">C'</span>
+  <span class="yellowbutton">=</span>
   in order to make a sanity check that the sum of the angles is indeed
   180 degrees (if
-  <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-  <span class="alttext">&nbsp;Deg&nbsp;</span>
+  <span class="yellowbutton">2nd</span>
+  <span class="alttext">Deg</span>
   is selected).</p>
 <p>The program of course also works with
-  <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-  <span class="alttext">&nbsp;Rad&nbsp;</span>
+  <span class="yellowbutton">2nd</span>
+  <span class="alttext">Rad</span>
   and
-  <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-  <span class="alttext">&nbsp;Grad&nbsp;</span>.</p>
+  <span class="yellowbutton">2nd</span>
+  <span class="alttext">Grad</span>.</p>
 <p>The program checks the number of arguments and displays a blinking
   9.9999999 99 if there are more or less than three arguments,
   but it does no sanity checks on the arguments themselves in order to see
@@ -172,49 +199,49 @@
   a = 3, b = 11 and &alpha; = 19.</p>
 <p>In fact the maximum angle &alpha; which is possible in this example
   is easily calculated as
-  <span class="brownbutton">&nbsp;D&nbsp;</span>
-  <span class="whitebutton">&nbsp;3&nbsp;</span>
-  <span class="brownbutton">&nbsp;A&nbsp;</span>
-  <span class="whitebutton">&nbsp;1&nbsp;</span>
-  <span class="whitebutton">&nbsp;1&nbsp;</span>
-  <span class="brownbutton">&nbsp;B&nbsp;</span>
-  <span class="whitebutton">&nbsp;9&nbsp;</span>
-  <span class="whitebutton">&nbsp;0&nbsp;</span>
-  <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-  <span class="alttext">&nbsp;B'&nbsp;</span>
-  <span class="brownbutton">&nbsp;E&nbsp;</span>
-  <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-  <span class="alttext">&nbsp;A'&nbsp;</span>
+  <span class="brownbutton">D</span>
+  <span class="whitebutton">3</span>
+  <span class="brownbutton">A</span>
+  <span class="whitebutton">1</span>
+  <span class="whitebutton">1</span>
+  <span class="brownbutton">B</span>
+  <span class="whitebutton">9</span>
+  <span class="whitebutton">0</span>
+  <span class="yellowbutton">2nd</span>
+  <span class="alttext">B'</span>
+  <span class="brownbutton">E</span>
+  <span class="yellowbutton">2nd</span>
+  <span class="alttext">A'</span>
   which yields 15.82662013.</p>
 <p>This example
-  <span class="brownbutton">&nbsp;D&nbsp;</span>
-  <span class="whitebutton">&nbsp;3&nbsp;</span>
-  <span class="brownbutton">&nbsp;A&nbsp;</span>
-  <span class="whitebutton">&nbsp;1&nbsp;</span>
-  <span class="whitebutton">&nbsp;1&nbsp;</span>
-  <span class="brownbutton">&nbsp;B&nbsp;</span>
-  <span class="whitebutton">&nbsp;1&nbsp;</span>
-  <span class="whitebutton">&nbsp;9&nbsp;</span>
-  <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-  <span class="alttext">&nbsp;A'&nbsp;</span>
-  <span class="brownbutton">&nbsp;E&nbsp;</span>
+  <span class="brownbutton">D</span>
+  <span class="whitebutton">3</span>
+  <span class="brownbutton">A</span>
+  <span class="whitebutton">1</span>
+  <span class="whitebutton">1</span>
+  <span class="brownbutton">B</span>
+  <span class="whitebutton">1</span>
+  <span class="whitebutton">9</span>
+  <span class="yellowbutton">2nd</span>
+  <span class="alttext">A'</span>
+  <span class="brownbutton">E</span>
   allegedly gives two solutions,
   the second of which yields negative values - an indication that something
   is wrong.</p>
 <p>When the angle &alpha; is smaller than 15.82662013,
   then there are indeed always two solutions.
   For example
-  <span class="brownbutton">&nbsp;D&nbsp;</span>
-  <span class="whitebutton">&nbsp;3&nbsp;</span>
-  <span class="brownbutton">&nbsp;A&nbsp;</span>
-  <span class="whitebutton">&nbsp;1&nbsp;</span>
-  <span class="whitebutton">&nbsp;1&nbsp;</span>
-  <span class="brownbutton">&nbsp;B&nbsp;</span>
-  <span class="whitebutton">&nbsp;1&nbsp;</span>
-  <span class="whitebutton">&nbsp;5&nbsp;</span>
-  <span class="yellowbutton">&nbsp;2nd&nbsp;</span>
-  <span class="alttext">&nbsp;A'&nbsp;</span>
-  <span class="brownbutton">&nbsp;E&nbsp;</span>
+  <span class="brownbutton">D</span>
+  <span class="whitebutton">3</span>
+  <span class="brownbutton">A</span>
+  <span class="whitebutton">1</span>
+  <span class="whitebutton">1</span>
+  <span class="brownbutton">B</span>
+  <span class="whitebutton">1</span>
+  <span class="whitebutton">5</span>
+  <span class="yellowbutton">2nd</span>
+  <span class="alttext">A'</span>
+  <span class="brownbutton">E</span>
   will yield the following two solutions:</p>
 
 <pre>

@@ -1,0 +1,14 @@
+<carddef style="user">
+<label slot="titleleft">SINGLE SPAN BEAMS</label>
+<label slot="titleright">STR-03</label>
+<label slot="a">L</label>
+<label slot="b">P&gt;E:</label>
+<label slot="c">Q</label>
+<label slot="d">M<sub>S</sub></label>
+<label slot="e">M<sub>D</sub></label>
+<label slot="aprime">n</label>
+<label slot="bprime">J-</label>
+<label slot="cprime">S-S</label>
+<label slot="dprime">J-S</label>
+<label slot="eprime">J-J</label>
+</carddef>

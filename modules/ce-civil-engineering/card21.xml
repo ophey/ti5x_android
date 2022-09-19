@@ -1,0 +1,9 @@
+<carddef style="user">
+<label slot="titleleft">RETICULAR BEAM</label>
+<label slot="titleright">STR-21</label>
+<label slot="a">A > init.</label>
+<label slot="b">n> X: Y:</label>
+<label slot="c">n> PX:PY:</label>
+<label slot="d">> NC: NA:</label>
+<label slot="e">RESULTS</label>
+</carddef>

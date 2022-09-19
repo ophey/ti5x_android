@@ -1,0 +1,298 @@
+   r/s
+   rst
+   cp
+   list
+
+lbl nop
+   +
+   =
+   rst
+
+lbl -
+   2020202020
+   op 02
+   op 03
+   op 04
+
+lbl y**x
+   op 01
+   op 05
+   op 00
+   clr
+   inv sbr
+
+lbl ×
+   sto 95
+   rc* 95
+   r/s
+   |x|
+   st* 95
+   1
+   sum 95
+   rcl 95
+   inv sbr
+
+lbl A
+   clr
+   rcl 90
+   r/s
+   |x|
+   cp
+   x=t nop
+   sto 90
+   clr
+   rst
+
+lbl B
+   clr
+   91
+   gto ee
+
+lbl C
+   clr
+   96
+
+lbl ee
+   sbr ×
+   sbr ×
+   sbr ×
+   clr
+   rst
+
+lbl rcl
+   clr
+   90
+   sto 95
+   27
+   d
+   14
+   d
+   1401
+   d
+   ifflg 1 int
+   1402
+   d
+
+lbl int
+   96
+   sto 95
+   23
+   d
+   2301
+   d
+   2302
+   inv ifflg 1 d
+   clr
+   inv sbr
+
+lbl D
+   op 04
+   rc* 95
+   op 06
+   1
+   sum 95
+   inv sbr
+
+lbl sto
+   sbr -
+   3637350312
+   gto y**x
+
+lbl rad
+   (
+   rcl 91
+   -
+   rcl 92
+   )
+   inv sbr
+
+lbl grad
+   (
+   rcl 93
+   -
+   rcl 92
+   )
+   inv sbr
+
+lbl D'
+   clr
+   sto 99
+   stflg 1
+   3542003720
+   x⇌t
+
+lbl sin
+   sbr rad
+   )
+   ×
+   rcl 97
+   ×
+   sum 99
+   rcl 97
+   x²
+   +
+   rcl 92
+   ×
+   rcl 96
+   ×
+   sum 99
+   rcl 96
+   x²
+   =
+   ÷
+   12
+   =
+   sto 94
+   sbr sto
+   rcl 96
+   ÷
+   2
+   =
+   exc 99
+   x⇌t
+
+lbl d.ms
+   op 01
+   adv
+   3617153740
+   op 02
+   op 05
+   op 00
+   sbr rcl
+   44
+   op 04
+   rcl 94
+   ÷
+   rcl 90
+   =
+   |x|
+   exc 99
+   op 06
+   13
+   op 04
+   x⇌t
+   op 06
+   x⇌t
+   25
+   op 04
+   rcl 94
+   op 06
+   26
+   op 04
+   rcl 99
+   op 06
+   sbr -
+   rcl 99
+   rst
+
+lbl C'
+   clr
+   2320
+   x⇌t
+   rcl 93
+   ×
+   rcl 98
+   ×
+   sto 99
+   rcl 98
+   x²
+   +
+   (
+   rcl 93
+   +/-
+   +
+   gto sin
+   000
+
+lbl B'
+   stflg 0
+
+lbl A'
+   sbr sto
+   rcl 92
+   ×
+   rcl 96
+   x²
+   +
+   sbr rad
+   ×
+   rcl 97
+   x²
+   +
+   sbr grad
+   ×
+   rcl 98
+   ×
+   (
+   2
+   ×
+   rcl 96
+   -
+   rcl 98
+   =
+   ÷
+   2
+   ÷
+   (
+   rcl 92
+   ×
+   rcl 96
+   +
+   sbr rad
+   ×
+   rcl 97
+   +
+   sbr grad
+   ×
+   rcl 98
+   )
+   sto 99
+   =
+   exc 99
+   x⇌t
+   rcl 99
+   y**x
+   3
+   ×
+   rcl 91
+   -
+   sbr rad
+   ×
+   (
+   rcl 99
+   -
+   rcl 97
+   )
+   y**x
+   3
+   +
+   rcl 93
+   ×
+   (
+   rcl 96
+   -
+   rcl 99
+   )
+   y**x
+   3
+   -
+   sbr grad
+   ×
+   (
+   rcl 96
+   -
+   rcl 99
+   -
+   rcl 98
+   )
+   y**x
+   3
+   =
+   ÷
+   3
+   =
+   sto 94
+   1520
+   ifflg 0 d.ms
+   2420
+   gto d.ms

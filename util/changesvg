@@ -37,10 +37,10 @@ import re
 import base64
 import pyexiv2
 
-MAX_HEIGHT = 350
+MAX_HEIGHT = 500
 
 # width of the PNG image, the height is kept with proportion
-WIDTH = 350
+WIDTH = 500
 
 if len(sys.argv) != 3:
     sys.exit("usage: changesvg <art_directory> <help_file>")
@@ -77,9 +77,11 @@ for c in content:
                 set_new_width("/tmp/art.png")
                 if(WIDTH != 350):
                     os.system("inkscape --export-area-drawing --batch-process --export-width=%d --export-filename=/tmp/art.png %s" % (WIDTH, svgfile))
-                initial_data = open('/tmp/art.png', 'rb').read()
+
+                os.system("zopflipng -y --iterations=20 --filters=01234mep --lossy_8bit --lossy_transparent /tmp/art.png /tmp/artc.png")
+                initial_data = open('/tmp/artc.png', 'rb').read()
                 encoded_data = base64.b64encode(initial_data).decode('utf-8')
-                newcontent.append('%s ALT="%s" src="data:image/png;base64,' % (alt.group(1), alt.group(2)) + '\n')
+                newcontent.append('%s ALT="%s" WIDTH="98%%" SRC="data:image/png;base64,' % (alt.group(1), alt.group(2)) + '\n')
                 for i in range((int)(len(encoded_data)/70)+1):
                     newcontent.append(encoded_data[i*70:(i+1)*70] + '\n')
             else:

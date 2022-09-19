@@ -6,55 +6,78 @@
 <STYLE TYPE="text/css">
 .yellowbutton
   {
-    background : #ce8c3b;
-    padding : 1pt;
+    background : #FFE071;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
-  } /*.yellowbutton*/
+    font-size: 0.8em;
+  }
 
 .brownbutton
   {
-    background : #4e3836;
-    padding : 1pt;
+    background : #63452B;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
-    color : #ac9e80;
-  } /*.brownbutton*/
+    color : #F0EDD5;
+    font-size: 0.8em;
+  }
 
 .whitebutton
   {
-    background : #ac9e80;
-    padding : 1pt;
+    background : #E0DDC5;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-  } /*.whitebutton*/
+    font-size: 0.8em;
+  }
 
 .alttext
   {
-    background : #222424;
-    padding : 1.5pt;
+    background : #000000;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
     font-weight : bold;
-    color : #ac9e80;
-  } /*alttext*/
+    color : #dcb151;
+    font-size: 0.8em;
+  }
 
 .deflist DT
   {
     display : compact;
     font-weight : bold;
-  } /*.deflist DT*/
+  }
 .deflist DD
   {
     margin-left : 4em;
-  } /*.deflist DD*/
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
 <H1>ML-05 — Complex Functions</H1>
 
 <P>First, enter the complex number X which is the operand for the remaining
-operations: enter the real part of X, then press <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>,
-then enter the imaginary part, and press <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN> again.
+operations: enter the real part of X, then press <SPAN CLASS="brownbutton">A</SPAN>,
+then enter the imaginary part, and press <SPAN CLASS="brownbutton">A</SPAN> again.
 <P>(This is the same initial entry procedure as for ML-04 and ML-06, and indeed the first or only
 operand entered for any of these programs may be used for any of the others.)
 
@@ -62,18 +85,18 @@ operand entered for any of these programs may be used for any of the others.)
 result in the display, and the imaginary part in the T register, and also replace the X
 operand with the result, ready for further operations:
 <DL class="deflist">
-<DT><SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
-    <DD>Convert to angular format: shows <I>r</I>, press <SPAN CLASS="brownbutton">&nbsp;x⇌t&nbsp;</SPAN>
+<DT><SPAN CLASS="brownbutton">B</SPAN>
+    <DD>Convert to angular format: shows <I>r</I>, press <SPAN CLASS="brownbutton">x⇌t</SPAN>
     to show <I>&theta;</I>.
-<DT><SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+<DT><SPAN CLASS="brownbutton">C</SPAN>
     <DD>Compute X<SUP>2</SUP>.
-<DT><SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+<DT><SPAN CLASS="brownbutton">D</SPAN>
     <DD>Compute square root of X.
-<DT><SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+<DT><SPAN CLASS="brownbutton">E</SPAN>
     <DD>Compute 1/X.
-<DT><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN> <SPAN CLASS="alttext">A´</SPAN>
+<DT><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">A´</SPAN>
     <DD>Compute natural log of X.
-<DT><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN> <SPAN CLASS="alttext">B´</SPAN>
+<DT><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">B´</SPAN>
     <DD>Compute e<SUP>X</SUP>.
 </DL>
 

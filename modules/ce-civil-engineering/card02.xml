@@ -1,0 +1,12 @@
+<carddef style="user">
+<label slot="titleleft">GEOM. CHARACT. OF PARTICULAR SECTION</label>
+<label slot="titleright">STR-02</label>
+<label slot="a">A</label>
+<label slot="b">B</label>
+<label slot="c">A<sub>0</sub></label>
+<label slot="d">B<sub>0</sub></label>
+<label slot="e">D</label>
+<label slot="aprime">RECT.</label>
+<label slot="bprime">T</label>
+<label slot="cprime">CIRC.</label>
+</carddef>

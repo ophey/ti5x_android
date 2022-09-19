@@ -1,0 +1,456 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #FFE071;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    font-size: 0.8em;
+  }
+
+.brownbutton
+  {
+    background : #63452B;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #F0EDD5;
+    font-size: 0.8em;
+  }
+
+.whitebutton
+  {
+    background : #E0DDC5;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+    font-size: 0.8em;
+  }
+
+.alttext
+  {
+    background : #000000;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #dcb151;
+    font-size: 0.8em;
+  }
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  }
+.deflist DD
+  {
+    margin-left : 4em;
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
+</STYLE>
+</HEAD>
+<BODY>
+<H1>STR-01 - Geometric Characteristics of any Section</H1>
+
+<P>For any section delimited by a closed polygonal, possibly hollow,
+  the program calculates area A, static moment with respect to the X
+  axis “S/x”, Moment of inertia with respect to the X axis “J/x”,
+  order of center of gravity “YG” and moment of inertia with respect
+  to a barycentric axis parallel to the X axis “J/G”.
+<p>The reference system is set by the operator.
+
+<h2>Description of the method</h2>
+
+<table>
+  <tb><IMG ALT="Polygonal Hollow" WIDTH="98%" SRC="data:image/png;base64,
+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
+">
+  </tb>
+  <tb>
+<p>The vertices of the external polygon must be
+  numbered progressively clockwise and, for
+  hollow sections, the vertices of the internal
+  polygon must be numbered progressively
+  counterclockwise.
+
+<p>The coordinates of the vertex <i>i</i> of the external polygon and
+  the coordinates of the vertex <i>i'</i> of the internal polygon are
+  indicated respectively with x<sub>i</sub>, y<sub>i</sub>
+  and <i>x<sub>i</sub>’</i> and <i>y<sub>i</sub>’</i>.
+</tb>
+</table>
+
+
+<p>If a definable key is assigned the input function of a single
+  numeric data, for example <i>X<sub>i</sub></i>, only the
+  description <i>X<sub>i</sub></i>>" is shown to indicate to type
+  first the value of <i>X<sub>i</sub></i> and then, with the symbol
+  ">" to press the definable key. If a double input is assigned to the
+  same key, <i>X<sub>i</sub></i> > <i>Y<sub>i</sub></i> :" will be
+  written to indicate to the operator to first type the numerical
+  value of <i>X<sub>i</sub></i>, then, with the ">" symbol, to press
+  the definable key; then type <i>Y<sub>i</sub></i>", and finally,
+  with the symbol ":",
+  press <SPAN CLASS="brownbutton">R/S</SPAN> to resume
+  processing.
+
+<p>When the ">" symbol is indicated first, for example
+  "> <i>X<sub>i</sub></i>: <i>Y<sub>i</sub></i>:", the operator must
+  first press the definable key, then the numerical
+  data <i>X<sub>i</sub></i>, then
+  the <SPAN CLASS="brownbutton">R/S</SPAN> key followed by
+  numeric value of <i>Y<sub>i</sub></i>" and finally
+  the <SPAN CLASS="brownbutton">R/S</SPAN> key again. This
+  last procedure is used to perform "output-input" operations of the
+  numerical data, which allows the operator, before entering the value
+  of the data to be stored, to view the value already stored on the
+  display and, if necessary, correct it.
+
+<OL>
+<LI>Print option: <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">St flg</SPAN>
+  <SPAN CLASS="whitebutton">1</SPAN>
+<LI>Initialization : <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">E'</SPAN>
+<LI>Start external polygonal : <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">A'</SPAN>
+<LI>Provide the coordinates of the vertices “1” of the external
+  polygon, X<sub>1</sub> <SPAN CLASS="brownbutton">A</SPAN>
+  Y<sub>1</sub> <SPAN CLASS="brownbutton">R/S</SPAN>
+<LI>Provide the coordinates of the vertices “2” of the external
+  polygon, X<sub>2</sub> <SPAN CLASS="brownbutton">A</SPAN>
+  Y<sub>2</sub> <SPAN CLASS="brownbutton">R/S</SPAN>
+<LI>continues to the last vertex “n”
+<LI>External polygon end : <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">B'</SPAN>
+<LI>Start internal polygonal (if the section is full skip to step 9)
+  : <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">A'</SPAN>
+<LI>Provide the coordinates of the vertices “1” of the internal
+  polygon, X<sub>1</sub>' <SPAN CLASS="brownbutton">A</SPAN>
+  Y<sub>1</sub>' <SPAN CLASS="brownbutton">R/S</SPAN>
+<LI>continues to the last vertex “m”
+<LI>Ask for the results
+  : <SPAN CLASS="brownbutton">E</SPAN>
+The values S/x J/x, Y(G) and J(G) will be displayed on the print or
+  after each press to <SPAN CLASS="brownbutton">R/S</SPAN>
+  if prinout not activated.
+</OL>
+
+<h2>Example</h2>
+
+<IMG ALT="Polygonal Hollow Ex" WIDTH="98%" SRC="data:image/png;base64,
+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
+2mDnSgszX1m8qykmpHN2tYxaAOdKB3wibUxfpNjqp6UWvE3RzqQAd6R22w5tSKWkeLa0z9
+P/Yv9unAAgEoDMDgEM3QbAFEbVi7tERSQIhQz18+dzuc6o3ooqO66KKjuuiif0910UVHdd
+FFR3XRRUd10UVHddFFR3XRx6Kjuuiio7rooqO66KKjuuiio/p8dNFRXXTRUV100VFddNFR
+XXTRUV100VW/9KuLLjrb9dUPj0Z70UVHddFFR3XRRUd10UVHddFFR3XRRR+guuiio7rooq
+O66KKjuuiio7rooo9SXXTRUV100VFddNFRXXTRUV100YeoLrroqC666KguuuioLrroqC66
+6PNUF110VBdddFQXXXRUF130/6W66KKjuuiio7rooqO66KL/nuqii47qoouO6qKLjuqii/
+4h1TfX8/rqoouO6qKLjuqiix6guuiio7roogeoLrroqC666KguuugFqosuOqqLLnqB6qKL
+juqiix6guuiiB6h+E130NtWPz+qii47qoovep7roosepLrroqC666AWqiy46qosueoHqoo
+uO6qKLXqC66KKjuuiiF6guuuioLrroBaqLLjqqiy56geqii47qoovep7roovepLrrofaqL
+Lnqf6qKL3qe66KL3qS666FGq716qiy56n+qii96nuuii96kuuuh9qosuep/qb6Of7uzcA8
+wrSxyG8bfda9u2bdu2bdu2bdu2bdu27duv72k2k8l2j93ZPM//aE4nX/hLsdNt7VrYU3p8
+T+vFvacfb3v0bO8Y5lugA73zg3qPoL/sJS3XWyMr/mtpvx53rOOaM9c8ZArP6EAnqHcP/V
+GP5szqbjKP7RfCns09hGV5ZKADnVKgfmoJ+kceLzCvuxaI1yP1mfxNvmunsGfcTocOdIL6
+bpYnLUHfI/DOPJIP8i1+pvV7mwL6y/Jd+4b1VEAHehJBvQR9rEB4OD9T+N9j43P6+vn6iL
+CeHehATySoF6C/Hl+sb9O26ysPGx6ZJ1+fnP+75kWBDvRE4r16AfrdHttD5YjPKu2aNECf
+IV+dF57fVwA60FMJ6uX5xC/549Iz+vDhmX6JfH1lzrzmdYAO9HSDenmOtPKp+eB8/Vw4Ln
+Mp0IFehaD+he/xRq61Rq57eL/DEVigVymoT261XUfPWnMRZ92BXq2gPokVJ7M8tm/gSy1A
+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
+90ADHrRPyV7QAAAABJRU5ErkJggg==
+">
+
+<p>External polygon:
+<pre>
+   1  2  3  4  5  6  7
+x 10 60 60 50 50 20 10
+y 50 50  0  0 10 40 40
+</pre>
+
+<p>Internal polygon:
+<pre>
+  1' 2' 3'
+x 50 30 50
+y 40 40 20
+</pre>
+
+<UL>
+<LI>Print option, <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">St flg</SPAN>
+  <SPAN CLASS="whitebutton">1</SPAN>
+<LI>Initialization : <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">E'</SPAN>
+<LI>Start external polygonal : <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">A'</SPAN>, display <SPAN CLASS="displayb">1</SPAN>.
+
+<LI>Enter coordinates for vertices:
+<UL>
+<LI>10 <SPAN CLASS="brownbutton">A</SPAN>, display <SPAN CLASS="displayb">10</SPAN>.
+<LI>50 <SPAN CLASS="brownbutton">R/S</SPAN>, display <SPAN CLASS="displayb">2</SPAN>.
+<LI>60 <SPAN CLASS="brownbutton">A</SPAN>, display <SPAN CLASS="displayb">60</SPAN>.
+<LI>50 <SPAN CLASS="brownbutton">R/S</SPAN>, display <SPAN CLASS="displayb">2</SPAN>.
+<LI>60 <SPAN CLASS="brownbutton">A</SPAN>, display <SPAN CLASS="displayb">60</SPAN>.
+<LI>0 <SPAN CLASS="brownbutton">R/S</SPAN>, display <SPAN CLASS="displayb">4</SPAN>.
+<LI>50 <SPAN CLASS="brownbutton">A</SPAN>, display <SPAN CLASS="displayb">50</SPAN>.
+<LI>0 <SPAN CLASS="brownbutton">R/S</SPAN>, display <SPAN CLASS="displayb">5</SPAN>.
+<LI>50 <SPAN CLASS="brownbutton">A</SPAN>, display <SPAN CLASS="displayb">50</SPAN>.
+<LI>10 <SPAN CLASS="brownbutton">R/S</SPAN>, display <SPAN CLASS="displayb">6</SPAN>.
+<LI>20 <SPAN CLASS="brownbutton">A</SPAN>, display <SPAN CLASS="displayb">20</SPAN>.
+<LI>40 <SPAN CLASS="brownbutton">R/S</SPAN>, display <SPAN CLASS="displayb">7</SPAN>.
+<LI>10 <SPAN CLASS="brownbutton">A</SPAN>, display <SPAN CLASS="displayb">10</SPAN>.
+<LI>40 <SPAN CLASS="brownbutton">R/S</SPAN>, display <SPAN CLASS="displayb">8</SPAN>.
+</UL>
+<LI>External polygonal end
+  : <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">B'</SPAN>, display <SPAN CLASS="displayb">0</SPAN>.
+<LI>Start internal polygon
+  : <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">A'</SPAN>, display <SPAN CLASS="displayb">1</SPAN>.
+
+<LI>Enter coordinates for vertices:
+<UL>
+<LI>50 <SPAN CLASS="brownbutton">A</SPAN>, display <SPAN CLASS="displayb">50</SPAN>.
+<LI>40 <SPAN CLASS="brownbutton">R/S</SPAN>, display <SPAN CLASS="displayb">2</SPAN>.
+<LI>30 <SPAN CLASS="brownbutton">A</SPAN>, display <SPAN CLASS="displayb">30</SPAN>.
+<LI>40 <SPAN CLASS="brownbutton">R/S</SPAN>, display <SPAN CLASS="displayb">3</SPAN>.
+<LI>50 <SPAN CLASS="brownbutton">A</SPAN>, display <SPAN CLASS="displayb">50</SPAN>.
+<LI>20 <SPAN CLASS="brownbutton">R/S</SPAN>, display <SPAN CLASS="displayb">4</SPAN>.
+</UL>
+
+<LI>Internal polygonal end
+  : <SPAN CLASS="yellowbutton">2nd</SPAN>
+  <SPAN CLASS="alttext">B'</SPAN>, display <SPAN CLASS="displayb">0</SPAN>.
+<LI>Ask for results : <SPAN CLASS="brownbutton">E</SPAN>
+</UL>
+
+<P>On the printer we have:
+
+<pre>
+1150.         A
+37333.33333   S/X
+1430833.333   J/X
+32.46376812   YG
+218852.657    J/G
+</pre>
+
+<P>Flags used:
+<UL>
+<LI>1 - enable print
+</UL>
+
+<P>Registers used: 0 to 12.

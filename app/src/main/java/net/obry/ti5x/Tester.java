@@ -1060,6 +1060,54 @@ class Tester {
     return check("4.", true);
   }
 
+  private boolean Test_32() {
+    //  test % & INV % extensions
+
+    Clear();
+
+    SetX(5);
+    Calc.Operator(State.STACKOP_MUL);
+    SetX(10);
+    Calc.Percent();
+    Calc.Equals();
+
+    if (!check("2.5", false))
+      return false;
+
+    Clear();
+
+    SetX(5);
+    Calc.Operator(State.STACKOP_ADD);
+    SetX(10);
+    Calc.Percent();
+    Calc.Equals();
+
+    if (!check("5.5", false))
+      return false;
+
+    Clear();
+
+    SetX(5);
+    Calc.Operator(State.STACKOP_MUL);
+    SetX(10);
+    Calc.InvState = true;
+    Calc.Percent();
+    Calc.Equals();
+
+    if (!check("5000.", false))
+      return false;
+
+    Clear();
+
+    SetX(5);
+    Calc.Operator(State.STACKOP_ADD);
+    SetX(10);
+    Calc.InvState = true;
+    Calc.Percent();
+    Calc.Equals();
+
+    return check("1005.", false);
+  }
   int Run() {
     Calc = Global.Calc;
     int Total = 0;
@@ -1125,6 +1173,8 @@ class Tester {
     if (!Test_30()) return -30;
     Total++;
     if (!Test_31()) return -31;
+    Total++;
+    if (!Test_32()) return -32;
     Total++;
 
     Clear();

@@ -64,6 +64,9 @@ class State {
        Persistent.DataFormatException;
     /* returns the next input value or raises ImportEOFException if none. */
 
+    abstract void Reset()
+       throws Persistent.DataFormatException;
+
     void End() {
       /* stops further invocations of the task. Subclass may add
         further cleanup, but must also invoke this superclass method. */
@@ -377,6 +380,7 @@ class State {
          // no number when:
             (op != 53     // opening a parenthesis
                   && op != 25  // clr
+                  && op != 20  // 2nd clr
                   && op != 24, // ce
                (InvState ? "I" : " ") + Printer.KeyCodeSym(op));
     }
@@ -1033,10 +1037,14 @@ class State {
   void Percent() {
     Enter(20);
 
-    X.div(100);
+    if (InvState)
+      X.mult(100);
+    else {
+      X.div(100);
 
-    if (OpStackNext > 0) {
-      X.mult(OpStack[OpStackNext - 1].Operand);
+      if (OpStackNext > 0) {
+          X.mult(OpStack[OpStackNext - 1].Operand);
+      }
     }
 
     if (X.isError()) {
@@ -2040,6 +2048,18 @@ class State {
             }
           }
           break;
+          case 97:
+            ResetImport();
+            OK = true;
+            break;
+          case 96:
+            if (InvState) {
+              ExportNew();
+            } else {
+              ImportNew();
+            }
+            OK = true;
+            break;
           case 98:
             TracePrintActivated = !TracePrintActivated;
             OK = true;
@@ -2644,10 +2664,20 @@ class State {
     // 1 and 4 and nnn the optional card index. The 9nn indexes are reserved for the internal
     // libraries and programs.
 
-    final int N = (int)Math.abs(X.getInt());
+    int Part = 0; // part of the bank to read (0 = Pro & Mem, default)
+    int N = (int)Math.abs(X.getInt());
     final int CardId = (int)Math.abs((int)Math.round((X.get() - N) * 1000));
+
+    while(InvState && N >= 10) {
+      Part = Part + 1;
+      N = N - 10;
+    }
+
     final String BankFilename = String.format("%03d.ti5b", CardId);
-    if ((N < 1 || N > 4) && (N != 0 || !InvState || CardId < 0)) {
+    if (Part > 2
+        || ((N < 1 || N > 4)
+            && (N != 0 || !InvState || CardId < 0)))
+    {
       SetErrorState(true);
     } else if (InvState) {
 
@@ -2661,8 +2691,8 @@ class State {
       }
 
       if (Store.Contains(CardId)) {
-        Store.Get (CardId).LoadCard(this);
-        // reset labels to take into account possible new ones in loaded cards
+        Store.Get (CardId).LoadCard(this, Part);
+        // reset labels to take into account possible new ones in loaded card
         ResetInLabels();
       } else {
         // card not found
@@ -2731,6 +2761,47 @@ class State {
     }
   }
 
+  void ResetImport() {
+    if (Import != null) {
+      Import.Reset();
+    }
+  }
+
+  void ResetExport() {
+    if(Global.Export !=null) {
+      Global.Export.Close();
+    }
+  }
+
+  void ImportNew() {
+      final int N = (int)Math.abs(X.getInt());
+      final String DataFilename = String.format("/%d.dat", N);
+      final String SaveDir =
+        new java.io.File(ctx.getExternalFilesDir(null), Persistent.DataDir)
+            .getAbsolutePath();
+      ClearImport();
+      try {
+        Global.Import.ImportData(SaveDir + DataFilename);
+      } catch (Persistent.DataFormatException Failed) {
+        SetErrorState(true);
+      }
+  }
+
+  void ExportNew() {
+    final int N = (int)Math.abs(X.getInt());
+    final String DataFilename = String.format("/%d.dat", N);
+    final String SaveDir =
+        new java.io.File(ctx.getExternalFilesDir(null), Persistent.DataDir)
+            .getAbsolutePath();
+    new java.io.File(SaveDir).mkdirs();
+    ResetExport();
+    try {
+      Global.Export.Open(SaveDir + DataFilename, false, true);
+    } catch (Persistent.DataFormatException Failed) {
+      SetErrorState(true);
+    }
+  }
+
   void ResetReturns() {
     /* clears the subroutine return stack. */
     ReturnLast = -1;
@@ -2739,9 +2810,7 @@ class State {
   void ResetProg() {
     if (InvState) /* extension! */ {
       ClearImport();
-      if (Global.Export != null) {
-        Global.Export.Close();
-      }
+      ResetExport();
     } else {
       for (int i = 0; i < MaxFlags; ++i) {
         Flag[i] = false;
@@ -3183,7 +3252,8 @@ class State {
             ClearEntry();
             break;
           case 20:
-            Percent();
+            ClearAll();
+            Enter(20);
             break;
           case 25:
             ClearAll();
@@ -3251,7 +3321,9 @@ class State {
           case 49:
             MemoryOp(MEMOP_MUL, GetProg(true), false);
             break;
-          /* 51 invalid */
+          case 51: /* extension % */
+            Percent();
+            break;
           case 52:
             EnterExponent();
             break;

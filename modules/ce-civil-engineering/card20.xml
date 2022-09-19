@@ -1,0 +1,11 @@
+<carddef style="user">
+<label slot="titleleft">THRUST OF THE EARTH</label>
+<label slot="titleright">STR-20</label>
+<label slot="a">F</label>
+<label slot="b">G</label>
+<label slot="c">H</label>
+<label slot="d">H'</label>
+<label slot="e">E</label>
+<label slot="aprime">Q</label>
+<label slot="eprime">RESULTS</label>
+</carddef>

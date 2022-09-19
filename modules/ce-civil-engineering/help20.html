@@ -1,0 +1,388 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #FFE071;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    font-size: 0.8em;
+  }
+
+.brownbutton
+  {
+    background : #63452B;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #F0EDD5;
+    font-size: 0.8em;
+  }
+
+.whitebutton
+  {
+    background : #E0DDC5;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+    font-size: 0.8em;
+  }
+
+.alttext
+  {
+    background : #000000;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #dcb151;
+    font-size: 0.8em;
+  }
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  }
+.deflist DD
+  {
+    margin-left : 4em;
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
+</STYLE>
+</HEAD>
+<BODY>
+
+<H2>STR-20 - Thrust of the Earth</H2>
+<P>The program identifies the pressure diagram and calculates the
+  thrust of the earth against a retaining wall according to Rankine's
+  hypothesis.
+
+<p>The units of measurement must be: lengths in meters, forces
+  in Newton and related multiples or submultiples.
+
+<P>
+<IMG ALT="Thrust of the Earth" WIDTH="98%" SRC="data:image/png;base64,
+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
+">
+
+<H3>Provide the Data</H3>
+<p><UL>
+<li>F = internal friction angle of the ground  (degrees)
+<li>G = specific weight of the ground (N/m³)
+<li>H = height of the wall above ground (m)
+<li>H'= underground height (m)
+<li>P = slope of the ground (degrees)
+<li>Q = load on the ground (N/m²)
+</ul></p>
+
+<H3>Results:</H3>
+<p><UL>
+<li>B = angle of the ground breaking surface (degrees)
+<li>P1= pressure at the top of the wall (N/m²)
+<li>P2= pressure at the height H' of the wall (N/m²)
+<li>Z = resulting thrust on the height H of the wall (N)
+<li>E = height above ground of application of the thrust Z (m)
+<li>Z'= resulting thrust on the height H' of the wall (N)
+<li>E'= height of the application of thrust Z' from the base of the wall (m)
+</ul></p>
+
+<H3>Instructions</H3>
+
+<p>The instructions for using the program are summarized in the "card
+  emulation” similar to the magnetic card of the TI-59.</p>
+
+<p>It summarizes the instructions assigned to each definable key, transcribed
+  in the box referring to the key.
+
+<p>Each input procedure is independent and the operator can perform it
+  without a predetermined order.
+
+<p>For another calculation, it will be sufficient to replace only the
+  data that change.
+
+<p>With the procedure assigned to keys it is possible to reecall and
+  correct the stored data.  By pressing the key the data present in
+  the register is extracted and displayed.  Pressing the key again,
+  the same data, possibly corrected, will be stored again.
+
+<p>Pressing <span class="yellowbutton">2nd</span>
+  <span class="alttext">E'</span> the program calculates
+  the thrust of the earth on the wall and displays "B".
+
+<p>Pressing in sequence <span class="brownbutton">R/S</span>
+  displays: P, P', Z, E, Z', E' and repeat the sequence.
+
+<p>The program will also print a report with data and results.
+
+<h3>Example</h3>
+
+<p>Calculate the thrusts on the wall of the previous figure.</p>
+
+<ol>
+<li>Provide the Data:
+<br> Each procedure can be performed without a specific order.
+<ul>
+<li>Set F : enter <b>20</b>
+  degrees. Press <span class="brownbutton">A</span>. Display = previous
+  stored data.
+<li>Set G : enter <b>1400</b>
+  dN/m³. Press <span class="brownbutton">B</span>. Display = previous
+  stored data.
+<li>Set H : enter <b>6</b>
+  m. Press <span class="brownbutton">C</span>. Display = previous stored
+  data.
+<li>Set H': enter <b>1</b>
+  m. Press <span class="brownbutton">D</span>. Display = previous stored
+  data.
+<li>Set E : enter <b>15</b>
+  degrees. Press <span class="brownbutton">E</span>. Display = previous
+  stored data.
+<li>Set Q : enter <b>0</b>
+  dN/m². Press <span class="yellowbutton">2nd</span>
+  <span class="alttext">A'</span>.
+</ul>
+
+<br>
+<li>Results:
+
+  <p>Pressing <span class="yellowbutton">2nd</span>
+    <span class="alttext">E'</span>
+    the program calculates the thrust of the earth on the wall and
+    displays B = <b>47.68014245</b> degrees.
+  <p>Pressing in sequence <span class="brownbutton">R/S</span> displays:
+    P, P', Z, E, Z', E'.
+  <p>The program will also print the following report with data and
+    results
+
+<pre><b>
+--------------------
+STR20
+          20.      F
+        1400.      G
+           6.      H
+           1.     H'
+          15.      E
+           0.      Q
+
+  47.68014245      B
+           0.      P
+  5366.346912     P'
+  16099.04074      Z
+           2.      E
+  5366.346912     Z'
+          0.5     E'
+--------------------
+</pre></b>
+
+
+<p>To view the print report, touch the printer icon at the top center
+  of the phone display.
+
+<p>To store on the APP or read the registers from 00 to 99, touch the
+  "?" icon at the top left of the phone display and follow the
+  instructions contained in the APP Help,"card emulation".
+
+</ol>
+
+<h3>About the Program</h3>
+<p>Number of steps: from <b>000</b> to <b>332</b>.
+<p>Registers used: from <b>00</b> to <b>17</b>
+<p>Flags used: <b>1</b>
+<p>Labels: <SPAN CLASS="alttext">Prt</SPAN>, <SPAN CLASS="alttext">Op</SPAN>, <SPAN CLASS="yellowbutton">=</SPAN> , <SPAN CLASS="alttext">Adv</SPAN>, <SPAN CLASS="yellowbutton">-</SPAN> , <SPAN CLASS="yellowbutton">+</SPAN>, and definable keys.
+
+</BODY>

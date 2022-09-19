@@ -1,0 +1,10 @@
+<carddef style="user">
+<label slot="titleleft">FRAMES</label>
+<label slot="titleright">STR-22</label>
+<label slot="bprime">n> REPORT</label>
+<label slot="a">>C: P:</label>
+<label slot="b">n>KP: KT:</label>
+<label slot="c">n>MI<sub>L</sub>:MI<sub>R</sub></label>
+<label slot="d">p > MS:</label>
+<label slot="e">CALC.</label>
+</carddef>

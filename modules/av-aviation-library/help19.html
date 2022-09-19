@@ -6,55 +6,70 @@
 <STYLE TYPE="text/css">
 .yellowbutton
   {
-    background : #ce8c3b;
-    padding : 1pt;
+    background : #FFE071;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
-  } /*.yellowbutton*/
+    font-size: 0.8em;
+  }
 
 .brownbutton
   {
-    background : #4e3836;
-    padding : 1pt;
+    background : #63452B;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
-    color : #ac9e80;
-  } /*.brownbutton*/
+    color : #F0EDD5;
+    font-size: 0.8em;
+  }
 
 .whitebutton
   {
-    background : #ac9e80;
-    padding : 1pt;
+    background : #E0DDC5;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-  } /*.whitebutton*/
+    font-size: 0.8em;
+  }
 
 .alttext
   {
-    background : #222424;
-    padding : 1.5pt;
+    background : #000000;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
     font-weight : bold;
-    color : #ac9e80;
-  } /*alttext*/
+    color : #dcb151;
+    font-size: 0.8em;
+  }
 
 .deflist DT
   {
     display : compact;
     font-weight : bold;
-  } /*.deflist DT*/
+  }
 .deflist DD
   {
     margin-left : 4em;
-  } /*.deflist DD*/
+  }
 
 .display
-  {
-     color : red;
-     font-weight : bold;
-     text-align : right;
-     margin-right : 2em;
-  }
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
@@ -80,34 +95,34 @@
 
 <DL class="deflist">
   <DT>Initialize
-    <DD><SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN>
-      <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">SBR</SPAN>
+      <SPAN CLASS="yellowbutton">CLR</SPAN>
     <DD CLASS="display">0.00</DD>
   </DT>
 
   <DT>Enter weight of item
-    <DD>Wt <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    <DD>Wt <SPAN CLASS="brownbutton">A</SPAN>
     <DD CLASS="display">Wt</dd>
   </DT>
 
   <h3>Do either:</h3>
 
   <DT>Enter moment arm
-    <DD>Mmt arm <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD>Mmt arm <SPAN CLASS="brownbutton">B</SPAN>
     <DD CLASS="display">Mmt</dd>
   </DT>
 
   <DT>Enter moment
-    <DD>Mmt <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;B'&nbsp;</SPAN>
+    <DD>Mmt <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">B'</SPAN>
     <DD CLASS="display">Mmt</DD>
   </DT>
 
   <h3>Then:</h3>
 
   <DT>To delete pair just entered
-    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;A'&nbsp;</SPAN>
+    <DD><SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">A'</SPAN>
     <DD CLASS="display">0.00</dd>
   </DT>
 
@@ -116,23 +131,23 @@
   <h3>Finally:</h3>
 
   <DT>Compute total weight
-    <DD><SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">C</SPAN>
     <DD CLASS="display">tot Wt</dd>
   </DT>
 
   <DT>Compute total moment
-    <DD><SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">D</SPAN>
     <DD CLASS="display">tot Mmt</dd>
   </DT>
 
   <DT>Compute center of gravity
-    <DD><SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">E</SPAN>
     <DD CLASS="display">C of G</dd>
   </DT>
 
   <DT>To delete any pair
-    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>
+    <DD><SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">E'</SPAN>
     <DD CLASS="display">0.00</dd>
   </DT>
 
@@ -142,14 +157,14 @@
   <p>For a new case, start over to "Initialize".</p>
 
   <DT>To convert gallon of fuel to pounds of fuel
-    <DD>Gal (fuel) <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;C'&nbsp;</SPAN>
+    <DD>Gal (fuel) <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">C'</SPAN>
     <DD CLASS="display">Lbs (fuel)</dd>
   </DT>
 
   <DT>To convert pounds to kilograms
-    <DD>Lbs <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;D'&nbsp;</SPAN>
+    <DD>Lbs <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">D'</SPAN>
     <DD CLASS="display">Kg</dd>
   </DT>
 </DL>

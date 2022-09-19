@@ -1,0 +1,217 @@
+   r/s
+   rst
+   c
+   1
+
+lbl A
+   exc 00
+   rst
+
+lbl B
+   exc 01
+   rst
+
+lbl C
+   exc 02
+   rst
+
+lbl D
+   exc 03
+   rst
+
+lbl E
+   exc 04
+   rst
+
+lbl A'
+   exc 05
+   rst
+
+lbl B'
+   exc 06
+   rst
+
+lbl E'
+   stflg 1
+   cp
+   rcl 02
+   -
+   rcl 03
+   =
+   sto 08
+   clr
+   sto 09
+
+lbl log
+   rcl 08
+   -
+   rcl 09
+   =
+   sto 10
+   ×
+   rcl 00
+   ×
+   rcl 04
+   ÷
+   rcl 05
+   -
+   rcl 01
+   ×
+   rcl 09
+   y**x
+   3
+   ÷
+   3
+   =
+   ÷
+   rcl 04
+   ÷
+   (
+   rcl 10
+   x²
+   +
+   rcl 06
+   ×
+   (
+   rcl 09
+   -
+   rcl 03
+   )
+   x²
+   )
+   =
+   sto 11
+   1
+   +
+   rcl 06
+   =
+   sto 12
+   ×
+   rcl 11
+   ×
+   rcl 04
+   ÷
+   rcl 01
+   ×
+   (
+   (
+   (
+   rcl 08
+   +
+   rcl 06
+   ×
+   rcl 03
+   )
+   ×
+   rcl 01
+   ×
+   2
+   ÷
+   rcl 04
+   ÷
+   rcl 11
+   ÷
+   rcl 12
+   x²
+   +
+   1
+   )
+   √x
+   -
+   1
+   )
+   =
+   -
+   exc 09
+   =
+   |x|
+   -
+   .01
+   =
+   x≥t log
+   rcl 08
+   -
+   rcl 09
+   =
+   ×
+   rcl 04
+   =
+   1/x
+   ×
+   rcl 05
+   ×
+   rcl 09
+   =
+   sto 10
+   rcl 11
+   ×
+   rcl 06
+   =
+   sto 12
+
+lbl lnx
+   sbr -
+   3637350204
+   op 01
+   sbr +
+   sto 07
+   30
+   c'
+   14
+   c'
+   13
+   c'
+   2365
+   c'
+   22
+   c'
+   772137
+   c'
+   33
+   c'
+   adv
+
+lbl adv
+   9
+   sto 07
+   44
+   c'
+   7715
+   c'
+   132137
+   c'
+   132115
+   c'
+   inv ifflg 1 adv
+   sbr -
+   adv
+   inv stflg 1
+   gto adv
+
+lbl C'
+   op 04
+   rc* 07
+   op 27
+
+lbl D'
+   ifflg 1 op
+   r/s
+   inv sbr
+
+lbl op
+   op 06
+   inv sbr
+
+lbl -
+   clr
+   2020202020
+   op 01
+   op 02
+   op 03
+   op 04
+
+lbl +
+   op 05
+   op 00
+   clr
+   inv sbr

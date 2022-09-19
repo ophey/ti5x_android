@@ -1,0 +1,785 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #FFE071;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    font-size: 0.8em;
+  }
+
+.brownbutton
+  {
+    background : #63452B;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #F0EDD5;
+    font-size: 0.8em;
+  }
+
+.whitebutton
+  {
+    background : #E0DDC5;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+    font-size: 0.8em;
+  }
+
+.alttext
+  {
+    background : #000000;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #dcb151;
+    font-size: 0.8em;
+  }
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  }
+.deflist DD
+  {
+    margin-left : 4em;
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
+</STYLE>
+</HEAD>
+<BODY>
+
+<H2>STR-19 - Distribution of the Seismic Shear Force</H2>
+
+<P>The program calculates the distribution coefficients of the
+  seismic shear force in the pillars of an infinitely rigid planar
+  building structure, in the two directions X and Y and as a
+  function of their stiffness and the eccentricity between the
+  center of gravity GW of the masses and GK of the stiffnesses.
+
+<p>The maximum number of pillars in the structure is 37.
+
+<p>The value of the seismic vertical load "W" present in each pillar
+  must be positive and less than 10⁵.
+
+<p>The sign of the pillar coordinates must be positive in both "X"
+  and "Y" directions and less than 10⁴.
+
+<p>The sign of the stiffnesses "K" of the pillars, in both directions,
+  must be positive and less than 10⁶.
+
+<p>The units of measurement must be: lengths in meters, forces
+  in Newton and related multiples or submultiples.
+
+<P>
+<IMG ALT="Seismic Shear Force" WIDTH="98%" SRC="data:image/png;base64,
+iVBORw0KGgoAAAANSUhEUgAAAfQAAAGlCAMAAAA72vTqAAADAFBMVEUAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAACzMPSIAAABAHRSTlMAFI2udAGH49RssN+mnOJ2kfU7
+DvYvbax9JfIE6kiWiQPgAlsYHNlmJmL3Me3LDAYsMBO1Tio22/++PSc8KJS4RJAaXPhFk3
+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
+Jggg==
+">
+
+<H3>Symbology</H3>
+<p>
+  <UL>
+    <li> N = number of pillars (max 37)
+    <li> W<sub>n</sub> = seismic vertical load on pillar "n"
+    <li> X<sub>n</sub>, Y<sub>n</sub> = coordinates of pillar "n"
+    <li> KX<sub>n</sub>, KY<sub>n</sub> = stiffness of pillar "n" in X
+      and Y direction
+    <li>XG, YG = coordinates of the center of the gravity GW of the
+      seismic masses
+    <li>XK, YK = coordinates of the center of the gravity GK of the stiffnesses
+    <li>CX<sub>n</sub>, CY<sub>n</sub> = distribution coefficients of
+      the seismic shear force in pillar "n" neglecting the torsion effect;
+    <li>EX<sub>n</sub>, EY<sub>n</sub> = distribution coefficients of
+      the seismic shear force in pillar "n" considering the torsion effect;
+  </ul>
+</p>
+
+
+<H3>Instructions</H3>
+
+<p>The instructions for using the program are summarized in the "card emulation”
+  similar to the magnetic card of the TI-59, which appears below the display
+  when the APP calls the program from the library module. </p>
+
+<p>It summarizes the instructions assigned to each definable key, transcribed
+  in the box referring to the key. Each input procedure is independent and
+  the operator can perform it without a predetermined order.
+
+<p>The program calculates the coefficients Cn and En of the generic pillar "n"
+  for a structure with a maximum of N = 37 pillars.
+
+<p>To start the program, enter N and press
+  the <span class="brownbutton">SBR</span> <span class="yellowbutton">CLR</span>
+  keys.
+
+<p>The data of the pillar "n" are: the "seismic" load W<sub>n</sub>,
+  the coordinates X<sub>n</sub> and Y<sub>n</sub> of the center of
+  gravity of the column section, the stiffnesses KX<sub>n</sub> and
+  KY<sub>n</sub> of the pillars, measured in both directions.
+
+<p>To reduce the time required for storing all data of the pillars, the program
+  stores the 5 data in 5 temporary registers, each managed by the definable key
+  from <span class="brownbutton">A</span>
+  to <span class="brownbutton">E</span> as shown in the card. The
+  operator can thus view the data and, if necessary, correct it.
+
+<p>After completing the input of the 5 data, the operator will archive
+  them with the procedure assigned to
+  key <span class="yellowbutton">2nd</span> <span class="alttext">B'</span>.
+
+<p>For another pillar, it will be sufficient to replace only the data
+  that change and repeat the archiving for the new pillar.
+
+<p>With the procedure assigned to
+  key <span class="yellowbutton">2nd</span> <span class="alttext">A'</span>
+  it is possible, at any time, to recall the data of a generic "r"
+  pillar in the 5 provisional registers, correct them and assign
+  them to the same or another pillar by archiving them with
+  procedure <span class="yellowbutton">2nd</span>
+  <span class="alttext">B'</span>.
+
+<p>After storing the data of all the pillars of the structure, with
+  the procedure assigned to key <span class="yellowbutton">2nd</span>
+  <span class="alttext">C'</span> it is possible to view in order, by
+  pressing <span class="brownbutton">R/S</span>, the "total seismic
+  weight" of the structure, the XG and YG coordinates of the center of
+  gravity of the seismic masses and the XK and YK coordinates of the
+  center of gravity of the stiffnesses.
+
+<p>Using the procedure assigned to the definable
+  key <span class="yellowbutton">2nd</span>
+  <span class="alttext">D'</span>, the operator can view, for a
+  generic pillar "n", the distribution coefficients of the shear
+  force due to the "total seismic weight", in order, by
+  pressing <span class="brownbutton">R/S</span>, CX, EX, CY, EY.
+
+<p>Pressing <span class="yellowbutton">2nd</span>
+  <span class="alttext">E'</span>,
+  the program print data and results for all pillars.
+
+<p>The instructions for using the program will be illustrated directly
+  with an example.
+
+<h3>Example</h3>
+
+Calculate the coefficients for the structure shown in the previous
+figure.
+
+<pre font-size="15px">
+---------------------------------------
+n  W (dN)  X(cm) Y(cm) KX(cm³) KY(cm³)
+---------------------------------------
+1  3600.   20.    15.    400.    225.
+2  7200.  580.    15.    400.    225.
+3  6000. 1380.    15.    400.    225.
+4  6000.   15.   580.    225.    400.
+5  9600.  585.   580.    225.    400.
+6  6000. 1380.   585.    400.    225.
+7  3600.   15.  1080.    225.    400.
+8  3600.  585.  1080.    225.    400.
+---------------------------------------
+</pre>
+
+<ol>
+<li>Initialization:
+<p>Enter total number of pillars "N", <b>8</b> and
+  press <span class="brownbutton">SBR</span>
+  <span class="yellowbutton">CLR</span>.</P>
+
+<li>Provide the Data of the Pillars:
+
+<p>Each input procedure is independent and each pillar can be stored
+  without a specific order.
+
+<ul>
+  <li>Pillar "1":
+    <ol><li>Enter data W=3600, X=20, Y=15, KX=400, KY=225.
+
+    <p>Set "W": press <span class="brownbutton">A</span>;
+    display = previoulsy stored data.
+      <br>Enter <b>3600</b>, press <span class="brownbutton">R/S</span>; display = <B>0</B> (end of procedure).
+
+    <p> Set "X": press <span class="brownbutton">B</span>; display =
+    previoulsy stored data.
+      <br> Enter <b> 20 </b>
+      press <span class="brownbutton">R/S</span>; display = <B>0</B>
+      (end of procedure).
+
+    <p> Set "Y" : press <span class="brownbutton">C</span>; display =
+    previoulsy stored data.
+      <BR> Enter <b> 15 </b>
+      press <span class="brownbutton">R/S</span>; display = <B>0</B>
+      (end of procedure).
+
+    <p>Set "KX" : press <span class="brownbutton">D</span>; display =
+    previoulsy stored data.
+      <BR> Enter <b> 400 </b>
+      press <span class="brownbutton">R/S</span>; display = <B>0</B>
+      (end of procedure).
+
+    <p> Set "KY" : press <span class="brownbutton">E</span>; display =
+    previoulsy stored data.
+      <BR> Enter <b> 225 </b>
+      press <span class="brownbutton">R/S</span>; display = <B>0</B>
+      (end of procedure).
+
+    <li>Archive pillar "1" data:
+    <p> Enter <b>1</b>,
+    press <span class="yellowbutton">2nd</span> <span class="alttext">B'</span>.
+    <p>The program will compact and archive the 5 pillar data.
+    <p>At the end display <b>0</b>. End of procedure.
+  </ol>
+
+  <li>Pillar "2":
+
+    <ol><li>Enter data W=7200, X=580, Y=15, KX=400, KY=225.
+    <p>Store only data that changes from the previous pillar.
+    <p>We have already stored the 5 data of pillar 1 and therefore
+      we will only replace W and X.
+    <p>Set "W": press <span class="brownbutton">A</span>;
+      display = <b>3600</b> incorrect stored data.
+      <br> Enter <b>7200</b>
+      press <span class="brownbutton">R/S</span>; display
+      = <B>0</B> (end of procedure).
+
+    <p> Set "X" : press <span class="brownbutton">B</span>; display
+      = <b>20</b> (incorrect stored data).
+      <br> Enter <b>580 </b>
+      press <span class="brownbutton">R/S</span>; display
+      = <B>0</B> (end of procedure).
+
+    <p>To check one of the other 3 data, for example KX,
+      press <span class="brownbutton">D</span>; display = <b>400</b>
+      <br> If the data is incorrect, enter new value and
+      press <span class="brownbutton">R/S</span> to store the new
+      data.
+    <li>Archive pillar "2" data:
+      <br> Enter <b>2</b> and press <span class="yellowbutton">2nd</span> <span class="alttext">B'</span>.
+    <p>The program will compact and archive the 5 pillar data.
+    <p>At the end display <b>0</b>. End of procedure.
+    </ol>
+
+    <br>
+  <li>Pillar "3":
+    <ol><li>Enter data W=6000, X=1380, Y=15, KX=400, KY=225.
+    <p> Even for this pillar we will only change W and X with
+      the same procedure.
+    <p>Set "X": press <span class="brownbutton">B</span>;
+      display = <b>580</b> incorrect stored data.
+      <br> Enter <b>1380</b>
+      press <span class="brownbutton">R/S</span>; display
+      = <B>0</B> (end of procedure).
+
+    <p>Set "W" :
+      press <span class="brownbutton">A</span>; display
+      = <b>7200</b> (incorrect stored data).
+      <br> Enter <b>6000 </b>
+      press <span class="brownbutton">R/S</span>; display
+      = <B>0</B> (end of procedure).
+
+    <li>Archive pillar "3" data:
+    <p>Enter <b>3</b> and
+      press <span class="yellowbutton">2nd</span>
+      <span class="alttext">B'</span>.
+    <p> The program will compact and archive the 5 data of the
+      pillar "3".
+    <p> At the end display <b>0</b>. End of procedure.
+    </ol>
+
+      <br>
+  <li>Pillar "6":
+    <ol><li>Enter data W=6000, X=1380, Y=585, KX=400, KY=225.
+    <p>The pillar has the same data as already stored
+      pillar 3, except the Y coordinate only will change
+      this.
+    <p>Set "Y": press <span class="brownbutton">C</span>;
+      display = <b>15</b> incorrect stored data.
+      <br> Enter <b>580</b>
+      press <span class="brownbutton">R/S</span>; display
+      = <B>0</B> (end of procedure).
+
+    <li>Archive pillar "6" data:
+    <p>Enter <b>6</b> and
+      press <span class="yellowbutton">2nd</span>
+      <span class="alttext">B'</span>.
+    <p>The program will compact and archive the 5 data of
+      the pillar "6".
+    <p>At the end display <b>0</b>. End of procedure.
+    </ol>
+<br>
+  <li>Pillar "4":
+    <ol><li>Enter data W=6000, X=15, Y=580, KX=225, KY=400.
+        <p>Comparing these data with those of pillar 6, just stored, we will
+          change X, Y, KX and KY.
+        <p>Set "X": press <span class="brownbutton">B</span>; display
+        = <b>1380</b> incorrect stored data.
+          <br> Enter <b>15</b> press <span class="brownbutton">R/S</span>; display = <B>0</B> (end of procedure).
+
+    <p>Set "Y": press <span class="brownbutton">C</span>; display = <b>585</b> incorrect stored data.
+      <br> Enter <b>580</b> press <span class="brownbutton">R/S</span>; display = <B>0</B> (end of procedure).
+
+    <p>Set "KX": press <span class="brownbutton">D</span>; display = <b>400</b> incorrect stored data.
+      <br> Enter <b>225</b> press <span class="brownbutton">R/S</span>; display = <B>0</B> (end of procedure).
+
+    <p>Set "KY": press <span class="brownbutton">E</span>; display = <b>225</b> incorrect stored data.
+      <br> Enter <b>400</b> press <span class="brownbutton">R/S</span>; display = <B>0</B> (end of procedure).
+
+<li>Archive pillar "4" data:
+<p>Enter <b>4</b> and press <span class="yellowbutton">2nd</span> <span class="alttext">B'</span>.
+<p>The program will compact and archive the 5 pillar data.
+<p>At the end display <b>0</b>. End of procedure.
+    </ol>
+
+<br>
+<li>Pillar "5":
+<ol><li>Enter data W=9600, X=585, Y=580, KX=225, KY=400.
+<p>Comparing these data with those of pillar 4, just stored, we will
+change W and X.
+ <p>Set "X": press <span class="brownbutton">B</span>; display = <b>15</b> incorrect stored data.
+ <br> Enter <b>585</b> press <span class="brownbutton">R/S</span>; display = <B>0</B> (end of procedure).
+
+ <p>Set "W": press <span class="brownbutton">A</span>; display = <b>6000</b> incorrect stored data.
+   <br> Enter <b>9600</b> press <span class="brownbutton">R/S</span>; display = <B>0</B> (end of procedure).
+
+ <p>Check "KY": press <span class="brownbutton">E</span>; display = <b>400</b> correct data.
+ <br>End of procedure.
+
+<li>Archive pillar "5" data:
+<p>Enter <b>5</b> and
+  press <span class="yellowbutton">2nd</span> <span class="alttext">B'</span>.
+<p>The program will compact and archive the data of pillar "5".
+<p>At the end display <b>0</b>. End of procedure.
+</ol>
+
+<br>
+<li>Pillar "7":
+  <p> Comparing the data of the pillar "7" and pillar "4", already archived, we will only change W and Y.
+  <ol><li>Retrieve the pillar "4" data from the archive:
+  <p> Enter <b>4</b> and press <span class="yellowbutton">2nd</span> <span class="alttext">A'</span>.
+  <p>The program unpacks the W, X, Y, KX, KY data of pillar "4" from the archive
+    and stores them in the relative registers assigned to keys A, B, C, D, E.
+  <p>At the end display <b>0</b>.
+  <li>Enter data W=3600, X=15, Y=1080, KX=225, KY=400.
+  <p>Set "y": press <span class="brownbutton">C</span>; display = <b>580</b> stored data Y4.
+ <br>Enter <b>1080</b> press <span class="brownbutton">R/S</span>; display = <B>0</B> (end of procedure).
+
+ <p>Set "W": press <span class="brownbutton">A</span>; display = <b>6000</b> stored data W4.
+ <p>Enter <b>3600</b> press <span class="brownbutton">R/S</span>; display = <B>0</B> (end of procedure).
+
+ <p>Check "X": press <span class="brownbutton">B</span>; display = <b>15</b> correct data.
+ <br>End of procedure.
+
+<li>Archive pillar "7" data:
+<p>Enter <b>7</b> and press <span class="yellowbutton">2nd</span> <span class="alttext">B'</span>.
+<p>The program will compact and archive the data of pillar "7".
+<p>At the end display <b>0</b>. End of procedure.
+  </ol>
+
+<br>
+<li>Pillar "8":
+<ol><li>Enter data W=3600, X=585, Y=1080, KX=225, KY=400.
+<p>Comparing these data with those of pillar 7, just stored, we will change only X.
+ <p>Set "X": press <span class="brownbutton">B</span>; display = <b>15</b> incorrect stored data.
+ <br> Enter <b>585</b> press <span class="brownbutton">R/S</span>; display = <B>0</B> (end of procedure).
+
+ <li>Archive pillar "8" data:
+ <p>Enter <b>8</b> and press <span class="yellowbutton">2nd</span> <span class="alttext">B'</span>.
+<p> The program will compact and archive the data of pillar "8".
+<p> At the end display <b>0</b>. End of procedure.
+</ol>
+</ul>
+
+<br>
+<li>Results:
+<ul>
+<li>Displays XG, YG, XK, YK coordinates:
+<br>
+  <p>Pressing <span class="yellowbutton">2nd</span>
+    <span class="alttext">C'</span>,
+    the program calculates the total seismic mass ΣW and the
+    coordinates XG, YG of the center of gravity of the masses, and the
+    coordinates XK, YK of the center of gravity of the stiffnesses.
+<p>At the end displays ΣW = <B>45600 </b>.
+<p>Pressing in sequence <span class="brownbutton">R/S</span> display
+     the coordinates XG, YG, XK, YK and repeat the sequence.
+<BR>
+<li>Displays CX, EX, CY, EY of the pillar "n"
+<br>
+  <p>Enter "n" and
+  pressing <span class="yellowbutton">2nd</span><span class="alttext">D'</span>.
+  <p>The program calculates CXn, EXn, CYn, and EYn distribution
+    coefficients of the seismic shear force in pillar "n" neglecting
+    or considering the torsion effect.
+  <p> At the end displays "n+1".
+
+<p>Pillar "1":
+<p>Enter "1" and
+press <span class="yellowbutton">2nd</span><span class="alttext">D'</span>.
+<p>Display CX = <b>0.09</b>.
+<p>Pressing in sequence <span class="brownbutton">R/S</span> display EX, CY, EY.
+<p>Pressing again <span class="brownbutton">R/S</span> display "n+1" = <b>2</b>.
+<p>Pressing again <span class="brownbutton">R/S</span> or <span class="yellowbutton">2nd</span>
+     <span class="alttext">D'</span> repeat the procedure for the next pillar.
+<p>Same procedure for the other pillars. </ul>
+
+<li>Print data and results for all pillars:
+
+<p>Press <span class="yellowbutton">2nd</span><span class="alttext">E'</span>.
+<p>The program print the following report:
+
+<pre><b>
+--------------------
+STR19
+
+           1.   PIL.
+        3600.      W
+          20.      X
+          15.      Y
+         400.     RX
+         225.     RY
+
+           2.   PIL.
+        7200.      W
+         580.      X
+          15.      Y
+         400.     RX
+         225.     RY
+
+           3.   PIL.
+        6000.      W
+        1380.      X
+          15.      Y
+         400.     RX
+         225.     RY
+
+           4.   PIL.
+        6000.      W
+          15.      X
+         580.      Y
+         225.     RX
+         400.     RY
+
+           5.   PIL.
+        9600.      W
+         585.      X
+         580.      Y
+         225.     RX
+         400.     RY
+
+           6.   PIL.
+        6000.      W
+        1380.      X
+         585.      Y
+         400.     RX
+         225.     RY
+
+           7.   PIL.
+        3600.      W
+          15.      X
+        1080.      Y
+         225.     RX
+         400.     RY
+
+           8.   PIL.
+        3600.      W
+         585.      X
+        1080.      Y
+         225.     RX
+         400.     RY
+--------------------
+       45600.     ∑W
+  628.8157895     XG
+  451.4473684     YG
+        645.6     XK
+        587.9     YK
+--------------------
+
+           1.   PIL.
+         0.09     CX
+  .1048347152     EX
+         0.16     CY
+  .1635423674     EY
+
+           2.   PIL.
+         0.09     CX
+  .1048347152     EX
+         0.16     CY
+  .1603714503     EY
+
+           3.   PIL.
+         0.09     CX
+  .1048347152     EX
+         0.16     CY
+  .1558415687     EY
+
+           4.   PIL.
+         0.16     CX
+  .1603636679     EX
+         0.09     CY
+  .0920085071     EY
+
+           5.   PIL.
+         0.16     CX
+  .1603636679     EX
+         0.09     CY
+  .0901930154     EY
+
+           6.   PIL.
+         0.09     CX
+  .0900750928     EX
+         0.16     CY
+  .1558415687     EY
+
+           7.   PIL.
+         0.16     CX
+  .1373467129     EX
+         0.09     CY
+  .0920085071     EY
+
+           8.   PIL.
+         0.16     CX
+  .1373467129     EX
+         0.09     CY
+  .0901930154     EY
+--------------------
+</pre></b>
+
+
+<p>To view the print report, touch the printer icon at the top center
+of the phone display.
+<p>To store on the APP or read the registers from 00 to 99, touch the
+  "?" icon at the top left of the phone display and follow the
+  instructions contained in the APP Help,"card emulation".
+
+<h3>About The Program</h3>
+
+<p>Number of steps: from <b>000</b> to <b>692</b>.
+<p>Registers used: from <b>00</b> to <b>25</b> and from <b>26</b>
+to <b>25+2xN</b>
+<p>Flags used: <b>1</b>
+<p>Labels: <SPAN CLASS="alttext">Nop</SPAN>, <SPAN CLASS="yellowbutton">CLR</SPAN>, <SPAN CLASS="brownbutton">SUM</SPAN>, <SPAN CLASS="alttext">Prt</SPAN>, <SPAN CLASS="brownbutton">INV</SPAN>, <SPAN CLASS="alttext">Op</SPAN>, <SPAN CLASS="brownbutton">RCL</SPAN>, <SPAN CLASS="alttext">Adv</SPAN>, <SPAN CLASS="brownbutton">STO</SPAN>, <SPAN CLASS="alttext">Dsz</SPAN>, <SPAN CLASS="alttext">If Flg</SPAN>, <SPAN CLASS="yellowbutton">=</SPAN>,
+     <SPAN CLASS="yellowbutton">-</SPAN> , <SPAN CLASS="yellowbutton">+</SPAN> , and definable keys.
+
+</BODY>

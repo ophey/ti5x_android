@@ -39,6 +39,7 @@ with version 7.9.
         other useful tasks.
     modules/
         av/   -- the source of the Aviation Library.
+        ce/   -- the source of the Civil Engineering Library.
         ct/   -- the source of the Contribution Library.
         ee/   -- the source of the Electrical Engineering Library.
         le/   -- the source of the Leisure Library.
@@ -54,7 +55,7 @@ with version 7.9.
     examples/ -- some simple examples for building user's programs
     README.md -- this file
     INSTALL   -- build/installation instructions
-    COPYING   -- licence (GPLv3)
+    COPYING   -- license (GPLv3)
 
 ## MeWee
 

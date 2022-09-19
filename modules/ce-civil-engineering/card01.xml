@@ -1,0 +1,9 @@
+<carddef style="user">
+<label slot="titleleft">GEOM. CHARACT. OF ANY SECTION</label>
+<label slot="titleright">STR-01</label>
+<label slot="a">X<sub>i</sub> &gt; Y<sub>i</sub>:</label>
+<label slot="e">Results</label>
+<label slot="aprime">Polig.Start</label>
+<label slot="bprime">Polig.End</label>
+<label slot="eprime">Initializ.</label>
+</carddef>

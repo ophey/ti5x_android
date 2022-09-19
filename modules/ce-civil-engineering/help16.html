@@ -1,0 +1,350 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #FFE071;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    font-size: 0.8em;
+  }
+
+.brownbutton
+  {
+    background : #63452B;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #F0EDD5;
+    font-size: 0.8em;
+  }
+
+.whitebutton
+  {
+    background : #E0DDC5;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+    font-size: 0.8em;
+  }
+
+.alttext
+  {
+    background : #000000;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #dcb151;
+    font-size: 0.8em;
+  }
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  }
+.deflist DD
+  {
+    margin-left : 4em;
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
+</STYLE>
+</HEAD>
+<BODY>
+<H2>STR-16 - Rectangular Section in Reinforced Concrete - Press Bending Check</H2>
+
+<P>The program checks a rectangular section in reinforced concrete
+  with symmetrical reinforcement, subject to pressure bending.
+
+<p>The conditions imposed by the operator are the stress in the
+  tensioned irons and the ratio P between area compressed irons
+  A<sub>FC</sub> and area taut iron A<sub>FT</sub>, according to the method of
+  admissible stresses.
+
+<p>The units of measurement must be consistents and those of the
+  International System: lengths in meters, forces in Newton and
+  related multiples or submultiples.
+
+<p>The sign of the bending moment M and normal strength P is
+  positive if it compresses the section (convention Science of
+  the Constructions).
+
+<p>
+<IMG ALT="Rectangular Section Press Bending Check" WIDTH="98%" SRC="data:image/png;base64,
+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
+CefINmPJ9gSCG2X776tjGtlmLNkuTo6/6EV+B3IPK8u2iMk2tWQLNxK0sD4DWIQTGcGv9J
+atbLOdbCfhakYT43qf5UG2ZcO2KRot0T4sD7YAA9mFw9iL1amBnmQrWzMfASRbk61sZWuy
+la2ZbGVrspWtbE22sjWTrWzTzWQrWzPZytZkK1vZmmxlayZb2ZpsZStbk61szWQr23Qz2c
+rWTLayNdnKVrYmW9mayVa2JlvZytZkK1sz2co25Uy2sjWTrWxNtrKVrclWtmayla3JVray
+NdnK1ky2sk0/k61szWQrW5OtbGVrspWtmWxla7KVrWxNtrI1k61s089kK1sz2crWZCtb2Z
+psZWsmW9mabGUrW5OtbM1kK9v0M9nK1ky2sjXZyla2JlvZmslWtiZb2crWZCtbM9nK1rKR
+bPfkdZ5hGv65QTTRwsqytWwm2zoeIbgeoHDyFMHFIFvLZrKFufiaHFuT3zEELUwmW8tuso
+X1GcP39AZgEf7iTxYB2VqWky2cR/AUtUxII8G+IFvLerKdkFcIjuRsggeplq1lP9nCYH7m
+L0bxObOAbMshky0cSRDsA7LtqUy2dazZWnVCbKfkLXIEbzK5bHsqk+2UBCMZPyG21xBcwh
+0El8q2HDLZbk+Od5iCWfmCHFvK1rKebAfzIyNYFoCNyPE1c8rWMptsCzf+HNvu1+WHqZGt
+JZNse3ETX/Mbb3McMyTE9jyCZ2ggv6n5kGBf2VoSyXYGPiBo4Ryu4EtuIpcA2/UZwy8M4p
+9biVH8ycKy7X4m21MIXmACAGbmPaLbbCfkSu5kazrucO7kZNl2P5Pt6wQ7k98hRbD1YfKp
+ZrKdjJEEC5DfUrKVbdaT7QCCYBby6yNb2WY92Q4hyDEV+c0tW9lmPdnORRAMJr/FZSvbrC
+fbar4nWIP8dpKtbLOebOE+gssKiJ+UrWyzn2zXI8coTmJ51uMO3uBvckwmW9lmOdnCkfxN
+tPUeC/A9wUyylW22ky3MwzbszlqMDwxgCPWyla35YiKytYwmW9mayVa2JlvZytZkK1sz2c
+rWZCtb2ZpsZWsmW9mabGUrW5MtyNZMtrJNP5OtbM1kK1uTrWxla7KVrZlsZWuyla1sTbay
+NZOtbNPPZCtbM9nK1mQrW9mabGVrJlvZmmxlK1uTrWzNZCvbrPdRnBMbxfwxbwyOFWK/eF
+aUspVttrsv+getVcekMUHQ2nixW3woTNkmzvZ6GllJtt3vnpgyiF5xUrwYn7RivT22jIYg
+1hKmbBNn+yzB+rLtbh9EnyAWjOZ2p+dHfRAnSrPC2c7NYPrLNnudEcSE8VSn822C6CPNim
+Y7Hp8SjKCXbLPWmkGs0cX541EbVXGbOCuY7VYEXxMclzDbdZmG/biCizmQmUC2pdcriCO6
+vDJXECeIs4LZPkqwB2P4gLpE2e7JOwS/kCP4mDlkW3rTBnFul1cWCmIfcVYs26FtYGt4mm
+CDRNl+zFX0BobyOsFJsi296YI4v8sriwWxhzgrlu05BKcAexDcnSjbZ6gCAPYguFO2pdc3
+iGO7vNIviGPEWaFsJ+ZrRjMImJqfGEmvBNnuQ37rErwk29JbMYhNujhvifGDuEqcFcp2J4
+LHAIArCY5PkO1G5LcGwXDZlt6JQUwdLZ3Ojw5ilkq8p5RsC7y2BwCWJ/iE+uRuAJJtd2uO
+GYLYsMPpC22ne0mzQtkuTo7vmIz8mgk2km2WOj+qg1gnXiycXBPzBDEs3m97a7l4W6IVxv
+ZSgl9oLPQdwb2yzVYnxSRBTBALxVqxUszbxnjxAuM5402JVhTbafmRHK+3awQj6SPbbPVg
+bB0zRU3Q2vixSJwYH8Qnsk2PbVWabPcleJH2u4PgJNlmseFxezxWACvbFNju0cZ2ARZOk+
+1wgj1pv40IPmE82Wa29NjK9j4u40y+ZcL02K5M8AvTdvTB+wSbdpvtYVzI/OQ3mAs5pszZ
+yla2G/MXP/MopMf2OoIr6byTCO732S06JVvZTsgnBCemyXYndqUvnTcru7IbNbKVrWw77X
+H+opfPJSXbknoxTuzQ1HFUh5P7e+7ry/Y0virRg2ztqdizQ1PEzh1Obu65ry/bfjSWF1vZ
++kuybCnVg2wtfbayRbayla1sZStbKze2spWtyVa2spWtbGUrW9nK1gbJVrayNdnKVrYmW9
+mayVa2ln6yla2ZbGVrspWtbE22sjWTrWxNtrKVrclWtmayla2ln2xlayZb2ZpsZStbk61s
+zWQrW5OtbGVrspWtmWxla2kkW9mayVa2JlvZytZkK1sz2crWUki21cDeQLVsrVyS7YbMwd
+6Mzx6ytXJJtgP5mpN5kcNka+WSbKGFX/mBWWRr5ZNsbyN4CWRr5ZNstyDHlbK1ckq2E/MH
+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
+MHCV4AAAAASUVORK5CYII=
+">
+
+<H3>Instructions</H3>
+
+<ol>
+<li>Provide the data
+<p>Each input procedure is independent.
+<p>Enter data and press the definable key. The program stores the data and displays previously stored data.
+<UL>
+<li>enter M (bending moment), press <span class="brownbutton">A</span>.
+<li>enter N (normal strength in C point), press <span class="brownbutton">B</span>.
+<li>enter B (section width), press <span class="brownbutton">C</span>.
+<li>enter A (section height), press <span class="brownbutton">D</span>.
+<li>enter h' (iron cover thickness), press  <span class="brownbutton">E</span>.
+<li>enter AF (symmetrical irons area), press <span class="yellowbutton">2nd</span><span class="alttext">A'</span>.
+<li>enter G (homogenization coefficient),
+  press <span class="yellowbutton">2nd</span><span class="alttext">B'</span>.
+</UL>
+
+At the end, each procedure displays the replaced data.
+</p>
+<p> To view and correct a data, press its definable key twice.
+<p>A first time to view it  and correct it if necessary.
+<p>A second time, to store it again in the same register.
+<br>
+<li>Results:
+  <p>Pressing <span class="yellowbutton">2nd</span>
+    <span class="alttext">E'</span>,
+     the program display the neutral axis X calculated by solving
+     the cubic equation with Newton's iterative method.
+  <p>In case of small eccentricity (M/N) &lt; (A/6), the program stops flashing "-1".
+<p>Pressing in sequence <span class="brownbutton">R/S</span> will display the others results:
+<p>ΣC (stress in the concrete),
+<p>ΣFT (stress in tensioned irons),
+<p>ΣFC (stress in compressed irons).
+<p>The program will also print a report with data and results.
+<p>For a new calculation, reset only the data that changes.
+</ol>
+
+<h3>Example 1</h3>
+<p>Calculate a rectanguar section in reinforced concrete with the
+  following data:
+<ul>
+  <li>M=500000 dNcm
+  <li>N=15000 dN
+  <li>B=30 cm
+  <li>A=40 cm
+  <li>h’=3 cm
+  <li>AF=6.03 cm²
+  <li>G=10
+</ul>
+
+<ol>
+<li>Set data:
+
+<p>After entering the new data, the procedure displays the data previously stored.
+  <UL>
+    <LI>M: enter <b>500000</b> dNcm, press <span class="brownbutton">A</span>.
+    <LI>N: enter <b>15000</b> dN, press <span class="brownbutton">B</span>.
+    <LI>B: enter <b>30</b> cm, press <span class="brownbutton">C</span>.
+    <LI>A: enter <b>70</b> cm, press <span class="brownbutton">D</span>.(*) data incorrect.
+    <LI>h': enter <b>3</b> cm, press <span class="brownbutton">E</span>.
+    <li>AF: enter <b>6.03</b> cm², press <span class="yellowbutton">2nd</span><span class="alttext">A'</span>.
+    <li>G: enter <b>10</b>, press <span class="yellowbutton">2nd</span><span class="alttext">B'</span>.
+
+<LI> To display the section height "A": press <span class="brownbutton">D</span>. Display = <b>70</b> (data incorrect),
+<p>enter <b>40</b> cm, press <span class="brownbutton">D</span> again to replace the previous incorrect data.
+  <LI>To display M: press <span class="brownbutton">A</span>. Display = <b>500000</b> (data correct),
+<p>press <span class="brownbutton">A</span> to store it again.
+  </UL>
+<bt>
+  <li>Results:
+    press <span class="yellowbutton">2nd</span><span class="alttext">E'</span>.Display = <b>14.47456442</b> cm (neutral axis X)
+     <p>Pressing in succession <span class="brownbutton">R/S</span> will display the stresses ΣC, ΣFT and ΣFC (dN/cm²).
+     <p>The program will also print the following report
+<pre>
+--------------------
+STR16
+      500000.      M
+       15000.      N
+          30.      B
+          40.      A
+           3.     H'
+         6.03     AF
+          10.      G
+
+  14.47456442      X
+  87.67759878     ∑C
+  1364.445965    ∑FT
+  695.0552889    ∑FC
+--------------------
+</pre>
+For a new calculation, reset only the data that changes.
+
+</ol>
+<br>
+
+<h3>Example 2</h3>
+<p>Calculate the same section by modifying the following data:
+  <ul>
+    <li>M=1200000 dNcm
+    <li>A=60 cm
+    <li>H’=3 cm
+    <li>AF=12.06 cm²
+    <li>G=15
+  </ul>
+
+  <ol>
+<li>Set data:
+  <UL>
+    <LI>M: enter <b>1200000</b> dNcm, press <span class="brownbutton">A</span>. Display = 500'000 (previous data stored)
+    <LI>A: enter <b>60</b> cm, press <span class="brownbutton">D</span>. Display = 40 (previous data stored)
+    <li>AF: enter <b>12.06</b> cm², press <span class="yellowbutton">2nd</span><span class="alttext">A'</span>. Display = 6.03 (previous data stored).
+    <li>G: enter <b>15</b>, press <span class="yellowbutton">2nd</span><span class="alttext">B'</span>. Display = 10 (previousstored data)
+  </UL>
+<br>
+<li>Results: press <span class="yellowbutton">2nd</span><span class="alttext">&ensp;E'</span>. Display = <b>23.12273048</b> cm (neutral axis X)
+     <p>Pressing in succession <span class="brownbutton">R/S</span> will display the stresses ΣC, ΣFT and ΣFC (dN/cm²).
+     <p>The program will also print the following report
+<pre>
+--------------------
+STR16
+     1200000.      M
+       15000.      N
+          30.      B
+          60.      A
+           3.     H'
+        12.06     AF
+          15.      G
+
+  23.12273048      X
+  62.70045162     ∑C
+  1377.942865    ∑FT
+   818.483109    ∑FC
+--------------------
+</pre>
+  </ol>
+
+<h3>About The Program</h3>
+<p>Number of steps: from <b>000</b> to <b>426</b>.
+<p>Registers used: <b>00</b> to <b>23</b>
+<p>Flags used: <b>1</b>
+<p>Labels: <span class="alttext">Eng</span>, <span class="alttext">LNx</span>, <span class="alttext">Adv</span>,
+ <span class="alttext">Prt</span>, <span class="alttext">ẍ</span>,
+<span class="alttext">π</span>, <span class="yellowbutton">-</span>, <span class="yellowbutton">+</span>, and definable keys.
+</p>
+
+
+</BODY>

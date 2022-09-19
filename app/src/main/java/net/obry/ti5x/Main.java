@@ -80,12 +80,13 @@ public class Main extends android.app.Activity {
   public static final BuiltinLibrary[] BuiltinLibraries =
      {
         new BuiltinLibrary(R.string.master_library, R.raw.ml),
-        new BuiltinLibrary(R.string.leisure_library, R.raw.le),
         new BuiltinLibrary(R.string.mathutil_library, R.raw.mu),
         new BuiltinLibrary(R.string.electrical_library, R.raw.ee),
         new BuiltinLibrary(R.string.surveying_library, R.raw.sy),
         new BuiltinLibrary(R.string.aviation_library, R.raw.av),
         new BuiltinLibrary(R.string.marine_navigation_library, R.raw.ng),
+        new BuiltinLibrary(R.string.civil_engineering_library, R.raw.ce),
+        new BuiltinLibrary(R.string.leisure_library, R.raw.le),
         new BuiltinLibrary(R.string.contribution_library, R.raw.ct)
      };
 
@@ -415,7 +416,7 @@ public class Main extends android.app.Activity {
             getString(R.string.exported_data),
             Persistent.DataDir,
             SaveAsExtra,
-            ""
+            ".dat"
          );
     }
   }
@@ -427,64 +428,6 @@ public class Main extends android.app.Activity {
      ) {
     OptionsMenu = new java.util.HashMap<android.view.MenuItem, Runnable>();
     android.view.MenuItem ThisItem;
-    OptionsMenu.put
-       (
-          TheMenu.add(R.string.show_calc_help),
-          new Runnable() {
-            public void run() {
-              ShowHelp("help/index.html", null);
-            } /*run*/
-          }
-       );
-    ThisItem = TheMenu.add(R.string.show_overlay);
-    OptionsMenu.put
-       (
-          ThisItem,
-          new Runnable() {
-            public void run() {
-              Global.Buttons.OverlayVisible = !Global.Buttons.OverlayVisible;
-              Global.Buttons.invalidate();
-              /* ToggleOverlayItem.setChecked(Global.Buttons.OverlayVisible); */
-              /* apparently can't do this in initial part of options menu */
-            } /*run*/
-          }
-       );
-    /* ThisItem.setCheckable(true); */
-    /* apparently can't do this in initial part of options menu */
-    OptionsMenu.put
-       (
-          TheMenu.add(R.string.show_module_help),
-          new Runnable() {
-            public void run() {
-              if (Global.Calc != null && Global.Calc.ModuleHelp != null) {
-                final Intent ShowHelp = new Intent(Intent.ACTION_VIEW);
-                ShowHelp.putExtra(Help.ContentID, Global.Calc.ModuleHelp);
-                ShowHelp.setClass(Main.this, Help.class);
-                startActivity(ShowHelp);
-              } else {
-                Toast.makeText
-                   (
-                      Main.this,
-                      getString(R.string.no_module_help),
-                      Toast.LENGTH_SHORT
-                   ).show();
-              }
-            } /*run*/
-          }
-       );
-    OptionsMenu.put
-       (
-          TheMenu.add(R.string.show_printer),
-          new Runnable() {
-            public void run() {
-              startActivity
-                 (
-                    new Intent(Intent.ACTION_VIEW)
-                       .setClass(Main.this, PrinterView.class)
-                 );
-            } /*run*/
-          }
-       );
     OptionsMenu.put
        (
           TheMenu.add(R.string.load_prog),
@@ -542,15 +485,6 @@ public class Main extends android.app.Activity {
                     CalcDirs.toArray(new String[0]),
                     AltLists
                  );
-            } /*run*/
-          }
-       );
-    OptionsMenu.put
-       (
-          TheMenu.add(R.string.opt_feedback),
-          new Runnable() {
-            public void run() {
-              new FeedbackDialog(Main.this).show();
             } /*run*/
           }
        );
@@ -619,6 +553,28 @@ public class Main extends android.app.Activity {
             } /*run*/
           }
        );
+    ThisItem = TheMenu.add(R.string.show_overlay);
+    OptionsMenu.put
+        (
+            ThisItem,
+            new Runnable() {
+              public void run() {
+                Global.Buttons.OverlayVisible = !Global.Buttons.OverlayVisible;
+                Global.Buttons.invalidate();
+                /* ToggleOverlayItem.setChecked(Global.Buttons.OverlayVisible); */
+                /* apparently can't do this in initial part of options menu */
+              } /*run*/
+            }
+        );
+    OptionsMenu.put
+        (
+            TheMenu.add(R.string.opt_feedback),
+            new Runnable() {
+              public void run() {
+                new FeedbackDialog(Main.this).show();
+              } /*run*/
+            }
+        );
     OptionsMenu.put
        (
           TheMenu.add(R.string.about_me),
@@ -1105,6 +1061,10 @@ public class Main extends android.app.Activity {
                           new java.io.File(getExternalFilesDir(null), Persistent.DataDir)
                           .getAbsolutePath();
                       new java.io.File(SaveDir).mkdirs();
+                      if(FileName.indexOf('.') == -1) {
+                        // no extension added, use default
+                        FileName = FileName + Persistent.DataExt;
+                      }
                       FileName = SaveDir + FileName;
                       /* note FileName will have leading slash */
                     }

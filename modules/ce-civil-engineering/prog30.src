@@ -1,0 +1,421 @@
+   r/s
+   rst
+   nop
+   nop
+
+lbl nop
+   +
+   =
+   rst
+
+lbl -
+   2020202020
+   op 02
+   op 03
+   op 04
+
+lbl y**x
+   op 01
+   op 05
+   op 00
+   clr
+   inv sbr
+
+lbl lnx
+   (
+   .5
+   gto log
+
+lbl ce
+   (
+   2
+   ÷
+   3
+
+lbl log
+   ×
+   rcl 95
+   +
+   rcl 93
+   b'
+   ÷
+   rcl 90
+   b'
+   )
+   inv ifflg 0 pgm
+   (
+   +/-
+   +
+   1
+   )
+
+lbl pgm
+   inv sbr
+
+lbl A'
+   (
+   int
+   -
+
+lbl D'
+   500000
+   )
+   inv sbr
+
+lbl B'
+   (
+   inv int
+   ×
+   4
+   inv log
+   )
+   inv sbr
+
+lbl C'
+   op 04
+   x⇌t
+   op 06
+   op 00
+   inv sbr
+
+lbl E'
+   sto 95
+   rcl 90
+   b'
+   cp
+   x=t nop
+   rc* 95
+   a'
+   r/s
+   sbr sto
+   exc ind 95
+   inv int
+   sm* 95
+   rc* 95
+   b'
+   r/s
+   inv %
+   int
+   %
+
+lbl eng
+   |x|
+   ÷
+   x⇌t
+   4
+   inv log
+   inv x≥t nop
+   =
+   exc ind 95
+   int
+   sm* 95
+   clr
+   inv sbr
+
+lbl sto
+   int
+   +
+   |x|
+   x⇌t
+   (
+   d'
+   inv x≥t nop
+   =
+   inv sbr
+
+lbl rst
+   cp
+   x=t nop
+   x⇌t
+   d'
+   sto 90
+   90
+   sto 95
+   x⇌t
+   sbr eng
+   d'
+   sto 93
+   sto 94
+   sto 91
+   sto 92
+
+lbl clr
+   clr
+   sbr -
+   3637350401
+   sbr y**x
+   rcl 90
+   b'
+   x⇌t
+   27
+   c'
+   sbr -
+   sto 98
+   sto 99
+   rst
+
+lbl A
+   clr
+   90
+   e'
+   rcl 90
+   a'
+   ×
+   rcl 90
+   b'
+   x²
+   ÷
+   12
+   =
+   sto 97
+   +/-
+   sto 96
+   27
+   x⇌t
+   34
+   op 04
+
+lbl rad
+   rcl 96
+   r/s
+   rcl 97
+   r/s
+   gto rad
+
+lbl B
+   clr
+   91
+   e'
+   rcl 91
+   a'
+   ×
+   rcl 91
+   b'
+   ÷
+   rcl 90
+   b'
+   x²
+   =
+   sto 96
+   sto 97
+   rcl 91
+   b'
+   prd 97
+   +/-
+   +
+   rcl 90
+   b'
+   =
+   prd 97
+   x²
+   +/-
+   prd 96
+   4421
+   x⇌t
+   21
+   op 04
+   gto rad
+
+lbl C
+   clr
+   92
+   e'
+   sbr fix
+   sto 97
+   1
+   -
+   sbr fix
+   sto 96
+   4415
+   x⇌t
+   15
+   op 04
+   gto rad
+
+lbl fix
+   rcl 92
+   b'
+   ÷
+   rcl 90
+   b'
+   =
+   ×
+   (
+   +/-
+   ×
+   3
+   +
+   2
+   =
+   ×
+   rcl 92
+   a'
+   =
+   inv sbr
+
+lbl D
+   clr
+   93
+   e'
+   94
+   e'
+   rcl 94
+   b'
+   -
+   rcl 93
+   b'
+   =
+   ÷
+   rcl 90
+   b'
+   =
+   sto 95
+   stflg 0
+   sbr r/s
+   =
+   sto 96
+   sum 96
+   +/-
+   sto 97
+   sbr r/s
+   +/-
+   =
+   sum 97
+   sum 97
+   +/-
+   sum 96
+   3
+   1/x
+   prd 97
+   +/-
+   prd 96
+   4402
+   x⇌t
+   3402
+   op 04
+   93
+   sto 95
+   stflg 1
+   gto rad
+
+lbl E
+   rc* 95
+   a'
+   op 06
+   rc* 95
+   b'
+   x⇌t
+   c'
+   inv ifflg 1 int
+   1
+   sum 95
+   4403
+   x⇌t
+   3403
+   op 04
+   inv stflg 1
+   gto e
+
+lbl int
+   rcl 96
+   sum 98
+   x⇌t
+   3013
+   c'
+   rcl 97
+   sum 99
+   x⇌t
+   3014
+   c'
+   sbr -
+   gto grad
+
+lbl =
+   sbr -
+   rcl 98
+   x⇌t
+   773013
+   c'
+   rcl 99
+   x⇌t
+   +
+   1
+   =
+   c'
+   sbr -
+
+lbl grad
+   rcl 98
+   r/s
+   rcl 99
+   r/s
+   gto grad
+
+lbl r/s
+   rcl 93
+   a'
+   ×
+   rcl 90
+   b'
+   x²
+   ÷
+   4
+   ×
+   rcl 95
+   ×
+   sbr lnx
+   ×
+   (
+   4
+   ×
+   (
+   1
+   -
+   sbr lnx
+   x²
+   )
+   -
+   rcl 95
+   x²
+   )
+   +
+   (
+   rcl 94
+   a'
+   -
+   rcl 93
+   a'
+   )
+   ÷
+   540
+   ×
+   rcl 90
+   b'
+   x²
+   ×
+   rcl 95
+   ×
+   (
+   270
+   ×
+   (
+   sbr ce
+   -
+   ce
+   ×
+   x²
+   )
+   -
+   rcl 95
+   x²
+   ×
+   (
+   45
+   ×
+   sbr ce
+   +
+   2
+   ×
+   rcl 95
+   inv stflg 0
+   inv sbr

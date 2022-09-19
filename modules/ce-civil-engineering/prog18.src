@@ -1,0 +1,287 @@
+   r/s
+   rst
+   c'
+   2
+
+lbl √x
+   gto sin
+   rst
+
+lbl D'
+   op 04
+   rc* 10
+   ×
+   1
+   sum 10
+   =
+
+lbl prt
+   ifflg 1 op
+   r/s
+   inv sbr
+
+lbl op
+   op 06
+   inv sbr
+
+lbl C'
+   sto 10
+   rc* 10
+   r/s
+   st* 10
+   clr
+   inv sbr
+
+lbl A
+   clr
+   c'
+   rst
+
+lbl B
+   1
+   c'
+   2
+   c'
+   rst
+
+lbl C
+   3
+   c'
+   4
+   c'
+   rst
+
+lbl D
+   5
+   c'
+   6
+   c'
+   rst
+
+lbl E
+   7
+   c'
+   8
+   c'
+   rst
+
+lbl A'
+   9
+   c'
+   rst
+
+lbl B'
+   19
+   c'
+   rst
+
+lbl E'
+   cp
+   deg
+   .9
+   ×
+   rcl 01
+   =
+   sto 10
+   1/x
+   ×
+   rcl 03
+   ÷
+   rcl 02
+   =
+   sto 11
+   .8
+   ×
+   rcl 01
+   =
+   sto 12
+   x⇌t
+   33
+   x≥t ÷
+   sto 12
+
+lbl ÷
+   rcl 06
+   -
+   150
+   =
+   sto 13
+   ÷
+   75
+   +
+   4
+   =
+   sto 14
+   rcl 13
+   ÷
+   35
+   +
+   14
+   =
+   sto 13
+   x⇌t
+   rcl 11
+   x≥t √x
+   x⇌t
+   rcl 14
+   x≥t ×
+   rcl 03
+   +
+   rcl 04
+   =
+   ×
+   rcl 00
+   ÷
+   2
+   =
+   sto 15
+   -
+   (
+   rcl 08
+   sin
+   +
+   rcl 08
+   cos
+   )
+   ×
+   rcl 05
+   ×
+   rcl 09
+   ×
+   rcl 10
+   =
+   ×
+   100
+   =
+   sto 16
+   ÷
+   rcl 15
+   =
+   sto 17
+   x⇌t
+   40
+   inv x≥t -
+   sto 17
+   ×
+   rcl 15
+   =
+   sto 16
+
+lbl -
+   3
+   x⇌t
+   rcl 16
+   ÷
+   rcl 05
+   ÷
+   rcl 10
+   ÷
+   rcl 00
+   =
+   sto 18
+   x≥t +
+
+lbl ×
+   100
+   sto 17
+   3
+   sto 18
+
+lbl +
+   stflg 1
+   sbr clr
+   3637350209
+   op 01
+   sbr ce
+   sto 10
+   27
+   d'
+   23
+   d'
+   14
+   d'
+   373044
+   d'
+   373031
+   d'
+   7721
+   d'
+   351526
+   d'
+   31
+   d'
+   2433
+   d'
+   1333
+   d'
+   1636
+   op 04
+   rcl 19
+   op 06
+   adv
+
+lbl adv
+   clr
+   11
+   sto 10
+   371341
+   d'
+   17
+   sto 10
+   6136
+   d'
+   133630
+   d'
+   rcl 19
+   inv stflg 2
+   x²
+   ×
+   π
+   ×
+   rcl 07
+   ×
+   25
+   ÷
+   rcl 18
+   =
+   sto 20
+   x⇌t
+   rcl 12
+   x≥t =
+   sto 20
+   stflg 2
+
+lbl =
+   3336
+   op 04
+   rcl 20
+   inv ifflg 1 lnx
+   op 06
+   sbr clr
+   inv stflg 1
+   gto adv
+
+lbl lnx
+   inv ifflg 2 log
+   inv stflg 2
+   x²
+   +/-
+   √x
+
+lbl log
+   sbr prt
+   gto adv
+
+lbl clr
+   clr
+   2020202020
+   op 01
+   op 02
+   op 03
+   op 04
+
+lbl ce
+   op 05
+   op 00
+   clr
+   inv sbr

@@ -98,14 +98,14 @@ symbols = \
         "c'" : simpleop(18),
         "d'" : simpleop(19),
         "e'" : simpleop(10),
-        "2nd" : {"act" : set_alt_state, "modifier" : True},
+        "2nd" : {"op" : 21, "act" : set_alt_state, "modifier" : True},
         "inv" : simpleop2(22, 27),
         "lnx" : simpleop2(23, 28),
         "log" : simpleop(28),
         "ce" : simpleop2(24, 29),
         "cp" : simpleop(29),
-        "clr" : simpleop(25),
-        "%" : simpleop(20),
+        "clr" : simpleop2(25, 20),
+        "%" : simpleop(51),  # extension: % and INV %
         # no "lrn"
         "pgm" : {"op" : 36, "expect" : "pgmno"},
         "pg*" : {"op" : 62, "expect" : "reg"},
@@ -118,7 +118,7 @@ symbols = \
         "1/x" : simpleop2(35, 30),
         "tan" : simpleop(30),
         # no "sst"
-        # no "ins"
+        "ins" : simpleop(46),
         "sto" : regop(42, 72), # I don't correctly handle "2nd STO"
         "st*" : {"op" : 72, "expect" : "reg"},
         "cms" : simpleop(47),
@@ -133,7 +133,7 @@ symbols = \
         "y**x" : simpleop(45),
         "ind" : {"modifier" : True, "isind" : True}, # special handling by parser
         # no "bst"
-        # no "del"
+        "del": simpleop(56),
         "ee" : simpleop2(52, 57),
         "eng" : simpleop(57),
         "(" : simpleop2(53, 58),
@@ -420,6 +420,7 @@ while True :
                     symbol = symbols.get(lookup)
                     numeric = re.search(r"^[\+\-]?(?:\d+(?:\.\d*)?|\.\d+?)(?:[eE][\+\-]?\d+)?$", cursym) != None
                     integral = re.search(r"^\d+$", cursym) != None
+
                     if symbol != None:
                         if "op" in symbol.keys() and symbol["op"] == 97:
                             is_dsz_op = True
@@ -471,6 +472,7 @@ while True :
                                 elif expect == "reg" or expect == "noindreg" :
                                     if opval < 100 :
                                         out(opval)
+                                        flushout()
                                     else :
                                         report_error("reg/op/pgm number can't be > 99")
                                     #end if

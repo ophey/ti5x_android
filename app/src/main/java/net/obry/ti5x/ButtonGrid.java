@@ -27,6 +27,9 @@ class ButtonGrid extends android.view.View {
   private final android.graphics.Typeface MFont =
      Typeface.createFromAsset(getContext().getAssets(),
         "fonts/dejavusans-bold.ttf");
+  private final android.graphics.Typeface MFontL =
+          Typeface.createFromAsset(getContext().getAssets(),
+                  "fonts/dejavusans.ttf");
 
   private final android.media.SoundPool MakeNoise;
   private final android.os.Vibrator Vibrate;
@@ -37,6 +40,7 @@ class ButtonGrid extends android.view.View {
   private final int White;
   private final int ButtonBrown;
   private final int ButtonYellow;
+  private final int AltButtonColor;
   private final int OverlayBlue;
 
   class ButtonDef {
@@ -58,7 +62,7 @@ class ButtonGrid extends android.view.View {
       this.MergedText = MergedText;
       this.TextColor = TextColor;
       this.ButtonColor = ButtonColor;
-      this.AltTextColor = White;
+      this.AltTextColor = AltButtonColor;
       this.OverlayColor = OverlayBlue;
       this.BGColor = Dark;
     }
@@ -122,31 +126,31 @@ class ButtonGrid extends android.view.View {
           new ButtonDef[]
              {
                 new ButtonDef("GTO", "Pause", White, ButtonBrown),
-                new ButtonDef("7", "x=t", "Pgm Ind", Dark, White),
-                new ButtonDef("8", "Nop", "Exc Ind", Dark, White),
-                new ButtonDef("9", "Op", "Prd Ind", Dark, White),
+                new ButtonDef("7", "x=t", "Pg*", Dark, White),
+                new ButtonDef("8", "Nop", "Ex*", Dark, White),
+                new ButtonDef("9", "Op", "PD*", Dark, White),
                 new ButtonDef("×", "Deg", Dark, ButtonYellow),
              },
           new ButtonDef[]
              {
                 new ButtonDef("SBR", "Lbl", White, ButtonBrown),
-                new ButtonDef("4", "x≥t", "STO Ind", Dark, White),
-                new ButtonDef("5", "∑+", "RCL Ind", Dark, White),
-                new ButtonDef("6", "x̅", "SUM Ind", Dark, White),
+                new ButtonDef("4", "x≥t", "ST*", Dark, White),
+                new ButtonDef("5", "∑+", "RC*", Dark, White),
+                new ButtonDef("6", "x̅", "SM*", Dark, White),
                 new ButtonDef("-", "Rad", Dark, ButtonYellow),
              },
           new ButtonDef[]
              {
                 new ButtonDef("RST", "St flg", White, ButtonBrown),
                 new ButtonDef("1", "If flg", Dark, White),
-                new ButtonDef("2", "D.MS", "GTO Ind", Dark, White),
-                new ButtonDef("3", "π", "Op Ind", Dark, White),
+                new ButtonDef("2", "D.MS", "GT*", Dark, White),
+                new ButtonDef("3", "π", "Op*", Dark, White),
                 new ButtonDef("+", "Grad", Dark, ButtonYellow),
              },
           new ButtonDef[]
              {
                 new ButtonDef("R/S", "Write", White, ButtonBrown),
-                new ButtonDef("0", "Dsz", "INV SBR", Dark, White),
+                new ButtonDef("0", "Dsz", "RTN", Dark, White),
                 new ButtonDef(".", "Adv", Dark, White),
                 new ButtonDef("+/-", "Prt", Dark, White),
                 new ButtonDef("=", "List", Dark, ButtonYellow),
@@ -228,6 +232,7 @@ class ButtonGrid extends android.view.View {
     ButtonBrown = Res.getColor(R.color.button_brown);
     ButtonYellow = Res.getColor(R.color.button_yellow);
     OverlayBlue = Res.getColor(R.color.overlay_blue);
+    AltButtonColor = Res.getColor(R.color.alt_button_color);
     MakeButtonDefs();
     MakeNoise = new android.media.SoundPool(1, android.media.AudioManager.STREAM_MUSIC, 0);
     ButtonDown = MakeNoise.load(TheContext, R.raw.button_down, 1);
@@ -453,8 +458,9 @@ class ButtonGrid extends android.view.View {
         TextPaint.setTextAlign(android.graphics.Paint.Align.CENTER);
         TextPaint.setAntiAlias(true);
         final float BaseTextSize = CellHeight * 0.33f;
-        TextPaint.setTextSize(BaseTextSize * 0.9f);
-        TextPaint.setTypeface(MFont);
+        // alt text
+        TextPaint.setTextSize(BaseTextSize * 0.75f);
+        TextPaint.setTypeface(MFontL);
         GraphicsUseful.DrawCenteredText
            (
               Draw,
@@ -539,7 +545,9 @@ class ButtonGrid extends android.view.View {
           final boolean HasMergedOverlay = ThisButton.MergedText != null;
 
           if (HasBaseOverlay || HasAltOverlay || HasMergedOverlay) {
-            final float Left = CellBounds.left + (CellBounds.right - CellBounds.left) * 0.0f;
+            float offs = -0.1f;
+            if(Col == 0) offs = 0.015f;
+            final float Left = CellBounds.left + (CellBounds.right - CellBounds.left) * offs;
             /* not quite authentic position, but what the hey */
             TextPaint.setTextSize(BaseTextSize * 0.6f);
             TextPaint.setColor(ThisButton.OverlayColor);
@@ -592,15 +600,19 @@ class ButtonGrid extends android.view.View {
             }
 
             if (HasAltOverlay) {
+              int oCode = ThisButton.BaseCode / 10 * 10
+                  +
+                  (ThisButton.BaseCode % 10 + 5) % 10;
+              if (oCode == 20) { /* extension % is code 51 */
+                oCode = 51;
+              }
               Draw.drawText
                  (
                     String.format
                        (
                           Global.StdLocale,
                           "%02d",
-                          ThisButton.BaseCode / 10 * 10
-                             +
-                             (ThisButton.BaseCode % 10 + 5) % 10
+                          oCode
                        ),
                     Left,
                     CellBounds.bottom + (ButtonBounds.top - ButtonBounds.bottom) * 1.4f,
@@ -609,10 +621,11 @@ class ButtonGrid extends android.view.View {
             }
           }
         }
+        // label on buttons
         TextPaint.setTextAlign(android.graphics.Paint.Align.CENTER);
         TextPaint.setColor(ThisButton.TextColor);
         TextPaint.setTypeface(MFont);
-        TextPaint.setTextSize(BaseTextSize * 1.1f);
+        TextPaint.setTextSize(BaseTextSize * 0.9f);
         GraphicsUseful.DrawCenteredText
            (
               Draw,
@@ -1126,6 +1139,9 @@ class ButtonGrid extends android.view.View {
               case 92: /*digit 0*/
                 Calc.StoreInstr(0);
                 break;
+              case 20: /* extension %, store as code 51 */
+                Calc.StoreInstr(51);
+                break;
               default:
                 Calc.StoreInstr(ButtonCode);
                 break;
@@ -1153,6 +1169,9 @@ class ButtonGrid extends android.view.View {
                     State.TRANSFER_LOC_SYMBOLIC
                  );
               break;
+            case 20:
+              Calc.Percent();
+              break;
             case 21:
             case 26:
               AltState = !AltState;
@@ -1169,9 +1188,6 @@ class ButtonGrid extends android.view.View {
             case 24:
               Calc.ClearEntry();
               break;
-            case 20:
-              Calc.Percent();
-              break;
             case 25:
               Calc.ClearAll();
               break;
@@ -1183,7 +1199,6 @@ class ButtonGrid extends android.view.View {
             case 29:
               Calc.ClearProgram();
               break;
-            /* 20 same as 25 */
             case 31: /*LRN*/
               Calc.SetProgMode(true);
               ResetOperands();

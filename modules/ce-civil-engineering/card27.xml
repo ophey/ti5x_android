@@ -1,0 +1,10 @@
+<carddef style="user">
+<label slot="titleleft">BEAM STRESSES</label>
+<label slot="titleright">STR-27</label>
+<label slot="primecenter">RESET: L <button>SBR</button> <button>CLR</button>    RESULT: <button>SBR</button> <button>=</button> Mx <button>x-t</button> Tx </label>
+<label slot="a">> Q: L:</label>
+<label slot="b">> MA: MB:</label>
+<label slot="c">> F: XF:</label>
+<label slot="d">>Q<sub>1</sub>:X<sub>1</sub>:Q<sub>2</sub>:X<sub>2</sub>:</label>
+<label slot="e">X> RESULT</label>
+</carddef>

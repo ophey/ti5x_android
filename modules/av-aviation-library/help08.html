@@ -6,55 +6,70 @@
 <STYLE TYPE="text/css">
 .yellowbutton
   {
-    background : #ce8c3b;
-    padding : 1pt;
+    background : #FFE071;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
-  } /*.yellowbutton*/
+    font-size: 0.8em;
+  }
 
 .brownbutton
   {
-    background : #4e3836;
-    padding : 1pt;
+    background : #63452B;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
-    color : #ac9e80;
-  } /*.brownbutton*/
+    color : #F0EDD5;
+    font-size: 0.8em;
+  }
 
 .whitebutton
   {
-    background : #ac9e80;
-    padding : 1pt;
+    background : #E0DDC5;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-  } /*.whitebutton*/
+    font-size: 0.8em;
+  }
 
 .alttext
   {
-    background : #222424;
-    padding : 1.5pt;
+    background : #000000;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
     font-weight : bold;
-    color : #ac9e80;
-  } /*alttext*/
+    color : #dcb151;
+    font-size: 0.8em;
+  }
 
 .deflist DT
   {
     display : compact;
     font-weight : bold;
-  } /*.deflist DT*/
+  }
 .deflist DD
   {
     margin-left : 4em;
-  } /*.deflist DD*/
+  }
 
 .display
-  {
-     color : red;
-     font-weight : bold;
-     text-align : right;
-     margin-right : 2em;
-  }
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
@@ -68,122 +83,121 @@
 
 <P>
 <IMG ALT="Wind Triangle" src="data:image/png;base64,
-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
-ALMvReJG/fpwAAAABJRU5ErkJggg==
+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
 ">
 
 <P>The true airspeed and magnetic heading are always entered. Then,
@@ -204,114 +218,114 @@ ALMvReJG/fpwAAAABJRU5ErkJggg==
 </p>
 
 <table>
-  <tr><td><b>GS&nbsp;vector</b><td>= vector with magnitude GS (ground
+  <tr><td><b>GSvector</b><td>= vector with magnitude GS (ground
   speed) and direction MC (mag. course).</tr>
-  <tr><td><b>TAS&nbsp;vector</b><td>= vector with magnitude TAS (true air
+  <tr><td><b>TASvector</b><td>= vector with magnitude TAS (true air
   speed) and direction MH (mag. heading)</tr>
-  <tr><td><b>W&nbsp;vector</b><td>= vector with magnitude WV (wind
+  <tr><td><b>Wvector</b><td>= vector with magnitude WV (wind
   velocity) and direction WD + Var (wind direction + mag. variation)</tr>
 </table>
 
 <DL class="deflist">
   <DT>Select degree mode
-    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN> <SPAN CLASS="alttext">&nbsp;Deg&nbsp;</SPAN>
+    <DD><SPAN CLASS="yellowbutton">2nd</SPAN> <SPAN CLASS="alttext">Deg</SPAN>
   </DT>
 
   <DT>Initialize
-    <DD><SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">SBR</SPAN> <SPAN CLASS="yellowbutton">CLR</SPAN>
     <DD CLASS="display">0.00</DD>
   </DT>
 
   <DT>Enter magnetic variation
-    <DD>Var (+W, -E) <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;A'&nbsp;</SPAN>
+    <DD>Var (+W, -E) <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">A'</SPAN>
     <DD CLASS="display">Var</dd>
   </DT>
 
   <DT>Enter magnetic heading
-    <DD>MH (deg) <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;D'&nbsp;</SPAN>
+    <DD>MH (deg) <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">D'</SPAN>
     <DD CLASS="display">MH</dd>
   </DT>
 
   <DT>Enter true airspeed
-    <DD>TAS <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;E'&nbsp;</SPAN>
+    <DD>TAS <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">E'</SPAN>
     <DD CLASS="display">TAS</dd>
   </DT>
 
   <h3>To calculate wind direction and velocity:</h3>
 
   <DT>Enter magnetic course
-    <DD>MC (deg) <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD>MC (deg) <SPAN CLASS="brownbutton">B</SPAN>
     <DD CLASS="display">MC</dd>
   </DT>
 
   <p>Do either:</p>
 
   <DT>Enter leg distance
-    <DD>Dist <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD>Dist <SPAN CLASS="brownbutton">D</SPAN>
     <DD CLASS="display">Dist</dd>
   </DT>
 
   <DT>Enter time at start of leg
-    <DD>t<sub>1</sub> (HH.MMSS) <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+    <DD>t<sub>1</sub> (HH.MMSS) <SPAN CLASS="brownbutton">E</SPAN>
     <DD CLASS="display">ignore</dd>
   </DT>
 
   <DT>Enter time at end of leg
-    <DD>t<sub>2</sub> (HH.MMSS) <SPAN CLASS="brownbutton">&nbsp;E&nbsp;</SPAN>
+    <DD>t<sub>2</sub> (HH.MMSS) <SPAN CLASS="brownbutton">E</SPAN>
     <DD CLASS="display">GS</dd>
   </DT>
 
   <p>or:</p>
 
   <DT>Enter ground speed
-    <DD>GS <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD>GS <SPAN CLASS="brownbutton">C</SPAN>
     <DD CLASS="display">GS</dd>
   </DT>
 
   <DT>Calculate wind direction
-    <DD><SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">A</SPAN>
     <DD CLASS="display">-1.00</dd>
-    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;B'&nbsp;</SPAN>
+    <DD><SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">B'</SPAN>
     <DD CLASS="display">WD (deg)</dd>
   </DT>
 
   <DT>Calculate wind velocity
-    <DD><SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">A</SPAN>
     <DD CLASS="display">-1.00</dd>
-    <DD><SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;C'&nbsp;</SPAN>
+    <DD><SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">C'</SPAN>
     <DD CLASS="display">WV</dd>
   </DT>
 
   <h3>To calculate magnetic course and ground speed:</h3>
 
   <DT>Enter wind direction
-    <DD>WD <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;B'&nbsp;</SPAN>
+    <DD>WD <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">B'</SPAN>
     <DD CLASS="display">WD</dd>
   </DT>
 
   <DT>Enter wind velocity
-    <DD>WV <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;C'&nbsp;</SPAN>
+    <DD>WV <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">C'</SPAN>
     <DD CLASS="display">WC</dd>
   </DT>
 
   <DT>Calculate magnetic course
-    <DD><SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">A</SPAN>
     <DD CLASS="display">-1.00</dd>
-    <DD><SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">B</SPAN>
     <DD CLASS="display">MC (deg)</dd>
   </DT>
 
   <DT>Calculate ground speed
-    <DD><SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">A</SPAN>
     <DD CLASS="display">-1.00</dd>
-    <DD><SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">C</SPAN>
     <DD CLASS="display">GS</dd>
   </DT>
 </DL>

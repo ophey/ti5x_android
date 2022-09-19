@@ -1,0 +1,425 @@
+   r/s
+   rst
+   d'
+   2
+
+lbl nop
+   gto sin
+   rst
+
+lbl clr
+   |x|
+   int
+   x⇌t
+   37
+   inv x≥t nop
+   x⇌t
+   sto 24
+   inv sbr
+
+lbl sum
+   |x|
+   int
+   x⇌t
+   rcl 24
+   inv x≥t nop
+   x⇌t
+   sto 25
+   -
+   1
+   =
+   ×
+   2
+   +
+   26
+   =
+   sto 00
+   inv sbr
+
+lbl A'
+   sbr sum
+   rc* 00
+   -
+   int
+   sto 05
+   =
+   ×
+   4
+   inv log
+   -
+   int
+   sto 01
+   =
+   ×
+   4
+   inv log
+   =
+   sto 03
+   op 20
+   rc* 00
+   -
+   int
+   sto 02
+   =
+   ×
+   6
+   inv log
+   =
+   sto 04
+   clr
+   inv sbr
+   rst
+
+lbl B'
+   sbr sum
+   rcl 03
+   ÷
+   8
+   inv log
+   +
+   rcl 01
+   ÷
+   4
+   inv log
+   +
+   rcl 05
+   =
+   st* 00
+   op 20
+   rcl 04
+   ÷
+   6
+   inv log
+   +
+   rcl 02
+   =
+   st* 00
+   clr
+   inv sbr
+   rst
+
+lbl prt
+   ifflg 1 op
+   r/s
+   inv sbr
+
+lbl op
+   op 06
+   inv sbr
+
+lbl A
+   5
+   x⇌t
+   5
+   gto inv
+
+lbl C
+   2
+   +
+
+lbl B
+   1
+   =
+   x⇌t
+   4
+   gto inv
+
+lbl E
+   2
+   +
+
+lbl D
+   2
+   =
+   x⇌t
+   6
+
+lbl inv
+   inv log
+   x⇌t
+   sto 00
+   rc* 00
+   r/s
+   |x|
+   int
+   x≥t nop
+   st* 00
+   clr
+   inv sbr
+   rst
+
+lbl C'
+   clr
+   sto 25
+   sto 06
+   sto 07
+   sto 08
+   sto 09
+   sto 10
+   sto 11
+   sto 12
+   sto 13
+   sto 14
+
+lbl rcl
+   1
+   sum 25
+   rcl 25
+   a'
+   rcl 02
+   sum 06
+   ×
+   rcl 01
+   =
+   sum 07
+   ×
+   rcl 01
+   =
+   sum 08
+   rcl 04
+   sum 09
+   ×
+   rcl 03
+   =
+   sum 10
+   ×
+   rcl 03
+   =
+   sum 11
+   rcl 05
+   sum 12
+   ×
+   rcl 01
+   =
+   sum 13
+   rcl 05
+   ×
+   rcl 03
+   =
+   sum 14
+   rcl 24
+   x⇌t
+   rcl 25
+   inv x=t rcl
+   rcl 13
+   ÷
+   rcl 12
+   =
+   sto 15
+   rcl 14
+   ÷
+   rcl 12
+   =
+   sto 16
+   rcl 07
+   ÷
+   rcl 06
+   =
+   sto 17
+   rcl 10
+   ÷
+   rcl 09
+   =
+   sto 18
+   rcl 15
+   -
+   rcl 17
+   =
+   sto 19
+   rcl 16
+   -
+   rcl 18
+   =
+   sto 20
+   rcl 08
+   +
+   rcl 06
+   ×
+   rcl 17
+   x²
+   -
+   rcl 07
+   ×
+   2
+   ×
+   rcl 17
+   +
+   rcl 11
+   +
+   rcl 09
+   ×
+   rcl 18
+   x²
+   -
+   rcl 10
+   ×
+   2
+   ×
+   rcl 18
+   =
+   sto 21
+
+lbl adv
+   7743
+   op 04
+   rcl 12
+   sbr prt
+   4422
+   op 04
+   rcl 15
+   sbr prt
+   4522
+   op 04
+   rcl 16
+   sbr prt
+   4426
+   op 04
+   rcl 17
+   sbr prt
+   4526
+   op 04
+   rcl 18
+   sbr prt
+   inv ifflg 1 adv
+   clr
+   inv sbr
+
+lbl D'
+   sbr ifflg
+   1544
+   op 04
+   rcl 04
+   ÷
+   rcl 09
+   =
+   sto 22
+   sbr prt
+   1744
+   op 04
+   rcl 22
+   +
+   rcl 04
+   ×
+   rcl 20
+   ×
+   (
+   rcl 03
+   -
+   rcl 18
+   )
+   ÷
+   rcl 21
+   =
+   sbr prt
+   1545
+   op 04
+   rcl 02
+   ÷
+   rcl 06
+   =
+   sto 23
+   sbr prt
+   1745
+   op 04
+   rcl 23
+   +
+   rcl 02
+   ×
+   rcl 19
+   ×
+   (
+   rcl 01
+   -
+   rcl 17
+   )
+   ÷
+   rcl 21
+   =
+   sbr prt
+   rcl 25
+   +
+   1
+   =
+   inv sbr
+   gto d'
+
+lbl E'
+   stflg 1
+   sbr -
+   3637350212
+   op 01
+   sbr +
+   sto 25
+
+lbl sto
+   1
+   sum 25
+   rcl 25
+   sbr ifflg
+   43
+   op 04
+   rcl 05
+   sbr prt
+   44
+   op 04
+   rcl 01
+   sbr prt
+   45
+   op 04
+   rcl 03
+   sbr prt
+   2644
+   op 04
+   rcl 02
+   sbr prt
+   2645
+   op 04
+   rcl 04
+   sbr prt
+   rcl 24
+   x⇌t
+   rcl 25
+   inv x=t sto
+   sbr -
+   sbr adv
+   sbr -
+   sto 25
+
+lbl dsz
+   1
+   sum 25
+   rcl 25
+   d'
+   rcl 24
+   x⇌t
+   rcl 25
+   inv x=t dsz
+   sbr -
+   rst
+
+lbl ifflg
+   a'
+   inv ifflg 1 =
+   33242740
+   op 04
+   adv
+   rcl 25
+   op 06
+
+lbl =
+   inv sbr
+
+lbl -
+   clr
+   2020202020
+   op 01
+   op 02
+   op 03
+   op 04
+
+lbl +
+   op 05
+   op 00
+   clr
+   inv sbr
+   rst

@@ -1,0 +1,14 @@
+<carddef style="user">
+<label slot="titleleft">T-SECTION IN R. C. - BENDING PROJECT</label>
+<label slot="titleright">STR-15</label>
+<label slot="a">M</label>
+<label slot="b">B</label>
+<label slot="c">B<sub>0</sub></label>
+<label slot="d">A</label>
+<label slot="e">A<sub>0</sub></label>
+<label slot="aprime">H'</label>
+<label slot="bprime">G</label>
+<label slot="cprime"><Sigma/><sub>FT</sub></label>
+<label slot="dprime">P</label>
+<label slot="eprime">RESULTS</label>
+</carddef>

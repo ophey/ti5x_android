@@ -18,23 +18,52 @@
 
 package net.obry.ti5x;
 
+import java.io.IOException;
+
 public class Importer {
 
-  class ImportDataFeeder extends State.ImportFeeder {
-    java.io.InputStream Data;
+  static class ImportDataFeeder extends State.ImportFeeder {
+    java.io.FileInputStream Data;
+    String FileName;
     int LineNr, ColNr; /* for reporting locations of errors */
     boolean WasNL, WasCR, EOF;
 
     ImportDataFeeder
        (
-          java.io.InputStream Data
+          java.io.FileInputStream Data,
+          String FileName
        ) {
       this.Data = Data;
+      this.FileName = FileName;
       LineNr = 0;
       ColNr = 0;
       WasNL = true; /* so LineNr gets incremented to 1 on first character */
       WasCR = false;
       EOF = false;
+    }
+
+    public void Reset() {
+      if (Data != null) {
+        try {
+          // reset() is not supported, so we close and reopen the file
+          Data.close();
+          Data = new java.io.FileInputStream (this.FileName);
+          LineNr = 0;
+          ColNr = 0;
+          WasNL = true;
+          WasCR = false;
+          EOF = false;
+        } catch (IOException Failed) {
+          throw new Persistent.DataFormatException
+              (
+                  String.format
+                      (
+                          Global.StdLocale,
+                          "Couldn't reset import data file",
+                          Failed.toString()
+                      )
+              );        }
+      }
     }
 
     @Override
@@ -162,6 +191,6 @@ public class Importer {
                )
          );
     }
-    Global.Calc.SetImport(new ImportDataFeeder(Data));
+    Global.Calc.SetImport(new ImportDataFeeder(Data, FileName));
   }
 }

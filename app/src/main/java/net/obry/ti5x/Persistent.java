@@ -84,6 +84,7 @@ public class Persistent {
   private static final String StateExt = ".ti5s"; /* for saved calculator state */
   static final String ProgExt = ".ti5p"; /* for saved user program */
   static final String LibExt = ".ti5l"; /* for library */
+  static final String DataExt = ".dat"; /* for data export */
   static final String ProgramsDir = "Programs"; /* where to save user programs */
   static final String DataDir = "Download"; /* where to save exported data */
   static final String BankDir = "Banks"; /* where to save bank files */

@@ -1,0 +1,516 @@
+   r/s
+
+lbl nop
+   +
+   =
+   rst
+   nop
+   nop
+
+lbl inv
+   (
+   rc* 05
+   inv int
+   |x|
+   ×
+   1
+   ee
+   8
+   +
+   .5
+   )
+   (
+   int
+   ÷
+   1
+   ee
+   8
+   )
+   inv ee
+   inv sbr
+
+lbl E'
+   rc* 05
+   int
+   inv sbr
+
+lbl C'
+   sto 08
+   stflg 2
+   d'
+   sto 07
+   -
+   rcl 06
+   =
+   x⇌t
+   3
+   sum 08
+   inv log
+   -
+   rcl 06
+   =
+   x⇌t
+   r/s
+   int
+   +
+   |x|
+   x≥t nop
+   rcl 06
+   -
+   cp
+   inv x≥t nop
+   rcl 07
+   =
+   ÷
+   rcl 08
+   inv log
+   int
+   =
+   sm* 05
+   inv sbr
+
+lbl D'
+   (
+   inv log
+   ×
+   rc* 05
+   |x|
+   )
+   (
+   inv int
+   ×
+   999
+   x⇌t
+   3
+   inv log
+   )
+   int
+   ifflg 2 op
+   inv x≥t op
+   x²
+   x²
+
+lbl op
+   inv stflg 2
+   inv sbr
+
+lbl x=t
+   inv fix
+   |x|
+   int
+   x⇌t
+   inv x≥t nop
+   0
+   x=t nop
+   x⇌t
+   sto 02
+   inv sbr
+
+lbl A'
+   clr
+   inv fix
+   80
+   x⇌t
+   rcl 01
+   r/s
+   sbr x=t
+   sto 01
+   +/-
+   +
+   80
+   =
+   x⇌t
+   rcl 00
+   r/s
+   sbr x=t
+   sto 00
+   +
+   rcl 01
+   =
+   r/s
+   rcl 01
+   x⇌t
+   rcl 00
+   cms
+   sto 00
+   x⇌t
+   sto 01
+   rcl 00
+   sto 02
+   +
+   sbr ÷
+   .0005005
+
+lbl pgm
+   st* 05
+   op 35
+   dsz 2 pgm
+   clr
+   rst
+
+lbl clr
+   rcl 01
+   sto 02
+   sbr -
+
+lbl int
+   sbr inv
+   st* 05
+   op 35
+   dsz 2 int
+   clr
+   inv sbr
+
+lbl =
+   2020202020
+   op 02
+   op 03
+   op 04
+
+lbl y**x
+   op 01
+   op 05
+   op 00
+   clr
+   inv sbr
+
+lbl ×
+   x⇌t
+   rcl 00
+   x⇌t
+   sbr x=t
+   +
+   gto ÷
+
+lbl +
+   (
+   rcl 04
+   int
+   +
+
+lbl ÷
+   rcl 01
+
+lbl -
+   +
+   9
+   )
+   sto 05
+   inv sbr
+
+lbl A
+   x⇌t
+   rcl 01
+   x⇌t
+   sbr x=t
+   sbr -
+   sbr inv
+   fix 8
+   r/s
+   inv fix
+   |x|
+   inv int
+   st* 05
+   sbr adv
+   r/s
+   gto a
+
+lbl B
+   sbr ×
+   e'
+   ÷
+   4
+   inv log
+   =
+   fix 4
+   r/s
+   inv fix
+   |x|
+   inv int
+   ×
+   4
+   inv log
+   =
+   int
+   +
+   sbr inv
+   =
+   st* 05
+   sbr adv
+   r/s
+   gto b
+
+lbl C
+   sbr ×
+   clr
+   sto 06
+   c'
+   sbr adv
+   r/s
+   gto c
+
+lbl D
+   sbr ×
+   500
+   sto 06
+   3
+   c'
+   6
+   c'
+   sbr adv
+   r/s
+   gto d
+
+lbl ifflg
+   (
+   (
+   stflg 2
+   d'
+   -
+   500
+   )
+   ×
+   4
+   inv log
+   )
+   inv sbr
+
+lbl E
+   inv fix
+   |x|
+   sto 09
+   prt
+   sbr clr
+
+lbl sto
+   clr
+   prt
+   rcl 01
+   sto 02
+   inv stflg 0
+
+lbl rcl
+   clr
+   sto 07
+   sto 08
+   4
+   sto 03
+   rcl 02
+   sbr -
+   sbr inv
+   sto 04
+
+lbl sum
+   inv stflg 3
+   100
+   prd 04
+   rcl 04
+   int
+   cp
+   x=t fix
+   x⇌t
+   rcl 00
+   inv x≥t nop
+   sbr +
+   rcl 02
+   x⇌t
+   e'
+   %
+   sto 06
+   int
+   x⇌t
+   inv x=t tan
+   rcl 06
+   inv int
+   inv %
+   int
+   x⇌t
+   3.
+
+lbl tan
+   6
+   int
+   sto 06
+   clr
+   x=t cms
+   x⇌t
+   sbr -
+   e'
+
+lbl cms
+   ×
+   sbr +
+   0
+   d'
+   sum 07
+   +
+   rcl 06
+   sbr ifflg
+   =
+   sum 08
+
+lbl fix
+   rcl 04
+   ee
+   inv ee
+   inv int
+   sto 04
+   dsz 3 sum
+   rcl 02
+   sbr -
+   rcl 07
+   cp
+   x=t exc
+   1/x
+   ×
+   rcl 08
+   +/-
+   ÷
+   2
+   +
+   op 10
+   ÷
+   2
+   =
+   int
+   sto 08
+   |x|
+   x⇌t
+   5
+   inv log
+   x⇌t
+   x≥t nop
+   rcl 08
+
+lbl exc
+   nop
+   +
+   op 10
+   cp
+   inv x=t )
+   1
+
+lbl )
+   ×
+   sbr inv
+   =
+   exc ind 05
+   int
+   -
+   e'
+   =
+   |x|
+   x⇌t
+   rcl 09
+   int
+   x≥t prd
+   stflg 0
+
+lbl prd
+   dsz 2 rcl
+   ifflg 0 sto
+
+lbl sbr
+   nop
+   sbr =
+   3637350307
+   sbr y**x
+   sbr =
+   1
+
+lbl eng
+   b'
+   gto eng
+
+lbl B'
+   sbr ×
+   op 00
+   2035321620
+   sbr y**x
+   rcl 02
+   prt
+   3144
+   x⇌t
+   e'
+   %
+   sto 06
+   sbr del
+   sto 07
+   sum 07
+   sto 08
+   3145
+   x⇌t
+   rcl 06
+   inv int
+   inv %
+   sbr del
+   sum 07
+   sum 08
+   sum 08
+   rcl 02
+   +
+   sbr ÷
+   0
+   d'
+   prd 07
+   prd 08
+   x⇌t
+   26
+   sbr prt
+   3
+   sbr ifflg
+   sum 07
+   %
+   %
+   x⇌t
+   302444
+   sbr prt
+   6
+   sbr ifflg
+   sum 08
+   %
+   %
+   x⇌t
+   302445
+   sbr prt
+   rcl 07
+   %
+   %
+   x⇌t
+   3044
+   sbr prt
+   rcl 08
+   %
+   %
+   x⇌t
+   3045
+   sbr prt
+   sbr =
+
+lbl adv
+   op 22
+   rcl 02
+   inv sbr
+
+lbl del
+   int
+   x⇌t
+   sto 03
+   sbr prt
+   cp
+   x=t ins
+   sbr -
+   e'
+
+lbl ins
+   x⇌t
+   rcl 03
+   +
+   400
+   =
+
+lbl prt
+   op 04
+   x⇌t
+   op 06
+   inv sbr

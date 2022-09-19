@@ -1,0 +1,220 @@
+   r/s
+   r/s
+   rst
+   a
+   2
+
+lbl A
+   exc 00
+   rst
+   nop
+   nop
+   nop
+
+lbl B
+   exc 01
+   rst
+   nop
+   nop
+   nop
+
+lbl C
+   exc 02
+   rst
+   nop
+   nop
+   nop
+
+lbl D
+   exc 03
+   rst
+   nop
+   nop
+   nop
+
+lbl E
+   inv stflg 2
+   cp
+   rcl 03
+   ×
+   rcl 02
+   ÷
+   2
+   =
+   sto 04
+   +/-
+   sto 05
+   rcl 01
+   -
+   rcl 00
+   =
+   ÷
+   rcl 02
+   =
+   sum 04
+   sum 05
+   rcl 04
+   ÷
+   rcl 03
+   =
+   sto 06
+   ×
+   rcl 04
+   ÷
+   2
+   =
+   sto 07
+   rcl 02
+   -
+   rcl 06
+   =
+   ×
+   rcl 05
+   ÷
+   2
+   =
+   sto 08
+   rcl 04
+   x²
+   ÷
+   2
+   ÷
+   rcl 03
+   +
+   rcl 00
+   =
+   sto 09
+   rcl 04
+   x²
+   +
+   rcl 03
+   ×
+   rcl 00
+   ×
+   2
+   =
+   inv x≥t deg
+   √x
+   sto 10
+   +/-
+   sto 11
+   rcl 04
+   +/-
+   sum 10
+   sum 11
+   rcl 03
+   +/-
+   1/x
+   prd 10
+   prd 11
+   gto =
+
+lbl deg
+   stflg 2
+
+lbl =
+   sbr prt
+   adv
+
+lbl adv
+   clr
+   4
+   sto 12
+   3713
+   b'
+   3714
+   b'
+   4401
+   b'
+   3613
+   b'
+   3614
+   b'
+   3044
+   op 04
+   rcl 09
+   ifflg 2 cos
+   a'
+   1
+   sum 12
+   4402
+   b'
+   4403
+   b'
+   inv ifflg 1 adv
+
+lbl sin
+   sbr -
+   inv stflg 1
+   adv
+   gto adv
+
+lbl cos
+   ifflg 1 tan
+   ×
+   |x|
+   +/-
+   √x
+   1
+   =
+   r/s
+   gto adv
+
+lbl tan
+   a'
+   op 00
+   3000
+   op 01
+   1532313637
+   op 02
+   36242231
+   op 03
+   c'
+   gto sin
+
+lbl -
+   clr
+   2020202020
+   op 01
+   op 02
+   op 03
+   op 04
+
+lbl C'
+   op 05
+   op 00
+   clr
+   inv sbr
+
+lbl prt
+   stflg 1
+   adv
+   sbr -
+   3637350202
+   op 01
+   c'
+   sto 12
+   3013
+   b'
+   3014
+   b'
+   27
+   b'
+   34
+
+lbl B'
+   op 04
+   rc* 12
+   ×
+   1
+   sum 12
+   =
+
+lbl A'
+   ifflg 1 d'
+   r/s
+   inv sbr
+
+lbl D'
+   op 06
+   inv sbr

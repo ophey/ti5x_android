@@ -1,0 +1,268 @@
+   r/s
+   rst
+   e
+   1
+
+lbl rcl
+   op 04
+   rc* 02
+   op 22
+
+lbl prt
+   ifflg 1 op
+   r/s
+   inv sbr
+
+lbl op
+   op 06
+   inv sbr
+
+lbl A
+   exc 09
+   rst
+
+lbl B
+   exc 00
+   rst
+
+lbl C
+   exc 01
+   rst
+
+lbl D
+   exc 03
+   rst
+
+lbl E
+   exc 04
+   rst
+
+lbl A'
+   exc 05
+   rst
+
+lbl B'
+   exc 06
+   rst
+
+lbl C'
+   exc 07
+   rst
+
+lbl D'
+   exc 08
+   rst
+
+lbl E'
+   cp
+   stflg 1
+   inv stflg 2
+   rcl 00
+   sto 02
+   rcl 03
+   -
+   rcl 05
+   =
+   sto 10
+   0
+   sto 11
+
+lbl ÷
+   rcl 10
+   -
+   rcl 11
+   =
+   sto 12
+   ×
+   rcl 06
+   ÷
+   rcl 07
+   =
+   sto 13
+   ×
+   rcl 09
+   =
+   -
+   (
+   rcl 00
+   ×
+   rcl 11
+   y**x
+   3
+   -
+   (
+   rcl 00
+   -
+   rcl 02
+   )
+   sto 14
+   ×
+   (
+   rcl 11
+   -
+   rcl 04
+   )
+   |x|
+   y**x
+   3
+   )
+   ÷
+   3
+   =
+   ÷
+   rcl 06
+   ÷
+   (
+   rcl 08
+   ×
+   (
+   rcl 11
+   -
+   rcl 05
+   )
+   x²
+   +
+   rcl 12
+   x²
+   )
+   =
+   sto 15
+   (
+   rcl 04
+   ×
+   rcl 14
+   +
+   rcl 06
+   ×
+   rcl 15
+   ×
+   (
+   1
+   +
+   rcl 08
+   )
+   )
+   sto 16
+   x²
+   +
+   rcl 02
+   ×
+   (
+   rcl 04
+   x²
+   ×
+   rcl 14
+   +
+   2
+   ×
+   rcl 06
+   ×
+   rcl 15
+   ×
+   (
+   rcl 10
+   +
+   rcl 08
+   ×
+   rcl 05
+   )
+   )
+   =
+   √x
+   -
+   rcl 16
+   =
+   ÷
+   rcl 02
+   =
+   sto 17
+   ifflg 2 ×
+   -
+   rcl 04
+   =
+   inv x≥t ×
+   stflg 2
+   rcl 01
+   sto 02
+   gto ÷
+
+lbl ×
+   rcl 17
+   -
+   exc 11
+   =
+   |x|
+   -
+   .1
+   =
+   x≥t ÷
+
+lbl lnx
+   sbr -
+   3637350206
+   op 01
+   sbr +
+   sto 02
+   14
+   sbr rcl
+   1401
+   sbr rcl
+   13
+   sbr rcl
+   1301
+   sbr rcl
+   2365
+   sbr rcl
+   22
+   sbr rcl
+   772137
+   sbr rcl
+   33
+   sbr rcl
+   30
+   sbr rcl
+   adv
+
+lbl adv
+   clr
+   44
+   op 04
+   rcl 11
+   sbr prt
+   7715
+   op 04
+   rcl 11
+   ×
+   rcl 13
+   1/x
+   =
+   sbr prt
+   132137
+   op 04
+   rcl 15
+   sbr prt
+   132115
+   op 04
+   rcl 15
+   ×
+   rcl 08
+   =
+   sbr prt
+   inv ifflg 1 adv
+   sbr -
+   inv stflg 1
+   gto adv
+
+lbl -
+   clr
+   2020202020
+   op 01
+   op 02
+   op 03
+   op 04
+
+lbl +
+   op 05
+   op 00
+   clr
+   inv sbr

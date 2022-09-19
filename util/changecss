@@ -1,4 +1,4 @@
-#! /usr/bin/python
+#! /usr/bin/python3
 
 import getopt
 import sys
@@ -7,7 +7,7 @@ import string
 
 file = sys.argv[1]
 
-print file
+print(file)
 
 content = open(file, 'r').readlines()
 newcontent = []
@@ -15,36 +15,41 @@ newcontent = []
 style = [ '<STYLE TYPE="text/css">',
           '.yellowbutton',
           '  {',
-          '    background : #ce8c3b;',
-          '    padding : 1pt;',
+          '    background : #FFE071;',
+          '    padding : 0.05em 0.3em 0.05em;',
           '    border : 1pt solid black;',
           '    font-weight : bold;',
+          '    font-size: 0.8em;',
           '  }',
           '',
           '.brownbutton',
           '  {',
-          '    background : #4e3836;',
-          '    padding : 1pt;',
+          '    background : #63452B;',
+          '    padding : 0.05em 0.3em 0.05em;',
           '    border : 1pt solid black;',
           '    font-weight : bold;',
-          '    color : #ac9e80;',
+          '    color : #F0EDD5;',
+          '    font-size: 0.8em;',
           '  }',
           '',
           '.whitebutton',
           '  {',
-          '    background : #ac9e80;',
-          '    padding : 1pt;',
+          '    background : #E0DDC5;',
+          '    padding : 0.05em 0.3em 0.05em;',
           '    border : 1pt solid black;',
           '    font-weight : bold;',
           '    color : #222424;',
+          '    font-size: 0.8em;',
           '  }',
           '',
           '.alttext',
           '  {',
-          '    background : #222424;',
-          '    padding : 1.5pt;',
+          '    background : #000000;',
+          '    padding : 0.05em 0.3em 0.05em;',
+          '    border : 1pt solid black;',
           '    font-weight : bold;',
-          '    color : #ac9e80;',
+          '    color : #dcb151;',
+          '    font-size: 0.8em;',
           '  }',
           '',
           '.deflist DT',
@@ -58,18 +63,28 @@ style = [ '<STYLE TYPE="text/css">',
           '  }',
           '',
           '.display',
-          '  {',
-          '     color : red;',
-          '     font-weight : bold;',
-          '     text-align : right;',
-          '     margin-right : 2em;',
-          '  }',
+          ' {',
+          '    color : red;',
+          '    font-weight : bold;',
+          '    font-family: courier bold;',
+          '    text-align : right;',
+          '    margin-right : 2em;',
+          ' }',
+          '.displayb',
+          ' {',
+          '    padding: 0em 0.5em 0em;',
+          '    color: red;',
+          '    background: #eeeeee;',
+          '    font-weight: bold;',
+          '    font-family: courier bold;',
+          '    font-size: 1.1em;',
+          ' }',
           '</STYLE>' ]
 
 is_style=False
 
 for c in content:
-    if string.find(string.lower(c), "<style") != -1:
+    if c.lower().find("<style") != -1:
         is_style=True
         for s in style:
             newcontent.append(s + "\n")
@@ -77,7 +92,7 @@ for c in content:
     if not is_style:
         newcontent.append(c);
 
-    if string.find(string.lower(c), "</style") != -1:
+    if c.lower().find("</style") != -1:
         is_style=False
 
 # write new content

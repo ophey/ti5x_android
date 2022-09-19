@@ -1,0 +1,12 @@
+<carddef style="user">
+<label slot="titleleft">R-SECTION IN R.C. - PRESS BENDING PROJECT</label>
+<label slot="titleright">STR-17</label>
+<label slot="a">M</label>
+<label slot="b">N</label>
+<label slot="c">B<sub>0</sub></label>
+<label slot="d">A</label>
+<label slot="e">H'</label>
+<label slot="aprime"><Sigma/>F</label>
+<label slot="bprime">G</label>
+<label slot="eprime">RESULTS</label>
+</carddef>

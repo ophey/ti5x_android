@@ -6,55 +6,70 @@
 <STYLE TYPE="text/css">
 .yellowbutton
   {
-    background : #ce8c3b;
-    padding : 1pt;
+    background : #FFE071;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
-  } /*.yellowbutton*/
+    font-size: 0.8em;
+  }
 
 .brownbutton
   {
-    background : #4e3836;
-    padding : 1pt;
+    background : #63452B;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
-    color : #ac9e80;
-  } /*.brownbutton*/
+    color : #F0EDD5;
+    font-size: 0.8em;
+  }
 
 .whitebutton
   {
-    background : #ac9e80;
-    padding : 1pt;
+    background : #E0DDC5;
+    padding : 0.05em 0.3em 0.05em;
     border : 1pt solid black;
     font-weight : bold;
     color : #222424;
-  } /*.whitebutton*/
+    font-size: 0.8em;
+  }
 
 .alttext
   {
-    background : #222424;
-    padding : 1.5pt;
+    background : #000000;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
     font-weight : bold;
-    color : #ac9e80;
-  } /*alttext*/
+    color : #dcb151;
+    font-size: 0.8em;
+  }
 
 .deflist DT
   {
     display : compact;
     font-weight : bold;
-  } /*.deflist DT*/
+  }
 .deflist DD
   {
     margin-left : 4em;
-  } /*.deflist DD*/
+  }
 
 .display
-  {
-     color : red;
-     font-weight : bold;
-     text-align : right;
-     margin-right : 2em;
-  }
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
 </STYLE>
 </HEAD>
 <BODY>
@@ -114,16 +129,16 @@
 
 <DL class="deflist">
   <DT>Enter number of waypoint to be loaded
-    <DD>Press <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN> (Load FIX)
+    <DD>Press <SPAN CLASS="brownbutton">A</SPAN> (Load FIX)
   </DT>
   <DT>Enter number of waypoint used as a reference
-    <DD>Press <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN> (from FIX)
+    <DD>Press <SPAN CLASS="brownbutton">B</SPAN> (from FIX)
   </DT>
   <DT>Enter magnetic bearing from reference to new waypoint
-    <DD>Press <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN> (RAD)
+    <DD>Press <SPAN CLASS="brownbutton">C</SPAN> (RAD)
   </DT>
   <DT>Enter distance between waypoints
-    <DD>Press <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN> (Dist)
+    <DD>Press <SPAN CLASS="brownbutton">D</SPAN> (Dist)
   </DT>
 </DL>
 
@@ -167,42 +182,42 @@ all other positions.
   card or cards you may simply read this data into your calculator's
   data memory when it is needed for the VOR or DME Area Nav
   program. To do this simple
-  press <SPAN CLASS="brownbutton">&nbsp;CLR&nbsp;</SPAN> and feed the
+  press <SPAN CLASS="brownbutton">CLR</SPAN> and feed the
   card into the card slot. Once the card is read the number in the
   display indicates which bank was read.
 </P>
 <P><i>Note that on this emulator there is a single virtual card
   simulated, to read it
-    just <SPAN CLASS="brownbutton">&nbsp;INV&nbsp;</SPAN>
-    <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-    <SPAN CLASS="alttext">&nbsp;write&nbsp;</SPAN>
+    just <SPAN CLASS="brownbutton">INV</SPAN>
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">write</SPAN>
 </P>
 
 <DL class="deflist">
   <DT>Initialize
-    <DD><SPAN CLASS="brownbutton">&nbsp;SBR&nbsp;</SPAN> <SPAN CLASS="yellowbutton">&nbsp;CLR&nbsp;</SPAN>
+    <DD><SPAN CLASS="brownbutton">SBR</SPAN> <SPAN CLASS="yellowbutton">CLR</SPAN>
     <DD CLASS="display">0.</DD>
   </DT>
 
   <h3>For each waypoint, do:</h3>
 
   <DT>Enter number of waypoint to be entered
-    <DD>n <SPAN CLASS="brownbutton">&nbsp;A&nbsp;</SPAN>
+    <DD>n <SPAN CLASS="brownbutton">A</SPAN>
     <DD CLASS="display">n</dd>
   </DT>
 
   <DT>Enter number of waypoint to be used as reference
-    <DD>m <SPAN CLASS="brownbutton">&nbsp;B&nbsp;</SPAN>
+    <DD>m <SPAN CLASS="brownbutton">B</SPAN>
     <DD CLASS="display">m</dd>
   </DT>
 
   <DT>Enter radial from m to n in degrees
-    <DD>Rad <SPAN CLASS="brownbutton">&nbsp;C&nbsp;</SPAN>
+    <DD>Rad <SPAN CLASS="brownbutton">C</SPAN>
     <DD CLASS="display">Rad</dd>
   </DT>
 
   <DT>Enter distance from m to n
-    <DD>Dist <SPAN CLASS="brownbutton">&nbsp;D&nbsp;</SPAN>
+    <DD>Dist <SPAN CLASS="brownbutton">D</SPAN>
     <DD CLASS="display">Dist</dd>
   </DT>
 
@@ -210,15 +225,15 @@ all other positions.
 
   <DT>Record data registers R<sub>00</sub> - R<sub>29</sub> on a
   magnetic card
-    <DD>4 <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;write&nbsp;</SPAN>
+    <DD>4 <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">write</SPAN>
     <DD CLASS="display">4</dd>
   </DT>
 
   <DT>Record data registers R<sub>30</sub> - R<sub>59</sub> on a
   magnetic card
-    <DD>3 <SPAN CLASS="yellowbutton">&nbsp;2nd&nbsp;</SPAN>
-      <SPAN CLASS="alttext">&nbsp;write&nbsp;</SPAN>
+    <DD>3 <SPAN CLASS="yellowbutton">2nd</SPAN>
+      <SPAN CLASS="alttext">write</SPAN>
     <DD CLASS="display">3</dd>
   </DT>
 

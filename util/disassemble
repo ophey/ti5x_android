@@ -80,6 +80,7 @@ codes = \
         28 : simple("log"),
         29 : simple("CP"),
         20 : simple("2nd CLR"),
+        21 : simple("2nd"),
         # 31 invalid
         32 : simple("x⇌t"),
         33 : simple("x²"),
@@ -95,17 +96,17 @@ codes = \
         43 : regop("RCL", True),
         44 : regop("SUM", True),
         45 : simple("y**x"),
-        # 46 invalid
+        46 : simple("Ins"),
         47 : simple("CMs"),
         48 : regop("Exc", True),
         49 : regop("Prd", True),
         # 40 (Ind) specially handled
-        # 51 invalid
+        51 : simple("%"), # extension: % and INV %
         52 : simple("EE"),
         53 : simple("("),
         54 : simple(")"),
         55 : simple("÷"),
-        # 56 invalid
+        56 : simple("Del"),
         57 : simple("Eng"),
         58 : {"sym" : "Fix", "act" : fix},
         59 : simple("Int"),
@@ -149,7 +150,7 @@ codes = \
         93 : simple("."),
         94 : simple("+/-"),
         95 : simple("="),
-        96 : simple("2nd R/S"),
+        96 : simple("Write"),
         97 : {"sym" : "Dsz", "expect" : "unitreg", "expect2" : "loc"},
         98 : simple("Adv"),
         99 : simple("Prt"),
@@ -252,6 +253,9 @@ while True :
                         elif val == 40 :
                             sys.stdout.write("Ind ")
                             expect = "reg"
+                        elif val == 51 : # 51 in loc must be code 51 and not the % extension
+                            sys.stdout.write("51")
+                            expect = None
                         else :
                             if val in codes and "sym" in codes[val] :
                                 sys.stdout.write(codes[val]["sym"])

@@ -1,0 +1,474 @@
+
+lbl π
+   ifflg 1 op
+   inv sbr
+
+lbl write
+   ifflg 1 ee
+   inv sbr
+
+lbl ee
+   op 05
+   inv sbr
+
+lbl prt
+   ifflg 1 op
+   r/s
+   inv sbr
+
+lbl op
+   op 06
+   inv sbr
+
+lbl =
+   44
+   op 04
+   (
+   rcl 09
+   ×
+   rcl 00
+   )
+   sbr prt
+   30554456
+   op 04
+   rcl 16
+   sbr prt
+   37554456
+   op 04
+   rcl 17
+   sbr prt
+   rcl 18
+   1/x
+   sum 09
+   +/-
+   sum 10
+   rcl 07
+   x⇌t
+   rcl 09
+   inv x≥t adv
+   stflg 2
+
+lbl adv
+   inv sbr
+
+lbl rst
+   (
+   rcl 18
+   +
+   1
+   )
+   sto 06
+   inv stflg 2
+   (
+   (
+   rcl 02
+   ÷
+   rcl 00
+   )
+   sto 07
+   +/-
+   +
+   1
+   )
+   sto 08
+   0
+   sto 09
+   1
+   sto 10
+   (
+   rcl 05
+   -
+   rcl 04
+   )
+   sto 11
+   1
+   sto 19
+   inv sbr
+
+lbl exc
+   rcl 12
+   exc 13
+   sto 12
+   rcl 10
+   sto 14
+   0
+   sto 15
+   1
+   +/-
+   sto 19
+   inv sbr
+
+lbl A
+   sto 00
+   27
+   op 04
+   rcl 00
+   sbr π
+   r/s
+
+lbl B
+   sto 01
+   33
+   op 04
+   rcl 01
+   sbr π
+   r/s
+   sto 02
+   17
+   op 04
+   rcl 02
+   sbr π
+   r/s
+
+lbl C
+   sto 03
+   34
+   op 04
+   rcl 03
+   sbr π
+   r/s
+
+lbl D
+   sto 04
+   3036
+   op 04
+   rcl 04
+   sbr π
+   r/s
+
+lbl E
+   sto 05
+   3016
+   op 04
+   rcl 05
+   sbr π
+   r/s
+
+lbl A'
+   sto 18
+   r/s
+
+lbl B'
+   op 00
+   24
+   op 01
+   sbr write
+   sbr rst
+
+lbl ÷
+   rcl 03
+   ×
+   rcl 00
+   x²
+   ÷
+   2
+   ×
+   rcl 10
+   x²
+   +/-
+   -
+   rcl 05
+   =
+   sto 16
+   rcl 03
+   ×
+   rcl 00
+   ×
+   rcl 10
+   =
+   sto 17
+   ifflg 2 |x|
+   rcl 09
+   -
+   rcl 07
+   =
+   ×
+   rcl 01
+   sum 17
+   ×
+   rcl 00
+   =
+   sum 16
+
+lbl |x|
+   sbr =
+   dsz 6 ÷
+   r/s
+
+lbl C'
+   op 00
+   130013
+   op 01
+   sbr write
+   sbr rst
+
+lbl ×
+   rcl 07
+   sto 12
+   rcl 08
+   sto 13
+   rcl 09
+   sto 14
+   inv ifflg 2 deg
+   sbr exc
+
+lbl deg
+   rcl 03
+   ×
+   rcl 00
+   x²
+   ÷
+   2
+   ×
+   (
+   rcl 09
+   -
+   rcl 09
+   x²
+   )
+   -
+   rcl 11
+   ×
+   rcl 09
+   -
+   rcl 04
+   +
+   rcl 01
+   ×
+   rcl 00
+   ×
+   rcl 13
+   ×
+   rcl 14
+   =
+   sto 16
+   rcl 03
+   ×
+   rcl 00
+   ×
+   (
+   .5
+   -
+   rcl 09
+   )
+   -
+   rcl 11
+   ÷
+   rcl 00
+   +
+   rcl 01
+   ×
+   rcl 13
+   ×
+   rcl 19
+   =
+   sto 17
+   sbr =
+   dsz 6 ×
+   r/s
+
+lbl D'
+   op 00
+   240013
+   op 01
+   sbr write
+   sbr rst
+
+lbl -
+   rcl 07
+   y**x
+   3
+   -
+   3
+   ×
+   rcl 07
+   x²
+   =
+   sto 13
+   +
+   2
+   =
+   sto 12
+   rcl 13
+   +
+   2
+   ×
+   rcl 07
+   =
+   sto 15
+   rcl 09
+   sto 14
+   inv ifflg 2 rad
+   sbr exc
+
+lbl rad
+   rcl 03
+   ×
+   rcl 00
+   x²
+   ÷
+   8
+   ×
+   (
+   3
+   ×
+   rcl 10
+   -
+   4
+   ×
+   rcl 10
+   x²
+   )
+   -
+   rcl 05
+   ÷
+   2
+   ×
+   (
+   3
+   ×
+   rcl 09
+   -
+   1
+   )
+   -
+   rcl 01
+   ×
+   rcl 00
+   ÷
+   2
+   ×
+   (
+   rcl 15
+   -
+   rcl 12
+   ×
+   rcl 14
+   ×
+   rcl 19
+   )
+   =
+   sto 16
+   rcl 03
+   ×
+   rcl 00
+   ×
+   (
+   rcl 10
+   -
+   3
+   ÷
+   8
+   )
+   -
+   1.5
+   ×
+   rcl 05
+   ÷
+   rcl 00
+   +
+   rcl 01
+   ÷
+   2
+   ×
+   rcl 12
+   =
+   sto 17
+   sbr =
+   dsz 6 -
+   r/s
+
+lbl E'
+   op 00
+   240024
+   op 01
+   sbr write
+   sbr rst
+
+lbl +
+   rcl 07
+   sto 12
+   rcl 08
+   sto 13
+   rcl 09
+   sto 14
+   inv ifflg 2 grad
+   sbr exc
+
+lbl grad
+   rcl 03
+   ×
+   rcl 00
+   ÷
+   2
+   ×
+   (
+   1
+   -
+   rcl 09
+   ×
+   2
+   )
+   +
+   rcl 01
+   ×
+   rcl 13
+   x²
+   ×
+   (
+   1
+   +
+   rcl 12
+   ×
+   2
+   )
+   ×
+   rcl 19
+   =
+   sto 17
+   rcl 03
+   ×
+   rcl 00
+   x²
+   ÷
+   12
+   ×
+   (
+   1
+   -
+   rcl 09
+   ×
+   6
+   +
+   rcl 09
+   x²
+   ×
+   6
+   )
+   +/-
+   +
+   rcl 01
+   ×
+   rcl 00
+   ×
+   rcl 13
+   x²
+   ×
+   (
+   rcl 14
+   ×
+   (
+   1
+   +
+   2
+   ×
+   rcl 12
+   )
+   -
+   rcl 12
+   )
+   =
+   sto 16
+   sbr =
+   dsz 6 +
+   r/s

@@ -1,0 +1,9 @@
+<carddef style="user">
+<label slot="titleleft">CANTILEVERED VIERENDEEL TRUSS</label>
+<label slot="titleright">STR-25</label>
+<label slot="bprime">p> RESULT.</label>
+<label slot="a">> P: H:</label>
+<label slot="b">p> KP:K<sub>0</sub>:K<sub>1</sub></label>
+<label slot="c">p> L: Q<sub>0</sub>:Q<sub>1</sub>:</label>
+<label slot="e"><epsilon/>>CALC.</label>
+</carddef>

@@ -46,17 +46,21 @@ class Printer {
 
   private final static int DotSize = 2;
   private final static int DotGap = 1;
-  final static int CharColumns = 20;
   private final static int CharWidth = 5;
   private final static int CharHeight = 7;
   private final static int CharHorGap = 1;
   private final static int CharVertGap = 1;
+  private final static int PaddingWidth = 10;
+  private final static int PaddingHeight = 10;
 
-  private final static int CharLines = 150; /* perhaps make this configurable? */
+  final static int CharColumns = 20;
+  private final static int CharLines = 125; /* make this configurable? */
 
-  private final int PaperWidth = (CharColumns * CharWidth + (CharColumns + 1) * CharHorGap) * (DotSize + DotGap) + DotGap;
-  private final int PaperHeight = (CharLines * CharHeight + (CharLines + 1) * CharVertGap) * (DotSize + DotGap) + DotGap;
   private final int LineHeight = (CharHeight + CharVertGap) * (DotSize + DotGap);
+  private final int ColumnWidth = (CharWidth + CharHorGap) * (DotSize + DotGap);
+
+  private final int PaperHeight = LineHeight * CharLines + (PaddingHeight * 2);
+  private final int PaperWidth = ColumnWidth * CharColumns + (PaddingWidth * 2);
 
   private final int PaperColor;
   private final int InkColor;
@@ -261,7 +265,7 @@ class Printer {
        (
           PaperWidth,
           PaperHeight,
-          android.graphics.Bitmap.Config.ARGB_4444
+          android.graphics.Bitmap.Config.RGB_565
        );
     PaperDraw = new android.graphics.Canvas(Paper);
     PaperDraw.drawPaint(GraphicsUseful.FillWithColor(PaperColor));
@@ -287,7 +291,7 @@ class Printer {
 
     try {
       outputStream = new FileOutputStream(file);
-      Paper.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+      Paper.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
     } catch (FileNotFoundException ex) {
       //exception handling code
       ex.printStackTrace();
@@ -313,26 +317,29 @@ class Printer {
        (
           PaperWidth,
           PaperHeight,
-          android.graphics.Bitmap.Config.ARGB_4444
+          android.graphics.Bitmap.Config.RGB_565
        );
     PaperDraw = new android.graphics.Canvas(Paper);
     PaperDraw.drawPaint(GraphicsUseful.FillWithColor(PaperColor));
     Paper.prepareToDraw();
     Toast.makeText(ctx, "Paper Reloaded!", Toast.LENGTH_SHORT).show();
-
   }
 
   private void StartNewLine() {
     // advances the paper to the next line.
     // source rectangle, skip top line.
-    IXCurLine += 1;
     if (IXCurLine >= this.CharLines)
     {
       SavePaper(PrtContext);
       IXCurLine = 0;
     }
+    IXCurLine += 1;
+
     android.graphics.Rect srcRect = new android.graphics.Rect
-       (0, LineHeight, PaperWidth, PaperHeight);
+       (PaddingWidth,
+        LineHeight + PaddingHeight,
+        PaperWidth - PaddingWidth,
+        PaperHeight - PaddingHeight);
 
     // destination rect, one line up
     android.graphics.Rect destRect = new android.graphics.Rect(srcRect);
@@ -342,7 +349,11 @@ class Printer {
 
     PaperDraw.drawRect /* fill in newly-scrolled-in area */
        (
-          new android.graphics.Rect(0, PaperHeight - LineHeight, PaperWidth, PaperHeight),
+          new android.graphics.Rect
+            (PaddingWidth,
+             PaperHeight - LineHeight - PaddingHeight,
+             PaperWidth - PaddingWidth,
+             PaperHeight),
           GraphicsUseful.FillWithColor(PaperColor)
        );
     Paper.prepareToDraw();
@@ -408,9 +419,9 @@ class Printer {
           Line,
           0,
           PaperWidth,
-          0,
-          PaperHeight - LineHeight,
-          PaperWidth,
+          PaddingWidth,
+          PaperHeight - LineHeight - PaddingHeight,
+          PaperWidth - PaddingWidth,
           LineHeight
        );
     if (PrintListener != null) {

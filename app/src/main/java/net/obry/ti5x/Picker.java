@@ -327,6 +327,7 @@ public class Picker extends android.app.Activity {
           }
           InaccessibleFolders = InaccessibleFolders.concat(Here);
         } else {
+          ThisDir.mkdirs();
           /*
            * This segment iterates on all of the files contained
            * withing the folder context.
@@ -335,9 +336,10 @@ public class Picker extends android.app.Activity {
           for (java.io.File Item : ourFiles) {
             boolean MatchesExt;
             String DisplayName = "";
+            final String ItemName = Item.getName();
+            DisplayName = ItemName;
+
             if (Alt.FileExts != null) {
-              final String ItemName = Item.getName();
-              DisplayName = ItemName;
               for (int i = 0; ; ) {
                 if (i == Alt.FileExts.length) {
                   MatchesExt = false;
@@ -363,7 +365,13 @@ public class Picker extends android.app.Activity {
       }
 
       FirstBuiltinIdx = 0; // PickerList.getCount();
-      FirstUserProgIdx = Alt.SpecialItem.length;
+
+      if (Alt.SpecialItem == null) {
+        FirstUserProgIdx = 0;
+      }
+      else {
+        FirstUserProgIdx = Alt.SpecialItem.length;
+      }
 
       if (Alt.SpecialItem != null) {
         for (int i = Alt.SpecialItem.length - 1; i >= 0; i--)
