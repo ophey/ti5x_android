@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=utf-8">
+<TITLE>ti5x help</TITLE>
+<STYLE TYPE="text/css">
+.yellowbutton
+  {
+    background : #FFE071;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    font-size: 0.8em;
+  }
+
+.brownbutton
+  {
+    background : #63452B;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #F0EDD5;
+    font-size: 0.8em;
+  }
+
+.whitebutton
+  {
+    background : #E0DDC5;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #222424;
+    font-size: 0.8em;
+  }
+
+.alttext
+  {
+    background : #000000;
+    padding : 0.05em 0.3em 0.05em;
+    border : 1pt solid black;
+    font-weight : bold;
+    color : #dcb151;
+    font-size: 0.8em;
+  }
+
+.deflist DT
+  {
+    display : compact;
+    font-weight : bold;
+  }
+.deflist DD
+  {
+    margin-left : 4em;
+  }
+
+.display
+ {
+    color : red;
+    font-weight : bold;
+    font-family: courier bold;
+    text-align : right;
+    margin-right : 2em;
+ }
+.displayb
+ {
+    padding: 0em 0.5em 0em;
+    color: red;
+    background: #eeeeee;
+    font-weight: bold;
+    font-family: courier bold;
+    font-size: 1.1em;
+ }
+</STYLE>
+</HEAD>
+<BODY>
+
+<H1>MM-04 — Dew Point/Wind Chill/Heat Index</H1>
+
+<p>This will calculate Wind Chill, Heat Index and Dew Point, in °C or ⁰F.
+
+<p>The Wind Chill is based on the National Weather Service formula
+  found at https://www.weather.gov/ffc/wci, Wind Chill does not exist
+  above 50⁰ or for wind speeds less than 3 mph.
+
+<p>The Dew Point is based on
+  https://www.omnicalculator.com/physics/dew-point#how-to-calculate-dew-point-how-to-calculate-relative-humidity
+  and it is calculated in ⁰C and then converted to ⁰F
+
+<p>The Heat Index formula can be found here
+  https://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml It is
+  comprised of different formulae each valid under specific
+  circumstances.  There is a simple version for temperatures under 80⁰F
+  and a more complex version for higher temperatures, which is further
+  modified for "dry" or "wet" conditions
+
+<p>The Heat Index calculation calculates all versions internally and
+  then selects the proper result based on temperature and relative
+  humidity. To avoid an internal error condition an absolute value |x|
+  term is added.
+
+<H3>Instructions</H3>
+
+<ol>
+  <li>Enter temperature:
+  <ul>
+  <li>in ⁰F,
+    press <SPAN CLASS="brownbutton">A</SPAN>
+    <br>or
+  <li>in ⁰C,
+    press <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">A'</SPAN>
+  </ul>
+  <li>Enter wind speed
+    <ul>
+      <li>in MPH, press <SPAN CLASS="brownbutton">B</SPAN>
+      <li>in KM/H, press <SPAN CLASS="yellowbutton">2nd</SPAN>
+        <SPAN CLASS="alttext">B'</SPAN>
+    </ul>
+  <li>Enter relative humidity RH,
+    press <SPAN CLASS="brownbutton">C</SPAN>
+  <li>Select English (0) or Metric (1) outputs, enter 0 or 1, press
+    <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">E'</SPAN>
+  <li>Calculate Dew Point, press <SPAN CLASS="brownbutton">D</SPAN>
+  <li>Calculate Wind chill, press <SPAN CLASS="brownbutton">C</SPAN>
+  <li>Calculate Heat Index, press <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">D'</SPAN>
+</ol>
+
+<H3>Example 1</H3>
+
+<ol>
+  <li>Temperature is 45⁰F, press 45 <SPAN CLASS="brownbutton">A</SPAN>.
+  <li>Wind speed is 10 mph, press 10 <SPAN CLASS="brownbutton">B</SPAN>
+  <li>Relative humidity is 35%,
+    press 35 <SPAN CLASS="brownbutton">C</SPAN>
+  <li>Calculate in Imperial units, press 0 <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">E'</SPAN>
+  <li>Get Dewpoint, press <SPAN CLASS="brownbutton">D</SPAN>,
+    18.967271
+  <li>Convert to °C, <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">C'</SPAN>, -7.240404938
+  <li>Get Windchill, press <SPAN CLASS="brownbutton">E</SPAN>,
+    39.8396758
+  <li>Convert to °C, <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">C'</SPAN>, 4.35537544
+  <li>Get Heat Index, press <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">D'</SPAN>, 40.845
+  <li>Convert to °C, <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">C'</SPAN>, 4.91388889
+</ol>
+
+<H3>Example 2</H3>
+
+<ol>
+  <li>Temperature is 30⁰C, press
+    30 <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="altext">A'</SPAN>.
+  <li>Wind speed is 6 km/h, press
+    6 <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="altext">B'</SPAN>
+  <li>Relative humidity is 40%,
+    press 40 <SPAN CLASS="brownbutton">C</SPAN>
+  <li>Calculate in Metric units, press 1 <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">E'</SPAN>
+  <li>Get Dewpoint, press <SPAN CLASS="brownbutton">D</SPAN>,
+    14.932995
+  <li>Get Windchill, press <SPAN CLASS="brownbutton">E</SPAN>,
+    30
+  <li>Get Heat Index, press <SPAN CLASS="yellowbutton">2nd</SPAN>
+    <SPAN CLASS="alttext">D'</SPAN>, 29.6891651
+</ol>
+
+<P>Registers used: <b>00</b> to <b>23</b>
+  </body>
+</html>

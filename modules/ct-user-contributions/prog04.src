@@ -1,0 +1,367 @@
+; Contributed by Mike Marquis
+
+lbl A
+   sto 01
+   c'
+   sto 00
+   rcl 01
+   inv sbr
+
+lbl B
+   sto 02
+   inv sbr
+
+lbl C
+   sto 03
+   inv sbr
+
+lbl =
+   42.379
+   +/-
+   sto 10
+   2.04901523
+   sto 11
+   10.14333127
+   sto 12
+   .22475541
+   sto 13
+   .00683783
+   sto 14
+   .05481717
+   sto 15
+   .00122874
+   sto 16
+   .00085282
+   sto 17
+   .00000199
+   sto 18
+   17.625
+   sto 21
+   243.04
+   sto 22
+   clr
+   inv sbr
+
+lbl E
+   sbr =
+   50
+   x⇌t
+   rcl 01
+   x≥t √x
+   rcl 02
+   x⇌t
+   3
+   x≥t √x
+   (
+   35.74
+   +
+   .6215
+   ×
+   rcl 01
+   -
+   35.75
+   ×
+   rcl 02
+   y**x
+   .16
+   +
+   .4275
+   ×
+   rcl 01
+   ×
+   rcl 02
+   y**x
+   .16
+   )
+   ifflg 1 c'
+   inv sbr
+
+lbl y**x
+   (
+   .5
+   ×
+   (
+   rcl 01
+   +
+   61
+   +
+   (
+   rcl 01
+   -
+   68
+   )
+   ×
+   1.2
+   +
+   (
+   rcl 03
+   ×
+   .094
+   )
+   )
+   )
+   sto 08
+   inv sbr
+
+lbl √x
+   rcl 01
+   sto 09
+   ifflg 1 c'
+   inv sbr
+
+lbl sum
+   (
+   (
+   rcl 03
+   -
+   85
+   )
+   ÷
+   10
+   ×
+   (
+   87
+   -
+   rcl 01
+   )
+   ÷
+   5
+   )
+   sto 07
+   inv sbr
+
+lbl sto
+   (
+   rcl 10
+   +
+   rcl 11
+   ×
+   rcl 01
+   +
+   rcl 12
+   ×
+   rcl 03
+   -
+   rcl 13
+   ×
+   rcl 01
+   ×
+   rcl 03
+   -
+   rcl 14
+   ×
+   rcl 01
+   x²
+   -
+   rcl 15
+   ×
+   rcl 03
+   x²
+   +
+   rcl 16
+   ×
+   rcl 01
+   x²
+   ×
+   rcl 03
+   +
+   rcl 17
+   ×
+   rcl 01
+   ×
+   rcl 03
+   x²
+   -
+   rcl 18
+   ×
+   rcl 01
+   x²
+   ×
+   rcl 03
+   x²
+   )
+   sto 05
+   inv sbr
+
+lbl rcl
+   (
+   (
+   13
+   -
+   rcl 03
+   )
+   ÷
+   4
+   ×
+   (
+   (
+   17
+   -
+   (
+   rcl 01
+   -
+   95
+   )
+   |x|
+   )
+   ÷
+   17
+   )
+   |x|
+   √x
+   )
+   sto 06
+   inv sbr
+
+lbl D'
+   sbr =
+   sbr y**x
+   sbr rcl
+   sbr sto
+   sbr sum
+   rcl 01
+   x⇌t
+   80
+   x≥t ee
+   rcl 03
+   x⇌t
+   13
+   x≥t (
+   85
+   x⇌t
+   rcl 03
+   x≥t )
+   rcl 01
+   x⇌t
+   78
+   x≥t √x
+   rcl 05
+   sto 09
+   ifflg 1 c'
+   inv sbr
+
+lbl ee
+   rcl 08
+   sto 09
+   ifflg 1 c'
+   inv sbr
+
+lbl (
+   (
+   rcl 05
+   -
+   rcl 06
+   )
+   sto 09
+   inv sbr
+
+lbl )
+   rcl 01
+   x⇌t
+   rcl 05
+   sto 09
+   inv sbr
+
+lbl ÷
+   (
+   rcl 05
+   +
+   rcl 07
+   )
+   sto 09
+   ifflg 1 c'
+   inv sbr
+
+lbl D
+   sbr =
+   (
+   (
+   rcl 03
+   ÷
+   100
+   )
+   lnx
+   +
+   rcl 21
+   ×
+   rcl 00
+   ÷
+   (
+   rcl 22
+   +
+   rcl 00
+   )
+   )
+   sto 19
+   (
+   (
+   rcl 22
+   ×
+   rcl 19
+   )
+   ÷
+   (
+   rcl 21
+   -
+   rcl 19
+   )
+   )
+   (
+   ×
+   9
+   ÷
+   5
+   +
+   32
+   )
+   sto 23
+   ifflg 1 c'
+   inv sbr
+
+lbl C'
+   (
+   (
+   -
+   32
+   )
+   ×
+   5
+   ÷
+   9
+   )
+   inv sbr
+
+lbl E'
+   x⇌t
+   1
+   inv x=t r/s
+   stflg 1
+   inv sbr
+
+lbl r/s
+   inv stflg 1
+   clr
+   inv sbr
+
+lbl B'
+   sto 20
+   ×
+   1.60934
+   =
+   sto 02
+   rcl 20
+   inv sbr
+
+lbl A'
+   sto 00
+   (
+   ×
+   9
+   ÷
+   5
+   +
+   32
+   )
+   sto 01
+   rcl 00
+   inv sbr

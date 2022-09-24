@@ -1,0 +1,14 @@
+<carddef style="user">
+<label slot="titleleft">Dew Point / Wind Chill /Heat Index</label>
+<label slot="titleright">MM-04</label>
+<label slot="aprime">°C</label>
+<label slot="bprime">km/h</label>
+<label slot="cprime">°F <ArrowR/> °C</label>
+<label slot="dprime">Heat Index</label>
+<label slot="eprime"> 0/1<ArrowR/>Units</label>
+<label slot="a">°F</label>
+<label slot="b">mph</label>
+<label slot="c">RH</label>
+<label slot="d">DP</label>
+<label slot="e">WC</label>
+</carddef>
