@@ -1,5 +1,9 @@
 Feature highlights:
 
+v8.2, 2022 November 4th:
+   Add in-app data exporter in append mode (n Inv Op 97).
+   Fix some broken URL.
+
 v8.1, 2022 September 16th:
    Add Civil Engineering library.
    Update layout & colors.
