@@ -23,13 +23,14 @@ lbl A                                     ;000
     )
     sto 3
     op 23
-    4 sum 2
+    4
+    sum 2
     rc* 2
     inv int
     st* 2
     (
-    inv dsz 3 67
-    ( rcl 0 × 1 0 )
+    inv dsz 3 67                          ;045
+    ( rcl 0 × 10 )
     sto 0
     int
     inv sum 0
@@ -49,7 +50,7 @@ lbl B                                     ;077
     rc* 2
     int
     inv sm* 2
-    ( exc 0 × 1 0 )
+    ( exc 0 × 10 )
     int
     inv log
     dms
@@ -79,7 +80,7 @@ lbl C                                     ;137
     ×
     rcl 3
     inv pd* 2
-    ( rcl 0 × 1 0 )
+    ( rcl 0 × 10 )
     int inv
     log
     dms
@@ -92,7 +93,7 @@ lbl D                                     ;167
     rc* 2
     int inv
     sm* 2
-    ( exc 0 × 1 0 )
+    ( exc 0 × 10 )
     int
     inv log
     dms
