@@ -19,9 +19,9 @@ android {
     defaultConfig {
         applicationId "net.obry.ti5x"
         minSdkVersion 14
-        targetSdkVersion 30
-        versionCode 176
-        versionName "8.2"
+        targetSdkVersion 31
+        versionCode 178
+        versionName "8.3"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         signingConfig signingConfigs.release

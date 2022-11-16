@@ -1,5 +1,8 @@
 Feature highlights:
 
+v8.3, 2022 November 16th:
+   Add MM-04 in Contribution Library.
+
 v8.2, 2022 November 4th:
    Add in-app data exporter in append mode (n Inv Op 97).
    Fix some broken URL.
