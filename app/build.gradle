@@ -15,10 +15,10 @@ android {
             }
         }
     }
-    compileSdkVersion 26
+    compileSdkVersion 31
     defaultConfig {
         applicationId "net.obry.ti5x"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 31
         versionCode 179
         versionName "8.4"
