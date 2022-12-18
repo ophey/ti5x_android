@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="15dp"
+        android:layout_marginLeft="5dp"
         android:layout_marginRight="8dp"
         android:clickable="false"
         android:text="@string/app_name"
@@ -73,7 +73,7 @@
         android:layout_height="24dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="15dp"
+        android:layout_marginRight="5dp"
         android:background="@drawable/ic_settings_applications_black_24dp" />
 
 </RelativeLayout>

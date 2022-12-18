@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 import android.Manifest;
 import android.app.Notification;
+import android.content.ContentProviderClient;
 import android.content.Intent;
 import android.view.MenuInflater;
 import android.view.View;
@@ -424,9 +425,14 @@ public class Main extends android.app.Activity {
 
   @Override
   public boolean onCreateOptionsMenu(android.view.Menu menu) {
-     MenuInflater inflater = getMenuInflater();
+      MenuInflater inflater = getMenuInflater();
       inflater.inflate(R.menu.ti5x_menu, menu);
-      return true;
+      return super.onCreateOptionsMenu(menu);
+  }
+
+  @Override
+  public boolean onPrepareOptionsMenu(android.view.Menu menu) {
+    return true;
   }
 
   @Override
