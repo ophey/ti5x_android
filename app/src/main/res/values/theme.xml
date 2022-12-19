@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--
-    style/Platform.AppCompat
-    android:style/Theme.Holo.Light
-    -->
-    <style name="ThemeOverride" parent="@android:style/Theme.Holo.Light">
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowNoTitle">false</item>
+    <style name="TiTheme" parent="@style/Theme.AppCompat.DayNight">
+        <item name="android:windowActionBar">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimary">@color/title_bar</item>
+        <item name="android:textColorSecondary">@color/title_bar</item>
+        <item name="android:textColorTertiary">@color/title_bar</item>
+        <item name="android:actionBarSize">30dip</item>
+        <item name="android:textColorPrimary">@color/dark</item>
+        <item name="android:colorBackground">@color/grey</item>
+        <item name="android:colorPrimaryDark">@color/dark</item>
     </style>
 </resources>
