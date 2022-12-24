@@ -11,8 +11,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text=""
-            android:textAlignment="center"
-            android:textColor="?android:attr/colorFocusedHighlight"/>
+            android:textAlignment="center" />
     </TableRow>
     <TableRow>
         <ListView
