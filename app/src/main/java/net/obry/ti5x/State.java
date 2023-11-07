@@ -1304,7 +1304,12 @@ class State {
     // Must be done on the displayed value and not X. That is if Fix-01 is set, the number must
     // be with a single digit.
 
-    X.nDigits(CurNrDecimals);
+    // X = new Number (CurDisplay);
+
+    if(CurNrDecimals == -1)
+      X.roundUpNDigits(9);
+    else
+      X.roundUpNDigits(CurNrDecimals);
 
     Number Sign = new Number(X);
     Sign.signum();
@@ -1342,6 +1347,7 @@ class State {
     }
 
     X.set(Degrees);
+
     X.add(Minutes);
     X.add(Seconds);
     X.mult(Sign);

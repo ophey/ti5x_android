@@ -427,6 +427,14 @@ class Number {
     }
   }
 
+  public void roundUpNDigits(int n) {
+    if (n >= 0) {
+      final Number Factor = new Number(B_ONE.scaleByPowerOfTen(n));
+
+      v = v.setScale(n, RoundingMode.HALF_UP);
+    }
+  }
+
   /* returns the number of figures before the decimal point in the
      formatted representation of X scaled by Exp. This has to be
      at least 1, because the decimal point is part of the display

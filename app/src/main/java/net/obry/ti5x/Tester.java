@@ -1108,6 +1108,85 @@ class Tester {
 
     return check("1005.", false);
   }
+
+  private boolean Test_33() {
+    // ensure that D.MS is done with the proper displayed precision
+    Clear();
+
+    Calc.Digit('1');
+    Calc.Digit('.');
+    Calc.Digit('0');
+    Calc.Digit('0');
+    Calc.Digit('3');
+
+    Calc.D_MS();
+
+    Calc.Operator(State.STACKOP_ADD);
+
+    Calc.Digit('1');
+    Calc.Digit('.');
+    Calc.Digit('0');
+    Calc.Digit('0');
+    Calc.Digit('3');
+
+    Calc.D_MS();
+
+    Calc.Equals();
+
+    Calc.InvState = true;
+    Calc.D_MS();
+    Calc.InvState = false;
+
+    if (!check("2.01", false))
+      return false;
+
+    // more tests checked on a real TI-59
+
+    SetX (1.987654);
+    Calc.SetDisplayMode(Calc.FORMAT_FIXED, 5);
+    Calc.D_MS();
+
+    if (!check("2.65458", false))
+      return false;
+
+    Calc.InvState = true;
+    Calc.D_MS();
+    Calc.InvState = false;
+
+    if (!check("2.39165", false))
+      return false;
+
+    Calc.D_MS();
+
+    if (!check("2.65458", false))
+      return false;
+
+    Calc.SetDisplayMode(State.FORMAT_FIXED, 0);
+
+    SetX (1.987654);
+
+    Calc.SetDisplayMode(Calc.FORMAT_FIXED, 2);
+    Calc.D_MS();
+
+    if (!check("2.65", false))
+      return false;
+
+    Calc.InvState = true;
+    Calc.D_MS();
+    Calc.InvState = false;
+
+    if (!check("2.39", false))
+      return false;
+
+    Calc.D_MS();
+
+    if (!check("2.65", false))
+      return false;
+
+    Calc.SetDisplayMode(State.FORMAT_FIXED, 0);
+    return true;
+  }
+
   int Run() {
     Calc = Global.Calc;
     int Total = 0;
@@ -1175,6 +1254,8 @@ class Tester {
     if (!Test_31()) return -31;
     Total++;
     if (!Test_32()) return -32;
+    Total++;
+    if (!Test_33()) return -33;
     Total++;
 
     Clear();
