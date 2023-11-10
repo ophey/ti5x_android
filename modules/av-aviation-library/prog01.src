@@ -39,12 +39,14 @@ lbl =
    ee
    inv ee
    x⇌t
-   377.7605150
-   x=t 2nd r/s
+   ; On the real calculatore the value
+   ; is 377.7605154
+   377.760515
+   x=t write
    0
    1/x
 
-lbl 2nd r/s
+lbl write
    fix 9
    op 00
    134224
