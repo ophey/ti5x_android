@@ -1,75 +1,136 @@
-;+
-; Recreation of the "Master Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; master library module -1-
+   ;
 
-lbl ∑+                                ;000
-    ( . 4 × rcl 1 + 2 . 3 )
-    int
-    +/-
-    +
-    gto x≥t
+lbl ∑+
+   (
+   .4
+   ×
+   rcl 01
+   +
+   2.3
+   )
+   int
+   +/-
+   +
+   gto x≥t
 
-lbl mean                              ;018
-    0
-    1/x
-    rtn
+lbl mean(x)
+   0
+   1/x
+   inv sbr
 
-lbl E'                                ;023
-    (
-    sto 1
-    cp inv
-    x≥t mean
-    inv int
-    inv sum 1
-    ×
-    4
-    inv log
-    )
-    sto 3
-    x⇌t
-    1 5 8 1
-    x≥t mean
-    3 2
-    x⇌t
-    (
-    ( rcl 1 / 1 0 0 )
-    sto 1
-    inv int
-    inv sum 1
-    *
-    1 0 0
-    )
-    sto 2
-    x≥t mean
-    1 3 x⇌t
-    rcl 1
-    x≥t mean
-    (
-    3 6 5 × rcl 3
-    + rcl 2
-    + 3 1 × rcl 1
-    - 3 1
-    + 3
-    x⇌t
-    rcl 1
-    x≥t ∑+
-    1 inv sum 3
+lbl E'
+   (
+   sto 01
+   cp
+   inv x≥t mean(x)
+   inv int
+   inv sum 01
+   ×
+   4
+   inv log
+   )
+   sto 03
+   x⇌t
+   1581
+   x≥t mean(x)
+   32
+   x⇌t
+   (
+   (
+   rcl 01
+   ÷
+   100
+   )
+   sto 01
+   inv int
+   inv sum 01
+   ×
+   100
+   )
+   sto 02
+   x≥t mean(x)
+   13
+   x⇌t
+   rcl 01
+   x≥t mean(x)
+   (
+   365
+   ×
+   rcl 03
+   +
+   rcl 02
+   +
+   31
+   ×
+   rcl 01
+   -
+   31
+   +
+   3
+   x⇌t
+   rcl 01
+   x≥t ∑+
+   1
+   inv sum 03
 
-lbl x≥t                                 ;116
-    ( rcl 3 ÷ 4 ) int - ( . 7 5 + (
-rcl 3 ÷ 1 0 0 ) int × . 7 5 ) int
-) rtn
+lbl x≥t
+   (
+   rcl 03
+   ÷
+   4
+   )
+   int
+   -
+   (
+   .75
+   +
+   (
+   rcl 03
+   ÷
+   100
+   )
+   int
+   ×
+   .75
+   )
+   int
+   )
+   inv sbr
 
-lbl A                                  ;148
-e' sto 4 0 rtn
+lbl A
+   e'
+   sto 04
+   0
+   inv sbr
 
-lbl B                                  ;155
-e' sto 5 0 rtn
+lbl B
+   e'
+   sto 05
+   0
+   inv sbr
 
-lbl C                                  ;162
-( rcl 5 - rcl 4 ) rtn
+lbl C
+   (
+   rcl 05
+   -
+   rcl 04
+   )
+   inv sbr
 
-lbl D                                  ;172
-( ( e' sto 1 +/- ÷ 7 ) int × 7
-+ rcl 1 ) rtn
+lbl D
+   (
+   (
+   e'
+   sto 01
+   +/-
+   ÷
+   7
+   )
+   int
+   ×
+   7
+   +
+   rcl 01
+   )
+   inv sbr

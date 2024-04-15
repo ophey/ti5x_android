@@ -1,54 +1,72 @@
-;+
-; Recreation of the "Master Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; master library module -1-
+   ;
 
-lbl A                                   ;000
-    ( ce × 2 . 5 4 )
-    rtn
+lbl A
+   (
+   ce
+   ×
+   2.54
+   )
+   inv sbr
 
-lbl B                                   ;011
-    ( ce × . 3 0 4 8 )
-    rtn
+lbl B
+   (
+   ce
+   ×
+   .3048
+   )
+   inv sbr
 
-lbl C                                   ;023
-    ( ce × . 9 1 4 4 )
-    rtn
+lbl C
+   (
+   ce
+   ×
+   .9144
+   )
+   inv sbr
 
-lbl D                                   ;035
-    ( ce × 1 . 6 0 9 3 4 4 )
-    rtn
+lbl D
+   (
+   ce
+   ×
+   1.609344
+   )
+   inv sbr
 
-lbl E                                   ;050
-    ( ce × . 8 6 8 9 7 6 2 4 1 2 6 6 )
-    rtn
+lbl E
+   (
+   ce
+   ×
+   .86897624
+   )
+   inv sbr
 
-lbl A'                                  ;066
-    1/x
-    A
-    1/x
-    rtn
+lbl A'
+   1/x
+   a
+   1/x
+   inv sbr
 
-lbl B'                                  ;072
-    1/x
-    B
-    1/x
-    rtn
+lbl B'
+   1/x
+   b
+   1/x
+   inv sbr
 
-lbl C'                                  ;078
-    1/x
-    C
-    1/x
-    rtn
+lbl C'
+   1/x
+   c
+   1/x
+   inv sbr
 
-lbl D'                                  ;084
-    1/x
-    D
-    1/x
-    rtn
+lbl D'
+   1/x
+   d
+   1/x
+   inv sbr
 
-lbl E'                                  ;090
-    1/x
-    E
-    1/x
-    rtn
+lbl E'
+   1/x
+   e
+   1/x
+   inv sbr

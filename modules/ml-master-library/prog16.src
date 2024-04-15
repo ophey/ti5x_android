@@ -1,64 +1,93 @@
-;+
-; My (partial) recreation of the "Master Library" module
-; that came with the original TI-58C/59 calculators.
-;
-; Written by Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
-;-
-
-;+
-; Register usage:
-;      01 -- n
-;      02 -- r
-;      03, 04 -- scratch
-;-
-
-lbl A
-; enter n
-    sto 01
-    inv sbr
-
-lbl B
-; enter r (must be done after entering n)
-    sto 02
-    x<>t rcl 01 x≥t |x| ; ensure it’s not greater than n
-    0 1/x ; otherwise flash it
-lbl |x|
-    rcl 02
-    inv sbr
+   ; master library module -1-
+   ;
 
 lbl C
-; compute n!
-    ( rcl 01 + 1 ) sto 03
-    1
-    gto sqrt
-lbl 1/x
-    ( ce × rcl 03 )
-lbl sqrt
-    dsz 3 1/x
-    inv sbr
+   cp
+   x=t mean(x)
+
+lbl π
+   rcl 01
+   prd 04
+   dsz 1 π
+
+lbl sin
+   rcl 04
+   ifflg 1 cos
+   inv sbr
 
 lbl D
-; compute P(n, r)
-    ( rcl 01 ) sto 03
-    ( rcl 02 + 1 ) sto 04
-    1
-    gto x²
-lbl ∑+
-    ( ce × rcl 03 )
-    op 33
-lbl x²
-    dsz 4 ∑+
-    inv sbr
+   cp
+   x=t mean(x)
+   d'
+   dsz 2 d
+   gto sin
 
 lbl E
-; compute C(n, r)
-    ( rcl 01 - rcl 02 + 1 ) sto 03
-    ( rcl 02 + 1 ) sto 04
-    1
-    gto p->r
-lbl x<>t
-    ( ce × rcl 03 ÷ rcl 04 )
-    op 23
-lbl p->r
-    dsz 4 x<>t
-    inv sbr
+   cp
+   x=t mean(x)
+   d'
+   rcl 02
+   inv prd 04
+   dsz 2 e
+   gto sin
+
+lbl mean(x)
+   1
+   sto 04
+   gto sin
+
+lbl A
+   x⇌t
+   inv stflg 1
+   1
+   sto 04
+   sto 03
+   x⇌t
+
+lbl B'
+   cp
+   x≥t ifflg
+   stflg 1
+   |x|
+
+lbl ifflg
+   st* 03
+   x⇌t
+   rc* 03
+   int
+   x=t d.ms
+   stflg 1
+
+lbl d.ms
+   st* 03
+   inv sbr
+
+lbl cos
+   0
+   1/x
+   rcl 04
+   inv sbr
+
+lbl D'
+   rcl 01
+   prd 04
+   1
+   inv sum 01
+   inv sbr
+
+lbl B
+   x⇌t
+   2
+   sto 03
+   x⇌t
+   b'
+   x⇌t
+   rcl 01
+   x≥t tan
+   0
+   1/x
+   inv sbr
+
+lbl tan
+   rcl 02
+   inv sbr
