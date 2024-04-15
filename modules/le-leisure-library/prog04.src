@@ -1,113 +1,123 @@
-Lbl CLR
-CMs
-Fix 9
-0
-INV SBR
-Lbl A
-12
-STO 00
-GTO 021
-Lbl C
-6
-STO 00
-RCL 00
-INV SBR
-STO Ind 00
-Dsz 0 021
-0
-INV SBR
-Lbl D
-STO 18
-11
-GTO 063
-Lbl B'
-STO 18
-6
-GTO 063
-Lbl D'
-STO 18
-5
-GTO 063
-Lbl B
-STO 18
-12
-(
-STO 00
--
-4
-)
-STO 19
-(
-RCL 18
-Exc Ind 00
-×
-RCL Ind 19
-)
-SUM Ind 00
-1
-SUM Ind 19
-RCL Ind 19
-INV Prd Ind 00
-0
-INV SBR
-STO 18
-(
-RCL 00
--
-2
--
-STO 00
-2
-)
-STO 19
-RCL 18
-(
-Exc Ind 00
-×
-(
-RCL Ind 19
--
-1
-)
-)
-SUM Ind 00
-RCL Ind 19
-INV Prd Ind 00
-0
-INV SBR
-Lbl E
-(
-(
-RCL 12
-+
-RCL 03
-)
-÷
-2
-)
-Fix 0
-D.MS
-STO 13
-(
-(
-RCL 10
-+
-RCL 05
-)
-÷
-2
-)
-D.MS
-STO 14
-Fix 9
-(
-RCL 14
-EE
-+/-
-2
-+
-RCL 13
-)
-INV EE
-Fix 9
-INV SBR
+   ; leisure library module -7-
+   ;
+
+lbl clr
+   cms
+   fix 9
+   0
+   inv sbr
+
+lbl A
+   12
+   sto 00
+   gto 021
+
+lbl C
+   6
+   sto 00
+   rcl 00
+   inv sbr
+   st* 00
+   dsz 0 021
+   0
+   inv sbr
+
+lbl D
+   sto 18
+   11
+   gto 063
+
+lbl B'
+   sto 18
+   6
+   gto 063
+
+lbl D'
+   sto 18
+   5
+   gto 063
+
+lbl B
+   sto 18
+   12
+   (
+   sto 00
+   -
+   4
+   )
+   sto 19
+   (
+   rcl 18
+   exc ind 00
+   ×
+   rc* 19
+   )
+   sm* 00
+   1
+   sm* 19
+   rc* 19
+   inv prd ind 00
+   0
+   inv sbr
+   sto 18
+   (
+   rcl 00
+   -
+   2
+   -
+   sto 00
+   2
+   )
+   sto 19
+   rcl 18
+   (
+   exc ind 00
+   ×
+   (
+   rc* 19
+   -
+   1
+   )
+   )
+   sm* 00
+   rc* 19
+   inv prd ind 00
+   0
+   inv sbr
+
+lbl E
+   (
+   (
+   rcl 12
+   +
+   rcl 03
+   )
+   ÷
+   2
+   )
+   fix 0
+   d.ms
+   sto 13
+   (
+   (
+   rcl 10
+   +
+   rcl 05
+   )
+   ÷
+   2
+   )
+   d.ms
+   sto 14
+   fix 9
+   (
+   rcl 14
+   ee
+   +/-
+   2
+   +
+   rcl 13
+   )
+   inv ee
+   fix 9
+   inv sbr

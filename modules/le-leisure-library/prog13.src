@@ -1,116 +1,170 @@
-;+
-; Partial recreation of the "Leisure Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; leisure library module -7-
+   ;
 
 lbl E'
-    rcl 10
-    sbr rad
-    ( 6 × rcl 9 + . 5 )
-    ee inv ee
-    fix 9
-    rtn
+   rcl 10
+   sbr rad
+   (
+   6
+   ×
+   rcl 09
+   +
+   .5
+   )
+   ee
+   inv ee
+   fix 9
+   inv sbr
 
 lbl rad
-    prd 9
-    rcl 9
-    fix 0
-    dms
-    inv sum 9
-    . 5
-    sum 9
-    rtn
+   prd 09
+   rcl 09
+   fix 0
+   d.ms
+   inv sum 09
+   .5
+   sum 09
+   inv sbr
 
 lbl A
-    iff 1 inv
-    E'
-    ( sto 6 + E' sum 6 ÷ 1 0 )
-    sto 5
-    fix 1
-    prt
-    ( rcl 6 - 4 )
-    cp
-    inv x≥t lnx
-    (
-    ( ce - 3 )
-    eq ce
-    ( ce - 4 )
-    eq ce
-    ( ce - 1 )
-    )
-    eq lnx
-    stf 1
-    gto D
+   ifflg 1 inv
+   e'
+   (
+   sto 06
+   +
+   e'
+   sum 06
+   ÷
+   10
+   )
+   sto 05
+   fix 1
+   prt
+   (
+   rcl 06
+   -
+   4
+   )
+   cp
+   inv x≥t lnx
+   (
+   (
+   ce
+   -
+   3
+   )
+   x=t ce
+   (
+   ce
+   -
+   4
+   )
+   x=t ce
+   (
+   ce
+   -
+   1
+   )
+   )
+   x=t lnx
+   stflg 1
+   gto d
 
 lbl inv
-    E'
-    ( sto 4
-    + E' sum 4 ÷ 1 0
-    )
-    sto 5
-    prt
-    ( rcl 4 - 7 )
-    cp
-    eq lnx
-    ( ce + 7 - rcl 6 )
-    eq ce
+   e'
+   (
+   sto 04
+   +
+   e'
+   sum 04
+   ÷
+   10
+   )
+   sto 05
+   prt
+   (
+   rcl 04
+   -
+   7
+   )
+   cp
+   x=t lnx
+   (
+   ce
+   +
+   7
+   -
+   rcl 06
+   )
+   x=t ce
 
 lbl D
-    rcl 5
-    fix 1
-    rtn
+   rcl 05
+   fix 1
+   inv sbr
 
 lbl E
-    sbr deg
-    inv stf 1
-    1 0 0 sto 7
-    fix 2
-    prt
-    adv
-    rtn
+   sbr deg
+   inv stflg 1
+   100
+   sto 07
+   fix 2
+   prt
+   adv
+   inv sbr
 
 lbl deg
-    x⇌t
-    1
-    op 17
-    cms
-    6
-    op 17
-    x⇌t
-    sto 9
-    7
-    inv lnx
-    sto 10
-    rtn
+   x⇌t
+   1
+   op 17
+   cms
+   6
+   op 17
+   x⇌t
+   sto 09
+   7
+   inv lnx
+   sto 10
+   inv sbr
 
 lbl lnx
-    ( 1 +/- ×
+   (
+   1
+   +/-
+   ×
 
 lbl ce
-    rcl 8 + rcl 7 )
-    sto 7
-    fix 2
-    inv stf 1
-    prt
-    adv
-    rtn
+   rcl 08
+   +
+   rcl 07
+   )
+   sto 07
+   fix 2
+   inv stflg 1
+   prt
+   adv
+   inv sbr
 
 lbl C
-    cp
-    inv x≥t sin
-    ( sto 8 - rcl 7 )
-    +/-
-    inv x≥t sin
-    rcl 8
-    fix 2
-    prt
-    rtn
+   cp
+   inv x≥t sin
+   (
+   sto 08
+   -
+   rcl 07
+   )
+   +/-
+   inv x≥t sin
+   rcl 08
+   fix 2
+   prt
+   inv sbr
 
 lbl sin
-    0
-    1/x
-    fix 9
-    rtn
+   0
+   1/x
+   fix 9
+   inv sbr
 
 lbl clr
-    rtn
+   inv sbr

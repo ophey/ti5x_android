@@ -1,89 +1,131 @@
-;+
-; Partial recreation of the "Leisure Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; leisure library module -7-
+   ;
 
 lbl clr
-    cms
-    cp
-    fix 9
-    0
-    rtn
+   cms
+   cp
+   fix 9
+   0
+   inv sbr
 
 lbl E
-    cms
-    fix 0
-    sto 9
-    1 sto 8
-    ( 6 0 + sbr 163 × 9 )
-    ee
-    inv ee
-    sto 5
-    ( 7 0 + sbr 163 × 2 0 )
-    dms
-    sto 3
-    4 sto 0
-    rcl 3
-    sto 4
-    prt
-    rtn
+   cms
+   fix 0
+   sto 09
+   1
+   sto 08
+   (
+   60
+   +
+   sbr 163
+   ×
+   9
+   )
+   ee
+   inv ee
+   sto 05
+   (
+   70
+   +
+   sbr 163
+   ×
+   20
+   )
+   d.ms
+   sto 03
+   4
+   sto 00
+   rcl 03
+   sto 04
+   prt
+   inv sbr
 
 lbl A
-    ( ce × 9 ×
-    ( sbr 163 - . 3 )
-    )
-    ( ee inv ee
-    - rcl 3
-    )
-    +/-
-    sto 3
-    prt
-    inv x≥t 125
-    ( ce - 1 0 0 )
-    x≥t 138
-    op 35
-    rcl 5
-    x=t 189
-    ( rcl 4 - rcl 3 - 1 0 )
-    x≥t 47
-    inv dsz 0 173
-    +/-
-    rtn
-
-    ( 6 + sbr 163 )
-    ee inv ee
-    gto 140
-    2 +/-
-    ( prt × rcl 8 )
-    x≥t 155
-    +/-
-    sum 7
-    gto 157
-
-    sum 6
-    sbr 197
-    gto 33
-
-    7
-    inv lnx
-    pgm 13 sbr
-    rad
-    rcl 9
-    rtn
-
-    ( 1 0 0 - rcl 3 )
-    sto 3
-    sbr 197
-    gto 47
-
-    rcl 6
-    adv
-    prt
-    rcl 7
-    prt
-    rtn
-
-    adv
-    1 +/-
-    prd 8
-    rtn
+   (
+   ce
+   ×
+   9
+   ×
+   (
+   sbr 163
+   -
+   .3
+   )
+   )
+   (
+   ee
+   inv ee
+   -
+   rcl 03
+   )
+   +/-
+   sto 03
+   prt
+   inv x≥t 125
+   (
+   ce
+   -
+   100
+   )
+   x≥t 138
+   op 35
+   rcl 05
+   x=t 189
+   (
+   rcl 04
+   -
+   rcl 03
+   -
+   10
+   )
+   x≥t 047
+   inv dsz 0 173
+   +/-
+   inv sbr
+   (
+   6
+   +
+   sbr 163
+   )
+   ee
+   inv ee
+   gto 140
+   2
+   +/-
+   (
+   prt
+   ×
+   rcl 08
+   )
+   x≥t 155
+   +/-
+   sum 07
+   gto 157
+   sum 06
+   sbr 197
+   gto 033
+   7
+   inv lnx
+   pgm 13
+   sbr rad
+   rcl 09
+   inv sbr
+   (
+   100
+   -
+   rcl 03
+   )
+   sto 03
+   sbr 197
+   gto 047
+   rcl 06
+   adv
+   prt
+   rcl 07
+   prt
+   inv sbr
+   adv
+   1
+   +/-
+   prd 08
+   inv sbr
