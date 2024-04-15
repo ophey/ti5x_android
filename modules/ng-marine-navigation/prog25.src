@@ -1,3 +1,5 @@
+   ; marine navigation -5-
+   ;
 
 lbl A
    inv eng
@@ -65,12 +67,14 @@ lbl grad
    inv sbr
 
 lbl E
-   pgm 16 e'
+   pgm 16
+   e'
    prd 02
    inv sbr
 
 lbl A'
-   pgm 16 e'
+   pgm 16
+   e'
    sum 02
    inv sbr
 
@@ -84,8 +88,7 @@ lbl B'
    rcl 02
    )
    x≥t 150
-   (
-   3
+   rcl 03
    x≥t 138
    (
    rcl 02

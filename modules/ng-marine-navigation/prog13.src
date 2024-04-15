@@ -1,3 +1,5 @@
+   ; marine navigation -5-
+   ;
 
 lbl E
    rcl 17
@@ -22,7 +24,8 @@ lbl E
    (
    (
    inv p→r
-   pgm 10 sbr st*
+   pgm 10
+   sbr st*
    -
    rcl 01
    )
@@ -50,11 +53,11 @@ lbl E
    ÷
    rcl 05
    +
-   rcl ind 29
+   rc* 29
    )
    x⇌t
    +
-   rcl ind 28
+   rc* 28
    )
    inv d.ms
    prt

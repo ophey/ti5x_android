@@ -1,11 +1,15 @@
+   ; marine navigation -5-
+   ;
 
 lbl A
    adv
-   pgm 16 a
+   pgm 16
+   a
    inv sbr
 
 lbl B
-   pgm 16 b
+   pgm 16
+   b
    inv sbr
 
 lbl C
@@ -19,7 +23,8 @@ lbl C
    inv sbr
 
 lbl D
-   pgm 16 e'
+   pgm 16
+   e'
    sum 03
    inv sbr
 
@@ -29,7 +34,8 @@ lbl E
    inv sbr
 
 lbl A'
-   pgm 16 e'
+   pgm 16
+   e'
    sto 02
    pgm 17
    sbr tan
@@ -39,13 +45,16 @@ lbl A'
    inv sbr
 
 lbl B'
-   pgm 19 b'
+   pgm 19
+   b'
    inv sbr
 
 lbl C'
-   pgm 19 c'
+   pgm 19
+   c'
    inv sbr
 
 lbl D'
-   pgm 19 d'
+   pgm 19
+   d'
    inv sbr

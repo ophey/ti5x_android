@@ -1,16 +1,21 @@
+   ; marine navigation -5-
+   ;
 
 lbl A
    adv
-   pgm 24 a
+   pgm 24
+   a
    inv sbr
 
 lbl B
-   pgm 24 b
+   pgm 24
+   b
    adv
    inv sbr
 
 lbl C
-   pgm 16 e'
+   pgm 16
+   e'
    sto 02
    (
    +/-
@@ -21,7 +26,8 @@ lbl C
    inv sbr
 
 lbl D
-   pgm 16 e'
+   pgm 16
+   e'
    sto 03
    (
    +/-
@@ -82,7 +88,8 @@ lbl D
    inv sbr
 
 lbl E
-   pgm 16 e'
+   pgm 16
+   e'
    sto 06
    (
    (
@@ -120,6 +127,7 @@ lbl E
    sin
    )
    inv tan
-   pgm 25 sbr grad
+   pgm 25
+   sbr grad
    adv
    inv sbr

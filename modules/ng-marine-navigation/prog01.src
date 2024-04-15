@@ -1,3 +1,5 @@
+   ; marine navigation -5-
+   ;
 
 lbl ce
    1
@@ -10,7 +12,7 @@ lbl clr
    6
    sto 01
    0
-   sto ind 01
+   st* 01
    dsz 1 015
    inv sbr
 
@@ -34,7 +36,8 @@ lbl =
    (
    ce
    -
-   pgm 11 sbr nop
+   pgm 11
+   sbr nop
    )
    ce
    ee

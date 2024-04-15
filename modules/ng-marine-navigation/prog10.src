@@ -1,3 +1,5 @@
+   ; marine navigation -5-
+   ;
 
 lbl A'
    prt
@@ -7,13 +9,15 @@ lbl A'
 
 lbl A
    prt
-   pgm 11 c'
+   pgm 11
+   c'
    exc 03
    exc 02
    inv sbr
 
 lbl D'
-   pgm 11 b'
+   pgm 11
+   b'
    rcl 19
    sto 01
    0
@@ -67,7 +71,8 @@ lbl E
    (
    1
    x⇌t
-   pgm 11 sbr nop
+   pgm 11
+   sbr nop
    ×
    rcl 18
    tan
