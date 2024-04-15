@@ -107,7 +107,7 @@ symbols = \
         "clr" : simpleop2(25, 20),
         "%" : simpleop(51),  # extension: % and INV %
         # no "lrn"
-        "pgm" : {"op" : 36, "expect" : "pgmno"},
+        "pgm" : regop(36, 62),
         "pg*" : {"op" : 62, "expect" : "reg"},
         "x<>t" : simpleop2(32, 37),
         "p->r" : simpleop(37),
