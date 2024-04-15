@@ -85,13 +85,14 @@ public class Main extends AppCompatActivity {
   public static final BuiltinLibrary[] BuiltinLibraries =
      {
         new BuiltinLibrary(R.string.master_library, R.raw.ml),
+        new BuiltinLibrary(R.string.appstats_library, R.raw.st),
+        new BuiltinLibrary(R.string.surveying_library, R.raw.sy),
+        new BuiltinLibrary(R.string.marine_navigation_library, R.raw.ng),
+        new BuiltinLibrary(R.string.aviation_library, R.raw.av),
+        new BuiltinLibrary(R.string.leisure_library, R.raw.le),
         new BuiltinLibrary(R.string.mathutil_library, R.raw.mu),
         new BuiltinLibrary(R.string.electrical_library, R.raw.ee),
-        new BuiltinLibrary(R.string.surveying_library, R.raw.sy),
-        new BuiltinLibrary(R.string.aviation_library, R.raw.av),
-        new BuiltinLibrary(R.string.marine_navigation_library, R.raw.ng),
         new BuiltinLibrary(R.string.civil_engineering_library, R.raw.ce),
-        new BuiltinLibrary(R.string.leisure_library, R.raw.le),
         new BuiltinLibrary(R.string.contribution_library, R.raw.ct)
      };
 
