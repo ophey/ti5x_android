@@ -336,7 +336,7 @@ def outpgm(pgmno) :
         report_error("program too large, can't exceed 1000 steps")
     #end if
     flushout()
-    prog = prog + [pgmno]
+    prog = prog + ["%02d" % int(pgmno)]
     loc += 1
 #end outlabel
 
