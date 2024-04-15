@@ -1,138 +1,148 @@
-;+
-; Partial recreation of the "Surveying Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; surveying module -4-
+   ;
 
 lbl D'
-    x²
-    √x
-    x⇌t
-    rtn
+   x²
+   √x
+   x⇌t
+   inv sbr
 
 lbl st*
-    x⇌t
-    sto 20
-    1 8 0 x⇌t
-    inv x≥t adv
-    ( ce - 3 6 0 )
+   x⇌t
+   sto 20
+   180
+   x⇌t
+   inv x≥t adv
+   (
+   ce
+   -
+   360
+   )
 
 lbl adv
-    x⇌t
-    rcl 20
-    x⇌t
-    rtn
+   x⇌t
+   rcl 20
+   x⇌t
+   inv sbr
 
 lbl E'
-    adv 0
-    cms
-    inv eng
-    fix 6
-    rtn
+   adv
+   0
+   cms
+   inv eng
+   fix 6
+   inv sbr
 
 lbl A'
-    sto 1
-    prt
-    rtn
-
-    sto 2
-    prt
-    rtn
+   sto 01
+   prt
+   inv sbr
+   sto 02
+   prt
+   inv sbr
 
 lbl A
-    dms
-    sbr 130
-    rtn
-
-    5
-    D'
-    rcl 12
-    P→R
-    D' D'
-    inv P→R
-    sbr st*
-    sbr 132
-    rtn
+   d.ms
+   sbr 130
+   inv sbr
+   5
+   d'
+   rcl 12
+   p→r
+   d'
+   d'
+   inv p→r
+   sbr st*
+   sbr 132
+   inv sbr
 
 lbl log
-    ( rcl 12 ÷ 9 0 + . 5 )
-    fix 0
-    ee inv ee
-    fix 6
-    prt
-    rtn
+   (
+   rcl 12
+   ÷
+   90
+   +
+   .5
+   )
+   fix 0
+   ee
+   inv ee
+   fix 6
+   prt
+   inv sbr
 
 lbl B
-    dms
-    sto 16
-    gto 132
+   d.ms
+   sto 16
+   gto 132
 
 lbl B'
-    sto 13      ; ??? was [sto] [18], but 18 is Lt and 13 is Quadrant
-    prt         ; which is what B' is about.
-    rtn
-
-    ( cp × 9 0
-    - cos
-    x=t 124
-
-    rcl 16
-    gto 129
-
-;#124
-    rcl 16
-    cos
-    inv sin
-;#129
-    )
-    sto 12
-
-;#132
-    fix 6
-    inv dms
-    prt
-    rtn
+   sto 13
+   prt
+   inv sbr
+   (
+   cp
+   ×
+   90
+   -
+   cos
+   x=t 124
+   rcl 16
+   gto 129
+   rcl 16
+   cos
+   inv sin
+   )
+   sto 12
+   fix 6
+   inv d.ms
+   prt
+   inv sbr
 
 lbl C
-    sto 7
-    prt
-    rtn
-
-    prt
-    dms
-    cos
-    inv sin
-    inv dms
+   sto 07
+   prt
+   inv sbr
+   prt
+   d.ms
+   cos
+   inv sin
+   inv d.ms
 
 lbl C'
-    pgm 4 C'
-    rtn
+   pgm 04
+   c'
+   inv sbr
 
 lbl D
-    adv
-    rcl 12
-    P→R
-    sto 19
-    prt
-    rtn
-
-    D'
-    sto 18
-    prt
-    rtn
-
-    ( ce + rcl 1 )
-    sto 3
-    prt
-    rtn
-
-    pgm 4 sbr op
-    rtn
+   adv
+   rcl 12
+   p→r
+   sto 19
+   prt
+   inv sbr
+   d'
+   sto 18
+   prt
+   inv sbr
+   (
+   ce
+   +
+   rcl 01
+   )
+   sto 03
+   prt
+   inv sbr
+   pgm 04
+   sbr op
+   inv sbr
 
 lbl E
-    pgm 5 sbr grad
-    rcl 7
-    sum 9
-    rcl 9
-    prt
-    adv
-    rtn
+   pgm 05
+   sbr grad
+   rcl 07
+   sum 09
+   rcl 09
+   prt
+   adv
+   inv sbr

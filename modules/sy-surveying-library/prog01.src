@@ -1,64 +1,62 @@
-;+
-; Partial recreation of the "Surveying Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; surveying module -4-
+   ;
 
 lbl ce
-    1 sto 11
-    deg
-    fix 9
+   1
+   sto 11
+   deg
+   fix 9
 
 lbl clr
-    cp 6
-    sto 1
-    0 st* 1
-    dsz 1
-    15
-    rtn
+   cp
+   6
+   sto 01
+   0
+   st* 01
+   dsz 1 015
+   inv sbr
 
 lbl =
-    sbr ce
-    inv eng 5
-    x⇌t
-    3 0
-    P→R
-    S+
-    inv P→R
-    ∑+
-    op 12
-    dms
-    ∑+
-    op 11
-    inv dms
-    inv ∑+
-    op 14
-    ( ce - sbr lnx )
-    )
-    ee
-    inv ee
-    x⇌t
-    2 4 7 9 5 3 6 . 6 7 5   ; original is .669 (precision?)
-    +/-
-    x=t write
-    0
-    1/x
+   sbr ce
+   inv eng
+   5
+   x⇌t
+   30
+   p→r
+   ∑+
+   inv p→r
+   ∑+
+   op 12
+   d.ms
+   ∑+
+   op 11
+   inv d.ms
+   inv ∑+
+   op 14
+   (
+   ce
+   -
+   pgm 11
+   sbr lnx
+   )
+   )
+   ee
+   inv ee
+   x⇌t
+   2479536.675
+   +/-
+   x=t write
+   0
+   1/x
 
 lbl write
-    fix 9
-    op 0
-    3 6 4 1 3 5 4 2
-    op 3
-    1 7 4 5 2 4 3 1 2 2
-    op 4
-    op 5
-    4
-    prt
-    rtn
-
-lbl lnx
-    ( ce ×
-    rcl 11
-    cos
-    ÷
-    ( 1 - rcl 11 cos )
-    rtn
+   fix 9
+   op 00
+   36413542
+   op 03
+   1745243122
+   op 04
+   op 05
+   4
+   prt
+   inv sbr

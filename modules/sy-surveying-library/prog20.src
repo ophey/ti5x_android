@@ -1,249 +1,336 @@
-;+
-; Partial recreation of the "Surveying Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; surveying module -4-
+   ;
 
 lbl A
-    adv
-    fix 3
-    sto 2
-    prt
-    rtn
-
-    sto 3
-    prt
-    rtn
+   adv
+   fix 3
+   sto 02
+   prt
+   inv sbr
+   sto 03
+   prt
+   inv sbr
 
 lbl B
-    adv
-    fix 3
-    sto 20
-    prt
-    sto 4
-    rtn
-
-    sto 21
-    prt
-    sto 5
-    sbr 306
-    sto 10
-    sbr 478
-    x⇌t
-    sto 11
-    x⇌t
-    rtn
+   adv
+   fix 3
+   sto 20
+   prt
+   sto 04
+   inv sbr
+   sto 21
+   prt
+   sto 05
+   sbr 306
+   sto 10
+   sbr 478
+   x⇌t
+   sto 11
+   x⇌t
+   inv sbr
 
 lbl C
-    adv
-    fix 3
-    sto 22
-    prt
-    sto 4
-    rtn
-
-    sto 23
-    prt
-    sto 5
-    sbr 306
-    sto 12
-    sbr 478
-    x⇌t
-    sto 13
-    ( rcl 12 - rcl 10 )
-    abs
-    ( sto 14 - 1 8 0 )
-    cp
-    inv x≥t 100
-    ( 3 6 0 - rcl 14 )
-    sto 14
-    fix 6
-    rcl 13
-    x⇌t
-    rcl 12
-    inv dms
-    rtn
+   adv
+   fix 3
+   sto 22
+   prt
+   sto 04
+   inv sbr
+   sto 23
+   prt
+   sto 05
+   sbr 306
+   sto 12
+   sbr 478
+   x⇌t
+   sto 13
+   (
+   rcl 12
+   -
+   rcl 10
+   )
+   |x|
+   (
+   sto 14
+   -
+   180
+   )
+   cp
+   inv x≥t 100
+   (
+   360
+   -
+   rcl 14
+   )
+   sto 14
+   fix 6
+   rcl 13
+   x⇌t
+   rcl 12
+   inv d.ms
+   inv sbr
 
 lbl D
-    adv
-    fix 6
-    prt
-    dms
-    sto 15
-    rtn
+   adv
+   fix 6
+   prt
+   d.ms
+   sto 15
+   inv sbr
 
 lbl E
-    prt
-    dms
-    sto 16
-    op 10
-    sto 18
-    prd 16
-    rcl 1
-    x⇌t
-    3
-    x=t 163
-    (
-    (
-    ( rcl 15 + rcl 16 + rcl 14 )
-    ÷ 2
-    )
-    +/-
-    +
-    1 8 0
-    )
-    gto 177
-
-    (
-    ( rcl 14 - rcl 15 - rcl 16 )
-    ÷ 2
-    )
-    sto 6
-    ( fix 4 ee inv ee - 9 0 )
-    cp
-    inv x=t 197
-    0
-    1/x
-    rtn
-
-    (
-    (
-    ( rcl 15 sin ÷ rcl 16 sin × rcl 11 ÷ rcl 13 )
-    inv tan
-    + 4 5
-    )
-    tan
-    1/x
-    ×
-    rcl 6
-    tan
-    )
-    inv tan
-    ( sto 7 + rcl 6 )
-    abs
-    sto 8
-    ( rcl 6 - rcl 7 )
-    abs
-    sto 9
-    ( 1 8 0 - rcl 8 - rcl 16 )
-    prd 18
-    ( rcl 18 + rcl 10 + 1 8 0 )
-    sto 19
-    sbr 399
-    ( rcl 8 sin ÷ rcl 16 sin × rcl 11 )
-    sto 17
-    x⇌t
-    rcl 19
-    P→R
-    sum 3
-    x⇌t
-    sum 2
-    rcl 16
-    fix 6
-    rtn
-
-    ( rcl 2 - rcl 4 )
-    sto 6
-    ( rcl 3 - rcl 5 )
-    sto 7
-    ( rcl 6 x² + rcl 7 x² )
-    √x
-    sto 8
-    rcl 6
-    cp
-    inv x=t 348
-    9 0
-    gto 357
-
-    ( 1/x × rcl 7 )
-    inv tan
-    abs
-    sto 9
-    rcl 6
-    x≥t 377
-    rcl 7
-    x≥t 390
-    ( 1 8 0 + gto 395
-
-    rcl 7
-    x≥t 395
-
-    (
-    3 6 0
-    -
-    gto 395
-    ( 1 8 0 - rcl 9 )
-    rtn
-
-    rcl 19
-    cp
-    x≥t 413
-    3 6 0
-    sum 19
-    gto 399
-
-    ( ce - 3 6 0 )
-    x≥t 424
-    rtn
-
-    3 6 0
-    inv sum 19
-    rcl 19
-    gto 413
+   prt
+   d.ms
+   sto 16
+   op 10
+   sto 18
+   prd 16
+   rcl 01
+   x⇌t
+   3
+   x=t 163
+   (
+   (
+   (
+   rcl 15
+   +
+   rcl 16
+   +
+   rcl 14
+   )
+   ÷
+   2
+   )
+   +/-
+   +
+   180
+   )
+   gto 177
+   (
+   (
+   rcl 14
+   -
+   rcl 15
+   -
+   rcl 16
+   )
+   ÷
+   2
+   )
+   sto 06
+   (
+   fix 4
+   ee
+   inv ee
+   -
+   90
+   )
+   cp
+   inv x=t 197
+   0
+   1/x
+   inv sbr
+   (
+   (
+   (
+   rcl 15
+   sin
+   ÷
+   rcl 16
+   sin
+   ×
+   rcl 11
+   ÷
+   rcl 13
+   )
+   inv tan
+   +
+   45
+   )
+   tan
+   1/x
+   ×
+   rcl 06
+   tan
+   )
+   inv tan
+   (
+   sto 07
+   +
+   rcl 06
+   )
+   |x|
+   sto 08
+   (
+   rcl 06
+   -
+   rcl 07
+   )
+   |x|
+   sto 09
+   (
+   180
+   -
+   rcl 08
+   -
+   rcl 16
+   )
+   prd 18
+   (
+   rcl 18
+   +
+   rcl 10
+   +
+   180
+   )
+   sto 19
+   sbr 399
+   (
+   rcl 08
+   sin
+   ÷
+   rcl 16
+   sin
+   ×
+   rcl 11
+   )
+   sto 17
+   x⇌t
+   rcl 19
+   p→r
+   sum 03
+   x⇌t
+   sum 02
+   rcl 16
+   fix 6
+   inv sbr
+   (
+   rcl 02
+   -
+   rcl 04
+   )
+   sto 06
+   (
+   rcl 03
+   -
+   rcl 05
+   )
+   sto 07
+   (
+   rcl 06
+   x²
+   +
+   rcl 07
+   x²
+   )
+   √x
+   sto 08
+   rcl 06
+   cp
+   inv x=t 348
+   90
+   gto 357
+   (
+   1/x
+   ×
+   rcl 07
+   )
+   inv tan
+   |x|
+   sto 09
+   rcl 06
+   x≥t 377
+   rcl 07
+   x≥t 390
+   (
+   180
+   +
+   gto 395
+   rcl 07
+   x≥t 395
+   (
+   360
+   -
+   gto 395
+   (
+   180
+   -
+   rcl 09
+   )
+   inv sbr
+   rcl 19
+   cp
+   x≥t 413
+   360
+   sum 19
+   gto 399
+   (
+   ce
+   -
+   360
+   )
+   x≥t 424
+   inv sbr
+   360
+   inv sum 19
+   rcl 19
+   gto 413
 
 lbl A'
-    rcl 19
-    adv
-    fix 9
-    inv dms
-    fix 6
-    prt
-    x⇌t
-    rcl 17
-    prt
-    x⇌t
-    rtn
+   rcl 19
+   adv
+   fix 9
+   inv d.ms
+   fix 6
+   prt
+   x⇌t
+   rcl 17
+   prt
+   x⇌t
+   inv sbr
 
 lbl B'
-    rcl 20
-    sto 4
-    rcl 21
-    gto 472
+   rcl 20
+   sto 04
+   rcl 21
+   gto 472
 
 lbl C'
-    rcl 22
-    sto 4
-    rcl 23
-    sto 5
-    sbr 306
-    adv
-    fix 9
-    inv dms
-    fix 6
-    prt
-    x⇌t
-    rcl 8
-    prt
-    x⇌t
-    rtn
+   rcl 22
+   sto 04
+   rcl 23
+   sto 05
+   sbr 306
+   adv
+   fix 9
+   inv d.ms
+   fix 6
+   prt
+   x⇌t
+   rcl 08
+   prt
+   x⇌t
+   inv sbr
 
 lbl D'
-    adv
-    fix 3
-    rcl 2
-    prt
-    x⇌t
-    rcl 3
-    prt
-    x⇌t
-    rtn
+   adv
+   fix 3
+   rcl 02
+   prt
+   x⇌t
+   rcl 03
+   prt
+   x⇌t
+   inv sbr
 
 lbl E'
-    inv eng
-    cms
-    fix 9
-    sto 1
-    adv
-    prt
-    deg 0
-    fix 3
-    rtn
+   inv eng
+   cms
+   fix 9
+   sto 01
+   adv
+   prt
+   deg
+   0
+   fix 3
+   inv sbr

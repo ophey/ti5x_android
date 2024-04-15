@@ -1,79 +1,99 @@
-;+
-; Partial recreation of the "Surveying Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; surveying module -4-
+   ;
 
 lbl E'
-    0
-    cms
-    adv
-    fix 6
-    rtn
+   0
+   cms
+   adv
+   fix 6
+   inv sbr
 
 lbl A
-    pgm 7 A
-    rtn
+   pgm 07
+   a
+   inv sbr
 
 lbl B
-    pgm 7 B
-    rtn
+   pgm 07
+   b
+   inv sbr
 
 lbl C
-    pgm 7 sbr lnx
-    sto 18
-    (
-    ( x² √x × rcl 5 ÷ rcl 14 )
+   pgm 07
+   sbr lnx
+   sto 18
+   (
+   (
+   x²
+   √x
+   ×
+   rcl 05
+   ÷
+   rcl 14
+   )
 
-lbl mean
-    +
-    rcl 18
-    +
-    rcl 11
-    )
-    sto 11
-    prt
-    rtn
+lbl mean(x)
+   +
+   rcl 18
+   +
+   rcl 11
+   )
+   sto 11
+   prt
+   inv sbr
 
 lbl D
-    pgm 7 sbr log
-    sto 19
-    (
-    ( x² √x × rcl 6 ÷ rcl 15 )
+   pgm 07
+   sbr log
+   sto 19
+   (
+   (
+   x²
+   √x
+   ×
+   rcl 06
+   ÷
+   rcl 15
+   )
 
 lbl ∑+
-    +
-    rcl 19
-    +
-    rcl 12
-    )
-    sto 12
-    prt
-    rtn
+   +
+   rcl 19
+   +
+   rcl 12
+   )
+   sto 12
+   prt
+   inv sbr
 
 lbl E
-    pgm 7 E
-    rtn
+   pgm 07
+   e
+   inv sbr
 
 lbl A'
-    A
-    rtn
+   a
+   inv sbr
 
 lbl B'
-    B
-    rtn
+   b
+   inv sbr
 
 lbl D'
-    pgm 7 D'
-    rtn
+   pgm 07
+   d'
+   inv sbr
 
 lbl C'
-    pgm 7 sbr lnx
-    x²
-    √x
-    sum 14
-    pgm 7 sbr log
-    x²
-    √x
-    sum 15
-    E
-    rtn
+   pgm 07
+   sbr lnx
+   x²
+   √x
+   sum 14
+   pgm 07
+   sbr log
+   x²
+   √x
+   sum 15
+   e
+   inv sbr

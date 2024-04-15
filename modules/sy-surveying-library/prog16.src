@@ -1,116 +1,134 @@
-;+
-; Partial recreation of the "Surveying Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; surveying module -4-
+   ;
 
 lbl B'
-    × 1 8 0
-    )
-    cos
-    +/-
-    )
-    tan
-    rtn
+   ×
+   180
+   )
+   cos
+   +/-
+   )
+   tan
+   inv sbr
 
 lbl E'
-    0
-    cms
-    adv
-    fix 6
-    rtn
+   0
+   cms
+   adv
+   fix 6
+   inv sbr
 
 lbl A
-    pgm 6 A
-    rtn
+   pgm 06
+   a
+   inv sbr
 
 lbl B
-    exc 4
-    exc 3
-    rcl 4
-    prt
-    rtn
+   exc 04
+   exc 03
+   rcl 04
+   prt
+   inv sbr
 
 lbl C
-    exc 6
-    dms
-    exc 5
-    rcl 6
-    prt
-    rtn
+   exc 06
+   d.ms
+   exc 05
+   rcl 06
+   prt
+   inv sbr
 
 lbl D
-    exc 8
-    dms
-    exc 7
-    rcl 8
-    prt
-    rtn
+   exc 08
+   d.ms
+   exc 07
+   rcl 08
+   prt
+   inv sbr
 
 lbl E
-    adv
-    (
-    rcl 5
-    ×
-    ( rcl 6
-    B'
-    sto 12
-    (
-    rcl 7
-    ×
-    (
-    rcl 8
-    B'
-    sto 13
-    op 19
-    iff 7 142
-    (
-    (
-    ce
-    ×
-    rcl 3
-    -
-    rcl 4
-    +
-    rcl 2
-    -
-    rcl 1
-    ×
-    rcl 12
-    )
-    ÷
-    ( rcl 13 - rcl 12 )
-    )
-    (
-    ( sto 10 - rcl 1 )
-    ×
-    rcl 12
-    +
-    rcl 2
-    )
-    sto 11
-    rcl 10
-    prt
-    rtn
+   adv
+   (
+   rcl 05
+   ×
+   (
+   rcl 06
+   b'
+   sto 12
+   (
+   rcl 07
+   ×
+   (
+   rcl 08
+   b'
+   sto 13
+   op 19
+   ifflg 7 142
+   (
+   (
+   ce
+   ×
+   rcl 03
+   -
+   rcl 04
+   +
+   rcl 02
+   -
+   rcl 01
+   ×
+   rcl 12
+   )
+   ÷
+   (
+   rcl 13
+   -
+   rcl 12
+   )
+   )
+   (
+   (
+   sto 10
+   -
+   rcl 01
+   )
+   ×
+   rcl 12
+   +
+   rcl 02
+   )
+   sto 11
+   rcl 10
+   prt
+   inv sbr
 
 lbl A'
-    rcl 11
-    prt
-    rtn
-
-    inv stf 7
-    (
-    rcl 12
-    op 19
-    iff 7 170
-    ×
-    ( rcl 3 sto 10 - rcl 1 )
-    + rcl 2
-    gto 129
-
-    inv stf 7
-    rcl 13
-    ×
-    ( rcl 1 sto 10 - rcl 3 )
-    +
-    rcl 4
-    gto 129
+   rcl 11
+   prt
+   inv sbr
+   inv stflg 7
+   (
+   rcl 12
+   op 19
+   ifflg 7 170
+   ×
+   (
+   rcl 03
+   sto 10
+   -
+   rcl 01
+   )
+   +
+   rcl 02
+   gto 129
+   inv stflg 7
+   rcl 13
+   ×
+   (
+   rcl 01
+   sto 10
+   -
+   rcl 03
+   )
+   +
+   rcl 04
+   gto 129

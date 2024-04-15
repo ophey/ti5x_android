@@ -1,97 +1,129 @@
-;+
-; Partial recreation of the "Surveying Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; surveying module -4-
+   ;
 
 lbl A
-    exc 2
-    exc 1
-    rcl 2
-    prt
-    rtn
+   exc 02
+   exc 01
+   rcl 02
+   prt
+   inv sbr
 
 lbl B
-    pgm 7 B
-    rtn
+   pgm 07
+   b
+   inv sbr
 
 lbl C
-    adv
-    ( rcl 3 - rcl 1 )
-    sto 18
-    sto 5
-    ( rcl 4 - rcl 2 )
-    sto 19
-    sto 6
-    ( x² + rcl 18 x² )
-    √x
-    sto 7
-    prt
-    rtn
+   adv
+   (
+   rcl 03
+   -
+   rcl 01
+   )
+   sto 18
+   sto 05
+   (
+   rcl 04
+   -
+   rcl 02
+   )
+   sto 19
+   sto 06
+   (
+   x²
+   +
+   rcl 18
+   x²
+   )
+   √x
+   sto 07
+   prt
+   inv sbr
 
 lbl D
-    cp
-    ( rcl 18 x=t 74 1/x × rcl 19 )
-    inv tan
-    x²
-    √x
-    gto 76
-    9 0 sto 16
-    fix 6
-    inv dms
-    prt
-    rtn
+   cp
+   (
+   rcl 18
+   x=t 074
+   1/x
+   ×
+   rcl 19
+   )
+   inv tan
+   x²
+   √x
+   gto 076
+   90
+   sto 16
+   fix 6
+   inv d.ms
+   prt
+   inv sbr
 
 lbl E
-    cp
-    rcl 18
-    x≥t 101
-    rcl 19
-    x≥t 110
-    3
-    gto 115
-    rcl 19
-    x≥t 114
-    4
-    gto 115
-
-    2
-    gto 115
-
-    1 sto 13
-    prt
-    rtn
+   cp
+   rcl 18
+   x≥t 101
+   rcl 19
+   x≥t 110
+   3
+   gto 115
+   rcl 19
+   x≥t 114
+   4
+   gto 115
+   2
+   gto 115
+   1
+   sto 13
+   prt
+   inv sbr
 
 lbl A'
-    cp
-    rcl 10
-    x=t 151
-    (
-    (
-    ( rcl 2 × rcl 3 - rcl 4 × rcl 1 + rcl 10 )
-    ÷
-    2
-    )
-    x²
-    √x
-    +
-    rcl 17
-    )
-    sto 10
-    prt
-    rtn
+   cp
+   rcl 10
+   x=t 151
+   (
+   (
+   (
+   rcl 02
+   ×
+   rcl 03
+   -
+   rcl 04
+   ×
+   rcl 01
+   +
+   rcl 10
+   )
+   ÷
+   2
+   )
+   x²
+   √x
+   +
+   rcl 17
+   )
+   sto 10
+   prt
+   inv sbr
 
 lbl B'
-    ( rcl 7 ÷ rcl 9 )
-    prt
-    adv
-    rtn
+   (
+   rcl 07
+   ÷
+   rcl 09
+   )
+   prt
+   adv
+   inv sbr
 
-LBL C'
-    sto 9
-    prt
-    rtn
+lbl C'
+   sto 09
+   prt
+   inv sbr
 
 lbl D'
-    sto 10
-    prt
-    rtn
+   sto 10
+   prt
+   inv sbr

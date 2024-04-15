@@ -1,78 +1,101 @@
-;+
-; Partial recreation of the "Surveying Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; surveying module -4-
+   ;
 
 lbl E'
-    cms
-    inv fix 0
-    adv
-    inv stf 1
-    rtn
+   cms
+   inv fix
+   0
+   adv
+   inv stflg 1
+   inv sbr
 
 lbl E
-    cp
-    prt
-    sto 7
-    sum 3
-    ( rcl 0 - 1 )
-    sto 0
-    x=t 48
-    rtn
-
-    ( rcl 3 ÷ 4 × rcl 1 × rcl 2 )
-    sto 5
-    gto 68
-
-    iff 1 31
-    ( rcl 3 ÷ 3 × rcl 1 × rcl 2 ÷ 2 )
-    sto 5
-    sum 6
-    0
-    rtn
+   cp
+   prt
+   sto 07
+   sum 03
+   (
+   rcl 00
+   -
+   1
+   )
+   sto 00
+   x=t 048
+   inv sbr
+   (
+   rcl 03
+   ÷
+   4
+   ×
+   rcl 01
+   ×
+   rcl 02
+   )
+   sto 05
+   gto 068
+   ifflg 1 031
+   (
+   rcl 03
+   ÷
+   3
+   ×
+   rcl 01
+   ×
+   rcl 02
+   ÷
+   2
+   )
+   sto 05
+   sum 06
+   0
+   inv sbr
 
 lbl C
-    0 sto 3
-    inv stf 1
-    3 sto 0
-    prt
-    rtn
+   0
+   sto 03
+   inv stflg 1
+   3
+   sto 00
+   prt
+   inv sbr
 
 lbl D
-    0 sto 3
-    stf 1
-    4 sto 0
-    prt
-    rtn
+   0
+   sto 03
+   stflg 1
+   4
+   sto 00
+   prt
+   inv sbr
 
 lbl A
-    sto 2
-    prt
-    rtn
+   sto 02
+   prt
+   inv sbr
 
 lbl B
-    sto 1
-    prt
-    rtn
+   sto 01
+   prt
+   inv sbr
 
 lbl A'
-    rcl 2
-    prt
-    rtn
+   rcl 02
+   prt
+   inv sbr
 
 lbl B'
-    rcl 1
-    prt
-    rtn
+   rcl 01
+   prt
+   inv sbr
 
 lbl C'
-    rcl 6
-    prt
-    adv
-    rtn
+   rcl 06
+   prt
+   adv
+   inv sbr
 
 lbl D'
-    rcl 5
-    prt
-    adv
-    rtn
+   rcl 05
+   prt
+   adv
+   inv sbr

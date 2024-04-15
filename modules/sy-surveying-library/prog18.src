@@ -1,110 +1,148 @@
-;+
-; Partial recreation of the "Surveying Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; surveying module -4-
+   ;
 
 lbl E'
-    0
-    cms
-    adv
-    fix 6
-    rtn
+   0
+   cms
+   adv
+   fix 6
+   inv sbr
 
 lbl A
-    pgm 6 A
-    rtn
+   pgm 06
+   a
+   inv sbr
 
 lbl B
-    pgm 16 B
-    rtn
+   pgm 16
+   b
+   inv sbr
 
 lbl C
-    dms
-    sto 5
-    inv dms
-    fix 6
-    prt
-    rtn
+   d.ms
+   sto 05
+   inv d.ms
+   fix 6
+   prt
+   inv sbr
 
 lbl D
-    sto 6
-    prt
-    rtn
+   sto 06
+   prt
+   inv sbr
 
 lbl E
-    sto 7
-    prt
-    rtn
+   sto 07
+   prt
+   inv sbr
 
 lbl A'
-    adv
-    cp
-    (
-    ( rcl 6 - 1 )
-    x=t 78
-    -
-    2
-    )
-    x=t 73
-    (
-    9 0
-    ×
-    rcl 6
-    -
-    gto 78
-    ( 1 8 0 + rcl 5 )
-    sto 8
-    ( rcl 3 - rcl 1 )
-    sto 9
-    (
-    ( rcl 4 - rcl 2 )
-    sto 10
-    x²
-    +
-    rcl 9
-    x²
-    )
-    √x
-    sto 11
-    prt
-    rtn
+   adv
+   cp
+   (
+   (
+   rcl 06
+   -
+   1
+   )
+   x=t 078
+   -
+   2
+   )
+   x=t 073
+   (
+   90
+   ×
+   rcl 06
+   -
+   gto 078
+   (
+   180
+   +
+   rcl 05
+   )
+   sto 08
+   (
+   rcl 03
+   -
+   rcl 01
+   )
+   sto 09
+   (
+   (
+   rcl 04
+   -
+   rcl 02
+   )
+   sto 10
+   x²
+   +
+   rcl 09
+   x²
+   )
+   √x
+   sto 11
+   prt
+   inv sbr
 
 lbl B'
-    rcl 9
-    x⇌t
-    rcl 10
-    inv P→R
-    pgm 2 sbr st*
-    sto 12
-    inv
-    dms
-    prt
-    rtn
+   rcl 09
+   x⇌t
+   rcl 10
+   inv p→r
+   pgm 02
+   sbr st*
+   sto 12
+   inv d.ms
+   prt
+   inv sbr
 
 lbl C'
-    ( rcl 12 - rcl 8 )
-    sto 13
-    (
-    ( sin × rcl 11 )
-    x²
-    +/-
-    +
-    rcl 7
-    x²
-    )
-    (
-    ( √x + rcl 13 cos × rcl 11 )
-    sto 14
-    ×
-    rcl 8
-    cos
-    +
-    rcl 1
-    )
-    prt
-    rtn
+   (
+   rcl 12
+   -
+   rcl 08
+   )
+   sto 13
+   (
+   (
+   sin
+   ×
+   rcl 11
+   )
+   x²
+   +/-
+   +
+   rcl 07
+   x²
+   )
+   (
+   (
+   √x
+   +
+   rcl 13
+   cos
+   ×
+   rcl 11
+   )
+   sto 14
+   ×
+   rcl 08
+   cos
+   +
+   rcl 01
+   )
+   prt
+   inv sbr
 
 lbl D'
-    ( rcl 14 × rcl 8 sin + rcl 2 )
-    prt
-    rtn
+   (
+   rcl 14
+   ×
+   rcl 08
+   sin
+   +
+   rcl 02
+   )
+   prt
+   inv sbr
