@@ -1,8 +1,8 @@
+   ; ee library module -11-
+   ;
 
 lbl D'
-   inv
-
-lbl D
+   inv lbl d
    stflg 0
    inv sbr
 
@@ -53,7 +53,7 @@ lbl B
    op 24
    op 25
    0
-   ex* 04
+   exc ind 04
    st* 05
    dsz 0 084
    7

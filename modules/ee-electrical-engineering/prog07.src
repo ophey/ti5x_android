@@ -1,16 +1,18 @@
+   ; ee library module -11-
+   ;
 
 lbl clr
    fix 9
    0
-   inv stf 0
-   rtn
+   inv stflg 0
+   inv sbr
 
 lbl E
-   stf 0
-   rtn
+   stflg 0
+   inv sbr
 
 lbl A
-   iff 0 031
+   ifflg 0 031
    sto 10
    sbr 118
    sbr 129
@@ -19,9 +21,14 @@ lbl A
    gto 005
 
 lbl B
-   iff 0 062
+   ifflg 0 062
    sto 11
-   ( rcl 11 log × 2 0 )
+   (
+   rcl 11
+   log
+   ×
+   20
+   )
    sto 13
    sbr 147
    rcl 11
@@ -31,9 +38,13 @@ lbl B
    gto 005
 
 lbl C
-   iff 0 091
+   ifflg 0 091
    sto 12
-   ( rcl 12 × 2 )
+   (
+   rcl 12
+   ×
+   2
+   )
    inv lnx
    sto 10
    sbr 118
@@ -42,24 +53,38 @@ lbl C
    gto 005
 
 lbl D
-   iff 0 113
+   ifflg 0 113
    sto 13
    sbr 147
    sbr 129
    sbr 140
    rcl 13
    gto 005
-   ( rcl 10 log × 1 0 )
+   (
+   rcl 10
+   log
+   ×
+   10
+   )
    sto 13
-   rtn
-   ( rcl 10 lnx × . 5 )
+   inv sbr
+   (
+   rcl 10
+   lnx
+   ×
+   .5
+   )
    sto 12
-   rtn
+   inv sbr
    rcl 12
    inv lnx
    sto 11
-   rtn
-   ( rcl 13 ÷ 1 0 )
+   inv sbr
+   (
+   rcl 13
+   ÷
+   10
+   )
    inv log
    sto 10
-   rtn
+   inv sbr

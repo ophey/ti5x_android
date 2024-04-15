@@ -1,123 +1,122 @@
+   ; ee library module -11-
+   ;
 
 lbl A
    p→r
-   sto 6
+   sto 06
    x⇌t
-   sto 5
-   rtn
+   sto 05
+   inv sbr
 
 lbl B
    p→r
-   sto 8
+   sto 08
    x⇌t
-   sto 7
-   rtn
+   sto 07
+   inv sbr
 
 lbl C
    p→r
    sto 10
    x⇌t
-   sto 9
-   rtn
+   sto 09
+   inv sbr
 
 lbl D
    p→r
    sto 12
    x⇌t
    sto 11
-   rtn
+   inv sbr
 
 lbl clr
    deg
    cp
-   50 sto 17
+   50
+   sto 17
    fix 9
    0
-   rtn
+   inv sbr
 
 lbl E
-   inv
-
-lbl E'
-   stf 4
+   inv lbl e'
+   stflg 4
    cp
-   x=t 061       ; if not 0 set new x0 on r17 (default 50, see lbl clr)
+   x=t 061
    sto 17
-   ;#061
-   inv iff 4 084
+   inv ifflg 4 084
    rcl 17
-   prd 5
-   prd 6
-   prd 7
-   prd 8
-   prd 9
+   prd 05
+   prd 06
+   prd 07
+   prd 08
+   prd 09
    prd 10
    prd 11
    prd 12
-   ;#084
    rcl 12
-   sto 4
+   sto 04
    rcl 11
-   sto 3
-   rcl 6
-   sto 2
-   rcl 5
-   sto 1
-   pgm 4 c       ; s11 x s22 -> (r01, r02)
-   rcl 7
-   exc 1
+   sto 03
+   rcl 06
+   sto 02
+   rcl 05
+   sto 01
+   pgm 04
+   c
+   rcl 07
+   exc 01
    sto 13
-   rcl 8
-   exc 2
-   sto 14        ; (r13,r14) = s22 x s11
-   rcl 9
-   sto 3
+   rcl 08
+   exc 02
+   sto 14
+   rcl 09
+   sto 03
    rcl 10
-   sto 4
-   pgm 4 c       ; s12 x s21 -> (r01, r02)
+   sto 04
+   pgm 04
+   c
    inv sum 13
    x⇌t
-   inv sum 14    ; (r13,r14) = s11 x s22 - s12 x s21
+   inv sum 14
    rcl 13
    sto 15
    rcl 14
-   sto 16        ; (r15, r16) = deltas
-   rcl 11        ;
-   sum 13        ; deltas + s22 (real)
-   exc 5         ; s22 (real) -> s11 (real)
-   sum 13        ; deltas + s22 + s11 (real)
-   inv sum 5     ; s22 (real) - s11 (real)
+   sto 16
+   rcl 11
+   sum 13
+   exc 05
+   sum 13
+   inv sum 05
    rcl 12
-   sum 14        ; deltas + s22 (img)
-   exc 6         ; s22 (img) -> s11 (img)
-   sum 14        ; deltas + s22 s11 (img)    (r15,r16) = deltas
-   inv sum 6     ; s22 (img) - s11 (img)     (r05,r06) = s22 - s11
-   0             ;                           (r13,r14) = deltas + s22 + s11
-   rtn
-   ;#165
+   sum 14
+   exc 06
+   sum 14
+   inv sum 06
+   0
+   inv sbr
 
 lbl D'
    sbr 260
-   inv sum 1
-   rcl 6         ;#174 is on the 6?????
-   inv sum 2
-   op 21         ; from a' - (r01,r02) = -deltas + s22 - s11 + 1 (ok)
-   ;#180
-   rcl 13        ;
-   sto 3
+   inv sum 01
+   rcl 06
+   inv sum 02
+   op 21
+   rcl 13
+   sto 03
    op 23
    rcl 14
-   sto 4         ; (r03,r04) = deltas + s11 + s22 + 1 (?? was sto 14)
-   pgm 4 c'      ; (-deltas + s22 - s11 + 1) ÷ (deltas + s22 + s11 + 1)
+   sto 04
+   pgm 04
+   c'
    rcl 17
-   iff 4 204
+   ifflg 4 204
    1/x
-   prd 1
-   prd 2
-   ;#204
-   rcl 1         ; y11 (real)
+   prd 01
+   prd 02
+   rcl 01
    x⇌t
-   rcl 2         ; y11 (img)
+   rcl 02
    inv p→r
    x⇌t
    prt
@@ -125,37 +124,35 @@ lbl D'
    prt
    x⇌t
    adv
-   rtn
+   inv sbr
 
 lbl B'
-   rcl 7
-   sto 1
-   rcl 8
-   ;#226
-   sto 2
+   rcl 07
+   sto 01
+   rcl 08
+   sto 02
    2
    +/-
-   prd 1
-   prd 2
+   prd 01
+   prd 02
    gto 180
 
 lbl C'
-   rcl 9
-   sto 1
+   rcl 09
+   sto 01
    rcl 10
    gto 226
 
 lbl A'
    sbr 260
-   sum 1
-   rcl 6
-   gto 176       ; ?? was 174 on orignal code
-   ;#260             ; (r01,r02) = - deltas
+   sum 01
+   rcl 06
+   gto 176
    rcl 15
    +/-
-   sto 1
+   sto 01
    rcl 16
    +/-
-   sto 2
-   rcl 5
-   rtn
+   sto 02
+   rcl 05
+   inv sbr

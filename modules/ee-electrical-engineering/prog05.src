@@ -1,3 +1,5 @@
+   ; ee library module -11-
+   ;
 
 lbl B
    deg
@@ -28,7 +30,8 @@ lbl E'
    inv sbr
 
 lbl A
-   pgm 04 a
+   pgm 04
+   a
    inv sbr
 
 lbl D'
@@ -85,8 +88,10 @@ lbl E
    sto 03
    0
    sto 04
-   pgm 04 e'
-   pgm 04 c'
+   pgm 04
+   e'
+   pgm 04
+   c'
    inv sbr
 
 lbl C'
@@ -104,5 +109,6 @@ lbl C'
 
 lbl p→r
    inv stflg 1
-   pgm 04 sbr p→r
+   pgm 04
+   sbr p→r
    inv sbr

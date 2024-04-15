@@ -1,119 +1,151 @@
+   ; ee library module -11-
+   ;
 
 lbl E'
-   rcl 1
-   exc 3
-   sto 1
-   rcl 2
-   exc 4
-   sto 2
+   rcl 01
+   exc 03
+   sto 01
+   rcl 02
+   exc 04
+   sto 02
    0
-   rtn
+   inv sbr
 
 lbl A
-   inv stf 1
+   inv stflg 1
    cp
    rad
-   exc 2
-   exc 1
-   rcl 2
+   exc 02
+   exc 01
+   rcl 02
    ce
-   rtn
+   inv sbr
 
 lbl A'
-   stf 1
-   exc 4
-   exc 3
-   rcl 4
+   stflg 1
+   exc 04
+   exc 03
+   rcl 04
    ce
-   rtn
+   inv sbr
 
 lbl B
-   rcl 4
-   sum 2
-   rcl 2
+   rcl 04
+   sum 02
+   rcl 02
    x⇌t
-   rcl 3
-   sum 1
-   rcl 1
-   rtn
+   rcl 03
+   sum 01
+   rcl 01
+   inv sbr
 
 lbl B'
    1
    +/-
-   prd 3
-   prd 4
+   prd 03
+   prd 04
    b
-   rtn
+   inv sbr
 
 lbl C
-   ( rcl 1 × rcl 3 - rcl 2 × rcl 4 )
+   (
+   rcl 01
+   ×
+   rcl 03
+   -
+   rcl 02
+   ×
+   rcl 04
+   )
    x⇌t
-   ( rcl 1 × rcl 4 + rcl 2 × rcl 3 )
-   sto 2
+   (
+   rcl 01
+   ×
+   rcl 04
+   +
+   rcl 02
+   ×
+   rcl 03
+   )
+   sto 02
    x⇌t
-   sto 1
-   rtn
+   sto 01
+   inv sbr
 
 lbl C'
    1
    +/-
-   prd 4
-   ( rcl 3 x² + rcl 4 x² )
+   prd 04
+   (
+   rcl 03
+   x²
+   +
+   rcl 04
+   x²
+   )
    1/x
-   prd 1
-   prd 2
+   prd 01
+   prd 02
    c
-   rtn
+   inv sbr
 
 lbl D
    e'
-   pgm 5 sbr pause
+   pgm 05
+   sbr pause
    cp
    x=t e'
-   pgm 5 a'
+   pgm 05
+   a'
    c
-   pgm 5 b'
-   rtn
+   pgm 05
+   b'
+   inv sbr
 
 lbl D'
-   pgm 5 a'
+   pgm 05
+   a'
    e'
-   pgm 5 a'
+   pgm 05
+   a'
    e'
    c'
-   rtn
+   inv sbr
 
 lbl E
    e'
-   pgm 5 sbr pause
+   pgm 05
+   sbr pause
    cp
    x=t e'
-   pgm 5 a'
+   pgm 05
+   a'
    c'
-   pgm 5 b'
-   rtn
+   pgm 05
+   b'
+   inv sbr
 
 lbl p→r
    deg
-   iff 1 195
-   rcl 1
+   ifflg 1 195
+   rcl 01
    x⇌t
-   rcl 2
+   rcl 02
    p→r
-   sto 2
+   sto 02
    x⇌t
-   sto 1
+   sto 01
    0
    rad
-   rtn
-   rcl 3
+   inv sbr
+   rcl 03
    x⇌t
-   rcl 4
+   rcl 04
    p→r
-   sto 4
+   sto 04
    x⇌t
-   sto 3
-   inv stf 1
+   sto 03
+   inv stflg 1
    0
    rad
-   rtn
+   inv sbr

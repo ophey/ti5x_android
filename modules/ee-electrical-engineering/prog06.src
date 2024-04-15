@@ -1,114 +1,188 @@
+   ; ee library module -11-
+   ;
 
 lbl A'
    rad
    (
-   ( rcl 1 + 1 )
+   (
+   rcl 01
+   +
+   1
+   )
    x²
    +
-   rcl 2
+   rcl 02
    x²
    )
    √x
-   rtn
-   ( ( rcl 1 - 1 )
+   inv sbr
+   (
+   (
+   rcl 01
+   -
+   1
+   )
    x²
    +
-   rcl 2
+   rcl 02
    x²
    )
    √x
-   rtn
-   ( ( a' + sbr 0 18 )
-   ÷ 2
+   inv sbr
+   (
+   (
+   a'
    +
-   ( ( ee inv ee x² - 1 )
+   sbr 018
+   )
+   ÷
+   2
+   +
+   (
+   (
+   ee
+   inv ee
+   x²
+   -
+   1
+   )
    √x
-   iff 0 061
+   ifflg 0 061
    ×
-   rcl 0
-   inv stf 0
-   ) )
+   rcl 00
+   inv stflg 0
+   )
+   )
    lnx
-   rtn
+   inv sbr
 
 lbl A
-   pgm 4 a
-   rtn
+   pgm 04
+   a
+   inv sbr
 
 lbl B
    rad
-   ( rcl 1 sin × pgm 5 e' )
+   (
+   rcl 01
+   sin
+   ×
+   pgm 05
+   e'
+   )
    x⇌t
-   ( rcl 1 cos × pgm 5 c' )
-   sto 2
+   (
+   rcl 01
+   cos
+   ×
+   pgm 05
+   c'
+   )
+   sto 02
    x⇌t
-   sto 1
-   rtn
+   sto 01
+   inv sbr
 
 lbl C
    rad
-   ( rcl 1 cos × pgm 5 e' )
-   x⇌t ( rcl 1 sin +/- × pgm 5 c' )
-   sto 2
+   (
+   rcl 01
+   cos
+   ×
+   pgm 05
+   e'
+   )
    x⇌t
-   sto 1
-   rtn
+   (
+   rcl 01
+   sin
+   +/-
+   ×
+   pgm 05
+   c'
+   )
+   sto 02
+   x⇌t
+   sto 01
+   inv sbr
 
 lbl D
-   rcl 1
-   sto 3
-   rcl 2
-   sto 4
+   rcl 01
+   sto 03
+   rcl 02
+   sto 04
    c
-   pgm 4 e'
+   pgm 04
+   e'
    b
-   pgm 4 c'
-   rtn
+   pgm 04
+   c'
+   inv sbr
 
 lbl B'
-   rcl 2
+   rcl 02
    op 10
-   sto 0
+   sto 00
    (
-   ( a' - sbr 0 18 )
-   ÷ 2
+   (
+   a'
+   -
+   sbr 018
+   )
+   ÷
+   2
    )
    inv sin
    x⇌t
    sbr 033
-   sto 2
+   sto 02
    x⇌t
-   sto 1
-   rtn
+   sto 01
+   inv sbr
 
 lbl C'
-   rcl 2
+   rcl 02
    op 10
-   sto 0
+   sto 00
    (
    (
-   ( a' - sbr 018 )
+   (
+   a'
+   -
+   sbr 018
+   )
    ÷
    2
    )
    inv cos
    ×
-   rcl 0 )
+   rcl 00
+   )
    x⇌t
-   stf 0
+   stflg 0
    sbr 033
    +/-
-   sto 2
+   sto 02
    x⇌t
-   sto 1
-   rtn
+   sto 01
+   inv sbr
 
 lbl D'
    (
-   ( 1 - rcl 1 x² - rcl 2 x² )
-   x⇌t
+   (
+   1
+   -
+   rcl 01
+   x²
+   -
+   rcl 02
+   x²
    )
-   2 × rcl 1
+   x⇌t
+   (
+   2
+   ×
+   rcl 01
    )
    rad
    inv p→r
@@ -118,13 +192,27 @@ lbl D'
    x⇌t
    (
    (
-   ( rcl 1 x² +
-   ( rcl 2 + 1 )
+   (
+   rcl 01
+   x²
+   +
+   (
+   rcl 02
+   +
+   1
+   )
    x²
    )
    ÷
-   ( rcl 1 x² +
-   ( rcl 2 - 1 )
+   (
+   rcl 01
+   x²
+   +
+   (
+   rcl 02
+   -
+   1
+   )
    x²
    )
    )
@@ -132,13 +220,13 @@ lbl D'
    ÷
    4
    )
-   sto 2
+   sto 02
    x⇌t
-   sto 1
-   rtn
+   sto 01
+   inv sbr
 
 lbl p→r
-   inv stf 1
-   pgm 4 sbr
-   p→r
-   rtn
+   inv stflg 1
+   pgm 04
+   sbr p→r
+   inv sbr
