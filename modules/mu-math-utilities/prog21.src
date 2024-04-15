@@ -1,57 +1,58 @@
-;+
-; Partial recreation of the "Math/Utilities Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; math/utilities module -10-
+   ;
 
-lbl inv                                   ;000
-    exc 20
-    iff 0 11
-    rc* 20
-    rtn
+lbl inv
+   exc 20
+   ifflg 0 011
+   rc* 20
+   inv sbr
+   st* 20
+   inv lbl e'
+   stflg 0
+   sto 20
+   inv sbr
 
-    st* 20                                ;011
-    inv
+lbl A
+   21
+   inv ifflg 1 inv
+   pgm 00
+   a
+   inv stflg 1
+   inv sbr
 
-lbl E'                                    ;013
-    stf 0
-    sto 20
-    rtn
+lbl B
+   22
+   inv ifflg 1 inv
+   pgm 00
+   b
+   inv stflg 1
+   inv sbr
 
-lbl A                                     ;021
-    2 1
-    inv iff 1
-    inv pgm 0 A
-    inv stf 1
-    rtn
+lbl C
+   23
+   inv ifflg 1 inv
+   pgm 00
+   c
+   inv stflg 1
+   inv sbr
 
-lbl B                                     ;036
-    2 2
-    inv iff 1
-    inv pgm 0 B
-    inv stf 1
-    rtn
+lbl D
+   24
+   inv ifflg 1 inv
+   pgm 00
+   d
+   inv stflg 1
+   inv sbr
 
-lbl C                                     ;051
-    2 3
-    inv iff 1
-    inv pgm 0 C
-    inv stf 1
-    rtn
+lbl E
+   25
+   inv ifflg 1 inv
+   pgm 00
+   e
+   inv stflg 1
+   inv sbr
 
-lbl D                                     ;066
-    2 4
-    inv iff 1
-    inv pgm 0 D
-    inv stf 1
-    rtn
-
-lbl E                                     ;081
-    2 5
-    inv iff 1
-    inv pgm 0 E
-    inv stf 1
-    rtn
-
-lbl A'                                    ;096
-    stf 1
-    rtn
+lbl A'
+   stflg 1
+   inv sbr
+   inv sbr

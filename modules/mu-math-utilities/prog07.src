@@ -1,298 +1,321 @@
-;+
-; Partial recreation of the "Math/Utilities Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; math/utilities module -10-
+   ;
 
-lbl A'                               ;000
-    sto 2
-    rtn
+lbl A'
+   sto 02
+   inv sbr
 
-lbl A                                ;005
-    sto 3
-    inv int
-    inv sum 3
-    sto 4
-    1 0 0 prd 4
-    op 33
-    op 34
-    rcl 6
-    prd 3
-    prd 4
-    sto 5
-    7 sum 3
-    sum 4
-    x⇌t
-    rcl 3
-    inv x≥t 48
-    sto 0
-    inv stf 1
-    rcl 4
-    inv x≥t 59
-    sto 0
-    inv stf 2
-    inv stf 3
-    inv stf 4
-    inv stf 5
-    inv stf 6
-    0
-    rtn
+lbl A
+   sto 03
+   inv int
+   inv sum 03
+   sto 04
+   100
+   prd 04
+   op 33
+   op 34
+   rcl 06
+   prd 03
+   prd 04
+   sto 05
+   7
+   sum 03
+   sum 04
+   x⇌t
+   rcl 03
+   inv x≥t 048
+   sto 00
+   inv stflg 1
+   rcl 04
+   inv x≥t 059
+   sto 00
+   inv stflg 2
+   inv stflg 3
+   inv stflg 4
+   inv stflg 5
+   inv stflg 6
+   0
+   inv sbr
 
-lbl B'                               ;075
-    inv stf 0
-    sto 1
-    sto 6
-    inv int
-    ( inv sum 1 × 1 0 0 )
-    exc 6
-    rtn
+lbl B'
+   inv stflg 0
+   sto 01
+   sto 06
+   inv int
+   (
+   inv sum 01
+   ×
+   100
+   )
+   exc 06
+   inv sbr
 
-lbl B                                ;098
-    cp
-    x≥t 106
-    abs
-    inv    ; cont
-    stf 6                            ;106
-    sto 0
-    iff 6 128
-    adv
-    3 5 3 2 4 3                      ; ROW
-    op 4
-    rcl 0
-    op 6
-    adv
-    op 30
-    rcl 6
-    prd 0
-    x⇌t 7
-    sum 0
-    0
-    iff 6 155
-    x⇌t
-    sto 2
-    rc* 0
-    prt
-    op 20
-    dsz 2 146
-    rtn
+lbl B
+   cp
+   x≥t 106
+   |x|
+   inv stflg 6
+   sto 00
+   ifflg 6 128
+   adv
+   353243
+   op 04
+   rcl 00
+   op 06
+   adv
+   op 30
+   rcl 06
+   prd 00
+   x⇌t
+   7
+   sum 00
+   0
+   ifflg 6 155
+   x⇌t
+   sto 02
+   rc* 00
+   prt
+   op 20
+   dsz 2 146
+   inv sbr
 
-lbl C'                                ;156
-    cp
-    x≥t 164
-    abs
-    inv
-    stf 6                             ;164, flag 6 set if number > 0
-    sto 0
-    inv int
-    inv sum 0
-    op 30
-    sto 4
-    1 0 0
-    prd 4
-    rcl 6
-    ( prd 0 - rcl 4
-    inv x=t 195
-    1 sum 0 + 2
-    )
-    sto 4
-    6 sum 0
-    0
-    iff 6 155
-    rc* 0
-    rtn
+lbl C'
+   cp
+   x≥t 164
+   |x|
+   inv stflg 6
+   sto 00
+   inv int
+   inv sum 00
+   op 30
+   sto 04
+   100
+   prd 04
+   rcl 06
+   (
+   prd 00
+   -
+   rcl 04
+   inv x=t 195
+   1
+   sum 00
+   +
+   2
+   )
+   sto 04
+   6
+   sum 00
+   0
+   ifflg 6 155
+   rc* 00
+   inv sbr
 
-lbl C                                 ;213
-    iff 6 224
-    op 20
-    rc* 0
-    rtn
+lbl C
+   ifflg 6 224
+   op 20
+   rc* 00
+   inv sbr
+   inv dsz 4 234
+   st* 00
+   op 20
+   inv sbr
+   +
+   =
+   inv sbr
 
-    inv dsz 4 234                     ;224
-    st* 0
-    op 20
-    rtn
+lbl D'
+   stflg 6
+   sto 04
+   rcl 06
+   sto 05
+   rcl 04
+   cp
+   x≥t 285
+   |x|
+   sto 04
+   sum 03
+   inv sum 05
+   op 24
+   ifflg 0 271
+   op 35
+   op 24
+   rc* 03
+   op 23
+   st* 00
+   op 20
+   dsz 5 271
+   0
+   inv sbr
+   rcl 05
+   sum 03
+   sum 00
+   rcl 04
+   inv sum 03
+   inv sum 05
+   ifflg 0 309
+   op 30
+   op 33
+   op 35
+   op 33
+   rc* 03
+   op 30
+   st* 00
+   dsz 5 309
+   rcl 04
+   inv sum 00
+   op 24
+   0
+   inv sbr
 
-    + = rtn                           ;234
+lbl D
+   sto 02
+   op 22
+   (
+   rcl 06
+   -
+   2
+   sto 04
+   )
+   sto 03
+   op 30
+   (
+   rc* 00
+   ×
+   rcl 02
+   ×
+   op 20
+   st* 00
+   dsz 3 352
+   1
+   )
+   inv ifflg 0 382
+   op 34
+   rc* 00
+   prd 02
+   rcl 02
+   op 20
+   st* 00
+   op 20
+   inv sbr
 
-lbl D'                                ;237
-    stf 6
-    sto 4
-    rcl 6
-    sto 5
-    rcl 4
-    cp
-    x≥t 285
-    abs
-    sto 4
-    sum 3
-    inv sum 5
-    op 24
-    iff 0 271
-    op 35
-    op 24
-    rc* 3
-    op 23
-    st* 0
-    op 2
-    dsz 5 271
-    0
-    rtn
+lbl E'
+   inv lbl e
+   stflg 1
+   cp
+   x≥t 403
+   |x|
+   sto 00
+   6
+   sum 00
+   inv stflg 2
+   inv ifflg 2 416
+   b
+   rcl 06
+   gto 418
+   rcl 01
+   sto 03
+   rcl 06
+   sto 04
+   ifflg 0 430
+   op 33
+   (
+   rc* 00
+   ifflg 1 441
+   ×
+   gto 442
+   +
+   1
+   ifflg 2 449
+   rcl 04
+   sum 00
+   dsz 3 431
+   0
+   ifflg 1 461
+   1
+   )
+   x⇌t
+   2
+   exc 04
+   inv ifflg 0 480
+   inv ifflg 2 477
+   1
+   inv sum 00
+   x⇌t
+   stflg 6
+   inv sbr
 
-    rcl 5                             ;285
-    sum 3
-    sum 0
-    rcl 4
-    inv sum 3
-    inv sum 5
-    iff 0 309
-    op 30
-    op 33
-    op 35
-    op 33
-    rc* 3
-    op 30
-    st* 0
-    dsz 5 309
-    rcl 4
-    inv sum 0
-    op 24
-    0
-    rtn
+lbl y**x
+   stflg 5
+   gto -
 
-lbl D                                 ;330
-    sto 2
-    op 22
-    ( rcl 6 - 2 sto 4 )
-    sto 3
-    op 30
-    (
-    rc* 0 × rcl 2 ×
-    op 2 st* 0
-    dsz 3 352
-    1 )
-    inv iff 0 382
-    op 34
-    rc* 0
-    prd 2
-    rcl 2
-    op 20
-    st* 0
-    op 20
-    rtn
+lbl +
+   stflg 3
+   gto -
 
-lbl E'                                ;385
-    inv
+lbl ×
+   stflg 3
 
-lbl E                                 ;388
-    stf 1
-    cp
-    x≥t 403
-    abs
-    sto 0
-    6 sum 0
-    inv stf 2
-    inv iff 2 416
-    b
-    rcl 6
-    gto 418
+lbl ÷
+   stflg 4
 
-    rcl 1                             ;416
-    sto 3
-    rcl 6
-    sto 4
-    iff 0 430
-    op 33
-    ( rc* 0
-    iff 1 441
-    ×
-    gto 442
-
-    + 1                               ;441
-    iff 2 449
-    rcl 4
-    sum 0
-    dsz 3 431
-    0
-    iff 1 461
-    1
-    )
-    x⇌t
-    2
-    exc 4
-    inv iff 0 480
-    inv iff 2 477
-    1
-    inv sum 0
-    x⇌t
-    stf 6
-    rtn
-
-lbl yˣ                                ;485
-    stf 5
-    gto -
-
-lbl +                                 ;490
-    stf 3
-    gto -
-
-lbl ×                                 ;496
-    stf 3
-
-lbl ÷                                 ;500
-    stf 4
-
-lbl -                                 ;504
-    op 35
-    inv stf 6
-    ( rcl 2
-    iff 1 522
-    rc* 3
-    op 23
-    iff 4 535
-    inv iff 5 539
-    yˣ
-    gto 540
-
-    × gto 540                         ;535
-
-    + rcl 2
-    iff 2 550
-    rc* 4
-    op 24
-    iff 3 567
-    iff 4 566
-    iff 5 567
-    +/-
-    gto 567
-
-    1/x                               ;566
-    )
-    st* 0
-    iff 6 61
-    op 20
-    dsz 5 511
-    stf 6
-    iff 0 511
-    ( rcl 6 - 1 )
-    sto 5
-    x⇌t
-    iff 5 612
-    iff 1 633
-    iff 2 633
-    inv iff 4 511
-    ( op 30 rc* 0 +
-    dsz 5 613
-    0
-    )
-    x⇌t
-    sum 0
-    x⇌t
-    st* 0
-    gto 61
-
-    iff 4 643                         ;633
-    x⇌t
-    prd 2
-    gto 511
-
-    iff 2 511                         ;643
-    gto 612
+lbl -
+   op 35
+   inv stflg 6
+   (
+   rcl 02
+   ifflg 1 522
+   rc* 03
+   op 23
+   ifflg 4 535
+   inv ifflg 5 539
+   y**x
+   gto 540
+   ×
+   gto 540
+   +
+   rcl 02
+   ifflg 2 550
+   rc* 04
+   op 24
+   ifflg 3 567
+   ifflg 4 566
+   ifflg 5 567
+   +/-
+   gto 567
+   1/x
+   )
+   st* 00
+   ifflg 6 061
+   op 20
+   dsz 5 511
+   stflg 6
+   ifflg 0 511
+   (
+   rcl 06
+   -
+   1
+   )
+   sto 05
+   x⇌t
+   ifflg 5 612
+   ifflg 1 633
+   ifflg 2 633
+   inv ifflg 4 511
+   (
+   op 30
+   rc* 00
+   +
+   dsz 5 613
+   0
+   )
+   x⇌t
+   sum 00
+   x⇌t
+   st* 00
+   gto 061
+   ifflg 4 643
+   x⇌t
+   prd 02
+   gto 511
+   ifflg 2 511
+   gto 612

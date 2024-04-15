@@ -1,70 +1,105 @@
-;+
-; Partial recreation of the "Math/Utilities Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; math/utilities module -10-
+   ;
 
 lbl B'
-    ( ce + 1 )
+   (
+   ce
+   +
+   1
+   )
 
-Lbl a'
-    inv stf 0
-    gto 56
-
-lbl A
-
-;#17:
-    stf 0
-    gto 56
+lbl A'
+   inv lbl a
+   stflg 0
+   gto 051
 
 lbl B
-    ( ce + 1 )
-    gto 17
+   (
+   ce
+   +
+   1
+   )
+   gto 012
 
 lbl C
-    cp x=t 54
-    sto 9
-    1 sto 10
-
-;#043
-    rcl 9
-    prd 10
-    dsz 9 43
-    rcl 10
-    rtn
-
-;#54
-    1
-    rtn
-
-;#056
-    (
-    ( sto 10 - . 5 )
-    ×
-    rcl 10
-    lnx -
-    rcl 10
-    +
-    ( 2 × π )
-    lnx ÷ 2 +
-    ( 12 × rcl 10 )
-    1/x
-    -
-    ( 3 6 0 × rcl 10 yˣ 3 )
-    1/x
-    +
-    ( 1 2 6 0 × rcl 10 yˣ 5 )
-    1/x
-    -
-    ( 1 6 8 0 × rcl 10 yˣ 7 )
-    1/x
-    +
-    ( 1 1 8 8 × rcl 10 yˣ 9 )
-    1/x
-    )
-    iff 0 146
-    rtn
-
-;#146
-    inv lnx
-    inv stf 0
-    rtn
+   cp
+   x=t 049
+   sto 09
+   1
+   sto 10
+   rcl 09
+   prd 10
+   dsz 9 038
+   rcl 10
+   inv sbr
+   1
+   inv sbr
+   (
+   (
+   sto 10
+   -
+   .5
+   )
+   ×
+   rcl 10
+   lnx
+   -
+   rcl 10
+   +
+   (
+   2
+   ×
+   π
+   )
+   lnx
+   ÷
+   2
+   +
+   (
+   12
+   ×
+   rcl 10
+   )
+   1/x
+   -
+   (
+   360
+   ×
+   rcl 10
+   y**x
+   3
+   )
+   1/x
+   +
+   (
+   1260
+   ×
+   rcl 10
+   y**x
+   5
+   )
+   1/x
+   -
+   (
+   1680
+   ×
+   rcl 10
+   y**x
+   7
+   )
+   1/x
+   +
+   (
+   1188
+   ×
+   rcl 10
+   y**x
+   9
+   )
+   1/x
+   )
+   ifflg 0 141
+   inv sbr
+   inv lnx
+   inv stflg 0
+   inv sbr
