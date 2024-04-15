@@ -1,3 +1,5 @@
+   ; aviation module -6-
+   ;
 
 lbl A'
    ×
@@ -114,7 +116,7 @@ lbl E'
    pgm 16
    e'
    inv sbr
-   rcl ind 00
+   rc* 00
    inv sbr
    +/-
    +

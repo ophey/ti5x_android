@@ -1,3 +1,5 @@
+   ; aviation module -6-
+   ;
 
 lbl A
    sto 03
@@ -30,16 +32,16 @@ lbl D
    x⇌t
    exc 00
    p→r
-   sto ind 01
+   st* 01
    op 31
    x⇌t
-   sto ind 01
-   rcl ind 02
-   sum ind 01
+   st* 01
+   rc* 02
+   sm* 01
    op 22
    op 21
-   rcl ind 02
-   sum ind 01
+   rc* 02
+   sm* 01
    rcl 03
    inv sbr
 

@@ -1,3 +1,5 @@
+   ; aviation module -6-
+   ;
 
 lbl A
    sbr 067
@@ -28,21 +30,17 @@ lbl E
    1609.344
    sbr 082
    inv sbr
-
    ifflg 0 078
    stflg 0
    sto 15
    sto 16
    inv sbr
-
    inv stflg 0
    inv sbr
-
    ifflg 0 092
    inv prd 16
    rcl 16
    inv sbr
-
    prd 16
    rcl 15
    inv sbr
@@ -92,14 +90,10 @@ lbl D'
 lbl E'
    stflg 1
    inv sbr
-
-; 179
    ifflg 1 188
    prd 15
    rcl 15
    inv sbr
-
-; 188
    inv stflg 1
    inv prd 15
    rcl 15

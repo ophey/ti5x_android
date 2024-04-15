@@ -1,3 +1,5 @@
+   ; aviation module -6-
+   ;
 
 lbl B'
    sbr 148
@@ -101,7 +103,7 @@ lbl E
    inv tan
    =
    inv sbr
-   rcl ind 00
+   rc* 00
    =
    inv sbr
 

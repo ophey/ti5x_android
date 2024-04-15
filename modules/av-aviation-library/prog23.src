@@ -1,3 +1,5 @@
+   ; aviation module -6-
+   ;
 
 lbl E'
    b'
@@ -92,11 +94,11 @@ lbl E
    1
    inv sum 15
    c'
-   rcl ind 15
+   rc* 15
    =
    sum 14
    gto 160
-   rcl ind 15
+   rc* 15
    -
    rcl 14
    =
@@ -122,7 +124,7 @@ lbl clr
    31
 
 lbl sin
-   sto ind 00
+   st* 00
    dsz 0 sin
    30
    sto 04
@@ -135,3 +137,4 @@ lbl sin
    0
    inv sbr
    gto clr
+   inv sbr

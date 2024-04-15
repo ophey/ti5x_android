@@ -1,3 +1,5 @@
+   ; aviation module -6-
+   ;
 
 lbl B
    cp
@@ -94,7 +96,6 @@ lbl E'
 lbl D
    sto 10
    inv sbr
-
    exc 00
    x⇌t
    exc 00
