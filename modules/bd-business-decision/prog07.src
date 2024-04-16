@@ -1,0 +1,277 @@
+   ; business decisions module -9-
+   ;
+
+lbl A
+   sto 05
+   inv sbr
+
+lbl B
+   sto 06
+   inv sbr
+
+lbl C
+   sto 07
+   inv sbr
+
+lbl D
+   sto 12
+   inv sbr
+
+lbl B'
+   sto 14
+   inv sbr
+
+lbl A'
+   sto 15
+   inv sbr
+
+lbl E'
+   inv lbl e
+   stflg 0
+   0
+   sto 23
+   x⇌t
+   rcl 15
+   inv x≥t 057
+   (
+   rcl 06
+   ×
+   rcl 07
+   )
+   gto 059
+   rcl 06
+   x⇌t
+   rcl 05
+   inv x≥t 069
+   +
+   =
+   inv sbr
+   (
+   ce
+   ÷
+   x⇌t
+   )
+   (
+   sto 08
+   ×
+   rcl 07
+   )
+   sto 09
+   cp
+   rcl 07
+   x⇌t
+   inv x≥t 094
+   gto 066
+   cp
+   rcl 15
+   inv x≥t 274
+   rcl 07
+   sto 04
+   sbr 414
+   rcl 07
+   sto 04
+   1
+   sto 11
+   sto 13
+   0
+   sto 02
+   sbr 397
+   (
+   (
+   rcl 07
+   ×
+   rcl 09
+   y**x
+   rcl 07
+   ÷
+   rcl 10
+   ÷
+   (
+   rcl 07
+   -
+   rcl 09
+   )
+   sto 01
+   )
+   sto 03
+   ÷
+   rcl 01
+   ÷
+   rcl 06
+   ÷
+   (
+   rcl 03
+   +
+   rcl 13
+   )
+   )
+   sto 16
+   rcl 15
+   x⇌t
+   1
+   inv x=t 212
+   (
+   rcl 07
+   ×
+   (
+   1
+   -
+   rcl 08
+   y**x
+   (
+   rcl 07
+   +
+   1
+   )
+   sto 01
+   )
+   ×
+   rcl 16
+   ÷
+   rcl 01
+   ÷
+   (
+   1
+   -
+   rcl 08
+   y**x
+   rcl 07
+   )
+   )
+   sto 16
+   (
+   rcl 16
+   +
+   rcl 06
+   1/x
+   )
+   sto 17
+   (
+   rcl 16
+   ×
+   rcl 05
+   )
+   (
+   sto 18
+   +
+   rcl 09
+   )
+   sto 19
+   (
+   (
+   1
+   -
+   rcl 08
+   )
+   ×
+   rcl 17
+   )
+   (
+   sto 20
+   ×
+   rcl 14
+   )
+   sto 22
+   sum 23
+   (
+   rcl 12
+   ×
+   rcl 16
+   )
+   sto 21
+   sum 23
+   gto 320
+   (
+   rcl 08
+   x²
+   ×
+   rcl 07
+   ÷
+   (
+   1
+   -
+   rcl 08
+   )
+   )
+   (
+   sto 18
+   ÷
+   rcl 05
+   )
+   (
+   sto 16
+   +
+   rcl 07
+   ÷
+   rcl 06
+   )
+   sto 17
+   (
+   rcl 18
+   +
+   rcl 09
+   )
+   sto 19
+   gto 238
+   rcl 19
+   fix 4
+   prt
+   ifflg 0 330
+   inv sbr
+   rcl 18
+   prt
+   ifflg 0 338
+   inv sbr
+   rcl 17
+   prt
+   ifflg 0 346
+   inv sbr
+   rcl 16
+   prt
+   ifflg 0 354
+   inv sbr
+   rcl 21
+   prt
+   ifflg 0 362
+   inv sbr
+   rcl 22
+   prt
+   ifflg 0 370
+   inv sbr
+   rcl 23
+   prt
+   ifflg 0 378
+   inv sbr
+   rcl 08
+   prt
+   inv sbr
+   (
+   rcl 11
+   ×
+   rcl 09
+   ÷
+   (
+   rcl 02
+   +
+   1
+   )
+   )
+   inv sbr
+   dsz 4 402
+   inv sbr
+   sbr 382
+   sum 13
+   sto 11
+   op 22
+   gto 397
+   1
+   sto 10
+   rcl 04
+   prd 10
+   dsz 4 417
+   inv sbr
+
+lbl clr
+   fix 9
+   0
+   inv sbr

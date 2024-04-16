@@ -1,0 +1,328 @@
+   ; business decisions module -9-
+   ;
+
+lbl clr
+   cms
+   9
+   sto 01
+   5
+   sto 04
+   op 25
+   0
+   fix 9
+   inv sbr
+
+lbl A
+   sto 02
+   sto 03
+   10
+   sum 03
+   rcl 02
+   inv sbr
+
+lbl B
+   (
+   sto 07
+   ×
+   10
+   )
+   op 21
+   st* 01
+   x⇌t
+   rcl 06
+   x≥t 048
+   x⇌t
+   sto 06
+   37133626
+   op 04
+   adv
+   (
+   rcl 01
+   -
+   9
+   )
+   op 06
+   (
+   rcl 05
+   ÷
+   6
+   inv log
+   )
+   sm* 01
+   .01
+   sm* 01
+   rcl 07
+   fix 1
+   prt
+   fix 9
+   adv
+   inv sbr
+
+lbl C
+   sto 07
+   100
+   prd ind 03
+   rcl 07
+   sm* 03
+   dsz 4 115
+   5
+   sto 04
+   op 23
+   op 25
+   .01
+   sm* 01
+   rcl 07
+   prt
+   inv sbr
+
+lbl D
+   100
+   prd ind 03
+   dsz 4 128
+   0
+   inv sbr
+
+lbl E'
+   inv lbl e
+   stflg 0
+   adv
+   adv
+   (
+   prt
+   ×
+   10
+   )
+   sto 07
+   +/-
+   x⇌t
+   rcl 06
+   +/-
+   inv x≥t 570
+   rcl 02
+   sto 08
+   9
+   sum 08
+   (
+   rc* 08
+   op 28
+   ×
+   10000
+   )
+   inv int
+   sto 05
+   100
+   prd 05
+   gto 225
+   100
+   prd 09
+   rcl 09
+   int
+   inv sum 09
+   sto 00
+   9
+   sum 00
+   .0001
+   sm* 00
+   dsz 4 242
+   op 28
+   5
+   sto 04
+   (
+   rc* 08
+   ÷
+   10
+   inv log
+   ee
+   inv ee
+   )
+   sto 09
+   dsz 5 196
+   363713
+   op 04
+   op 25
+   rcl 05
+   adv
+   op 06
+   adv
+   ifflg 0 268
+   +/-
+   inv sbr
+   rcl 07
+   sto 01
+   rcl 02
+   sto 08
+   10
+   sto 09
+   inv stflg 1
+   inv stflg 2
+   0
+   sto 04
+   cp
+   rc* 09
+   inv x≥t 357
+   (
+   (
+   stflg 2
+   ×
+   100
+   )
+   inv int
+   ×
+   100
+   )
+   int
+   inv x=t 357
+   rc* 09
+   int
+   x⇌t
+   rcl 01
+   inv x≥t 357
+   (
+   (
+   rc* 09
+   inv int
+   ×
+   100
+   )
+   int
+   ×
+   x⇌t
+   )
+   x⇌t
+   rcl 04
+   x≥t 357
+   x⇌t
+   sto 04
+   stflg 1
+   rcl 09
+   sto 00
+   op 29
+   dsz 8 289
+   inv ifflg 1 526
+   (
+   rcl 00
+   -
+   9
+   )
+   prt
+   ifflg 0 380
+   inv sbr
+   1
+   +/-
+   prd ind 00
+   rc* 00
+   int
+   sum 01
+   (
+   rc* 00
+   inv int
+   ×
+   100
+   )
+   sto 08
+   inv int
+   (
+   inv sum 08
+   ×
+   100
+   )
+   (
+   inv int
+   ×
+   20
+   )
+   +/-
+   (
+   sto 04
+   int
+   +
+   10
+   +
+   rcl 02
+   )
+   sto 00
+   (
+   rcl 04
+   inv int
+   cp
+   inv x=t 446
+   op 30
+   1
+   ×
+   5
+   -
+   6
+   )
+   (
+   (
+   sto 09
+   ×
+   2
+   )
+   inv log
+   ee
+   inv ee
+   ×
+   rc* 00
+   )
+   inv int
+   sto 04
+   inv dsz 8 272
+   100
+   prd 04
+   rcl 04
+   int
+   inv sum 04
+   sto 03
+   9
+   sum 03
+   .0001
+   inv sm* 03
+   dsz 9 523
+   5
+   sto 09
+   op 20
+   rc* 00
+   sto 04
+   10
+   +/-
+   inv log
+   ee
+   inv ee
+   prd 04
+   gto 471
+   adv
+   (
+   rcl 01
+   ÷
+   10
+   )
+   fix 1
+   prt
+   ifflg 0 545
+   +
+   =
+   inv sbr
+   ce
+   fix 9
+   ifflg 2 246
+   rcl 02
+   sto 09
+   9
+   sto 08
+   1
+   +/-
+   op 28
+   prd ind 08
+   dsz 9 560
+   0
+   inv sbr
+   (
+   +/-
+   ÷
+   10
+   )
+   +
+   =
+   inv sbr
+   inv sbr

@@ -1,0 +1,217 @@
+   ; business decisions module -9-
+   ;
+
+lbl D
+   sto 13
+   inv sbr
+
+lbl A
+   sto 28
+   inv stflg 1
+   cp
+   x=t 027
+   (
+   ce
+   -
+   1
+   )
+   x=t 036
+   +
+   =
+   inv sbr
+   stflg 1
+   15
+   sto 00
+   gto 040
+   17
+   sto 00
+   0
+   inv sbr
+   st* 00
+   inv sbr
+
+lbl B
+   sto 11
+   inv sbr
+
+lbl C
+   sto 18
+   inv sbr
+   sto 19
+   inv sbr
+   sto 22
+   inv sbr
+
+lbl A'
+   sto 23
+   inv sbr
+
+lbl B'
+   sto 20
+   inv sbr
+
+lbl C'
+   sto 21
+   inv sbr
+
+lbl D'
+   sto 27
+   inv sbr
+
+lbl E'
+   inv lbl e
+   stflg 2
+   27
+   sto 05
+   0
+   sto 12
+   ifflg 1 106
+   17
+   sto 02
+   gto 110
+   15
+   sto 02
+   pgm 08
+   sbr eng
+   (
+   ce
+   ×
+   rcl 23
+   )
+   ifflg 1 135
+   x⇌t
+   1
+   x⇌t
+   x≥t 024
+   sto 15
+   gto 137
+   sto 17
+   (
+   (
+   1
+   +
+   rcl 13
+   ÷
+   rcl 11
+   )
+   sto 01
+   ×
+   rcl 20
+   )
+   sto 24
+   (
+   rcl 01
+   ×
+   rcl 21
+   x²
+   )
+   √x
+   sto 25
+   pgm 08
+   sbr +/-
+   rcl 13
+   inv prd 16
+   (
+   rcl 16
+   ×
+   rcl 17
+   )
+   sto 07
+   sum 12
+   (
+   rcl 19
+   ÷
+   rcl 13
+   )
+   sto 10
+   sum 12
+   (
+   rcl 22
+   ÷
+   rcl 13
+   )
+   sto 09
+   sum 12
+   (
+   rcl 18
+   ×
+   rcl 27
+   ×
+   (
+   rcl 14
+   -
+   rcl 20
+   -
+   rcl 23
+   ×
+   rcl 13
+   ÷
+   2
+   )
+   )
+   sto 08
+   sum 12
+   (
+   rcl 14
+   -
+   rcl 20
+   -
+   rcl 23
+   ×
+   rcl 13
+   )
+   sto 06
+   rcl 12
+   fix 2
+   prt
+   ifflg 2 260
+   inv sbr
+   rcl 14
+   fix 0
+   prt
+   ifflg 2 270
+   inv sbr
+   rcl 13
+   fix 5
+   prt
+   ifflg 2 280
+   inv sbr
+   rcl 15
+   fix 4
+   prt
+   ifflg 2 290
+   inv sbr
+   rcl 17
+   prt
+   ifflg 2 298
+   inv sbr
+   rcl 16
+   fix 0
+   prt
+   ifflg 2 308
+   inv sbr
+   rcl 06
+   prt
+   ifflg 2 316
+   inv sbr
+   rcl 10
+   fix 2
+   prt
+   ifflg 2 326
+   inv sbr
+   rcl 09
+   prt
+   ifflg 2 334
+   inv sbr
+   rcl 08
+   prt
+   ifflg 2 342
+   inv sbr
+   rcl 07
+   prt
+   inv sbr
+
+lbl clr
+   fix 9
+   0
+   inv sbr

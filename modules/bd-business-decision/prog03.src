@@ -1,0 +1,49 @@
+   ; business decisions module -9-
+   ;
+
+lbl A
+   sto 01
+   inv sbr
+
+lbl B
+   sto 02
+   inv sbr
+
+lbl C
+   sto 03
+   inv sbr
+
+lbl D
+   sto 04
+   inv sbr
+
+lbl E
+   sto 05
+   inv sbr
+
+lbl E'
+   (
+   rcl 04
+   ×
+   rcl 03
+   -
+   ce
+   ×
+   rcl 05
+   +
+   (
+   rcl 02
+   -
+   rcl 03
+   )
+   ×
+   rcl 05
+   ÷
+   rcl 01
+   )
+   inv sbr
+
+lbl clr
+   0
+   fix 9
+   inv sbr

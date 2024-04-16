@@ -1,0 +1,299 @@
+   ; business decisions module -9-
+   ;
+
+lbl A
+   sto 10
+   inv sbr
+
+lbl B
+   sbr 421
+   sto 11
+   inv sbr
+
+lbl C
+   sto 12
+   inv sbr
+
+lbl D
+   sto 13
+   inv sbr
+
+lbl E
+   sbr 421
+   sto 14
+   inv sbr
+
+lbl D'
+   sto 15
+   inv sbr
+
+lbl E'
+   sto 16
+   inv sbr
+
+lbl C'
+   rcl 11
+   sbr 051
+   gto 066
+   (
+   (
+   ce
+   ÷
+   100
+   )
+   lnx
+   ÷
+   2
+   lnx
+   +/-
+   )
+   inv sbr
+   sto 17
+   rcl 14
+   sbr 051
+   sto 18
+   cp
+   (
+   rcl 15
+   -
+   2
+   )
+   inv x≥t 152
+   x=t 250
+   (
+   ce
+   -
+   2
+   )
+   inv x≥t 236
+   x=t 244
+   cp
+   (
+   (
+   rcl 12
+   ×
+   (
+   rcl 18
+   -
+   1
+   )
+   ÷
+   (
+   rcl 10
+   ×
+   (
+   rcl 17
+   -
+   rcl 18
+   )
+   )
+   )
+   x=t 133
+   x≥t 136
+   +
+   =
+   inv sbr
+   (
+   ce
+   lnx
+   ÷
+   (
+   1
+   -
+   rcl 17
+   )
+   )
+   inv lnx
+   fix 0
+   inv sbr
+   rcl 12
+   sto 19
+   sbr 278
+   sto 09
+   sbr 318
+   sbr 406
+   sto 05
+   x⇌t
+   .5
+   x⇌t
+   x≥t 181
+   rcl 04
+   fix 0
+   inv sbr
+   rcl 04
+   sto 09
+   sbr 318
+   rcl 05
+   x⇌t
+   sbr 406
+   x≥t 133
+   gto 167
+   (
+   (
+   ce
+   y**x
+   (
+   1
+   -
+   rcl 17
+   )
+   )
+   ×
+   rcl 10
+   +
+   rcl 12
+   )
+   inv sbr
+   (
+   (
+   rcl 16
+   y**x
+   (
+   1
+   -
+   rcl 18
+   )
+   )
+   ×
+   rcl 13
+   )
+   inv sbr
+   rcl 16
+   sbr 200
+   fix 2
+   inv sbr
+   sbr 219
+   fix 2
+   inv sbr
+   sbr 219
+   sto 20
+   rcl 16
+   sbr 200
+   (
+   (
+   +/-
+   +
+   rcl 20
+   )
+   ÷
+   rcl 20
+   ×
+   100
+   )
+   fix 2
+   inv sbr
+   cp
+   (
+   rcl 19
+   ÷
+   rcl 13
+   ÷
+   (
+   1
+   -
+   rcl 16
+   ÷
+   100
+   )
+   )
+   x=t 133
+   inv x≥t 133
+   (
+   ce
+   lnx
+   ÷
+   (
+   1
+   -
+   rcl 18
+   )
+   )
+   inv lnx
+   inv sbr
+   (
+   (
+   rcl 12
+   +
+   rcl 17
+   ×
+   rcl 10
+   ×
+   rcl 09
+   y**x
+   (
+   1
+   -
+   rcl 17
+   )
+   sto 08
+   -
+   (
+   rcl 13
+   ×
+   (
+   1
+   -
+   rcl 16
+   ÷
+   100
+   )
+   )
+   sto 07
+   ×
+   rcl 18
+   ×
+   rcl 09
+   y**x
+   (
+   1
+   -
+   rcl 18
+   )
+   sto 06
+   )
+   ÷
+   (
+   rcl 07
+   ×
+   rcl 06
+   ×
+   rcl 09
+   y**x
+   rcl 18
+   +/-
+   -
+   rcl 10
+   ×
+   rcl 08
+   ×
+   rcl 09
+   y**x
+   rcl 17
+   +/-
+   )
+   )
+   sto 04
+   inv sbr
+   (
+   rcl 04
+   -
+   rcl 09
+   )
+   |x|
+   inv sbr
+
+lbl clr
+   fix 9
+   0
+   inv sbr
+   x⇌t
+   50
+   +/-
+   x⇌t
+   inv x≥t 133
+   (
+   ce
+   +
+   100
+   )
+   inv sbr

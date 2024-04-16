@@ -49,6 +49,7 @@
     <string name="module_prompt">Select Module to Load</string>
     <string name="master_library">Master Library</string>
     <string name="appstats_library">Applied Statistics</string>
+    <string name="businessdecision_library">Business Decision</string>
     <string name="surveying_library">Surveying Library</string>
     <string name="marine_navigation_library">Marine Navigation Library</string>
     <string name="aviation_library">Aviation Library</string>
