@@ -1,0 +1,9 @@
+<carddef style="system">
+<label slot="titleleft">CONTINUOUS BEAM (CAQUOT)</label>
+<label slot="titleright">SE-07</label>
+<label slot="bprime">I<sub>l</sub>, C<sub>l</sub>, S<sub>l</sub></label>
+<label slot="cprime">I<sub>r</sub>, C<sub>r</sub>, S<sub>r</sub></label>
+<label slot="b">I<sub>l</sub>, C<sub>l</sub>, S<sub>l</sub></label>
+<label slot="c">I<sub>r</sub>, C<sub>r</sub>, S<sub>r</sub></label>
+<label slot="e">Compute</label>
+</carddef>

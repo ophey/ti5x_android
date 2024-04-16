@@ -1,0 +1,16 @@
+   ; structural engineering module rev.a
+   ;
+
+lbl =
+   1
+   +/-
+   sto 11
+   36
+   pgm 02
+   sbr π
+   x⇌t
+   13
+   inv x=t op
+   prt
+   cms
+   inv sbr

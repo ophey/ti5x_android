@@ -1,0 +1,11 @@
+<carddef style="system">
+<label slot="titleleft">PORTAL FRAME</label>
+<label slot="titleright">SE-06</label>
+<label slot="bprime">a, b, q</label>
+<label slot="cprime">a, F</label>
+<label slot="a">n, u<sub>n</sub></label>
+<label slot="b">i<sub>s</sub>, L, EI</label>
+<label slot="c">q</label>
+<label slot="d">i<sub>c</sub>, L, EI, <xi/></label>
+<label slot="e">H</label>
+</carddef>

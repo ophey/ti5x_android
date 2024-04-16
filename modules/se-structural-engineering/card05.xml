@@ -1,0 +1,9 @@
+<carddef style="system">
+<label slot="titleleft">TRUSS BEAM</label>
+<label slot="titleright">SE-05</label>
+<label slot="a">L, n, <empty/></label>
+<label slot="b">h<sub>o</sub>, h<sub>m</sub></label>
+<label slot="c">F</label>
+<label slot="d"></label>
+<label slot="e"></label>
+</carddef>

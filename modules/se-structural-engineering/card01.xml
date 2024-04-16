@@ -1,0 +1,5 @@
+<carddef style="system">
+<label slot="titleleft">STRUCTURAL ENGINEERING DIAGNOSTIC</label>
+<label slot="titleright">SE-01</label>
+<label slot="primecenter">DIAGNOSTIC: <button>SBR</button> <button>=</button></label>
+</carddef>

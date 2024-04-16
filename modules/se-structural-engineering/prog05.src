@@ -1,0 +1,314 @@
+   ; structural engineering module rev.a
+   ;
+   nop
+
+lbl ifflg
+   rcl 11
+   ÷
+   2
+   =
+   x⇌t
+   rcl 00
+   inv sbr
+
+lbl d.ms
+   rcl 13
+   +
+   rcl 14
+   ×
+   rcl 00
+   ÷
+   rcl 11
+   =
+   sto 03
+   ×
+   rcl 11
+   ÷
+   rcl 10
+   -
+   rcl 12
+   tan
+   =
+   +/-
+   inv tan
+   sto 04
+   inv sbr
+
+lbl A
+   cms
+   sto 10
+   x⇌t
+   27
+   op 04
+   x⇌t
+   adv
+   op 06
+   inv sbr
+   sto 11
+   x⇌t
+   17
+   x≥t 073
+   +
+   -
+   gto 059
+   31
+   op 04
+   x⇌t
+   op 06
+   inv sbr
+   sto 12
+   x⇌t
+   332324
+   op 04
+   x⇌t
+   op 06
+   inv sbr
+
+lbl B
+   sto 13
+   x⇌t
+   0
+   inv x=t 108
+   stflg 1
+   234001
+   op 04
+   x⇌t
+   op 06
+   inv sbr
+   x⇌t
+   234030
+   op 04
+   x⇌t
+   op 06
+   -
+   rcl 13
+   =
+   ×
+   2
+   =
+   sto 14
+   ÷
+   rcl 10
+   -
+   rcl 12
+   tan
+   =
+   +/-
+   inv tan
+   sto 15
+   inv sbr
+
+lbl C
+   sto 16
+   x⇌t
+   21
+   op 04
+   x⇌t
+   op 06
+   1
+   sto 00
+   22
+   sto 01
+   31
+   sto 02
+   op 00
+   4133331735
+   op 01
+   op 05
+   op 00
+   sbr d.ms
+   rcl 00
+   ×
+   (
+   ce
+   +/-
+   +
+   rcl 11
+   )
+   ×
+   rcl 10
+   ×
+   rcl 16
+   ÷
+   2
+   ÷
+   rcl 11
+   =
+   sto 05
+   rcl 00
+   +
+   1
+   =
+   op 04
+   rcl 05
+   ÷
+   rcl 03
+   ÷
+   rcl 12
+   cos
+   =
+   +/-
+   sto 09
+   op 06
+   ×
+   rcl 12
+   cos
+   ÷
+   rcl 15
+   cos
+   =
+   +/-
+   st* 01
+   op 31
+   rc* 01
+   ×
+   rcl 15
+   sin
+   +
+   rcl 09
+   ×
+   rcl 12
+   sin
+   +
+   rcl 16
+   ×
+   (
+   rcl 11
+   ÷
+   2
+   +
+   .5
+   -
+   rcl 00
+   =
+   +/-
+   ÷
+   rcl 04
+   sin
+   =
+   st* 02
+   op 21
+   sbr ifflg
+   x=t 311
+   op 20
+   op 21
+   op 22
+   gto 196
+   adv
+   op 00
+   2732431735
+   op 01
+   op 05
+   op 00
+   inv ifflg 1 339
+   rcl 22
+   sto 21
+   1
+   sto 00
+   21
+   sto 01
+   rcl 00
+   +
+   1
+   =
+   op 04
+   rc* 01
+   op 06
+   sbr ifflg
+   x=t 369
+   op 20
+   op 21
+   gto 346
+   adv
+   op 00
+   1624132240
+   op 01
+   op 05
+   op 00
+   1
+   sto 00
+   31
+   sto 02
+   ifflg 1 415
+   rcl 00
+   +
+   1
+   =
+   op 04
+   rc* 02
+   op 06
+   sbr ifflg
+   x=t 422
+   op 20
+   op 22
+   gto 399
+   adv
+   op 00
+   4217353740
+   op 01
+   op 05
+   op 00
+   ifflg 1 459
+   1
+   op 04
+   rcl 11
+   ÷
+   2
+   ×
+   rcl 16
+   =
+   +/-
+   op 06
+   1
+   sto 00
+   22
+   sto 01
+   31
+   sto 02
+   sbr d.ms
+   rcl 00
+   +
+   1
+   =
+   op 04
+   rc* 01
+   op 31
+   -
+   rc* 01
+   =
+   +/-
+   ×
+   rcl 15
+   sin
+   +
+   rc* 02
+   ×
+   rcl 04
+   sin
+   =
+   op 06
+   op 21
+   op 20
+   op 21
+   op 22
+   sbr ifflg
+   x=t 518
+   gto 470
+   +
+   1
+   =
+   op 04
+   rcl 09
+   ×
+   rcl 12
+   sin
+   ×
+   2
+   +
+   rcl 16
+   =
+   +/-
+   op 06
+   adv
+   inv stflg 1
+   inv sbr
