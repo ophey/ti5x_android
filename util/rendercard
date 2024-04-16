@@ -357,6 +357,7 @@ symbols = \
         # Lower-case greek characters
         "alpha" : defsymbol("alpha", "(\\141)"),
         "beta" : defsymbol("beta", "(\\142)"),
+        "chi" : defsymbol("chi", "(\\143)"),
         "epsilon": defsymbol("epsilon", "(\\145)"),
         "gamma" : defsymbol("gamma", "(\\147)"),
         "eta" : defsymbol("eta", "(\\150)"),
