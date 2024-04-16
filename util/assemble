@@ -223,13 +223,18 @@ symbols["lst"] = symbols["list"]
 
 check_labels = False
 dump_prog = False
+rom = False
+MAXLOC = 1000
 
 if len(sys.argv) == 2 and sys.argv[1] == "--checklabels" :
     check_labels = True
 elif len(sys.argv) == 2 and sys.argv[1] == "--dumploc" :
     dump_prog = True
+elif len(sys.argv) == 2 and sys.argv[1] == "--rom" :
+    rom = True
+    MAXLOC=1500
 elif len(sys.argv) > 1 :
-    raise RuntimeError("unexpected args")
+    raise RuntimeError("unexpected args %s" % sys.argv[1])
 #end if
 
 exitstatus = 0 # to begin with
@@ -299,8 +304,8 @@ def flushout() :
 def out(b) :
     """outputs a single instruction byte."""
     global pending_out, loc
-    if loc == 1000 :
-        report_error("program too large, can't exceed 1000 steps")
+    if loc == MAXLOC :
+        report_error("program too large, can't exceed %s steps" % MAXLOC)
     #end if
     flushout()
     pending_out = b
@@ -310,8 +315,8 @@ def out(b) :
 def outloc(b) :
     """outputs a single instruction byte."""
     global pending_out, loc, prog
-    if loc == 1000 :
-        report_error("program too large, can't exceed 1000 steps")
+    if loc == MAXLOC :
+        report_error("program too large, can't exceed %s steps" % MAXLOC)
     #end if
     flushout()
     realout(b)
@@ -321,8 +326,8 @@ def outloc(b) :
 def outlabel(lab) :
     """outputs a label, will be resolved on the second pass."""
     global loc, prog
-    if loc == 1000 :
-        report_error("program too large, can't exceed 1000 steps")
+    if loc == MAXLOC :
+        report_error("program too large, can't exceed %s steps" % MAXLOC)
     #end if
     flushout()
     prog = prog + [lab]
@@ -332,8 +337,8 @@ def outlabel(lab) :
 def outpgm(pgmno) :
     """outputs a label, will be resolved on the second pass."""
     global loc, prog
-    if loc == 1000 :
-        report_error("program too large, can't exceed 1000 steps")
+    if loc == MAXLOC :
+        report_error("program too large, can't exceed %s steps" % MAXLOC)
     #end if
     flushout()
     prog = prog + ["%02d" % int(pgmno)]
