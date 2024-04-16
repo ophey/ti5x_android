@@ -1,0 +1,566 @@
+   ; investment module -3-
+   ;
+
+lbl E'
+   fix 9
+   adv
+   6
+   op 17
+   cms
+   16
+   sto 06
+   0
+   sto 14
+   inv sbr
+
+lbl A
+   x⇌t
+   1
+   sum 15
+   x⇌t
+   op 26
+   st* 06
+   prt
+   inv sbr
+   gto 024
+
+lbl clr
+   (
+   ce
+   +
+   2
+   )
+   (
+   sto 57
+   +
+   1
+   )
+   (
+   sto 56
+   +
+   1
+   )
+   (
+   sto 59
+   +
+   7
+   )
+   sto 06
+   inv sbr
+
+lbl B
+   (
+   sto 16
+   ×
+   3
+   inv log
+   +/-
+   )
+   sm* 06
+   rcl 16
+   prt
+   inv sbr
+   gto 024
+
+lbl C
+   x⇌t
+   2
+   x=t 095
+   3
+   x=t 143
+   x⇌t
+   prt
+   inv sbr
+   (
+   rcl 06
+   -
+   11
+   )
+   sto 58
+   sbr clr
+   sbr 271
+   (
+   rcl 06
+   -
+   10
+   )
+   sto 58
+   (
+   rc* 57
+   ×
+   rc* 58
+   )
+   pgm 02
+   a
+   rc* 59
+   pgm 02
+   e
+   0
+   pgm 02
+   c
+   st* 59
+   2
+   fix 9
+   inv sbr
+   9
+   inv sum 06
+   30
+   +/-
+   sm* 06
+   9
+   sum 06
+   3
+   prt
+   inv sbr
+   cp
+   rc* 57
+   inv x≥t 225
+   sbr 271
+   (
+   rc* 06
+   x⇌t
+   1
+   inv x≥t 179
+   rc* 06
+   ×
+   rc* 57
+   )
+   hir 08
+   cp
+   pgm 02
+   a
+   rc* 59
+   pgm 02
+   c
+   0
+   pgm 02
+   e
+   cp
+   x≥t 203
+   0
+   (
+   (
+   +/-
+   +
+   rc* 58
+   )
+   sum 13
+   +/-
+   sm* 58
+   +
+   rc* 59
+   ×
+   hir 18
+   )
+   sum 10
+   inv sbr
+   (
+   rc* 56
+   ÷
+   100
+   ×
+   (
+   rc* 58
+   -
+   rc* 59
+   ÷
+   2
+   ×
+   (
+   rc* 57
+   +
+   29
+   )
+   )
+   )
+   sum 10
+   (
+   (
+   rc* 57
+   +
+   30
+   )
+   ×
+   rc* 59
+   )
+   inv sm* 58
+   sum 13
+   inv sbr
+   pgm 03
+   e'
+   (
+   rc* 56
+   ÷
+   rc* 57
+   )
+   stflg 0
+   stflg 5
+   pgm 02
+   b
+   rc* 58
+   pgm 02
+   d
+   inv sbr
+   (
+   ce
+   +
+   1
+   )
+   (
+   sto 57
+   +
+   1
+   )
+   sto 58
+   5
+   sto 59
+   (
+   rc* 58
+   +
+   3
+   inv log
+   )
+   cp
+   x=t 403
+   x≥t 360
+   (
+   ce
+   +
+   3
+   inv log
+   )
+   x⇌t
+   6
+   sto 59
+   x⇌t
+   cp
+   x=t 403
+   x≥t 360
+   (
+   ce
+   +
+   3
+   inv log
+   )
+   x⇌t
+   7
+   sto 59
+   x⇌t
+   cp
+   x=t 403
+   sto 58
+   rc* 56
+   pgm ind 59
+   sbr π
+   rc* 57
+   pgm ind 59
+   sbr rad
+   rcl 07
+   sto 57
+   rcl 58
+   pgm ind 59
+   sbr grad
+   rc* 06
+   sbr 404
+   ifflg 7 415
+   pgm ind 59
+   sbr nop
+   sum 00
+   rcl 57
+   sto 07
+   inv sbr
+   inv stflg 7
+   pgm ind 59
+   sbr deg
+   op 19
+   ce
+   inv sbr
+   (
+   rc* 06
+   -
+   1
+   )
+   sbr 404
+   ifflg 7 403
+   pgm ind 59
+   sbr nop
+   inv sum 54
+   inv sbr
+
+lbl D
+   fix 2
+   1
+   sum 55
+   rcl 15
+   +/-
+   sto 16
+   rcl 00
+   sto 54
+   0
+   sto 10
+   sto 13
+   sto 00
+   17
+   sto 58
+   sbr clr
+   sbr 158
+   22
+   sto 56
+   sbr 294
+   25
+   sto 56
+   sbr 294
+   1
+   sm* 06
+   sum 16
+   rcl 16
+   cp
+   x=t cos
+   29
+   sto 58
+   sbr clr
+   sbr 158
+   34
+   sto 56
+   sbr 294
+   37
+   sto 56
+   sbr 294
+   1
+   sm* 06
+   sum 16
+   rcl 16
+   cp
+   x=t cos
+   41
+   sto 58
+   sbr clr
+   sbr 158
+   46
+   sto 56
+   sbr 294
+   49
+   sto 56
+   sbr 294
+   1
+   sm* 06
+
+lbl cos
+   (
+   rcl 00
+   -
+   rcl 54
+   )
+   sto 54
+   sum 14
+   rcl 55
+   prt
+   rcl 13
+   prt
+   inv sbr
+   sto 53
+   adv
+   prt
+   inv sbr
+   x⇌t
+   1
+   x=t 586
+   inv sbr
+   inv sum 53
+   prt
+   inv sbr
+   (
+   ce
+   ÷
+   100
+   ×
+   rcl 53
+   )
+   inv sum 53
+   prt
+   inv sbr
+
+lbl E
+   inv sum 53
+   prt
+   inv sbr
+   (
+   sto 56
+   prt
+   ÷
+   100
+   )
+   fix 9
+   sto 07
+   rcl 56
+   inv sbr
+
+lbl A'
+   fix 2
+   1
+   x⇌t
+   rcl 55
+   x=t 647
+   (
+   rcl 53
+   +
+   ce
+   ×
+   rcl 07
+   )
+   sto 53
+   rcl 53
+   sto 56
+   prt
+   inv sbr
+   inv sum 56
+   prt
+   inv sbr
+   rcl 10
+   inv sum 56
+   prt
+   inv sbr
+   rcl 54
+   inv sum 56
+   prt
+   inv sbr
+   rcl 56
+   prt
+   inv sbr
+   sto 57
+   x⇌t
+   (
+   rcl 10
+   +
+   rcl 13
+   )
+   sum 57
+   x⇌t
+   adv
+   prt
+   inv sbr
+   sum 57
+   prt
+   inv sbr
+   rcl 53
+   inv sum 57
+   rcl 57
+   +/-
+
+lbl C'
+   sto 57
+   prt
+   inv sbr
+   prd 56
+   100
+   inv prd 56
+   rcl 56
+   prt
+   inv sbr
+   +/-
+   sum 57
+   rcl 57
+   prt
+   adv
+   inv sbr
+
+lbl B'
+   sto 16
+   prt
+   inv sbr
+   sum 16
+   prt
+   inv sbr
+   sum 16
+   +/-
+   sto 56
+   +/-
+   prt
+   inv sbr
+   rcl 14
+   inv sum 16
+   prt
+   inv sbr
+   inv sum 16
+   prt
+   inv sbr
+   rcl 16
+   prt
+   adv
+   inv sbr
+   inv sum 14
+   prt
+   inv sbr
+   cp
+   rcl 14
+   x≥t 779
+   0
+   sto 14
+   prt
+   adv
+   inv sbr
+   sto 15
+   fix 4
+   prt
+   inv sbr
+   fix 2
+   sum 56
+   prt
+   inv sbr
+   (
+   ce
+   -
+   rcl 16
+   -
+   rcl 14
+   )
+   prt
+   sto 16
+   inv sbr
+   cp
+   (
+   rcl 16
+   -
+   50000
+   )
+   x≥t 831
+   (
+   rcl 16
+   ×
+   .25
+   gto 843
+   (
+   ce
+   ×
+   .35
+   +
+   12500
+   +
+   100
+   inv prd 14
+   rcl 15
+   prd 14
+   rcl 14
+   )
+   +/-
+   sum 56
+   +/-
+   prt
+   inv sbr
+   rcl 29
+   sum 17
+   rcl 41
+   sum 17
+   (
+   rcl 56
+   -
+   rcl 17
+   )
+   prt
+   inv sbr
+
+lbl D'
+   sto 14
+   inv sum 16
+   prt
+   gto 754

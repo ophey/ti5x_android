@@ -1,0 +1,222 @@
+   ; investment module -3-
+   ;
+
+lbl E'
+   adv
+   inv stflg 1
+   inv stflg 2
+   inv stflg 3
+   13
+   sto 01
+   0
+   st* 01
+   dsz 1 016
+   inv sbr
+   stflg 2
+   sto 16
+   sbr pgm
+   ifflg 7 046
+   sbr 071
+   inv sbr
+   sbr pgm
+   ifflg 7 050
+   sbr cp
+   inv sbr
+   gto 024
+   inv sbr
+   gto 038
+
+lbl pgm
+   inv stflg 7
+   sto 17
+   lnx
+   op 19
+   inv sbr
+
+lbl A
+   stflg 1
+   sto 16
+   sto 14
+   sum 04
+   x²
+   sum 05
+   op 23
+   rcl 16
+   prt
+   inv sbr
+
+lbl ce
+   sto 17
+
+lbl cp
+   sto 15
+   sum 01
+   x²
+   sum 02
+   rcl 15
+   prd 14
+   rcl 14
+   sum 06
+   rcl 17
+   prt
+   rcl 03
+   inv sbr
+
+lbl B
+   sbr 069
+   inv sbr
+   sbr pgm
+   ifflg 7 125
+   sbr cp
+   inv sbr
+   gto 117
+
+lbl C
+   stflg 3
+   sto 16
+   sbr pgm
+   inv ifflg 7 071
+   inv sbr
+
+lbl adv
+   op 12
+   x⇌t
+   sto 15
+   x⇌t
+   ifflg 1 161
+   ifflg 3 161
+   inv lnx
+   sto 16
+   inv sbr
+
+lbl B'
+   rcl 15
+   prt
+   inv sbr
+
+lbl C'
+   op 13
+   x²
+   prt
+   inv sbr
+
+lbl D'
+   ifflg 2 205
+   ifflg 1 219
+   ifflg 3 223
+   (
+   (
+   ce
+   ÷
+   rcl 16
+   )
+   lnx
+   ÷
+   rcl 15
+   )
+   prt
+   inv sbr
+   (
+   (
+   ce
+   ÷
+   rcl 16
+   )
+   y**x
+   rcl 15
+   1/x
+   )
+   prt
+   inv sbr
+   op 15
+   prt
+   inv sbr
+   op 15
+   inv lnx
+   prt
+   inv sbr
+
+lbl E
+   ifflg 1 267
+   ifflg 3 266
+   ifflg 2 258
+   (
+   (
+   ce
+   ×
+   rcl 15
+   )
+   inv lnx
+   ×
+   rcl 16
+   )
+   prt
+   inv sbr
+   (
+   ce
+   y**x
+   rcl 15
+   gto 252
+   lnx
+   op 14
+   prt
+   inv sbr
+
+lbl D
+   ifflg 1 320
+   ifflg 2 305
+   ifflg 3 294
+   sbr 320
+   inv sbr
+   sto 17
+   lnx
+   gto p→r
+   sto 16
+   lnx
+   sbr 322
+   inv sbr
+   sto 17
+   gto p→r
+   sto 16
+   lnx
+   sbr 322
+   inv sbr
+   sto 17
+   lnx
+   sbr p→r
+   gto 046
+   sto 16
+   sto 14
+   +/-
+   sum 04
+   x²
+   +/-
+   sum 05
+   op 33
+   rcl 16
+   prt
+   inv sbr
+   sto 17
+
+lbl p→r
+   sto 15
+   +/-
+   sum 01
+   x²
+   +/-
+   sum 02
+   (
+   rcl 15
+   ×
+   rcl 14
+   )
+   +/-
+   sum 06
+   rcl 17
+   prt
+   inv sbr
+
+lbl A'
+   sbr adv
+   prt
+   inv sbr

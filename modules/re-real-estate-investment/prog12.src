@@ -1,0 +1,179 @@
+   ; investment module -3-
+   ;
+
+lbl C
+   fix 8
+   rcl 04
+   sto 06
+   rcl 03
+   +/-
+   sum 06
+   rcl 05
+   inv prd 06
+
+lbl E
+   rcl 01
+   sto 12
+   rcl 02
+   sto 07
+   rcl 03
+   +/-
+   sto 04
+   0
+   sto 05
+   sto 08
+   sto 09
+   1
+   inv sum 12
+   (
+   (
+   rcl 06
+   +/-
+   ×
+   rcl 07
+   )
+   inv lnx
+   ×
+   rc* 12
+   ×
+   sum 04
+   rcl 07
+   ×
+   sum 05
+   rcl 07
+   ×
+   sum 08
+   rcl 07
+   )
+   sum 09
+   dsz 7 040
+   (
+   (
+   (
+   rcl 05
+   1/x
+   prd 04
+   prd 08
+   ×
+   rcl 09
+   ÷
+   6
+   -
+   rcl 08
+   x²
+   ÷
+   2
+   )
+   ×
+   rcl 04
+   +/-
+   +
+   rcl 08
+   ÷
+   2
+   )
+   ×
+   rcl 04
+   x²
+   +
+   rcl 04
+   )
+   sum 06
+   (
+   x²
+   √x
+   -
+   6
+   +/-
+   inv log
+   )
+   cp
+   x≥t e
+   (
+   (
+   rcl 06
+   inv lnx
+   -
+   1
+   )
+   ×
+   100
+   )
+   fix 4
+   prt
+   inv sbr
+
+lbl A'
+   fix 2
+   sto 10
+   sto 11
+   inv sbr
+
+lbl C'
+   x⇌t
+   19
+   sum 10
+   x⇌t
+   st* 10
+   inv sbr
+
+lbl B'
+   x⇌t
+   19
+   sum 10
+   (
+   rc* 10
+   inv sum 04
+   ×
+   rcl 11
+   )
+   inv sum 05
+   (
+   x⇌t
+   sum 04
+   st* 10
+   ×
+   rcl 11
+   )
+   sum 05
+   inv sbr
+
+lbl E'
+   fix 9
+   adv
+   20
+   sto 01
+   1
+   sto 02
+   0
+   sto 04
+   sto 05
+   inv sbr
+
+lbl B
+   x⇌t
+   op 32
+   rcl 02
+   fix 9
+   adv
+   prt
+   x⇌t
+   sto 03
+   fix 2
+   prt
+   inv sbr
+
+lbl A
+   (
+   st* 01
+   fix 2
+   prt
+   sum 04
+   ×
+   rcl 02
+   )
+   sum 05
+   op 21
+   rcl 02
+   op 22
+   inv sbr

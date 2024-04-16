@@ -86,6 +86,7 @@ public class Main extends AppCompatActivity {
      {
         new BuiltinLibrary(R.string.master_library, R.raw.ml),
         new BuiltinLibrary(R.string.appstats_library, R.raw.st),
+        new BuiltinLibrary(R.string.investment_library, R.raw.re),
         new BuiltinLibrary(R.string.surveying_library, R.raw.sy),
         new BuiltinLibrary(R.string.marine_navigation_library, R.raw.ng),
         new BuiltinLibrary(R.string.aviation_library, R.raw.av),
