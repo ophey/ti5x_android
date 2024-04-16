@@ -1,0 +1,108 @@
+   ; securities analysis module -8-
+   ;
+
+lbl A
+   sto 24
+   sbr 034
+   exc 24
+   inv sbr
+
+lbl B
+   sto 20
+   sbr 034
+   exc 20
+   inv sbr
+
+lbl C
+   fix 9
+   (
+   rcl 20
+   -
+   rcl 24
+   )
+   inv sbr
+
+lbl A'
+   fix 4
+   (
+   sto 21
+   cp
+   inv int
+   inv sum 21
+   ×
+   4
+   inv log
+   )
+   sto 23
+   (
+   (
+   rcl 21
+   ÷
+   100
+   )
+   sto 21
+   inv int
+   inv sum 21
+   ×
+   100
+   )
+   sto 22
+   (
+   365
+   ×
+   rcl 23
+   +
+   rcl 22
+   +
+   31
+   ×
+   rcl 21
+   -
+   31
+   +
+   3
+   x⇌t
+   rcl 21
+   inv x≥t 120
+   (
+   .4
+   ×
+   rcl 21
+   +
+   2.3
+   )
+   int
+   +/-
+   +
+   1
+   sum 23
+   1
+   inv sum 23
+   (
+   rcl 23
+   ÷
+   4
+   )
+   int
+   -
+   (
+   .75
+   +
+   (
+   rcl 23
+   ÷
+   100
+   )
+   int
+   ×
+   .75
+   )
+   int
+   )
+   inv sbr
+
+lbl clr
+   0
+   fix 9
+   inv sbr
+   inv sbr

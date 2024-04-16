@@ -1,0 +1,187 @@
+   ; securities analysis module -8-
+   ;
+
+lbl list
+   pause
+   pause
+   pause
+   pause
+   pause
+   pause
+   inv sbr
+
+lbl clr
+   cms
+   1
+   sto 14
+   fix 9
+   0
+   inv sbr
+
+lbl A'
+   sto 20
+   inv stflg 1
+   pgm 02
+   d'
+   sbr 318
+   adv
+   inv sbr
+
+lbl A
+   sto 12
+   x⇌t
+   33
+   pgm 09
+   a'
+   inv sbr
+
+lbl B
+   sto 13
+   x⇌t
+   16
+   gto 041
+
+lbl C
+   (
+   (
+   rcl 12
+   -
+   rcl 14
+   +
+   rcl 13
+   )
+   ÷
+   rcl 14
+   )
+   ifflg 1 143
+   st* 07
+   op 27
+   rcl 12
+   sto 14
+   adv
+   inv sbr
+   rc* 07
+   ∑+
+   op 27
+   dsz 8 086
+   mean(x)
+   sto 15
+   x⇌t
+   67173524
+   sbr 312
+   inv mean(x)
+   sto 24
+   x²
+   sto 16
+   x⇌t
+   42133524
+   sbr 312
+   rcl 24
+   x⇌t
+   361624
+   pgm 09
+   e
+   adv
+   inv sbr
+   st* 00
+   op 20
+   gto 080
+
+lbl B'
+   stflg 1
+   x⇌t
+   adv
+   sbr 318
+   36
+   gto 138
+
+lbl C'
+   sbr 318
+   op 27
+   op 20
+   rcl 20
+   sto 08
+   op 38
+   pgm 01
+   sbr clr
+   inv ifflg 1 086
+   rc* 07
+   x⇌t
+   rc* 00
+   ∑+
+   op 27
+   op 20
+   dsz 8 188
+   adv
+   op 12
+   sto 21
+   x⇌t
+   sto 22
+   13
+   sbr 312
+   rcl 22
+   x⇌t
+   14
+   sbr 312
+   (
+   (
+   rcl 02
+   -
+   rcl 21
+   ×
+   rcl 01
+   -
+   rcl 22
+   ×
+   rcl 06
+   )
+   ÷
+   (
+   rcl 20
+   -
+   3
+   )
+   )
+   sto 17
+   (
+   rcl 21
+   +
+   rcl 22
+   ×
+   rcl 15
+   )
+   sto 18
+   x⇌t
+   1735
+   sbr 312
+   (
+   rcl 22
+   x²
+   ×
+   rcl 16
+   +
+   rcl 17
+   )
+   sto 19
+   x⇌t
+   421335
+   sbr 312
+   √x
+   sto 25
+   x⇌t
+   3616
+   sbr 312
+   op 13
+   x²
+   x⇌t
+   3570
+   pgm 09
+   e
+   sbr list
+   inv sbr
+   26
+   sto 07
+   sto 00
+   rcl 20
+   sum 00
+   inv sbr

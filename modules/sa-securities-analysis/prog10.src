@@ -1,0 +1,341 @@
+   ; securities analysis module -8-
+   ;
+
+lbl clr
+   pgm 04
+   sbr clr
+   365
+   sto 25
+   2
+   sto 26
+   100
+   sto 27
+   0
+   fix 9
+   inv sbr
+
+lbl B'
+   fix 4
+   prt
+   (
+   (
+   pgm 15
+   a'
+   -
+   rcl 24
+   )
+   ÷
+   rcl 25
+   ×
+   rcl 26
+   )
+
+lbl A
+   ifflg 5 056
+   sto 01
+   pgm 02
+   d'
+   inv sbr
+   rcl 01
+   sto 20
+   0
+   sto 01
+   sbr 439
+   .01
+   x⇌t
+   (
+   pgm 04
+   a
+   -
+   exc 01
+   )
+   |x|
+   x≥t 063
+   rcl 20
+   exc 01
+   fix 2
+   ee
+   inv ee
+   pgm 02
+   d'
+   inv sbr
+
+lbl B
+   ifflg 5 126
+   (
+   sto 09
+   ÷
+   100
+   ÷
+   rcl 26
+   +
+   sto 02
+   1
+   )
+   exc 09
+   pgm 03
+   e'
+   inv sbr
+   pgm 09
+   a'
+   inv sbr
+   sbr 439
+   (
+   pgm 04
+   b
+   ×
+   rcl 26
+   )
+   gto 118
+
+lbl C
+   ifflg 5 156
+   sto 17
+   x⇌t
+   6115
+   gto 122
+   sbr 439
+   rcl 29
+   sto 04
+   (
+   (
+   (
+   pgm 04
+   c
+   ÷
+   rcl 28
+   ×
+   rcl 26
+   ×
+   100
+   )
+   gto 148
+
+lbl D
+   ifflg 5 218
+   (
+   sto 29
+   sbr 504
+   ×
+   10
+   )
+   exc 29
+   pgm 06
+   sbr deg
+   inv sbr
+   sum 29
+   x⇌t
+   153230
+   gto 122
+   sbr 439
+   (
+   rcl 28
+   ×
+   (
+   1
+   -
+   rcl 19
+   )
+   )
+   sto 05
+   (
+   (
+   pgm 04
+   d
+   -
+   rcl 15
+   ×
+   rcl 03
+   )
+   ÷
+   10
+   ÷
+   (
+   1
+   -
+   rcl 19
+   ÷
+   rcl 12
+   )
+   )
+   sbr 525
+   gto 201
+
+lbl E
+   ifflg 5 294
+   (
+   sto 28
+   sbr 504
+   ×
+   10
+   )
+   exc 28
+   x⇌t
+   301337
+   gto 122
+   sbr 439
+   (
+   rcl 17
+   ÷
+   100
+   ×
+   (
+   1
+   -
+   rcl 18
+   )
+   ÷
+   rcl 26
+   )
+   sto 03
+   pgm 04
+   e
+   -
+   (
+   1
+   -
+   rcl 19
+   )
+   ÷
+   rcl 12
+   )
+   +/-
+   1/x
+   ×
+   (
+   rcl 29
+   -
+   ce
+   ×
+   rcl 19
+   ÷
+   rcl 12
+   )
+   ÷
+   10
+   )
+   sbr 525
+   gto 284
+
+lbl A'
+   fix 4
+   prt
+   pgm 15
+   a
+   inv sbr
+
+lbl C'
+   adv
+   (
+   rcl 28
+   ×
+   rcl 17
+   ×
+   (
+   1
+   -
+   rcl 18
+   )
+   ÷
+   rcl 29
+   )
+   x⇌t
+   15452716
+   gto 122
+
+lbl D'
+   (
+   sto 18
+   ÷
+   100
+   )
+   exc 18
+   pgm 06
+   sbr rad
+   inv sbr
+   (
+   sto 19
+   ÷
+   100
+   )
+   exc 19
+   pgm 06
+   sbr grad
+   inv sbr
+
+lbl E'
+   stflg 5
+   stflg 6
+   stflg 3
+   adv
+   inv sbr
+   (
+   rcl 28
+   -
+   (
+   ce
+   -
+   rcl 29
+   )
+   ×
+   rcl 19
+   )
+   sto 05
+   (
+   rcl 17
+   ÷
+   100
+   ×
+   rcl 28
+   ÷
+   rcl 26
+   ×
+   (
+   1
+   -
+   rcl 18
+   )
+   )
+   sto 03
+   cp
+   rcl 01
+   inv int
+   x=t 491
+   (
+   +/-
+   +
+   1
+   )
+   (
+   sto 15
+   ×
+   rcl 03
+   +
+   rcl 29
+   )
+   sto 04
+   inv sbr
+   sto 20
+   inv int
+   (
+   inv sum 20
+   ×
+   100
+   ÷
+   rcl 27
+   )
+   sum 20
+   rcl 20
+   inv sbr
+   sto 20
+   inv int
+   (
+   inv sum 20
+   ÷
+   100
+   ×
+   rcl 27
+   )
+   sum 20
+   rcl 20
+   inv sbr
