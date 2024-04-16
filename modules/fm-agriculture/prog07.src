@@ -1,0 +1,121 @@
+   ; agriculture module -12-
+   ;
+
+lbl A'
+   .45359237
+   inv sbr
+
+lbl E
+   fix 1
+   sto 04
+   +/-
+   +
+   rcl 01
+   =
+   sto 06
+   ×
+   .9486
+   +
+   rcl 04
+   ×
+   1.614
+   =
+   +/-
+   sto 05
+   rcl 06
+   ×
+   1.511
+   =
+   inv sbr
+   rcl 05
+   inv sbr
+
+lbl D'
+   fix 1
+   clr
+   rcl 01
+   ×
+   .1
+   ×
+   rcl 03
+   =
+   sto 04
+   +/-
+   +
+   1.044
+   ×
+   rcl 02
+   =
+   ÷
+   2.8
+   =
+   sto 05
+   x⇌t
+   clr
+   x⇌t
+   x≥t 109
+   clr
+   1.044
+   ×
+   rcl 02
+   gto 111
+   rcl 04
+   ×
+   .8
+   -
+   12
+   +
+   .9
+   ×
+   (
+   10
+   ×
+   rcl 01
+   -
+   rcl 04
+   =
+   inv sbr
+   rcl 05
+   inv sbr
+
+lbl D
+   d'
+   ×
+   a'
+   =
+   inv sbr
+
+lbl B'
+   clr
+   rcl 05
+   ×
+   a'
+   =
+   inv sbr
+
+lbl E'
+   e
+   ÷
+   a'
+   =
+   inv sbr
+
+lbl C'
+   clr
+   rcl 05
+   ÷
+   a'
+   =
+   inv sbr
+
+lbl A
+   sto 01
+   inv sbr
+
+lbl B
+   sto 02
+   inv sbr
+
+lbl C
+   sto 03
+   inv sbr

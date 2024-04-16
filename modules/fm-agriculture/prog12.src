@@ -1,0 +1,144 @@
+   ; agriculture module -12-
+   ;
+
+lbl A
+   fix 2
+   sto 20
+   prt
+   adv
+   pgm 13
+   sbr cos
+   +
+   rcl 00
+   =
+   sto 12
+   1
+   x⇌t
+   rcl 12
+   inv x≥t 099
+   -
+   365
+   =
+   inv x≥t 037
+   sto 12
+   rcl 12
+   ÷
+   32
+   =
+   x≥t 057
+   rcl 12
+   ÷
+   100
+   +
+   1
+   =
+   prt
+   inv sbr
+   rcl 12
+   +
+   32.3
+   =
+   ÷
+   30.6
+   =
+   int
+   +
+   .01
+   =
+   pgm 13
+   sbr cos
+   -
+   1
+   -
+   rcl 12
+   =
+   +/-
+   ÷
+   100
+   =
+   +
+   rcl 27
+   =
+   prt
+   inv sbr
+   +
+   365
+   =
+   sto 12
+   gto 037
+   pgm 13
+   sbr cos
+   +
+   rc* 09
+   =
+   gto 016
+
+lbl A'
+   sto 21
+   prt
+   adv
+   pgm 13
+   sbr cos
+   +
+   365
+   -
+   rcl 00
+   =
+   sbr 016
+   inv sbr
+
+lbl B
+   1
+   sto 09
+   rcl 20
+   sbr 109
+   inv sbr
+
+lbl C
+   2
+   sto 09
+   rcl 20
+   sbr 109
+   inv sbr
+
+lbl D
+   3
+   sto 09
+   rcl 20
+   sbr 109
+   inv sbr
+
+lbl E
+   4
+   sto 09
+   rcl 20
+   sbr 109
+   inv sbr
+
+lbl B'
+   5
+   sto 09
+   rcl 21
+   sbr 109
+   inv sbr
+
+lbl C'
+   6
+   sto 09
+   rcl 21
+   sbr 109
+   inv sbr
+
+lbl D'
+   7
+   sto 09
+   rcl 21
+   sbr 109
+   inv sbr
+
+lbl E'
+   8
+   sto 09
+   rcl 21
+   sbr 109
+   inv sbr

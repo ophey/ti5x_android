@@ -52,6 +52,7 @@
     <string name="businessdecision_library">Business Decision</string>
     <string name="rpn_library">RPN Simulator</string>
     <string name="structuralengineering_library">Structural Engineering</string>
+    <string name="agriculture_library">Agriculture</string>
     <string name="securitiesanalysis_library">Securities Analysis</string>
     <string name="investment_library">Real Estate / Investment</string>
     <string name="surveying_library">Surveying</string>

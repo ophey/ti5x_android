@@ -1,0 +1,298 @@
+   ; agriculture module -12-
+   ;
+
+lbl E'
+   fix 9
+   4
+   op 17
+   fix 3
+   inv sbr
+
+lbl C
+   3
+   inv sbr
+   sto 28
+   4
+   inv sbr
+   sto 29
+   5
+   inv sbr
+   sto 30
+   0
+   inv sbr
+
+lbl A
+   sto 35
+   sbr 120
+   inv sbr
+   sbr 212
+   inv sbr
+   sbr 229
+   rcl 35
+   prt
+   inv sbr
+   sbr 239
+   prt
+   inv sbr
+   gto 275
+   adv
+   inv sbr
+
+lbl B
+   sto 35
+   sbr 089
+   sbr 120
+   inv sbr
+   sbr 212
+   inv sbr
+   sbr 229
+   sbr 239
+   prt
+   inv sbr
+   rcl 35
+   prt
+   inv sbr
+   sbr 089
+   gto 275
+   inv sbr
+   rcl 01
+   exc 02
+   sto 01
+   rcl 06
+   exc 07
+   sto 06
+   rcl 11
+   exc 12
+   sto 11
+   rcl 16
+   exc 17
+   sto 16
+   rcl 21
+   exc 22
+   sto 21
+   inv sbr
+   rcl 28
+   sto 33
+   ×
+   rcl 11
+   +
+   rcl 29
+   sum 33
+   ×
+   rcl 16
+   +
+   rcl 30
+   sum 33
+   ×
+   rcl 21
+   =
+   ÷
+   100
+   =
+   sto 34
+   100
+   -
+   rcl 33
+   =
+   ÷
+   100
+   =
+   sto 33
+   rcl 35
+   -
+   rcl 34
+   =
+   ÷
+   rcl 33
+   =
+   sto 32
+   -
+   rcl 01
+   =
+   sto 37
+   sto 36
+   rcl 06
+   -
+   rcl 32
+   =
+   sto 34
+   sum 36
+   ÷
+   rcl 36
+   ×
+   rcl 33
+   ×
+   100
+   =
+   sto 26
+   sto 38
+   prt
+   inv sbr
+   rcl 37
+   ÷
+   rcl 36
+   ×
+   rcl 33
+   ×
+   100
+   =
+   sto 27
+   prt
+   inv sbr
+   rcl 28
+   prt
+   rcl 29
+   prt
+   rcl 30
+   prt
+   inv sbr
+   rcl 26
+   ×
+   rcl 02
+   +
+   rcl 27
+   ×
+   rcl 07
+   +
+   rcl 28
+   ×
+   rcl 12
+   +
+   rcl 29
+   ×
+   rcl 17
+   +
+   rcl 30
+   ×
+   rcl 22
+   =
+   ÷
+   100
+   =
+   inv sbr
+   rcl 26
+   ×
+   rcl 03
+   +
+   rcl 27
+   ×
+   rcl 08
+   +
+   rcl 28
+   ×
+   rcl 13
+   +
+   rcl 29
+   ×
+   rcl 18
+   +
+   rcl 30
+   ×
+   rcl 23
+   =
+   ÷
+   100
+   =
+   prt
+   inv sbr
+   rcl 26
+   ×
+   rcl 04
+   +
+   rcl 27
+   ×
+   rcl 09
+   +
+   rcl 28
+   ×
+   rcl 14
+   +
+   rcl 29
+   ×
+   rcl 19
+   +
+   rcl 30
+   ×
+   rcl 24
+   =
+   ÷
+   100
+   =
+   prt
+   inv sbr
+   rcl 26
+   ×
+   rcl 05
+   +
+   rcl 27
+   ×
+   rcl 10
+   +
+   rcl 28
+   ×
+   rcl 15
+   +
+   rcl 29
+   ×
+   rcl 20
+   +
+   rcl 30
+   ×
+   rcl 25
+   =
+   ÷
+   100
+   =
+   prt
+   adv
+   inv sbr
+
+lbl D
+   prt
+   adv
+   sto 31
+   88
+   ÷
+   rcl 31
+   =
+   prd 26
+   rcl 26
+   -
+   rcl 38
+   =
+   +
+   100
+   =
+   ÷
+   100
+   =
+   1/x
+   prd 26
+   prd 27
+   prd 28
+   prd 29
+   prd 30
+   rcl 26
+   prt
+   inv sbr
+   rcl 27
+   prt
+   inv sbr
+   rcl 28
+   prt
+   inv sbr
+   rcl 29
+   prt
+   inv sbr
+   rcl 30
+   prt
+   adv
+   inv sbr
+
+lbl E
+   prt
+   adv
+   ÷
+   100
+   =
+   gto 418

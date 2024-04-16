@@ -1,0 +1,113 @@
+   ; agriculture module -12-
+   ;
+
+lbl E'
+   cms
+   fix 2
+   0
+   inv sbr
+
+lbl A'
+   ×
+   inv sbr
+   ÷
+   88
+   =
+
+lbl A
+   prt
+   sto 10
+   sum 11
+   1
+   inv sbr
+   ×
+   rcl 10
+   =
+   sum 12
+   2
+   inv sbr
+   ×
+   rcl 10
+   =
+   sum 13
+   3
+   inv sbr
+   ×
+   rcl 10
+   =
+   sum 14
+   4
+   inv sbr
+   ×
+   rcl 10
+   =
+   sum 15
+   5
+   inv sbr
+   ×
+   rcl 10
+   =
+   sum 16
+   6
+   inv sbr
+   ×
+   rcl 10
+   =
+   sum 17
+   7
+   inv sbr
+   ×
+   rcl 10
+   =
+   sum 18
+   0
+   inv sbr
+
+lbl B
+   rcl 11
+   prt
+   adv
+   inv sbr
+   rcl 12
+   ÷
+   rcl 11
+   =
+   prt
+   inv sbr
+   rcl 13
+   ÷
+   rcl 11
+   =
+   prt
+   inv sbr
+   rcl 14
+   ÷
+   rcl 11
+   =
+   prt
+   inv sbr
+   rcl 15
+   ÷
+   rcl 11
+   =
+   prt
+   inv sbr
+   rcl 16
+   ÷
+   rcl 11
+   =
+   prt
+   inv sbr
+   rcl 17
+   ÷
+   rcl 11
+   =
+   prt
+   inv sbr
+   rcl 18
+   ÷
+   rcl 11
+   =
+   prt
+   adv
+   inv sbr

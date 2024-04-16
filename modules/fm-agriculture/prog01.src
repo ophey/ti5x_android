@@ -1,0 +1,61 @@
+   ; agriculture module -12-
+   ;
+
+lbl ce
+   0
+   sto 09
+   deg
+   fix 9
+
+lbl clr
+   cp
+   6
+   sto 01
+   0
+   st* 01
+   dsz 1 015
+   inv sbr
+
+lbl =
+   sbr ce
+   5
+   x⇌t
+   30
+   p→r
+   ∑+
+   inv p→r
+   ∑+
+   op 12
+   d.ms
+   ∑+
+   op 11
+   inv d.ms
+   inv ∑+
+   op 14
+   (
+   ce
+   -
+   100
+   pgm 03
+   b
+   )
+   ee
+   inv ee
+   x⇌t
+   165.7605154
+   x=t write
+   0
+   1/x
+
+lbl write
+   op 00
+   13
+   op 02
+   2235241541
+   op 03
+   2737413517
+   op 04
+   op 05
+   12
+   prt
+   inv sbr

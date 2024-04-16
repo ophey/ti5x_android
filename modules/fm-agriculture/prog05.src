@@ -1,0 +1,317 @@
+   ; agriculture module -12-
+   ;
+
+lbl eng
+   ÷
+   100
+   )
+   inv sbr
+
+lbl B
+   sto 26
+   adv
+   rcl 19
+   ÷
+   rcl 26
+   =
+   sto 13
+   rcl 20
+   ÷
+   rcl 26
+   =
+   sto 14
+   rcl 21
+   ÷
+   rcl 26
+   =
+   sto 15
+   rcl 22
+   ÷
+   rcl 26
+   =
+   sto 16
+   rcl 23
+   ÷
+   rcl 26
+   =
+   sto 17
+   rcl 24
+   ÷
+   rcl 26
+   =
+   sto 18
+   rcl 13
+   prt
+   inv sbr
+   ÷
+   rcl 01
+   =
+   prt
+   inv sbr
+   x⇌t
+   fix 2
+   cms
+   1
+   sto 26
+   clr
+   x⇌t
+   sto 00
+   -
+   800
+   inv sbr
+
+lbl A
+   sbr 071
+   =
+   +/-
+   ×
+   31
+   ÷
+   10
+   y**x
+   7
+   =
+   sto 05
+   +
+   .02
+   =
+   ×
+   rcl 00
+   =
+   sto 01
+   ×
+   (
+   .54
+   +
+   rcl 05
+   ×
+   10
+   =
+   sto 03
+   .06
+   ×
+   rcl 01
+   =
+   sto 02
+   .044
+   sto 04
+   0
+   x⇌t
+   inv sbr
+   inv x=t b'
+   nop
+   .836
+   prd 01
+   .817
+   prd 02
+   .85
+   prd 03
+   .9
+   prd 04
+   gto b'
+   nop
+
+lbl A'
+   sbr 071
+   =
+   +/-
+   ×
+   9
+   ÷
+   10
+   y**x
+   6
+   =
+   +
+   .028
+   =
+   ×
+   rcl 00
+   =
+   sto 01
+   ×
+   .465
+   =
+   sto 03
+   rcl 01
+   ×
+   .0803
+   =
+   sto 02
+   .066
+   sto 04
+   2
+   x⇌t
+   1
+   =
+   inv sbr
+   inv x≥t b'
+   nop
+   1.26
+   prd 03
+   1.32
+   prd 02
+   1.65
+   prd 04
+
+lbl B'
+   clr
+   1
+   =
+   inv sbr
+   sto 10
+   2
+   =
+   inv sbr
+   inv prd 10
+   3
+   =
+   inv sbr
+   sto 12
+   ×
+   rcl 10
+   =
+   sum 20
+   4
+   =
+   inv sbr
+   sbr 002
+   prd 12
+   rcl 12
+   sum 19
+   5
+   =
+   inv sbr
+   sbr 002
+   ×
+   rcl 12
+   =
+   sum 21
+   6
+   =
+   inv sbr
+   sbr 002
+   ×
+   rcl 12
+   =
+   sum 22
+   7
+   =
+   inv sbr
+   sbr 002
+   ×
+   rcl 12
+   =
+   sum 23
+   8
+   =
+   inv sbr
+   sbr 002
+   ×
+   rcl 12
+   =
+   sum 24
+   gto b'
+   nop
+
+lbl C
+   clr
+   fix 2
+   1
+   x⇌t
+   rcl 16
+   prt
+   inv sbr
+   ÷
+   rcl 03
+   =
+   x≥t 363
+   ×
+   ×
+   prt
+   inv sbr
+
+lbl D
+   clr
+   fix 2
+   1
+   x⇌t
+   rcl 15
+   prt
+   inv sbr
+   ÷
+   rcl 02
+   =
+   x≥t 385
+   ×
+   ×
+   prt
+   inv sbr
+
+lbl D'
+   sto 25
+   0
+   x⇌t
+   rcl 02
+   -
+   rcl 15
+   =
+   ÷
+   rcl 25
+   ×
+   100
+   =
+   x≥t 411
+   x⇌t
+   prt
+   inv sbr
+   ×
+   rcl 26
+   =
+   prt
+   inv sbr
+
+lbl E
+   clr
+   fix 2
+   1
+   x⇌t
+   rcl 17
+   ÷
+   rcl 04
+   =
+   x≥t 437
+   ×
+   ×
+   rcl 17
+   prt
+   inv sbr
+   rcl 17
+   -
+   rcl 04
+   =
+   prt
+   inv sbr
+   clr
+   rcl 18
+   ÷
+   rcl 04
+   =
+   x≥t 461
+   ×
+   ×
+   rcl 18
+   prt
+   inv sbr
+   rcl 18
+   -
+   rcl 04
+   =
+   prt
+   inv sbr
+
+lbl E'
+   clr
+   rcl 14
+   prt
+   inv sbr

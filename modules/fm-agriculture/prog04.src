@@ -1,0 +1,25 @@
+   ; agriculture module -12-
+   ;
+
+lbl A
+   sto 29
+   inv sbr
+
+lbl B
+   ÷
+   rcl 29
+   =
+   sto 28
+   1
+   sto 00
+   rcl 00
+   pause
+   rcl 28
+   ×
+   rc* 00
+   =
+   prt
+   inv sbr
+   op 20
+   gto 016
+   inv sbr

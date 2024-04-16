@@ -1,0 +1,481 @@
+   ; agriculture module -12-
+   ;
+
+lbl sum
+   ×
+   rcl 17
+   =
+   sm* 00
+   op 20
+   inv sbr
+
+lbl cp
+   ×
+   2.225
+   =
+   inv sbr
+
+lbl C
+   clr
+   1
+   -
+   rcl 10
+   y**x
+   .75
+   ×
+   .0426
+   ÷
+   rcl 03
+   =
+   x≥t 048
+   ×
+   ×
+   inv sbr
+   ×
+   rcl 04
+   ×
+   .0495
+   ÷
+   rcl 10
+   y**x
+   .75
+   +
+   .002779
+   =
+   √x
+   ×
+   161.16
+   -
+   8.4962
+   =
+   prt
+   sto 21
+   inv sbr
+   rcl 02
+   ÷
+   rcl 21
+   =
+   inv sbr
+   +
+   rcl 02
+   =
+   ÷
+   rcl 21
+   =
+   inv sbr
+
+lbl E
+   rcl 12
+   +
+   rcl 13
+   -
+   rcl 15
+   =
+   inv sbr
+
+lbl A
+   adv
+   prt
+   x⇌t
+   fix 9
+   3
+   op 17
+   cms
+   6
+   op 17
+   fix 2
+   clr
+   x⇌t
+   sto 10
+
+lbl A'
+   inv stflg 1
+   1
+   adv
+   inv sbr
+   prt
+   sto 16
+   2
+   inv sbr
+   prt
+   inv prd 16
+   3
+   inv sbr
+   prt
+   sto 17
+   ×
+   rcl 16
+   =
+   sum 02
+   4
+   sto 00
+   inv sbr
+   prt
+   prd 17
+   5
+   inv sbr
+   prt
+   ×
+   rcl 17
+   sum 01
+   =
+   sum 03
+   6
+   inv sbr
+   prt
+   sbr sum
+   7
+   inv sbr
+   prt
+   sbr sum
+   8
+   inv sbr
+   prt
+   x≥t 210
+   op 20
+   sbr sum
+   gto 214
+   sbr sum
+   op 20
+   9
+   inv sbr
+   prt
+   ÷
+   100
+   sbr sum
+   10
+   inv sbr
+   prt
+   ÷
+   100
+   sbr sum
+   gto a'
+
+lbl B
+   prt
+   sto 11
+   x=t 255
+   9
+   sto 00
+   rcl 11
+   1/x
+   prd ind 00
+   dsz 0 249
+   clr
+   rcl 01
+   ÷
+   (
+   rcl 10
+   ×
+   .9
+   ×
+   (
+   .033
+   -
+   rcl 10
+   ÷
+   5
+   inv log
+   =
+   inv sbr
+   rcl 01
+   prt
+   inv sbr
+
+lbl D
+   sto 16
+   rcl 11
+   x=t 296
+   inv prd 16
+   4
+   inv sbr
+   sto 17
+   prd 16
+   7
+   inv sbr
+   sto 18
+   ifflg 1 320
+   ×
+   rcl 16
+   +/-
+   +
+   rcl 05
+   =
+   sto 12
+   8
+   inv sbr
+   sbr cp
+   sto 19
+   ifflg 1 rad
+   ×
+   rcl 16
+   =
+   +/-
+   +
+   x≥t 349
+   rcl 06
+   sbr cp
+   sto 13
+   stflg 1
+   ifflg 2 rad
+   rcl 07
+   sbr cp
+   sto 14
+   stflg 2
+   inv ifflg 1 338
+
+lbl rad
+   rcl 21
+   ×
+   (
+   3527
+   -
+   rcl 10
+   )
+   +
+   rcl 10
+   y**x
+   .734
+   ×
+   24
+   =
+   ×
+   .0526
+   =
+   sto 15
+   inv stflg 2
+   rcl 13
+   +
+   rcl 14
+   =
+   x≥t 433
+   e
+   +/-
+   sto 00
+   x≥t 420
+   clr
+   inv sbr
+   clr
+   inv sbr
+   rcl 19
+   x≥t 453
+   rcl 00
+   ÷
+   rcl 18
+   gto 495
+   rcl 15
+   -
+   rcl 12
+   +
+   rcl 14
+   =
+   sto 00
+   inv x≥t 416
+   rcl 19
+   x≥t 425
+   rcl 00
+   ÷
+   (
+   rcl 18
+   +
+   rcl 19
+   |x|
+   =
+   sto 00
+   ×
+   rcl 19
+   |x|
+   -
+   (
+   rcl 13
+   +
+   rcl 14
+   )
+   |x|
+   =
+   x≥t 488
+   rcl 00
+   gto 495
+   ÷
+   rcl 18
+   +
+   rcl 00
+   =
+   ÷
+   rcl 17
+   =
+   sto 00
+   inv sbr
+   rcl 00
+   ×
+   rcl 11
+   =
+   inv sbr
+
+lbl D'
+   clr
+   fix 4
+   rcl 21
+   ×
+   5
+   +
+   9
+   =
+   ×
+   .0024
+   =
+   sto 00
+   ×
+   1.2
+   -
+   rcl 08
+   =
+   sto 16
+   +/-
+   x≥t 546
+   ×
+   ×
+   inv sbr
+   clr
+   rcl 00
+   -
+   rcl 09
+   =
+   sto 17
+   +/-
+   x≥t 562
+   ×
+   ×
+   inv sbr
+   clr
+   fix 2
+   rcl 08
+   ÷
+   rcl 09
+   =
+   inv sbr
+
+lbl E'
+   1/x
+   ×
+   rcl 16
+   =
+   x≥t 584
+   clr
+   sto 18
+   10
+   =
+   inv sbr
+   1/x
+   ×
+   rcl 17
+   =
+   x≥t 599
+   clr
+   sto 19
+   -
+   rcl 18
+   =
+   x≥t 625
+   rcl 18
+   ×
+   100
+   =
+   sto 00
+   inv sbr
+   rcl 00
+   ×
+   rcl 11
+   =
+   inv sbr
+   rcl 19
+   gto 610
+
+lbl C'
+   clr
+   1
+   -
+   rcl 10
+   y**x
+   .75
+   ×
+   .0426
+   ÷
+   rcl 03
+   =
+   x≥t 657
+   ×
+   ×
+   inv sbr
+   ×
+   rcl 04
+   ×
+   .0915
+   ÷
+   rcl 10
+   y**x
+   .75
+   +
+   .003139
+   =
+   √x
+   ×
+   87.14
+   -
+   4.8824
+   =
+   gto 089
+
+lbl B'
+   prt
+   +
+   2
+   =
+   ×
+   10
+   =
+   sto 20
+   -
+   30
+   =
+   x≥t 722
+   clr
+   1/x
+   inv sbr
+   -
+   21
+   =
+   x≥t 719
+   1
+   inv sbr
+   prt
+   ÷
+   rc* 20
+   =
+   sto 16
+   3
+   inv sbr
+   prt
+   sto 17
+   ×
+   rcl 16
+   =
+   sum 02
+   1
+   sum 20
+   rc* 20
+   prd 17
+   rcl 17
+   sum 01
+   3
+   sto 00
+   1
+   sum 20
+   rc* 20
+   sbr sum
+   rcl 00
+   -
+   10
+   =
+   inv x≥t 763
+   gto a'
