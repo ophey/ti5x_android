@@ -8,5 +8,5 @@ DIR=$(dirname $BINARY)
 ls *.xml | while read file; do
     echo "=================== $file"
     F=$(basename $file .xml)
-    cat $file | $DIR/rendercard > $F.png
+    cat $file | $DIR/../util/rendercard > $F.png
 done
