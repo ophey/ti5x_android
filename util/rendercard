@@ -350,6 +350,7 @@ symbols = \
         "Delta" : defsymbol("Delta", "(\\104)"),
         "Phi" : defsymbol("Phi", "(\\106)"),
         "Gamma" : defsymbol("Gamma", "(\\107)"),
+        "Pi" : defsymbol("Pi", "(\\120)"),
         "Sigma" : defsymbol("Sigma", "(\\123)"),
         "Tau" : defsymbol("Tau", "(\\124)"),
         "Omega" : defsymbol("Omega", "(\\127)"),
