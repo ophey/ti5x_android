@@ -390,6 +390,7 @@ symbols = \
         "darrow" : defsymbol("darrow", "(\\257)"),
         "empty" : defsymbol("empty", "(\\306)"),     # circle with a bar
         "intersect" : defsymbol("intersect", "(\\307)"), # half-circle down
+        "infinity" : defsymbol("infinity", "(\\245)"),
     }
 
 fontname = "Helvetica"
