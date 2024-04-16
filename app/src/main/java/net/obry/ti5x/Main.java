@@ -95,6 +95,7 @@ public class Main extends AppCompatActivity {
         new BuiltinLibrary(R.string.businessdecision_library, R.raw.bd),
         new BuiltinLibrary(R.string.mathutil_library, R.raw.mu),
         new BuiltinLibrary(R.string.electrical_library, R.raw.ee),
+        new BuiltinLibrary(R.string.rpn_library, R.raw.rp),
         new BuiltinLibrary(R.string.civil_engineering_library, R.raw.ce),
         new BuiltinLibrary(R.string.contribution_library, R.raw.ct)
      };

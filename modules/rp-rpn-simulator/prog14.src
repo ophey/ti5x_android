@@ -1,0 +1,33 @@
+   ; rpn simulator module -13-
+   ;
+
+lbl A
+   cp
+   x≥t 009
+   +
+   =
+   inv sbr
+   inv x=t 017
+   sto 29
+   1
+   inv sbr
+   hir 08
+   inv int
+   x=t 029
+   hir 18
+   +
+   =
+   inv sbr
+   hir 18
+   sto 29
+   x⇌t
+   (
+   rcl 29
+   ×
+   dsz 29 035
+   1
+   )
+   x⇌t
+   sto 29
+   x⇌t
+   inv sbr

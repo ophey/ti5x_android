@@ -50,6 +50,7 @@
     <string name="master_library">Master</string>
     <string name="appstats_library">Applied Statistics</string>
     <string name="businessdecision_library">Business Decision</string>
+    <string name="rpn_library">RPN Simulator</string>
     <string name="securitiesanalysis_library">Securities Analysis</string>
     <string name="investment_library">Real Estate / Investment</string>
     <string name="surveying_library">Surveying</string>

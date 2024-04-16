@@ -1,0 +1,52 @@
+   ; rpn simulator module -13-
+   ;
+
+lbl B
+   sto 29
+   pause
+   cos
+   rc* 29
+   pause
+   pause
+   inv sbr
+
+lbl A
+   x⇌t
+   rcl 29
+   hir 08
+   0
+   b
+   1
+   b
+   2
+   b
+   3
+   b
+   4
+   b
+   5
+   b
+   6
+   b
+   7
+   b
+   8
+   b
+   9
+   b
+   20
+   b
+   21
+   b
+   22
+   b
+   23
+   b
+   24
+   b
+   25
+   b
+   hir 18
+   sto 29
+   x⇌t
+   inv sbr

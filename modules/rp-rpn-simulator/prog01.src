@@ -1,0 +1,318 @@
+   ; rpn simulator module -13-
+   ;
+
+lbl A
+   adv
+   prt
+   stflg 6
+   op 28
+   cp
+   x=t 037
+   x≥t 021
+   pgm 00
+   a
+   gto 187
+   (
+   ce
+   ÷
+   log
+   int
+   inv x=t 031
+   1
+   inv log
+   ÷
+   10
+   )
+   sto 02
+   pgm 10
+   a
+   x⇌t
+   inv ifflg 3 071
+   10
+   x≥t 184
+   42
+   x=t 184
+   43
+   x=t 184
+   83
+   x=t 184
+   inv stflg 3
+   31
+   inv x=t 081
+   3
+   gto 098
+   32
+   inv x=t 091
+   4
+   gto 098
+   35
+   inv x=t 136
+   5
+   sto 00
+   (
+   (
+   pgm 10
+   a
+   -
+   (
+   (
+   ce
+   ÷
+   10
+   )
+   int
+   -
+   2
+   )
+   ×
+   6
+   )
+   ×
+   3
+   -
+   62
+   )
+   sto 01
+   pgm ind 00
+   sbr ind 01
+   gto 187
+   22
+   inv x=t 148
+   pgm 06
+   a
+   gto 187
+   23
+   inv x=t 160
+   pgm 07
+   a
+   gto 187
+   33
+   inv x=t 172
+   pgm 08
+   a
+   gto 187
+   34
+   inv x=t 184
+   pgm 09
+   a
+   gto 187
+   pgm 02
+   a
+   inv stflg 7
+   op 18
+   ifflg 7 198
+   0
+   inv sbr
+   inv stflg 7
+   inv ifflg 5 241
+   adv
+   76
+   pgm 11
+   a
+   (
+   rcl 12
+   inv ifflg 8 222
+   -
+   1
+   )
+   sto 01
+   3
+   prd 01
+   op 21
+   pgm 62
+   sbr ind 01
+   pgm 11
+   a
+   inv stflg 5
+   inv ifflg 8 251
+   inv stflg 8
+   stflg 5
+   0
+   inv sbr
+
+lbl E
+   op 00
+   10
+   sto 00
+   inv stflg ind 00
+   dsz 0 261
+   6
+   op 17
+   cp
+   int
+   x=t 281
+   10
+   op 17
+   cms
+   op 33
+   19
+   sto 09
+   18
+   exc 18
+   fix 9
+   inv sbr
+
+lbl B
+   rcl 18
+   sto 16
+   1
+   sum 16
+   rc* 16
+   0
+   inv sbr
+   st* 16
+   x⇌t
+   1
+   sum 16
+   rc* 16
+   x⇌t
+   inv stflg 7
+   op 18
+   ifflg 7 307
+   ce
+
+lbl C
+   pgm 03
+   b'
+   adv
+   15
+   op 01
+   2317152600
+   op 02
+   2431334137
+   op 03
+   op 05
+   adv
+   (
+   rcl 18
+   sto 17
+   +
+   1
+   )
+   inv list
+   x⇌t
+   pgm 03
+   b'
+   0
+   inv sbr
+
+lbl C'
+   x⇌t
+   inv sum 16
+   1
+   sum 17
+   0
+   exc ind 17
+   a
+   dsz 16 386
+   inv sbr
+
+lbl D
+   pgm 03
+   b'
+   32333724
+   op 02
+   3231132700
+   op 03
+   adv
+   op 05
+   adv
+   61
+   pgm 11
+   a
+   0
+   pgm 11
+   b
+   0
+   pgm 11
+   b
+   51
+   sto 00
+   71
+   sbr 458
+   61
+   sbr 458
+   81
+   sto 01
+   76
+   pgm 11
+   a
+   rcl 01
+   pgm 11
+   a
+   36
+   pgm 11
+   a
+   rcl 00
+   pgm 11
+   b
+   11
+   pgm 11
+   a
+   92
+   pgm 11
+   a
+   op 20
+   0
+   inv sbr
+
+lbl write
+   op 00
+   353331
+   op 02
+   36243041
+   op 03
+   2713373235
+   op 04
+   op 05
+   13
+   prt
+   inv sbr
+
+lbl A'
+   sto 00
+   (
+   rcl 16
+   +
+   rcl 17
+   )
+   sto 01
+   op 21
+   inv stflg 7
+   rc* 01
+   op 19
+   ifflg 7 563
+   1
+   sum 16
+   op 31
+   inv stflg 7
+   rcl 00
+   inv sum 01
+   0
+   op 21
+   exc ind 00
+   op 20
+   dsz 1 576
+   st* 00
+   clr
+   inv sbr
+
+lbl B'
+   +/-
+   sto 00
+   (
+   rcl 16
+   +
+   rcl 17
+   )
+   sto 01
+   sum 00
+   op 20
+   1
+   inv sum 16
+   0
+   exc ind 01
+   op 31
+   dsz 0 611
+   0
+   inv sbr

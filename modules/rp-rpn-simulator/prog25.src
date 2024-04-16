@@ -1,0 +1,38 @@
+   ; rpn simulator module -13-
+   ;
+
+lbl A
+   sto 29
+   (
+   (
+   rcl 17
+   -
+   rcl 16
+   x²
+   ÷
+   rcl 19
+   )
+   ÷
+   (
+   rcl 19
+   -
+   1
+   )
+   hir 08
+   )
+   √x
+   sto 26
+   (
+   (
+   rcl 15
+   -
+   rcl 14
+   x²
+   ÷
+   rcl 19
+   )
+   ÷
+   hir 18
+   )
+   √x
+   inv sbr

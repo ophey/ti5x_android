@@ -1,0 +1,12 @@
+   ; rpn simulator module -13-
+   ;
+
+lbl A
+   hir 08
+   1
+   sum 25
+   x⇌t
+   rcl 25
+   pgm 55
+   b
+   inv sbr

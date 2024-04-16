@@ -1,0 +1,91 @@
+   ; rpn simulator module -13-
+   ;
+
+lbl A
+   cp
+   x=t 007
+   inv stflg 1
+   pgm 10
+   a
+   sto 00
+   x⇌t
+   24
+   x=t 149
+   stflg 0
+   61
+   inv ifflg 4 031
+   71
+   pgm 11
+   a
+   rcl 00
+   x⇌t
+   (
+   9
+   x≥t 070
+   inv ifflg 4 054
+   ifflg 1 068
+   gto 059
+   31
+   x=t 064
+   1
+   +/-
+   gto 069
+   pgm 10
+   a
+   x⇌t
+   4
+   +
+   x⇌t
+   )
+   sto 01
+   sto 13
+   3
+   prd 01
+   op 21
+   pgm 62
+   sbr ind 01
+   pgm 11
+   a
+   rcl 13
+   x⇌t
+   10
+   sto 00
+   (
+   9
+   x≥t 107
+   op 20
+   10
+   +/-
+   +
+   x⇌t
+   )
+   (
+   inv log
+   ee
+   inv ee
+   ×
+   rc* 00
+   )
+   (
+   inv int
+   ×
+   10
+   )
+   int
+   cp
+   x=t 148
+   1
+   sum 18
+   (
+   rcl 13
+   +
+   rcl 03
+   ÷
+   1000
+   )
+   st* 18
+   inv sbr
+   0
+   1/x
+   op 38
+   inv sbr

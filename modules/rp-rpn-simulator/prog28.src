@@ -1,0 +1,24 @@
+   ; rpn simulator module -13-
+   ;
+
+lbl A
+   x⇌t
+   0
+   sto 00
+   sto 01
+   sto 02
+   sto 03
+   sto 04
+   sto 05
+   sto 06
+   sto 07
+   sto 08
+   sto 09
+   sto 20
+   sto 21
+   sto 22
+   sto 23
+   sto 24
+   sto 25
+   x⇌t
+   inv sbr

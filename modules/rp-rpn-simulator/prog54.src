@@ -1,0 +1,203 @@
+   ; rpn simulator module -13-
+   ;
+   nop
+   000100
+   inv sbr
+   000200
+   inv sbr
+   000300
+   inv sbr
+   000400
+   inv sbr
+   000500
+   inv sbr
+   000600
+   inv sbr
+   000700
+   inv sbr
+   001000
+   inv sbr
+   001100
+   inv sbr
+   001200
+   inv sbr
+   176500
+   inv sbr
+   001300
+   inv sbr
+   001400
+   inv sbr
+   001500
+   inv sbr
+   001600
+   inv sbr
+   001700
+   inv sbr
+   136500
+   inv sbr
+   146500
+   inv sbr
+   156500
+   inv sbr
+   166500
+   inv sbr
+   152765
+   inv sbr
+   033116
+   inv sbr
+   243142
+   inv sbr
+   273144
+   inv sbr
+   151700
+   inv sbr
+   152735
+   inv sbr
+   033116
+   inv sbr
+   243165
+   inv sbr
+   273222
+   inv sbr
+   153300
+   inv sbr
+   371331
+   inv sbr
+   273531
+   inv sbr
+   446237
+   inv sbr
+   447000
+   inv sbr
+   524400
+   inv sbr
+   026344
+   inv sbr
+   332230
+   inv sbr
+   336335
+   inv sbr
+   362431
+   inv sbr
+   153236
+   inv sbr
+   243116
+   inv sbr
+   363637
+   inv sbr
+   363732
+   inv sbr
+   351527
+   inv sbr
+   364130
+   inv sbr
+   456600
+   inv sbr
+   243136
+   inv sbr
+   153036
+   inv sbr
+   174415
+   inv sbr
+   333516
+   inv sbr
+   244424
+   inv sbr
+   143637
+   inv sbr
+   171700
+   inv sbr
+   005500
+   inv sbr
+   005600
+   inv sbr
+   007200
+   inv sbr
+   161727
+   inv sbr
+   173122
+   inv sbr
+   212444
+   inv sbr
+   243137
+   inv sbr
+   161722
+   inv sbr
+   223732
+   inv sbr
+   332251
+   inv sbr
+   174451
+   inv sbr
+   331651
+   inv sbr
+   005000
+   inv sbr
+   331341
+   inv sbr
+   001734
+   inv sbr
+   313233
+   inv sbr
+   323300
+   inv sbr
+   351316
+   inv sbr
+   361435
+   inv sbr
+   363751
+   inv sbr
+   351551
+   inv sbr
+   363051
+   inv sbr
+   002000
+   inv sbr
+   271427
+   inv sbr
+   002217
+   inv sbr
+   774700
+   inv sbr
+   006700
+   inv sbr
+   223516
+   inv sbr
+   353637
+   inv sbr
+   232435
+   inv sbr
+   223251
+   inv sbr
+   323351
+   inv sbr
+   004700
+   inv sbr
+   363721
+   inv sbr
+   242121
+   inv sbr
+   163036
+   inv sbr
+   005300
+   inv sbr
+   273637
+   inv sbr
+   356336
+   inv sbr
+   353731
+   inv sbr
+   004000
+   inv sbr
+   476320
+   inv sbr
+   006400
+   inv sbr
+   433537
+   inv sbr
+   163646
+   inv sbr
+   131642
+   inv sbr
+   333537
+   inv sbr

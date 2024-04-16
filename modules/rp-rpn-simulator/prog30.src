@@ -1,0 +1,37 @@
+   ; rpn simulator module -13-
+   ;
+
+lbl A
+   x⇌t
+   rcl 00
+   exc 10
+   sto 00
+   rcl 01
+   exc 11
+   sto 01
+   rcl 02
+   exc 12
+   sto 02
+   rcl 03
+   exc 13
+   sto 03
+   rcl 04
+   exc 14
+   sto 04
+   rcl 05
+   exc 15
+   sto 05
+   rcl 06
+   exc 16
+   sto 06
+   rcl 07
+   exc 17
+   sto 07
+   rcl 08
+   exc 18
+   sto 08
+   rcl 09
+   exc 19
+   sto 09
+   x⇌t
+   inv sbr
