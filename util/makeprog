@@ -67,16 +67,23 @@ import re
 import subprocess
 import zipfile
 
+rom = False
+n = 1
+
+if len(sys.argv) > 1 and sys.argv[1] == "--rom" :
+    rom = True
+    n = 2
+
 utildir = os.path.dirname(sys.argv[0])
 
 if len(sys.argv) < 2 :
     raise RuntimeError("need at least one arg, the name of the output file to create")
 #end if
-outfile = sys.argv[1]
+outfile = sys.argv[n]
 mtime = 0
 
 components = {}
-for arg in sys.argv[2:] :
+for arg in sys.argv[n + 1:] :
     type, index, bi, infile = re.search(r"^([a-z]+)([0-9]?[0-9]?[0-9]?)([0-9]?)\=(.+)$", arg).groups()
 
     if bi == "":
@@ -132,6 +139,10 @@ if not os.path.isfile(outfile) or os.path.getmtime(outfile) < mtime:
     banks = {}
     mems = {}
 
+    assbl = [os.path.join(utildir, "assemble")]
+    if rom == True :
+        assbl = assbl + ["--rom"]
+
     for index in range(0, 1000) :
         if index in components :
             component = components[index]
@@ -142,7 +153,7 @@ if not os.path.isfile(outfile) or os.path.getmtime(outfile) < mtime:
                         banks[bi] = {}
                     banks[bi][index] = subprocess.check_output \
                         (
-                            args = (os.path.join(utildir, "assemble"),),
+                            args = assbl,
                             stdin = open(component["banksrc"][bi], "r"),
                             close_fds = True
                         )
@@ -164,7 +175,7 @@ if not os.path.isfile(outfile) or os.path.getmtime(outfile) < mtime:
             if "progsrc" in component :
                 prog = subprocess.check_output \
                   (
-                    args = (os.path.join(utildir, "assemble"),),
+                    args = assbl,
                     stdin = open(component["progsrc"][0], "r"),
                     close_fds = True
                   )

@@ -1,0 +1,62 @@
+   ; investment module -3-
+   ;
+
+lbl ce
+   0
+   sto 09
+   deg
+   fix 9
+
+lbl clr
+   cp
+   6
+   sto 01
+   0
+   st* 01
+   dsz 1 015
+   inv sbr
+
+lbl =
+   sbr ce
+   inv eng
+   5
+   x⇌t
+   30
+   p→r
+   ∑+
+   inv p→r
+   ∑+
+   op 12
+   d.ms
+   ∑+
+   op 11
+   inv d.ms
+   inv ∑+
+   op 14
+   (
+   ce
+   -
+   pgm 09
+   e'
+   )
+   ee
+   inv ee
+   x⇌t
+   377.760515 ; adjusted for emulatore, real value is 377.7605154
+   x=t write
+   0
+   1/x
+
+lbl write
+   fix 9
+   op 00
+   3637133717
+   op 04
+   1713270017
+   op 03
+   35
+   op 02
+   op 05
+   3
+   prt
+   inv sbr

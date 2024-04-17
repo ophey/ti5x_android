@@ -1,0 +1,60 @@
+   ; rpn simulator module -13-
+   ;
+
+lbl A
+   sto 29
+   x⇌t
+   rcl 26
+   inv p→r
+   sto 26
+   x⇌t
+   hir 08
+   90
+   cos
+   op 10
+   cp
+   x=t 076
+   x≥t 051
+   π
+   x⇌t
+   rcl 26
+   x=t 036
+   x≥t 039
+   hir 18
+   inv sbr
+   (
+   ce
+   -
+   2
+   ×
+   π
+   )
+   sto 26
+   hir 18
+   inv sbr
+   200
+   x⇌t
+   rcl 26
+   x=t 036
+   inv x≥t 036
+   (
+   ce
+   -
+   400
+   )
+   sto 26
+   hir 18
+   inv sbr
+   180
+   x⇌t
+   rcl 26
+   x=t 036
+   inv x≥t 036
+   (
+   ce
+   -
+   360
+   )
+   sto 26
+   hir 18
+   inv sbr

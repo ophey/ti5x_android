@@ -1,0 +1,388 @@
+   ; structural engineering module rev.a
+   ;
+
+lbl d.ms
+   x⇌t
+   fix 2
+   ee
+   =
+   inv ee
+   fix 9
+   x⇌t
+
+lbl π
+   op 04
+   x⇌t
+   op 06
+   inv sbr
+
+lbl ifflg
+   7173
+   op 04
+   op 05
+   clr
+   gto 187
+
+lbl x≥t
+   inv ifflg 3 043
+   ×
+   =
+   inv sbr
+
+lbl A
+   cms
+   sto 11
+   sto 31
+   adv
+   x⇌t
+   234037
+   sbr π
+   adv
+   1
+   sto 26
+   rcl 11
+   inv sbr
+
+lbl B
+   ifflg 2 ifflg
+   stflg 2
+   sto 12
+   x⇌t
+   rcl 32
+   x⇌t
+   inv x≥t 087
+   sto 32
+   sto 15
+   sto 28
+   sto 29
+   x⇌t
+   rcl 26
+   +
+   1401
+   =
+   ×
+   10000
+   =
+   sto 27
+   sbr π
+   0
+   sto 13
+   sto 35
+   rcl 12
+   inv sbr
+   sto 29
+   x⇌t
+   rcl 32
+   x⇌t
+   inv x≥t 133
+   sto 32
+   x⇌t
+   rcl 27
+   +
+   4032
+   =
+   sbr π
+   -
+   rcl 12
+   =
+   cp
+   x≥t 157
+   sto 35
+   stflg 1
+   +/-
+   ÷
+   2
+   =
+   sto 13
+   inv sbr
+
+lbl C
+   sto 14
+   x⇌t
+   rcl 26
+   +
+   2301
+   =
+   ×
+   10000
+   =
+   sto 27
+   sbr π
+   inv sbr
+   inv stflg 2
+   1
+   sum 26
+   rcl 35
+   sum 15
+   rcl 14
+   prd 13
+   x²
+   sto 17
+   √x
+   ×
+   rcl 15
+   =
+   exc 15
+   x²
+   sto 18
+   rcl 15
+   sum 19
+   sto 16
+   ÷
+   12
+   =
+   prd 17
+   ×
+   rcl 18
+   =
+   sum 21
+   rcl 11
+   -
+   rcl 14
+   ÷
+   2
+   =
+   prd 16
+   ×
+   rcl 16
+   sum 22
+   +
+   rcl 17
+   =
+   sum 20
+   rcl 11
+   -
+   rcl 14
+   ÷
+   3
+   ifflg 1 267
+   ×
+   2
+   =
+   ×
+   rcl 13
+   =
+   cp
+   x=t 343
+   sum 22
+   x²
+   ÷
+   rcl 13
+   sum 19
+   =
+   +
+   rcl 14
+   x²
+   ×
+   rcl 13
+   ÷
+   18
+   =
+   sum 20
+   rcl 28
+   -
+   rcl 29
+   =
+   inv x≥t 313
+   sum 29
+   inv sum 28
+   |x|
+   sto 30
+   ×
+   rcl 14
+   ÷
+   8
+   ×
+   (
+   rcl 30
+   x²
+   ÷
+   18
+   +
+   (
+   rcl 30
+   ÷
+   3
+   +
+   rcl 28
+   )
+   x²
+   =
+   sum 21
+   rcl 11
+   -
+   rcl 14
+   =
+   sto 11
+   inv stflg 1
+   adv
+   inv stflg 2
+   inv sbr
+
+lbl E
+   ifflg 2 ifflg
+   rcl 22
+   ÷
+   rcl 19
+   =
+   sto 37
+   x²
+   ×
+   rcl 19
+   -
+   rcl 20
+   =
+   +/-
+   sto 36
+   rcl 19
+   x⇌t
+   adv
+   13
+   sbr d.ms
+   rcl 37
+   x⇌t
+   46
+   sbr d.ms
+   rcl 36
+   x⇌t
+   244044
+   sbr d.ms
+   rcl 21
+   x⇌t
+   +
+   1
+   =
+   sbr x≥t
+   sbr d.ms
+   clr
+   rcl 36
+   ÷
+   rcl 37
+   =
+   sto 11
+   x⇌t
+   43404400
+   sbr d.ms
+   rcl 36
+   ÷
+   (
+   rcl 31
+   -
+   rcl 37
+   =
+   sto 12
+   x⇌t
+   +
+   65
+   =
+   sbr d.ms
+   rcl 21
+   ×
+   2
+   ÷
+   rcl 32
+   =
+   x⇌t
+   +
+   35
+   =
+   sbr x≥t
+   sbr d.ms
+   clr
+   rcl 36
+   ÷
+   rcl 19
+   =
+   √x
+   x⇌t
+   354044
+   sbr d.ms
+   rcl 21
+   ÷
+   rcl 19
+   =
+   √x
+   x⇌t
+   +
+   1
+   =
+   sbr x≥t
+   sbr d.ms
+   clr
+   rcl 11
+   ÷
+   rcl 19
+   =
+   x⇌t
+   26404400
+   sbr d.ms
+   rcl 12
+   ÷
+   rcl 19
+   =
+   x⇌t
+   +
+   65
+   =
+   sbr d.ms
+   inv stflg 3
+   adv
+   inv sbr
+
+lbl D
+   ifflg 2 ifflg
+   stflg 3
+   sto 11
+   x⇌t
+   16
+   sbr π
+   inv sbr
+   sto 12
+   x⇌t
+   45
+   sbr π
+   1
+   inv sbr
+   sto 13
+   x⇌t
+   31
+   sbr π
+   rcl 11
+   x²
+   ×
+   π
+   ÷
+   4
+   =
+   sto 11
+   ×
+   rcl 13
+   =
+   inv sum 19
+   ×
+   rcl 12
+   =
+   inv sum 22
+   rcl 11
+   ×
+   (
+   ce
+   ÷
+   4
+   ÷
+   π
+   +
+   rcl 12
+   x²
+   )
+   ×
+   rcl 13
+   =
+   inv sum 20
+   adv
+   inv sbr
+
+lbl A'
+   inv stflg 2
+   adv
+   inv sbr

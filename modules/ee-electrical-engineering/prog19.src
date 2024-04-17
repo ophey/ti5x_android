@@ -1,3 +1,5 @@
+   ; ee library module -11-
+   ;
 
 lbl E
    (
@@ -71,7 +73,7 @@ lbl E
    sbr 301
    sbr 309
    rcl 01
-   st* 73
+   st* 93
    rcl 02
    st* 92
    1
@@ -209,4 +211,5 @@ lbl A
    rcl 91
    )
    sto 91
+   inv sbr
    inv sbr

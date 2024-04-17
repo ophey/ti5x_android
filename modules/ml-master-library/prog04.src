@@ -1,94 +1,124 @@
-;+
-; Recreation of the "Master Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; master library module -1-
+   ;
 
-lbl E'                                ;000
-    rcl 1
-    exc 3
-    sto 1
-    rcl 2
-    exc 4
-    sto 2
-    0
-    rtn
+lbl E'
+   rcl 01
+   exc 03
+   sto 01
+   rcl 02
+   exc 04
+   sto 02
+   0
+   inv sbr
 
-lbl A                                 ;016
-    cp
-    rad
-    exc 2
-    exc 1
-    rcl 2
-    ce
-    rtn
+lbl A
+   cp
+   rad
+   exc 02
+   exc 01
+   rcl 02
+   ce
+   inv sbr
 
-lbl A'                                ;128
-    exc 4
-    exc 3
-    rcl 4
-    ce
-    rtn
+lbl A'
+   exc 04
+   exc 03
+   rcl 04
+   ce
+   inv sbr
 
-lbl B                                 ;038
-    rcl 4
-    sum 2
-    rcl 2
-    x⇌t
-    rcl 3
-    sum 1
-    rcl 1
-    rtn
+lbl B
+   rcl 04
+   sum 02
+   rcl 02
+   x⇌t
+   rcl 03
+   sum 01
+   rcl 01
+   inv sbr
 
-lbl B'                                ;054
-    1 +/-
-    prd 3
-    prd 4
-    B
-    rtn
+lbl B'
+   1
+   +/-
+   prd 03
+   prd 04
+   b
+   inv sbr
 
-lbl C                                 ;064
-    ( rcl  1 × rcl 3 - rcl 2 × rcl 4 )
-    x⇌t
-    ( rcl 1 × rcl 4 + rcl 2 × rcl 3 )
-    sto 2
-    x⇌t
-    sto 1
-    rtn
+lbl C
+   (
+   rcl 01
+   ×
+   rcl 03
+   -
+   rcl 02
+   ×
+   rcl 04
+   )
+   x⇌t
+   (
+   rcl 01
+   ×
+   rcl 04
+   +
+   rcl 02
+   ×
+   rcl 03
+   )
+   sto 02
+   x⇌t
+   sto 01
+   inv sbr
 
-lbl C'                                ;099
-    1 +/-
-    prd 4
-    ( rcl 3 x² + rcl 4 x² )
-    1/x
-    prd 1
-    prd 2
-    c
-    rtn
+lbl C'
+   1
+   +/-
+   prd 04
+   (
+   rcl 03
+   x²
+   +
+   rcl 04
+   x²
+   )
+   1/x
+   prd 01
+   prd 02
+   c
+   inv sbr
 
-lbl D                                 ;121
-    E'
-    pgm 5 B
-    cp
-    x=t E'
-    pgm 5 A'
-    C
-    pgm 5 B'
-    rtn
+lbl D
+   e'
+   pgm 05
+   b
+   cp
+   x=t e'
+   pgm 05
+   a'
+   c
+   pgm 05
+   b'
+   inv sbr
 
-lbl D'                                ;138
-    pgm 5 A'
-    E'
-    pgm 5 A'
-    E'
-    C'
-    rtn
+lbl D'
+   pgm 05
+   a'
+   e'
+   pgm 05
+   a'
+   e'
+   c'
+   inv sbr
 
-lbl E                                 ;150
-    E'
-    pgm 5 B
-    cp
-    x=t E'
-    pgm 5 A'
-    C'
-    pgm 5 B'
-    rtn
+lbl E
+   e'
+   pgm 05
+   b
+   cp
+   x=t e'
+   pgm 05
+   a'
+   c'
+   pgm 05
+   b'
+   inv sbr

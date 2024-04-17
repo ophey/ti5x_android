@@ -1,132 +1,211 @@
-;+
-; Partial recreation of the "Master Library" module
-; that came with the original TI-58C/59 calculators.
-;-
-
-;+
-; Registers used:
-;     01            -- pointer
-;     02            -- pointer
-;     03            -- m lines
-;     04            -- n columns
-;     05            -- lambda-1
-;     06            -- lambda-2
-;     07            -- pointer
-;     01 .. 2mn+7   -- used for matrix addition
-;     01 .. mn+2n+7 -- used for matrix multiplication
-;-
+   ; master library module -1-
+   ;
 
 lbl A
-    exc 4 exc 3 rcl 4
-    adv prt
-    rtn
+   exc 04
+   exc 03
+   rcl 04
+   adv
+   prt
+   inv sbr
 
 lbl B
-    - x<>t 1 =
-    * rcl 3 + 8 = sto 7
-    x<>t
-    adv
-    rtn
+   -
+   x⇌t
+   1
+   =
+   ×
+   rcl 03
+   +
+   8
+   =
+   sto 07
+   x⇌t
+   adv
+   inv sbr
 
 lbl |x|
-    st* 7 x/t 1 sum 7 x/t
-    prt rtn
-    gto |x|
+   st* 07
+   x⇌t
+   1
+   sum 07
+   x⇌t
+   prt
+   inv sbr
+   gto |x|
 
 lbl C
-    + x/t rcl 4 - 1 =
-    * rcl 3 + 8 = sto 7
-    x<>t
-    adv
-    rtn
-
-    gto ixi
+   +
+   x⇌t
+   rcl 04
+   -
+   1
+   =
+   ×
+   rcl 03
+   +
+   8
+   =
+   sto 07
+   x⇌t
+   adv
+   inv sbr
+   gto |x|
 
 lbl D
-    exc 6 exc 5 rcl 6
-    adv
-    prt
-    rtn
+   exc 06
+   exc 05
+   rcl 06
+   adv
+   prt
+   inv sbr
 
 lbl E
-    7 sto 1
-    + ( rcl 3 * rcl 4 ) sto 7
-    = sto 2
+   7
+   sto 01
+   +
+   (
+   rcl 03
+   ×
+   rcl 04
+   )
+   sto 07
+   =
+   sto 02
 
 lbl x²
-    1 sum 1
-    sum 2
-    rcl 5 * rc* 1 + rcl 6 * rc* 2
-    = st* 1
-    dsz 7 x² 1 rtn
+   1
+   sum 01
+   sum 02
+   rcl 05
+   ×
+   rc* 01
+   +
+   rcl 06
+   ×
+   rc* 02
+   =
+   st* 01
+   dsz 7 x²
+   1
+   inv sbr
 
 lbl A'
-    b
-    rtn
+   b
+   inv sbr
 
-lbl yx
-    rc* 7
-    prt
-    rtn
-
-    1 sum 7
-    gto yx
+lbl y**x
+   rc* 07
+   prt
+   inv sbr
+   1
+   sum 07
+   gto y**x
 
 lbl B'
-    + x<>t
-    rcl 3 * ( rcl 4 + 1 ) + 8
-    = sto 7
-    x<>t
-    adv
-    rtn
+   +
+   x⇌t
+   rcl 03
+   ×
+   (
+   rcl 04
+   +
+   1
+   )
+   +
+   8
+   =
+   sto 07
+   x⇌t
+   adv
+   inv sbr
 
 lbl deg
-    st* 7 x<>t 1 sum 7 x<>t
-    prt
-    rtn
-
-    gto deg
+   st* 07
+   x⇌t
+   1
+   sum 07
+   x⇌t
+   prt
+   inv sbr
+   gto deg
 
 lbl C'
-    rcl 3 - x<>t 8
-    = +/- sto 1
+   rcl 03
+   -
+   x⇌t
+   8
+   =
+   +/-
+   sto 01
 
 lbl ee
-    rcl 3 *
-    ( rcl 4 sto 7 + 1 ) + 8
-    = sto 2
-    0
+   rcl 03
+   ×
+   (
+   rcl 04
+   sto 07
+   +
+   1
+   )
+   +
+   8
+   =
+   sto 02
+   0
 
 lbl int
-    + rcl 3 sum 1
-    1 sum 2
-    rc* 1 * rc* 2
-    dsz 7 int
-    = exc 3
-    sum 1
-    exc 3 st* 1
-    x<>t - 1 = sto 1
-    cp
-    eq clr
-    +/- + 8 = exc 1
-    x<>t
-    gto ee
+   +
+   rcl 03
+   sum 01
+   1
+   sum 02
+   rc* 01
+   ×
+   rc* 02
+   dsz 7 int
+   =
+   exc 03
+   sum 01
+   exc 03
+   st* 01
+   x⇌t
+   -
+   1
+   =
+   sto 01
+   cp
+   x=t clr
+   +/-
+   +
+   8
+   =
+   exc 01
+   x⇌t
+   gto ee
 
 lbl clr
-    1
-    rtn
+   1
+   inv sbr
 
 lbl D'
-    + x<>t 7 + rcl 3 * rcl 4 =
-    sto 7
-    x<>t
-    adv
-    rtn
+   +
+   x⇌t
+   7
+   +
+   rcl 03
+   ×
+   rcl 04
+   =
+   sto 07
+   x⇌t
+   adv
+   inv sbr
 
 lbl eng
-    rc* 7
-    prt
-    rtn
-
-    1 sum 7
-    gto eng
+   rc* 07
+   prt
+   inv sbr
+   1
+   sum 07
+   gto eng

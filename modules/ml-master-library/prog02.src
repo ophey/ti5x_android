@@ -1,193 +1,564 @@
-;+
-; Partial recreation of the "Master Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; master library module -1-
+   ;
 
-;+
-; Registers used:
-;     01            -- pointer
-;     02            -- pointer
-;     03            -- pointer
-;     04            -- counter
-;     05            -- counter
-;     06            -- determinant
-;     07            -- n (order of the matrix)
-;     08 .. n²+n+7  -- used for the determinant and inverse matrix
-;     08 .. n²+2n+7 -- used for simultaneous equations
-;-
+lbl D'
+   +
+   (
+   ce
+   -
+   1
+   )
+   ×
+   rcl 07
+   +
+   7
+   =
+   inv sbr
 
-lbl d'                                       ; #000
-    + ( ce - 1 ) * rcl 7 + 7 = rtn
+lbl C'
+   gto 811
+   1
+   inv sum 01
+   rcl 07
+   inv sum 02
+   inv sbr
+   inv dsz 5 051
+   -
+   1
+   sum 01
+   rcl 07
+   sum 02
+   rc* 01
+   ×
+   rc* 02
+   gto 030
+   inv sbr
+   inv dsz 5 069
+   -
+   sbr 020
+   rc* 01
+   ×
+   rc* 02
+   gto 052
+   inv sbr
 
-lbl c'                                       ; #015
-    gto 811
+lbl A
+   sto 07
+   prt
+   adv
+   inv sbr
 
-    1 inv sum 1 rcl 7 inv sum 2 rtn          ; #020
+lbl B
+   -
+   x⇌t
+   1
+   =
+   ×
+   rcl 07
+   +
+   8
+   =
+   sto 01
+   x⇌t
+   inv sbr
+   prt
+   st* 01
+   inv sbr
+   x⇌t
+   1
+   sum 01
+   x⇌t
+   gto 093
 
-    inv dsz 5 051 - 1 sum 1 rcl 7 sum 2      ; #030
-    rc* 1 * rc* 2 gto 030 rtn
+lbl C
+   rcl 07
+   sto 05
+   +
+   x²
+   +
+   7
+   =
+   sto 01
+   rcl 05
+   st* 01
+   1
+   inv sum 01
+   dsz 5 118
+   1
+   sto 04
+   sto 06
+   rcl 04
+   +
+   7
+   =
+   sto 03
+   -
+   rcl 07
+   -
+   8
+   =
+   sto 05
+   rcl 04
+   d'
+   sto 02
+   rc* 02
+   |x|
+   x⇌t
+   inv dsz 5 188
+   1
+   sum 02
+   rc* 02
+   |x|
+   inv x≥t 159
+   x⇌t
+   rcl 07
+   +
+   rcl 05
+   +
+   8
+   =
+   sto 03
+   gto 159
+   rcl 03
+   x⇌t
+   rcl 04
+   +
+   7
+   =
+   x=t 228
+   sto 02
+   1
+   +/-
+   prd 06
+   rcl 07
+   +
+   1
+   =
+   sto 05
+   rc* 02
+   exc ind 03
+   st* 02
+   rcl 07
+   sum 02
+   sum 03
+   dsz 5 212
+   rcl 04
+   d'
+   sto 01
+   rc* 01
+   prd 06
+   cp
+   x=t 331
+   rcl 07
+   sto 05
+   rcl 04
+   d'
+   sto 02
+   +
+   rcl 05
+   -
+   rcl 04
+   =
+   sto 03
+   rc* 03
+   ÷
+   rc* 02
+   =
+   sto 01
+   st* 03
+   rcl 07
+   sum 02
+   sum 03
+   x²
+   +
+   8
+   =
+   x⇌t
+   rcl 03
+   x≥t 297
+   rcl 01
+   +/-
+   ×
+   rc* 02
+   =
+   sm* 03
+   gto 269
+   1
+   inv sum 05
+   rcl 05
+   x⇌t
+   rcl 04
+   x=t 312
+   gto 245
+   1
+   sum 04
+   rcl 07
+   x⇌t
+   rcl 04
+   x=t 326
+   gto 135
+   d'
+   sto 01
+   rc* 01
+   prd 06
+   rcl 06
+   adv
+   prt
+   adv
+   inv sbr
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
 
-    inv dsz 5 069 - sbr 020 rc* 1 * rc* 2    ; #052
-    gto 052
-    rtn
+lbl D
+   sto 05
+   inv sbr
+   sto 03
+   rcl 07
+   x²
+   +
+   7
+   =
+   sto 01
+   rcl 05
+   x⇌t
+   rcl 07
+   inv x≥t 354
+   1
+   sum 01
+   rc* 01
+   inv x=t 374
+   rcl 07
+   sum 01
+   1
+   sum 05
+   rcl 03
+   st* 01
+   prt
+   inv sbr
+   gto 355
 
-lbl a                                        ; #070
-; n -> R07
-    sto 7 prt adv rtn
+lbl E
+   1
+   sto 04
+   rcl 07
+   +
+   x²
+   +
+   7
+   =
+   sto 01
+   rcl 04
+   sto 05
+   -
+   rcl 07
+   +
+   7
+   =
+   sto 02
+   0
+   sbr 030
+   +
+   1
+   sum 01
+   rc* 01
+   =
+   st* 01
+   1
+   sum 04
+   rcl 04
+   x⇌t
+   rcl 07
+   x≥t 404
+   1
+   sto 04
+   7
+   +
+   (
+   rcl 07
+   +
+   1
+   )
+   x²
+   =
+   sto 01
+   -
+   rcl 07
+   -
+   rcl 04
+   sto 05
+   =
+   sto 02
+   0
+   sbr 052
+   +
+   sbr 020
+   rc* 01
+   =
+   ÷
+   rc* 02
+   =
+   st* 01
+   1
+   sum 04
+   rcl 04
+   x⇌t
+   rcl 07
+   x≥t 452
+   adv
+   1
+   inv sbr
 
-lbl b                                        ; #077
-; j -> R01 (pointer to A data)
-    - x<>t 1 = * rcl 7 + 8 = sto 1 x<>t
-    rtn
+lbl A'
+   +
+   x⇌t
+   7
+   +
+   rcl 07
+   ×
+   (
+   ce
+   +
+   1
+   )
+   =
+   sto 01
+   x⇌t
+   inv sbr
+   rc* 01
+   prt
+   inv sbr
+   1
+   sum 01
+   gto 525
 
-    prt st* 1                                ; #093
-    rtn
+lbl B'
+   1
+   sto 04
+   rcl 04
+   d'
+   =
+   sto 01
+   rc* 01
+   1/x
+   st* 01
+   1
+   sum 04
+   rcl 04
+   x⇌t
+   rcl 07
+   x≥t 540
+   1
+   +/-
+   sum 04
+   1
+   sto 03
+   rcl 04
+   d'
+   sto 01
+   -
+   rcl 03
+   sto 05
+   =
+   sto 02
+   rc* 01
+   ×
+   rc* 02
+   +/-
+   sbr 052
+   =
+   ×
+   sbr 020
+   rc* 02
+   =
+   st* 01
+   1
+   sum 03
+   rcl 04
+   x⇌t
+   rcl 03
+   inv x=t 569
+   1
+   sto 03
+   inv sum 04
+   rcl 04
+   x⇌t
+   1
+   inv x=t 569
+   rcl 04
+   d'
+   sto 01
+   +
+   rcl 03
+   sto 05
+   =
+   sto 02
+   rc* 02
+   +/-
+   sbr 030
+   ×
+   1
+   sum 01
+   =
+   st* 01
+   1
+   sum 03
+   rcl 03
+   x⇌t
+   rcl 07
+   -
+   rcl 04
+   =
+   x≥t 627
+   1
+   sum 04
+   sto 03
+   rcl 07
+   x⇌t
+   rcl 04
+   inv x=t 627
+   1
+   sto 04
+   rcl 04
+   sto 05
+   d'
+   sto 03
+   rcl 05
+   d'
+   sto 01
+   rcl 03
+   sto 02
+   rcl 07
+   -
+   rcl 05
+   +
+   1
+   =
+   exc 05
+   x⇌t
+   rc* 03
+   +/-
+   sbr 030
+   =
+   +/-
+   st* 03
+   rcl 07
+   sum 03
+   x⇌t
+   +
+   1
+   =
+   sto 05
+   x⇌t
+   x≥t 692
+   x⇌t
+   rcl 04
+   x=t 808
+   +
+   1
+   =
+   sto 05
+   rcl 04
+   d'
+   +
+   1
+   =
+   sto 03
+   rcl 05
+   d'
+   sto 02
+   rcl 03
+   sto 01
+   rcl 07
+   -
+   rcl 05
+   +
+   1
+   =
+   exc 05
+   x⇌t
+   rc* 01
+   ×
+   rc* 02
+   +/-
+   sbr 030
+   =
+   +/-
+   st* 03
+   1
+   sum 03
+   +
+   x⇌t
+   =
+   sto 05
+   x⇌t
+   rcl 07
+   x≥t 755
+   1
+   sum 04
+   gto 685
+   adv
+   1
+   inv sbr
+   sto 03
+   x⇌t
+   rcl 07
+   inv x≥t 810
+   +
+   sto 05
+   x²
+   +
+   7
+   =
+   sto 01
+   0
+   sto 04
+   rc* 01
+   x=t 845
+   1
+   inv sum 01
+   dsz 5 832
+   rcl 05
+   -
+   1
+   =
+   ×
+   rcl 07
+   +
+   7
+   =
+   sto 01
+   x⇌t
+   inv sbr
+   1
+   sum 01
+   sum 04
+   rc* 01
+   prt
+   inv sbr
+   rcl 04
+   x⇌t
+   rcl 07
+   inv x=t 860
+   1
+   +
+   rcl 03
+   =
+   c'
+   gto 860
 
-    x<>t 1 sum 1 x<>t                        ; #097 incr(R01)
-    gto 093
-
-lbl c                                        ; #105
-; A derterminant
-    rcl 7 sto 5 + x2 + 7 = sto 1
-    rcl 5 st* 1 1 inv sum 1
-    dsz 5 118
-    1 sto 4 sto 6 rcl 4 + 7 =
-    sto 3 - rcl 7 - 8 = sto 5
-    rcl 4 d' sto 2 rc* 2 abs
-    x<>t inv dsz 5 188 1 sum 2 rc* 2 abs
-    inv ge 159 x<>t rcl 7 + rcl 5 + 8 =
-    sto 3
-    gto 159
-
-    rcl 3 x<>t rcl 4 + 7 =                   ; #188
-    eq 228
-    sto 2
-    1 +/- prd 6 rcl 7 + 1 = sto 5
-    rc* 2 ex* 3 st* 2 rcl 7 sum 2 sum 3
-    dsz 5 212
-    rcl 4 d' sto 1 rc* 1 prd 6 cp
-    eq 331
-    rcl 7 sto 5 rcl 4 d' sto 2 + rcl 5 -
-    rcl 4 = sto 3 rc* 3 / rc* 2 = sto 1
-    st* 3 rcl 7 sum 2 sum 3 x2 + 8 = x<>t
-    rcl 3
-    ge 297
-    rcl 1 +/- * rc* 2 = sm* 3
-    gto 269
-
-    1 inv sum 5 rcl 5 x<>t rcl 4             ; #297
-    eq 312
-    gto 245
-
-    1 sum 4 rcl 7 x<>t rcl 4 eq 326 gto 135  ; #312
-
-    d' sto 1 rc* 1 prd 6 rcl 6 adv prt adv   ; #326
-    rtn
-
-    nop nop nop nop nop nop nop nop nop nop  ; #339
-    nop
-
-lbl d                                        ; #350
-    sto 5 rtn
-
-    sto 3 rcl 7 x2 + 7 = sto 1 rcl 5 x<>t    ; #355
-    rcl 7 inv ge 354 1 sum 1 rc* 1
-    inv eq 374
-    rcl 7 sum 1 1 sum 5 rcl 3 st* 1
-    prt
-    rtn
-
-    gto 355                                  ; #396
-
-lbl e                                        ; #399
-    1 sto 4
-    rcl 7 + x² + 7 = sto 1
-    rcl 4 sto 5 - rcl 7 + 7 = sto 2
-    0 sbr 030 + 1 sum 1 rc* 1 = st* 1
-    1 sum 4 rcl 4
-    x<>t rcl 7
-    ge 404
-    1 sto 4
-    7 + ( rcl 7 + 1 ) x² =
-    sto 1 - rcl 7 - rcl 4 sto 5 = sto 2
-    0 sbr 052 + sbr 020 rc* 1 = / rc* 2 =
-    st* 1
-    1 sum 4 rcl 4 x<>t rcl 7
-    ge 452
-    adv 1
-    rtn
-
-lbl a'                                       ; #506
-    + x<>t 7 + rcl 7 * ( ce + 1 ) = sto 1
-    x<>t rtn
-
-    rc* 1 prt rtn                            ; #525
-
-    1 sum 1                                  ; #529
-    gto 525
-
-lbl b'                                       ; #535
-    1 sto 4 rcl 4 d' = sto 1 rc* 1 1/x st*
-    1 1 sum 4 rcl 4 x<>t
-    rcl 07 ge 540
-    1 +/- sum 4 1 sto 3 rcl 4 d'
-    sto 1 - rcl 3 sto 5 =
-    sto 2 rc* 1 * rc* 2 +/-
-    sbr 052
-    = *
-    sbr 020
-    rc* 2 = st* 1 1 sum 3 rcl 4
-    x<>t rcl 3 inv eq 569 1 sto 3 inv sum 4
-    rcl 4 x<>t
-    1 inv eq 569 rcl 4 d'
-    sto 1 + rcl 3 sto 5 = sto 2
-    rc* 2 +/-
-    sbr 030 * 1 sum 1 = st* 1
-    1 sum 3 rcl 3 x<>t rcl 7
-    - rcl 4 =
-    ge 627
-    1 sum 4 sto 3 rcl 7 x<>t
-    rcl 4
-    inv eq 627
-    1 sto 4 rcl 4 sto 5 d'
-    sto 3 rcl 5 d' sto 1 rcl 3 sto 2 rcl 7 -
-    rcl 5 + 1 = exc 5 x<>t rc* 3 +/-
-    sbr 030 =
-    +/- st* 3 rcl 7 sum 3 x<>t + 1 = sto 5
-    x<>t ge 692
-    x<>t rcl 4
-    eq 808
-    + 1 = sto 5
-    rcl 4 d' + 1 = sto 3 rcl 5 d' sto 2 rcl 3
-    sto 1 rcl 7 - rcl 5 + 1 = exc 5 x<>t rc* 1
-    * rc* 2 +/- sbr 030 = +/- st* 3 1 sum 3 +
-    x<>t = sto 5 x<>t rcl 7
-    ge 755
-    1 sum 4
-    gto 685
-
-    adv 1 rtn                                ; #808
-
-    sto 3 x<>t rcl 7                         ; #811
-    inv ge 810 + sto 5 x2 + 7 = sto 1
-    0 sto 4 rc* 1
-    eq 845
-    1 inv sum 1
-    dsz 5 832
-    rcl 5 - 1 = * rcl 7 + 7 = sto 1
-    x<>t
-    rtn
-
-    1 sum 1 sum 4 rc* 1 prt                  ; #860
-    rtn
-
-    rcl 4 x<>t rcl 7                         ; #869
-    inv eq 860
-    1 + rcl 3 = c'
-    gto 860
-
-lbl e'                                       ; #887
-    c cp
-    eq 895
-    b' rcl 6
-    rtn
+lbl E'
+   c
+   cp
+   x=t 895
+   b'
+   rcl 06
+   inv sbr

@@ -1,0 +1,242 @@
+   ; investment module -3-
+   ;
+
+lbl clr
+   pgm 03
+   e'
+   fix 2
+   inv sbr
+
+lbl A'
+   (
+   ce
+   ×
+   12
+   )
+   pgm 02
+   a
+   inv sbr
+
+lbl B'
+   (
+   ce
+   ÷
+   12
+   )
+   pgm 02
+   b
+   inv sbr
+
+lbl C'
+   pgm 02
+   d
+   inv sbr
+
+lbl D'
+   pgm 02
+   c
+   inv sbr
+
+lbl E'
+   sto 15
+   prt
+   inv sbr
+
+lbl A
+   sto 16
+   prt
+   inv sbr
+
+lbl B
+   (
+   prt
+   ÷
+   x⇌t
+   1200
+   )
+   sto 17
+   x⇌t
+   inv sbr
+
+lbl C
+   (
+   prt
+   ÷
+   x⇌t
+   12
+   )
+   sto 18
+   x⇌t
+   inv sbr
+
+lbl D
+   (
+   prt
+   ÷
+   x⇌t
+   100
+   +
+   1
+   )
+   sto 19
+   x⇌t
+   inv sbr
+
+lbl E
+   prt
+   sto 23
+   adv
+   sto 25
+   (
+   rcl 03
+   +
+   rcl 18
+   )
+   prt
+   adv
+   inv sbr
+
+lbl adv
+   adv
+   (
+   (
+   1
+   -
+   rcl 09
+   y**x
+   (
+   rcl 25
+   -
+   rcl 01
+   )
+   )
+   ÷
+   rcl 08
+   ×
+   rcl 03
+   )
+   sto 24
+   (
+   rcl 23
+   ×
+   rcl 17
+   ×
+   rcl 16
+   +
+   sum 16
+   rcl 15
+   +
+   rcl 04
+   -
+   rcl 24
+   )
+   sto 15
+   prt
+   inv sbr
+
+lbl r/s
+   (
+   rcl 23
+   ×
+   rcl 03
+   -
+   rcl 04
+   +
+   rcl 24
+   +
+   rcl 23
+   ×
+   rcl 18
+   )
+   x⇌t
+   12
+   sto 23
+   sum 25
+   rcl 24
+   sto 04
+   rcl 19
+   prd 18
+   x⇌t
+   prt
+   inv sbr
+   gto adv
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop

@@ -1,0 +1,109 @@
+   ; structural engineering module rev.a
+   ;
+
+lbl B
+   sto 01
+   prt
+   inv sbr
+   sto 02
+   inv sbr
+   sto 03
+   inv sbr
+
+lbl C
+   sto 04
+   prt
+   inv sbr
+   sto 05
+   inv sbr
+   sto 06
+   inv sbr
+
+lbl B'
+   ×
+   .8
+   =
+   gto 002
+
+lbl C'
+   ×
+   .8
+   =
+   gto 014
+
+lbl prt
+   3422
+   op 04
+   rcl 10
+   op 06
+   inv sbr
+
+lbl write
+   3416
+   op 04
+   rcl 11
+   op 06
+   inv sbr
+
+lbl E
+   adv
+   rcl 01
+   y**x
+   3
+   =
+   sto 08
+   rcl 04
+   y**x
+   3
+   =
+   sto 09
+   rcl 01
+   sum 04
+   8.5
+   prd 04
+   rcl 02
+   +
+   rcl 03
+   =
+   sto 10
+   sbr prt
+   rcl 05
+   +
+   rcl 06
+   =
+   sto 11
+   sbr write
+   sbr √x
+   rcl 02
+   sto 10
+   sbr prt
+   rcl 11
+   sbr write
+   sbr √x
+   rcl 03
+   sum 10
+   sbr prt
+   rcl 06
+   inv sum 11
+   sbr write
+   sbr √x
+   inv sbr
+
+lbl √x
+   (
+   (
+   rcl 10
+   ×
+   rcl 08
+   +
+   rcl 11
+   ×
+   rcl 09
+   )
+   ÷
+   rcl 04
+   )
+   +/-
+   prt
+   adv
+   inv sbr

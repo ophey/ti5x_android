@@ -1,0 +1,235 @@
+   ; securities analysis module -8-
+   ;
+
+lbl clr
+   0
+   sto 07
+   sto 10
+   fix 9
+   inv sbr
+
+lbl A'
+   inv lbl a
+   stflg 1
+   sto 01
+   pgm 02
+   d'
+   inv sbr
+
+lbl B
+   sto 02
+   x⇌t
+   ifflg 1 041
+   334137
+   gto 049
+   15132727
+   pgm 09
+   a'
+   inv sbr
+   sto 14
+   x⇌t
+   153230
+   gto 049
+
+lbl C
+   sto 03
+   pgm 09
+   d'
+   inv sbr
+
+lbl D
+   sto 04
+   pgm 02
+   d'
+   inv sbr
+   sto 05
+   pgm 09
+   e'
+   inv sbr
+
+lbl E
+   (
+   sto 06
+   ÷
+   100
+   )
+   sto 09
+   op 29
+   +/-
+   sto 08
+   op 28
+   +/-
+   exc 06
+   x⇌t
+   6115
+   gto 049
+
+lbl E'
+   sto 07
+   x⇌t
+   162442
+   pgm 09
+   a'
+   inv sbr
+   sto 10
+   x⇌t
+   303137
+   gto 049
+
+lbl B'
+   (
+   rcl 01
+   ×
+   100
+   ×
+   sto 15
+   rcl 02
+   -
+   rcl 14
+   +
+   sto 11
+   rcl 04
+   ×
+   (
+   rcl 05
+   ×
+   ifflg 1 186
+   rcl 08
+   -
+   rcl 07
+   -
+   rcl 09
+   gto 195
+   rcl 09
+   +/-
+   +
+   rcl 07
+   +
+   rcl 08
+   ×
+   rcl 03
+   )
+   )
+   sto 12
+   x⇌t
+   adv
+   301344
+   gto 049
+
+lbl C'
+   (
+   rcl 10
+   -
+   rcl 11
+   +
+   rcl 04
+   ×
+   rcl 05
+   ×
+   ifflg 1 242
+   (
+   .5
+   +
+   rcl 06
+   )
+   gto 244
+   rcl 09
+   )
+   x⇌t
+   243142
+   pgm 09
+   a'
+   inv sbr
+   (
+   1/x
+   ×
+   rcl 12
+   ×
+   100
+   )
+   pgm 03
+   e'
+   inv sbr
+
+lbl D'
+   ifflg 1 295
+   sbr 308
+   x⇌t
+   41
+   pgm 09
+   a'
+   inv sbr
+   sbr 339
+   x⇌t
+   27
+   gto 049
+   sbr 339
+   sbr 279
+   inv sbr
+   sbr 308
+   gto 289
+   (
+   (
+   rcl 12
+   +
+   rcl 04
+   ×
+   ifflg 1 325
+   rcl 09
+   gto 328
+   rcl 08
+   +/-
+   ×
+   sto 13
+   rcl 03
+   )
+   ÷
+   rcl 13
+   )
+   inv sbr
+   (
+   (
+   rcl 12
+   +
+   (
+   rcl 15
+   -
+   rcl 04
+   )
+   sto 13
+   cp
+   +/-
+   x≥t 402
+   +/-
+   ×
+   rcl 03
+   ×
+   (
+   1
+   +
+   rcl 06
+   ifflg 1 377
+   )
+   +/-
+   gto 379
+   +/-
+   )
+   )
+   ÷
+   rcl 13
+   ÷
+   (
+   1
+   -
+   rcl 06
+   ifflg 1 398
+   )
+   +/-
+   gto 400
+   +/-
+   )
+   )
+   inv sbr
+   0
+   1/x
+   inv sbr

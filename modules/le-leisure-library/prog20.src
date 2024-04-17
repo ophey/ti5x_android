@@ -1,111 +1,195 @@
-;+
-; Partial recreation of the "Leisure Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; leisure library module -7-
+   ;
 
 lbl sin
-    dsz 0 D
+   dsz 0 d
 
-lbl dms
-    + )
+lbl d.ms
+   +
+   )
 
 lbl D
-    (
-    ( 9 c × 5 )
-    fix 2
-    ee
-    2 + 0
-    C
-    ÷ 1 0 0 )
-    inv ee
-    rtn
+   (
+   (
+   9
+   c
+   ×
+   5
+   )
+   fix 2
+   ee
+   2
+   +
+   0
+   c
+   ÷
+   100
+   )
+   inv ee
+   inv sbr
 
 lbl C
-    sto 10
-    rc* 10
-    rtn
+   sto 10
+   rc* 10
+   inv sbr
 
 lbl A'
-    exc 6
-    rtn
+   exc 06
+   inv sbr
 
 lbl E'
-    rad
-    π
-    cos
-    cp
-    x≥t dms
-    3 0 sto 9
-    ( exc 7 + 1 6 sto 0
-    x⇌t 1 6 ) x²
-    P→R
-    inv P→R
-    sto 8
-    . 2
-    sto 4
-    1 sto 5
-    gto sin
+   rad
+   π
+   cos
+   cp
+   x≥t d.ms
+   30
+   sto 09
+   (
+   exc 07
+   +
+   16
+   sto 00
+   x⇌t
+   16
+   )
+   x²
+   p→r
+   inv p→r
+   sto 08
+   .2
+   sto 04
+   1
+   sto 05
+   gto sin
 
 lbl A
-    sto 1
-    rtn
+   sto 01
+   inv sbr
 
 lbl B
-    sto 2
-    rtn
+   sto 02
+   inv sbr
 
 lbl E
-    ( 2 × 5 c )
-    inv sum 7
-    0 A'
-    cp
-    x=t π
-    ( ce × 5 c sum 7
-    ÷ 7 C )
-    sum 8
+   (
+   2
+   ×
+   5
+   c
+   )
+   inv sum 07
+   0
+   a'
+   cp
+   x=t π
+   (
+   ce
+   ×
+   5
+   c
+   sum 07
+   ÷
+   7
+   c
+   )
+   sum 08
 
 lbl π
-    7 C
-    log
-    cp
-    inv x≥t dms
-    1 C
-    x=t D
-    (
-    ( ce ÷ 5 0 0 ) ×
-    ( ce + 1/x × 7 c x²
-    - 2 × 7 C ×
-    ( 8 c - 2 c × π ÷ 1 8 0 )
-    sto 6 cos
-    )
-    )
-    √x
-    ( ( sto 9 log +/- - 1 )
-    cp
-    x≥t dms
-    + 1 )
-    x≥t grad
-    ( ce + 1 )
-    x≥t mean
-    0 sto 9
+   7
+   c
+   log
+   cp
+   inv x≥t d.ms
+   1
+   c
+   x=t d
+   (
+   (
+   ce
+   ÷
+   500
+   )
+   ×
+   (
+   ce
+   +
+   1/x
+   ×
+   7
+   c
+   x²
+   -
+   2
+   ×
+   7
+   c
+   ×
+   (
+   8
+   c
+   -
+   2
+   c
+   ×
+   π
+   ÷
+   180
+   )
+   sto 06
+   cos
+   )
+   )
+   √x
+   (
+   (
+   sto 09
+   log
+   +/-
+   -
+   1
+   )
+   cp
+   x≥t d.ms
+   +
+   1
+   )
+   x≥t grad
+   (
+   ce
+   +
+   1
+   )
+   x≥t mean(x)
+   0
+   sto 09
 
-lbl mean
-    0 A'
-    gto sin
+lbl mean(x)
+   0
+   a'
+   gto sin
 
 lbl grad
-    ( 5 C - 4 C )
-    cp
-    x=t tan
-    sto 5
+   (
+   5
+   c
+   -
+   4
+   c
+   )
+   cp
+   x=t tan
+   sto 05
 
 lbl tan
-    1 A'
-    cp
-    x≥t sin
-    1 +/-
-    A'
-    gto sin
+   1
+   a'
+   cp
+   x≥t sin
+   1
+   +/-
+   a'
+   gto sin
 
 lbl clr
-    rtn
+   inv sbr

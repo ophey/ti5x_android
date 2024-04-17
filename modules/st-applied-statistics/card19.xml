@@ -1,0 +1,8 @@
+<carddef style="system">
+<label slot="titleleft">NORMAL DISTRIBUTION</label>
+<label slot="titleright">ST-19</label>
+<label slot="a">z <ArrowR/> <Phi/>(z)</label>
+<label slot="b">z <ArrowR/> P(z)</label>
+<label slot="c">z <ArrowR/> Q(z)</label>
+<label slot="d">z <ArrowR/> A(z)</label>
+</carddef>

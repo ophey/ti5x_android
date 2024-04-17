@@ -1,0 +1,209 @@
+   ; investment module -3-
+   ;
+
+lbl A
+   stflg 4
+   cp
+   x=t exc
+   inv x≥t exc
+   pgm 10
+   a
+   lnx
+   sto 19
+   sum 07
+   x²
+   sum 08
+   rcl 16
+   inv sbr
+
+lbl exc
+   0
+   1/x
+   inv sbr
+
+lbl B
+   x=t exc
+   inv x≥t exc
+   pgm 10
+   sbr ce
+   rcl 17
+   lnx
+   sto 18
+   sum 09
+   x²
+   sum 10
+   (
+   rcl 19
+   ×
+   rcl 18
+   )
+   sum 11
+   rcl 16
+   prd 18
+   rcl 18
+   ifflg 4 070
+   +/-
+   sum 12
+   rcl 17
+   prd 19
+   rcl 19
+   sum 13
+   rcl 03
+   inv sbr
+
+lbl sum
+   sto 29
+   pgm 10
+   sbr adv
+   rcl 26
+   x⇌t
+   inv sbr
+
+lbl D'
+   stflg 1
+   pgm 10
+   d
+   lnx
+   +/-
+   sto 19
+   sum 07
+   x²
+   +/-
+   sum 08
+   rcl 16
+   inv sbr
+   sto 17
+   pgm 10
+   sbr p→r
+   lnx
+   sto 18
+   +/-
+   sum 09
+   x²
+   +/-
+   inv stflg 4
+   sbr 048
+   rcl 17
+   inv sbr
+
+lbl C
+   1
+   sto 29
+   pgm 10
+   sbr adv
+   op 13
+   x²
+   sto 26
+   x⇌t
+   inv stflg 1
+   rcl 01
+   sto 21
+   rcl 02
+   sto 22
+   rcl 06
+   sto 23
+   rcl 04
+   sto 24
+   rcl 05
+   sto 25
+   rcl 09
+   sto 01
+   rcl 10
+   sto 02
+   rcl 12
+   sto 06
+   op 13
+   x²
+   inv x≥t 200
+   sto 26
+   3
+   sbr sum
+   stflg 2
+   rcl 07
+   sto 04
+   rcl 08
+   sto 05
+   rcl 11
+   sto 06
+   op 13
+   x²
+   inv x≥t 226
+   sto 26
+   2
+   sbr sum
+   inv stflg 2
+   stflg 3
+   rcl 21
+   sto 01
+   rcl 22
+   sto 02
+   rcl 13
+   sto 06
+   op 13
+   x²
+   inv x≥t 259
+   sto 26
+   4
+   sto 29
+   pgm 10
+   sbr adv
+   inv stflg 3
+   rcl 29
+   prt
+   inv sbr
+
+lbl D
+   rcl 16
+   prt
+   inv sbr
+
+lbl E
+   rcl 15
+   prt
+   inv sbr
+
+lbl A'
+   rcl 26
+   prt
+   inv sbr
+
+lbl E'
+   pgm 10
+   e'
+   inv sbr
+   sto 27
+   rcl 29
+   x⇌t
+   4
+   x=t 326
+   1
+   x=t 308
+   2
+   x=t 323
+   inv sbr
+   rcl 24
+   sto 04
+   rcl 25
+   sto 05
+   rcl 23
+   sto 06
+   stflg 1
+   inv sbr
+   stflg 2
+   inv sbr
+   stflg 3
+   inv sbr
+
+lbl B'
+   sbr 290
+   rcl 27
+   pgm 10
+   d'
+   inv sbr
+
+lbl C'
+   sbr 290
+   rcl 27
+   pgm 10
+   e
+   inv sbr

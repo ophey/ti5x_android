@@ -1,63 +1,73 @@
-;+
-; Partial recreation of the "Leisure Library" module
-; that came with the original TI-58C/59 calculators.
-;-
-; registers:
-; 01 .. 04  -  the four digits of the number to guess (no 0, no digit repeated)
-; 05        -  index to digits during generation
+   ; leisure library module -7-
+   ;
 
 lbl E
-    cms
-    sto 9
+   cms
+   sto 09
 
 lbl B
-    op 25                     ; #007 add 1 to r05
-    rcl 5                     ; #009
-    sto 6
-    ( pgm 15 sbr dms × 1 0 )
-    int
-    x⇌t
-    rc* 6                     ; #024
-    x=t 9                     ; if digit is 0 or already set, generate a new one
-    dsz 6 024                 ; check all digits already generated, no repeated digits
-    x⇌t                      ; X is new digit
-    st* 5                     ; store it
-    rcl 5
-    x⇌t
-    3
-    x≥t 7                     ; generate next digit
-    0
-    rtn
+   op 25
+   rcl 05
+   sto 06
+   (
+   pgm 15
+   sbr d.ms
+   ×
+   10
+   )
+   int
+   x⇌t
+   rc* 06
+   x=t 009
+   dsz 6 024
+   x⇌t
+   st* 05
+   rcl 05
+   x⇌t
+   3
+   x≥t 007
+   0
+   inv sbr
 
 lbl A
-    fix 9
-    prt
-    sto 7
-    4 sto 5
-    ( rcl 7 ÷ 1 0 )
-    sto 7
-    inv int
-    ( inv sum 7 × 1 0 )
-    x⇌t
-    4 sto 6
-    rc* 6
-    x=t 90
-    dsz 6 078
-    gto 102
-
-    rcl 6
-    x⇌t
-    rcl 5
-    x=t 99
-    . 1
-    sum 8
-    dsz 5 055
-    0 exc 8
-    fix 1
-    prt
-    adv
-    rtn
+   fix 9
+   prt
+   sto 07
+   4
+   sto 05
+   (
+   rcl 07
+   ÷
+   10
+   )
+   sto 07
+   inv int
+   (
+   inv sum 07
+   ×
+   10
+   )
+   x⇌t
+   4
+   sto 06
+   rc* 06
+   x=t 090
+   dsz 6 078
+   gto 102
+   rcl 06
+   x⇌t
+   rcl 05
+   x=t 099
+   .1
+   sum 08
+   dsz 5 055
+   0
+   exc 08
+   fix 1
+   prt
+   adv
+   inv sbr
 
 lbl clr
-    cms
-    rtn
+   cms
+   inv sbr

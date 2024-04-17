@@ -1,0 +1,97 @@
+#!/bin/bash
+
+ROM=()
+
+FILE=$1
+NAME=""
+
+LDIR=$2
+
+RDIR=romdump
+
+rm -fr $RDIR
+mkdir -p $RDIR
+
+#  Read ROM data
+
+{
+    LOAD=no
+    read line
+    read line
+    read line
+    read NAME
+
+    while read line; do
+        if [[ ${line:0:5} == "0000:" ]]; then
+            LOAD=yes;
+        fi
+
+        [[ $LOAD == yes ]] &&
+            ROM+=( ${line#*:} )
+    done
+} < <( cat $FILE | dos2unix ; echo ) #  tr '\r' ' ')
+
+#  Dump programs
+
+function dump-prog()
+{
+    local PROG=$1
+    local START=$2
+    local SIZE=$3
+
+    local PFILE=$RDIR/$(printf "prog%02d" $PROG).code
+    local SFILE=$RDIR/$(printf "prog%02d" $PROG).src
+
+    printf "Dump %2d starting from $START (size %3d) to $PFILE\n" $PROG $SIZE
+
+    {
+        for (( I=0; I < $SIZE; I++ )); do
+            local N=$(( 10#$START + $I ))
+            echo ${ROM[$N]}
+        done
+    } > $PFILE
+
+    {
+        echo "; $NAME"
+        echo ";"
+
+        cat $PFILE | util/disassemble
+    } > $SFILE
+
+    util/beautify $SFILE
+}
+
+NBPROG=10#${ROM[0]}
+
+for (( P=1; P<=$NBPROG; P++ )); do
+    SI=$(( 2 + ( P - 1) * 2 ))
+    EI=$(( $SI + 2 ))
+    # echo Addr: $SI $EI
+    ST="${ROM[$SI]}${ROM[$SI+1]}"
+    ET="${ROM[$EI]}${ROM[$EI+1]}"
+    N=10#$ST
+    # echo $P - $SI - $ST - $(( 10#$ET - 10#$ST )) - $N / ${ROM[${N}]}
+
+    ADJ=0
+    [[ $P == $NBPROG ]] && ADJ=1
+
+    dump-prog $P $ST $(( 10#$ET - 10#$ST + $ADJ ))
+done
+
+if [[ -n $LDIR ]]; then
+    echo
+    echo Check against current module...
+
+    for file in $RDIR/prog*.code; do
+        echo "=============================== $file ==========="
+        F=$(basename $file .code)
+        diff -c $file <( cat $LDIR/$F.src | util/assemble | tr ' ' '\n' )
+
+        if [[ $? == 1 ]]; then
+            cat $LDIR/$F.src | util/assemble | util/disassemble > x
+            util/beautify x
+            diff -c <( tail -n +3 $RDIR/$F.src ) x
+            echo
+        fi
+    done
+fi

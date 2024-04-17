@@ -1,3 +1,5 @@
+   ; aviation module -6-
+   ;
 
 lbl B'
    (
@@ -110,7 +112,6 @@ lbl C
    √x
    )
    inv sbr
-
    rcl 13
    inv sbr
 

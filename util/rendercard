@@ -350,13 +350,16 @@ symbols = \
         "Delta" : defsymbol("Delta", "(\\104)"),
         "Phi" : defsymbol("Phi", "(\\106)"),
         "Gamma" : defsymbol("Gamma", "(\\107)"),
+        "Pi" : defsymbol("Pi", "(\\120)"),
         "Sigma" : defsymbol("Sigma", "(\\123)"),
+        "Tau" : defsymbol("Tau", "(\\124)"),
         "Omega" : defsymbol("Omega", "(\\127)"),
         "Zeta" : defsymbol("Zeta", "(\\132)"),
 
         # Lower-case greek characters
         "alpha" : defsymbol("alpha", "(\\141)"),
         "beta" : defsymbol("beta", "(\\142)"),
+        "chi" : defsymbol("chi", "(\\143)"),
         "epsilon": defsymbol("epsilon", "(\\145)"),
         "gamma" : defsymbol("gamma", "(\\147)"),
         "eta" : defsymbol("eta", "(\\150)"),
@@ -389,6 +392,7 @@ symbols = \
         "darrow" : defsymbol("darrow", "(\\257)"),
         "empty" : defsymbol("empty", "(\\306)"),     # circle with a bar
         "intersect" : defsymbol("intersect", "(\\307)"), # half-circle down
+        "infinity" : defsymbol("infinity", "(\\245)"),
     }
 
 fontname = "Helvetica"

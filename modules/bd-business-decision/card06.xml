@@ -1,0 +1,12 @@
+<carddef style="system">
+<label slot="titleleft">BREAKEVEN ANALYSIS</label>
+<label slot="titleright">BD-06</label>
+<label slot="cprime">START</label>
+<label slot="dprime">COMMAND</label>
+<label slot="eprime">UNIT / GPM</label>
+<label slot="a">VAR CST</label>
+<label slot="b">LEARN</label>
+<label slot="c">FIX CST</label>
+<label slot="d">U PRICE</label>
+<label slot="e">EROSION</label>
+</carddef>

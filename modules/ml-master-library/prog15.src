@@ -1,53 +1,100 @@
-;+
-; My (partial) recreation of the "Master Library" module
-; that came with the original TI-58C/59 calculators.
-;
-; This implementation of random numbers does not use
-; the low-quality linear-congruential method. Instead, it
-; relies on the Op 51 extension in my ti5x emulator to
-; return a cryptographically-strong random value. This
-; is automatically seeded from system entropy, so there
-; is no function provided to manually seed it.
-;
-; Written by Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
-;-
-
-lbl E´
-; initialize
-    pgm 01 sbr clr ; initialize stats registers
-    inv sbr
-
-lbl E
-; does nothing in this implementation, but keep this label for programs
-; using it.
-    inv sbr
-
-lbl A
-; enter lower limit for uniform distribution, or mean for normal distribution
-    sto 10
-    inv sbr
-
-lbl B
-; enter upper limit for uniform distribution, or standard deviation for normal distribution
-    sto 11
-    inv sbr
-
-lbl C
-; generate uniformly-distributed random variable
-    ( op 51 * ( rcl 11 - rcl 10 ) + rcl 10 ) sto 09
-    ∑+ ; accumulate statistics
-    rcl 09
-    inv sbr
-
-lbl C´
-; generate normally-distributed random variable
-    ( ( op 51 lnx × 2 +/- ) sqrt × ( op 51 × 1 inv sin × 4 ) cos × rcl 11 + rcl 10 ) sto 09
-    ∑+ ; accumulate statistics
-    rcl 09
-    inv sbr
+   ; master library module -1-
+   ;
 
 lbl d.ms
-; generate random variable uniformly distributed over [0.0 .. 1.0)
-; without accumulating statistics
-    op 51
-    inv sbr
+   (
+   (
+   24298
+   ×
+   rcl 09
+   +
+   99991
+   )
+   ÷
+   199017
+   sto 07
+   )
+   (
+   (
+   (
+   inv int
+   ×
+   rcl 07
+   )
+   sto 09
+   ÷
+   rcl 07
+   ×
+   5
+   inv log
+   )
+   int
+   ÷
+   5
+   inv log
+   )
+   inv sbr
+
+lbl C
+   sbr d.ms
+   (
+   ce
+   ×
+   (
+   rcl 11
+   -
+   rcl 10
+   )
+
+lbl p→r
+   +
+   rcl 10
+   )
+   sto 07
+   ∑+
+   rcl 07
+   inv sbr
+
+lbl C'
+   rad
+   sbr d.ms
+   sto 08
+   sbr d.ms
+   (
+   (
+   ce
+   ×
+   2
+   ×
+   π
+   )
+   cos
+   ×
+   (
+   rcl 08
+   lnx
+   ×
+   2
+   +/-
+   )
+   √x
+   ×
+   rcl 11
+   gto p→r
+
+lbl E'
+   pgm 01
+   sbr clr
+   inv sbr
+
+lbl E
+   sto 09
+   inv sbr
+
+lbl A
+   sto 10
+   inv sbr
+
+lbl B
+   sto 11
+   inv sbr

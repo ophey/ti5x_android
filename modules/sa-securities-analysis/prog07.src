@@ -1,0 +1,235 @@
+   ; securities analysis module -8-
+   ;
+
+lbl clr
+   cms
+   365
+   exc 05
+   fix 9
+   inv stflg 1
+   inv sbr
+
+lbl A
+   sto 01
+   pgm 09
+   e'
+   inv sbr
+
+lbl B
+   sto 02
+   pgm 09
+   d'
+   inv sbr
+
+lbl C
+   sto 03
+   x⇌t
+   423227
+   pgm 09
+   a'
+   inv sbr
+
+lbl D
+   (
+   sto 04
+   ÷
+   100
+   )
+   exc 04
+   pgm 03
+   e'
+   inv sbr
+
+lbl C'
+   sto 08
+   fix 4
+   prt
+   inv sbr
+   x⇌t
+   162442
+   sbr 041
+   (
+   ce
+   ÷
+   (
+   1
+   +
+   rcl 04
+   )
+   y**x
+   (
+   (
+   rcl 08
+   pgm 15
+   a'
+   -
+   rcl 06
+   )
+   ÷
+   rcl 05
+   )
+   )
+   sum 10
+   fix 2
+   prt
+   inv sbr
+
+lbl A'
+   sto 06
+   pgm 15
+   a'
+   exc 06
+   prt
+   inv sbr
+
+lbl B'
+   sto 07
+   pgm 15
+   a'
+   exc 07
+   prt
+   inv sbr
+
+lbl E
+   stflg 1
+
+lbl E'
+   adv
+   (
+   rcl 01
+   -
+   rcl 10
+   )
+   sto 11
+   (
+   (
+   rcl 07
+   -
+   rcl 06
+   )
+   ÷
+   rcl 05
+   )
+   (
+   (
+   (
+   sto 19
+   ×
+   rcl 04
+   +
+   sto 12
+   (
+   rcl 11
+   ÷
+   rcl 02
+   )
+   lnx
+   )
+   ÷
+   (
+   rcl 03
+   ÷
+   100
+   ×
+   rcl 19
+   √x
+   )
+   sto 13
+   )
+   sto 14
+   +
+   sbr 253
+   )
+   sto 15
+   (
+   (
+   ifflg 1 213
+   +/-
+   exc 14
+   -
+   sbr 253
+   ×
+   rcl 02
+   ÷
+   rcl 12
+   inv lnx
+   inv ifflg 1 233
+   +/-
+   +
+   rcl 14
+   ×
+   rcl 11
+   )
+   pgm 09
+   c'
+   inv stflg 1
+   inv sbr
+   rcl 15
+   pgm 09
+   b'
+   inv sbr
+   rcl 13
+   ÷
+   2
+   )
+   cp
+   inv ifflg 1 383
+   x≥t 386
+   (
+   (
+   sto 16
+   x²
+   inv lnx
+   ×
+   2
+   ×
+   π
+   )
+   √x
+   1/x
+   ×
+   rcl 16
+   (
+   |x|
+   ×
+   .2316419
+   +
+   1
+   )
+   1/x
+   (
+   sto 16
+   prd 16
+   sto 17
+   ×
+   .31938153
+   -
+   .356563782
+   ×
+   rcl 16
+   prd 17
+   +
+   1.781477937
+   ×
+   rcl 17
+   -
+   1.821255978
+   ×
+   rcl 16
+   prd 17
+   x²
+   +
+   1.330274429
+   ×
+   rcl 17
+   )
+   )
+   inv sbr
+   x≥t 267
+   sbr 267
+   (
+   +/-
+   +
+   1
+   )
+   inv sbr

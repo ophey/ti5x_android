@@ -1,0 +1,353 @@
+   ; investment module -3-
+   ;
+
+lbl ifflg
+   pgm 04
+   sbr prt
+   (
+   ce
+   ×
+   rcl 03
+   +
+   rcl 05
+   ÷
+   rcl 12
+   )
+   x=t 026
+
+lbl D
+   x=t 520
+   sto 04
+   fix 2
+   gto 073
+   stflg 5
+   pgm 04
+   d'
+   ifflg 4 046
+   pgm 04
+   sbr sin
+   (
+   (
+   ce
+   ×
+   rcl 03
+   -
+   rcl 04
+   )
+   +/-
+   ×
+   rcl 12
+   )
+   x=t 069
+
+lbl E
+   x=t 033
+   sto 05
+   fix 2
+   ifflg 0 p→r
+   prt
+
+lbl p→r
+   inv sbr
+   pgm 04
+   sbr prt
+   (
+   ce
+   ÷
+   (
+   rcl 04
+   -
+   rcl 05
+   ÷
+   rcl 12
+   )
+   )
+   1/x
+   x=t 107
+
+lbl C
+   x=t 487
+   sto 03
+   fix 2
+   gto 073
+   sum 11
+   rcl 11
+   lnx
+   sto 11
+   rcl 10
+   lnx
+   +/-
+   sum 11
+   rcl 09
+   lnx
+   1/x
+   prd 11
+   rcl 11
+   x=t 143
+
+lbl A
+   x=t 435
+   sto 01
+   +/-
+   sto 11
+   +/-
+   fix 9
+   gto 073
+   1
+   sto 09
+   7
+   +/-
+   inv log
+   x⇌t
+   (
+   rcl 04
+   ÷
+   rcl 03
+   )
+   sto 10
+   ifflg 3 266
+   ifflg 4 266
+   (
+   ce
+   ÷
+   rcl 01
+   x²
+   -
+   rcl 10
+   1/x
+   )
+   sto 08
+   sum 09
+   pgm 04
+   sbr prt
+   sto 14
+   ifflg 1 210
+   (
+   ce
+   ×
+   rcl 09
+   )
+   (
+   ce
+   -
+   rcl 10
+   )
+   sto 13
+   (
+   rcl 14
+   ÷
+   rcl 08
+   -
+   rcl 01
+   ×
+   rcl 12
+   ÷
+   rcl 09
+   ÷
+   rcl 08
+   )
+   ifflg 1 250
+   (
+   ce
+   ×
+   rcl 09
+   -
+   rcl 14
+   )
+   inv prd 13
+   rcl 13
+   sum 08
+   sum 09
+   |x|
+   x≥t 194
+   gto 412
+   (
+   rcl 05
+   ÷
+   rcl 03
+   +
+   sto 14
+   rcl 01
+   prd 14
+   -
+   rcl 10
+   )
+   sto 08
+   (
+   rcl 01
+   +
+   x²
+   ÷
+   2
+   +
+   rcl 14
+   ÷
+   rcl 01
+   )
+   ifflg 3 314
+   (
+   rcl 11
+   +
+   x²
+   ÷
+   2
+   +
+   rcl 14
+   )
+   inv prd 08
+   rcl 08
+   sum 09
+   pgm 04
+   sbr sin
+   sto 06
+   ifflg 3 337
+   (
+   ce
+   ×
+   rcl 09
+   )
+   (
+   ce
+   +
+   rcl 14
+   ÷
+   rcl 01
+   ÷
+   rcl 12
+   -
+   rcl 10
+   )
+   sto 13
+   (
+   (
+   rcl 06
+   ÷
+   rcl 08
+   -
+   rcl 01
+   ÷
+   rcl 12
+   ÷
+   rcl 09
+   ÷
+   rcl 08
+   )
+   ifflg 3 387
+   (
+   ce
+   ×
+   rcl 09
+   +
+   rcl 06
+   )
+   (
+   ce
+   +
+   rcl 14
+   ÷
+   rcl 12
+   ÷
+   rcl 09
+   )
+   inv prd 13
+   rcl 13
+   sum 08
+   sum 09
+   |x|
+   x≥t 321
+   (
+   rcl 08
+   ×
+   100
+   )
+   cp
+   x=t 429
+
+lbl B
+   x=t 154
+   fix 4
+   pgm 04
+   e
+   inv sbr
+   rcl 03
+   sto 11
+   sto 10
+   rcl 09
+   ifflg 2 452
+   ifflg 4 452
+   1
+   prd 11
+   prd 10
+   (
+   rcl 04
+   ×
+   rcl 08
+   )
+   ifflg 1 114
+   ifflg 2 114
+   +/-
+   sum 10
+   (
+   rcl 05
+   ×
+   rcl 08
+   )
+   +/-
+   sum 11
+   gto 116
+   stflg 5
+   ifflg 1 080
+   ifflg 2 514
+   ifflg 3 507
+   pgm 04
+   d'
+   gto 084
+   pgm 04
+   sbr sin
+   gto 084
+   pgm 04
+   b'
+   gto 084
+   stflg 5
+   ifflg 1 ifflg
+   ifflg 2 546
+   ifflg 3 539
+   pgm 04
+   d'
+   gto 006
+   pgm 04
+   sbr sin
+   gto 006
+   pgm 04
+   b'
+   gto 006
+
+lbl A'
+   stflg 1
+   inv sbr
+
+lbl B'
+   stflg 2
+   inv sbr
+
+lbl C'
+   stflg 3
+   inv sbr
+
+lbl D'
+   stflg 4
+   inv sbr
+
+lbl E'
+   adv
+   inv stflg 1
+   inv stflg 2
+   inv stflg 3
+   inv stflg 4
+   inv stflg 5
+   inv stflg 0
+   0
+   sto 05
+   fix 9
+   cp
+   inv sbr

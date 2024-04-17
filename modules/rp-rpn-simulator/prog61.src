@@ -1,0 +1,9 @@
+   ; rpn simulator module -13-
+   ;
+
+lbl A
+   inv ifflg 3 inv
+   inv lbl inv
+   stflg 4
+   inv stflg 3
+   inv sbr

@@ -1,111 +1,153 @@
-;+
-; Partial recreation of the "Math/Utilities Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; math/utilities module -10-
+   ;
 
-lbl A                                     ;000
-    sto 1
-    rtn
+lbl A
+   sto 01
+   inv sbr
+   (
+   (
+   ce
+   -
+   1
+   )
+   ÷
+   rcl 01
+   sto 00
+   int
+   inv sum 00
+   )
+   sto 02
+   (
+   inv int
+   ×
+   rcl 01
+   int
+   )
+   sto 03
+   op 23
+   4
+   sum 02
+   rc* 02
+   inv int
+   st* 02
+   (
+   inv dsz 3 067
+   (
+   rcl 00
+   ×
+   10
+   )
+   sto 00
+   int
+   inv sum 00
+   +
+   gto 045
+   0
+   )
+   inv log
+   d.ms
+   sto 03
+   prd ind 02
+   inv sbr
 
-    (                                     ;005
-    ( ce - 1 )
-    ÷
-    rcl 1
-    sto 0
-    int inv
-    sum 0
-    )
-    sto 2
-    ( inv int
-    ×
-    rcl 1
-    int
-    )
-    sto 3
-    op 23
-    4
-    sum 2
-    rc* 2
-    inv int
-    st* 2
-    (
-    inv dsz 3 67                          ;045
-    ( rcl 0 × 10 )
-    sto 0
-    int
-    inv sum 0
-    +
-    gto 45
+lbl B
+   sbr 005
+   rc* 02
+   int
+   inv sm* 02
+   (
+   exc 00
+   ×
+   10
+   )
+   int
+   inv log
+   d.ms
+   prd 00
+   prd ind 02
+   prd 03
+   (
+   (
+   1/x
+   ×
+   x⇌t
+   )
+   (
+   inv int
+   ÷
+   x⇌t
+   )
+   int
+   +
+   exc 00
+   +
+   rc* 02
+   inv int
+   )
+   st* 02
+   rcl 03
+   inv prd ind 02
+   rcl 00
+   inv sbr
 
-    0                                     ;067
-    )
-    inv log
-    dms
-    sto 3
-    pd* 2
-    rtn
+lbl C
+   sbr 005
+   (
+   rc* 02
+   inv int
+   ×
+   rcl 03
+   inv prd ind 02
+   (
+   rcl 00
+   ×
+   10
+   )
+   int
+   inv log
+   d.ms
+   )
+   int
+   inv sbr
 
-lbl B                                     ;077
-    sbr 5
-    rc* 2
-    int
-    inv sm* 2
-    ( exc 0 × 10 )
-    int
-    inv log
-    dms
-    prd 0
-    pd* 2
-    prd 3
-    (
-    ( 1/x × x⇌t )
-    ( inv int ÷ x⇌t )
-    int
-    +
-    exc 0
-    +
-    rc* 2
-    inv int
-    )
-    st* 2
-    rcl 3
-    inv pd* 2
-    rcl 0
-    rtn
-
-lbl C                                     ;137
-    sbr 5
-    ( rc* 2
-    inv int
-    ×
-    rcl 3
-    inv pd* 2
-    ( rcl 0 × 10 )
-    int inv
-    log
-    dms
-    )
-    int
-    rtn
-
-lbl D                                     ;167
-    sbr 5
-    rc* 2
-    int inv
-    sm* 2
-    ( exc 0 × 10 )
-    int
-    inv log
-    dms
-    prd 0
-    prd 3
-    pd* 2
-    ( 1/x × x⇌t )
-    ( inv int ÷ x⇌t )
-    (
-    ( int + rc* 2 inv int + rcl 0 )
-    ÷ rcl 3
-    )
-    ex* 2
-    int
-    rtn
+lbl D
+   sbr 005
+   rc* 02
+   int
+   inv sm* 02
+   (
+   exc 00
+   ×
+   10
+   )
+   int
+   inv log
+   d.ms
+   prd 00
+   prd 03
+   prd ind 02
+   (
+   1/x
+   ×
+   x⇌t
+   )
+   (
+   inv int
+   ÷
+   x⇌t
+   )
+   (
+   (
+   int
+   +
+   rc* 02
+   inv int
+   +
+   rcl 00
+   )
+   ÷
+   rcl 03
+   )
+   exc ind 02
+   int
+   inv sbr

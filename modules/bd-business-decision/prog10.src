@@ -1,0 +1,409 @@
+   ; business decisions module -9-
+   ;
+
+lbl A
+   sto 42
+   inv sbr
+   sto 43
+   inv sbr
+   sto 44
+   inv sbr
+
+lbl B
+   stflg 1
+   sto 57
+   sto 03
+   x⇌t
+   12
+   inv x≥t 048
+   45
+   sto 04
+   0
+   inv sbr
+   st* 04
+   op 24
+   op 33
+   cp
+   rcl 03
+   inv x≥t 048
+   gto 030
+   +
+   =
+   inv sbr
+
+lbl C
+   sto 05
+   sto 01
+   x⇌t
+   0
+   sto 29
+   12
+   inv x≥t 048
+   30
+   sto 02
+   0
+   sto 10
+   0
+   inv sbr
+   st* 02
+   sum 10
+   op 22
+   op 31
+   cp
+   rcl 01
+   inv x≥t 048
+   gto 074
+
+lbl C'
+   sto 06
+   x⇌t
+   12
+   inv x≥t 048
+   (
+   x⇌t
+   +
+   29
+   )
+   sto 07
+   0
+   inv sbr
+   st* 07
+   inv sbr
+
+lbl D
+   sto 08
+   inv sbr
+
+lbl A'
+   sto 58
+   inv sbr
+   sto 59
+   inv sbr
+
+lbl B'
+   inv stflg 1
+   3
+   inv write
+   inv sbr
+
+lbl D'
+   sto 09
+   inv sbr
+
+lbl E'
+   inv lbl e
+   stflg 0
+   cp
+   rcl 09
+   x≥t 393
+   rcl 01
+   inv x=t 048
+   rcl 44
+   x=t 208
+   rcl 43
+   x=t 201
+   rcl 29
+   x=t 048
+   (
+   (
+   ce
+   -
+   rcl 30
+   )
+   ÷
+   rcl 05
+   )
+   sto 59
+   (
+   rcl 29
+   -
+   exc 30
+   )
+   sum 10
+   rcl 05
+   sto 57
+   gto 211
+   sbr 666
+   rcl 43
+   x=t 251
+   rcl 44
+   x=t 226
+   rcl 59
+   gto 253
+   (
+   rcl 05
+   +
+   29
+   )
+   sto 00
+   (
+   (
+   rc* 00
+   -
+   rcl 30
+   )
+   ÷
+   (
+   rcl 05
+   -
+   1
+   )
+   )
+   sto 59
+   sbr 686
+   ifflg 0 261
+   inv sbr
+   rcl 42
+   x=t 048
+   (
+   rcl 10
+   ÷
+   rcl 05
+   +
+   (
+   rcl 05
+   -
+   1
+   )
+   ×
+   rcl 59
+   ÷
+   2
+   )
+   sto 58
+   sbr 686
+   ifflg 0 295
+   inv sbr
+   rcl 44
+   inv x=t 302
+   inv sbr
+   45
+   sto 04
+   30
+   sto 02
+   1
+   sto 01
+   sbr 691
+   ifflg 0 326
+   pause
+   pause
+   pause
+   pause
+   pause
+   pause
+   x⇌t
+   1
+   x=t 356
+   (
+   rc* 02
+   ÷
+   (
+   rcl 58
+   -
+   (
+   rcl 57
+   -
+   rcl 01
+   +
+   1
+   )
+   ×
+   rcl 59
+   )
+   )
+   gto 363
+   (
+   rc* 02
+   ÷
+   rcl 58
+   )
+   st* 04
+   sbr 686
+   ifflg 0 373
+   inv sbr
+   op 21
+   op 22
+   op 24
+   rcl 01
+   x⇌t
+   rcl 57
+   inv x≥t 392
+   x⇌t
+   gto 313
+   inv sbr
+   rcl 06
+   x=t 048
+   rcl 44
+   inv x=t 407
+   sbr 666
+   inv ifflg 1 421
+   rcl 03
+   inv x=t 048
+   inv stflg 1
+   rcl 06
+   x⇌t
+   rcl 57
+   inv x≥t 048
+   cp
+   rcl 09
+   inv x=t 545
+   rcl 08
+   x⇌t
+   inv x≥t 447
+   gto 048
+   (
+   rcl 57
+   +
+   45
+   )
+   sto 02
+   (
+   (
+   rcl 06
+   +
+   1
+   sto 00
+   )
+   sto 01
+   +
+   44
+   )
+   sto 04
+   x⇌t
+   rcl 02
+   x⇌t
+   inv x≥t 485
+   45
+   sto 04
+   rcl 00
+   sbr 691
+   ifflg 0 500
+   pause
+   pause
+   pause
+   pause
+   pause
+   pause
+   (
+   (
+   rcl 58
+   +
+   rcl 00
+   ×
+   rcl 59
+   )
+   ×
+   rc* 04
+   )
+   fix 3
+   adv
+   prt
+   ifflg 0 524
+   inv sbr
+   op 20
+   rcl 00
+   x⇌t
+   rcl 08
+   inv x≥t 544
+   op 21
+   op 24
+   rcl 04
+   gto 473
+   inv sbr
+   rcl 42
+   x=t 048
+   x⇌t
+   1
+   inv x≥t 048
+   x⇌t
+   rcl 43
+   x⇌t
+   inv x≥t 048
+   x⇌t
+   rcl 44
+   x⇌t
+   inv x≥t 048
+   (
+   rcl 06
+   +
+   44
+   )
+   sto 04
+   (
+   rcl 58
+   +
+   rcl 42
+   ×
+   (
+   rc* 07
+   ÷
+   rc* 04
+   -
+   rcl 59
+   -
+   rcl 58
+   )
+   +
+   rcl 59
+   )
+   sbr 686
+   ifflg 0 613
+   inv sbr
+   (
+   (
+   exc 58
+   +/-
+   +
+   rcl 58
+   -
+   rcl 59
+   )
+   ×
+   rcl 43
+   +
+   rcl 59
+   )
+   sto 59
+   sbr 686
+   ifflg 0 642
+   inv sbr
+   (
+   rc* 04
+   +
+   rcl 44
+   ×
+   (
+   rc* 07
+   ÷
+   rcl 58
+   -
+   rc* 04
+   )
+   )
+   st* 04
+   sbr 686
+   inv sbr
+   12
+   sto 57
+   sto 03
+   45
+   sto 04
+   1
+   st* 04
+   op 24
+   dsz 3 676
+   inv sbr
+   fix 5
+   adv
+   prt
+   inv sbr
+   fix 0
+   adv
+   adv
+   prt
+   inv sbr
+
+lbl clr
+   fix 9
+   0
+   inv sbr

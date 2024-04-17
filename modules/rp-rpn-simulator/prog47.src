@@ -1,0 +1,10 @@
+   ; rpn simulator module -13-
+   ;
+
+lbl A
+   pgm 51
+   a
+
+lbl A'
+   rcl 23
+   inv sbr

@@ -1,96 +1,107 @@
-Lbl A'
-(
-CE
-÷
-RCL 14
-)
-INV SBR
-Lbl E
-RCL 04
-A'
-x⇌t
-RCL 03
-P→R
-STO 20
-RCL 02
-+/-
-A'
-x⇌t
-STO 21
-RCL 01
-P→R
-SUM 20
-RCL 17
-x⇌t
-SUM 21
-RCL 18
-P→R
-SUM 20
-(
-RCL 21
-+
-x⇌t
-)
-x⇌t
-RCL 20
-INV P→R
-x⇌t
-STO 22
-x⇌t
-CP
-x≥t 068
-(
-CE
-+
-360
-)
-x⇌t
-RCL 22
-Adv
-Prt
-INV SBR
-x⇌t
-Prt
-INV SBR
-Lbl A
-Prt
-Exc 18
-Exc 17
-INV SBR
-Lbl B
-Prt
-Exc 01
-Exc 02
-INV SBR
-Lbl C
-Prt
-Exc 03
-Exc 04
-INV SBR
-Lbl D
-Prt
-D.MS
-STO 14
-INV SBR
-Lbl C'
-RCL 18
-SUM 03
-RCL 03
-Lbl E'
-(
-CE
--
-CP
-x≥t 127
-0
-+
-360
-)
-INV x≥t E'
-Prt
-INV SBR
-Lbl B'
-RCL 18
-SUM 01
-RCL 01
-GTO E'
+   ; marine navigation -5-
+   ;
+
+lbl A'
+   (
+   ce
+   ÷
+   rcl 14
+   )
+   inv sbr
+
+lbl E
+   rcl 04
+   a'
+   x⇌t
+   rcl 03
+   p→r
+   sto 20
+   rcl 02
+   +/-
+   a'
+   x⇌t
+   sto 21
+   rcl 01
+   p→r
+   sum 20
+   rcl 17
+   x⇌t
+   sum 21
+   rcl 18
+   p→r
+   sum 20
+   (
+   rcl 21
+   +
+   x⇌t
+   )
+   x⇌t
+   rcl 20
+   inv p→r
+   x⇌t
+   sto 22
+   x⇌t
+   cp
+   x≥t 068
+   (
+   ce
+   +
+   360
+   )
+   x⇌t
+   rcl 22
+   adv
+   prt
+   inv sbr
+   x⇌t
+   prt
+   inv sbr
+
+lbl A
+   prt
+   exc 18
+   exc 17
+   inv sbr
+
+lbl B
+   prt
+   exc 01
+   exc 02
+   inv sbr
+
+lbl C
+   prt
+   exc 03
+   exc 04
+   inv sbr
+
+lbl D
+   prt
+   d.ms
+   sto 14
+   inv sbr
+
+lbl C'
+   rcl 18
+   sum 03
+   rcl 03
+
+lbl E'
+   (
+   ce
+   -
+   cp
+   x≥t 127
+   0
+   +
+   360
+   )
+   inv x≥t e'
+   prt
+   inv sbr
+
+lbl B'
+   rcl 18
+   sum 01
+   rcl 01
+   gto e'

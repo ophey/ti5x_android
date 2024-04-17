@@ -305,14 +305,6 @@ public class Picker extends android.app.Activity {
     final String ExternalStorage =
         getExternalFilesDir(null).getAbsolutePath();
 
-    if (!PermissionUtil.hasCorrectPermission(this)) {
-      android.widget.Toast.makeText
-         (
-            Picker.this,
-            R.string.storage_unavailable,
-            android.widget.Toast.LENGTH_LONG
-         ).show();
-    }
     try {
       for (String Here : LookIn) {
         final java.io.File ThisDir = new java.io.File(ExternalStorage + "/" + Here);

@@ -1,180 +1,188 @@
-Lbl CLR
-CMs
-Fix 9
-7
-STO 01
-INV Stflg 0
-0
-INV SBR
-Lbl B
-(
-RCL 03
-+
-6
-)
-STO 00
-0
-STO 30
-7
-STO 01
-RCL 03
-STO 05
-RCL Ind 01
-STO 31
-GTO 048
-RCL 31
-x⇌t
-RCL Ind 01
-x≥t 056
-RCL 01
-STO 32
-RCL Ind 01
-Exc 31
-Op 21
-Dsz 5 040
-RCL 31
-Prt
-Pause
-SUM 30
-RCL Ind 00
-Exc Ind 32
-Op 30
-Op 33
-Dsz 6 026
-Op 00
-77
-Op 04
-RCL 30
-Adv
-Op 06
-Pause
-Op 00
-67
-Op 04
-(
-RCL 30
-÷
-RCL 02
-×
-Op 06
-Pause
-.96
-)
-STO 30
-Pause
-Op 00
-12076167
-Op 04
-RCL 30
-Op 06
-Op 00
-23
-Op 04
-0
-x⇌t
-(
-RCL 30
-INV x≥t 153
-+
-.5
-)
-GTO 159
-(
-CE
--
-.5
-)
-Int
-Op 06
-INV SBR
-Lbl A
-Fix 3
-Prt
-Fix 9
-STO 30
-(
-INV Int
-×
-100
-)
-x⇌t
-(
-RCL 30
-Int
--
-x⇌t
-)
-Prt
-Adv
-STO Ind 01
-STO 29
-Op 21
-INV Ifflg 0 205
-RCL 28
-STO 01
-INV Stflg 0
-RCL 29
-INV SBR
-Lbl B'
-STO 04
-27
-STO 01
-RCL 04
-A
-7
-STO 01
-21
-STO 04
-RCL Ind 01
-Op 31
-STO Ind 01
-(
-RCL 01
-+
-2
-)
-STO 01
-Dsz 4 229
-RCL 29
-INV SBR
-Lbl A'
-STO 03
-Prt
-8
-x⇌t
-(
-RCL 03
-INV x≥t 271
-÷
-2
-)
-Int
-GTO 278
-(
-RCL 03
--
-4
-)
-Int
-STO 06
-STO 02
-Prt
-Adv
-INV SBR
-Lbl E
-(
-CE
-+
-6
-)
-STO 27
-Stflg 0
-RCL 01
-STO 28
-RCL 27
-(
-STO 01
--
-6
-)
-INV SBR
+   ; leisure library module -7-
+   ;
+
+lbl clr
+   cms
+   fix 9
+   7
+   sto 01
+   inv stflg 0
+   0
+   inv sbr
+
+lbl B
+   (
+   rcl 03
+   +
+   6
+   )
+   sto 00
+   0
+   sto 30
+   7
+   sto 01
+   rcl 03
+   sto 05
+   rc* 01
+   sto 31
+   gto 048
+   rcl 31
+   x⇌t
+   rc* 01
+   x≥t 056
+   rcl 01
+   sto 32
+   rc* 01
+   exc 31
+   op 21
+   dsz 5 040
+   rcl 31
+   prt
+   pause
+   sum 30
+   rc* 00
+   exc ind 32
+   op 30
+   op 33
+   dsz 6 026
+   op 00
+   77
+   op 04
+   rcl 30
+   adv
+   op 06
+   pause
+   op 00
+   67
+   op 04
+   (
+   rcl 30
+   ÷
+   rcl 02
+   ×
+   op 06
+   pause
+   .96
+   )
+   sto 30
+   pause
+   op 00
+   12076167
+   op 04
+   rcl 30
+   op 06
+   op 00
+   23
+   op 04
+   0
+   x⇌t
+   (
+   rcl 30
+   inv x≥t 153
+   +
+   .5
+   )
+   gto 159
+   (
+   ce
+   -
+   .5
+   )
+   int
+   op 06
+   inv sbr
+
+lbl A
+   fix 3
+   prt
+   fix 9
+   sto 30
+   (
+   inv int
+   ×
+   100
+   )
+   x⇌t
+   (
+   rcl 30
+   int
+   -
+   x⇌t
+   )
+   prt
+   adv
+   st* 01
+   sto 29
+   op 21
+   inv ifflg 0 205
+   rcl 28
+   sto 01
+   inv stflg 0
+   rcl 29
+   inv sbr
+
+lbl B'
+   sto 04
+   27
+   sto 01
+   rcl 04
+   a
+   7
+   sto 01
+   21
+   sto 04
+   rc* 01
+   op 31
+   st* 01
+   (
+   rcl 01
+   +
+   2
+   )
+   sto 01
+   dsz 4 229
+   rcl 29
+   inv sbr
+
+lbl A'
+   sto 03
+   prt
+   8
+   x⇌t
+   (
+   rcl 03
+   inv x≥t 271
+   ÷
+   2
+   )
+   int
+   gto 278
+   (
+   rcl 03
+   -
+   4
+   )
+   int
+   sto 06
+   sto 02
+   prt
+   adv
+   inv sbr
+
+lbl E
+   (
+   ce
+   +
+   6
+   )
+   sto 27
+   stflg 0
+   rcl 01
+   sto 28
+   rcl 27
+   (
+   sto 01
+   -
+   6
+   )
+   inv sbr

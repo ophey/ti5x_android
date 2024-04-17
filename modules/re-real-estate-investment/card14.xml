@@ -1,0 +1,10 @@
+<carddef style="system">
+<label slot="titleleft">YEARLY AMORTIZATION SCHEDULE</label>
+<label slot="titleright">RE-14</label>
+<label slot="eprime">INIT</label>
+<label slot="a">N</label>
+<label slot="b">% I</label>
+<label slot="c">PMT</label>
+<label slot="d">PV</label>
+<label slot="e"><ArrowR/> ADS</label>
+</carddef>

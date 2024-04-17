@@ -1,0 +1,182 @@
+   ; rpn simulator module -13-
+   ;
+   nop
+   gto 085
+   gto 094
+   gto 099
+   gto 105
+   nop
+   nop
+   nop
+   nop
+   nop
+   nop
+   gto 118
+   gto 123
+   gto 144
+   gto 149
+   gto 154
+   nop
+   nop
+   nop
+   gto 164
+   gto 178
+   gto 188
+   gto 193
+   gto 159
+   gto 198
+   gto 217
+   gto 222
+   gto 227
+   gto 283
+   gto 288
+   gto 303
+   gto 319
+   gto 324
+   gto 334
+   gto 339
+   23
+   sbr 345
+   inv stflg 0
+   inv sbr
+   92
+   gto 359
+   57
+   pgm 11
+   a
+   inv sbr
+   48
+   pgm 11
+   a
+   25
+   pgm 11
+   b
+   stflg 0
+   inv sbr
+   42
+   gto 107
+   36
+   pgm 11
+   a
+   49
+   pgm 11
+   b
+   11
+   ifflg 0 359
+   16
+   gto 359
+   60
+   gto 359
+   70
+   gto 359
+   80
+   gto 359
+   22
+   pgm 11
+   a
+   86
+   pgm 11
+   a
+   pgm 10
+   a
+   pgm 11
+   b
+   stflg 0
+   inv sbr
+   48
+   pgm 11
+   a
+   26
+   gto 112
+   53
+   gto 345
+   52
+   gto 345
+   35
+   sto 00
+   42
+   pgm 11
+   a
+   29
+   pgm 11
+   b
+   rcl 00
+   gto 359
+   13
+   gto 345
+   50
+   gto 200
+   pgm 10
+   a
+   sto 00
+   x⇌t
+   1
+   inv x≥t 257
+   22
+   pgm 11
+   a
+   87
+   pgm 11
+   a
+   rcl 00
+   pgm 11
+   b
+   pgm 03
+   e
+   inv sbr
+   36
+   pgm 11
+   a
+   rcl 00
+   x⇌t
+   2
+   x=t 274
+   61
+   gto 276
+   60
+   sbr 354
+   pgm 03
+   b
+   inv sbr
+   66
+   gto 359
+   inv ifflg 0 298
+   51
+   sbr 345
+   89
+   gto 359
+   36
+   pgm 11
+   a
+   29
+   pgm 11
+   b
+   11
+   pgm 11
+   a
+   inv sbr
+   14
+   gto 345
+   36
+   pgm 11
+   a
+   50
+   gto 130
+   15
+   gto 345
+   68
+   pgm 11
+   a
+   inv sbr
+   sto 00
+   36
+   pgm 11
+   a
+   rcl 00
+   pgm 11
+   b
+   11
+   pgm 11
+   a
+   stflg 0
+   inv sbr

@@ -1,0 +1,93 @@
+   ; investment module -3-
+   ;
+
+lbl A
+   pgm 02
+   a
+   inv sbr
+
+lbl B
+   pgm 02
+   b
+   inv sbr
+
+lbl C
+   pgm 02
+   c
+   inv sbr
+
+lbl D
+   pgm 02
+   d
+   inv sbr
+
+lbl E
+   fix 9
+   sto 15
+   prt
+   inv sbr
+
+lbl A'
+   rcl 15
+   stflg 0
+   pgm 02
+   a
+   0
+   pgm 02
+   e
+   inv stflg 0
+   prt
+   inv sbr
+
+lbl B'
+   fix 9
+   sto 16
+   prt
+   inv sbr
+
+lbl C'
+   (
+   rcl 16
+   -
+   1
+   )
+   sto 01
+   +/-
+   sto 11
+   stflg 0
+   0
+   pgm 02
+   e
+   sto 17
+   rcl 15
+   pgm 02
+   a
+   0
+   sto 05
+   cp
+   pgm 02
+   e
+   (
+   ce
+   -
+   rcl 17
+   +
+   (
+   rcl 15
+   +
+   1
+   -
+   rcl 16
+   )
+   ×
+   rcl 03
+   )
+   inv stflg 0
+   prt
+   inv sbr
+
+lbl E'
+   pgm 02
+   e'
+   stflg 3
+   inv sbr

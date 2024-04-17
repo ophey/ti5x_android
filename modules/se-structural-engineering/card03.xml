@@ -1,0 +1,12 @@
+<carddef style="system">
+<label slot="titleleft">CONTINUOUS BEAM</label>
+<label slot="titleright">SE-03</label>
+<label slot="aprime">a, q</label>
+<label slot="bprime">a, b, q</label>
+<label slot="cprime">a, F</label>
+<label slot="a">n</label>
+<label slot="b">i, L, EI</label>
+<label slot="c">q</label>
+<label slot="d">M<sub>i</sub>, M</label>
+<label slot="e">Comp.</label>
+</carddef>

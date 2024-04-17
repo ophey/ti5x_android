@@ -1,0 +1,219 @@
+   ; agriculture module -12-
+   ;
+
+lbl A'
+   (
+   rcl 15
+   ×
+   rcl 16
+   +
+   rcl 17
+   ×
+   rcl 18
+   +
+   rcl 19
+   ×
+   rcl 20
+   +
+   rcl 21
+   ×
+   rcl 22
+   +
+   rcl 23
+   ×
+   rcl 24
+   )
+   fix 2
+   inv sbr
+   (
+   rcl 03
+   +
+   a'
+   )
+   ×
+   .5
+   ×
+   rcl 01
+   )
+   +
+   rcl 02
+   +
+   rcl 03
+   +
+   rcl 04
+   )
+   inv sbr
+   rcl 05
+   ×
+   rcl 01
+   +
+   rcl 06
+   +
+   rcl 07
+   )
+   inv sbr
+   (
+   rcl 09
+   -
+   rcl 08
+   )
+   ×
+   rcl 10
+   ×
+   rcl 13
+   )
+   inv sbr
+
+lbl B'
+   a'
+   +
+   sbr 036
+   -
+   sbr 073
+   )
+   inv sbr
+   +
+   sbr 073
+   )
+   inv sbr
+
+lbl C'
+   (
+   b'
+   +
+   sbr 060
+   )
+   inv sbr
+   +
+   sbr 073
+   )
+   inv sbr
+
+lbl D'
+   (
+   rcl 12
+   ×
+   (
+   rcl 11
+   -
+   rcl 09
+   )
+   )
+   inv sbr
+   rcl 10
+   ×
+   (
+   rcl 09
+   -
+   rcl 08
+   )
+   )
+   inv sbr
+   +
+   d'
+   )
+   inv sbr
+   rcl 12
+   ×
+   rcl 11
+   )
+   inv sbr
+   d'
+   ×
+   rcl 14
+   +
+   sbr 073
+   )
+   inv sbr
+
+lbl A
+   b'
+   ÷
+   d'
+   )
+   inv sbr
+
+lbl B
+   c'
+   ÷
+   d'
+   )
+   inv sbr
+
+lbl C
+   c'
+   +/-
+   +
+   (
+   d'
+   ×
+   rcl 14
+   )
+   )
+   inv sbr
+
+lbl D
+   (
+   rcl 03
+   +
+   a'
+   )
+   ×
+   .5
+   +
+   rcl 05
+   )
+   ×
+   rcl 01
+   +
+   rcl 02
+   )
+   inv sbr
+
+lbl E
+   sto 25
+   exc 11
+   sto 25
+   c'
+   ÷
+   (
+   (
+   rcl 11
+   -
+   rcl 09
+   )
+   ×
+   (
+   rcl 12
+   )
+   )
+   )
+   sto 26
+   rcl 25
+   exc 11
+   rcl 26
+   inv sbr
+
+lbl E'
+   sto 27
+   exc 12
+   sto 27
+   c'
+   ÷
+   (
+   (
+   rcl 11
+   -
+   rcl 09
+   )
+   ×
+   (
+   rcl 12
+   )
+   )
+   )
+   sto 28
+   rcl 27
+   exc 12
+   rcl 28
+   inv sbr

@@ -1,3 +1,5 @@
+   ; aviation module -6-
+   ;
 
 lbl A
    sto 02
@@ -18,7 +20,7 @@ lbl A
    rcl 02
    fix 6
    d.ms
-   sto ind 00
+   st* 00
    op 20
    1
    ifflg 1 055
@@ -40,12 +42,11 @@ lbl C'
    x⇌t
    op 06
    inv sbr
-
    inv lbl e'
    sum 00
 
 lbl D'
-   rcl ind 00
+   rc* 00
    inv sbr
 
 lbl E

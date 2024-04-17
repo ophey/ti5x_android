@@ -1,0 +1,226 @@
+   ; securities analysis module -8-
+   ;
+
+lbl clr
+   0
+   sto 16
+   pgm 05
+   sbr clr
+   sto 15
+   sto 17
+   stflg 2
+   inv sbr
+
+lbl A
+   (
+   sto 15
+   ÷
+   100
+   +/-
+   +
+   1
+   )
+   exc 15
+
+lbl rad
+   x⇌t
+   371344
+   sbr 115
+   inv sbr
+   (
+   sto 16
+   ÷
+   100
+   )
+   exc 16
+
+lbl grad
+   x⇌t
+   152237
+   gto 115
+
+lbl B
+   (
+   ce
+   ×
+   rcl 15
+   )
+   pgm 05
+   b
+   inv sbr
+
+lbl A'
+   pgm 05
+   a'
+   inv sbr
+
+lbl B'
+   (
+   ce
+   ×
+   rcl 15
+   )
+   pgm 05
+   b'
+   inv sbr
+
+lbl C'
+   (
+   sto 17
+   ÷
+   100
+   +
+   1
+   )
+   exc 17
+   x⇌t
+   2235
+   pgm 09
+   a'
+   inv sbr
+
+lbl D'
+   sto 18
+   inv sbr
+   sto 07
+   0
+   sto 08
+   (
+   rcl 18
+   ×
+   rcl 17
+   y**x
+   rcl 08
+   )
+   b
+   op 28
+   dsz 7 129
+   inv sbr
+
+lbl C
+   ifflg 5 172
+   sto 12
+   inv sbr
+   sum 12
+   rcl 12
+
+lbl deg
+   x⇌t
+   144145
+   gto 115
+   0
+   exc 12
+   sto 19
+   (
+   (
+   rcl 14
+   pgm 05
+   e
+   ×
+   (
+   rcl 02
+   y**x
+   (
+   rcl 01
+   -
+   1
+   )
+   )
+   exc 19
+   sto 12
+   rcl 19
+   +
+   rcl 13
+   ×
+   (
+   1
+   -
+   rcl 16
+   )
+   )
+   ÷
+   (
+   rcl 19
+   -
+   rcl 16
+   )
+   )
+   gto 162
+
+lbl D
+   ifflg 5 251
+   sto 13
+   inv sbr
+   inv sum 13
+   rcl 13
+   x⇌t
+   36172727
+   gto 115
+   (
+   (
+   (
+   0
+   exc 12
+   sto 19
+   -
+   rcl 14
+   pgm 05
+   e
+   )
+   ×
+   rcl 02
+   y**x
+   (
+   rcl 01
+   -
+   1
+   )
+   -
+   rcl 19
+   sto 12
+   ×
+   rcl 16
+   )
+   ÷
+   (
+   1
+   -
+   rcl 16
+   )
+   )
+   gto 239
+
+lbl E
+   ifflg 5 308
+   sto 14
+   pgm 03
+   e'
+   inv sbr
+   op 39
+   (
+   rcl 13
+   -
+   (
+   ce
+   -
+   rcl 12
+   )
+   ×
+   rcl 16
+   )
+   sm* 09
+   op 29
+   pgm 05
+   d
+   op 39
+   x⇌t
+   rcl 03
+   st* 09
+   op 29
+   x⇌t
+   inv sbr
+
+lbl E'
+   stflg 5
+   adv
+   inv sbr

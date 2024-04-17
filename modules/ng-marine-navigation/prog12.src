@@ -1,49 +1,57 @@
-Lbl E
-RCL 20
-Adv
-Prt
-STO 16
-RCL 21
-Prt
-STO 08
-RCL 22
-Prt
-STO 09
-RCL 23
-Prt
-STO 10
-RCL 24
-Prt
-STO 11
-RCL 12
-Prt
-STO 04
-RCL 13
-Prt
-STO 05
-0
-INV SBR
-Lbl A'
-STO 20
-INV SBR
-Lbl B
-D.MS
-Exc 22
-Exc 21
-INV SBR
-Lbl B'
-D.MS
-Exc 24
-Exc 23
-INV SBR
-Lbl C
-Exc 13
-Exc 12
-INV SBR
-Lbl C'
-D.MS
-cos
-STO 13
-1
-STO 12
-INV SBR
+   ; marine navigation -5-
+   ;
+
+lbl E
+   rcl 20
+   adv
+   prt
+   sto 16
+   rcl 21
+   prt
+   sto 08
+   rcl 22
+   prt
+   sto 09
+   rcl 23
+   prt
+   sto 10
+   rcl 24
+   prt
+   sto 11
+   rcl 12
+   prt
+   sto 04
+   rcl 13
+   prt
+   sto 05
+   0
+   inv sbr
+
+lbl A'
+   sto 20
+   inv sbr
+
+lbl B
+   d.ms
+   exc 22
+   exc 21
+   inv sbr
+
+lbl B'
+   d.ms
+   exc 24
+   exc 23
+   inv sbr
+
+lbl C
+   exc 13
+   exc 12
+   inv sbr
+
+lbl C'
+   d.ms
+   cos
+   sto 13
+   1
+   sto 12
+   inv sbr

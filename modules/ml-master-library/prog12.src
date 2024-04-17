@@ -1,73 +1,116 @@
-;+
-; My (partial) recreation of the "Master Library" module
-; that came with the original TI-58C/59 calculators.
-;
-; Written by Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
-;-
-
-;+
-; Register usage (note this doesn't match the original):
-;     01 -- side a
-;     02 -- side b
-;     03 -- side c
-;     04 -- scratch
-;     05 -- angle A or B
-;     06 -- angle C
-;     07 -- scratch
-;_
-
-;+
-; input entry
-;-
+   ; master library module -1-
+   ;
 
 lbl A
-    sto 01
-    inv sbr
+   sto 07
+   inv sbr
 
 lbl B
-    sto 05
-    inv sbr
+   sto 04
+   inv sbr
 
 lbl C
-    sto 06
-    inv sbr
-
-;+
-; output computations
-;-
+   sto 05
+   inv sbr
 
 lbl A'
-; ASA, compute angle A
-    ( 2 * 1 inv sin - rcl 05 - rcl 06 ) sto 07
-; compute remaining sides
-    ( ce sin ÷ rcl 01 ) sto 04
-    ( rcl 05 sin ÷ rcl 04 ) sto 02 ; side b from angle B
-    ( rcl 06 sin ÷ rcl 04 ) sto 03 ; side c from angle C
-    rcl 07 ; what I came here to get
-    inv sbr
+   (
+   1
+   +/-
+   inv cos
+   -
+   rcl 04
+   -
+   rcl 05
+   )
+   sto 03
+   gto nop
 
 lbl B'
-; SAA, compute angle B
-    ( 2 * 1 inv sin - rcl 05 - rcl 06 ) sto 07
-; compute remaining sides
-    ( rcl 05 sin ÷ rcl 01 ) sto 04
-    ( rcl 07 sin ÷ rcl 04 ) sto 02 ; side b from angle B
-    ( rcl 06 sin ÷ rcl 04 ) sto 03 ; side c from angle C
-    rcl 07 ; what I came here to get
-    inv sbr
+   (
+   1
+   +/-
+   inv cos
+   -
+   rcl 04
+   sto 03
+   -
+   rcl 05
+   )
+   sto 04
+   stflg 0
 
-lbl C'
-; compute area of triangle, once all three sides are known
-    ( ( rcl 01 + rcl 02 + rcl 03 ) ÷ 2 ) sto 04
-    ( rcl 04 * ( rcl 04 - rcl 01 ) * ( rcl 04 - rcl 02 ) * ( rcl 04 - rcl 03 ) ) sqrt
-    inv sbr
+lbl nop
+   (
+   rcl 07
+   ×
+   rcl 04
+   sin
+   ÷
+   rcl 03
+   sin
+   )
+   sto 01
+   (
+   rcl 07
+   ×
+   rcl 05
+   sin
+   ÷
+   rcl 03
+   sin
+   )
+   sto 02
+   ifflg 0 op
+   rcl 03
+   inv sbr
+
+lbl op
+   rcl 04
+   inv stflg 0
+   inv sbr
 
 lbl D
-; return side b
-    rcl 02
-    inv sbr
+   rcl 01
+   inv sbr
 
 lbl E
-; return side c
-    rcl 03
-    inv sbr
+   rcl 02
+   inv sbr
+
+lbl C'
+   (
+   (
+   rcl 07
+   +
+   rcl 01
+   +
+   rcl 02
+   )
+   ÷
+   2
+   )
+   sto 06
+   (
+   rcl 06
+   ×
+   (
+   rcl 06
+   -
+   rcl 07
+   )
+   ×
+   (
+   rcl 06
+   -
+   rcl 01
+   )
+   ×
+   (
+   rcl 06
+   -
+   rcl 02
+   )
+   )
+   √x
+   inv sbr

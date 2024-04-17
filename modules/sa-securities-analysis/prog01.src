@@ -1,0 +1,58 @@
+   ; securities analysis module -8-
+   ;
+
+lbl ce
+   deg
+
+lbl clr
+   cp
+   6
+   sto 01
+   0
+   st* 01
+   dsz 1 010
+   inv sbr
+
+lbl =
+   sbr ce
+   5
+   x⇌t
+   30
+   p→r
+   ∑+
+   inv p→r
+   ∑+
+   op 12
+   d.ms
+   ∑+
+   op 11
+   inv d.ms
+   inv ∑+
+   op 14
+   (
+   ce
+   -
+   1.1
+   pgm 15
+   a'
+   )
+   ee
+   inv ee
+   x⇌t
+   364834.2395
+   +/-
+   x=t write
+   0
+   1/x
+
+lbl write
+   op 00
+   2437241736
+   fix 9
+   op 04
+   3617154135
+   op 03
+   op 05
+   8
+   prt
+   inv sbr

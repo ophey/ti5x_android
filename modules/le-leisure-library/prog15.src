@@ -1,90 +1,113 @@
-;+
-; Partial recreation of the "Leisure Library" module
-; that came with the original TI-58C/59 calculators.
-;-
-; registers
-; 01  -  number to find
-; 02  -  my guess
+   ; leisure library module -7-
+   ;
 
 lbl A
-    sto 4
-    prt
-    rtn
+   sto 04
+   prt
+   inv sbr
 
 lbl B
-    sto 9
-    prt
-    ( sbr dms × 1 0 0 )
-    int
-    sto 1
-    0
-    rtn
+   sto 09
+   prt
+   (
+   sbr d.ms
+   ×
+   100
+   )
+   int
+   sto 01
+   0
+   inv sbr
 
 lbl clr
-    fix 9
-    0 sto 5
-    rtn
+   fix 9
+   0
+   sto 05
+   inv sbr
 
 lbl E
-    inv stf 1
-    sto 2
-    prt
-    op 25
-    sbr dms
-    ( ce × 1 0 0 )
-    int
-    sto 3
-    x⇌t
-    rcl 4
-    inv x≥t sto    ; do not lie
-    stf 1
+   inv stflg 1
+   sto 02
+   prt
+   op 25
+   sbr d.ms
+   (
+   ce
+   ×
+   100
+   )
+   int
+   sto 03
+   x⇌t
+   rcl 04
+   inv x≥t sto
+   stflg 1
 
 lbl sto
-    rcl 2
-    x⇌t
-    rcl 1
-    x=t cos
-    inv x≥t tan
-    iff 1 √x
+   rcl 02
+   x⇌t
+   rcl 01
+   x=t cos
+   inv x≥t tan
+   ifflg 1 √x
 
 lbl x²
-    1
-    prt
-    adv
-    rtn
+   1
+   prt
+   adv
+   inv sbr
 
 lbl tan
-    iff 1 x²
+   ifflg 1 x²
 
 lbl √x
-    1 +/-
-    prt
-    adv
-    rtn
+   1
+   +/-
+   prt
+   adv
+   inv sbr
 
 lbl cos
-    rcl 2
-    +/-
-    √x
-    x²
-    prt
-    adv
-    rtn
+   rcl 02
+   +/-
+   √x
+   x²
+   prt
+   adv
+   inv sbr
 
 lbl C
-    sbr dms
-    prt
-    rtn
+   sbr d.ms
+   prt
+   inv sbr
 
 lbl D
-    rcl 5
-    prt
-    rtn
+   rcl 05
+   prt
+   inv sbr
 
-lbl dms
-    fix 9
-    (
-    ( 2 4 2 9 8 × rcl 9 + 9 9 9 9 1 )
-    ÷ 1 9 9 0 1 7 sto 10 )
-    ( ( inv int × rcl 10 ) sto 9 ÷ rcl 10 )
-    rtn
+lbl d.ms
+   fix 9
+   (
+   (
+   24298
+   ×
+   rcl 09
+   +
+   99991
+   )
+   ÷
+   199017
+   sto 10
+   )
+   (
+   (
+   inv int
+   ×
+   rcl 10
+   )
+   sto 09
+   ÷
+   rcl 10
+   )
+   inv sbr

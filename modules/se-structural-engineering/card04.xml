@@ -1,0 +1,10 @@
+<carddef style="system">
+<label slot="titleleft">PROPERTIES OF SECTIONS</label>
+<label slot="titleright">SE-04</label>
+<label slot="aprime">Corr.</label>
+<label slot="a">h<sub>i</sub></label>
+<label slot="b">b, b<sub>i</sub></label>
+<label slot="c">h</label>
+<label slot="d"><empty/>, y, n</label>
+<label slot="e">Comp.</label>
+</carddef>

@@ -1,0 +1,283 @@
+   ; investment module -3-
+   ;
+
+lbl E'
+   adv
+   fix 9
+   8
+   sto 02
+   10
+   sto 28
+   18
+   sto 27
+   0
+   inv sbr
+   st* 02
+   op 22
+   prt
+   inv sbr
+   gto 018
+   fix 4
+   cp
+   rcl 15
+   x=t 103
+   (
+   1
+   -
+   (
+   1
+   -
+   rcl 15
+   ÷
+   rcl 09
+   )
+   y**x
+   rc* 28
+   )
+   st* 27
+   ×
+   100
+   )
+   inv sbr
+
+lbl A
+   adv
+   sbr 027
+   prt
+   inv sbr
+   fix 2
+   (
+   rcl 18
+   ×
+   rcl 08
+   )
+   sto 19
+   prt
+   inv sbr
+   (
+   rcl 19
+   -
+   rcl 08
+   -
+   rcl 16
+   )
+   sto 19
+   +/-
+   prt
+   inv sbr
+   rcl 17
+   sum 19
+   rcl 19
+   prt
+   inv sbr
+   rcl 09
+   pgm 07
+   sbr grad
+   0
+   sto 02
+   rc* 28
+   pgm 07
+   sbr deg
+   rcl 08
+   pgm 05
+   sbr π
+   pgm 07
+   sbr nop
+   (
+   (
+   ce
+   ÷
+   rcl 01
+   )
+   st* 27
+   fix 4
+   gto 053
+
+lbl B
+   fix 4
+   11
+   sto 28
+   20
+   sto 27
+   adv
+   sbr 027
+   prt
+   inv sbr
+   sbr 165
+   prt
+   inv sbr
+   rcl 09
+   inv prd ind 28
+   (
+   rc* 28
+   gto 053
+
+lbl C
+   21
+   sto 27
+   12
+   sto 28
+   sbr 027
+   (
+   cp
+   x=t 199
+   rcl 20
+   inv sum 21
+   rcl 21
+
+lbl sm*
+   ×
+   100
+   )
+   prt
+   inv sbr
+   sbr 165
+   rcl 12
+   sto 22
+   (
+   x=t 226
+   rcl 11
+   inv sum 12
+   rcl 12
+   gto sm*
+
+lbl D
+   23
+   sto 27
+   13
+   sto 28
+   sbr 027
+   (
+   cp
+   x=t 253
+   rcl 21
+   inv sum 23
+   rcl 23
+   sbr sm*
+   inv sbr
+   sbr 165
+   (
+   x=t 270
+   rcl 22
+   inv sum 13
+   rcl 13
+   gto sm*
+
+lbl E
+   fix 2
+   (
+   (
+   rcl 21
+   -
+   rcl 12
+   )
+   ×
+   rcl 08
+   )
+   cp
+   x≥t 295
+   0
+   sto 24
+   prt
+   inv sbr
+
+lbl A'
+   (
+   (
+   rcl 23
+   -
+   rcl 13
+   )
+   ×
+   rcl 08
+   )
+   cp
+   x≥t 318
+   0
+   sto 25
+   prt
+   inv sbr
+
+lbl B'
+   fix 2
+   (
+   (
+   rcl 18
+   -
+   rcl 20
+   -
+   rcl 21
+   -
+   rcl 23
+   -
+   rcl 10
+   ÷
+   rcl 09
+   +
+   rcl 11
+   +
+   rcl 12
+   +
+   rcl 13
+   )
+   ×
+   rcl 08
+   )
+   cp
+   x≥t 364
+   0
+   sto 26
+   prt
+   inv sbr
+
+lbl C'
+   (
+   1.2
+   -
+   .12
+   ×
+   rcl 10
+   )
+   cp
+   x≥t 387
+   0
+   prd 24
+   rcl 24
+   prt
+   inv sbr
+   rcl 14
+   x=t 414
+   (
+   2
+   -
+   .12
+   ×
+   rcl 10
+   )
+   x≥t 412
+   0
+   prd 25
+   rcl 25
+   prt
+   inv sbr
+   rcl 26
+   prt
+   inv sbr
+   (
+   rcl 26
+   +
+   rcl 25
+   +
+   rcl 24
+   )
+   prt
+   inv sbr
+
+lbl D'
+   (
+   +/-
+   +
+   rcl 19
+   )
+   prt
+   inv sbr

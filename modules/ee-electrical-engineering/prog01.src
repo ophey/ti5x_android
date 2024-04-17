@@ -1,17 +1,21 @@
+   ; ee library module -11-
+   ;
 
 lbl clr
    cp
-   6 sto 1
-   0 st* 1
+   6
+   sto 01
+   0
+   st* 01
    dsz 1 007
-   rtn
+   inv sbr
 
-lbl wrt
+lbl write
    fix 9
-   op 0
-   1 7 1 7
-   op 2
-   op 5
-   1 1
+   op 00
+   1717
+   op 02
+   op 05
+   11
    prt
-   rtn
+   inv sbr

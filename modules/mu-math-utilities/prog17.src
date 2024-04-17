@@ -1,93 +1,172 @@
-;+
-; Partial recreation of the "Math/Utilities Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; math/utilities module -10-
+   ;
 
-lbl A                                     ;000
-    sto 10
-    rtn
+lbl A
+   sto 10
+   inv sbr
 
-lbl B                                     ;005
-    sto 11
-    rtn
+lbl B
+   sto 11
+   inv sbr
 
-lbl C                                     ;010
-    cp x⇌t
-    rtn
+lbl C
+   cp
+   x⇌t
+   inv sbr
 
-lbl D                                     ;015
-    inv stf 7
-    rcl 10
-    pgm 0 A'
-    sto 18
-    rcl 11
-    pgm 0 A'
-    sum 18
-    ( ( rcl 11 - rcl 10 ) ÷ 2 )
-    prd 18
-    sto 19
-    ( ( rcl 11 + rcl 10 ) ÷ 2 )
-    pgm 0 A'
-    prd 19
-    ( rcl 18 ÷ 2 )
-    sum 19
-    ( ( 4 × rcl 19 - rcl 18 ) ÷ 3 )
-    sto 20
-    sto 18
-    2 sto 9
-
-jump4:
-    op 28
-    rc* 8
-    op 19
-    iff 7 jump1
-    op 29
-    ( ( rcl 11 - rcl 10 )
-    ÷ 2 yˣ ( rcl 9 - 1 )
-    sto 17 )
-    sto 13
-    ( +/- + rcl 10 )
-    sto 14
-    ( 2 yˣ ( rcl 9 - 2 ) )
-    dms
-    sto 15
-    0
-    sto 16
-
-jump2:
-    rcl 13
-    sum 14
-    sum 14
-    rcl 14
-    pgm 0 A'
-    sum 16
-    dsz 15 jump2
-    1 9
-    sto 8
-    ( rcl 19 ÷ 2 + rcl 13 × rcl 16 )
-    ex* 8
-
-jump3:
-    (
-    ( +/- + rc* 8 ×
-    ( 4 yˣ
-    ( rcl 8 - 1 8 ) )
-    sto 12
-    )
-    ÷
-    ( rcl 12 - 1 ) )
-    op 28
-    ex* 8
-    dsz 17 jump3
-    (
-    ( rc* 8 - exc 18 )
-    ÷
-    rcl 18
-    )
-    abs
-    x≥t jump4
-
-jump1:
-    x⇌t
-    rcl 18
-    rtn
+lbl D
+   inv stflg 7
+   rcl 10
+   pgm 00
+   a'
+   sto 18
+   rcl 11
+   pgm 00
+   a'
+   sum 18
+   (
+   (
+   rcl 11
+   -
+   rcl 10
+   )
+   ÷
+   2
+   )
+   prd 18
+   sto 19
+   (
+   (
+   rcl 11
+   +
+   rcl 10
+   )
+   ÷
+   2
+   )
+   pgm 00
+   a'
+   prd 19
+   (
+   rcl 18
+   ÷
+   2
+   )
+   sum 19
+   (
+   (
+   4
+   ×
+   rcl 19
+   -
+   rcl 18
+   )
+   ÷
+   3
+   )
+   sto 20
+   sto 18
+   2
+   sto 09
+   op 28
+   rc* 08
+   op 19
+   ifflg 7 239
+   op 29
+   (
+   (
+   rcl 11
+   -
+   rcl 10
+   )
+   ÷
+   2
+   y**x
+   (
+   rcl 09
+   -
+   1
+   )
+   sto 17
+   )
+   sto 13
+   (
+   +/-
+   +
+   rcl 10
+   )
+   sto 14
+   (
+   2
+   y**x
+   (
+   rcl 09
+   -
+   2
+   )
+   )
+   d.ms
+   sto 15
+   0
+   sto 16
+   rcl 13
+   sum 14
+   sum 14
+   rcl 14
+   pgm 00
+   a'
+   sum 16
+   dsz 15 151
+   19
+   sto 08
+   (
+   rcl 19
+   ÷
+   2
+   +
+   rcl 13
+   ×
+   rcl 16
+   )
+   exc ind 08
+   (
+   (
+   +/-
+   +
+   rc* 08
+   ×
+   (
+   4
+   y**x
+   (
+   rcl 08
+   -
+   18
+   )
+   )
+   sto 12
+   )
+   ÷
+   (
+   rcl 12
+   -
+   1
+   )
+   )
+   op 28
+   exc ind 08
+   dsz 17 186
+   (
+   (
+   rc* 08
+   -
+   exc 18
+   )
+   ÷
+   rcl 18
+   )
+   |x|
+   x≥t 093
+   x⇌t
+   rcl 18
+   inv sbr

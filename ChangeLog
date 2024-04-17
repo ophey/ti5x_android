@@ -1,5 +1,16 @@
 Feature highlights:
 
+v9.0, 2024 April 20th:
+   Replace all modules by dump of ROM.
+   Many new modules have been added:
+      - Applied Statistics
+      - Real Estate / Investment
+      - Securites Analysis
+      - Business Decision
+      - RPN Simulator
+      - Structural Engineering
+      - Agriculture
+
 v8.7, 2023 November 10th:
    Fix D.MS implementation precision.
 

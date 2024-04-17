@@ -1,0 +1,8 @@
+<carddef style="system">
+<label slot="titleleft">HISTOGRAM CONSTRUCTION</label>
+<label slot="titleright">ST-09</label>
+<label slot="aprime"><ArrowR/> s</label>
+<label slot="a"><ArrowR/> <bar>x</bar></label>
+<label slot="b"><ArrowR/> Count</label>
+<label slot="c"><ArrowR/> x<sub>max</sub></label>
+</carddef>

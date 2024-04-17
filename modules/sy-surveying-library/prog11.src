@@ -1,98 +1,159 @@
-;+
-; Partial recreation of the "Surveying Library" module
-; that came with the original TI-58C/59 calculators.
-;-
-
+   ; surveying module -4-
+   ;
 
 lbl E'
-    pgm 10 E'
-    rtn
+   pgm 10
+   e'
+   inv sbr
 
 lbl A'
-    pgm 10 A'
-    rtn
+   pgm 10
+   a'
+   inv sbr
 
 lbl B'
-    stf 1
-    rtn
+   stflg 1
+   inv sbr
 
 lbl D
-    prt
-    dms
-    sto 4
-    iff 1 41
-    (
-    ( rcl 4 ÷ 2 )
-    sin
-    1/x
-    ×
-    rcl 1
-    gto A
-
-    rcl 4
-    sbr π
+   prt
+   d.ms
+   sto 04
+   ifflg 1 041
+   (
+   (
+   rcl 04
+   ÷
+   2
+   )
+   sin
+   1/x
+   ×
+   rcl 01
+   gto a
+   rcl 04
+   sbr π
 
 lbl A
-    )
-    sto 5
-    prt
-    adv
-    rtn
-
-    ( ce × rcl 11 sin × 2 )
-    sto 10
-    prt
-    rtn
-
-    (
-    ( 1 - rcl 11 cos )
-    ×
-    rcl 5
-    )
-    prt
-    rtn
-
-    ( rcl 3 × π × rcl 5 x² ÷ 3 6 0 )
-    sto 12
-    prt
-    rtn
-
-    ( ce - rcl 5 × rcl 10 × rcl 11 cos ÷ 2 )
-    prt
-    rtn
-
-    ( rcl 11 tan × rcl 5 x² - rcl 12 )
-    inv stf 1
-    prt
-    rtn
+   )
+   sto 05
+   prt
+   adv
+   inv sbr
+   (
+   ce
+   ×
+   rcl 11
+   sin
+   ×
+   2
+   )
+   sto 10
+   prt
+   inv sbr
+   (
+   (
+   1
+   -
+   rcl 11
+   cos
+   )
+   ×
+   rcl 05
+   )
+   prt
+   inv sbr
+   (
+   rcl 03
+   ×
+   π
+   ×
+   rcl 05
+   x²
+   ÷
+   360
+   )
+   sto 12
+   prt
+   inv sbr
+   (
+   ce
+   -
+   rcl 05
+   ×
+   rcl 10
+   ×
+   rcl 11
+   cos
+   ÷
+   2
+   )
+   prt
+   inv sbr
+   (
+   rcl 11
+   tan
+   ×
+   rcl 05
+   x²
+   -
+   rcl 12
+   )
+   inv stflg 1
+   prt
+   inv sbr
 
 lbl B
-    ( prt × rcl 11 tan 1/x
-    gto A
+   (
+   prt
+   ×
+   rcl 11
+   tan
+   1/x
+   gto a
 
 lbl lnx
-    ( ce × rcl 11 cos
-    ÷
-    ( 1 - rcl 11 cos )
-    rtn
+   (
+   ce
+   ×
+   rcl 11
+   cos
+   ÷
+   (
+   1
+   -
+   rcl 11
+   cos
+   )
+   inv sbr
 
 lbl C
-    sbr lnx
-    gto A
+   sbr lnx
+   gto a
 
 lbl E
-    prt
-    ( 1/x × rcl 3 × rcl 2 )
-    inv dms
-    gto 20
+   prt
+   (
+   1/x
+   ×
+   rcl 03
+   ×
+   rcl 02
+   )
+   inv d.ms
+   gto 020
 
 lbl π
-    (
-    ( ce × π )
-    1/x
-    ×
-    rcl 2
-    ×
-    1 8 0
-    )
-    rtn
+   (
+   (
+   ce
+   ×
+   π
+   )
+   1/x
+   ×
+   rcl 02
+   ×
+   180
+   )
+   inv sbr

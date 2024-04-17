@@ -1,0 +1,9 @@
+   ; rpn simulator module -13-
+   ;
+
+lbl A
+   exc 26
+   exc 27
+   sto 28
+   rcl 26
+   inv sbr

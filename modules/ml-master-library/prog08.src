@@ -1,83 +1,102 @@
-;+
-; Recreation of the "Master Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; master library module -1-
+   ;
 
-lbl A                                  ;000
-    sto 1
-    rtn
+lbl A
+   sto 01
+   inv sbr
 
-lbl B                                  ;005
-    ( sto 2 - x⇌t rcl 1 )
-    sto 3
-    . 0 1
-    sto 8
-    x⇌t
-    rtn
+lbl B
+   (
+   sto 02
+   -
+   x⇌t
+   rcl 01
+   )
+   sto 03
+   .01
+   sto 08
+   x⇌t
+   inv sbr
 
-lbl C                                  ;024
-    sto 3
-    rtn
+lbl C
+   sto 03
+   inv sbr
 
-lbl D                                  ;029
-    sto 8
-    rtn
+lbl D
+   sto 08
+   inv sbr
 
-lbl E                                  ;034
-    (
-    ce
-    rcl 2
-    x⇌t
-    rcl 1
-    x≥t abs
-    sto 4
-    +
-    rcl 3
-    )
-    sto 1
-    sto 5
-    pgm 0 A'
-    sto 7
-    (
-    rcl 4
-    sto 6
-    pgm 0 A'
-    cp
-    x=t rad
-    ×
-    exc 7
-    )
-    x≥t E
+lbl E
+   (
+   ce
+   rcl 02
+   x⇌t
+   rcl 01
+   x≥t |x|
+   sto 04
+   +
+   rcl 03
+   )
+   sto 01
+   sto 05
+   pgm 00
+   a'
+   sto 07
+   (
+   rcl 04
+   sto 06
+   pgm 00
+   a'
+   cp
+   x=t rad
+   ×
+   exc 07
+   )
+   x≥t e
 
-lbl grad                                ;077
-    (
-    ( rcl 4 + rcl 5 )
-    ÷
-    2
-    )
-    sto 6
-    rcl 8
-    x⇌t
-    ( rcl 5 - rcl 4 )
-    inv x≥t rad
-    ( rcl 6 pgm 0 a' × rcl 7 )
-    cp
-    x=t rad
-    x≥t yˣ
-    rcl 6
-    sto 5
-    gto grad
+lbl grad
+   (
+   (
+   rcl 04
+   +
+   rcl 05
+   )
+   ÷
+   2
+   )
+   sto 06
+   rcl 08
+   x⇌t
+   (
+   rcl 05
+   -
+   rcl 04
+   )
+   inv x≥t rad
+   (
+   rcl 06
+   pgm 00
+   a'
+   ×
+   rcl 07
+   )
+   cp
+   x=t rad
+   x≥t y**x
+   rcl 06
+   sto 05
+   gto grad
 
-lbl yˣ                                  ;126
-    rcl 6
-    sto 4
-    gto grad
+lbl y**x
+   rcl 06
+   sto 04
+   gto grad
 
-lbl rad                                 ;134
-    rcl 6
-    rtn
+lbl rad
+   rcl 06
+   inv sbr
 
-lbl abs                                 ;139
-    0
-    1/x
-    rtn
+lbl |x|
+   0
+   1/x
+   inv sbr

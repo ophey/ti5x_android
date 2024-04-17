@@ -1,0 +1,230 @@
+   ; business decisions module -9-
+   ;
+
+lbl clr
+   fix 9
+   cms
+   16
+   sto 09
+   1
+   exc 01
+   inv sbr
+
+lbl A
+   sto 11
+   fix 2
+   prt
+   adv
+   inv sbr
+
+lbl B
+   x⇌t
+   rcl 01
+   fix 9
+   prt
+   x⇌t
+   st* 09
+   op 21
+   op 29
+   gto 058
+
+lbl A'
+   sto 07
+   fix 9
+   prt
+   inv sbr
+
+lbl B'
+   x⇌t
+   15
+   sum 07
+   x⇌t
+   st* 07
+   fix 2
+   prt
+   adv
+   inv sbr
+
+lbl C'
+   sto 03
+   op 23
+   inv sbr
+
+lbl C
+   sto 06
+   inv sbr
+   sto 07
+   (
+   rcl 06
+   ×
+   b
+   rcl 03
+   dsz 7 080
+   1
+   )
+   inv sbr
+
+lbl E'
+   inv lbl e
+   stflg 1
+   fix 9
+   prt
+   sto 02
+   op 22
+   rcl 02
+   lnx
+   sto 00
+   sbr 131
+   rcl 04
+   ifflg 1 058
+   (
+   ce
+   ×
+   rcl 02
+   y**x
+   rcl 01
+   )
+   gto 058
+   rcl 09
+   sto 08
+   rcl 01
+   +/-
+   sto 07
+   op 27
+   rcl 11
+   +/-
+   sto 04
+   0
+   sto 05
+   op 38
+   (
+   (
+   rcl 00
+   ×
+   rcl 07
+   )
+   inv lnx
+   ×
+   rc* 08
+   ×
+   sum 04
+   rcl 07
+   )
+   sum 05
+   dsz 7 150
+   inv sbr
+
+lbl D
+   fix 9
+   5
+   +/-
+   inv log
+   x⇌t
+   0
+   sto 00
+   rcl 00
+   sbr 131
+   (
+   rcl 04
+   ÷
+   rcl 05
+   )
+   inv sum 00
+   |x|
+   x≥t 190
+   (
+   rcl 00
+   inv lnx
+   -
+   1
+   )
+   fix 3
+   prt
+   adv
+   inv sbr
+
+lbl D'
+   sto 06
+   fix 2
+   prt
+   4
+   +/-
+   inv log
+   sto 14
+   (
+   rcl 03
+   sbr 214
+   fix 9
+   rcl 03
+   lnx
+   sto 12
+   (
+   rcl 06
+   ÷
+   rcl 11
+   +
+   rcl 03
+   )
+   lnx
+   sto 13
+   sto 00
+   sbr 338
+   x=t 334
+   inv x≥t 285
+   rcl 13
+   (
+   sto 12
+   +
+   .1
+   )
+   gto 259
+   rcl 12
+   sum 00
+   2
+   inv prd 00
+   rcl 14
+   x⇌t
+   (
+   rcl 13
+   -
+   rcl 12
+   )
+   inv x≥t 334
+   rcl 00
+   sbr 338
+   x=t 334
+   x≥t 325
+   rcl 00
+   sto 13
+   gto 285
+   rcl 13
+   exc 00
+   sto 12
+   gto 285
+   (
+   gto 209
+   sbr 131
+   (
+   (
+   rcl 00
+   inv lnx
+   sto 05
+   -
+   rcl 03
+   )
+   1/x
+   ×
+   rcl 06
+   ×
+   rcl 05
+   y**x
+   (
+   1
+   -
+   rcl 01
+   )
+   +
+   rcl 04
+   )
+   cp
+   inv sbr

@@ -1,94 +1,133 @@
-;+
-; Recreation of the "Master Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; master library module -1-
+   ;
 
-lbl A'                                  ;000
-    (
-    ( rcl 9 yˣ rcl 1 - sto 12 1 )
-    ÷
-    rcl 8
-    )
-    rtn
+lbl A'
+   (
+   (
+   rcl 09
+   y**x
+   rcl 01
+   -
+   sto 12
+   1
+   )
+   ÷
+   rcl 08
+   )
+   inv sbr
 
-lbl B'                                  ;019
-    ( A' × rcl 9 )
-    rtn
+lbl B'
+   (
+   a'
+   ×
+   rcl 09
+   )
+   inv sbr
 
-lbl C'                                  ;028
-    ( A' ÷ rcl 12 )
-    rtn
+lbl C'
+   (
+   a'
+   ÷
+   rcl 12
+   )
+   inv sbr
 
-lbl D'                                  ;037
-    C'
-    ( ce × rcl 9 )
-    rtn
+lbl D'
+   c'
+   (
+   ce
+   ×
+   rcl 09
+   )
+   inv sbr
 
-lbl E'                                  ;047
-    cp
-    fix 2
-    rtn
+lbl E'
+   cp
+   fix 2
+   inv sbr
 
-lbl sbr                                 ;053
-    ( rcl 4 ÷ rcl 3 )
-    rtn
+lbl sbr
+   (
+   rcl 04
+   ÷
+   rcl 03
+   )
+   inv sbr
 
-lbl clr                                 ;063
-    (
-    sbr sbr
-    lnx
-    ÷
-    rcl 9
-    lnx
-    )
-    sto 1
-    rtn
+lbl clr
+   (
+   sbr sbr
+   lnx
+   ÷
+   rcl 09
+   lnx
+   )
+   sto 01
+   inv sbr
 
-lbl A                                   ;077
-    x=t
-    clr
-    sto 1
-    rtn
+lbl A
+   x=t clr
+   sto 01
+   inv sbr
 
-lbl inv                                 ;084
-    (
-    1 0 0
-    -
-    ce
-    ×
-    sbr sbr
-    inv yˣ
-    rcl 1
-    )
-    +/-
-    x=t E
+lbl inv
+   (
+   100
+   -
+   ce
+   ×
+   sbr sbr
+   inv y**x
+   rcl 01
+   )
+   +/-
+   x=t e
 
-lbl B                                   ;103
-    x=t inv
+lbl B
+   x=t inv
 
-lbl E                                   ;107
-    sto 2
-    ( ce ÷ 1 0 0 + sto 8 1 )
-    sto 9
-    rcl 2
-    rtn
+lbl E
+   sto 02
+   (
+   ce
+   ÷
+   100
+   +
+   sto 08
+   1
+   )
+   sto 09
+   rcl 02
+   inv sbr
 
-lbl lnx                                 ;127
-    ( rcl 4 ÷ rcl 9 yˣ rcl 1 )
-    sto 3
-    rtn
+lbl lnx
+   (
+   rcl 04
+   ÷
+   rcl 09
+   y**x
+   rcl 01
+   )
+   sto 03
+   inv sbr
 
-lbl C                                   ;142
-    x=t lnx
-    sto 3
-    rtn
+lbl C
+   x=t lnx
+   sto 03
+   inv sbr
 
-lbl ce                                  ;149
-    ( rcl 3 × rcl 9 yˣ rcl 1 )
-    sto 4
-    rtn
+lbl ce
+   (
+   rcl 03
+   ×
+   rcl 09
+   y**x
+   rcl 01
+   )
+   sto 04
+   inv sbr
 
-lbl D                                   ;164
-    x=t ce
-    sto 4
-    rtn
+lbl D
+   x=t ce
+   sto 04
+   inv sbr

@@ -1,117 +1,172 @@
-;+
-; Partial recreation of the "Leisure Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; leisure library module -7-
+   ;
 
 lbl clr
-    cp
-    cms
+   cp
+   cms
 
 lbl E
-    rcl 1
-    rtn
-
-    sto 2
-    sto 1
-    rcl 1
-    rtn
+   rcl 01
+   inv sbr
+   sto 02
+   sto 01
+   rcl 01
+   inv sbr
 
 lbl A
-    inv stf 1
-    rcl 2
-    rtn
-
-    ( ce - 4 )
-    cp
-    x≥t A
-    ( ce + 3 )
-    inv x≥t A
-    ( ce + 1 )
-    +/-
-    sum 2
-    rcl 2
-    x=t op
-    ( ce + 6 )
-    sto 5
-    . 2
-    sm* 5
+   inv stflg 1
+   rcl 02
+   inv sbr
+   (
+   ce
+   -
+   4
+   )
+   cp
+   x≥t a
+   (
+   ce
+   +
+   3
+   )
+   inv x≥t a
+   (
+   ce
+   +
+   1
+   )
+   +/-
+   sum 02
+   rcl 02
+   x=t op
+   (
+   ce
+   +
+   6
+   )
+   sto 05
+   .2
+   sm* 05
 
 lbl B
-    stf 1
-    rcl 2
-    sto 6
-    ( E' E' E'
-    sto 3
-    rcl 2
-    sto 6
-    rcl 4
-    × 1 8 0 ÷ π )
-    (
-    ( ce - ( ce + . 5 ) int + . 5 )
-    sto 4 × rcl 3
-    )
-    +/-
+   stflg 1
+   rcl 02
+   sto 06
+   (
+   e'
+   e'
+   e'
+   sto 03
+   rcl 02
+   sto 06
+   rcl 04
+   ×
+   180
+   ÷
+   π
+   )
+   (
+   (
+   ce
+   -
+   (
+   ce
+   +
+   .5
+   )
+   int
+   +
+   .5
+   )
+   sto 04
+   ×
+   rcl 03
+   )
+   +/-
 
 lbl list
-    sto 0
-    ( sbr deg + rcl 0 )
-    inv x≥t list
-    rcl 6
-    x=t op
-    sto 2
-    . 1
-    sm* 5
-    gto A
+   sto 00
+   (
+   sbr deg
+   +
+   rcl 00
+   )
+   inv x≥t list
+   rcl 06
+   x=t op
+   sto 02
+   .1
+   sm* 05
+   gto a
 
 lbl deg
-    rcl 6
-    op 10
-    inv sum 6
-    ( rcl 6 + 6 )
-    sto 5
-    rc* 5
-    inv lnx
-    rtn
+   rcl 06
+   op 10
+   inv sum 06
+   (
+   rcl 06
+   +
+   6
+   )
+   sto 05
+   rc* 05
+   inv lnx
+   inv sbr
 
 lbl E'
-    sbr
-    deg
-    +
-    rtn
+   sbr deg
+   +
+   inv sbr
 
 lbl op
-    ( rcl 1 sto 6 + 6 )
-    sto 5
+   (
+   rcl 01
+   sto 06
+   +
+   6
+   )
+   sto 05
 
 lbl gto
-    1 sto 3
-    ( rc* 5 -
-    ( ce + . 5 )
-    int st* 5 - . 1
-    )
-    inv x≥t dsz
-    inv x=t iff
-    1 +/-
-    prd 3
+   1
+   sto 03
+   (
+   rc* 05
+   -
+   (
+   ce
+   +
+   .5
+   )
+   int
+   st* 05
+   -
+   .1
+   )
+   inv x≥t dsz
+   inv x=t ifflg
+   1
+   +/-
+   prd 03
 
-lbl iff
-    rcl 3
-    iff 1 dms
-    +/-
+lbl ifflg
+   rcl 03
+   ifflg 1 d.ms
+   +/-
 
-lbl dms
-    sm* 5
+lbl d.ms
+   sm* 05
 
 lbl dsz
-    op 35
-    dsz 6 gto
-    iff 1 π
-    π
-    C
-    rtn
+   op 35
+   dsz 6 gto
+   ifflg 1 π
+   π
+   c
+   inv sbr
 
 lbl π
-    0
-    1/x
-    0
-    rtn
+   0
+   1/x
+   0
+   inv sbr

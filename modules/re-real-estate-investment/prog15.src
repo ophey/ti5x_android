@@ -1,0 +1,160 @@
+   ; investment module -3-
+   ;
+
+lbl A
+   sto 01
+   fix 0
+   prt
+   inv sbr
+
+lbl B
+   sto 02
+   fix 5
+   prt
+   inv sbr
+
+lbl C
+   fix 1
+   (
+   prt
+   ÷
+   x⇌t
+   100
+   )
+   sto 03
+   x⇌t
+   inv sbr
+
+lbl D
+   fix 3
+   (
+   prt
+   ÷
+   x⇌t
+   100
+   )
+   sto 04
+   x⇌t
+   inv sbr
+
+lbl E
+   sto 05
+   fix 0
+   prt
+   inv sbr
+
+lbl A'
+   (
+   rcl 02
+   ×
+   rcl 05
+   ÷
+   (
+   1
+   ÷
+   rcl 03
+   +
+   rcl 02
+   ÷
+   rcl 04
+   -
+   1
+   ÷
+   gto 207
+
+lbl B'
+   (
+   (
+   rcl 04
+   -
+   rcl 03
+   )
+   ×
+   rcl 01
+   ÷
+   rcl 03
+   ÷
+   (
+   rcl 04
+   ×
+   rcl 05
+   -
+   rcl 01
+   )
+   fix 5
+   )
+   prt
+   inv sbr
+
+lbl C'
+   (
+   rcl 01
+   ×
+   rcl 04
+   ÷
+   (
+   rcl 02
+   ×
+   rcl 04
+   ×
+   rcl 05
+   -
+   rcl 02
+   ×
+   rcl 01
+   +
+   rcl 01
+   )
+   ×
+   100
+   fix 4
+   )
+   prt
+   inv sbr
+
+lbl D'
+   (
+   rcl 01
+   ×
+   rcl 03
+   ×
+   (
+   rcl 02
+   -
+   1
+   )
+   ÷
+   (
+   rcl 02
+   ×
+   rcl 03
+   ×
+   rcl 05
+   -
+   gto 139
+
+lbl E'
+   (
+   rcl 01
+   ×
+   (
+   rcl 04
+   +
+   rcl 03
+   ×
+   rcl 02
+   -
+   rcl 03
+   )
+   ÷
+   (
+   rcl 02
+   ×
+   rcl 03
+   ×
+   rcl 04
+   )
+   fix 0
+   )
+   prt
+   inv sbr

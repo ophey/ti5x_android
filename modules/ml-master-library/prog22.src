@@ -1,67 +1,73 @@
-;+
-; Recreation of the "Master Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; master library module -1-
+   ;
 
-lbl E'                               ;000
-    iff 0 yˣ
-    5
-    gto sum
+lbl E'
+   ifflg 0 y**x
+   5
+   gto sum
 
-lbl yˣ                               ;008
-    6
+lbl y**x
+   6
 
-lbl sum                              ;011
-    sto 10
-    rc* 10
-    rtn
+lbl sum
+   sto 10
+   rc* 10
+   inv sbr
 
-lbl C                                ;018
-    +/-
+lbl C
+   +/-
 
-lbl B                                ;021
-    ( ce + e' )
-    st* 10
-    rtn
+lbl B
+   (
+   ce
+   +
+   e'
+   )
+   st* 10
+   inv sbr
 
 lbl A
-    E'                               ;031
-    rtn
+   e'
+   inv sbr
 
-lbl A'                               ;035
-    inv
+lbl A'
+   inv lbl b'
+   stflg 0
+   fix 2
+   inv sbr
 
-lbl B'                               ;038
-    stf 0
-    fix 2
-    rtn
+lbl C'
+   sto 07
+   inv sbr
 
-lbl C'                               ;045
-    sto 7
-    rtn
+lbl D'
+   (
+   1/x
+   ×
+   rcl 07
+   )
+   cp
+   pgm 18
+   b
+   inv sbr
 
-lbl D'                               ;050
-    ( 1/x × rcl 7 )
-    cp
-    pgm 18 B
-    rtn
+lbl D
+   cp
+   pgm 18
+   a
+   rcl 06
+   sto 03
+   cp
+   pgm 18
+   sbr ce
+   sto 06
+   inv sbr
 
-lbl D                                ;063
-    cp
-    pgm 18 A
-    rcl 6
-    sto 3
-    cp
-    pgm 18 sbr
-    ce
-    sto 6
-    rtn
+lbl E
+   ifflg 0 √x
+   sto 05
+   inv sbr
 
-lbl E                                ;081
-    iff 0 √x
-    sto 5
-    rtn
-
-lbl √x                              ;089
-    sto 6
-    rtn
+lbl √x
+   sto 06
+   inv sbr

@@ -1,0 +1,260 @@
+   ; securities analysis module -8-
+   ;
+
+lbl A'
+   sto 05
+   pgm 15
+   a'
+   exc 05
+   x⇌t
+   1416
+   fix 9
+   op 04
+   x⇌t
+   fix 4
+   op 06
+   inv sbr
+
+lbl B'
+   sto 06
+   sbr 058
+   exc 06
+   x⇌t
+   3316
+   gto 014
+
+lbl C'
+   sto 07
+   sbr 058
+   exc 07
+   x⇌t
+   3616
+   gto 014
+   (
+   (
+   ce
+   pgm 15
+   a'
+   -
+   rcl 05
+   )
+   ÷
+   365
+   )
+   sto 01
+   inv sbr
+
+lbl A
+   sto 20
+   x⇌t
+   31
+   fix 9
+   op 04
+   x⇌t
+   op 06
+   inv sbr
+
+lbl B
+   sto 27
+   x⇌t
+   15323637
+   stflg 0
+   gto 154
+
+lbl C
+   sto 28
+   x⇌t
+   3033
+   stflg 0
+   gto 154
+
+lbl D
+   sto 29
+   x⇌t
+   243115
+   stflg 0
+   sbr 154
+   adv
+   inv sbr
+
+lbl clr
+   cms
+   fix 9
+   0
+   inv sbr
+   773715
+   fix 9
+   op 04
+   x⇌t
+   fix 2
+   ifflg 0 169
+   pgm 11
+   sbr list
+   op 06
+   inv stflg 0
+   inv sbr
+   773042
+   gto 154
+   77226327
+   gto 154
+   771324
+   gto 154
+
+lbl E
+   (
+   rcl 27
+   ×
+   rcl 20
+   )
+   sum 15
+   sto 04
+   x⇌t
+   sbr 150
+   (
+   rcl 28
+   ×
+   rcl 20
+   )
+   sum 16
+   sto 03
+   x⇌t
+   sbr 177
+   (
+   rcl 29
+   ×
+   rcl 20
+   )
+   sto 12
+   sum 18
+   x⇌t
+   sbr 197
+   (
+   rcl 20
+   ×
+   (
+   rcl 28
+   -
+   rcl 27
+   )
+   )
+   sum 17
+   x⇌t
+   sbr 186
+   (
+   (
+   rcl 29
+   ÷
+   rcl 27
+   )
+   x⇌t
+   rcl 12
+   (
+   op 10
+   ×
+   x⇌t
+   )
+   sto 24
+   ×
+   100
+   )
+   x⇌t
+   6145
+   sbr 154
+   (
+   (
+   (
+   (
+   rcl 03
+   ÷
+   rcl 04
+   )
+   inv y**x
+   rcl 01
+   )
+   -
+   1
+   )
+   sto 25
+   ×
+   100
+   )
+   x⇌t
+   611322
+   sbr 154
+   (
+   (
+   rcl 24
+   +
+   rcl 25
+   )
+   ×
+   100
+   )
+   sto 26
+   x⇌t
+   613745
+   sbr 154
+   (
+   rcl 04
+   ×
+   rcl 24
+   )
+   sum 10
+   (
+   rcl 04
+   ×
+   rcl 25
+   )
+   sum 11
+   rcl 26
+   adv
+   adv
+   inv sbr
+
+lbl D'
+   rcl 15
+   x⇌t
+   sbr 148
+   rcl 16
+   x⇌t
+   sbr 175
+   rcl 18
+   x⇌t
+   sbr 195
+   rcl 17
+   x⇌t
+   sbr 184
+   (
+   rcl 10
+   ÷
+   rcl 15
+   ×
+   100
+   )
+   sto 13
+   x⇌t
+   336145
+   sbr 154
+   (
+   rcl 11
+   ÷
+   rcl 15
+   ×
+   100
+   )
+   sto 14
+   x⇌t
+   33611322
+   sbr 154
+   (
+   rcl 13
+   +
+   rcl 14
+   )
+   x⇌t
+   33613745
+   sbr 154
+   adv
+   adv
+   adv
+   inv sbr

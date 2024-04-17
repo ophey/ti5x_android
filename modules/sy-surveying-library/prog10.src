@@ -1,81 +1,108 @@
-;+
-; Partial recreation of the "Surveying Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; surveying module -4-
+   ;
 
 lbl E'
-    cms
-    5 0 sto 1
-    1 0 0 sto 2
-    0
-    adv
-    fix 6
-    inv stf 1
-    rtn
+   cms
+   50
+   sto 01
+   100
+   sto 02
+   0
+   adv
+   fix 6
+   inv stflg 1
+   inv sbr
 
 lbl A'
-    prt
-    ( dms sto 3 ÷ 2 )
-    sto 11
-    rcl 3
-    inv dms
-    rtn
+   prt
+   (
+   d.ms
+   sto 03
+   ÷
+   2
+   )
+   sto 11
+   rcl 03
+   inv d.ms
+   inv sbr
 
 lbl B'
-    stf 1
-    rtn
+   stflg 1
+   inv sbr
 
 lbl D
-    pgm 11 D
-    rtn
-
-    ( ce × rcl 11 tan )
-    sto 6
-    prt
-    rtn
-
-    (
-    ( rcl 11 cos 1/x - 1 )
-    ×
-    rcl 5
-    )
-    sto 7
-    prt
-    rtn
-
-    iff 1 95
-    (
-    ( rcl 1 ÷ rcl 5 )
-    inv sin
-    ×
-    2
-    gto 101
-
-    rcl 5
-    pgm 11 sbr π
-    )
-    sto 4
-    inv dms
-    prt
-    rtn
-
-    ( rcl 3 ÷ rcl 4 × rcl 2 )
-    sto 8
-    prt
-    gto 16
+   pgm 11
+   d
+   inv sbr
+   (
+   ce
+   ×
+   rcl 11
+   tan
+   )
+   sto 06
+   prt
+   inv sbr
+   (
+   (
+   rcl 11
+   cos
+   1/x
+   -
+   1
+   )
+   ×
+   rcl 05
+   )
+   sto 07
+   prt
+   inv sbr
+   ifflg 1 095
+   (
+   (
+   rcl 01
+   ÷
+   rcl 05
+   )
+   inv sin
+   ×
+   2
+   gto 101
+   rcl 05
+   pgm 11
+   sbr π
+   )
+   sto 04
+   inv d.ms
+   prt
+   inv sbr
+   (
+   rcl 03
+   ÷
+   rcl 04
+   ×
+   rcl 02
+   )
+   sto 08
+   prt
+   gto 016
 
 lbl B
-    pgm 11 B
-    gto 47
+   pgm 11
+   b
+   gto 047
 
 lbl C
-    prt
-    pgm 11 sbr lnx
+   prt
+   pgm 11
+   sbr lnx
 
 lbl A
-    pgm 11 A
-    gto 47
+   pgm 11
+   a
+   gto 047
 
 lbl E
-    pgm 11 E
-    gto 47
+   pgm 11
+   e
+   gto 047

@@ -1,0 +1,778 @@
+   ; structural engineering module rev.a
+   ;
+
+lbl x≥t
+   op 04
+   x⇌t
+   op 06
+   inv sbr
+
+lbl ifflg
+   ×
+   rcl 02
+   +
+   rcl 03
+   +
+   4
+   gto 036
+
+lbl d.ms
+   +
+   4
+   =
+   ×
+   (
+   rcl 02
+   +
+   1
+   )
+   +
+   rcl 03
+   +
+   12
+   =
+   sto 01
+   inv sbr
+   nop
+
+lbl π
+   op 00
+   7173
+   op 03
+   op 05
+   clr
+   gto 191
+
+lbl ∑+
+   sbr d.ms
+   inv ifflg 1 074
+   0
+   st* 01
+   st* 00
+   inv sbr
+
+lbl A
+   cms
+   x⇌t
+   7
+   inv x≥t op
+   adv
+   31
+   sbr x≥t
+   -
+   1
+   =
+   sto 02
+   clr
+   adv
+   inv sbr
+
+lbl E'
+   stflg 5
+
+lbl B
+   stflg 1
+   -
+   1
+   =
+   sto 03
+   op 00
+   +
+   2
+   =
+   op 02
+   36331331
+   nop
+   nop
+   op 01
+   op 05
+   4
+   sbr d.ms
+   inv ifflg 5 145
+   rc* 01
+   sto 11
+   gto 155
+   inv sbr
+   x⇌t
+   27
+   sbr x≥t
+   sto 11
+   st* 01
+   inv sbr
+   x⇌t
+   1724
+   sbr x≥t
+   1/x
+   ×
+   rcl 11
+   =
+   sto 06
+   x⇌t
+   0
+   sbr ifflg
+   ifflg 5 183
+   stflg 3
+   gto 191
+   inv stflg 5
+   adv
+   inv sbr
+   gto 187
+   inv sbr
+   inv stflg 3
+   cp
+   rcl 03
+   x⇌t
+   inv x=t 212
+   rcl 06
+   sto 04
+   sm* 01
+   gto 248
+   rcl 02
+   inv x=t 229
+   rcl 06
+   sto 05
+   op 31
+   sm* 01
+   gto 248
+   rcl 06
+   sm* 01
+   op 31
+   sm* 01
+   ÷
+   2
+   =
+   x⇌t
+   rcl 02
+   sum 01
+   x⇌t
+   st* 01
+   adv
+   inv sbr
+
+lbl A'
+   ifflg 3 π
+   sto 10
+   x⇌t
+   13
+   sbr x≥t
+   inv sbr
+   x⇌t
+   34
+   sbr x≥t
+   sto 08
+   1
+   sbr d.ms
+   sto 00
+   3
+   sbr ∑+
+   rcl 08
+   ÷
+   2
+   ×
+   (
+   rcl 11
+   -
+   rcl 10
+   =
+   sm* 00
+   sm* 01
+   sto 09
+   0
+   sbr d.ms
+   sto 00
+   2
+   sbr ∑+
+   rcl 10
+   ÷
+   rcl 11
+   =
+   x²
+   ×
+   (
+   √x
+   -
+   2
+   )
+   +
+   1
+   =
+   ×
+   rcl 11
+   x²
+   ×
+   rcl 06
+   ×
+   rcl 08
+   ÷
+   8
+   =
+   sm* 00
+   sm* 01
+   rcl 11
+   ÷
+   4
+   =
+   sto 07
+   5
+   sbr d.ms
+   sto 00
+   7
+   sbr ∑+
+   sbr 377
+   sm* 00
+   6
+   sbr d.ms
+   sto 00
+   6
+   sbr ∑+
+   2
+   prd 07
+   sbr 377
+   0
+   sto 07
+   gto 506
+   cp
+   rcl 07
+   y**x
+   3
+   -
+   (
+   rcl 07
+   -
+   rcl 10
+   )
+   x≥t 394
+   0
+   y**x
+   3
+   =
+   ×
+   rcl 08
+   ÷
+   6
+   ÷
+   rcl 10
+   +/-
+   +
+   rcl 09
+   ×
+   rcl 07
+   =
+   sm* 01
+   inv sbr
+
+lbl C
+   ifflg 3 π
+   sto 08
+   x⇌t
+   34
+   sbr x≥t
+   x⇌t
+   1
+   sbr d.ms
+   sto 00
+   3
+   sbr ∑+
+   x⇌t
+   ×
+   rcl 11
+   ÷
+   2
+   =
+   sm* 00
+   sm* 01
+   x⇌t
+   0
+   sbr d.ms
+   sto 00
+   2
+   sbr ∑+
+   x⇌t
+   ×
+   rcl 11
+   ×
+   rcl 06
+   ÷
+   4
+   =
+   sm* 00
+   sm* 01
+   x⇌t
+   6
+   sbr d.ms
+   sto 00
+   6
+   sbr ∑+
+   x⇌t
+   ÷
+   rcl 06
+   =
+   sm* 01
+   ×
+   .75
+   =
+   x⇌t
+   5
+   sbr d.ms
+   sto 00
+   7
+   sbr ∑+
+   x⇌t
+   sm* 00
+   sm* 01
+   inv stflg 1
+   adv
+   inv sbr
+
+lbl C'
+   ifflg 3 π
+   x⇌t
+   13
+   sbr x≥t
+   sto 10
+   rcl 11
+   ÷
+   1000
+   =
+   sto 09
+   inv sbr
+   x⇌t
+   21
+   sbr x≥t
+   ÷
+   rcl 09
+   =
+   gto 577
+
+lbl B'
+   ifflg 3 π
+   sto 10
+   x⇌t
+   13
+   sbr x≥t
+   inv sbr
+   x⇌t
+   14
+   sbr x≥t
+   sto 09
+   ÷
+   2
+   =
+   sum 10
+   inv sbr
+   x⇌t
+   34
+   sbr x≥t
+   sto 08
+   stflg 2
+   2
+   sbr d.ms
+   sto 00
+   3
+   sbr ∑+
+   rcl 08
+   ×
+   rcl 09
+   ×
+   rcl 10
+   ÷
+   rcl 11
+   =
+   sm* 01
+   rcl 10
+   ×
+   (
+   (
+   ce
+   ÷
+   rcl 11
+   )
+   x²
+   +/-
+   +
+   1
+   -
+   (
+   rcl 09
+   ÷
+   rcl 11
+   )
+   x²
+   ÷
+   4
+   )
+   ×
+   rcl 08
+   ×
+   rcl 09
+   ×
+   rcl 06
+   ÷
+   2
+   =
+   sm* 00
+   rcl 11
+   -
+   rcl 10
+   =
+   sto 10
+   inv ifflg 2 668
+   inv stflg 2
+   0
+   sbr d.ms
+   sto 00
+   1
+   gto 587
+   4
+   sto 00
+   op 20
+   rcl 00
+   sbr d.ms
+   inv ifflg 1 685
+   0
+   st* 01
+   rcl 11
+   ÷
+   4
+   =
+   sum 07
+   rcl 07
+   x⇌t
+   rcl 11
+   x=t 767
+   x⇌t
+   ×
+   rcl 09
+   ×
+   (
+   1
+   -
+   rcl 10
+   ÷
+   rcl 11
+   )
+   ×
+   2
+   cp
+   -
+   (
+   rcl 07
+   -
+   rcl 10
+   +
+   rcl 09
+   ÷
+   2
+   )
+   x≥t 735
+   ×
+   0
+   x²
+   +
+   (
+   rcl 07
+   -
+   rcl 10
+   -
+   rcl 09
+   ÷
+   2
+   )
+   x≥t 754
+   ×
+   0
+   x²
+   =
+   ×
+   rcl 08
+   ÷
+   2
+   =
+   sm* 01
+   gto 671
+   inv stflg 1
+   0
+   sto 07
+   adv
+   inv sbr
+
+lbl D
+   x⇌t
+   3027
+   sbr x≥t
+   sto 12
+   ×
+   rcl 04
+   ÷
+   2
+   =
+   sto 14
+   inv sbr
+   x⇌t
+   3035
+   sbr x≥t
+   sto 13
+   ×
+   rcl 05
+   ÷
+   2
+   =
+   sto 15
+   adv
+   inv sbr
+
+lbl E
+   rcl 02
+   sto 03
+   0
+   sbr d.ms
+   rcl 15
+   sm* 01
+   0
+   sto 03
+   rcl 02
+   sto 00
+   2
+   sbr d.ms
+   rcl 14
+   sm* 01
+   2
+   sbr d.ms
+   rc* 01
+   x⇌t
+   op 23
+   0
+   sbr d.ms
+   rc* 01
+   +
+   x⇌t
+   =
+   x⇌t
+   3
+   sbr ifflg
+   op 31
+   x⇌t
+   st* 01
+   dsz 0 841
+   0
+   sto 03
+   rcl 02
+   sto 00
+   0
+   sbr ifflg
+   rc* 01
+   x⇌t
+   2
+   sbr ifflg
+   x⇌t
+   st* 01
+   op 23
+   dsz 0 877
+   cp
+   0
+   sto 03
+   rcl 02
+   sto 00
+   op 30
+   2
+   sbr ifflg
+   rc* 01
+   x⇌t
+   1
+   sbr ifflg
+   rc* 01
+   ÷
+   x⇌t
+   =
+   +/-
+   sto 06
+   ×
+   rc* 01
+   =
+   x⇌t
+   op 23
+   2
+   sbr ifflg
+   x⇌t
+   sm* 01
+   3
+   sbr ifflg
+   op 31
+   rcl 06
+   ×
+   rc* 01
+   =
+   op 21
+   sm* 01
+   dsz 0 905
+   rcl 02
+   sto 00
+   sto 03
+   op 33
+   2
+   sbr ifflg
+   rc* 01
+   x⇌t
+   3
+   sbr ifflg
+   rc* 01
+   ÷
+   x⇌t
+   =
+   +/-
+   st* 01
+   x⇌t
+   op 33
+   1
+   sbr ifflg
+   rc* 01
+   ×
+   x⇌t
+   =
+   x⇌t
+   3
+   sbr ifflg
+   x⇌t
+   sm* 01
+   dsz 0 962
+   rcl 02
+   sto 03
+   2
+   sbr ifflg
+   op 31
+   rcl 12
+   st* 01
+   3
+   sbr ifflg
+   rcl 13
+   exc ind 01
+   sto 06
+   adv
+   op 00
+   3032
+   op 01
+   3017313736
+   op 02
+   op 05
+   op 00
+   0
+   sto 03
+
+lbl mean(x)
+   5
+   sto 11
+   3
+   sto 00
+   sbr ifflg
+   op 31
+   rc* 01
+   adv
+   prt
+   adv
+
+lbl nop
+   rc* 01
+   ×
+   rcl 00
+   =
+   op 21
+   +
+   rc* 01
+   ×
+   (
+   4
+   -
+   rcl 00
+   =
+   ÷
+   4
+   =
+   x⇌t
+   rcl 11
+   sbr d.ms
+   rc* 01
+   +
+   x⇌t
+   =
+   prt
+   1
+   sum 11
+   3
+   sbr ifflg
+   op 31
+   dsz 0 nop
+   op 23
+   rcl 03
+   x⇌t
+   rcl 02
+   x≥t mean(x)
+   op 21
+   rc* 01
+   adv
+   prt
+   adv
+   0
+   sto 03
+   2
+   sbr d.ms
+   rcl 14
+   inv sm* 01
+   rcl 02
+   sto 03
+   sto 00
+   0
+   sbr d.ms
+   rcl 15
+   inv sm* 01
+   2
+   sbr ifflg
+   op 31
+   rcl 01
+   sto 10
+   op 20
+   35171315
+   op 01
+   3724323136
+   op 02
+   op 05
+   op 00
+   adv
+   0
+   sto 03
+
+lbl x=t
+   rc* 10
+   sto 11
+   1
+   sum 10
+   rc* 10
+   inv sum 11
+   4
+   sbr d.ms
+   rc* 01
+   inv prd 11
+   1
+   sbr d.ms
+   rc* 01
+   -
+   rcl 11
+   =
+   prt
+   adv
+   3
+   sbr d.ms
+   rc* 01
+   +
+   rcl 11
+   =
+   prt
+   op 23
+   dsz 0 x=t
+   0
+   sto 03
+   sbr d.ms
+   rcl 06
+   st* 01
+   clr
+   adv
+   inv sbr

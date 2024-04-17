@@ -1,0 +1,62 @@
+   ; investment module -3-
+   ;
+
+lbl E
+   0
+   sto 06
+   sto 18
+   sto 19
+   (
+   rcl 03
+   ×
+   12
+   sto 01
+   )
+   sto 15
+   adv
+   prt
+   inv sbr
+
+lbl r/s
+   (
+   rcl 15
+   ÷
+   rcl 04
+   ×
+   100
+   )
+   prt
+   inv sbr
+   adv
+   op 26
+   rcl 06
+   fix 0
+   prt
+   0
+   pgm 02
+   e
+   (
+   fix 2
+   +/-
+   +
+   rcl 04
+   )
+   inv sum 04
+   prt
+   sto 10
+   sum 19
+   (
+   +/-
+   +
+   rcl 15
+   )
+   prt
+   sto 11
+   sum 18
+   rcl 19
+   prt
+   rcl 18
+   prt
+   rcl 06
+   inv sbr
+   gto 038

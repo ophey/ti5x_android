@@ -1,126 +1,149 @@
-;+
-; Partial recreation of the "Surveying Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; surveying module -4-
+   ;
 
 lbl E'
-    cms
-    fix 6
-    2 0 9 0 2 2 2 7 . 2 8
-    sto 1
-    adv
-    prt
-    rtn
+   cms
+   fix 6
+   20902227.28
+   sto 01
+   adv
+   prt
+   inv sbr
 
 lbl A
-    sto 2
-    prt
-    rtn
+   sto 02
+   prt
+   inv sbr
 
 lbl B
-    (
-    ( sto 4
-    sin
-    ×
-    rcl 2 × 9 0
-    ÷ rcl 1
-    ÷ π
-    )
-    sto 9
-    * . 1 4 2
-    )
-    sto 10
-    rcl 4
-    prt
-    rtn
+   (
+   (
+   sto 04
+   sin
+   ×
+   rcl 02
+   ×
+   90
+   ÷
+   rcl 01
+   ÷
+   π
+   )
+   sto 09
+   ×
+   .142
+   )
+   sto 10
+   rcl 04
+   prt
+   inv sbr
 
 lbl C
-    sto 5
-    prt
-    rtn
-
-    sto 6
-    prt
-    rtn
+   sto 05
+   prt
+   inv sbr
+   sto 06
+   prt
+   inv sbr
 
 lbl D
-    sto 7
-    prt
-    rtn
-
-    sto 8
-    prt
-    rtn
+   sto 07
+   prt
+   inv sbr
+   sto 08
+   prt
+   inv sbr
 
 lbl E
-    sto 3
-    ( rcl 5 - rcl 6 - rcl 7 + rcl 8 )
-    sto 15
-    ( ( (
-    rcl 4
-    -
-    2
-    ×
-    rcl 9
-    +
-    rcl 10
-    )
-    sin
-    ×
-    rcl 15
-    ÷
-    rcl 2
-    )
-    inv sin
-    +
-    rcl 10
-    -
-    rcl 9
-    +
-    rcl 4
-    )
-    sto 11
-    rcl 3
-    prt
-    adv
-    rtn
+   sto 03
+   (
+   rcl 05
+   -
+   rcl 06
+   -
+   rcl 07
+   +
+   rcl 08
+   )
+   sto 15
+   (
+   (
+   (
+   rcl 04
+   -
+   2
+   ×
+   rcl 09
+   +
+   rcl 10
+   )
+   sin
+   ×
+   rcl 15
+   ÷
+   rcl 02
+   )
+   inv sin
+   +
+   rcl 10
+   -
+   rcl 09
+   +
+   rcl 04
+   )
+   sto 11
+   rcl 03
+   prt
+   adv
+   inv sbr
 
 lbl A'
-    (
-    ( rcl 11 - rcl 9 )
-    sin × rcl 2
-    ÷
-    rcl 9
-    cos
-    )
-    sto 17
-    prt
-    rtn
+   (
+   (
+   rcl 11
+   -
+   rcl 09
+   )
+   sin
+   ×
+   rcl 02
+   ÷
+   rcl 09
+   cos
+   )
+   sto 17
+   prt
+   inv sbr
 
 lbl B'
-    (
-    ( rcl 1 + rcl 3 )
-    1/x
-    ×
-    rcl 1
-    ×
-    rcl 17
-    )
-    prt
-    rtn
+   (
+   (
+   rcl 01
+   +
+   rcl 03
+   )
+   1/x
+   ×
+   rcl 01
+   ×
+   rcl 17
+   )
+   prt
+   inv sbr
 
 lbl C'
-    ( rcl 2
-    ×
-    rcl 11
-    cos
-    ÷
-    rcl 9
-    cos
-    +
-    rcl 5
-    -
-    rcl 6
-    )
-    prt
-    rtn
+   (
+   rcl 02
+   ×
+   rcl 11
+   cos
+   ÷
+   rcl 09
+   cos
+   +
+   rcl 05
+   -
+   rcl 06
+   )
+   prt
+   inv sbr

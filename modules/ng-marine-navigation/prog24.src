@@ -1,11 +1,15 @@
+   ; marine navigation -5-
+   ;
 
 lbl A
-   pgm 16 e'
+   pgm 16
+   e'
    sto 00
    inv sbr
 
 lbl B
-   pgm 16 e'
+   pgm 16
+   e'
    sto 01
    inv sbr
 
@@ -23,7 +27,8 @@ lbl D
    inv sbr
 
 lbl E
-   pgm 16 e'
+   pgm 16
+   e'
    sto 03
    inv sbr
 

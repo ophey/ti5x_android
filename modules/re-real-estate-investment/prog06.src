@@ -1,0 +1,165 @@
+   ; investment module -3-
+   ;
+
+lbl C
+   fix 9
+   prt
+
+lbl grad
+   pgm 05
+   sbr grad
+   inv sbr
+
+lbl prd
+   fix 2
+   (
+   (
+   1
+   -
+   rcl 02
+   ÷
+   rcl 03
+   )
+   y**x
+   rcl 04
+   ×
+   rcl 01
+   )
+   inv sbr
+
+lbl E'
+   op 24
+   rcl 04
+
+lbl D
+   fix 9
+   adv
+   prt
+
+lbl deg
+   pgm 05
+   sbr deg
+   inv sbr
+
+lbl A
+   fix 2
+   prt
+
+lbl π
+   pgm 05
+   sbr π
+   inv sbr
+
+lbl B
+   fix 9
+   prt
+
+lbl rad
+   (
+   sto 02
+   -
+   1
+   )
+   lnx
+   (
+   2
+   -
+   rcl 02
+   )
+   cp
+   x≥t 090
+   lnx
+   rcl 02
+   inv sbr
+
+lbl A'
+   sbr nop
+   (
+   +/-
+   +
+   rcl 01
+   )
+   prt
+   inv sbr
+
+lbl B'
+   gto a'
+
+lbl C'
+   sbr nop
+   prt
+   inv sbr
+   (
+   rcl 01
+   -
+   sbr prd
+   )
+   inv sbr
+
+lbl E
+   sbr x≥t
+   prt
+   inv sbr
+
+lbl x≥t
+   rcl 04
+   sto 07
+   op 34
+   inv int
+   sto 05
+   cp
+   x=t 160
+   rcl 07
+   int
+   sto 04
+   sbr 160
+   (
+   ce
+   ×
+   rcl 05
+   )
+   inv sbr
+   (
+   sbr prd
+   ×
+   rcl 02
+   ÷
+   rcl 03
+   )
+   x⇌t
+   rcl 07
+   sto 04
+   x⇌t
+   inv sbr
+
+lbl nop
+   rcl 04
+   sto 07
+   inv int
+   sto 05
+   cp
+   x=t 115
+   rcl 04
+   int
+   sto 04
+   (
+   sbr prd
+   ×
+   rcl 02
+   ÷
+   rcl 03
+   ×
+   rcl 05
+   )
+   x⇌t
+   sbr 115
+   (
+   ce
+   +
+   x⇌t
+   )
+   gto 170
+
+lbl D'
+   rcl 03
+   gto d

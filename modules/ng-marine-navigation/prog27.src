@@ -1,3 +1,5 @@
+   ; marine navigation -5-
+   ;
 
 lbl A
    1
@@ -82,7 +84,8 @@ lbl D
    )
    x⇌t
    inv p→r
-   pgm 10 sbr st*
+   pgm 10
+   sbr st*
    x⇌t
    sto 20
    x⇌t

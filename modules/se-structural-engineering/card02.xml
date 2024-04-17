@@ -1,0 +1,13 @@
+<carddef style="system">
+<label slot="titleleft">SINGLE SPAN BEAM</label>
+<label slot="titleright">SE-02</label>
+<label slot="aprime"><darrow/> <sub>^</sub>-----<sub>^</sub> <darrow/></label>
+<label slot="bprime">-----|</label>
+<label slot="dprime"><darrow/> <sub>^</sub>-----|</label>
+<label slot="eprime">|-----|</label>
+<label slot="a">L.(<Delta/>)</label>
+<label slot="b">q</label>
+<label slot="c">a, F</label>
+<label slot="d">M</label>
+<label slot="e">a, b, q<sub>1</sub>, q<sub>2</sub></label>
+</carddef>

@@ -1,188 +1,202 @@
-Lbl A'
-CMs
-(
-STO 06
-+
-10
-)
-Exc 06
-SUM Ind 09
-INV SBR
-Lbl B'
-(
-CE
--
-Int
-STO 01
-)
-INV SBR
-Lbl C'
-RCL 08
-INV SBR
-Lbl D'
-RCL Ind 09
-INV SBR
-Lbl E'
-(
-B'
-×
-10
-)
-INV SBR
-Lbl A
-CP
-STO 09
-x=t 235
-9
-SUM 09
-INV Stflg 7
-RCL Ind 09
-Op 19
-Ifflg 7 239
-.01
-SBR 012
-D'
-E'
-E'
-CP
-INV x=t 092
-.1
-+/-
-SBR 012
-100
-+/-
-√x
-INV SBR
-(
-RCL 09
--
-9
-)
-INV SBR
-Lbl B
-STO 08
-SBR 012
-D'
-E'
-B'
-CP
-RCL 01
-x=t 125
-C'
-SBR 012
-.1
-+/-
-SBR 012
-(
-D'
-E'
-B'
-0
-x⇌t
-RCL 01
--
-2
-)
-INV x≥t 150
-C'
-SBR 012
-.1
-+/-
-SBR 012
-(
-CP
-C'
--
-10
-)
-INV x=t 173
-D'
-E'
-E'
-CP
-x=t 173
-.2
-SBR 012
-C'
-INV SBR
-Lbl C
-(
-STO 07
-SBR 012
-D'
-E'
-B'
-CP
-RCL 01
--
-1
-)
-INV x=t 207
-RCL 07
-SBR 012
-.1
-+/-
-SBR 012
-(
-C'
-CP
-+
-RCL 07
--
-10
-)
-INV x=t 226
-.1
-SBR 012
-RCL 07
-INV SBR
-Lbl D
-SBR 012
-INV SBR
-1
-+/-
-lnx
-INV SBR
-(
-RCL 09
--
-9
-)
-INV SBR
-Lbl E
-STO 09
-Adv
-Prt
-9
-SUM 09
-D'
-Prt
-INV SBR
-Lbl Prt
-Fix 0
-RCL 06
-x⇌t
-9
-STO 01
-Op 21
-(
-RCL 01
-x=t 289
-Adv
--
-9
-)
-Prt
-Pause
-RCL Ind 01
-Prt
-Pause
-GTO 268
--
-10
-)
-INV SBR
-Lbl CLR
-Fix 9
-CMs
-INV SBR
+   ; leisure library module -7-
+   ;
+
+lbl A'
+   cms
+   (
+   sto 06
+   +
+   10
+   )
+   exc 06
+   sm* 09
+   inv sbr
+
+lbl B'
+   (
+   ce
+   -
+   int
+   sto 01
+   )
+   inv sbr
+
+lbl C'
+   rcl 08
+   inv sbr
+
+lbl D'
+   rc* 09
+   inv sbr
+
+lbl E'
+   (
+   b'
+   ×
+   10
+   )
+   inv sbr
+
+lbl A
+   cp
+   sto 09
+   x=t 235
+   9
+   sum 09
+   inv stflg 7
+   rc* 09
+   op 19
+   ifflg 7 239
+   .01
+   sbr 012
+   d'
+   e'
+   e'
+   cp
+   inv x=t 092
+   .1
+   +/-
+   sbr 012
+   100
+   +/-
+   √x
+   inv sbr
+   (
+   rcl 09
+   -
+   9
+   )
+   inv sbr
+
+lbl B
+   sto 08
+   sbr 012
+   d'
+   e'
+   b'
+   cp
+   rcl 01
+   x=t 125
+   c'
+   sbr 012
+   .1
+   +/-
+   sbr 012
+   (
+   d'
+   e'
+   b'
+   0
+   x⇌t
+   rcl 01
+   -
+   2
+   )
+   inv x≥t 150
+   c'
+   sbr 012
+   .1
+   +/-
+   sbr 012
+   (
+   cp
+   c'
+   -
+   10
+   )
+   inv x=t 173
+   d'
+   e'
+   e'
+   cp
+   x=t 173
+   .2
+   sbr 012
+   c'
+   inv sbr
+
+lbl C
+   (
+   sto 07
+   sbr 012
+   d'
+   e'
+   b'
+   cp
+   rcl 01
+   -
+   1
+   )
+   inv x=t 207
+   rcl 07
+   sbr 012
+   .1
+   +/-
+   sbr 012
+   (
+   c'
+   cp
+   +
+   rcl 07
+   -
+   10
+   )
+   inv x=t 226
+   .1
+   sbr 012
+   rcl 07
+   inv sbr
+
+lbl D
+   sbr 012
+   inv sbr
+   1
+   +/-
+   lnx
+   inv sbr
+   (
+   rcl 09
+   -
+   9
+   )
+   inv sbr
+
+lbl E
+   sto 09
+   adv
+   prt
+   9
+   sum 09
+   d'
+   prt
+   inv sbr
+
+lbl prt
+   fix 0
+   rcl 06
+   x⇌t
+   9
+   sto 01
+   op 21
+   (
+   rcl 01
+   x=t 289
+   adv
+   -
+   9
+   )
+   prt
+   pause
+   rc* 01
+   prt
+   pause
+   gto 268
+   -
+   10
+   )
+   inv sbr
+
+lbl clr
+   fix 9
+   cms
+   inv sbr

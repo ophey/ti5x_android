@@ -1217,13 +1217,13 @@ public class Persistent {
           if (localName.equals("prog")) {
 
             if (BankNr == 0) {
-              for (int i = 0; i < Calc.MaxProgram; ++i) {
+              for (int i = 0; i < Calc.MaxProgramSteps; ++i) {
                 Calc.Program[i] = (byte) 0;
               }
             }
             ArrayList<Double> p = parseNumbers(ContentStr);
 
-            if (BankNr == 0 ? p.size() > Calc.MaxProgram : p.size() >= 1000) {
+            if (BankNr == 0 ? p.size() > Calc.MaxProgramSteps : p.size() >= Calc.MaxCardProgramSteps) {
               throw new DataFormatException
                   (
                       String.format(Global.StdLocale, "too many memories, only %d allowed", Calc.MaxMemories)

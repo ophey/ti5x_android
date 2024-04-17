@@ -1,155 +1,179 @@
-;+
-; Partial recreation of the "Math/Utilities Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; math/utilities module -10-
+   ;
 
-lbl E'                      ;000
-    1 0
-    prd 0
+lbl E'
+   10
+   prd 00
 
-lbl D'                      ;006
-    rcl 0
-    int
-    inv sum 0
-    rtn
+lbl D'
+   rcl 00
+   int
+   inv sum 00
+   inv sbr
 
-lbl B                       ;015
-    9 sto 1
-    ( ( 0
-    inv iff ind 1 37
-    × 1 0
-    + rcl 1
-    )
-    ( dsz 1 23 )
-    )
-    iff 0 50
-    fix 9
-    rtn
+lbl B
+   9
+   sto 01
+   (
+   (
+   0
+   inv ifflg ind 01 037
+   ×
+   10
+   +
+   rcl 01
+   )
+   (
+   dsz 1 023
+   )
+   )
+   ifflg 0 050
+   fix 9
+   inv sbr
+   fix 1
+   inv sbr
 
-    fix 1                   ;050
-    rtn
+lbl C
+   op 16
+   (
+   inv int
+   ×
+   10
+   +
+   .9
+   )
+   int
+   inv sbr
 
-lbl C                       ;056
-    op 16
-    ( inv int × 1 0 + . 9 )
-    int
-    rtn
+lbl D
+   90
+   cos
+   op 10
+   inv sbr
 
-lbl D                       ;069
-    9 0
-    cos
-    op 10
-    rtn
+lbl B'
+   cp
+   (
+   10
+   -
+   1
+   +
+   +/-
+   inv log
+   ee
+   inv ee
+   x=t 083
+   0
+   )
+   inv sbr
 
-lbl B'                      ;077
-    cp
-    ( 1 0
-    -                       ;083
-    1
-    +
-    +/-
-    inv log
-    ee
-    inv ee
-    x=t 83
-    0
-    )
-    rtn
+lbl C'
+   hir 08
+   7
+   op 04
+   hir 18
+   cp
+   inv x=t 113
+   inv stflg 0
+   0
+   inv sbr
 
-lbl C'                      ;098
-    hir 8 7
-    op 4
-    hir 18
-    cp
-    inv x=t 113
-    inv stf 0 0
-    rtn
+lbl E
+   x⇌t
+   10
+   sto 00
+   0
+   sto 01
+   (
+   inv stflg 7
+   op 30
+   op 21
+   op 18
+   ifflg 7 127
+   ce
+   dsz 1 149
+   rcl 00
+   inv sbr
+   )
+   gto 142
 
-lbl E                       ;118
-    x⇌t
-    1 0 sto 0
-    0 sto 1
-    (
-    inv stf 7
-    op 30                   ; 1 inv sum 0
-    op 21                   ; 1 sum 1
-    op 18                   ; raise flag 7 if no error
-    iff 7 127
-    ce
-    dsz 1 149
-    rcl 0
-    rtn
+lbl A
+   0
+   sto 00
+   10
+   sto 01
+   inv ifflg ind 01 170
+   op 20
+   inv prd 00
+   dsz 1 162
+   b'
+   sum 00
+   .1
+   prd 00
+   d
+   x=t 192
+   op 20
+   prd 00
+   .1
+   prd 00
+   c
+   x⇌t
+   10
+   x=t 206
+   inv prd 00
+   (
+   1/x
+   ×
+   0
+   x⇌t
+   ×
+   rcl 00
+   op 10
+   inv x=t 221
+   1
+   )
+   sum 00
+   0
+   inv sbr
 
-    )                       ;149
-    gto 142
-
-lbl A                       ;153
-    0 sto 0
-    1 0 sto 1
-    inv iff ind 1 170
-    op 20
-    inv prd 0
-    dsz 1 162
-    B'
-    sum 0 . 1
-    prd 0 D
-    x=t 192
-    op 20
-    prd 0
-    . 1
-    prd 0
-    C
-    x⇌t
-    1 0
-    x=t 206
-    inv prd 0
-    ( 1/x × 0
-    x⇌t × rcl 0
-    op 10
-    inv x=t 221
-    1
-    )
-    sum 0
-    0
-    rtn
-
-lbl A'                       ;226
-    cp
-    rcl 0
-    int
-    x=t 243
-    inv sum 0
-    1 0
-    gto 245
-
-    E'                        ;243
-    abs
-    op 17
-    E'
-    x=t 266
-    x≥t 262
-    1 +/-
-    prd 0
-    rad
-    gto 267
-
-    grad                     ;262
-    gto 267
-
-    deg                      ;266
-    1 0 prd 0
-    fix
-    ind 0 D'
-    1 0 sto 1
-    inv log
-    prd 0
-    cp . 1
-    prd 0
-    rcl 0
-    inv int
-    inv sum 0
-    x=t 301
-    stf ind 1
-    dsz 1 284
-    0
-    rtn
+lbl A'
+   cp
+   rcl 00
+   int
+   x=t 243
+   inv sum 00
+   10
+   gto 245
+   e'
+   |x|
+   op 17
+   e'
+   x=t 266
+   x≥t 262
+   1
+   +/-
+   prd 00
+   rad
+   gto 267
+   grad
+   gto 267
+   deg
+   10
+   prd 00
+   fix ind 00
+   d'
+   10
+   sto 01
+   inv log
+   prd 00
+   cp
+   .1
+   prd 00
+   rcl 00
+   inv int
+   inv sum 00
+   x=t 301
+   stflg ind 01
+   dsz 1 284
+   0
+   inv sbr

@@ -1,3 +1,5 @@
+   ; aviation module -6-
+   ;
 
 lbl A
    sto 10
@@ -59,9 +61,9 @@ lbl C
    sum 17
    =
    sto 18
-   rcl ind 00
+   rc* 00
    ×
-   rcl ind 19
+   rc* 19
    sum 17
    =
    sum 18
@@ -97,7 +99,7 @@ lbl y**x
    inv dsz 0 127
    1
    sum 19
-   rcl ind 19
+   rc* 19
    inv sbr
    gto y**x
 

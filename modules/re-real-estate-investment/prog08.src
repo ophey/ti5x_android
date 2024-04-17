@@ -1,0 +1,189 @@
+   ; investment module -3-
+   ;
+
+lbl E'
+   fix 9
+   adv
+   20
+   sto 01
+   0
+   sto 11
+   inv sbr
+   sto 15
+   prt
+   inv sbr
+   st* 01
+   op 21
+   prt
+   inv sbr
+   gto 017
+
+lbl B
+   sto 08
+   gto 037
+
+lbl D'
+   op 28
+   fix 9
+   23
+   sto 17
+   sto 18
+   sto 19
+   0
+   sto 12
+   sto 10
+   rcl 08
+   prt
+   inv sbr
+
+lbl A'
+   23
+   sto 17
+   0
+   sto 10
+   rcl 15
+   sto 09
+   c
+   dsz 9 069
+   rcl 10
+   sum 11
+   prt
+   inv sbr
+
+lbl C
+   rcl 17
+   sto 13
+   sbr 105
+   x⇌t
+   4
+   sum 17
+   0
+   x=t 104
+   pgm ind 16
+   sbr x≥t
+   prt
+   sum 10
+   inv sbr
+   5
+   sto 16
+   (
+   rcl 13
+   -
+   1
+   )
+   sto 14
+   rcl 08
+   x⇌t
+   rc* 14
+   inv x≥t 178
+   rcl 05
+   sto 14
+   rc* 13
+   x⇌t
+   1
+   x=t 142
+   2
+   x=t cos
+   7
+   sto 16
+   2
+   inv sum 13
+   rc* 13
+   pgm ind 16
+   sbr rad
+   1
+   sum 13
+   rc* 13
+   pgm ind 16
+   sbr grad
+   rcl 08
+   pgm ind 16
+   sbr deg
+   2
+   inv sum 13
+   rc* 13
+   pgm ind 16
+   sbr π
+   inv sbr
+   rcl 05
+   sto 14
+   0
+   inv sbr
+
+lbl D
+   rcl 18
+   sto 13
+   sbr 105
+   x⇌t
+   4
+   sum 18
+   0
+   x=t 104
+   pgm ind 16
+   c'
+   inv sbr
+
+lbl E
+   rcl 19
+   sto 13
+   sbr 105
+   x⇌t
+   4
+   sum 19
+   0
+   x=t 104
+   pgm ind 16
+   a'
+   sum 12
+   inv sbr
+
+lbl C'
+   23
+   sto 19
+   0
+   sto 12
+   rcl 15
+   sto 09
+   e
+   dsz 9 241
+   rcl 12
+   prt
+   inv sbr
+
+lbl B'
+   rcl 11
+   prt
+   inv sbr
+
+lbl cos
+   6
+   sto 16
+   gto 142
+
+lbl A
+   sto 09
+   0
+   sto 08
+   rcl 15
+   sto 05
+   adv
+   d'
+   c
+   rcl 14
+   sto 05
+   d
+   rcl 14
+   sto 05
+   e
+   rcl 14
+   sto 05
+   dsz 5 277
+   rcl 12
+   prt
+   rcl 10
+   prt
+   sum 11
+   dsz 9 271
+   rcl 11
+   prt
+   inv sbr

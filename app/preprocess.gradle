@@ -24,7 +24,7 @@ task preprocess {
 
             exec {
                 executable '../util/libmake'
-                args "$moddata", "$resRaw", "$modcode"
+                args "--rom", "$moddata", "$resRaw", "$modcode"
             }
         }
 

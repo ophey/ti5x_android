@@ -1,102 +1,127 @@
-;+
-; Partial recreation of the "Surveying Library" module
-; that came with the original TI-58C/59 calculators.
-;-
+   ; surveying module -4-
+   ;
 
 lbl E'
-    0
-    cms
-    adv
-    fix 6
-    rtn
+   0
+   cms
+   adv
+   fix 6
+   inv sbr
 
 lbl A
-    pgm 6 A
-    rtn
+   pgm 06
+   a
+   inv sbr
 
 lbl B
-    pgm 16 B
-    rtn
+   pgm 16
+   b
+   inv sbr
 
 lbl C
-    sto 5
-    prt
-    rtn
+   sto 05
+   prt
+   inv sbr
 
 lbl D
-    sto 6
-    prt
-    rtn
+   sto 06
+   prt
+   inv sbr
 
 lbl E
-    adv
-    ( rcl 3 - rcl 1 )
-    sto 7
-    x²
-    sto 9
-    ( rcl 4 - rcl 2 )
-    sto 8
-    x²
-    (
-    (
-    ( sto 10 + rcl 9 )
-    √x
-    sto 11
-    x²
-    +
-    rcl 5
-    x²
-    -
-    rcl 6
-    x²
-    )
-    ÷
-    2
-    ÷
-    rcl 5
-    ÷
-    rcl 11
-    )
-    inv cos
-    sto 12
-    inv dms
-    prt
-    rtn
+   adv
+   (
+   rcl 03
+   -
+   rcl 01
+   )
+   sto 07
+   x²
+   sto 09
+   (
+   rcl 04
+   -
+   rcl 02
+   )
+   sto 08
+   x²
+   (
+   (
+   (
+   sto 10
+   +
+   rcl 09
+   )
+   √x
+   sto 11
+   x²
+   +
+   rcl 05
+   x²
+   -
+   rcl 06
+   x²
+   )
+   ÷
+   2
+   ÷
+   rcl 05
+   ÷
+   rcl 11
+   )
+   inv cos
+   sto 12
+   inv d.ms
+   prt
+   inv sbr
 
 lbl A'
-    rcl 7
-    x⇌t
-    rcl 8
-    inv P→R
-    pgm 2 sbr st*
-    cp
-    x≥t 120
-    ( ce + 3 6 0 )
-    sto 13
-    inv dms
-    prt
-    rtn
+   rcl 07
+   x⇌t
+   rcl 08
+   inv p→r
+   pgm 02
+   sbr st*
+   cp
+   x≥t 120
+   (
+   ce
+   +
+   360
+   )
+   sto 13
+   inv d.ms
+   prt
+   inv sbr
 
 lbl B'
-    (
-    ( rcl 13 - rcl 12 )
-    cos
-    ×
-    rcl 5
-    +
-    rcl 1
-    )
-    prt
-    rtn
+   (
+   (
+   rcl 13
+   -
+   rcl 12
+   )
+   cos
+   ×
+   rcl 05
+   +
+   rcl 01
+   )
+   prt
+   inv sbr
 
 lbl C'
-    (
-    ( rcl 13 - rcl 12 )
-    sin
-    ×
-    rcl 5
-    +
-    rcl 2
-    )
-    prt
-    rtn
+   (
+   (
+   rcl 13
+   -
+   rcl 12
+   )
+   sin
+   ×
+   rcl 05
+   +
+   rcl 02
+   )
+   prt
+   inv sbr

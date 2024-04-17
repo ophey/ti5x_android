@@ -1,0 +1,23 @@
+   ; business decisions module -9-
+   ;
+
+lbl clr
+   cp
+   6
+   sto 01
+   0
+   st* 01
+   dsz 1 007
+   inv sbr
+
+lbl write
+   fix 9
+   op 00
+   2431173636
+   op 04
+   144136
+   op 03
+   op 05
+   9
+   prt
+   inv sbr

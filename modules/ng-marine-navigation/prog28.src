@@ -1,3 +1,5 @@
+   ; marine navigation -5-
+   ;
 
 lbl A'
    -
@@ -152,7 +154,6 @@ lbl C'
    gto 152
 
 lbl E'
-   pgm 27 e'
-   inv sbr
-   adv
+   pgm 27
+   e'
    inv sbr
