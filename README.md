@@ -39,17 +39,24 @@ with version 7.9.
         other useful tasks.
     modules/
         av/   -- the source of the Aviation Library.
+        bd/   -- the source of the Business Decision Library.
         ce/   -- the source of the Civil Engineering Library.
         ct/   -- the source of the Contribution Library.
         ee/   -- the source of the Electrical Engineering Library.
+        fm/   -- the source of the Agriculture Library.
         le/   -- the source of the Leisure Library.
         ml/   -- the source of the Master Library.
         mu/   -- the source of the Math Utilities Library.
         ng/   -- the source of the Marine Navigation Library.
+        re/   -- the source of the Real Estate / Investment Library.
+        rp/   -- the source of the RPN Simulator Library.
+        sa/   -- the source of the Structural Engineering Library.
+        st/   -- the source of the Applied Statistics Library.
         sy/   -- the source of the Surveying Library.
     programs/
         ee19_input_code/         -- builtin companion program for EE-19
         ee19_construct_nam_code/ -- builtin companion program for EE-19
+        demo_card_store/         -- builtin demo of a card store
     art/      -- artwork for diagrams, higher-res scan for icon
     tests/    -- some unit tests
     examples/ -- some simple examples for building user's programs
