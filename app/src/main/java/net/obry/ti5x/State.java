@@ -160,7 +160,13 @@ class State {
 
   boolean ProgMode; /* true for program-entry mode, false for calculation mode */
   final int MaxMemories = 100; /* maximum addressable */
-  final int MaxProgram = 960; /* absolute max on original model */
+  final int MaxProgramSteps = 960; /* absolute max on original model */
+
+  final int MaxCardProgramSteps = 1500;
+  /* a SSSM have 5000 steps and a single program can have more than 1000 steps.
+     In such a case the program cannot be copied into the user's program memory.
+   */
+
   final int MaxBanks = 100;
   final int BankNumber = 4;
   /* 00 is user-entered program, others are loaded from library modules */
@@ -255,8 +261,10 @@ class State {
       Memory[i] = new Number();
       CardMemory[i] = new Number();
     }
-    for (int i = 0; i < MaxProgram; ++i) {
+    for (int i = 0; i < MaxProgramSteps; ++i) {
       Program[i] = (byte) 0;
+    }
+    for (int i = 0; i < MaxCardProgramSteps; ++i) {
       CardProgram[i] = (byte) 0;
     }
     if (ClearLibs) {
@@ -297,9 +305,9 @@ class State {
     this.ctx = ctx;
     OpStack = new OpStackEntry[MaxOpStack];
     Memory = new Number[MaxMemories];
-    Program = new byte[MaxProgram];
+    Program = new byte[MaxProgramSteps];
     CardMemory = new Number[MaxMemories];
-    CardProgram = new byte[MaxProgram];
+    CardProgram = new byte[MaxCardProgramSteps];
     CardBankUsed = new boolean[BankNumber];
     Store = new CardStore();
     Bank = new ProgBank[MaxBanks];
@@ -1445,7 +1453,7 @@ class State {
 
   void ClearProgram() {
     Enter(29); /*?*/
-    for (int i = 0; i < MaxProgram; ++i) {
+    for (int i = 0; i < MaxProgramSteps; ++i) {
       Program[i] = (byte) 0;
     }
     PC = 0;
@@ -1839,7 +1847,7 @@ class State {
                     &&
                     Bank.Program != null
                     &&
-                    Bank.Program.length <= MaxProgram
+                    Bank.Program.length <= MaxProgramSteps
                  ) {
                 System.arraycopy
                    (
@@ -1847,7 +1855,7 @@ class State {
                       Program, 0,
                       Bank.Program.length
                    );
-                for (int i = Bank.Program.length; i < MaxProgram; ++i) {
+                for (int i = Bank.Program.length; i < MaxProgramSteps; ++i) {
                   Program[i] = 0;
                 }
                 ResetLabels();
@@ -1993,7 +2001,7 @@ class State {
             Number N = new Number(MaxMemories);
             N.sub(1);
             N.div(100);
-            N.add(MaxProgram);
+            N.add(MaxProgramSteps);
             N.sub(1);
             SetX(N, true);
             OK = true;
@@ -2256,7 +2264,7 @@ class State {
      ) {
     ResetLabels();
     Program[PC] = (byte) Instr;
-    if (PC < MaxProgram - 1) {
+    if (PC < MaxProgramSteps - 1) {
       ClearDelayedStep();
       if (DelayTask == null) {
         DelayTask = new DelayedStep();
@@ -2284,15 +2292,15 @@ class State {
   }
 
   void InsertAtCurInstr() {
-    System.arraycopy(Program, PC, Program,PC + 1,MaxProgram - 1 - PC);
+    System.arraycopy(Program, PC, Program,PC + 1, MaxProgramSteps - 1 - PC);
     Program[PC] = (byte) 0;
     ResetLabels();
     ShowCurProg();
   }
 
   void DeleteCurInstr() {
-    System.arraycopy(Program,PC + 1, Program, PC,MaxProgram - 1 - PC);
-    Program[MaxProgram - 1] = (byte) 0;
+    System.arraycopy(Program,PC + 1, Program, PC, MaxProgramSteps - 1 - PC);
+    Program[MaxProgramSteps - 1] = (byte) 0;
     ResetLabels();
     ShowCurProg();
   }
@@ -2466,7 +2474,7 @@ class State {
 
     ProgramLister() {
       ListPC = PC;
-      EndPC = MaxProgram;
+      EndPC = MaxProgramSteps;
       for (; ; ) /* omit trailing zero bytes */ {
         if (EndPC == 0)
           break;
@@ -2479,7 +2487,7 @@ class State {
     }
 
     public void run() {
-      if (ListPC < MaxProgram) {
+      if (ListPC < MaxProgramSteps) {
         final int Val = Program[ListPC];
         String Symbol = Printer.KeyCodeSym(Val);
         int NextExpecting = ExpectOpcode;
@@ -2593,7 +2601,7 @@ class State {
         Expecting = NextExpecting;
         ++ListPC;
       }
-      if (ListPC == MaxProgram || ListPC > EndPC && Expecting == ExpectOpcode) {
+      if (ListPC == MaxProgramSteps || ListPC > EndPC && Expecting == ExpectOpcode) {
         StopTask();
       }
     }
@@ -2719,9 +2727,9 @@ class State {
       }
       System.arraycopy
          (
-            Program,    (N - 1) * BANK_PROG,
-            CardProgram,(N - 1) * BANK_PROG,
-             BANK_PROG
+            Program,     (N - 1) * BANK_PROG,
+            CardProgram, (N - 1) * BANK_PROG,
+            BANK_PROG
          );
 
       Persistent.SaveBankFile(ctx, N, CardId, BankFilename, Global.Calc);
