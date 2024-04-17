@@ -25,15 +25,13 @@ import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 
 /**
- * Utility class that wraps access to the runtime permissions API in M and provides basic helper
+ * Utility class that wraps access to the runtime permissions API and provides basic helper
  * methods.
  */
 abstract class PermissionUtil {
 
   static boolean hasCorrectPermission(Context ctx) {
-    return Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN
-       ||
-       ((ActivityCompat.checkSelfPermission(ctx, Manifest.permission.READ_EXTERNAL_STORAGE)
+    return ((ActivityCompat.checkSelfPermission(ctx, Manifest.permission.READ_EXTERNAL_STORAGE)
           == PackageManager.PERMISSION_GRANTED)
        && (ActivityCompat.checkSelfPermission(ctx, Manifest.permission.WRITE_EXTERNAL_STORAGE)
           == PackageManager.PERMISSION_GRANTED));
