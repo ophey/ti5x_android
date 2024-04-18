@@ -1008,6 +1008,7 @@ class ButtonGrid extends android.view.View {
             case 69: /* Op */
               DigitsNeeded = 2;
               AcceptInd = true;
+              AcceptSymbolic = true;
               break;
             case 58: /* Fix */
               if (!Calc.InvState) {
