@@ -122,6 +122,20 @@ public class Persistent {
       super(Message);
     }
   }
+  public static String EnsureDirExists
+     (
+        android.content.Context ctx,
+        String DirName,
+        String FileName
+     )
+  {
+    final String Dir =
+        new java.io.File(ctx.getExternalFilesDir(null), DirName)
+            .getAbsolutePath();
+    new java.io.File(Dir).mkdirs();
+
+    return Dir + (FileName == "" ? "" : "/" + FileName);
+  }
 
   private static void SaveBool
      (
@@ -240,11 +254,7 @@ public class Persistent {
       ) {
 
     // create BankDir
-    new java.io.File (ctx.getExternalFilesDir(null), BankDir).mkdirs();
-
-    String ToFile = new java.io.File
-        (ctx.getExternalFilesDir(null),
-            BankDir + "/" + FileName).getAbsolutePath();
+    String ToFile = EnsureDirExists(ctx, BankDir, FileName);
 
     if(!new File(ToFile).isFile()) {
       Calc.SetErrorState(true);
@@ -287,11 +297,7 @@ public class Persistent {
       ) {
 
     // create BankDir
-    new java.io.File (ctx.getExternalFilesDir(null), BankDir).mkdirs();
-
-    String ToFile = new java.io.File
-        (ctx.getExternalFilesDir(null),
-            BankDir + "/" + FileName).getAbsolutePath();
+    String ToFile = EnsureDirExists(ctx, BankDir, FileName);
 
     java.io.FileOutputStream Out;
     try {
@@ -1555,16 +1561,9 @@ public class Persistent {
     /* saves the current calculator state for later restoration. */
     java.io.FileOutputStream CurSave;
     try {
-      final String SaveDir =
-          new java.io.File(ctx.getExternalFilesDir(null), Persistent.StateDir)
-          .getAbsolutePath();
-      new java.io.File(SaveDir).mkdirs();
+      final String FileName = SaveLib ? SavedLibName : SavedStateName;
+      final String StateName = EnsureDirExists(ctx, StateDir, FileName);
 
-      final String StateName = SaveDir + "/" +
-          (SaveLib ?
-            SavedLibName
-            :
-            SavedStateName);
       CurSave = new java.io.FileOutputStream(StateName);
     } catch (java.io.FileNotFoundException Eh) {
       throw new RuntimeException("ti5x save-state create error " + Eh.toString());
@@ -1632,22 +1631,10 @@ public class Persistent {
             /* load library before rest of state, otherwise Calc.SelectProgram(Calc.CurBank)
                call (above) will trigger error on nonexistent bank */
 
-            final String SaveDir =
-              new java.io.File(ctx.getExternalFilesDir(null), Persistent.StateDir)
-                .getAbsolutePath();
-            new java.io.File(SaveDir).mkdirs();
-
             final boolean LoadingLib = Restoring == LOAD_LIB;
-            StateFile =
-               SaveDir
-                  +
-                  "/"
-                  +
-                  (LoadingLib ?
-                     SavedLibName
-                     :
-                     SavedStateName
-                  );
+            final String FileName = LoadingLib ? SavedLibName : SavedStateName;
+            final String StateFile = EnsureDirExists(ctx, StateDir, FileName);
+
             if (new java.io.File(StateFile).exists()) {
               Subtask = new Load
                  (

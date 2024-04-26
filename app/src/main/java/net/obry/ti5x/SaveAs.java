@@ -132,14 +132,9 @@ public class SaveAs extends android.app.Activity {
                 TheCleanedText = Clean.toString();
                 if (!HadFunnies) {
                   if (TheCleanedText.length() != 0) {
-                    if
-                       (
-                       new java.io.File
-                          (
-                           getExternalFilesDir(null),
-                           SaveWhere + "/" + TheCleanedText + FileExt
-                          ).exists()
-                       ) {
+                    final String SaveFile =
+                        Persistent.EnsureDirExists(getApplicationContext(), SaveWhere, TheCleanedText + FileExt);
+                    if (new java.io.File (SaveFile).exists()) {
                       new OverwriteConfirm(SaveAs.this, TheCleanedText).show();
                     } else {
                       ReturnResult();

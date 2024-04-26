@@ -302,12 +302,10 @@ public class Picker extends android.app.Activity {
     String InaccessibleFolders = "";
     PickerList.clear();
 
-    final String ExternalStorage =
-        getExternalFilesDir(null).getAbsolutePath();
-
     try {
       for (String Here : LookIn) {
-        final java.io.File ThisDir = new java.io.File(ExternalStorage + "/" + Here);
+        final String ThisDirName = Persistent.EnsureDirExists(this, Here, "");
+        final java.io.File ThisDir = new java.io.File(ThisDirName);
         /*
          * We need to ensure that the lack of permissions doesn't harm us
          * if the user didn't grant them ... this logic ensures that no error
@@ -317,9 +315,8 @@ public class Picker extends android.app.Activity {
           if (InaccessibleFolders.length() > 0) {
             InaccessibleFolders = InaccessibleFolders.concat(", ");
           }
-          InaccessibleFolders = InaccessibleFolders.concat(Here);
+          InaccessibleFolders = InaccessibleFolders.concat(ThisDirName);
         } else {
-          ThisDir.mkdirs();
           /*
            * This segment iterates on all of the files contained
            * withing the folder context.
@@ -399,7 +396,7 @@ public class Picker extends android.app.Activity {
                (
                   Global.StdLocale,
                   getString(R.string.folder_unreadable),
-                  InaccessibleFolders.concat("\"\nIn Folder\n\"").concat(ExternalStorage)
+                  InaccessibleFolders
                ),
             Toast.LENGTH_SHORT
          ).show();

@@ -2793,13 +2793,12 @@ class State {
 
   void ImportNew() {
       final int N = (int)Math.abs(X.getInt());
-      final String DataFilename = String.format("/%d.dat", N);
-      final String SaveDir =
-        new java.io.File(ctx.getExternalFilesDir(null), Persistent.DataDir)
-            .getAbsolutePath();
+      final String DataFilename = String.format("%d.dat", N);
+      final String SaveFile =
+        Persistent.EnsureDirExists(ctx, Persistent.DataDir, DataFilename);
       ClearImport();
       try {
-        Global.Import.ImportData(SaveDir + DataFilename);
+        Global.Import.ImportData(SaveFile);
       } catch (Persistent.DataFormatException Failed) {
         SetErrorState(true);
       }
@@ -2811,14 +2810,12 @@ class State {
       )
   {
     final int N = (int)Math.abs(X.getInt());
-    final String DataFilename = String.format("/%d.dat", N);
-    final String SaveDir =
-        new java.io.File(ctx.getExternalFilesDir(null), Persistent.DataDir)
-            .getAbsolutePath();
-    new java.io.File(SaveDir).mkdirs();
+    final String DataFilename = String.format("%d.dat", N);
+    final String SaveFile =
+        Persistent.EnsureDirExists(ctx, Persistent.DataDir, DataFilename);
     ResetExport();
     try {
-      Global.Export.Open(SaveDir + DataFilename, Append, true);
+      Global.Export.Open(SaveFile, Append, true);
     } catch (Persistent.DataFormatException Failed) {
       SetErrorState(true);
     }
