@@ -1187,6 +1187,60 @@ class Tester {
     return true;
   }
 
+  private boolean Test_34() {
+    Clear();
+
+    Calc.SetDisplayMode(State.FORMAT_FIXED, 8);
+
+    if (!check("0.00000000", false))
+      return false;
+
+    Calc.SetDisplayMode(State.FORMAT_ENG, 8);
+
+    if (!check("0.0000000 00", false))
+      return false;
+
+    SetX(9600);
+    Calc.Operator(State.STACKOP_DIV);
+    SetX(90);
+    Calc.Equals();
+
+    if (!check("106.66667 00", false))
+      return false;
+
+    return true;
+  }
+
+  private boolean Test_35() {
+    Clear();
+
+    Calc.SetDisplayMode(State.FORMAT_ENG, 8);
+
+    if (!check("0.0000000 00", false))
+      return false;
+
+    SetX(.123);
+    Calc.Equals();
+
+    if (!check("123.00000-03", false))
+      return false;
+
+    SetX(.123);
+    Calc.ChangeSign();
+    Calc.Equals();
+
+    if (!check("-123.00000-03", false))
+      return false;
+
+    SetX(.12345);
+    Calc.Equals();
+
+    if (!check("123.45000-03", false))
+      return false;
+
+    return true;
+  }
+
   int Run() {
     Calc = Global.Calc;
     int Total = 0;
@@ -1256,6 +1310,10 @@ class Tester {
     if (!Test_32()) return -32;
     Total++;
     if (!Test_33()) return -33;
+    Total++;
+    if (!Test_34()) return -34;
+    Total++;
+    if (!Test_35()) return -35;
     Total++;
 
     Clear();
