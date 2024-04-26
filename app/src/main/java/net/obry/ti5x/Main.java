@@ -268,6 +268,7 @@ public class Main extends AppCompatActivity {
           DialogInterface TheDialog
        ) {
       Global.Buttons.SetFeedbackType(TheButtons.getCheckedRadioButtonId());
+      Persistent.SaveState(Main.this, false);
     }
   }
 
@@ -1204,6 +1205,8 @@ public class Main extends AppCompatActivity {
 
   @Override
   public void onDestroy() {
+    // save state before closing
+    Persistent.SaveState(this, false);
     Global.KillBGTask();
     if (Global.Calc != null) {
       Global.Calc.ResetLibs();
@@ -1217,7 +1220,6 @@ public class Main extends AppCompatActivity {
   public void onPause() {
     super.onPause();
     if (!ShuttingDown) {
-      Persistent.SaveState(this, false);
       /* don't bother making async, because I'm going to background anyway */
       if (Global.Calc.TaskRunning) {
         PostNotification(R.string.prog_running, true);
@@ -1229,7 +1231,7 @@ public class Main extends AppCompatActivity {
   public void onResume() {
     super.onResume();
     Notiman.cancel(NotifyProgramDone);
-    if (!StateLoaded) {
+    if (!StateLoaded && (!Global.BGTaskInProgress())) {
       Global.StartBGTask
          (
             new Persistent.RestoreState(Main.this) {
