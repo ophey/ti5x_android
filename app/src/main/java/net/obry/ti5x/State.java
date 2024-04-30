@@ -630,6 +630,8 @@ class State {
 
     // check that FORMAT_FIXED can be used, if outside supported range use FORMAT_FLOAT
 
+    final int CurFormat = UseFormat;
+
     if (UseFormat == FORMAT_FIXED
        && NrDecimals == -1
        && X.getSignum() != 0
@@ -648,18 +650,16 @@ class State {
         Number N = new Number(X);
         N.div(Factor);
 
-        final int UseNrDecimalsF = NrDecimals == -1 ? Math.max(8 - BeforeDecimal, 0) : NrDecimals;
+        final int MaxDecimal = (CurFormat == FORMAT_ENG) ? 8 : 10;
+
+        final int UseNrDecimalsF = NrDecimals == -1
+            ? Math.max(MaxDecimal - BeforeDecimal, 0)
+            : Math.min(NrDecimals, MaxDecimal - BeforeDecimal);
+
         Result = N.formatString(Global.StdLocale, UseNrDecimalsF);
-
-        if (UseNrDecimalsF > 0) {
+        if (NrDecimals == -1) {
           Result = RemoveTrailingZeros(Result);
-
-          // this can happen only when number <1, remove leading zero
-          // length is +2 because of 0 and decimal point
-          if (UseNrDecimalsF == 8)
-            Result = RemoveLeadingZero(Result, 10);
         }
-
                 /* assume there will always be a decimal point? */
         Result += (Exp < 0 ? "-" : " ") + String.format(Global.StdLocale, "%02d", Math.abs(Exp));
         break;
@@ -2793,13 +2793,12 @@ class State {
 
   void ImportNew() {
       final int N = (int)Math.abs(X.getInt());
-      final String DataFilename = String.format("/%d.dat", N);
-      final String SaveDir =
-        new java.io.File(ctx.getExternalFilesDir(null), Persistent.DataDir)
-            .getAbsolutePath();
+      final String DataFilename = String.format("%d.dat", N);
+      final String SaveFile =
+        Persistent.EnsureDirExists(ctx, Persistent.DataDir, DataFilename);
       ClearImport();
       try {
-        Global.Import.ImportData(SaveDir + DataFilename);
+        Global.Import.ImportData(SaveFile);
       } catch (Persistent.DataFormatException Failed) {
         SetErrorState(true);
       }
@@ -2811,14 +2810,12 @@ class State {
       )
   {
     final int N = (int)Math.abs(X.getInt());
-    final String DataFilename = String.format("/%d.dat", N);
-    final String SaveDir =
-        new java.io.File(ctx.getExternalFilesDir(null), Persistent.DataDir)
-            .getAbsolutePath();
-    new java.io.File(SaveDir).mkdirs();
+    final String DataFilename = String.format("%d.dat", N);
+    final String SaveFile =
+        Persistent.EnsureDirExists(ctx, Persistent.DataDir, DataFilename);
     ResetExport();
     try {
-      Global.Export.Open(SaveDir + DataFilename, Append, true);
+      Global.Export.Open(SaveFile, Append, true);
     } catch (Persistent.DataFormatException Failed) {
       SetErrorState(true);
     }

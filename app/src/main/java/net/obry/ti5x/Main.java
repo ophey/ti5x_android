@@ -268,6 +268,7 @@ public class Main extends AppCompatActivity {
           DialogInterface TheDialog
        ) {
       Global.Buttons.SetFeedbackType(TheButtons.getCheckedRadioButtonId());
+      Persistent.SaveState(Main.this, false);
     }
   }
 
@@ -475,12 +476,10 @@ public class Main extends AppCompatActivity {
        ArrayList<String> CalcDirs = new ArrayList<String>();
 
        final String ProgramsDir =
-           new java.io.File(getExternalFilesDir(null), Persistent.ProgramsDir)
-               .getAbsolutePath();
+           Persistent.EnsureDirExists(this, Persistent.ProgramsDir, "");
 
        final String DataDir =
-           new java.io.File(getExternalFilesDir(null), Persistent.DataDir)
-               .getAbsolutePath();
+           Persistent.EnsureDirExists(this, Persistent.DataDir, "");
 
        if (new java.io.File(ProgramsDir).exists()) {
          CalcDirs.add(Persistent.ProgramsDir);
@@ -911,9 +910,8 @@ public class Main extends AppCompatActivity {
               final String TheName =
                  Data.getData().getPath().substring(1) /* ignoring leading slash */
                     + Persistent.ProgExt;
-              final String SaveDir =
-                 new java.io.File(getExternalFilesDir(null), Persistent.ProgramsDir)
-                 .getAbsolutePath();
+              final String SaveFile =
+                  Persistent.EnsureDirExists(getApplicationContext(), Persistent.ProgramsDir, TheName);
               Global.StartBGTask
                  (
 
@@ -921,14 +919,13 @@ public class Main extends AppCompatActivity {
                       @Override
                       public void BGRun() {
                         try {
-                          new java.io.File(SaveDir).mkdirs();
                           Persistent.Save
                              (
                                 Global.Buttons,
                                 Global.Calc,
                                 false,
                                 false,
-                                SaveDir + "/" + TheName
+                                SaveFile
                              );
                         } catch (RuntimeException Failed) {
                           SetStatus(-1, Failed);
@@ -982,6 +979,8 @@ public class Main extends AppCompatActivity {
               try {
                 Global.Calc.ClearImport();
                 Global.Import.ImportData(FileName);
+                final String BaseName =
+                    FileName.substring(FileName.lastIndexOf("/") + 1, FileName.length());
                 Toast.makeText
                    (
                       Main.this,
@@ -989,7 +988,7 @@ public class Main extends AppCompatActivity {
                          (
                             Global.StdLocale,
                             getString(R.string.import_started),
-                            FileName
+                             BaseName
                          ),
                       Toast.LENGTH_SHORT
                    ).show();
@@ -1025,18 +1024,15 @@ public class Main extends AppCompatActivity {
                   try {
                     String FileName = Data.getData().getPath();
                     if (!ExportAppend) {
-                      final String SaveDir =
-                          new java.io.File(getExternalFilesDir(null), Persistent.DataDir)
-                          .getAbsolutePath();
-                      new java.io.File(SaveDir).mkdirs();
                       if(FileName.indexOf('.') == -1) {
                         // no extension added, use default
-                        FileName = FileName + Persistent.DataExt;
+                        FileName = FileName.substring(1) + Persistent.DataExt;
                       }
-                      FileName = SaveDir + FileName;
                       /* note FileName will have leading slash */
                     }
-                    Global.Export.Open(FileName, ExportAppend, ExportNumbersOnly);
+                    final String SaveFile =
+                        Persistent.EnsureDirExists(getApplicationContext(), Persistent.DataDir, FileName);
+                    Global.Export.Open(SaveFile, ExportAppend, ExportNumbersOnly);
                     Toast.makeText
                        (
                           Main.this,
@@ -1204,6 +1200,8 @@ public class Main extends AppCompatActivity {
 
   @Override
   public void onDestroy() {
+    // save state before closing
+    Persistent.SaveState(this, false);
     Global.KillBGTask();
     if (Global.Calc != null) {
       Global.Calc.ResetLibs();
@@ -1217,7 +1215,6 @@ public class Main extends AppCompatActivity {
   public void onPause() {
     super.onPause();
     if (!ShuttingDown) {
-      Persistent.SaveState(this, false);
       /* don't bother making async, because I'm going to background anyway */
       if (Global.Calc.TaskRunning) {
         PostNotification(R.string.prog_running, true);
@@ -1229,7 +1226,7 @@ public class Main extends AppCompatActivity {
   public void onResume() {
     super.onResume();
     Notiman.cancel(NotifyProgramDone);
-    if (!StateLoaded) {
+    if (!StateLoaded && (!Global.BGTaskInProgress())) {
       Global.StartBGTask
          (
             new Persistent.RestoreState(Main.this) {

@@ -225,7 +225,6 @@ class ButtonGrid extends android.view.View {
         android.util.AttributeSet TheAttributes
      ) {
     super(TheContext, TheAttributes);
-    FeedbackType = FEEDBACK_NONE;
     final android.content.res.Resources Res = TheContext.getResources();
     Dark = Res.getColor(R.color.dark);
     White = Res.getColor(R.color.white);
@@ -237,7 +236,6 @@ class ButtonGrid extends android.view.View {
     MakeNoise = new android.media.SoundPool(1, android.media.AudioManager.STREAM_MUSIC, 0);
     ButtonDown = MakeNoise.load(TheContext, R.raw.button_down, 1);
     Vibrate = (android.os.Vibrator) TheContext.getSystemService(android.content.Context.VIBRATOR_SERVICE);
-    SetFeedbackType(FEEDBACK_CLICK);
 
     setOnTouchListener
        (

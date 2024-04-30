@@ -27,8 +27,8 @@ import java.io.File;
 class ZipComponentWriter
   /* convenient writing of components to a ZIP archive, with automatic
      calculation of size and CRC fields. */ {
-  private java.util.zip.ZipOutputStream Parent;
-  private ZipEntry Entry;
+  final private java.util.zip.ZipOutputStream Parent;
+  final private ZipEntry Entry;
   java.io.ByteArrayOutputStream Out;
 
   ZipComponentWriter
@@ -88,6 +88,7 @@ public class Persistent {
   static final String ProgramsDir = "Programs"; /* where to save user programs */
   static final String DataDir = "Download"; /* where to save exported data */
   static final String BankDir = "Banks"; /* where to save bank files */
+  static final String StateDir = "State"; /* where to save state files */
   static final String[] ExternalCalcDirectories =
       /* where to load programs/libraries from */
      {
@@ -120,6 +121,20 @@ public class Persistent {
        ) {
       super(Message);
     }
+  }
+  public static String EnsureDirExists
+     (
+        android.content.Context ctx,
+        String DirName,
+        String FileName
+     )
+  {
+    final String Dir =
+        new java.io.File(ctx.getExternalFilesDir(null), DirName)
+            .getAbsolutePath();
+    new java.io.File(Dir).mkdirs();
+
+    return Dir + (FileName == "" ? "" : "/" + FileName);
   }
 
   private static void SaveBool
@@ -239,11 +254,7 @@ public class Persistent {
       ) {
 
     // create BankDir
-    new java.io.File (ctx.getExternalFilesDir(null), BankDir).mkdirs();
-
-    String ToFile = new java.io.File
-        (ctx.getExternalFilesDir(null),
-            BankDir + "/" + FileName).getAbsolutePath();
+    String ToFile = EnsureDirExists(ctx, BankDir, FileName);
 
     if(!new File(ToFile).isFile()) {
       Calc.SetErrorState(true);
@@ -286,11 +297,7 @@ public class Persistent {
       ) {
 
     // create BankDir
-    new java.io.File (ctx.getExternalFilesDir(null), BankDir).mkdirs();
-
-    String ToFile = new java.io.File
-        (ctx.getExternalFilesDir(null),
-            BankDir + "/" + FileName).getAbsolutePath();
+    String ToFile = EnsureDirExists(ctx, BankDir, FileName);
 
     java.io.FileOutputStream Out;
     try {
@@ -688,7 +695,7 @@ public class Persistent {
               POut.print("none");
               break;
           }
-          POut.println("\"/>\n");
+          POut.println("\"/>");
         }
 
         SaveProg(Calc.Program, POut, 8);
@@ -1554,13 +1561,10 @@ public class Persistent {
     /* saves the current calculator state for later restoration. */
     java.io.FileOutputStream CurSave;
     try {
-      final String StateName =
-         SaveLib ?
-            SavedLibName
-            :
-            SavedStateName;
-      ctx.deleteFile(StateName);
-      CurSave = ctx.openFileOutput(StateName, android.content.Context.MODE_PRIVATE);
+      final String FileName = SaveLib ? SavedLibName : SavedStateName;
+      final String StateName = EnsureDirExists(ctx, StateDir, FileName);
+
+      CurSave = new java.io.FileOutputStream(StateName);
     } catch (java.io.FileNotFoundException Eh) {
       throw new RuntimeException("ti5x save-state create error " + Eh.toString());
     }
@@ -1626,17 +1630,11 @@ public class Persistent {
           case LOAD_STATE:
             /* load library before rest of state, otherwise Calc.SelectProgram(Calc.CurBank)
                call (above) will trigger error on nonexistent bank */
+
             final boolean LoadingLib = Restoring == LOAD_LIB;
-            StateFile =
-               ctx.getFilesDir().getAbsolutePath()
-                  +
-                  "/"
-                  +
-                  (LoadingLib ?
-                     SavedLibName
-                     :
-                     SavedStateName
-                  );
+            final String FileName = LoadingLib ? SavedLibName : SavedStateName;
+            final String StateFile = EnsureDirExists(ctx, StateDir, FileName);
+
             if (new java.io.File(StateFile).exists()) {
               Subtask = new Load
                  (

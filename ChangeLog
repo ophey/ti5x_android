@@ -1,5 +1,9 @@
 Feature highlights:
 
+v9.1, 2024 April 27th:
+   Fix calc save/restore state
+   Fix display in Fix + Eng mode
+
 v9.0, 2024 April 20th:
    Replace all modules by dump of ROM.
    Many new modules have been added:
