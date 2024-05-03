@@ -1,5 +1,8 @@
 Feature highlights:
 
+v9.2, 2024 May 3rd:
+   Fix display in Fix mode
+
 v9.1, 2024 April 27th:
    Fix calc save/restore state
    Fix display in Fix + Eng mode
