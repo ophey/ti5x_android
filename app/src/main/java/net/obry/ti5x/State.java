@@ -650,7 +650,7 @@ class State {
         Number N = new Number(X);
         N.div(Factor);
 
-        final int MaxDecimal = (CurFormat == FORMAT_ENG) ? 8 : 10;
+        final int MaxDecimal = (CurFormat == FORMAT_ENG) ? 8 : 9;
 
         final int UseNrDecimalsF = NrDecimals == -1
             ? Math.max(MaxDecimal - BeforeDecimal, 0)

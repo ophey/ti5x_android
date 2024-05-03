@@ -466,6 +466,7 @@ class Tester {
     Calc.ChangeSign();
     Calc.Equals();
 
+    // validated in Ti59
     if (!check("1.23456-13", false))
       return false;
 
@@ -865,6 +866,7 @@ class Tester {
   }
 
   private boolean Test_25() {
+    // full test validated on real Ti59
     Clear();
 
     Calc.SetDisplayMode(State.FORMAT_ENG, -1);
@@ -1240,6 +1242,36 @@ class Tester {
 
     return true;
   }
+  private boolean Test_36() {
+    // all values validated on a real Ti59
+    // commit Fri May 3 19:13:43 2024
+    Clear();
+
+    SetX(999999999);
+    Calc.EnterExponent();
+    Calc.Equals();
+
+    if (!check("1. 09", false))
+      return false;
+
+    Calc.SetDisplayMode(State.FORMAT_FIXED, 4);
+    Calc.EnterExponent();
+    Calc.Equals();
+
+    if (!check("1.0000 09", false))
+      return false;
+
+    Calc.SetDisplayMode(State.FORMAT_FIXED, -1);
+
+    SetX(99999999);
+    Calc.EnterExponent();
+    Calc.Equals();
+
+    if (!check("9.9999999 07", false))
+      return false;
+
+    return true;
+  }
 
   int Run() {
     Calc = Global.Calc;
@@ -1314,6 +1346,8 @@ class Tester {
     if (!Test_34()) return -34;
     Total++;
     if (!Test_35()) return -35;
+    Total++;
+    if (!Test_36()) return -36;
     Total++;
 
     Clear();

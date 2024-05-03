@@ -480,6 +480,8 @@ class Number {
 
     l.abs();
     l.log();
+    // Rounding to correspond to Ti59 precision, this makes test_36() to pass
+    l.roundUpNDigits(9);
 
     if (v.compareTo(B_ZERO) != 0) {
       switch (UsingFormat) {
@@ -498,6 +500,8 @@ class Number {
 
       if (Exp >= 100.0)
         Exp = 99;
+      if(Exp <= -100)
+        Exp = -99;
     }
 
     return Exp;
