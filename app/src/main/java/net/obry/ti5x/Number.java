@@ -484,10 +484,7 @@ class Number {
     if (v.compareTo(B_ZERO) != 0) {
       switch (UsingFormat) {
         case State.FORMAT_FLOAT:
-          if (l.v.signum() < 0)
-            Exp = l.v.setScale(0, RoundingMode.FLOOR).intValue();
-          else
-            Exp = l.v.setScale(0, RoundingMode.FLOOR).intValue();
+          Exp = l.v.setScale(0, RoundingMode.FLOOR).intValue();
           break;
         case State.FORMAT_ENG:
           l.v = l.v.divide(B_THREE, mc);
