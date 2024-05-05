@@ -1244,7 +1244,7 @@ class Tester {
   }
   private boolean Test_36() {
     // all values validated on a real Ti59
-    // commit Fri May 3 19:13:43 2024
+    // commit Fri May 3 19:13:43 2024 +0200
     Clear();
 
     SetX(999999999);
@@ -1268,6 +1268,32 @@ class Tester {
     Calc.Equals();
 
     if (!check("9.9999999 07", false))
+      return false;
+
+    return true;
+  }
+
+  private boolean Test_37() {
+    // all values validated on a real Ti59
+    // commit Sun May 5 20:01:35 2024 +0200
+    Clear();
+
+    SetX(23456789);
+    Calc.ChangeSign();
+    Calc.EnterExponent();
+    Calc.Digit('1');
+    Calc.Equals();
+
+    if (!check("-2.3456789 08", false))
+      return false;
+
+    Calc.Operator(State.STACKOP_SUB);
+    Calc.Digit('8');
+    Calc.EnterExponent();
+    Calc.Digit('8');
+    Calc.Equals();
+
+    if (!check("-1.0345679 09", false))
       return false;
 
     return true;
@@ -1349,7 +1375,8 @@ class Tester {
     Total++;
     if (!Test_36()) return -36;
     Total++;
-
+    if (!Test_37()) return -37;
+    Total++;
     Clear();
 
     return Total;
